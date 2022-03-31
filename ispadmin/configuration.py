@@ -14,8 +14,11 @@ class Configuration:
             configfile = 'ispadmin.ini'
         self.configparser = configparser.ConfigParser()
         self.configparser.read(configfile)
-        self.id = self.configparser['DEFAULT']['id']
-        self.password = self.configparser['DEFAULT']['password']
+        try:
+            self.id = self.configparser['DEFAULT']['id']
+            self.password = self.configparser['DEFAULT']['password']
+        except:
+            pass
         self.checklogin()
 
     def checklogin(self):
