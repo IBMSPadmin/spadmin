@@ -53,7 +53,7 @@ class Dsmadmc:
             quit(1)
 
     def commandPreprocessor(self,text):
-        if text == 'sh actlog':
+        if text == 'sh actlogt':
             return 'select DATE_TIME,MESSAGE from actlog WHERE (DATE_TIME>=current_timestamp-24 hour) order by 2 '
         return text
 

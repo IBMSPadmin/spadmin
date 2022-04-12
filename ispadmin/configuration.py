@@ -31,7 +31,7 @@ class Configuration:
                 ['dsmadmc', '-id=%s' % self.id, '-pa=%s' % self.password, '-dataonly=yes',
                  'select SERVER_NAME from STATUS'], stderr=subprocess.STDOUT, timeout=10,
                 universal_newlines=True)
-            print("PROMPT: ", result.strip())
+
             self.prompt = 'Protect: %s>' % result.strip()
             self.writeconfig( self.id, self.password)
         except subprocess.CalledProcessError as exc:
