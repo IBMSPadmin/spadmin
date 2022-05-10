@@ -1,17 +1,19 @@
 import re
 import subprocess
-
-from prompt_toolkit import prompt
+import pexpect
 from prompt_toolkit.completion import NestedCompleter, Completion, Completer, WordCompleter
 
 
 class DsmadmcSelectCompleter(Completer):
     select = None
+    MORE = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
+    MORE2 = 'The character \'#\' stands for any decimal integer.'  # meg itt
 
-    def __init__(self, select):
+    def __init__(self,analyzer, select):
         if not select:
             pass
         self.select = select
+        self.analyzer = analyzer
 
     def count_space(self, string):
         count = 0
@@ -21,78 +23,41 @@ class DsmadmcSelectCompleter(Completer):
         return count
 
     def execute(self, sql):
-        result = subprocess.check_output(
-            ['dsmadmc', '-id=%s' % 'support', '-pa=%s' % 'userkft1q2', '-dataonly=yes',
-             sql], stderr=subprocess.STDOUT, timeout=10,
-            universal_newlines=True)
-        return result
+        self.analyzer.sendline(sql)
+        self.analyzer.expect(
+            ['Protect: USERTSM.USR>', self.MORE, self.MORE2,
+             pexpect.EOF])  ## várjuk, hogy promptot vagy "MORE"-t kapjunk
+        list = self.analyzer.before.splitlines()
+        list.pop(0) # delete "select" command
+        while ("" in list): ## remove empty lines
+            list.remove("")
+        return list
 
     def get_completions(self, document, complete_event):
-        nodes = None
         if self.select == "NODE":
             if document.cursor_position == 0:  # ha most lépett be a függvénybe
-                nodes = self.execute('select DOMAIN_NAME from DOMAINS').splitlines()
-                for a in nodes:
-                    yield Completion(a.strip(), start_position=0)
-            elif self.count_space(re.sub(' +', ' ', document.text)) == 0:
-                for a in nodes:
-                    if a.startswith(document.text):
-                        yield Completion(a.strip, start_position=0)
-
-            elif self.count_space(re.sub(' +', ' ', document.text)) == 1:  # már legalább 2. alkalommal lépett be a függvénybe
-                yield Completion("DOmain=", start_position=0)
-                yield Completion("Format=", start_position=0)
-                yield Completion("AUTHentication=LOcal", start_position=0)
-                yield Completion("AUTHentication=LDap", start_position=0)
-                yield Completion("Type=Client", start_position=0)
-                yield Completion("Type=NAS", start_position=0)
-                yield Completion("Type=Server", start_position=0)
-                yield Completion("Type=Any", start_position=0)
+                yield Completion("*", start_position=0)
+                for a in self.execute('select NODE_NAME from NODES'):
+                   yield Completion(a.strip(), start_position=0)
+            elif self.count_space(re.sub(' +', ' ', document.text)) > 0:  # már legalább 2. alkalommal lépett be a függvénybe
+                for a in ["DOmain=","Format=Standard","Format=Detailed","AUTHentication=LOcal","AUTHentication=LDap","Type=Client","Type=NAS","Type=Server","Type=Any",]:
+                    yield Completion(a, start_position=0)
 
         elif self.select == "STGP":
-            yield Completion("STGP1", start_position=0)
-            yield Completion("STGP2", start_position=0)
-            yield Completion("STGP3", start_position=0)
-            yield Completion("STGP4", start_position=0)
+            if document.cursor_position == 0:  # ha most lépett be a függvénybe
+                yield Completion("*", start_position=0)
+                for line in self.execute('select STGPOOL_NAME from STGPOOLS'):
+                    yield Completion(line.strip(), start_position=0)
+            elif self.count_space(re.sub(' +', ' ', document.text)) > 0:  # már legalább 2. alkalommal lépett be a függvénybe
+                for a in ["Format=Standard","Format=Detailed","POoltype=ANY","POoltype=PRimary","POoltype=COpy","POoltype=COPYCONtainer","POoltype=ACTIVEdata","POoltype=RETention"]:
+                    yield Completion(a, start_position=0)
+
         elif self.select == "DOM":
             if document.cursor_position == 0: # ha most lépett be a függvénybe
-                for line in self.execute('select DOMAIN_NAME from DOMAINS').splitlines():
+                for line in self.execute('select DOMAIN_NAME from DOMAINS'):
                     yield Completion(line.strip(), start_position=0)
             elif self.count_space(re.sub(' +', ' ',document.text)) == 1: # már legalább 2. alkalommal lépett be a függvénybe
-                for line in self.execute('select SET_NAME from POLICYSETS where DOMAIN_NAME=\'%s\'' % document.text.strip()).splitlines():
+                for line in self.execute('select SET_NAME from POLICYSETS where DOMAIN_NAME=\'%s\'' % document.text.strip()):
                     yield Completion(line.strip(), start_position=0)
             else:
                 pass
-
-
-completer = NestedCompleter.from_nested_dict({
-    'accept': {
-        'date': None
-    },
-    'activate':{
-        'policyset': DsmadmcSelectCompleter("DOM")
-    },
-    'query': {
-        'node':
-            DsmadmcSelectCompleter("NODE"),
-        'stgp': DsmadmcSelectCompleter("STGP"),
-        'ip': {
-            'interface': WordCompleter(["alligator", "ant"]),
-        },
-    },
-    'quit': None,
-})
-
-text = prompt('# ', completer=completer, complete_while_typing=True)
-
-print('You said: %s' % text)
-
-d = [["Mark", 12, 95],
-     ["Jay", 11, 88],
-     ["Jack", 14, 90]]
-
-print ("{:<8} {:<15} {:<10}".format('Name', 'Age', 'Percent'))
-
-for v in d:
-    name, age, perc = v
-    print ("{:<8} {:<15} {:<10}".format(name, age, perc))
