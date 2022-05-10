@@ -110,6 +110,3 @@ class Dsmadmc:
                 prmpt, completer=completer, complete_while_typing=False,
                 cursor=CursorShape.BLINKING_BLOCK)  # Prompt, history-val és completerrel.
         self.sendline(text)
-
-
-
