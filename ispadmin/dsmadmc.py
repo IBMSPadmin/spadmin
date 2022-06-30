@@ -6,6 +6,10 @@ from prompt_toolkit.completion import NestedCompleter
 from prompt_toolkit import PromptSession
 from ispadmin.ispcompleter import DsmadmcSelectCompleter
 from prompt_toolkit.cursor_shapes import CursorShape, ModalCursorShapeConfig
+from prompt_toolkit.history import InMemoryHistory
+from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
+from tabulate import tabulate
+
 
 from termcolor import colored
 
@@ -28,6 +32,9 @@ class Dsmadmc:
         command = text
         if text == 'sh actlog':
            command = 'select DATE_TIME,MESSAGE from actlog WHERE (DATE_TIME>=current_timestamp-24 hour) order by 1'
+        if text.endswith('?') :
+            command = 'help %s' % text[:-1]
+
         if self.analyzer is None or not self.analyzer.isalive():
             self.startdsmadmc(self)
         columns, rows = os.get_terminal_size(0)
@@ -87,16 +94,95 @@ class Dsmadmc:
         """Command line interface"""
 
         completer = NestedCompleter.from_nested_dict({
-            'accept': {
-                'date': None
+            'ACCept': {
+                'Date': None
             },
-            'activate': {
-                'policyset': DsmadmcSelectCompleter(self.getanalyzer(), "DOM")
+            'ACTivate': {
+                'POlicyset': DsmadmcSelectCompleter(self.getanalyzer(), "activate_policyset")
             },
-            'query': {
-                'node':
-                    DsmadmcSelectCompleter(self.getanalyzer(), "NODE"),
-                'stgp': DsmadmcSelectCompleter(self.getanalyzer(), "STGP"),
+            'ASsign': {
+                'DEFMGmtclass': DsmadmcSelectCompleter(self.getanalyzer(), "assign_defmgmtclass")
+            },
+            'AUDit': {
+                'LIBRary': DsmadmcSelectCompleter(self.getanalyzer(), "audit_library"),
+                'LICense': {'?'},
+                'Volume': DsmadmcSelectCompleter(self.getanalyzer(), "audit_volume")
+            },
+            'BAckup': {
+                'DB': DsmadmcSelectCompleter(self.getanalyzer(), "backup_db")
+            },
+            'Query': {
+                'NOde':
+                    DsmadmcSelectCompleter(self.getanalyzer(), "query_node"),
+                'STGp': DsmadmcSelectCompleter(self.getanalyzer(), "query_stgp"),
+                'actlog': {'?'},
+                'admin': {'?'},
+                'association': {'?'},
+                'auditoccupancy': {'?'},
+                'backupset': {'?'},
+                'backupsetcontents': {'?'},
+                'cloptset': {'?'},
+                'collocgroup': {'?'},
+                'content': {'?'},
+                'copygroup': {'?'},
+                'datamover': {'?'},
+                'db': {'?'},
+                'dbbackuptrigger': {'?'},
+                'dbvolume': {'?'},
+                'devclass': {'?'},
+                'dirspace': {'?'},
+                'domain': {'?'},
+                'drive': {'?'},
+                'drmedia': {'?'},
+                'drmstatus': {'?'},
+                'enabled': {'?'},
+                'event': {'?'},
+                'eventrules': {'?'},
+                'eventserver': {'?'},
+                'export': {'?'},
+                'filespace': {'?'},
+                'library': {'?'},
+                'libvolume': {'?'},
+                'license': {'?'},
+                'log': {'?'},
+                'logvolume': {'?'},
+                'machine': {'?'},
+                'media': {'?'},
+                'mgmtclass': {'?'},
+                'mount': {'?'},
+                'nasbackup': {'?'},
+                'nodedata': {'?'},
+                'nodegroup': {'?'},
+                'occupancy': {'?'},
+                'option': {'?'},
+                'path': {'?'},
+                'policyset': {'?'},
+                'process': {'?'},
+                'profile': {'?'},
+                'proxynode': {'?'},
+                'recoverymedia': {'?'},
+                'request': {'?'},
+                'restore': {'?'},
+                'rpfcontent': {'?'},
+                'rpfile': {'?'},
+                'san': {'?'},
+                'schedule': {'?'},
+                'script': {'?'},
+                'server': {'?'},
+                'servergroup': {'?'},
+                'session': {'?'},
+                'shredstatus': {'?'},
+                'spacetrigger': {'?'},
+                'sqlsession': {'?'},
+                'status': {'?'},
+                'subscriber': {'?'},
+                'subscription': {'?'},
+                'system': {'?'},
+                'tapealermsg': {'?'},
+                'toc': {'?'},
+                'virtualfsmapping': {'?'},
+                'volhistory': {'?'},
+                'volume': {'?'},
             },
             'quit': None,
         })
@@ -104,7 +190,7 @@ class Dsmadmc:
 
         if not prmpt:
             text = self.session.prompt(
-                self.config.prompt, completer=completer, complete_while_typing=False, cursor=CursorShape.BLINKING_BLOCK)
+                self.config.prompt, completer=completer, complete_while_typing=True, cursor=CursorShape.BLINKING_BLOCK, auto_suggest=AutoSuggestFromHistory())
         else:
             text = self.session.prompt(
                 prmpt, completer=completer, complete_while_typing=False,
