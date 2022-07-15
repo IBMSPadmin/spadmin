@@ -25,7 +25,7 @@ class Dsmadmc:
     start = datetime.datetime.utcnow()
     config = None
     session = PromptSession()
-    def __init__(self, configuration):
+    def     __init__(self, configuration):
         self.config = configuration
 
     def sendline(self,text):
@@ -55,7 +55,7 @@ class Dsmadmc:
 
     def bye(self):
         end_date = datetime.datetime.utcnow()
-        print(colored('Thanks!', 'green'), colored('spadmin has run', 'white'),
+        print(colored('Thank you!', 'green'), colored('spadmin has run', 'white'),
               str(datetime.timedelta(seconds=abs((end_date - self.start).seconds))), colored('total', 'white'))
 
     def startdsmadmc(self, self1):
