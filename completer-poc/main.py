@@ -69,7 +69,6 @@ class DsmadmcSelectCompleter(NestedCompleter):
                                 yield Completion("db", start_position=0)
                             else:
                                 yield Completion("db", start_position=0 - len(document.text.split()[-1]))
-
                     else:
                         yield Completion("backup", start_position=0 - len(document.text))
             pass
