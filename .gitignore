@@ -8,3 +8,4 @@ ispadmin/__pycache__/dsmadmc.cpython-310.pyc
 ispadmin/__pycache__/dsmadmc.cpython-39.pyc
 .DS_Store
 completer-poc/logfile.txt
+*.pyc
