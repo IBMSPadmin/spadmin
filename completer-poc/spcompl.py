@@ -53,7 +53,7 @@ class SFACompleter:
                 if second not in self.rules:
                     self.rules[ second ] = []
                 self.rules[ first ].append( second )
-                sleep( .1 )
+                sleep( .05 )
         rulefile.close()
         print()
         
@@ -67,6 +67,7 @@ class SFACompleter:
         consoleline( '#' )
 
     def process( self, tokens ):
+        logging.info( 'PROCESS TOKENS:\n' + pformat( tokens ) )
         if len( tokens )   == 0:
             # LEVEL ?
             print( 'LEVEL ?' )
@@ -82,8 +83,8 @@ class SFACompleter:
             ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         elif len( tokens ) == 3 or len( tokens ) == 4 :
             # LEVEL 3 and 4
-            logging.info( 'Stepped into LEVEL >3.' )
-            ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
+            logging.info( 'Stepped into LEVEL 3.' )
+            ret = [ x + '' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         else:
             logging.info( 'Stepped into LEVEL Bzzz...' )
         logging.info( 'RETURN:\n' + pformat( ret ) )
