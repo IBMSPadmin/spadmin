@@ -83,15 +83,15 @@ class SFACompleter:
             ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         elif len( tokens ) == 3 or len( tokens ) == 4 :
             # LEVEL 3 and 4
-            logging.info( 'Stepped into LEVEL 3.' )
+            logging.info( 'Stepped into LEVEL 3. and 4.' )
             ret = [ x + '' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         else:
             logging.info( 'Stepped into LEVEL Bzzz...' )
-        logging.info( 'RETURN:\n' + pformat( ret ) )
+        logging.info( 'PROCESS RETURN:\n' + pformat( ret ) )
         return ret
 
     def complete( self, text, state ):
-        logging.info( 'COMPLETE Text: [' + text + '].' )
+        logging.info( 'COMPLETER Text: [' + text + '].' )
         try:
             logging.info( 'readline buffer: [' + readline.get_line_buffer() + '].' )
             tokens = readline.get_line_buffer().split()
