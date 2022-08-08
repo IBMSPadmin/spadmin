@@ -1,0 +1,16 @@
+$->backup
+$->define
+$->delete
+$->query
+$->quit
+backup->db
+db->devc=
+db->type=
+backup->volhistory
+backup->devconfig
+define->node
+define->stgpool
+delete->node
+delete->stgpool
+query->node
+query->stgpool
