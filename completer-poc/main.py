@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Example of using the control-space key binding for auto completion.
 """
@@ -28,19 +28,20 @@ class DsmadmcSelectCompleter(NestedCompleter):
         if self.select == "new":
             # Level 0
             if document.cursor_position == 0:
-                logging.info("Level 0: [" + document.text + "]")
+                logging.info("Level 00: [" + document.text + "]")
                 yield Completion("backup", start_position=0)
-                yield Completion("Define", start_position=0)
-                yield Completion("Delete", start_position=0)
-                yield Completion("Query", start_position=0)
-            # Level 1
+                yield Completion("define", start_position=0)
+                yield Completion("delete", start_position=0)
+                yield Completion("query",  start_position=0)
             else:
+                # Level 1
+                logging.info("Level 1: [" + document.text + "]")
                 # Ez a BACKUP parancs ága
-                if search("(backup|backu|back|bac|ba|b)", document.text):
-                    logging.info("\t [" + document.text + "]")
+                if search("(backup|backu|back|bac|ba)", document.text):
+                    logging.info("Level 1: BAckup [" + document.text + "]")
                     # Level 2: ha már van szóköz végén
                     if search("(backup|backu|back|bac|ba)\s+", document.text):
-                        logging.info("\t\t [" + document.text + "]")
+                        logging.info("Level 2: BAckup+space [" + document.text + "]")
                         # Level 3: opciók
                         if search("(backup|backu|back|bac|ba)\s+db", document.text):
                             logging.info("\t\t\t [" + document.text + "]")
@@ -93,6 +94,7 @@ def _(event):
 
 
 def main():
+    logging.info("--------------------------- [" + "]")
     text = prompt(
         "Spectrum> ",
         completer=DsmadmcSelectCompleter("new"),
