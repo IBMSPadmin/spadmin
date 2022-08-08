@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-from time import time
+import sys
+
+from time import time, sleep
 start = time()
 
 import readline
@@ -8,6 +10,8 @@ readline.parse_and_bind( 'tab: complete' )
 
 import os
 rows, columns = os.popen( 'stty size', 'r' ).read().split()
+rows    = int( rows )
+columns = int( columns )
 
 import platform
 
@@ -29,9 +33,13 @@ logging.basicConfig( filename='spcompl.log',
 class SFACompleter:
     def __init__( self, rulefilename ):
         rulefile = open( rulefilename, 'r' )
-        self.rules = {}
+        rulefilelines = rulefile.readlines()
         self.start = []
-        for line in rulefile:
+        self.rules = {}
+        i = 0
+        for line in rulefilelines:
+            i += 1
+            progressbar( i, len( rulefilelines ) )
             assert( '->' in line )
             line = line.strip()
             first, second = line.split( '->' )
@@ -45,12 +53,17 @@ class SFACompleter:
                 if second not in self.rules:
                     self.rules[ second ] = []
                 self.rules[ first ].append( second )
+                sleep( .1 )
         rulefile.close()
+        print()
         
         consoleline( '#' )
-        print( colored( 'Imported rules', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored(  rulefilename, 'green' ) + ']' )
-        logging.info( 'Rule file imported:\n' + pformat( self.rules ) )
+        print( colored( 'Imported LEVEL 0 starters', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored(  rulefilename, 'green' ) + ']' )
+        pprint( self.start )
+        print( colored( 'Imported LEVEL >1 other rules', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored(  rulefilename, 'green' ) + ']' )
         pprint( self.rules )
+        logging.info( 'Rule file imported as starters:\n'    + pformat( self.start ) )
+        logging.info( 'Rule file imported as other rules:\n' + pformat( self.rules ) )
         consoleline( '#' )
 
     def process( self, tokens ):
@@ -93,8 +106,18 @@ class SFACompleter:
         return None
 
 def consoleline( char ):
-        print( char * int( columns ) )
+        print( char * columns )
+        
+def progressbar( count, total ):
+    barlength = columns - 2
+    filledlength = int( round( ( barlength ) * count / float( total ) ) )
 
+    percent = round( 100.0 * count / float( total ), 1)
+    barline = '=' * filledlength + colored ('-', 'red', attrs=[ 'bold' ] ) * ( barlength - filledlength )
+
+    sys.stdout.write( '[%s]\r' % ( barline ) )
+    sys.stdout.flush()
+    
 ##########      
 # main() #
 ##########
