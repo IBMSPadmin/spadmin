@@ -105,6 +105,10 @@ class SFACompleter:
             consoleline( 'E' )
         return None
 
+#############      
+# Functions #
+#############
+
 def consoleline( char ):
         print( char * columns )
         
@@ -114,8 +118,9 @@ def progressbar( count, total ):
 
     percent = round( 100.0 * count / float( total ), 1)
     barline = '=' * filledlength + colored ('-', 'red', attrs=[ 'bold' ] ) * ( barlength - filledlength )
-
+    
     sys.stdout.write( '[%s]\r' % ( barline ) )
+    sys.stdout.write( '[%s%s\r' % ( colored( percent, 'grey', 'on_white' ), colored( '%', 'grey', 'on_white' ) ) )
     sys.stdout.flush()
     
 ##########      
