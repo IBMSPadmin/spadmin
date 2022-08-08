@@ -67,12 +67,13 @@ class SFACompleter:
             # LEVEL 2
             logging.info( 'Stepped into LEVEL 2.' )
             ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
-        elif len( tokens ) == 3:
-            # LEVEL 3
+        elif len( tokens ) == 3 or len( tokens ) == 4 :
+            # LEVEL 3 and 4
             logging.info( 'Stepped into LEVEL >3.' )
             ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         else:
             logging.info( 'Stepped into LEVEL Bzzz...' )
+        logging.info( 'RETURN:\n' + pformat( ret ) )
         return ret
 
     def complete( self, text, state ):
@@ -83,8 +84,8 @@ class SFACompleter:
             if not tokens or readline.get_line_buffer()[ -1 ] == ' ':
                 tokens.append( '' )
             results = self.process( tokens ) + [ None ]
-            #logging.info( 'results: [' + results + '].' )
-            logging.info( 'results return: [' + results[ state ] + '].' )
+            logging.info( 'Results:\n' + pformat( results ) )
+            logging.info( 'Results return: [' + results[ state ] + '].' )
             return results[ state ]   
         except Exception as e:
             print( coloreed( '\nOS error: {0}'.format(e), 'red' ) )

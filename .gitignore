@@ -9,3 +9,4 @@ ispadmin/__pycache__/dsmadmc.cpython-39.pyc
 .DS_Store
 completer-poc/logfile.txt
 *.pyc
+completer-poc/spcompl.log
