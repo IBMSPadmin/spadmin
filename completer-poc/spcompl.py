@@ -7,7 +7,7 @@
 import sys
 
 from time import time, sleep
-start = time()
+prgstart = time()
 
 import readline
 readline.parse_and_bind( 'tab: complete' )
@@ -95,32 +95,38 @@ class IBMSPrlCompleter:
         elif len( tokens ) == 1:
             # LEVEL 1 searches in start commands
             logging.info( ' Stepped into LEVEL 1.' )
+            # ret = [ x + ' ' for x in self.start if x.startswith( tokens[ -1 ] ) ]
             for x in self.start:
                 if x.startswith( tokens[ -1 ] ):
                     ret.append( x + ' ' )
-            #ret = [ x + ' ' for x in self.start if x.startswith( tokens[ -1 ] ) ]
         elif len( tokens ) == 2:
             # LEVEL 2
             logging.info( ' Stepped into LEVEL 2.' )
+            # ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
             for x in self.rules[ tokens[ -2 ] ]:
                 if x.startswith( tokens[ -1 ] ):
                     ret.append( x + ' ' )
-            #ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
-        elif len( tokens ) == 3 or len( tokens ) == 5 :
+        elif len( tokens ) == 3 or len( tokens ) == 4 :
             # LEVEL 3 and 4
             logging.info( ' Stepped into LEVEL 3. and 4.' )
-            if tokens[0] == 'query' and tokens[1] == 'node':
+            if tokens[ -3 ] == 'query' and tokens[ -2 ] == 'node':
                 logging.info( ' QUERY NODE found!' )
-                nodelist = [ 'NODE1', 'NODE2', 'NODE3', 'NODE4' ]
+                nodelist = [ 'node1', 'node2', 'node3', 'node4' ]
+                # ret = [ x + ' ' for x in nodelist if x.startswith( tokens[ -1 ] ) ]
                 for x in nodelist:
                     if x.startswith( tokens[ -1 ] ):
-                        ret.append( x + ' ' )    
-                #ret = [ x + ' ' for x in nodelist if x.startswith( tokens[ -1 ] ) ]
+                        ret.append( x + ' ' )
+            elif tokens[ -3 ] == 'query' and tokens[ -2 ] == 'stgpool':
+                stgpoollist = [ 'stgpool1', 'stgpool2', 'stgpool3', 'stgpool4' ]
+                # ret = [ x + ' ' for x in nodelist if x.startswith( tokens[ -1 ] ) ]
+                for x in stgpoollist:
+                    if x.startswith( tokens[ -1 ] ):
+                        ret.append( x + ' ' )
             else:
+                # ret = [ x + '' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
                 for x in self.rules[ tokens[ -2 ] ]:
                     if x.startswith( tokens[ -1 ] ):
                         ret.append( x + ' ' )
-                #ret = [ x + '' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         else:
             logging.info( ' Stepped into LEVEL Bzzz...' )
         logging.info( ' PROCESS RETURN: ' + pformat( ret ) )
@@ -158,7 +164,7 @@ def progressbar( count, total ):
     filledlength = int( round( ( barlength ) * count / float( total ) ) )
 
     percent = round( 100.0 * count / float( total ), 1)
-    barline = '=' * filledlength + colored ('-', 'red', attrs=[ 'bold' ] ) * ( barlength - filledlength )
+    barline = '=' * filledlength + colored ( '-', 'red', attrs=[ 'bold' ] ) * ( barlength - filledlength )
     
     sys.stdout.write( '[%s]\r' % ( barline ) )
     sys.stdout.write( '[%s%s\r' % ( colored( percent, 'grey', 'on_white' ), colored( '%', 'grey', 'on_white' ) ) )
@@ -185,10 +191,15 @@ atexit.register( readline.write_history_file, rlhistfile )
 myIBMSPrlCompleter = IBMSPrlCompleter( "sprules.txt" )
 readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
 
-line = input( colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' ' )
 
-consoleline( '-' )
-print ( "You said: [" + line.strip() + "]" )
-end = time()
-print ( "Program execution time (s):", end - start )
+while True:
+    line = input( colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' ' )
+    consoleline( '-' )
+    print ( "You said: [" + line.strip() + "]" )
+    if search( '(quit|qui)', line ):
+        break
+    consoleline( '-' )
+
+prgend = time()
+print ( "Program execution time (s):", prgend - prgstart )
 consoleline( '-' )
