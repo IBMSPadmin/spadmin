@@ -40,10 +40,11 @@ class SFACompleter:
         for line in rulefilelines:
             i += 1
             progressbar( i, len( rulefilelines ) )
-            assert( '->' in line )
+            # assert( '->' in line )
             line = line.strip()
             first, second = line.split( '->' )
             if first == '$':
+                # Starter
                 self.start.append( second )
                 if second not in self.rules:
                     self.rules[second] = []
@@ -53,12 +54,12 @@ class SFACompleter:
                 if second not in self.rules:
                     self.rules[ second ] = []
                 self.rules[ first ].append( second )
-                sleep( .05 )
+                sleep( .03 )
         rulefile.close()
         print()
         
         consoleline( '#' )
-        print( colored( 'Imported LEVEL 0 starters', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored(  rulefilename, 'green' ) + ']' )
+        print( colored( 'Imported LEVEL 0 starters', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored( rulefilename, 'green' ) + ']' )
         pprint( self.start )
         print( colored( 'Imported LEVEL >1 other rules', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored(  rulefilename, 'green' ) + ']' )
         pprint( self.rules )
@@ -74,7 +75,7 @@ class SFACompleter:
             logging.info( 'Stepped into LEVEL 0.' )
             ret = []
         elif len( tokens ) == 1:
-            # LEVEL 1
+            # LEVEL 1 searches in start commands
             logging.info( 'Stepped into LEVEL 1.' )
             ret = [ x + ' ' for x in self.start if x.startswith( tokens[ -1 ] ) ]
         elif len( tokens ) == 2:
