@@ -38,4 +38,5 @@ delete->node
 delete->stgpool
 query->node
 query->stgpool
+show->time
 (backup|backu|back|bac|ba)->regexp_db

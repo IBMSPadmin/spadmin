@@ -9,6 +9,8 @@ import sys
 from time import time, sleep
 prgstart = time()
 
+import datetime
+
 import readline
 readline.parse_and_bind( 'tab: complete' )
 
@@ -85,7 +87,7 @@ class IBMSPrlCompleter:
     # tokenEngine #
     ###############  
     def tokenEngine( self, tokens ):
-        logging.info( ' PROCESS TOKENS:  ' + pformat( tokens ) )
+        logging.info( ' PROCESS TOKENS: ' + pformat( tokens ) )
         ret = []
         if len( tokens )   == 0:
             # LEVEL ?
@@ -109,14 +111,17 @@ class IBMSPrlCompleter:
         elif len( tokens ) == 3 or len( tokens ) == 4 :
             # LEVEL 3 and 4
             logging.info( ' Stepped into LEVEL 3. and 4.' )
-            if tokens[ -3 ] == 'query' and tokens[ -2 ] == 'node':
-                logging.info( ' QUERY NODE found!' )
+            #if tokens[ -3 ] == 'query' and tokens[ -2 ] == 'node':
+            if search( '(query|quer|que|qu|q)\s+(node|nod|no|n)', tokens[ -3 ] + ' ' + tokens[ -2 ]):
+                logging.info( ' QUERY NODE command detected!' )
                 nodelist = [ 'node1', 'node2', 'node3', 'node4' ]
                 # ret = [ x + ' ' for x in nodelist if x.startswith( tokens[ -1 ] ) ]
                 for x in nodelist:
                     if x.startswith( tokens[ -1 ] ):
                         ret.append( x + ' ' )
-            elif tokens[ -3 ] == 'query' and tokens[ -2 ] == 'stgpool':
+            #elif tokens[ -3 ] == 'query' and tokens[ -2 ] == 'stgpool':
+            elif search( '(query|quer|que|qu|q)\s+(stgpool|stgpoo|stgpo|stgp|stg)', tokens[ -3 ] + ' ' + tokens[ -2 ]):    
+                logging.info( ' QUERY STGPOOLS command detected!' )
                 stgpoollist = [ 'stgpool1', 'stgpool2', 'stgpool3', 'stgpool4' ]
                 # ret = [ x + ' ' for x in nodelist if x.startswith( tokens[ -1 ] ) ]
                 for x in stgpoollist:
@@ -129,6 +134,7 @@ class IBMSPrlCompleter:
                         ret.append( x + ' ' )
         else:
             logging.info( ' Stepped into LEVEL Bzzz...' )
+        
         logging.info( ' PROCESS RETURN: ' + pformat( ret ) )
         return ret
         
@@ -201,5 +207,6 @@ while True:
     consoleline( '-' )
 
 prgend = time()
-print ( "Program execution time (s):", prgend - prgstart )
+consoleline( '-' )
+print ( "Program execution time:", colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
 consoleline( '-' )
