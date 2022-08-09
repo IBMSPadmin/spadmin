@@ -3,6 +3,9 @@ $->define
 $->delete
 $->query
 $->quit
+$->show
+$->test
+teszt->parancs
 ba->db
 back->db
 backu->db
@@ -24,3 +27,4 @@ delete->node
 delete->stgpool
 query->node
 query->stgpool
+(backup|backu|back|bac|ba)->regexp_db

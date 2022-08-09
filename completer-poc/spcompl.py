@@ -30,7 +30,7 @@ logging.basicConfig( filename='spcompl.log',
                      datefmt= '%Y%m%d %H%M%S',
                      level=   logging.INFO )
 
-class SFACompleter:
+class IBMSPrlCompleter:
     def __init__( self, rulefilename ):
         rulefile = open( rulefilename, 'r' )
         rulefilelines = rulefile.readlines()
@@ -54,7 +54,7 @@ class SFACompleter:
                 if second not in self.rules:
                     self.rules[ second ] = []
                 self.rules[ first ].append( second )
-                sleep( .03 )
+                sleep( .01 )
         rulefile.close()
         print()
         
@@ -67,48 +67,59 @@ class SFACompleter:
         logging.info( 'Rule file imported as other rules:\n' + pformat( self.rules ) )
         consoleline( '#' )
 
-    def process( self, tokens ):
-        logging.info( 'PROCESS TOKENS:\n' + pformat( tokens ) )
+    ###############      
+    # tokenEngine #
+    ###############  
+    def tokenEngine( self, tokens ):
+        logging.info( ' PROCESS TOKENS:  ' + pformat( tokens ) )
         if len( tokens )   == 0:
             # LEVEL ?
-            print( 'LEVEL ?' )
+            print( ' LEVEL ?' )
             logging.info( 'Stepped into LEVEL 0.' )
             ret = []
         elif len( tokens ) == 1:
             # LEVEL 1 searches in start commands
-            logging.info( 'Stepped into LEVEL 1.' )
-            ret = [ x + ' ' for x in self.start if x.startswith( tokens[ -1 ] ) ]
+            logging.info( ' Stepped into LEVEL 1.' )
+            ret = []
+            for x in self.start:
+                if x.startswith( tokens[ -1 ] ):
+                    ret.append( x + ' ' )
+            #ret = [ x + ' ' for x in self.start if x.startswith( tokens[ -1 ] ) ]
         elif len( tokens ) == 2:
             # LEVEL 2
-            logging.info( 'Stepped into LEVEL 2.' )
+            logging.info( ' Stepped into LEVEL 2.' )
             ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         elif len( tokens ) == 3 or len( tokens ) == 4 :
             # LEVEL 3 and 4
-            logging.info( 'Stepped into LEVEL 3. and 4.' )
+            logging.info( ' Stepped into LEVEL 3. and 4.' )
             ret = [ x + '' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         else:
-            logging.info( 'Stepped into LEVEL Bzzz...' )
-        logging.info( 'PROCESS RETURN:\n' + pformat( ret ) )
+            logging.info( ' Stepped into LEVEL Bzzz...' )
+        logging.info( ' PROCESS RETURN: ' + pformat( ret ) )
         return ret
-
-    def complete( self, text, state ):
-        logging.info( 'COMPLETER Text: [' + text + '].' )
+        
+    ##################      
+    # IBMSPcompleter #
+    ##################    
+    def IBMSPcompleter( self, text, state ):
+        logging.info( 'COMPLETER Text:  [' + text + '] and state[' + str( state ) + ']. ------------------------------------------------------------' )
         try:
             logging.info( 'readline buffer: [' + readline.get_line_buffer() + '].' )
             tokens = readline.get_line_buffer().split()
             if not tokens or readline.get_line_buffer()[ -1 ] == ' ':
                 tokens.append( '' )
-            results = self.process( tokens ) + [ None ]
-            logging.info( 'Results:\n' + pformat( results ) )
-            logging.info( 'Results return: [' + results[ state ] + '].' )
+            results = self.tokenEngine( tokens ) + [ None ]
+            logging.info( 'Results: ' + pformat( results ) + '???????????????????' )
+            logging.info( 'COMPLETER results return: [' + results[ state ] + ']. -----------------------------------------------------------' )
             return results[ state ]   
         except Exception as e:
+            consoleline( coloreed( 'E', 'red' ) )
             print( coloreed( '\nOS error: {0}'.format(e), 'red' ) )
-            consoleline( 'E' )
+            consoleline( coloreed( 'E', 'red' ) )
         return None
 
 #############      
-# Functions #
+# Functions # ####################################################################
 #############
 
 def consoleline( char ):
@@ -125,12 +136,12 @@ def progressbar( count, total ):
     sys.stdout.write( '[%s%s\r' % ( colored( percent, 'grey', 'on_white' ), colored( '%', 'grey', 'on_white' ) ) )
     sys.stdout.flush()
     
-##########      
-# main() #
-##########
+########## #######################################################################
+# main() # 
+########## #######################################################################
 
-completer = SFACompleter( "sprules.txt" )
-readline.set_completer( completer.complete )
+myIBMSPrlCompleter = IBMSPrlCompleter( "sprules.txt" )
+readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
 
 line = input( colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' ' )
 
