@@ -86,15 +86,15 @@ class IBMSPrlCompleter:
     ###############  
     def tokenEngine( self, tokens ):
         logging.info( ' PROCESS TOKENS:  ' + pformat( tokens ) )
+        ret = []
         if len( tokens )   == 0:
             # LEVEL ?
             print( ' LEVEL ?' )
             logging.info( 'Stepped into LEVEL 0.' )
-            ret = []
+            #ret = []
         elif len( tokens ) == 1:
             # LEVEL 1 searches in start commands
             logging.info( ' Stepped into LEVEL 1.' )
-            ret = []
             for x in self.start:
                 if x.startswith( tokens[ -1 ] ):
                     ret.append( x + ' ' )
@@ -102,16 +102,25 @@ class IBMSPrlCompleter:
         elif len( tokens ) == 2:
             # LEVEL 2
             logging.info( ' Stepped into LEVEL 2.' )
-            ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
+            for x in self.rules[ tokens[ -2 ] ]:
+                if x.startswith( tokens[ -1 ] ):
+                    ret.append( x + ' ' )
+            #ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         elif len( tokens ) == 3 or len( tokens ) == 5 :
             # LEVEL 3 and 4
             logging.info( ' Stepped into LEVEL 3. and 4.' )
             if tokens[0] == 'query' and tokens[1] == 'node':
                 logging.info( ' QUERY NODE found!' )
                 nodelist = [ 'NODE1', 'NODE2', 'NODE3', 'NODE4' ]
-                ret = [ x + ' ' for x in nodelist if x.startswith( tokens[ -1 ] ) ]
+                for x in nodelist:
+                    if x.startswith( tokens[ -1 ] ):
+                        ret.append( x + ' ' )    
+                #ret = [ x + ' ' for x in nodelist if x.startswith( tokens[ -1 ] ) ]
             else:
-                ret = [ x + '' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
+                for x in self.rules[ tokens[ -2 ] ]:
+                    if x.startswith( tokens[ -1 ] ):
+                        ret.append( x + ' ' )
+                #ret = [ x + '' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         else:
             logging.info( ' Stepped into LEVEL Bzzz...' )
         logging.info( ' PROCESS RETURN: ' + pformat( ret ) )
