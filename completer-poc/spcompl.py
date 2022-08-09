@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+# Python based readline completions POC
+# Original idea and the base source came from: https://sites.google.com/site/xiangyangsite/home/technical-tips/software-development/python/python-readline-completions
+# 
+
 import sys
 
 from time import time, sleep
@@ -22,16 +26,21 @@ if platform.system() == 'Windows':
 from pprint import pprint, pformat
 
 from re import search
+
 import logging
 
 import atexit
 
-logging.basicConfig( filename='spcompl.log',
-                     filemode='a',
-                     format=  '%(asctime)s %(levelname)s %(message)s',
-                     datefmt= '%Y%m%d %H%M%S',
-                     level=   logging.INFO )
+# Logger settings
+logging.basicConfig( filename = 'spcompl.log',
+                     filemode = 'a',
+                     format   = '%(asctime)s %(levelname)s %(message)s',
+                     datefmt  = '%Y%m%d %H%M%S',
+                     level    = logging.INFO )
 
+#####################################
+# IBMSPrlCompleter Class definition #
+#####################################
 class IBMSPrlCompleter:
     def __init__( self, rulefilename ):
         rulefile = open( rulefilename, 'r' )
@@ -43,6 +52,7 @@ class IBMSPrlCompleter:
             i += 1
             progressbar( i, len( rulefilelines ) )
             # assert( '->' in line )
+            # Skipt the remark and empty lines
             if line.startswith( "#" ) or not line.rstrip():
                 continue
             line = line.strip()
@@ -145,12 +155,13 @@ def progressbar( count, total ):
     sys.stdout.write( '[%s%s\r' % ( colored( percent, 'grey', 'on_white' ), colored( '%', 'grey', 'on_white' ) ) )
     sys.stdout.flush()
     
-########## #######################################################################
+########## ###############################################################################################################
 # main() # 
-########## #######################################################################
+########## ###############################################################################################################
 
+# Command line history
 # Based on this: https://docs.python.org/3/library/readline.html
-#rlhistfile = os.path.join( os.path.expanduser( "~" ), ".python_history" )
+# rlhistfile = os.path.join( os.path.expanduser( "~" ), ".python_history" )
 rlhistfile = os.path.join( "./", ".python_history" )
 try:
     readline.read_history_file( rlhistfile )
@@ -159,7 +170,7 @@ try:
 except FileNotFoundError:
     pass
 
-# Register
+# Register history file autosaver
 atexit.register( readline.write_history_file, rlhistfile )
 
 myIBMSPrlCompleter = IBMSPrlCompleter( "sprules.txt" )
@@ -170,5 +181,5 @@ line = input( colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' ' )
 consoleline( '-' )
 print ( "You said: [" + line.strip() + "]" )
 end = time()
-print ( "Execution time (s):", end - start )
+print ( "Program execution time (s):", end - start )
 consoleline( '-' )
