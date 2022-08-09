@@ -1,3 +1,6 @@
+################
+# Starter part #
+################
 $->backup
 $->define
 $->delete
@@ -5,7 +8,15 @@ $->query
 $->quit
 $->show
 $->test
-teszt->parancs
+$->node1
+$->node2
+$->node3
+$->node4
+
+################
+# and the rest #
+################
+teszt->parancs	
 ba->db
 back->db
 backu->db

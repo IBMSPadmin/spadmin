@@ -24,6 +24,8 @@ from pprint import pprint, pformat
 from re import search
 import logging
 
+import atexit
+
 logging.basicConfig( filename='spcompl.log',
                      filemode='a',
                      format=  '%(asctime)s %(levelname)s %(message)s',
@@ -41,6 +43,8 @@ class IBMSPrlCompleter:
             i += 1
             progressbar( i, len( rulefilelines ) )
             # assert( '->' in line )
+            if line.startswith( "#" ) or not line.rstrip():
+                continue
             line = line.strip()
             first, second = line.split( '->' )
             if first == '$':
@@ -89,10 +93,15 @@ class IBMSPrlCompleter:
             # LEVEL 2
             logging.info( ' Stepped into LEVEL 2.' )
             ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
-        elif len( tokens ) == 3 or len( tokens ) == 4 :
+        elif len( tokens ) == 3 or len( tokens ) == 5 :
             # LEVEL 3 and 4
             logging.info( ' Stepped into LEVEL 3. and 4.' )
-            ret = [ x + '' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
+            if tokens[0] == 'query' and tokens[1] == 'node':
+                logging.info( ' QUERY NODE found!' )
+                nodelist = [ 'NODE1', 'NODE2', 'NODE3', 'NODE4' ]
+                ret = [ x + ' ' for x in nodelist if x.startswith( tokens[ -1 ] ) ]
+            else:
+                ret = [ x + '' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
         else:
             logging.info( ' Stepped into LEVEL Bzzz...' )
         logging.info( ' PROCESS RETURN: ' + pformat( ret ) )
@@ -139,6 +148,19 @@ def progressbar( count, total ):
 ########## #######################################################################
 # main() # 
 ########## #######################################################################
+
+# Based on this: https://docs.python.org/3/library/readline.html
+#rlhistfile = os.path.join( os.path.expanduser( "~" ), ".python_history" )
+rlhistfile = os.path.join( "./", ".python_history" )
+try:
+    readline.read_history_file( rlhistfile )
+    # default history len is -1 (infinite), which may grow unruly
+    readline.set_history_length( 1000 )
+except FileNotFoundError:
+    pass
+
+# Register
+atexit.register( readline.write_history_file, rlhistfile )
 
 myIBMSPrlCompleter = IBMSPrlCompleter( "sprules.txt" )
 readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
