@@ -58,6 +58,7 @@ class IBMSPrlCompleter:
         for line in rulefilelines:
             i += 1
             progressbar( i, len( rulefilelines ) )
+            # ez mi? assert?
             # assert( '->' in line )
             # Skip the remark and empty lines
             if line.startswith( "#" ) or not line.rstrip():
