@@ -4,7 +4,7 @@
 # Original idea and the base source came from: https://sites.google.com/site/xiangyangsite/home/technical-tips/software-development/python/python-readline-completions
 # 
 
-# Let's do soma mess!!!
+# Let's do some mess!!!
 
 import sys
 
@@ -130,7 +130,15 @@ class IBMSPrlCompleter:
                     for x in self.rules[key]:
                         if x.startswith( tokens[ -1 ] ):
                             ret.append( x + ' ' )
-            ret = list( dict.fromkeys( ret ) ) # easy unique list just to be on the safe side, maybe we don't need this CHECK later!
+                        elif search( tokens[ -1 ], x ):
+                            ret.append( search( '^\((\w+)|', x )[1] + ' ' )
+            #ret = list( dict.fromkeys( ret ) ) # easy unique list just to be on the safe side, maybe we don't need this CHECK later!
+            # let's clean the regexp like items
+            #for i, x in enumerate( ret ):
+            #    print( search( '^\((\w+)|', x )[1] )
+            #    #ret[ i ] = search( '^\((\w+)|', x )[1]
+            #    print ( search( '^\((\w+)|', x )[1] )
+            
         elif len( tokens ) == 3 or len( tokens ) == 4 :
             # LEVEL 3 and 4
             logging.info( ' Stepped into LEVEL 3. and 4.' )

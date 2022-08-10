@@ -26,8 +26,8 @@ $->reload
 ^(backup|backu|back|bac|ba)->db
 #backup->volhistory
 #backup->devconfig
-^(backup|backu|back|bac|ba)->devconfig
-^(backup|backu|back|bac|ba)->volhistory
+^(backup|backu|back|bac|ba)->(devconfig|devconfi|devconf)
+^(backup|backu|back|bac|ba)->(volhistory|volhistor|volhisto|volhist|volhis|volhi|volh)
 
 ##################
 # Query commands #
