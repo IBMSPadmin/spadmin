@@ -10,3 +10,4 @@ ispadmin/__pycache__/dsmadmc.cpython-39.pyc
 completer-poc/logfile.txt
 *.pyc
 completer-poc/spcompl.log
+completer-poc/.python_history
