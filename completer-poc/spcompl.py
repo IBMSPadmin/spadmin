@@ -4,6 +4,8 @@
 # Original idea and the base source came from: https://sites.google.com/site/xiangyangsite/home/technical-tips/software-development/python/python-readline-completions
 # 
 
+# Let's do soma mess!!!
+
 import sys
 
 from time import time, sleep
