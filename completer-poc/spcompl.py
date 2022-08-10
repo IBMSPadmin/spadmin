@@ -126,7 +126,7 @@ class IBMSPrlCompleter:
                     for x in self.rules[key]:
                         if x.startswith( tokens[ -1 ] ):
                             ret.append( x + ' ' )
-            ret = list( dict.fromkeys( ret ) ) # easy unique list just to be on the safe side, maybe we don't need this CHEKC later!
+            ret = list( dict.fromkeys( ret ) ) # easy unique list just to be on the safe side, maybe we don't need this CHECK later!
         elif len( tokens ) == 3 or len( tokens ) == 4 :
             # LEVEL 3 and 4
             logging.info( ' Stepped into LEVEL 3. and 4.' )
