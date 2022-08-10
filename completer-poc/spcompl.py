@@ -122,10 +122,11 @@ class IBMSPrlCompleter:
             for key in self.rules:
                 logging.info( ' and searching for pattern II. regexp [' + key + ']' )
                 if search( key, tokens[ -2 ] ):
-                    logging.info( ' FOUND for pattern: II. regexp [' + self.rules[key][0] + ']' )
-                    if self.rules[key][0].startswith( tokens[ -1 ] ):
-                        ret.append( self.rules[key][0] + ' ' )
-            ret = list( dict.fromkeys( ret ) ) # easy unique list just to ba on the safe side
+                    logging.info( ' FOUND for pattern: II. regexp [' + pformat( self.rules[key] ) + ']' )
+                    for x in self.rules[key]:
+                        if x.startswith( tokens[ -1 ] ):
+                            ret.append( x + ' ' )
+            ret = list( dict.fromkeys( ret ) ) # easy unique list just to be on the safe side, maybe we don't need this CHEKC later!
         elif len( tokens ) == 3 or len( tokens ) == 4 :
             # LEVEL 3 and 4
             logging.info( ' Stepped into LEVEL 3. and 4.' )
