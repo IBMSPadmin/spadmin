@@ -52,8 +52,8 @@ class IBMSPrlCompleter:
     def loadrules( self, rulefilename ):
         rulefile = open( rulefilename, 'r' )
         rulefilelines = rulefile.readlines()
-        self.start = [] # list
-        self.rules = {} # dictionary
+        self.start = [] # 1. level list
+        self.rules = {} # >2. level dictionary
         i = 0
         for line in rulefilelines:
             i += 1
@@ -229,11 +229,9 @@ myIBMSPrlCompleter = IBMSPrlCompleter( "sprules.txt" )
 readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
 
 # Short text help
-print("""
-Short HELP:
-  Use: "quit" or "exit" command to leave the program or
-  use: "reload" to reload the rule file!
-""")
+print( colored( 'Short HELP:', 'cyan' ) )
+print( '''  Use: "quit" or "exit" command to leave the program or
+  use: "reload" to reload the rule file!''' )
 
 # Infinite loop
 while True:
