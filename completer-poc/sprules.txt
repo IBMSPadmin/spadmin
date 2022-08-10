@@ -15,9 +15,9 @@ $->reload
 # and the rest LEVEL 2 #
 ########################
 
-##################
-# backup command #
-##################
+###################
+# BAckup commands #
+###################
 #ba->db
 #back->db
 #backu->db
@@ -28,6 +28,14 @@ $->reload
 #backup->devconfig
 ^(backup|backu|back|bac|ba)->devconfig
 ^(backup|backu|back|bac|ba)->volhistory
+
+##################
+# Query commands #
+##################
+#query->node
+#query->stgpool
+^(query|quer|que|qu|q)->node
+^(query|quer|que|qu|q)->stgpool
 
 teszt->parancs	
 
@@ -44,7 +52,5 @@ define->node
 define->stgpool
 delete->node
 delete->stgpool
-query->node
-query->stgpool
 
 show->time
