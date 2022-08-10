@@ -5,28 +5,29 @@ $->backup
 $->define
 $->delete
 $->query
-$->quit
 $->show
 
+$->exit
+$->quit
 $->reload
 
 ########################
 # and the rest LEVEL 2 #
 ########################
 
-##########
-# backup #
-##########
+##################
+# backup command #
+##################
 #ba->db
 #back->db
 #backu->db
 #backup->db
 # This will replace all the above lines 
-(backup|backu|back|bac|ba)->db
+^(backup|backu|back|bac|ba)->db
 #backup->volhistory
 #backup->devconfig
-(backup|backu|back|bac|ba)->devconfig
-(backup|backu|back|bac|ba)->volhistory
+^(backup|backu|back|bac|ba)->devconfig
+^(backup|backu|back|bac|ba)->volhistory
 
 teszt->parancs	
 
@@ -45,4 +46,5 @@ delete->node
 delete->stgpool
 query->node
 query->stgpool
+
 show->time

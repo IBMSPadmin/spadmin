@@ -218,6 +218,13 @@ atexit.register( readline.write_history_file, rlhistfile )
 myIBMSPrlCompleter = IBMSPrlCompleter( "sprules.txt" )
 readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
 
+# Short text help
+print("""
+Short HELP:
+  Use: "quit" or "exit" command to leave the program or
+  use: "reload" to reload the rule file!
+""")
+
 # Infinite loop
 while True:
     line = input( colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' ' )
