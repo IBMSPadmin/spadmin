@@ -1,26 +1,35 @@
-################
-# Starter part #
-################
+########################
+# Starter part LEVEL 1 #
+########################
 $->backup
 $->define
 $->delete
 $->query
 $->quit
 $->show
-$->test
-$->node1
-$->node2
-$->node3
-$->node4
 
-################
-# and the rest #
-################
+$->reload
+
+########################
+# and the rest LEVEL 2 #
+########################
+
+##########
+# backup #
+##########
+#ba->db
+#back->db
+#backu->db
+#backup->db
+# This will replace all the above lines 
+(backup|backu|back|bac|ba)->db
+#backup->volhistory
+#backup->devconfig
+(backup|backu|back|bac|ba)->devconfig
+(backup|backu|back|bac|ba)->volhistory
+
 teszt->parancs	
-ba->db
-back->db
-backu->db
-backup->db
+
 db->devc=
 db->type=
 db->scratch=
@@ -30,8 +39,6 @@ devc=->type=
 devc=->scratch=
 scratch=->devc=
 scratch=->type=
-backup->volhistory
-backup->devconfig
 define->node
 define->stgpool
 delete->node
@@ -39,4 +46,3 @@ delete->stgpool
 query->node
 query->stgpool
 show->time
-(backup|backu|back|bac|ba)->regexp_db

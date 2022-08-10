@@ -44,17 +44,21 @@ logging.basicConfig( filename = 'spcompl.log',
 # IBMSPrlCompleter Class definition #
 #####################################
 class IBMSPrlCompleter:
+
     def __init__( self, rulefilename ):
+        self.loadrules( rulefilename )
+
+    def loadrules( self, rulefilename ):
         rulefile = open( rulefilename, 'r' )
         rulefilelines = rulefile.readlines()
-        self.start = []
-        self.rules = {}
+        self.start = [] # list
+        self.rules = {} # dictionary
         i = 0
         for line in rulefilelines:
             i += 1
             progressbar( i, len( rulefilelines ) )
             # assert( '->' in line )
-            # Skipt the remark and empty lines
+            # Skip the remark and empty lines
             if line.startswith( "#" ) or not line.rstrip():
                 continue
             line = line.strip()
@@ -62,8 +66,9 @@ class IBMSPrlCompleter:
             if first == '$':
                 # Starter
                 self.start.append( second )
-                if second not in self.rules:
-                    self.rules[second] = []
+                # ??? kell ez? bezavar regexp-nél
+                #if second not in self.rules:
+                #    self.rules[second] = []
             else:
                 if first not in self.rules:
                     self.rules[ first ] = []
@@ -82,6 +87,8 @@ class IBMSPrlCompleter:
         logging.info( 'Rule file imported as starters:\n'    + pformat( self.start ) )
         logging.info( 'Rule file imported as other rules:\n' + pformat( self.rules ) )
         consoleline( '#' )
+        
+        return None
 
     ###############      
     # tokenEngine #
@@ -105,9 +112,20 @@ class IBMSPrlCompleter:
             # LEVEL 2
             logging.info( ' Stepped into LEVEL 2.' )
             # ret = [ x + ' ' for x in self.rules[ tokens[ -2 ] ] if x.startswith( tokens[ -1 ] ) ]
-            for x in self.rules[ tokens[ -2 ] ]:
-                if x.startswith( tokens[ -1 ] ):
-                    ret.append( x + ' ' )
+            #logging.info( ' and searching for pattern  I. [' + tokens[ -2 ] + ']' )
+            #for x in self.rules[ tokens[ -2 ] ]:
+            #    if x.startswith( tokens[ -1 ] ):
+            #    #if search( tokens[ -1 ], x ):
+            #        ret.append( x + ' ' )
+            # try all as regexps and don't need the above part which fails if there is no real item!!!
+            logging.info( ' and searching for pattern II. [' + tokens[ -2 ] + ']' )
+            for key in self.rules:
+                logging.info( ' and searching for pattern II. regexp [' + key + ']' )
+                if search( key, tokens[ -2 ] ):
+                    logging.info( ' FOUND for pattern: II. regexp [' + self.rules[key][0] + ']' )
+                    if self.rules[key][0].startswith( tokens[ -1 ] ):
+                        ret.append( self.rules[key][0] + ' ' )
+            ret = list( dict.fromkeys( ret ) ) # easy unique list just to ba on the safe side
         elif len( tokens ) == 3 or len( tokens ) == 4 :
             # LEVEL 3 and 4
             logging.info( ' Stepped into LEVEL 3. and 4.' )
@@ -136,6 +154,7 @@ class IBMSPrlCompleter:
             logging.info( ' Stepped into LEVEL Bzzz...' )
         
         logging.info( ' PROCESS RETURN: ' + pformat( ret ) )
+        
         return ret
         
     ##################      
@@ -156,6 +175,7 @@ class IBMSPrlCompleter:
             consoleline( coloreed( 'E', 'red' ) )
             print( coloreed( '\nOS error: {0}'.format(e), 'red' ) )
             consoleline( coloreed( 'E', 'red' ) )
+            
         return None
 
 #############      
@@ -197,13 +217,20 @@ atexit.register( readline.write_history_file, rlhistfile )
 myIBMSPrlCompleter = IBMSPrlCompleter( "sprules.txt" )
 readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
 
-
+# Infinite loop
 while True:
     line = input( colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' ' )
+    if not line.rstrip():
+        continue
+            
     consoleline( '-' )
     print ( "You said: [" + line.strip() + "]" )
-    if search( '(quit|qui)', line ):
+    
+    if search( '^(reload|reloa|relo|rel|re)', line ):
+       alma = myIBMSPrlCompleter.loadrules( "sprules.txt" )
+    elif search( '^(quit|qui)', line ) or search( '^(exit|exi|ex|e)', line ):
         break
+    
     consoleline( '-' )
 
 prgend = time()
