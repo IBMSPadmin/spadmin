@@ -46,6 +46,7 @@ logging.basicConfig( filename = 'spcompl.log',
 class IBMSPrlCompleter:
 
     def __init__( self, rulefilename ):
+        print( 'Loading rules...')
         self.loadrules( rulefilename )
 
     def loadrules( self, rulefilename ):
@@ -200,6 +201,16 @@ def progressbar( count, total ):
 ########## ###############################################################################################################
 # main() # 
 ########## ###############################################################################################################
+
+# https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
+print( colored( """
+ ███████╗██████╗  █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗   ██████╗ ██╗   ██╗
+ ██╔════╝██╔══██╗██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║   ██╔══██╗╚██╗ ██╔╝
+ ███████╗██████╔╝███████║██║  ██║██╔████╔██║██║██╔██╗ ██║   ██████╔╝ ╚████╔╝ 
+ ╚════██║██╔═══╝ ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║   ██╔═══╝   ╚██╔╝  
+ ███████║██║     ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║██╗██║        ██║   
+ ╚══════╝╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═╝        ╚═╝   
+""", 'white', attrs=[ 'bold' ] ) )
 
 # Command line history
 # Based on this: https://docs.python.org/3/library/readline.html
