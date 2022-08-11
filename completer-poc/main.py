@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
 Example of using the control-space key binding for auto completion.
 """
@@ -24,54 +24,86 @@ class DsmadmcSelectCompleter(NestedCompleter):
         self.select = select
 
     def get_completions(self, document, complete_event):
-        # yield Completion("?", start_position=0)
+        tokens = document.text.split(" ")
         if self.select == "new":
             # Level 0
             if document.cursor_position == 0:
-                logging.info("Level 00: [" + document.text + "]")
-                yield Completion("backup", start_position=0)
-                yield Completion("define", start_position=0)
-                yield Completion("delete", start_position=0)
-                yield Completion("query",  start_position=0)
-            else:
-                # Level 1
-                logging.info("Level 1: [" + document.text + "]")
-                # Ez a BACKUP parancs ága
-                if search("(backup|backu|back|bac|ba)", document.text):
-                    logging.info("Level 1: BAckup [" + document.text + "]")
-                    # Level 2: ha már van szóköz végén
-                    if search("(backup|backu|back|bac|ba)\s+", document.text):
-                        logging.info("Level 2: BAckup+space [" + document.text + "]")
-                        # Level 3: opciók
-                        if search("(backup|backu|back|bac|ba)\s+db", document.text):
-                            logging.info("\t\t\t [" + document.text + "]")
-                            if search("ba.*db ", document.text):
-                                logging.info("\t\t\t\t [" + document.text + "]")
-                                if search("ba.*db.*t.*=", document.text):
-                                    logging.info("\t\t\t\t\t [" + document.text + "]")
-                                    start_position=0
-                                    if document.text[-1] == " ":
-                                        start_position=-1
-                                    yield Completion("full", start_position=start_position)
-                                    yield Completion("incremental", start_position=start_position)
-                                    yield Completion("dbsnapshot", start_position=start_position)
-                                elif search("ba.*db.*d.*=", document.text):
-                                    yield Completion("AC_01", start_position=0)
-                                    yield Completion("AC_02", start_position=0)
-                                    yield Completion("DC_01", start_position=0)
-                                    yield Completion("DC_02", start_position=0)
-                                else:
-                                    yield Completion("type=", start_position=0)
-                                    yield Completion("devclass=", start_position=0)
+                logging.info("Level 0: [" + document.text + "]")
+                yield Completion("backup ", start_position=0)
+                yield Completion("define ", start_position=0)
+                yield Completion("delete ", start_position=0)
+                yield Completion("query ", start_position=0)
+                yield Completion("quit ", start_position=0)
+            logging.info("Level 1: Nr. of tokens: %s Length of prompt: %s, Token: [%s]", len(tokens), len(document.text), document.text )
+            # Level 3
+            if len(tokens) >= 3:
+                ############ Backup DB
+                ###################
+                if search("b.*", tokens[0]) and search("db.*", tokens[1]):
+                    if not tokens[len(tokens)-1]:  # Backup, és db a második szó
+                        yield Completion("type", start_position=0)
+                        yield Completion("devclass", start_position=0)
+                    elif search('t.*=f.*', tokens[len(tokens) - 1]):  # Backup, DB
+                        yield Completion("full ", start_position=0 - len(tokens[len(tokens)-1]))
+                    elif search('t.*=d.*', tokens[len(tokens) - 1]):  # Backup, DB
+                        yield Completion("dbs ", start_position=0 - len(tokens[len(tokens)-1]))
+                    elif search('t.*=i.*', tokens[len(tokens) - 1]):  # Backup, DB
+                        yield Completion("incr ", start_position=0 - len(tokens[len(tokens)-1]))
+                    elif search('t.*=', tokens[len(tokens)-1]):  # Backup, DB
+                        yield Completion("full", start_position=0 )
+                        yield Completion("dbs", start_position=0)
+                        yield Completion("incr", start_position=0)
+                    elif search('d.*=', tokens[len(tokens)-1]):  # Backup, DEVC
+                        yield Completion("AC_01 ", start_position=0)
+                        yield Completion("BC_01 ", start_position=0)
+                        yield Completion("CC_01 ", start_position=0)
+                        yield Completion("DC_01 ", start_position=0)
+                    elif search('t.*', tokens[len(tokens)-1]):  # Backup, DB
+                        yield Completion("type=", start_position=0 - len(tokens[len(tokens)-1]))
+                    elif search('d.*', tokens[len(tokens)-1]):  # Backup, DEVC
+                        yield Completion("devclass= ", start_position=0 - len(tokens[len(tokens)-1]))
 
-                        else:
-                            logging.info("\t\t\t length: [" + document.text + "]: %s", len(document.text.split()[-1]))
-                            if search("\s+$",document.text):
-                                yield Completion("db", start_position=0)
-                            else:
-                                yield Completion("db", start_position=0 - len(document.text.split()[-1]))
-                    else:
-                        yield Completion("backup", start_position=0 - len(document.text))
+            # Level 2
+            if len(tokens) == 2:
+                ############ Backup
+                ###################
+                if search("b.*", tokens[0]):
+                    if not tokens[1]: # Backup, és üres a második szó, tehát csak egy szóközt ütöttek
+                        yield Completion("db ", start_position=0 )
+                        yield Completion("devc ", start_position=0)
+                        yield Completion("volhistory ", start_position=0)
+                    elif search('db', tokens[1]): # Backup, DB
+                        yield Completion("db ", start_position=0 - len(tokens[1]))
+                    elif search('de.*', tokens[1]): # Backup, DEVC
+                        yield Completion("devc ", start_position=0 - len(tokens[1]))
+                    elif search('d.*',tokens[1]): # Backup, D*
+                        yield Completion("db", start_position=0 - len(tokens[1]))
+                        yield Completion("devc", start_position=0 - len(tokens[1]))
+                    elif search('v.*', tokens[1]):  # Backup, VOLHISTORY
+                        yield Completion("volhistory ", start_position=0 - len(tokens[1]))
+                ############ Query
+                ###################
+                if search("que.*", tokens[0]):
+                    if not tokens[1]:  # Query, és üres a második szó, tehát csak egy szóközt ütöttek
+                        yield Completion("node ", start_position=0)
+                        yield Completion("stgpool ", start_position=0)
+                    elif search('n.*', tokens[1]):
+                        yield Completion("node ", start_position=0 - len(tokens[1]))
+                    elif search('s.*', tokens[1]):
+                        yield Completion("stgpool ", start_position=0 - len(tokens[1]))
+                # Level 1
+            elif len(tokens) == 1:
+                if search("(backup|backu|back|bac|ba|b)", tokens[0]):
+                    yield Completion("backup ", start_position=0 - len(document.text))
+                elif search("(query|quer|que)", tokens[0]):
+                    yield Completion("query ", start_position=0 - len(document.text))
+                elif search("(quit|qui)", tokens[0]):
+                    yield Completion("quit ", start_position=0 - len(document.text))
+                elif search("(qu|q)", tokens[0]):
+                    yield Completion("query ", start_position=0 - len(document.text))
+                    yield Completion("quit ", start_position=0 - len(document.text))
+
+
             pass
 
 
@@ -94,12 +126,11 @@ def _(event):
 
 
 def main():
-    logging.info("--------------------------- [" + "]")
     text = prompt(
         "Spectrum> ",
         completer=DsmadmcSelectCompleter("new"),
         complete_style=CompleteStyle.MULTI_COLUMN,
-        complete_while_typing=True,
+        complete_while_typing=False,
         key_bindings=kb,
 
     )

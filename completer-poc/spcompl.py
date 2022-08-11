@@ -7,13 +7,13 @@
 # Let's do some mess!!!
 
 import sys
+import gnureadline as readline
 
 from time import time, sleep
 prgstart = time()
 
 import datetime
 
-import readline
 readline.parse_and_bind( 'tab: complete' )
 
 import os
