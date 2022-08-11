@@ -149,7 +149,7 @@ class IBMSPrlCompleter:
             for key in self.rules:
                 logging.info( ' and searching for regexp pattern  [' + key + ']' )
                 if search( key, tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE ):
-                    logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )        
+                    logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
                     logging.info( ' let\'s continue searching with this item [' + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:
                       # First try as a regexp pattern!
