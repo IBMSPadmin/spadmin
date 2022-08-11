@@ -1,0 +1,42 @@
+########################
+# Starter part LEVEL 1 #
+########################
+$->BAckup
+$->DEFine
+$->DELete
+$->Query
+$->SHow
+
+# own commands
+$->Exit
+$->QUIt
+$->REload
+
+###########################
+# and the rest LEVEL 2, 3 #
+###########################
+
+###################
+# BAckup commands #
+###################
+# This will replace all the above lines 
+^(BAckup|backu|back|bac|ba)(?!.*\w)->DB
+^(BAckup|backu|back|bac|ba)(?!.*\w)->(DEVCONFig|devconfi|devconf)
+^(BAckup|backu|back|bac|ba)(?!.*\w)->(VOLHistory|volhistor|volhisto|volhist|volhis|volhi|volh)
+^(BAckup|backu|back|bac|ba)\s+(devconfig|devconfi|devconf)->(Filenames|filename|filenam|filena|filen|file|fil|fi|f)=
+^(BAckup|backu|back|bac|ba)\s+(volhistory|volhistor|volhisto|volhist|volhis|volhi|volh)->(Filenames|filename|filenam|filena|filen|file|fil|fi|f)=
+
+##################
+# Query commands #
+##################
+#query->node
+#query->stgpool
+^(Query|quer|que|qu|q)(?!.*\w)->(Node|nod|no|n)
+^(Query|quer|que|qu|q)(?!.*\w)->(STGpool|stgpoo|stgpo|stgp|stg)
+^(Query|quer|que|qu|q)(?!.*\w)->(STGPOOLDIRectory|stgpooldirector|stgpooldirecto|stgpooldirect|stgpooldirec|stgpooldire|stgpooldir)
+
+^(SHow|show|sh)->TIME
+
+###############################################################
+teszt->parancs	
+
