@@ -32,6 +32,9 @@ $->REload
 #query->node
 #query->stgpool
 ^(Query|quer|que|qu|q)(?!.*\w)->(Node|nod|no|n)
+^(Query|quer|que|qu|q)\s*(Node|nod|no|n)->(DOmain|domai|doma|dom|do)=
+^(Query|quer|que|qu|q)\s*(Node|nod|no|n)->(Format|forma|form|for|fo|f)=
+^(Query|quer|que|qu|q)\s*(Node|nod|no|n)->(Type|typ|ty|t)=
 ^(Query|quer|que|qu|q)(?!.*\w)->(STGpool|stgpoo|stgpo|stgp|stg)
 ^(Query|quer|que|qu|q)(?!.*\w)->(STGPOOLDIRectory|stgpooldirector|stgpooldirecto|stgpooldirect|stgpooldirec|stgpooldire|stgpooldir)
 

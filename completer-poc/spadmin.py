@@ -14,6 +14,7 @@ prgstart = time()
 import datetime
 
 import readline
+#import gnureadline as readline
 readline.parse_and_bind( 'tab: complete' )
 
 import os
@@ -148,13 +149,13 @@ class IBMSPrlCompleter:
             for key in self.rules:
                 logging.info( ' and searching for regexp pattern  [' + key + ']' )
                 if search( key, tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE ):
-                    logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 2nd LEVEL dictionary item: [' + key + '].' )        
+                    logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )        
                     logging.info( ' let\'s continue searching with this item [' + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:
                       # First try as a regexp pattern!
                       if search( '^\(' + tokens[ -1 ], x, IGNORECASE ):
                           logging.info( ' it (regexp) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
-                          separator = '=' if x[-1] == '=' else ' '
+                          separator = '=' if x[ -1 ] == '=' else ' '
                           ret.append( search( '^\((\w+)|', x, IGNORECASE )[1] + separator )
                           continue
                       # At last try as a simple text
@@ -162,6 +163,27 @@ class IBMSPrlCompleter:
                           logging.info( ' it (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
                           ret.append( x + ' ' )
                           continue
+            ###########
+            # Idea test
+            ###########
+            if search( '(query|quer|que|qu|q)\s+(node|nod|no|n)', tokens[ -3 ] + ' ' + tokens[ -2 ]):
+                logging.info( ' QUERY NODE command detected!' )
+                nodelist = [ 'node1', 'node2', 'node3', 'node4' ]              
+                for x in nodelist:
+                    if x.startswith( tokens[ -1 ] ):
+                        ret.append( x + ' ' )
+            #elif tokens[ -3 ] == 'query' and tokens[ -2 ] == 'stgpool':
+            elif search( '(query|quer|que|qu|q)\s+(stgpool|stgpoo|stgpo|stgp|stg)', tokens[ -3 ] + ' ' + tokens[ -2 ]):    
+                logging.info( ' QUERY STGPOOLS command detected!' )
+                stgpoollist = [ 'stgpool1', 'stgpool2', 'stgpool3', 'stgpool4' ]
+                for x in stgpoollist:
+                    if x.startswith( tokens[ -1 ] ):
+                        ret.append( x + ' ' )
+        
+        elif len( tokens ) == 4:
+            # LEVEL 3 
+            logging.info( ' Stepped into LEVEL 4.' )
+         
         else:
             logging.info( ' Stepped into LEVEL Bzzz...' )
         
@@ -272,7 +294,7 @@ while True:
     print ( "You said: [" + line.strip() + "]" )
     
     if search( '^(reload|reloa|relo|rel|re)', line ):
-       alma = myIBMSPrlCompleter.loadrules( "sprules.txt" )
+       alma = myIBMSPrlCompleter.loadrules( "spadmin.rules" )
     elif search( '^(quit|qui)', line ) or search( '^(exit|exi|ex|e)', line ):
         break
     
