@@ -5,6 +5,7 @@ $->BAckup
 $->DEFine
 $->DELete
 $->Query
+$->REMove
 $->SHow
 
 # own commands
@@ -27,6 +28,12 @@ $->REload
 # BAckup VOLHistory
 ^(BAckup|backu|back|bac|ba)(?!.*\w)->(VOLHistory|volhistor|volhisto|volhist|volhis|volhi|volh)
 ^(BAckup|backu|back|bac|ba)\s+(volhistory|volhistor|volhisto|volhist|volhis|volhi|volh)->(Filenames|filename|filenam|filena|filen|file|fil|fi|f)=
+
+###################
+# DELete commands #
+###################
+# DELete STGpool
+^(DELete|delet|dele|del)(?!.*\w)->(STGpool|stgpoo|stgpo|stgp|stg)
 
 ##################
 # Query commands #
@@ -56,6 +63,13 @@ $->REload
 ^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SCHedname|schednam|schedna|schedn|sched|sche|sch)=
 ^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(DOmainname|domainnam|domainna|domainn|domain|domai|doma|dom|do)=
 ^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SESsnum|sessnu|sessn|sess|ses)=
+
+##################
+# REMove command #
+##################
+# REMove Node
+^(REMove|remov|remo|rem)(?!.*\w)->(Node|nod|no|n)
+^(REMove|remov|remo|rem)\s+(Node|nod|no|n)->(SYNCldapdelete|syncldapdelet|syncldapdele|syncldapdel|syncldapde|syncldapd|syncldap|synclda|syncld|syncl|sync)=
 
 ################
 # SHow command #
