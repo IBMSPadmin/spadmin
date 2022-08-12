@@ -232,7 +232,7 @@ class IBMSPrlCompleter:
 def consoleline( char ):
     print( char * columns )
 
-def consolefilledline( left, pattern, right, width ):
+def consolefilledline( left = '', pattern = '-', right = '', width = 80 ):
     patternwith = width - len( left ) - len( right ) - 2
     return left + ' ' + pattern * patternwith + ' ' + right
         
