@@ -42,7 +42,7 @@ import atexit
 class IBMSPrlCompleter:
 
     def __init__( self, rulefilename ):
-        print( 'Loading rules...')
+        print( ' Loading rules...')
         self.loadrules( rulefilename )
 
     def loadrules( self, rulefilename ):
