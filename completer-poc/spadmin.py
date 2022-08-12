@@ -179,7 +179,7 @@ class IBMSPrlCompleter:
                     if search( '=(\w*)$', tokens[ -1 ], IGNORECASE ) and x.startswith( search( '=(\w*)$', tokens[ -1 ], IGNORECASE )[1] ):
                         ret.append( x + ' ' )  
         elif len( tokens ) == 4:
-            # LEVEL 3 
+            # LEVEL 4
             logging.info( ' Stepped into LEVEL 4.' )
          
         else:
