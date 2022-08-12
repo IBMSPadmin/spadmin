@@ -4,6 +4,7 @@
 $->BAckup
 $->DEFine
 $->DELete
+$->Help
 $->Query
 $->REMove
 $->SHow

@@ -79,9 +79,9 @@ class IBMSPrlCompleter:
         
         consoleline( '#' )
         print( colored( 'Imported LEVEL 0 starters', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored( rulefilename, 'green' ) + ']' )
-        pprint( self.start )
+        #pprint( self.start )
         print( colored( 'Imported LEVEL >1 other rules', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored(  rulefilename, 'green' ) + ']' )
-        pprint( self.rules )
+        #pprint( self.rules )
         logging.info( 'Rule file imported as starters:\n'    + pformat( self.start ) )
         logging.info( 'Rule file imported as other rules:\n' + pformat( self.rules ) )
         consoleline( '#' )
@@ -251,12 +251,20 @@ def progressbar( count, total = columns ):
 
 # https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
 print( colored( '''
- ███████╗██████╗  █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗   ██████╗ ██╗   ██╗
- ██╔════╝██╔══██╗██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║   ██╔══██╗╚██╗ ██╔╝
- ███████╗██████╔╝███████║██║  ██║██╔████╔██║██║██╔██╗ ██║   ██████╔╝ ╚████╔╝ 
- ╚════██║██╔═══╝ ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║   ██╔═══╝   ╚██╔╝  
- ███████║██║     ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║██╗██║        ██║   
- ╚══════╝╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═╝        ╚═╝''', 'white', attrs=[ 'bold' ] ) )
+ ███████╗ ██████╗   █████╗  ██████╗  ███╗   ███╗ ██╗ ███╗   ██╗     ██████╗  ██╗   ██╗
+ ██╔════╝ ██╔══██╗ ██╔══██╗ ██╔══██╗ ████╗ ████║ ██║ ████╗  ██║     ██╔══██╗ ╚██╗ ██╔╝
+ ███████╗ ██████╔╝ ███████║ ██║  ██║ ██╔████╔██║ ██║ ██╔██╗ ██║     ██████╔╝  ╚████╔╝ 
+ ╚════██║ ██╔═══╝  ██╔══██║ ██║  ██║ ██║╚██╔╝██║ ██║ ██║╚██╗██║     ██╔═══╝    ╚██╔╝  
+ ███████║ ██║      ██║  ██║ ██████╔╝ ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██╗ ██║         ██║   
+ ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝
+ Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager''', 'white', attrs=[ 'bold' ] ) )
+
+print()
+print( colored( '= Python3 [' + sys.version + '] readline DEMO POC', 'grey', attrs=[ 'bold' ] ) )
+print( colored( '= Welcome, enter SP commands if you\'re lost type help', 'grey', attrs=[ 'bold' ] ) )
+print( colored( '= Your current platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
+print( colored( '= Terminal properties: [' + str(columns) + 'x' + str(rows) + ']', 'grey', attrs=[ 'bold' ] ) )
+print()
  
 # Logger settings
 logging.basicConfig( filename = 'spcompl.log',
@@ -269,6 +277,8 @@ print( consolefilledline( '', '-', '', columns ) )
 
 rulesfilename  = "spadmin.rules"
 histoyfilename = ".spadmin_history"
+rlprompt = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
+rlprompt = '[' + colored( 'SERVER1', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' '
 
 # Command line history
 # Based on this: https://docs.python.org/3/library/readline.html
@@ -288,18 +298,20 @@ myIBMSPrlCompleter = IBMSPrlCompleter( rulesfilename )
 readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
 
 # Short text help
+print()
 print( colored( 'Short HELP:', 'cyan' ) )
 print( '''  Use: "quit" or "exit" command to leave the program or
   use: "reload" to reload the rule file!''' )
+print()
 
 # Infinite loop
 while True:
-    line = input( colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' ' )
+    line = input( rlprompt )
     if not line.rstrip():
         continue
             
     consoleline( '-' )
-    print ( "You said: [" + line.strip() + "]" )
+    print ( " You said: [" + line.strip() + "]" )
     
     if search( '^(reload|reloa|relo|rel|re)', line ):
        alma = myIBMSPrlCompleter.loadrules( rulesfilename )
