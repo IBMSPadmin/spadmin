@@ -35,8 +35,25 @@ $->REload
 ^(Query|quer|que|qu|q)\s*(Node|nod|no|n)->(DOmain|domai|doma|dom|do)=
 ^(Query|quer|que|qu|q)\s*(Node|nod|no|n)->(Format|forma|form|for|fo|f)=
 ^(Query|quer|que|qu|q)\s*(Node|nod|no|n)->(Type|typ|ty|t)=
+
 ^(Query|quer|que|qu|q)(?!.*\w)->(STGpool|stgpoo|stgpo|stgp|stg)
 ^(Query|quer|que|qu|q)(?!.*\w)->(STGPOOLDIRectory|stgpooldirector|stgpooldirecto|stgpooldirect|stgpooldirec|stgpooldire|stgpooldir)
+
+^(Query|quer|que|qu|q)(?!.*\w)->(LOG)
+^(Query|quer|que|qu|q)\s*(LOG)->(Format|forma|form|for|fo|f)=
+
+^(Query|quer|que|qu|q)(?!.*\w)->(ACtlog|actlo|actl|act|ac)
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(BEGINTime|begintim|beginti|begint)=
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(ENDDate|enddat|endda|endd)=
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(ENDTime|endtim|endti|endt)=
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(Search|searc|sear|sea|se|s)=
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(NODEname|nodenam|nodena|noden|node)=
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(ORiginator|originato|originat|origina|origin|origi|orig|ori|or)=
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(OWNERname|ownernam|ownerna|ownern|owner)=
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(SCHedname|schednam|schedna|schedn|sched|sche|sch)=
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(DOmainname|domainnam|domainna|domainn|domain|domai|doma|dom|do)=
+^(Query|quer|que|qu|q)\s*(ACtlog|actlo|actl|act|ac)->(SESsnum|sessnu|sessn|sess|ses)=
 
 ^(SHow|show|sh)->TIME
 
