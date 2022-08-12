@@ -229,15 +229,15 @@ class IBMSPrlCompleter:
 # Functions # ####################################################################
 #############
 
-def consoleline( char ):
+def consoleline( char = '-' ):
     print( char * columns )
 
 def consolefilledline( left = '', pattern = '-', right = '', width = 80 ):
     patternwith = width - len( left ) - len( right ) - 2
     return left + ' ' + pattern * patternwith + ' ' + right
         
-def progressbar( count, total ):
-    barlength = columns - 2
+def progressbar( count, total = columns ):
+    barlength = columns - 2   # [...]
     filledlength = int( round( ( barlength ) * count / float( total ) ) )
 
     percent = round( 100.0 * count / float( total ), 1)
@@ -273,7 +273,7 @@ try:
 except FileNotFoundError:
     pass
 
-# Register history file autosaver
+# Register history file as "autosaver"
 atexit.register( readline.write_history_file, rlhistfile )
 
 myIBMSPrlCompleter = IBMSPrlCompleter( "spadmin.rules" )
