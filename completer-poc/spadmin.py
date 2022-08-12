@@ -36,13 +36,6 @@ import logging
 
 import atexit
 
-# Logger settings
-logging.basicConfig( filename = 'spcompl.log',
-                     filemode = 'a',
-                     format   = '%(asctime)s %(levelname)s %(message)s',
-                     datefmt  = '%Y%m%d %H%M%S',
-                     level    = logging.INFO )
-
 #####################################
 # IBMSPrlCompleter Class definition #
 #####################################
@@ -260,12 +253,22 @@ print( colored( '''
  ███████║██║     ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║██╗██║        ██║   
  ╚══════╝╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚═╝        ╚═╝''', 'white', attrs=[ 'bold' ] ) )
  
-logging.info( consolefilledline( '', '-', '', columns ) )
+# Logger settings
+logging.basicConfig( filename = 'spcompl.log',
+                      filemode = 'a',
+                      format   = '%(asctime)s %(levelname)s %(message)s',
+                      datefmt  = '%Y%m%d %H%M%S',
+                      level    = logging.INFO )
+ 
+print( consolefilledline( '', '-', '', columns ) )
+
+rulesfilename  = "spadmin.rules"
+histoyfilename = ".spadmin_history"
 
 # Command line history
 # Based on this: https://docs.python.org/3/library/readline.html
 # rlhistfile = os.path.join( os.path.expanduser( "~" ), ".python_history" )
-rlhistfile = os.path.join( "./", ".spadmin_history" )
+rlhistfile = os.path.join( "./", histoyfilename )
 try:
     readline.read_history_file( rlhistfile )
     # default history len is -1 (infinite), which may grow unruly
@@ -276,7 +279,7 @@ except FileNotFoundError:
 # Register history file as "autosaver"
 atexit.register( readline.write_history_file, rlhistfile )
 
-myIBMSPrlCompleter = IBMSPrlCompleter( "spadmin.rules" )
+myIBMSPrlCompleter = IBMSPrlCompleter( rulesfilename )
 readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
 
 # Short text help
@@ -294,12 +297,13 @@ while True:
     print ( "You said: [" + line.strip() + "]" )
     
     if search( '^(reload|reloa|relo|rel|re)', line ):
-       alma = myIBMSPrlCompleter.loadrules( "spadmin.rules" )
+       alma = myIBMSPrlCompleter.loadrules( rulesfilename )
     elif search( '^(quit|qui)', line ) or search( '^(exit|exi|ex|e)', line ):
         break
     
     consoleline( '-' )
 
+# End of the prg
 prgend = time()
 consoleline( '-' )
 print ( "Program execution time:", colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
