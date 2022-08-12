@@ -19,29 +19,31 @@ $->REload
 ###################
 # BAckup commands #
 ###################
-# This will replace all the above lines 
+# BAckup DB
 ^(BAckup|backu|back|bac|ba)(?!.*\w)->DB
+# BAckup DEVCONFig
 ^(BAckup|backu|back|bac|ba)(?!.*\w)->(DEVCONFig|devconfi|devconf)
-^(BAckup|backu|back|bac|ba)(?!.*\w)->(VOLHistory|volhistor|volhisto|volhist|volhis|volhi|volh)
 ^(BAckup|backu|back|bac|ba)\s+(devconfig|devconfi|devconf)->(Filenames|filename|filenam|filena|filen|file|fil|fi|f)=
+# BAckup VOLHistory
+^(BAckup|backu|back|bac|ba)(?!.*\w)->(VOLHistory|volhistor|volhisto|volhist|volhis|volhi|volh)
 ^(BAckup|backu|back|bac|ba)\s+(volhistory|volhistor|volhisto|volhist|volhis|volhi|volh)->(Filenames|filename|filenam|filena|filen|file|fil|fi|f)=
 
 ##################
 # Query commands #
 ##################
-#query->node
-#query->stgpool
+# Query Node
 ^(Query|quer|que|qu|q)(?!.*\w)->(Node|nod|no|n)
 ^(Query|quer|que|qu|q)\s+(Node|nod|no|n)->(DOmain|domai|doma|dom|do)=
 ^(Query|quer|que|qu|q)\s+(Node|nod|no|n)->(Format|forma|form|for|fo|f)=
 ^(Query|quer|que|qu|q)\s+(Node|nod|no|n)->(Type|typ|ty|t)=
-
+# Query STGpool
 ^(Query|quer|que|qu|q)(?!.*\w)->(STGpool|stgpoo|stgpo|stgp|stg)
+# Query STGPOOLDIRectory
 ^(Query|quer|que|qu|q)(?!.*\w)->(STGPOOLDIRectory|stgpooldirector|stgpooldirecto|stgpooldirect|stgpooldirec|stgpooldire|stgpooldir)
-
+# Query LOG
 ^(Query|quer|que|qu|q)(?!.*\w)->(LOG)
 ^(Query|quer|que|qu|q)\s*(LOG)->(Format|forma|form|for|fo|f)=
-
+# Query ACtlog
 ^(Query|quer|que|qu|q)(?!.*\w)->(ACtlog|actlo|actl|act|ac)
 ^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
 ^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINTime|begintim|beginti|begint)=
@@ -55,8 +57,11 @@ $->REload
 ^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(DOmainname|domainnam|domainna|domainn|domain|domai|doma|dom|do)=
 ^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SESsnum|sessnu|sessn|sess|ses)=
 
-^(SHow|show|sh)->TIME
+################
+# SHow command #
+################
+# SHow TIME
+^(SHow|show|sh)(?!.*\w)->TIME
 
 ###############################################################
-teszt->parancs	
-
+teszt->parancs
