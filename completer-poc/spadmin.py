@@ -157,7 +157,7 @@ class IBMSPrlCompleter:
                           ret.append( x + ' ' )
                           continue
             ###########
-            # Idea test
+            # Idea test POC $$$$$$$$$$$$$$$$$$$$$
             ###########
             if search( '(query|quer|que|qu|q)\s+(node|nod|no|n)', tokens[ -3 ] + ' ' + tokens[ -2 ]):
                 logging.info( ' QUERY NODE command detected!' )
@@ -172,7 +172,12 @@ class IBMSPrlCompleter:
                 for x in stgpoollist:
                     if x.startswith( tokens[ -1 ] ):
                         ret.append( x + ' ' )
-        
+            elif search( '(nodename|nodenam|nodena|noden|node)=\w*', tokens[ -1 ] ):
+                logging.info( ' NODEname= detected!' )
+                nodelist = [ 'node11', 'node22', 'node33', 'node44' ]              
+                for x in nodelist:
+                    if search( '=(\w*)$', tokens[ -1 ], IGNORECASE ) and x.startswith( search( '=(\w*)$', tokens[ -1 ], IGNORECASE )[1] ):
+                        ret.append( x + ' ' )  
         elif len( tokens ) == 4:
             # LEVEL 3 
             logging.info( ' Stepped into LEVEL 4.' )
