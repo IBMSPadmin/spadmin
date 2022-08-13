@@ -249,6 +249,12 @@ def progressbar( count, total = columns ):
 # main() # 
 ########## ###############################################################################################################
 
+# Clear screen
+if platform.system() == 'Windows':
+    os.system( 'cls' )
+else:
+    os.system( 'clear' )
+
 # https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
 print( colored( '''
  ███████╗ ██████╗   █████╗  ██████╗  ███╗   ███╗ ██╗ ███╗   ██╗     ██████╗  ██╗   ██╗
@@ -306,16 +312,25 @@ print()
 
 # Infinite loop
 while True:
-    line = input( rlprompt )
-    if not line.rstrip():
+    try:
+      line = input( rlprompt )
+    
+      if not line.rstrip():
         continue
-            
+        
+    except KeyboardInterrupt:
+      # Suppress ctrl-c
+      print( '\a' )
+      continue
+               
     consoleline( '-' )
     print ( " You said: [" + line.strip() + "]" )
     
+    # Own commands
     if search( '^(reload|reloa|relo|rel|re)', line ):
        alma = myIBMSPrlCompleter.loadrules( rulesfilename )
-    elif search( '^(quit|qui)', line ) or search( '^(exit|exi|ex|e)', line ):
+    elif search( '^(quit|qui)', line ) or \
+         search( '^(exit|exi|ex|e)', line ):
         break
     
     consoleline( '-' )
