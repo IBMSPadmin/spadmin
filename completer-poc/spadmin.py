@@ -328,7 +328,7 @@ while True:
     
     # Own commands
     if search( '^(reload|reloa|relo|rel|re)', line ):
-       alma = myIBMSPrlCompleter.loadrules( rulesfilename )
+        myIBMSPrlCompleter.loadrules( rulesfilename )
     elif search( '^(quit|qui)', line ) or \
          search( '^(exit|exi|ex|e)', line ):
         break
