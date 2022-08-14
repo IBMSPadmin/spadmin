@@ -1,6 +1,9 @@
 ########################
 # Starter part LEVEL 1 #
 ########################
+$->ACCept
+$->ACTivate
+$->ASsign
 $->BAckup
 $->DEFine
 $->DELete
@@ -17,6 +20,14 @@ $->REload
 ################################
 # and the rest LEVEL 2, 3, ... #
 ################################
+# ACCept Date
+^(ACCept|accep|acce|acc)(?!.*\w)->(Date|dat|da|d)
+
+# ACTivate POlicyset
+^(ACTivate|activate||activat|activa|activ|acti|act)(?!.*\w)->(POlicyset|policyse|policys|policy|polic|poli|pol)
+
+# ASsign DEFMGmtclass
+^(ASsign|assig|assi|ass|as)(?!.*\w)->(DEFMGmtclass|defmgmtclas|defmgmtcla|defmgmtcl|defmgmtc|defmgmt|defmgm|defmg)
 
 ###################
 # BAckup commands #

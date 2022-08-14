@@ -73,14 +73,14 @@ class IBMSPrlCompleter:
                 if second not in self.rules:
                     self.rules[ second ] = []
                 self.rules[ first ].append( second )
-                sleep( .01 )
+                sleep( .04 )
         rulefile.close()
         print()
         
         consoleline( '#' )
-        print( colored( 'Imported LEVEL 0 starters', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored( rulefilename, 'green' ) + ']' )
+        print( colored( ' Imported LEVEL 0 starters', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored( rulefilename, 'green' ) + ']' )
         #pprint( self.start )
-        print( colored( 'Imported LEVEL >1 other rules', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored(  rulefilename, 'green' ) + ']' )
+        print( colored( ' Imported LEVEL >1 other rules', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored(  rulefilename, 'green' ) + ']' )
         #pprint( self.rules )
         logging.info( 'Rule file imported as starters:\n'    + pformat( self.start ) )
         logging.info( 'Rule file imported as other rules:\n' + pformat( self.rules ) )
@@ -239,7 +239,7 @@ def progressbar( count, total = columns ):
     filledlength = int( round( ( barlength ) * count / float( total ) ) )
 
     percent = round( 100.0 * count / float( total ), 1)
-    barline = '=' * filledlength + colored ( '-', 'red', attrs=[ 'bold' ] ) * ( barlength - filledlength )
+    barline = '=' * filledlength + colored ( '-', 'grey', attrs=[ 'bold' ] ) * ( barlength - filledlength )
     
     sys.stdout.write( '[%s]\r' % ( barline ) )
     sys.stdout.write( '[%s%s\r' % ( colored( percent, 'grey', 'on_white' ), colored( '%', 'grey', 'on_white' ) ) )

@@ -13,3 +13,4 @@
 	- CSV
 
 - start console
+- rules file regexp consolidation
