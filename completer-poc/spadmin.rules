@@ -40,7 +40,7 @@ $->REload
 # Query commands #
 ##################
 # Query PRocess
-^(Query|quer|que|qu|q)(?!.*\w)->(PRocess|[proces|proce|proc|pro|pr)
+^(Query|quer|que|qu|q)(?!.*\w)->(PRocess|proces|proce|proc|pro|pr)
 # Query Node
 ^(Query|quer|que|qu|q)(?!.*\w)->(Node|nod|no|n)
 ^(Query|quer|que|qu|q)\s+(Node|nod|no|n)->(DOmain|domai|doma|dom|do)=
