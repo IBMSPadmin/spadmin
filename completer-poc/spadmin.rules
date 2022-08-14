@@ -24,9 +24,11 @@ $->REload
 ^(ACCept|accep|acce|acc)(?!.*\w)->(Date|dat|da|d)
 
 # ACTivate POlicyset
+# ACTivate POlicyset--domain_name--policy_set_name
 ^(ACTivate|activate||activat|activa|activ|acti|act)(?!.*\w)->(POlicyset|policyse|policys|policy|polic|poli|pol)
 
 # ASsign DEFMGmtclass
+# ASsign DEFMGmtclass domain_name policy_set_name class_name
 ^(ASsign|assig|assi|ass|as)(?!.*\w)->(DEFMGmtclass|defmgmtclas|defmgmtcla|defmgmtcl|defmgmtc|defmgmt|defmgm|defmg)
 
 ###################

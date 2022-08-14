@@ -1,16 +1,27 @@
 # toDos
 
-- test
-	- on Linux
-	- on MS Windows 10, 11
-		- cygwin
-		- WSL
-- plugins
-- popen, pexpect
-- table printer
-	- text
-	- PDF
-	- CSV
+## Level 1 
+- no recursion! Test
 
-- start console
-- rules file regexp consolidation
+## test
+- on Linux
+- on MS Windows 10, 11
+	- cygwin
+	- WSL
+
+## plugin handler
+
+## ADD: popen?, pexpect?
+
+## table printer
+- text (colored, left, right, center, cut, ?)
+- PDF
+- CSV
+
+# start console 
+- log
+- actlog
+	
+# rules file regexp consolidation
+
+# test driven / cases
