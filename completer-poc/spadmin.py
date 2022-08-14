@@ -336,9 +336,9 @@ while True:
         continue
         
     except KeyboardInterrupt:
-      # Suppress ctrl-c
-      print( '\a' )
-      continue
+        # Suppress ctrl-c
+        print( '\a' )
+        continue
                
     consoleline( '-' )
     print ( ' You said: [' + line.strip() + ']' )
@@ -347,7 +347,8 @@ while True:
     if search( '^(reload|reloa|relo|rel|re)', line ):
         myIBMSPrlCompleter.loadrules( rulesfilename )
     elif search( '^(quit|qui)', line ) or \
-         search( '^(exit|exi|ex|e)', line ):
+         search( '^(LOGout|logou|logo)', line ) or \
+         search( '^(Bye|By)', line ):
         break
     
     consoleline( '-' )

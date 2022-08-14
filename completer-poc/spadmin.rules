@@ -12,9 +12,11 @@ $->Query
 $->REMove
 $->SHow
 
-# own commands
+# own commands: QUIt, Query problem!
 $->Exit
 $->QUIt
+$->Bye
+$->LOGout
 $->REload
 
 ################################
@@ -24,7 +26,7 @@ $->REload
 ^(ACCept|accep|acce|acc)(?!.*\w)->(Date|dat|da|d)
 
 # ACTivate POlicyset
-# ACTivate POlicyset--domain_name--policy_set_name
+# ACTivate POlicyset domain_name policy_set_name
 ^(ACTivate|activate||activat|activa|activ|acti|act)(?!.*\w)->(POlicyset|policyse|policys|policy|polic|poli|pol)
 
 # ASsign DEFMGmtclass

@@ -22,6 +22,7 @@
 - text (colored, left, right, center, cut, ?)
 - PDF
 - CSV
+- > filename
 
 # Start console 
 - log
@@ -33,3 +34,11 @@
 # test driven / cases
 - github actions
 - ?
+
+# command executor
+- handle it with the readline completer!
+- q sess; q dom; show time
+- alias commands
+
+# Code brush
+- regexp logging
