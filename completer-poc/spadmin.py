@@ -285,16 +285,16 @@ print()
 print( colored( '= Python3 [' + sys.version + '] readline DEMO POC', 'grey', attrs=[ 'bold' ] ) )
 print( colored( '= Welcome, enter SP commands if you\'re lost type help', 'grey', attrs=[ 'bold' ] ) )
 print( colored( '= Your current platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
-print( colored( '= Terminal properties: [' + str(columns) + 'x' + str(rows) + ']', 'grey', attrs=[ 'bold' ] ) )
+print( colored( '= Terminal properties: [' + str( columns ) + 'x' + str( rows ) + ']', 'grey', attrs=[ 'bold' ] ) )
 print( colored( '= We\'re trying to breathe new life into this old character based management interface.', 'grey', attrs=[ 'bold' ] ) )
 print()
  
 # Logger settings
 logging.basicConfig( filename = 'spcompl.log',
-                      filemode = 'a',
-                      format   = '%(asctime)s %(levelname)s %(message)s',
-                      datefmt  = '%Y%m%d %H%M%S',
-                      level    = logging.INFO )
+                     filemode = 'a',
+                     format   = '%(asctime)s %(levelname)s %(message)s',
+                     datefmt  = '%Y%m%d %H%M%S',
+                     level    = logging.INFO )
  
 print( consolefilledline( '', '-', '', columns ) )
 
