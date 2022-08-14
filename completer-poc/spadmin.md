@@ -2,6 +2,7 @@
 
 ## Level 1 
 - no recursion! Test
+- case problem lower: QUIt       Query
 
 ## test
 - on Linux

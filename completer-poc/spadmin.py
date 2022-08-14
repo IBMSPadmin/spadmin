@@ -59,7 +59,9 @@ class IBMSPrlCompleter:
             # Skip the remark and empty lines
             if line.startswith( "#" ) or not line.rstrip():
                 continue
-            line = line.strip().lower()
+            # lower ??? QUIt Query
+            #line = line.strip().lower()
+            line = line.strip()
             first, second = line.split( '->' )
             if first == '$':
                 # Starter
@@ -325,7 +327,7 @@ while True:
       continue
                
     consoleline( '-' )
-    print ( " You said: [" + line.strip() + "]" )
+    print ( ' You said: [' + line.strip() + ']' )
     
     # Own commands
     if search( '^(reload|reloa|relo|rel|re)', line ):
@@ -339,7 +341,7 @@ while True:
 # End of the prg
 prgend = time()
 consoleline( '-' )
-print ( "Program execution time:", colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
+print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
 consoleline( '-' )
 
 __author__     = [ "Fleischmann György", "Szabó Marcell" ]
