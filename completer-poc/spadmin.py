@@ -246,7 +246,21 @@ def progressbar( count, total = columns ):
     sys.stdout.write( '[%s]\r' % ( barline ) )
     sys.stdout.write( '[%s%s\r' % ( colored( percent, 'grey', 'on_white' ), colored( '%', 'grey', 'on_white' ) ) )
     sys.stdout.flush()
+
+def regexpgenerator( regexp ):
+    # Generate regular expressions pattern     
     
+    tmpstring = regexp
+    
+    for x in regexp:
+      if tmpstring[ -1 ].isupper():
+        break
+        
+      tmpstring = regexp[ 0 : len( tmpstring ) - 1 ]	
+      regexp += '|' + tmpstring
+    
+    return regexp
+  
 ########## ###############################################################################################################
 # main() # 
 ########## ###############################################################################################################
