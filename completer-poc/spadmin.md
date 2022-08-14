@@ -1,28 +1,35 @@
 # toDos
 
+## readline vs. GNUreadline vs. ...
+
+## getopt, GNU gatopt, parameters
+
 ## Level 1 
 - no recursion! Test
 - case problem lower: QUIt       Query
 
-## test
+## TESTs
 - on Linux
 - on MS Windows 10, 11
 	- cygwin
 	- WSL
 
-## plugin handler
+## Plugin handler
 
 ## ADD: popen?, pexpect?
 
-## table printer
+## Table printer
 - text (colored, left, right, center, cut, ?)
 - PDF
 - CSV
 
-# start console 
+# Start console 
 - log
 - actlog
 	
-# rules file regexp consolidation
+# Rules file regexp consolidation
+- regexp pattern generator
 
 # test driven / cases
+- github actions
+- ?
