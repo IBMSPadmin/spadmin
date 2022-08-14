@@ -333,6 +333,7 @@ print()
 #spadmincommands = { 'SHow Commands' : showspadmncommand() }
 #rules[ '^' + regexpgenerator( 'SHow' ) + '\s+' + regexpgenerator( 'COMmands' )  ].append( second )
 # locals()["myfunction"]()
+#
 
 # Infinite loop
 while True:

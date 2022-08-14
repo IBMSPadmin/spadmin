@@ -25,10 +25,18 @@ $->REload
 ################################
 # ACCept Date
 ^(ACCept|accep|acce|acc)(?!.*\w)->(Date|dat|da|d)
+# New version
+# ACCept -> Date
 
 # ACTivate POlicyset
 # ACTivate POlicyset domain_name policy_set_name
 ^(ACTivate|activate||activat|activa|activ|acti|act)(?!.*\w)->(POlicyset|policyse|policys|policy|polic|poli|pol)
+#^(ACTivate|activate||activat|activa|activ|acti|act)\s+(POlicyset|policyse|policys|policy|polic|poli|pol)\s+->domain_name
+#^(ACTivate|activate||activat|activa|activ|acti|act)\s+(POlicyset|policyse|policys|policy|polic|poli|pol)\s+(\w+)\s+->policy_set_name
+# New version
+# ACTivate               -> POlicyset
+# ACTivate POlicyset     -> domain_name
+# ACTivate POlicyset \w+ -> policy_set_name
 
 # ASsign DEFMGmtclass
 # ASsign DEFMGmtclass domain_name policy_set_name class_name
