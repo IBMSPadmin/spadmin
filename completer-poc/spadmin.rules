@@ -12,11 +12,12 @@ $->Query
 $->REMove
 $->SHow
 
-# own commands: QUIt, Query problem!
+# Own commands:
 $->Exit
+# !!!QUIt, Query collision problem!!!
 $->QUIt
 $->Bye
-$->LOGout
+$->Logout
 $->REload
 
 ################################
@@ -37,7 +38,7 @@ $->REload
 # BAckup commands #
 ###################
 # BAckup DB
-^(BAckup|backu|back|bac|ba)(?!.*\w)->DB
+^(BAckup|backu|back|bac|ba)(?!.*\w)->(DB)
 # BAckup DEVCONFig
 ^(BAckup|backu|back|bac|ba)(?!.*\w)->(DEVCONFig|devconfi|devconf)
 ^(BAckup|backu|back|bac|ba)\s+(devconfig|devconfi|devconf)->(Filenames|filename|filenam|filena|filen|file|fil|fi|f)=

@@ -161,20 +161,20 @@ class IBMSPrlCompleter:
             ###########
             # Idea test POC $$$$$$$$$$$$$$$$$$$$$
             ###########
-            if search( '(query|quer|que|qu|q)\s+(node|nod|no|n)', tokens[ -3 ] + ' ' + tokens[ -2 ]):
+            if search( '(query|quer|que|qu|q)\s+(node|nod|no|n)', tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE):
                 logging.info( ' QUERY NODE command detected!' )
                 nodelist = [ 'node1', 'node2', 'node3', 'node4' ]              
                 for x in nodelist:
                     if x.startswith( tokens[ -1 ] ):
                         ret.append( x + ' ' )
             #elif tokens[ -3 ] == 'query' and tokens[ -2 ] == 'stgpool':
-            elif search( '(query|quer|que|qu|q)\s+(stgpool|stgpoo|stgpo|stgp|stg)', tokens[ -3 ] + ' ' + tokens[ -2 ]):    
+            elif search( '(query|quer|que|qu|q)\s+(stgpool|stgpoo|stgpo|stgp|stg)', tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE):    
                 logging.info( ' QUERY STGPOOLS command detected!' )
                 stgpoollist = [ 'stgpool1', 'stgpool2', 'stgpool3', 'stgpool4' ]
                 for x in stgpoollist:
                     if x.startswith( tokens[ -1 ] ):
                         ret.append( x + ' ' )
-            elif search( '(nodename|nodenam|nodena|noden|node)=\w*', tokens[ -1 ] ):
+            elif search( '(nodename|nodenam|nodena|noden|node)=\w*', tokens[ -1 ], IGNORECASE ):
                 logging.info( ' NODEname= detected!' )
                 nodelist = [ 'node11', 'node22', 'node33', 'node44' ]              
                 for x in nodelist:
@@ -259,8 +259,8 @@ def regexpgenerator( regexp ):
       tmpstring = regexp[ 0 : len( tmpstring ) - 1 ]	
       regexp += '|' + tmpstring
     
-    return regexp
-  
+    return '(' + regexp + ')'
+      
 ########## ###############################################################################################################
 # main() # 
 ########## ###############################################################################################################
@@ -327,28 +327,36 @@ print( '''  Use: "quit" or "exit" command to leave the program or
   use: "reload" to reload the rule file!''' )
 print()
 
+#def showspadmncommand():
+#  print( '> showspadmncommand <' )
+#  return
+#spadmincommands = { 'SHow Commands' : showspadmncommand() }
+#rules[ '^' + regexpgenerator( 'SHow' ) + '\s+' + regexpgenerator( 'COMmands' )  ].append( second )
+# locals()["myfunction"]()
+
 # Infinite loop
 while True:
     try:
       line = input( rlprompt )
     
+      # Skip the empty command
       if not line.rstrip():
         continue
         
     except KeyboardInterrupt:
         # Suppress ctrl-c
-        print( '\a' )
+        print( '\a' ) # Bell
         continue
                
     consoleline( '-' )
     print ( ' You said: [' + line.strip() + ']' )
     
     # Own commands
-    if search( '^(reload|reloa|relo|rel|re)', line ):
+    if search( '^' + regexpgenerator( 'REload' ), line, IGNORECASE ):
         myIBMSPrlCompleter.loadrules( rulesfilename )
-    elif search( '^(quit|qui)', line ) or \
-         search( '^(LOGout|logou|logo)', line ) or \
-         search( '^(Bye|By)', line ):
+    elif search( '^' + regexpgenerator( 'QUIt' ), line, IGNORECASE ) or \
+         search( '^' + regexpgenerator( 'LOGout' ), line, IGNORECASE ) or \
+         search( '^' + regexpgenerator( 'Bye' ), line, IGNORECASE ):
         break
     
     consoleline( '-' )
