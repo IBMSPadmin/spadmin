@@ -31,12 +31,12 @@ $->REload
 # ACTivate POlicyset
 # ACTivate POlicyset domain_name policy_set_name
 ^(ACTivate|activate||activat|activa|activ|acti|act)(?!.*\w)->(POlicyset|policyse|policys|policy|polic|poli|pol)
-#^(ACTivate|activate||activat|activa|activ|acti|act)\s+(POlicyset|policyse|policys|policy|polic|poli|pol)\s+->domain_name
-#^(ACTivate|activate||activat|activa|activ|acti|act)\s+(POlicyset|policyse|policys|policy|polic|poli|pol)\s+(\w+)\s+->policy_set_name
+^(ACTivate|activate||activat|activa|activ|acti|act)\s+(POlicyset|policyse|policys|policy|polic|poli|pol)->select domain_name from domains
+^(ACTivate|activate||activat|activa|activ|acti|act)\s+(POlicyset|policyse|policys|policy|polic|poli|pol)\s+(\w+)\s+(\w*)->select set_name from POLICYSETS where set_name != 'ACTIVE' and domain_name like upper( '-2' )
 # New version
 # ACTivate               -> POlicyset
-# ACTivate POlicyset     -> domain_name
-# ACTivate POlicyset \w+ -> policy_set_name
+# ACTivate POlicyset \w* -> domain_name
+# ACTivate POlicyset \w+ \w* -> policy_set_name
 
 # ASsign DEFMGmtclass
 # ASsign DEFMGmtclass domain_name policy_set_name class_name
@@ -103,6 +103,9 @@ $->REload
 ################
 # SHow TIME
 ^(SHow|show|sh)(?!.*\w)->TIME
+
+# DEBUG
+^(SHow|show|sh)(?!.*\w)->LOG
 
 ###############################################################
 teszt->parancs

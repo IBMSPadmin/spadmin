@@ -77,7 +77,7 @@ class IBMSPrlCompleter:
                 if second not in self.rules:
                     self.rules[ second ] = []
                 self.rules[ first ].append( second )
-                sleep( .04 )
+
         rulefile.close()
         print()
         
@@ -144,7 +144,7 @@ class IBMSPrlCompleter:
             logging.info( ' Stepped into LEVEL 3.' )
             
             for key in self.rules:
-                logging.info( ' and searching for regexp pattern  [' + key + ']' )
+                #logging.info( ' and searching for regexp pattern  [' + key + ']' )
                 if search( key, tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE ):
                     logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
                     logging.info( ' let\'s continue searching with this item [' + pformat( self.rules[key], width=180 ) + ']' )
@@ -160,6 +160,8 @@ class IBMSPrlCompleter:
                           logging.info( ' it (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
                           ret.append( x + ' ' )
                           continue
+                                                
+            logging.info( ' Here\'s what in ret: [' + pformat( ret ) + ']' )
             ###########
             # Idea test POC $$$$$$$$$$$$$$$$$$$$$
             ###########
@@ -182,6 +184,9 @@ class IBMSPrlCompleter:
                 for x in nodelist:
                     if search( '=(\w*)$', tokens[ -1 ], IGNORECASE ) and x.startswith( search( '=(\w*)$', tokens[ -1 ], IGNORECASE )[1] ):
                         ret.append( x + ' ' )  
+            if ret[0].startswith( 'select' ):
+              ret = spsqlengine( ret[ 0 ].strip(), tokens )
+            
         elif len( tokens ) == 4:
             # LEVEL 4
             logging.info( ' Stepped into LEVEL 4.' )
@@ -264,7 +269,18 @@ def regexpgenerator( regexp ):
       regexp += '|' + tmpstring
     
     return '(' + regexp + ')'
-      
+    
+def spsqlengine( select, tokens = [] ):
+    # Handle SQL requests
+    
+    logging.info( consolefilledline( 'SP SQL Engine reached with select: [' + select  + ']', '-', '', 120 ) )
+    logging.info( consolefilledline( 'SP SQL Engine reached with tokens: [' + pformat( tokens ) + ']', '-', '', 120 ) )
+
+    if select == 'select domain_name from domains':
+      return [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX' ]
+    elif select == "select set_name from POLICYSETS where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
+      return [ 'STANDARD' ]
+ 
 ########## ###############################################################################################################
 # main() # 
 ########## ###############################################################################################################
@@ -339,6 +355,8 @@ print()
 # locals()["myfunction"]()
 #
 
+logging.info( consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
+
 # Infinite loop
 while True:
     try:
@@ -359,10 +377,13 @@ while True:
     # Own commands
     if search( '^' + regexpgenerator( 'REload' ), line, IGNORECASE ):
         myIBMSPrlCompleter.loadrules( rulesfilename )
+    elif search( '^' + regexpgenerator( 'Show Log' ), line, IGNORECASE ):
+        os.system( 'open ./' + 'spcompl.log' )
     elif search( '^' + regexpgenerator( 'QUIt' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'LOGout' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'Exit' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'Bye' ), line, IGNORECASE ):
+        # Quit the program
         break
     
     consoleline( '-' )
