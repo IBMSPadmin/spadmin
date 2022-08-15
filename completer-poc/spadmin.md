@@ -2,7 +2,7 @@
 
 ## readline vs. GNUreadline vs. ...
 
-## getopt, GNU gatopt, parameters
+## getopt, GNU getopt, parameters
 
 ## Level 1 
 - no recursion! Test
@@ -42,3 +42,6 @@
 
 # Code brush
 - regexp logging
+
+# 1 Bináris mind felett
+- ?

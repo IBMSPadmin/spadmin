@@ -131,7 +131,7 @@ class IBMSPrlCompleter:
                           logging.info( ' it (regexp) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
                           ret.append( search( '^\((\w+)|', x, IGNORECASE )[1] + ' ' )
                           continue
-                      # At last try as a simple text
+                      # At last try as a simple text KELL???
                       elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
                           logging.info( ' it (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
                           ret.append( x + ' ' )
@@ -153,7 +153,7 @@ class IBMSPrlCompleter:
                           separator = '=' if x[ -1 ] == '=' else ' '
                           ret.append( search( '^\((\w+)|', x, IGNORECASE )[1] + separator )
                           continue
-                      # At last try as a simple text
+                      # At last try as a simple text KELL???
                       elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
                           logging.info( ' it (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
                           ret.append( x + ' ' )
@@ -196,34 +196,34 @@ class IBMSPrlCompleter:
     ##################
     def IBMSPcompleter( self, text, state ):
  
-        logging.info( '' )
-        logging.info( consolefilledline( 'COMPLETER Text: ', '-', '[' + text + '] and state[' + str( state ) + '].', 120 ) )
-        try:
-            logging.info( 'Readline buffer: [' + readline.get_line_buffer() + '].' )
-            
-            # Read CLI and split commands
-            tokens = readline.get_line_buffer().split()
-            if not tokens or readline.get_line_buffer()[ -1 ] == ' ':
-                tokens.append( '' )
-            
-            # Call the Engine
-            self.results = self.tokenEngine( tokens ) + [ None ]
-                        
-            logging.info( 'RETURNED results from the engine: ' + pformat( self.results, width=180 ) )
-            if self.results[ state ] == None:
-                logging.info( 'COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------' )
-                logging.info( '' )
-            else:
-                logging.info( consolefilledline( 'COMPLETER results push cycle: ', '-', '[' + str( state ) + '] [' + self.results[ state ] + '].', 120 ) )
-            
-            return self.results[ state ] 
-            
-        except Exception as e:
-            consoleline( coloreed( 'E', 'red' ) )
-            print( coloreed( '\nOS error: {0}'.format(e), 'red' ) )
-            consoleline( coloreed( 'E', 'red' ) )
-            
-        return None
+      logging.info( '' )
+      logging.info( consolefilledline( 'COMPLETER Text: ', '-', '[' + text + '] and state[' + str( state ) + '].', 120 ) )
+      try:
+          logging.info( 'Readline buffer: [' + readline.get_line_buffer() + '].' )
+          
+          # Read CLI and split commands
+          tokens = readline.get_line_buffer().split()
+          if not tokens or readline.get_line_buffer()[ -1 ] == ' ':
+              tokens.append( '' )
+          
+          # Call the Engine
+          self.results = self.tokenEngine( tokens ) + [ None ]
+                      
+          logging.info( 'RETURNED results from the engine: ' + pformat( self.results, width=180 ) )
+          if self.results[ state ] == None:
+              logging.info( 'COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------' )
+              logging.info( '' )
+          else:
+              logging.info( consolefilledline( 'COMPLETER results push cycle: ', '-', '[' + str( state ) + '] [' + self.results[ state ] + '].', 120 ) )
+          
+          return self.results[ state ] 
+          
+      except Exception as e:
+          consoleline( coloreed( 'E', 'red' ) )
+          print( coloreed( '\nOS error: {0}'.format(e), 'red' ) )
+          consoleline( coloreed( 'E', 'red' ) )
+          
+      return None
 
 #############      
 # Functions # ####################################################################
