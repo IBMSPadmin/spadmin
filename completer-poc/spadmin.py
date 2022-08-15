@@ -357,6 +357,7 @@ while True:
         myIBMSPrlCompleter.loadrules( rulesfilename )
     elif search( '^' + regexpgenerator( 'QUIt' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'LOGout' ), line, IGNORECASE ) or \
+         search( '^' + regexpgenerator( 'Exit' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'Bye' ), line, IGNORECASE ):
         break
     
