@@ -147,7 +147,7 @@ class IBMSPrlCompleter:
                 #logging.info( ' and searching for regexp pattern  [' + key + ']' )
                 if search( key, tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE ):
                     logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
-                    logging.info( ' let\'s continue searching with this item [' + pformat( self.rules[key], width=180 ) + ']' )
+                    logging.info( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:
                       # First try as a regexp pattern!
                       if search( '^\(' + tokens[ -1 ], x, IGNORECASE ):
@@ -155,11 +155,17 @@ class IBMSPrlCompleter:
                           separator = '=' if x[ -1 ] == '=' else ' '
                           ret.append( search( '^\((\w+)|', x, IGNORECASE )[1] + separator )
                           continue
-                      # At last try as a simple text KELL???
+                      elif x.startswith( 'select' ):
+                          logging.info( ' it (SQL) [' + x + ' > ' + tokens[ -1 ] + ']' )
+                          ret = spsqlengine( x.strip(), tokens )
+                      # At last try as a simple text KELL ez???
                       elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
                           logging.info( ' it (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
                           ret.append( x + ' ' )
                           continue
+                      elif x.startswith( 'select' ):
+                          logging.info( ' it (SQL) [' + x + ' > ' + tokens[ -1 ] + ']' )
+                          ret = spsqlengine( x.strip(), tokens )
                                                 
             logging.info( ' Here\'s what in ret: [' + pformat( ret ) + ']' )
             ###########
@@ -184,8 +190,6 @@ class IBMSPrlCompleter:
                 for x in nodelist:
                     if search( '=(\w*)$', tokens[ -1 ], IGNORECASE ) and x.startswith( search( '=(\w*)$', tokens[ -1 ], IGNORECASE )[1] ):
                         ret.append( x + ' ' )  
-            if ret[0].startswith( 'select' ):
-              ret = spsqlengine( ret[ 0 ].strip(), tokens )
             
         elif len( tokens ) == 4:
             # LEVEL 4
@@ -276,10 +280,16 @@ def spsqlengine( select, tokens = [] ):
     logging.info( consolefilledline( 'SP SQL Engine reached with select: [' + select  + ']', '-', '', 120 ) )
     logging.info( consolefilledline( 'SP SQL Engine reached with tokens: [' + pformat( tokens ) + ']', '-', '', 120 ) )
 
+    ret = []
+
     if select == 'select domain_name from domains':
-      return [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX' ]
+        for x in [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX' ]:
+            if search( '^' + tokens[ -1 ], x ):
+              ret.append( x + ' ' )  
     elif select == "select set_name from POLICYSETS where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
-      return [ 'STANDARD' ]
+        rer = [ 'STANDARD' ]
+    
+    return ret
  
 ########## ###############################################################################################################
 # main() # 
@@ -370,7 +380,8 @@ while True:
         # Suppress ctrl-c
         print( '\a' ) # Bell
         continue
-               
+    
+    # Command executor
     consoleline( '-' )
     print ( ' You said: [' + line.strip() + ']' )
     
@@ -383,10 +394,13 @@ while True:
          search( '^' + regexpgenerator( 'LOGout' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'Exit' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'Bye' ), line, IGNORECASE ):
+        
         # Quit the program
         break
     
     consoleline( '-' )
+
+logging.info( consolefilledline( 'INPUT LOOP END ', '-', '', 120 ) )
 
 # End of the prg
 prgend = time()
