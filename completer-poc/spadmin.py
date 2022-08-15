@@ -100,42 +100,42 @@ class IBMSPrlCompleter:
     ###############  
     def tokenEngine( self, tokens ):
         logging.info( ' PROCESS TOKENS, received tokens: ' + pformat( tokens ) )
-        # Reset the results
+        
+        # Reset the results dictionary
         ret = []
+        
         if len( tokens )   == 0:
-            # LEVEL ?
-            print( ' LEVEL ?' )
+            # Never happen this
             logging.info( 'Stepped into LEVEL 0.' )
             
         elif len( tokens ) == 1:
             # LEVEL 1 searches in start commands
             logging.info( ' Stepped into LEVEL 1.' )
             
-            # Simple check the beginning of the command
+            # Simple check the beginning of the command on start list
             for x in self.start:
                 if search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                    logging.info( ' and found [' + tokens[ -1 ] + '] text in the 1st LEVEL list item: [' + x + '].' )        
+                    logging.info( ' found this part [' + tokens[ -1 ] + '] of the command in the 1st LEVEL list items: [' + x + '].' )        
                     ret.append( x + ' ' )
                     
         elif len( tokens ) == 2:
             # LEVEL 2
             logging.info( ' Stepped into LEVEL 2.' )
             
-            # Let's search 
             for key in self.rules:            
-              logging.info( ' and searching for regexp pattern  [' + key + ']' )
+              #logging.info( ' and searching for regexp pattern  [' + key + ']' )
               if search( key, tokens[ -2 ], IGNORECASE ):
-                  logging.info( ' and found [' + tokens[ -2 ] + '] command in the 2nd LEVEL dictionary item: [' + key + '].' )        
-                  logging.info( ' let\'s continue searching with this item [' + pformat( self.rules[key], width=180 ) + ']' )
+                  logging.info( ' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
+                  logging.info( ' Let\'s continue searching with this pattern [' + pformat( self.rules[key], width=180 ) + ']' )
                   for x in self.rules[key]:
                       # First try as a regexp pattern!
                       if search( '^\(' + tokens[ -1 ], x, IGNORECASE ):
-                          logging.info( ' it (regexp) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
+                          logging.info( ' as (regexp) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
                           ret.append( search( '^\((\w+)|', x, IGNORECASE )[1] + ' ' )
                           continue
                       # At last try as a simple text KELL???
                       elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                          logging.info( ' it (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
+                          logging.info( ' as (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
                           ret.append( x + ' ' )
                           continue
             
@@ -149,25 +149,23 @@ class IBMSPrlCompleter:
                     logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
                     logging.info( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:
-                      # First try as a regexp pattern!
-                      if search( '^\(' + tokens[ -1 ], x, IGNORECASE ):
-                          logging.info( ' it (regexp) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
+                      if x.startswith( 'select' ):
+                          # First try as an SQL pattern!
+                          logging.info( ' it\'s an SQL select [' + x + ' > ' + tokens[ -1 ] + ']' )
+                          ret += spsqlengine( x.strip(), tokens )
+                          continue
+                      elif search( '^\(' + tokens[ -1 ], x, IGNORECASE ):
+                          # REGEXP handler
+                          logging.info( ' as a regexp starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
                           separator = '=' if x[ -1 ] == '=' else ' '
                           ret.append( search( '^\((\w+)|', x, IGNORECASE )[1] + separator )
                           continue
-                      elif x.startswith( 'select' ):
-                          logging.info( ' it (SQL) [' + x + ' > ' + tokens[ -1 ] + ']' )
-                          ret = spsqlengine( x.strip(), tokens )
-                      # At last try as a simple text KELL ez???
                       elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                          logging.info( ' it (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
+                          # At last try as a simple text KELL ez??? vagy az REGEXP marad csak, de módosítva
+                          logging.info( ' as (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
                           ret.append( x + ' ' )
                           continue
-                      elif x.startswith( 'select' ):
-                          logging.info( ' it (SQL) [' + x + ' > ' + tokens[ -1 ] + ']' )
-                          ret = spsqlengine( x.strip(), tokens )
-                                                
-            logging.info( ' Here\'s what in ret: [' + pformat( ret ) + ']' )
+
             ###########
             # Idea test POC $$$$$$$$$$$$$$$$$$$$$
             ###########
@@ -198,7 +196,8 @@ class IBMSPrlCompleter:
         else:
             logging.info( ' Stepped into LEVEL Bzzz...' )
         
-        logging.info( ' PROCESS RETURNED: ' + pformat( ret, width=180 ) )
+        logging.info( ' Here\'s what we have in ret: [' + pformat( ret, width=180 ) + ']' )
+        logging.info( ' PROCESS RETURNED.' )
         
         return ret
         
@@ -277,18 +276,21 @@ def regexpgenerator( regexp ):
 def spsqlengine( select, tokens = [] ):
     # Handle SQL requests
     
-    logging.info( consolefilledline( 'SP SQL Engine reached with select: [' + select  + ']', '-', '', 120 ) )
-    logging.info( consolefilledline( 'SP SQL Engine reached with tokens: [' + pformat( tokens ) + ']', '-', '', 120 ) )
+    logging.info( ' SP SQL Engine reached with select: [' + select  + ']' )
+    logging.info( ' SP SQL Engine reached with tokens: [' + pformat( tokens ) + ']' )
 
     ret = []
 
     if select == 'select domain_name from domains':
-        for x in [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX' ]:
-            if search( '^' + tokens[ -1 ], x ):
-              ret.append( x + ' ' )  
+        sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX' ] 
     elif select == "select set_name from POLICYSETS where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
-        rer = [ 'STANDARD' ]
-    
+        sqlresults = [ 'STANDARD' ]
+        
+    # Filter the sqlresults with the last word if possible    
+    for x in sqlresults:
+        if search( '^' + tokens[ -1 ], x, IGNORECASE ):
+            ret.append( x + ' ' )
+        
     return ret
  
 ########## ###############################################################################################################
