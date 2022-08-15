@@ -204,7 +204,9 @@ class IBMSPrlCompleter:
           logging.info( 'Readline buffer: [' + readline.get_line_buffer() + '].' )
           
           # Read CLI and split commands
-          tokens = readline.get_line_buffer().split()
+          # first ;
+          # tokens = readline.get_line_buffer().split()
+          tokens = readline.get_line_buffer().split( ';' )[ -1 ].split()
           if not tokens or readline.get_line_buffer()[ -1 ] == ' ':
               tokens.append( '' )
           
