@@ -142,12 +142,12 @@ class IBMSPrlCompleter:
             
             for key in self.rules:
                 # skip the previous level entries
-                if len( key.split() ) < 3:
+                if len( key.split() ) < 2:
                     continue
-                #logging.info( ' and searching for regexp pattern [' + key + ']' )
-                #logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
-                #logging.info( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
-                if search( '^' + regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ', IGNORECASE ):
+                logging.info( ' and searching for regexp pattern [' + key + ']' )
+                logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
+                logging.info( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
+                if search( '^' + regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE ):
                     logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
                     logging.info( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:

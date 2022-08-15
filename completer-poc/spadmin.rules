@@ -40,10 +40,10 @@ ASsign -> DEFMGmtclass
 BAckup -> DB
 
 BAckup               -> DEVCONFig
-BAckup DEVCONFig \w* -> Filenames=
+BAckup DEVCONFig -> Filenames=
 
 BAckup                -> VOLHistory
-BAckup VOLHistory \w* -> Filenames=
+BAckup VOLHistory -> Filenames=
 
 ###################
 # DELete commands #
