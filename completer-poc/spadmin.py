@@ -347,7 +347,8 @@ print( colored( '= We\'re trying to breathe new life into this old character bas
 print()
  
 # Logger settings
-logging.basicConfig( filename = 'spcompl.log',
+logfilename = 'spadmin.log'
+logging.basicConfig( filename = logfilename,
                      filemode = 'a',
                      format   = '%(asctime)s %(levelname)s %(message)s',
                      datefmt  = '%Y%m%d %H%M%S',
@@ -416,7 +417,7 @@ while True:
     if search( '^' + regexpgenerator( 'REload' ), line, IGNORECASE ):
         myIBMSPrlCompleter.loadrules( rulesfilename )
     elif search( '^' + regexpgenerator( 'Show Log' ), line, IGNORECASE ):
-        os.system( 'open ./' + 'spcompl.log' )
+        os.system( 'open ./' + logfilename )
     elif search( '^' + regexpgenerator( 'QUIt' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'LOGout' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'Exit' ), line, IGNORECASE ) or \
