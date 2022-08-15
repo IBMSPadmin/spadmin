@@ -65,6 +65,8 @@ class IBMSPrlCompleter:
             #line = line.strip().lower()
             line = line.strip()
             first, second = line.split( '->' )
+            first = first.strip()
+            second = second.strip()
             if first == '$':
                 # Starter
                 self.start.append( second )
@@ -123,19 +125,14 @@ class IBMSPrlCompleter:
             logging.info( ' Stepped into LEVEL 2.' )
             
             for key in self.rules:            
-              #logging.info( ' and searching for regexp pattern  [' + key + ']' )
-              if search( key, tokens[ -2 ], IGNORECASE ):
+              #logging.info( ' and searching for regexp pattern [' + key + ']' )
+              #logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + '(?!.*\w)' + ']' )
+              if search( '^' + regexpgenerator( key ) + '(?!.*\w)', tokens[ -2 ], IGNORECASE ):
                   logging.info( ' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
                   logging.info( ' Let\'s continue searching with this pattern [' + pformat( self.rules[key], width=180 ) + ']' )
                   for x in self.rules[key]:
-                      # First try as a regexp pattern!
-                      if search( '^\(' + tokens[ -1 ], x, IGNORECASE ):
-                          logging.info( ' as (regexp) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
-                          ret.append( search( '^\((\w+)|', x, IGNORECASE )[1] + ' ' )
-                          continue
-                      # At last try as a simple text KELL???
-                      elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                          logging.info( ' as (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
+                      if search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                          logging.info( ' as (regexp) starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
                           ret.append( x + ' ' )
                           continue
             
@@ -144,26 +141,25 @@ class IBMSPrlCompleter:
             logging.info( ' Stepped into LEVEL 3.' )
             
             for key in self.rules:
-                #logging.info( ' and searching for regexp pattern  [' + key + ']' )
-                if search( key, tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE ):
+                # skip the previous level entries
+                if len( key.split() ) < 3:
+                    continue
+                #logging.info( ' and searching for regexp pattern [' + key + ']' )
+                #logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
+                #logging.info( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
+                if search( '^' + regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ', IGNORECASE ):
                     logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
                     logging.info( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:
                       if x.startswith( 'select' ):
                           # First try as an SQL pattern!
-                          logging.info( ' it\'s an SQL select [' + x + ' > ' + tokens[ -1 ] + ']' )
+                          logging.info( ' it\'s an SQL select [' + tokens[ -1 ] + ' > ' + x + ']' )
                           ret += spsqlengine( x.strip(), tokens )
                           continue
-                      elif search( '^\(' + tokens[ -1 ], x, IGNORECASE ):
-                          # REGEXP handler
-                          logging.info( ' as a regexp starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
-                          separator = '=' if x[ -1 ] == '=' else ' '
-                          ret.append( search( '^\((\w+)|', x, IGNORECASE )[1] + separator )
-                          continue
                       elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                          # At last try as a simple text KELL ez??? vagy az REGEXP marad csak, de módosítva
-                          logging.info( ' as (text) starts with [' + x + ' > ' + tokens[ -1 ] + ']' )
-                          ret.append( x + ' ' )
+                          logging.info( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                          separator = '' if x[ -1 ] == '=' else ' '
+                          ret.append( x + separator )
                           continue
 
             ###########
@@ -260,6 +256,35 @@ def progressbar( count, total = columns ):
     sys.stdout.flush()
 
 def regexpgenerator( regexp ):
+  
+    savelastchar = '' 
+    if regexp[-1] == '=':
+      savelastchar = regexp[-1]
+      regexp = regexp[ : -1 ]
+    
+    result = ''
+    for part in regexp.split():
+    
+      if part[ 0 ].isupper():
+          
+        tmpregexp = part
+        tmpstring = part
+        for x in part:
+          if tmpstring[ -1 ].isupper():
+            break
+          tmpstring = part[ 0 : len( tmpstring ) - 1 ]	
+          tmpregexp += '|' + tmpstring
+          
+        result += '(' + tmpregexp + ')' 
+          
+      else:
+        result += '(' + part + ')'	
+      
+      result += '\s+'
+    
+    return result[ :-3 ] + savelastchar
+
+def old_regexpgenerator( regexp ):
     # Generate regular expressions pattern     
     
     tmpstring = regexp
@@ -395,7 +420,7 @@ while True:
     elif search( '^' + regexpgenerator( 'QUIt' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'LOGout' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'Exit' ), line, IGNORECASE ) or \
-         search( '^' + regexpgenerator( 'Bye' ), line, IGNORECASE ):
+         search( '^' + regexpgenerator( 'BYe' ), line, IGNORECASE ):
         
         # Quit the program
         break
