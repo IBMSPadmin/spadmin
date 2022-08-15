@@ -13,8 +13,10 @@ prgstart = time()
 
 import datetime
 
-import readline
-#import gnureadline as readline
+try:
+    import gnureadline as readline
+except ImportError:
+    import readline
 readline.parse_and_bind( 'tab: complete' )
 
 import os
