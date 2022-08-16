@@ -126,8 +126,8 @@ class IBMSPrlCompleter:
             logging.info( ' Stepped into LEVEL 2.' )
             
             for key in self.rules:            
-              logging.info( ' and searching for regexp pattern [' + key + ']' )
-              logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + '(?!.*\w)' + ']' )
+              #logging.info( ' and searching for regexp pattern [' + key + ']' )
+              #logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + '(?!.*\w)' + ']' )
               if search( '^' + regexpgenerator( key ), tokens[ -2 ], IGNORECASE ):
                   logging.info( ' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
                   
@@ -148,9 +148,9 @@ class IBMSPrlCompleter:
                     continue
                 elif key.startswith( 'select' ): # ???????????????????????????????
                     continue
-                logging.info( ' and searching for regexp pattern [' + key + ']' )
-                logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
-                logging.info( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
+                #logging.info( ' and searching for regexp pattern [' + key + ']' )
+                #logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
+                #logging.info( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
                 if search( '^' + regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ] , IGNORECASE ):
                     logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
                     
