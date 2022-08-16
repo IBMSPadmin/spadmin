@@ -45,6 +45,8 @@ BAckup DEVCONFig ?!\w+= -> Filenames=
 BAckup                   -> VOLHistory
 BAckup VOLHistory ?!\w+= -> Filenames=
 
+# So far at this point we've made it... ;-) #################################################################################
+
 ###################
 # DELete commands #
 ###################
@@ -56,16 +58,19 @@ DELete -> STGpool
 Query -> PRocess
 
 Query -> Node
-Query Node ?!\w+= -> DOmain=
-Query Node ?!\w+= -> Format=
-Query Node ?!\w+= -> Type=
+Query Node ?!\w+ -> DOmain=
+Query Node ?!\w+ -> Format=
+Query Node ?!\w+ -> Type=
+Query Node \w+   -> DOmain=
+Query Node \w+   -> Format=
+Query Node \w+   -> Type=
 
 Query -> STGpool
 
 Query -> STGPOOLDIRectory
 
-Query         -> LOG
-Query LOG \w* -> Format=
+Query           -> LOG
+Query LOG ?!\w+ -> Format=
 
 Query -> ACtlog
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
@@ -84,12 +89,14 @@ Query -> ACtlog
 # REMove command #
 ##################
 REMove          -> Node
-REMove Node \w* -> SYNCldapdelete
+REMove Node ?!\w+ -> SYNCldapdelete
 
 ################
 # SHow command #
 ################
 SHow -> TIME
+
+###############################################################
 
 # DEBUG
 SHow -> LOG

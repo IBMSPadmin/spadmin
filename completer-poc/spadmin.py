@@ -342,7 +342,7 @@ def spsqlengine( select, tokens = [] ):
     if select == 'select domain_name from domains':
         sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX' ] 
     elif select == "select set_name from POLICYSETS where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
-        sqlresults = [ 'STANDARD' ]
+        sqlresults = [ 'STANDARD [' + tokens[ -2 ] + ']' ]
         
     # Filter the sqlresults with the last word if possible    
     for x in sqlresults:
@@ -391,8 +391,8 @@ print( consolefilledline( '', '-', '', columns ) )
 
 rulesfilename  = "spadmin.rules"
 histoyfilename = ".spadmin_history"
-rlprompt = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
-rlprompt = '[' + colored( 'SERVER1', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' '
+rlprompt       = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
+rlprompt       = '[' + colored( 'SERVER1', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' '
 
 # Command line history
 # Based on this: https://docs.python.org/3/library/readline.html
@@ -414,8 +414,9 @@ readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
 # Short text help
 print()
 print( colored( 'Short HELP:', 'cyan' ) )
-print( '''  Use: "quit" or "exit" command to leave the program or
-  use: "reload" to reload the rule file!''' )
+print( '''  Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
+  use: "REload" to reload the rule file! and
+  use: "SHow LOG" to reach the local log file!''' )
 print()
 
 #def showspadmncommand():
