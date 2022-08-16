@@ -136,7 +136,7 @@ class IBMSPrlCompleter:
                       if search( '^' + tokens[ -1 ], x, IGNORECASE ):
                           logging.info( ' as (regexp) starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
                           ret.append( x + ' ' )
-                          continue
+                          #continue
             
         elif len( tokens ) == 3:
             # LEVEL 3 
@@ -203,9 +203,9 @@ class IBMSPrlCompleter:
                     continue
                 elif key.startswith( 'select' ): # ???????????????????????????????
                     continue
-                logging.info( ' and searching for regexp pattern [' + key + ']' )
-                logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
-                logging.info( ' and searching in text [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
+                #logging.info( ' and searching for regexp pattern [' + key + ']' )
+                #logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
+                #logging.info( ' and searching in text [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
                 if search( '^' + regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ] , IGNORECASE ):
                     logging.info( ' and found [' + tokens[ -4 ] + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
                     
