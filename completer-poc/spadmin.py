@@ -18,6 +18,7 @@ try:
 except ImportError:
     import readline
 readline.parse_and_bind( 'tab: complete' )
+#readline.set_completer_delims( '= ' )
 
 import os
 rows, columns = os.popen( 'stty size', 'r' ).read().split()
@@ -125,10 +126,11 @@ class IBMSPrlCompleter:
             logging.info( ' Stepped into LEVEL 2.' )
             
             for key in self.rules:            
-              #logging.info( ' and searching for regexp pattern [' + key + ']' )
-              #logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + '(?!.*\w)' + ']' )
-              if search( '^' + regexpgenerator( key ) + '(?!.*\w)', tokens[ -2 ], IGNORECASE ):
+              logging.info( ' and searching for regexp pattern [' + key + ']' )
+              logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + '(?!.*\w)' + ']' )
+              if search( '^' + regexpgenerator( key ), tokens[ -2 ], IGNORECASE ):
                   logging.info( ' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
+                  
                   logging.info( ' Let\'s continue searching with this pattern [' + pformat( self.rules[key], width=180 ) + ']' )
                   for x in self.rules[key]:
                       if search( '^' + tokens[ -1 ], x, IGNORECASE ):
@@ -144,11 +146,14 @@ class IBMSPrlCompleter:
                 # skip the previous level entries
                 if len( key.split() ) < 2:
                     continue
+                elif key.startswith( 'select' ): # ???????????????????????????????
+                    continue
                 logging.info( ' and searching for regexp pattern [' + key + ']' )
                 logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
                 logging.info( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
-                if search( '^' + regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE ):
+                if search( '^' + regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ] , IGNORECASE ):
                     logging.info( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
+                    
                     logging.info( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:
                       if x.startswith( 'select' ):
@@ -162,9 +167,9 @@ class IBMSPrlCompleter:
                           ret.append( x + separator )
                           continue
 
-            ###########
-            # Idea test POC $$$$$$$$$$$$$$$$$$$$$
-            ###########
+###########
+# Idea test POC $$$$$$$$$$$$$$$$$$$$$ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+###########
             if search( '(query|quer|que|qu|q)\s+(node|nod|no|n)', tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE):
                 logging.info( ' QUERY NODE command detected!' )
                 nodelist = [ 'node1', 'node2', 'node3', 'node4' ]              
@@ -184,10 +189,38 @@ class IBMSPrlCompleter:
                 for x in nodelist:
                     if search( '=(\w*)$', tokens[ -1 ], IGNORECASE ) and x.startswith( search( '=(\w*)$', tokens[ -1 ], IGNORECASE )[1] ):
                         ret.append( x + ' ' )  
+###########
+# Idea test POC $$$$$$$$$$$$$$$$$$$$$ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+###########
             
         elif len( tokens ) == 4:
             # LEVEL 4
             logging.info( ' Stepped into LEVEL 4.' )
+            
+            for key in self.rules:
+                # skip the previous level entries
+                if len( key.split() ) < 3:
+                    continue
+                elif key.startswith( 'select' ): # ???????????????????????????????
+                    continue
+                logging.info( ' and searching for regexp pattern [' + key + ']' )
+                logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
+                logging.info( ' and searching in text [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
+                if search( '^' + regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ] , IGNORECASE ):
+                    logging.info( ' and found [' + tokens[ -4 ] + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
+                    
+                    logging.info( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
+                    for x in self.rules[key]:
+                      if x.startswith( 'select' ):
+                          # First try as an SQL pattern!
+                          logging.info( ' it\'s an SQL select [' + tokens[ -1 ] + ' > ' + x + ']' )
+                          ret += spsqlengine( x.strip(), tokens )
+                          continue
+                      elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                          logging.info( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                          separator = '' if x[ -1 ] == '=' else ' '
+                          ret.append( x + separator )
+                          continue
          
         else:
             logging.info( ' Stepped into LEVEL Bzzz...' )
@@ -258,9 +291,9 @@ def progressbar( count, total = columns ):
 def regexpgenerator( regexp ):
   
     savelastchar = '' 
-    if regexp[-1] == '=':
-      savelastchar = regexp[-1]
-      regexp = regexp[ : -1 ]
+#    if regexp[-1] == '=':
+#      savelastchar = regexp[-1]
+#      regexp = regexp[ : -1 ]
     
     result = ''
     for part in regexp.split():

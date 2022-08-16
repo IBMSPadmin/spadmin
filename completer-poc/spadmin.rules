@@ -27,9 +27,9 @@ $->REload
 ACCept -> Date
 
 # ACTivate POlicyset domain_name policy_set_name
-ACTivate                   -> POlicyset
-ACTivate POlicyset \w*     -> select domain_name from domains
-ACTivate POlicyset \w+ \w* -> select set_name from POLICYSETS where set_name != 'ACTIVE' and domain_name like upper( '-2' )
+ACTivate               -> POlicyset
+ACTivate POlicyset     -> select domain_name from domains
+ACTivate POlicyset \w+ -> select set_name from POLICYSETS where set_name != 'ACTIVE' and domain_name like upper( '-2' )
 
 # ASsign DEFMGmtclass domain_name policy_set_name class_name
 ASsign -> DEFMGmtclass
@@ -39,11 +39,11 @@ ASsign -> DEFMGmtclass
 ###################
 BAckup -> DB
 
-BAckup               -> DEVCONFig
-BAckup DEVCONFig -> Filenames=
+BAckup                  -> DEVCONFig
+BAckup DEVCONFig ?!\w+= -> Filenames=
 
-BAckup                -> VOLHistory
-BAckup VOLHistory -> Filenames=
+BAckup                   -> VOLHistory
+BAckup VOLHistory ?!\w+= -> Filenames=
 
 ###################
 # DELete commands #
@@ -56,9 +56,9 @@ DELete -> STGpool
 Query -> PRocess
 
 Query -> Node
-Query Node \w* -> DOmain=
-Query Node \w* -> Format=
-Query Node \w* -> Type=
+Query Node ?!\w+= -> DOmain=
+Query Node ?!\w+= -> Format=
+Query Node ?!\w+= -> Type=
 
 Query -> STGpool
 
