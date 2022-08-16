@@ -58,6 +58,8 @@ DELete -> STGpool
 Query -> PRocess
 
 Query -> Node
+
+Query Node       -> select node_name from nodes
 Query Node ?!\w+ -> DOmain=
 Query Node ?!\w+ -> Format=
 Query Node ?!\w+ -> Type=

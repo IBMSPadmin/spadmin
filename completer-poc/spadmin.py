@@ -339,7 +339,9 @@ def spsqlengine( select, tokens = [] ):
 
     ret = []
 
-    if select == 'select domain_name from domains':
+    if select == 'select node_name from nodes':
+        sqlresults = [ 'WINnode', 'SQLnode', 'AIXnode', 'LINUXnode', 'HPUXnode' ]
+    elif select == 'select domain_name from domains':
         sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX' ] 
     elif select == "select set_name from POLICYSETS where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
         sqlresults = [ 'STANDARD [' + tokens[ -2 ] + ']' ]
