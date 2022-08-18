@@ -173,25 +173,25 @@ class IBMSPrlCompleter:
 ###########
 # Idea test POC $$$$$$$$$$$$$$$$$$$$$ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ###########
-            if search( '(query|quer|que|qu|q)\s+(node|nod|no|n)', tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE):
-                logging.info( ' QUERY NODE command detected!' )
-                nodelist = [ 'node1', 'node2', 'node3', 'node4' ]              
-                for x in nodelist:
-                    if x.startswith( tokens[ -1 ] ):
-                        ret.append( x + ' ' )
-            #elif tokens[ -3 ] == 'query' and tokens[ -2 ] == 'stgpool':
-            elif search( '(query|quer|que|qu|q)\s+(stgpool|stgpoo|stgpo|stgp|stg)', tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE):    
-                logging.info( ' QUERY STGPOOLS command detected!' )
-                stgpoollist = [ 'stgpool1', 'stgpool2', 'stgpool3', 'stgpool4' ]
-                for x in stgpoollist:
-                    if x.startswith( tokens[ -1 ] ):
-                        ret.append( x + ' ' )
-            elif search( '(nodename|nodenam|nodena|noden|node)=\w*', tokens[ -1 ], IGNORECASE ):
-                logging.info( ' NODEname= detected!' )
-                nodelist = [ 'node11', 'node22', 'node33', 'node44' ]              
-                for x in nodelist:
-                    if search( '=(\w*)$', tokens[ -1 ], IGNORECASE ) and x.startswith( search( '=(\w*)$', tokens[ -1 ], IGNORECASE )[1] ):
-                        ret.append( x + ' ' )  
+#             if search( '(query|quer|que|qu|q)\s+(node|nod|no|n)', tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE):
+#                 logging.info( ' QUERY NODE command detected!' )
+#                 nodelist = [ 'node1', 'node2', 'node3', 'node4' ]              
+#                 for x in nodelist:
+#                     if x.startswith( tokens[ -1 ] ):
+#                         ret.append( x + ' ' )
+#             #elif tokens[ -3 ] == 'query' and tokens[ -2 ] == 'stgpool':
+#             elif search( '(query|quer|que|qu|q)\s+(stgpool|stgpoo|stgpo|stgp|stg)', tokens[ -3 ] + ' ' + tokens[ -2 ], IGNORECASE):    
+#                 logging.info( ' QUERY STGPOOLS command detected!' )
+#                 stgpoollist = [ 'stgpool1', 'stgpool2', 'stgpool3', 'stgpool4' ]
+#                 for x in stgpoollist:
+#                     if x.startswith( tokens[ -1 ] ):
+#                         ret.append( x + ' ' )
+#             elif search( '(nodename|nodenam|nodena|noden|node)=\w*', tokens[ -1 ], IGNORECASE ):
+#                 logging.info( ' NODEname= detected!' )
+#                 nodelist = [ 'node11', 'node22', 'node33', 'node44' ]              
+#                 for x in nodelist:
+#                     if search( '=(\w*)$', tokens[ -1 ], IGNORECASE ) and x.startswith( search( '=(\w*)$', tokens[ -1 ], IGNORECASE )[1] ):
+#                         ret.append( x + ' ' )  
 ###########
 # Idea test POC $$$$$$$$$$$$$$$$$$$$$ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ###########
