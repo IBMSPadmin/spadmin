@@ -62,7 +62,11 @@ Színezés szekvenciája:
 - Engedjük el a teljes sor kiszínezését, mert úgy könnyebb
 
 {RED, ANR8592I} Session 136369 connection is using protocol TLSV12, cipher specification {RED, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384}, certificate TSM Self-Signed Certificate.  (SESSION: 136369)
-Ha sortöréskor volt elkezdett szín, akkor azzal kell az újat is elkezdeni. 
+Ha sortöréskor volt elkezdett szín, akkor azzal kell az újat is elkezdeni.
+
+- Kell-e törni a sort, ha nem kész.
+- Kell: van-e épp olyan szín, aminél törik a sor? Ha igen, akkor azzal kell majd kezdeni a következő sort!
+- 
 
 # Start console 
 - log
