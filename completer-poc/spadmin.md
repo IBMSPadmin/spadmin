@@ -57,7 +57,7 @@ Date                Actlog
 08/16/2022 09:40:02 ANR8592I Session 136369 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
                     certificate TSM Self-Signed Certificate.  (SESSION: 136369)
 
-** Fontos anna a kezelése, hogy mi van akkor, ha nem fér ki a tábla **
+** Fontos annak a lekezelése, hogy mi van akkor, ha nem fér ki a tábla **
 
 Színezés szekvenciája:
 
