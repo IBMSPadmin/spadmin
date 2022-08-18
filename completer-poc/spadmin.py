@@ -125,7 +125,10 @@ class IBMSPrlCompleter:
             # LEVEL 2
             logging.info( ' Stepped into LEVEL 2.' )
             
-            for key in self.rules:            
+            for key in self.rules:
+              # skip the previous level entries
+              if len( key.split() ) + 1 < 2:
+                  continue
               #logging.info( ' and searching for regexp pattern [' + key + ']' )
               #logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + '(?!.*\w)' + ']' )
               if search( '^' + regexpgenerator( key ), tokens[ -2 ], IGNORECASE ):
@@ -144,7 +147,7 @@ class IBMSPrlCompleter:
             
             for key in self.rules:
                 # skip the previous level entries
-                if len( key.split() ) < 2:
+                if len( key.split() ) + 1 < 3:
                     continue
                 elif key.startswith( 'select' ): # ???????????????????????????????
                     continue
@@ -199,7 +202,7 @@ class IBMSPrlCompleter:
             
             for key in self.rules:
                 # skip the previous level entries
-                if len( key.split() ) < 3:
+                if len( key.split() ) + 1 < 4:
                     continue
                 elif key.startswith( 'select' ): # ???????????????????????????????
                     continue
@@ -221,7 +224,36 @@ class IBMSPrlCompleter:
                           separator = '' if x[ -1 ] == '=' else ' '
                           ret.append( x + separator )
                           continue
-         
+                          
+        elif len( tokens ) == 5:
+            # LEVEL 5
+            logging.info( ' Stepped into LEVEL 5.' )
+            
+            for key in self.rules:
+                # skip the previous level entries
+                if len( key.split() ) + 1 < 5:
+                    continue
+                elif key.startswith( 'select' ): # ???????????????????????????????
+                    continue
+                logging.info( ' and searching for regexp pattern [' + key + ']' )
+                logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
+                logging.info( ' and searching in text [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
+                if search( '^' + regexpgenerator( key ), tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ] , IGNORECASE ):
+                    logging.info( ' and found [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
+                    
+                    logging.info( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
+                    for x in self.rules[key]:
+                      if x.startswith( 'select' ):
+                          # First try as an SQL pattern!
+                          logging.info( ' it\'s an SQL select [' + tokens[ -1 ] + ' > ' + x + ']' )
+                          ret += spsqlengine( x.strip(), tokens )
+                          continue
+                      elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                          logging.info( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                          separator = '' if x[ -1 ] == '=' else ' '
+                          ret.append( x + separator )
+                          continue
+             
         else:
             logging.info( ' Stepped into LEVEL Bzzz...' )
         
@@ -339,12 +371,16 @@ def spsqlengine( select, tokens = [] ):
 
     ret = []
 
-    if select == 'select node_name from nodes':
+    if select == "select node_name from nodes":
         sqlresults = [ 'WINnode', 'SQLnode', 'AIXnode', 'LINUXnode', 'HPUXnode' ]
-    elif select == 'select domain_name from domains':
-        sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX' ] 
-    elif select == "select set_name from POLICYSETS where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
-        sqlresults = [ 'STANDARD [' + tokens[ -2 ] + ']' ]
+    elif select == "select node_name from nodes where domain_name like where domain_name like upper( '-3' )":
+       sqlresults = [ 'NODE_1_' + tokens[ -3 ] + '_', 'NODE_2_' + tokens[ -3 ] + '_', 'NODE_3_' + tokens[ -3 ] + '_' ]
+    elif select == "select domain_name from domains":
+        sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX', 'TEST_DOM' ] 
+    elif select == "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
+        sqlresults = [ 'STANDARD_' + tokens[ -2 ] + '_', 'STANDARD_2_' + tokens[ -2 ] + '_', 'NONSTANDARD_' + tokens[ -2 ] + '_' ]
+    elif select == "select schedule_name from client_schedules where domain_name like upper( '-2' )":
+        sqlresults = [ 'SCHED_1_' + tokens[ -2 ] + '_', 'SCHED_2_' + tokens[ -2 ] + '_', 'SCHED_3_' + tokens[ -2 ] + '_' ]
         
     # Filter the sqlresults with the last word if possible    
     for x in sqlresults:

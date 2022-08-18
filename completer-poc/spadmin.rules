@@ -29,7 +29,7 @@ ACCept -> Date
 # ACTivate POlicyset domain_name policy_set_name
 ACTivate               -> POlicyset
 ACTivate POlicyset     -> select domain_name from domains
-ACTivate POlicyset \w+ -> select set_name from POLICYSETS where set_name != 'ACTIVE' and domain_name like upper( '-2' )
+ACTivate POlicyset \w+ -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
 
 # ASsign DEFMGmtclass domain_name policy_set_name class_name
 ASsign -> DEFMGmtclass
@@ -48,6 +48,14 @@ BAckup VOLHistory ?!\w+= -> Filenames=
 # So far at this point we've made it... ;-) #################################################################################
 
 ###################
+# DEFine commands #
+###################
+DEFine                     -> ASSOCiation
+DEFine ASSOCiation         -> select domain_name from domains
+DEFine ASSOCiation \w+     -> select schedule_name from client_schedules where domain_name like upper( '-2' )
+DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like where domain_name like upper( '-3' )
+
+###################
 # DELete commands #
 ###################
 DELete -> STGpool
@@ -57,16 +65,20 @@ DELete -> STGpool
 ##################
 Query -> PRocess
 
-Query -> Node
-
+Query            -> Node
 Query Node       -> select node_name from nodes
 Query Node ?!\w+ -> DOmain=
 Query Node ?!\w+ -> Format=
 Query Node ?!\w+ -> Type=
-Query Node \w+   -> DOmain=
-Query Node \w+   -> Format=
-Query Node \w+   -> Type=
 
+# a 4. szinten ne ez legyen, de lehet ez em is kell
+Query Node \w+ ?!\w+= -> DOmain=
+Query Node \w+ ?!\w+= -> Format=
+Query Node \w+ ?!\w+= -> Type=
+Query Node \w+ DOmain= -> select domain_name from domains
+# de ez már az 5. szint
+Query Node \w+ (\w+=\w*\s+){1,} -> DOmain=
+Query Node \w+ (\w+=\w*\s+){1,} -> DOmain=
 Query -> STGpool
 
 Query -> STGPOOLDIRectory
