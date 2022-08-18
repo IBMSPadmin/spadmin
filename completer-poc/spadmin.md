@@ -64,8 +64,6 @@ Színezés szekvenciája:
 {RED, ANR8592I} Session 136369 connection is using protocol TLSV12, cipher specification {RED, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384}, certificate TSM Self-Signed Certificate.  (SESSION: 136369)
 Ha sortöréskor volt elkezdett szín, akkor azzal kell az újat is elkezdeni. 
 
-
-
 # Start console 
 - log
 - actlog
