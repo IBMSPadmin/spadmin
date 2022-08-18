@@ -410,11 +410,12 @@ print( colored( '''
  Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager''', 'white', attrs=[ 'bold' ] ) )
 
 print()
-print( colored( '= Python3 [' + sys.version + '] readline DEMO POC', 'grey', attrs=[ 'bold' ] ) )
-print( colored( '= Welcome, enter SP commands if you\'re lost type help', 'grey', attrs=[ 'bold' ] ) )
-print( colored( '= Your current platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
-print( colored( '= Terminal properties: [' + str( columns ) + 'x' + str( rows ) + ']', 'grey', attrs=[ 'bold' ] ) )
-print( colored( '= We\'re trying to breathe new life into this old character based management interface.', 'grey', attrs=[ 'bold' ] ) )
+print( colored( '= Python3 [' + sys.version + '] spadmin + readline DEMO POC', 'grey', attrs=[ 'bold' ] ) )
+print( colored( '= Welcome! Enter any ', 'grey', attrs=[ 'bold' ] ) + colored( ' IBM ', 'white', 'on_blue', attrs=[ 'bold', 'underline' ] ) + colored( " Spectrum Protect commands and if you're lost type help!", 'grey', attrs=[ 'bold' ] ) )
+print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
+print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )
+print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
+print( colored( "= Once you start using it, you can't live without it!!!", 'magenta', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
 print()
  
 # Logger settings
@@ -451,8 +452,9 @@ readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
 
 # Short text help
 print()
-print( colored( 'Short HELP:', 'cyan' ) )
-print( '''  Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
+print( ' ' + colored( 'Short HELP:', 'cyan', attrs=[ 'bold', 'underline' ] ) )
+print( '''
+  Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
   use: "REload" to reload the rule file! and
   use: "SHow LOG" to reach the local log file!''' )
 print()
@@ -507,6 +509,10 @@ prgend = time()
 consoleline( '-' )
 print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
 consoleline( '-' )
+
+sys.exit( 0 )
+
+sdsds
 
 __author__     = [ "Fleischmann György", "Szabó Marcell" ]
 __copyright__  = "Copyright 2022, The SPadmin Project"

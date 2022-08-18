@@ -1,4 +1,9 @@
 while :; do
  ./spadmin.py
- sleep 1
+ if [ $? -ne 0 ] 
+   then
+    exit 1 
+ fi
+ echo "Press ctrl+c to exit!"
+ sleep 2
 done

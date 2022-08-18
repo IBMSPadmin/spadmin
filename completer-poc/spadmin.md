@@ -31,7 +31,7 @@
 - CSV
 - > filename
 
-Hogyan kellene kinéznie:
+PROC, ACTLOG: Hogyan kellene kinéznie:
 
 =================== ========================================================================================================================
 Date                Actlog

@@ -7,7 +7,7 @@ $->ASsign
 $->BAckup
 $->DEFine
 $->DELete
-$->Help
+$->Help!
 $->Query
 $->REMove
 $->SHow
@@ -45,8 +45,6 @@ BAckup DEVCONFig ?!\w+= -> Filenames=
 BAckup                   -> VOLHistory
 BAckup VOLHistory ?!\w+= -> Filenames=
 
-# So far at this point we've made it... ;-) #################################################################################
-
 ###################
 # DEFine commands #
 ###################
@@ -67,6 +65,9 @@ Query -> PRocess
 
 Query            -> Node
 Query Node       -> select node_name from nodes
+
+# So far at this point we've made it... ;-) #################################################################################
+
 Query Node ?!\w+ -> DOmain=
 Query Node ?!\w+ -> Format=
 Query Node ?!\w+ -> Type=
@@ -76,6 +77,7 @@ Query Node \w+ ?!\w+= -> DOmain=
 Query Node \w+ ?!\w+= -> Format=
 Query Node \w+ ?!\w+= -> Type=
 Query Node \w+ DOmain= -> select domain_name from domains
+
 # de ez már az 5. szint
 Query Node \w+ (\w+=\w*\s+){1,} -> DOmain=
 Query Node \w+ (\w+=\w*\s+){1,} -> DOmain=
