@@ -19,6 +19,7 @@ $->QUIt
 $->BYe
 $->Logout
 $->REload
+$->RULer
 
 ################################
 # and the rest LEVEL 2, 3, ... #
@@ -81,6 +82,21 @@ Query Node \w+ DOmain= -> select domain_name from domains
 # de ez már az 5. szint
 Query Node \w+ (\w+=\w*\s+){1,} -> DOmain=
 Query Node \w+ (\w+=\w*\s+){1,} -> DOmain=
+
+Query         -> SEssion
+Query SEssion -> select session_id from sessions
+Query SEssion -> MINTIMethreshold=
+Query SEssion -> MAXTHRoughput=
+Query SEssion -> Format=
+Query SEssion -> Type= 
+Query SEssion -> CLIENTName=
+
+Query SEssion \d+ -> MINTIMethreshold=
+Query SEssion \d+ -> MAXTHRoughput=
+Query SEssion \d+ -> Format=
+Query SEssion \d+ -> Type= 
+Query SEssion \d+ -> CLIENTName=
+
 Query -> STGpool
 
 Query -> STGPOOLDIRectory

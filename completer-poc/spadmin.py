@@ -374,7 +374,9 @@ def spsqlengine( select, tokens = [] ):
     if select == "select node_name from nodes":
         sqlresults = [ 'WINnode', 'SQLnode', 'AIXnode', 'LINUXnode', 'HPUXnode' ]
     elif select == "select node_name from nodes where domain_name like where domain_name like upper( '-3' )":
-       sqlresults = [ 'NODE_1_' + tokens[ -3 ] + '_', 'NODE_2_' + tokens[ -3 ] + '_', 'NODE_3_' + tokens[ -3 ] + '_' ]
+        sqlresults = [ 'NODE_1_' + tokens[ -3 ] + '_', 'NODE_2_' + tokens[ -3 ] + '_', 'NODE_3_' + tokens[ -3 ] + '_' ]
+    elif select == "select session_id from sessions":
+        sqlresults = [ '28', '456', '12345' ]
     elif select == "select domain_name from domains":
         sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX', 'TEST_DOM' ] 
     elif select == "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
@@ -388,6 +390,34 @@ def spsqlengine( select, tokens = [] ):
             ret.append( x + ' ' )
         
     return ret
+    
+def ruler():
+    cc = 1
+    for i in range( 1, columns + 1, 1 ):
+      if i % 100:
+        print( ' ', end='' ) 
+      else:
+        print( colored( cc, 'green' ), end='' )
+        cc += 1
+        cc = 0 if cc == 100 else cc
+    print()
+    
+    cc = 1
+    for i in range( 1, columns + 1, 1 ):
+      if i % 10:
+        print( ' ', end='' ) 
+      else:
+        print( colored( cc, 'green' ), end='' )
+        cc += 1
+        cc = 0 if cc == 10 else cc
+    print()
+    
+    for i in range( 1, columns + 1, 1 ):
+      c = i % 10
+      if c:
+        print( c, end='' ) 
+      else:
+        print( colored( c, 'green' ), end='' )  
  
 ########## ###############################################################################################################
 # main() # 
@@ -457,7 +487,7 @@ print( '''
   Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
   use: "REload" to reload the rule file! and
   use: "SHow LOG" to reach the local log file!''' )
-print()
+#print()
 
 #def showspadmncommand():
 #  print( '> showspadmncommand <' )
@@ -466,6 +496,9 @@ print()
 #rules[ '^' + regexpgenerator( 'SHow' ) + '\s+' + regexpgenerator( 'COMmands' )  ].append( second )
 # locals()["myfunction"]()
 #
+
+ruler()
+print()
 
 logging.info( consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
 
