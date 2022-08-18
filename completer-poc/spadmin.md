@@ -31,6 +31,41 @@
 - CSV
 - > filename
 
+Hogyan kellene kinéznie:
+
+=================== ========================================================================================================================
+Date                Actlog
+=================== ========================================================================================================================
+08/16/2022 09:40:02 ANR8592I Session 136369 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,                           certificate TSM Self-Signed Certificate.  (SESSION: 136369)
+08/16/2022 09:40:02 ANR8592I Session 136369 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,                           certificate TSM Self-Signed Certificate.  (SESSION: 136369)
+
+=================== ========================================================================================================================
+ Date                Actlog
+=================== ========================================================================================================================
+08/16/2022 09:40:02 ANR8592I Session 136369 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,                           certificate TSM Self-Signed Certificate.  (SESSION: 136369)
+08/16/2022 09:40:02 ANR8592I Session 136369 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,                           certificate TSM Self-Signed Certificate.  (SESSION: 136369)
+
+=================== ========================================================================================================================
+| Date            | | Actlog                                                                                                               |
+=================== ========================================================================================================================
+08/16/2022 09:40:02 ANR8592I Session 136369 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,                           certificate TSM Self-Signed Certificate.  (SESSION: 136369)
+08/16/2022 09:40:02 ANR8592I Session 136369 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,                           certificate TSM Self-Signed Certificate.  (SESSION: 136369)
+
+** Fontos anna a kezelése, hogy mi van akkor, ha nem fér ki a tábla **
+
+Színezés szekvenciája:
+
+!!! még a színezések előtt meg kell tudni a méretét, hogy lássuk melyik a leghosszabb sor, mert a fejléc arra fog elkészülni és a többi sor is azzal lesz finomhangolva !!! 
+- Ha van grep akkor azt ki kellene emelni (Mi van ha pont ott törik meg???)
+- Ugyenez igaz ha valami mintát emelünk ki. A grep kiemelése nem annyira fontos, de a minta kiemelés az nem maradha ki.
+- Ha a mintára megcsináljuk, akkor maradhat a grep-nél is: tehát meg kell csinálni
+- Engedjük el a teljes sor kiszínezését, mert úgy könnyebb
+
+{RED, ANR8592I} Session 136369 connection is using protocol TLSV12, cipher specification {RED, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384}, certificate TSM Self-Signed Certificate.  (SESSION: 136369)
+Ha sortöréskor volt elkezdett szín, akkor azzal kell az újat is elkezdeni. 
+
+
+
 # Start console 
 - log
 - actlog
