@@ -18,7 +18,7 @@ try:
 except ImportError:
     import readline
 readline.parse_and_bind( 'tab: complete' )
-#readline.set_completer_delims( '= ' )
+readline.set_completer_delims( ' ' )
 
 import os
 rows, columns = os.popen( 'stty size', 'r' ).read().split()
@@ -210,7 +210,7 @@ class IBMSPrlCompleter:
                 #logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
                 #logging.info( ' and searching in text [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
                 if search( '^' + regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ] , IGNORECASE ):
-                    logging.info( ' and found [' + tokens[ -4 ] + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
+                    logging.info( ' and found [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
                     
                     logging.info( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:
@@ -235,11 +235,11 @@ class IBMSPrlCompleter:
                     continue
                 elif key.startswith( 'select' ): # ???????????????????????????????
                     continue
-                logging.info( ' and searching for regexp pattern [' + key + ']' )
-                logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
-                logging.info( ' and searching in text [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
+                #logging.info( ' and searching for regexp pattern [' + key + ']' )
+                #logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
+                #logging.info( ' and searching in text [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
                 if search( '^' + regexpgenerator( key ), tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ] , IGNORECASE ):
-                    logging.info( ' and found [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
+                    logging.info( ' and found [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 5th LEVEL dictionary item: [' + key + '].' )
                     
                     logging.info( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:
@@ -297,7 +297,23 @@ class IBMSPrlCompleter:
           consoleline( coloreed( 'E', 'red' ) )
           
       return None
-
+          
+    def match_display_hook( self, substitution, matches, longest_match_length ):
+      word = 1
+      print()
+      for match in matches:
+          if search ( '^\w+=(\w+)', match ):
+              ppp = search ( '^\w+=(\w+)', match )[1]
+          else:
+              ppp = match          
+          print( ppp + ' ', end='',  )
+          if word == 8:
+            word = 1
+            print()
+          word += 1
+      print( '\n[' + colored( 'SERVER1', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' ' + readline.get_line_buffer(),end='' )
+      # sys.stdout.flush()
+      
 #############      
 # Functions # ####################################################################
 #############
@@ -323,9 +339,9 @@ def progressbar( count, total = columns ):
 def regexpgenerator( regexp ):
   
     savelastchar = '' 
-#    if regexp[-1] == '=':
-#      savelastchar = regexp[-1]
-#      regexp = regexp[ : -1 ]
+    if regexp[ -1 ] == '=':
+      savelastchar = regexp[ -1 ]
+      regexp = regexp[ : -1 ]
     
     result = ''
     for part in regexp.split():
@@ -378,7 +394,10 @@ def spsqlengine( select, tokens = [] ):
     elif select == "select session_id from sessions":
         sqlresults = [ '28', '456', '12345' ]
     elif select == "select domain_name from domains":
-        sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX', 'TEST_DOM' ] 
+        sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX', 'TEST_DOM' ]    
+    elif select == "select domain_name from domains {Prefix: DOmain=}":
+        prefix = search( '(\w+=*)', tokens[ -1 ] )[ 1 ]
+        sqlresults = [ prefix + 'WIN', prefix + 'SQL', prefix + 'AIX', prefix + 'LINUX', prefix + 'HPUX', prefix + 'TEST_DOM' ]
     elif select == "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
         sqlresults = [ 'STANDARD_' + tokens[ -2 ] + '_', 'STANDARD_2_' + tokens[ -2 ] + '_', 'NONSTANDARD_' + tokens[ -2 ] + '_' ]
     elif select == "select schedule_name from client_schedules where domain_name like upper( '-2' )":
@@ -479,6 +498,7 @@ atexit.register( readline.write_history_file, rlhistfile )
 
 myIBMSPrlCompleter = IBMSPrlCompleter( rulesfilename )
 readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
+readline.set_completion_display_matches_hook( myIBMSPrlCompleter.match_display_hook )
 
 # Short text help
 print()

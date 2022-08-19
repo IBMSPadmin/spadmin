@@ -41,10 +41,12 @@ ASsign -> DEFMGmtclass
 BAckup -> DB
 
 BAckup                  -> DEVCONFig
-BAckup DEVCONFig ?!\w+= -> Filenames=
+#BAckup DEVCONFig ?!\w+= -> Filenames=
+BAckup DEVCONFig -> Filenames=
 
 BAckup                   -> VOLHistory
-BAckup VOLHistory ?!\w+= -> Filenames=
+#BAckup VOLHistory ?!\w+= -> Filenames=
+BAckup VOLHistory  -> Filenames=
 
 ###################
 # DEFine commands #
@@ -66,22 +68,31 @@ Query -> PRocess
 
 Query            -> Node
 Query Node       -> select node_name from nodes
+Query Node       -> DOmain=
+Query Node       -> Format=
+Query Node       -> Type=
 
-# So far at this point we've made it... ;-) #################################################################################
-
-Query Node ?!\w+ -> DOmain=
-Query Node ?!\w+ -> Format=
-Query Node ?!\w+ -> Type=
+# 3. szint
+Query Node DOmain= -> select domain_name from domains {Prefix: DOmain=}
 
 # a 4. szinten ne ez legyen, de lehet ez em is kell
-Query Node \w+ ?!\w+= -> DOmain=
-Query Node \w+ ?!\w+= -> Format=
-Query Node \w+ ?!\w+= -> Type=
-Query Node \w+ DOmain= -> select domain_name from domains
+#Query Node \w+ ?!\w+= -> DOmain=
+#Query Node \w+ ?!\w+= -> Format=
+#Query Node \w+ ?!\w+= -> Type=
+#Query Node \w+ DOmain= -> select domain_name from domains
+
+#Query Node \w+ ?!\w+= -> DOmain=
+#Query Node \w+ ?!\w+= -> Format=
+#Query Node \w+ ?!\w+= -> Type=
+Query Node \w+  -> DOmain=
+Query Node \w+  -> Format=
+Query Node \w+  -> Type=
+
+Query Node \w+ DOmain= -> select domain_name from domains {Prefix: DOmain=}
 
 # de ez már az 5. szint
-Query Node \w+ (\w+=\w*\s+){1,} -> DOmain=
-Query Node \w+ (\w+=\w*\s+){1,} -> DOmain=
+#Query Node \w+ (\w+=\w*\s+){1,} -> select domain_name from domains {Prefix: DOmain=}
+#Query Node \w+ (\w+=\w*\s+){1,} -> DOmainx=
 
 Query         -> SEssion
 Query SEssion -> select session_id from sessions
