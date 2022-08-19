@@ -141,7 +141,7 @@ class IBMSPrlCompleter:
                       if search( '^' + tokens[ -1 ], x, IGNORECASE ):
                           logging.info( ' as (regexp) starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
                           ret.append( x + ' ' )
-                          #continue
+                          continue
             
         elif len( tokens ) == 3:
             # LEVEL 3 
