@@ -39,6 +39,8 @@ import logging
 
 import atexit
 
+import pexpect
+
 #####################################
 # IBMSPrlCompleter Class definition #
 #####################################
@@ -313,7 +315,44 @@ class IBMSPrlCompleter:
           word += 1
       print( '\n[' + colored( 'SERVER1', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' ' + readline.get_line_buffer(),end='' )
       # sys.stdout.flush()
+
+class DSM:
+      START_DSMADMC = "dsmadmc"
+      id = "support"
+      pa = "asdpoi123"
+      STARTCOMMAND = START_DSMADMC + " -id=" + id + " -pa=" + pa + " -dataonly=yes" + " -comma"
+      MORE1   = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
+      MORE2   = 'The character \'#\' stands for any decimal integer.'  # meg itt
+      MORE3   = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt
+      PROMPT1 = 'Protect: .*'
+      PROMPT2 = 'tsm: .*'
+      tsm = None
       
+      def get_tsm(self):
+          if self.tsm is None or not self.tsm.isalive:
+              self.tsm = pexpect.spawn('%s' % self.STARTCOMMAND, encoding='utf-8', echo=False)
+              self.tsm.setwinsize(65534, 65534)
+              self.tsm.expect([self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF])
+          return self.tsm
+      
+      def send_command(self, command):
+          tsm = DSM.get_tsm(DSM)
+          try:
+              tsm.sendline(command)
+          except:
+              print("An error occurred during a dsmadmc execution. Please try again...")
+              quit(1)
+          tsm.expect([self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF])
+          return tsm.before
+      
+      def send_command_array(self, command):
+          list = DSM.send_command(DSM,command).splitlines()
+          if len(list) > 0:
+              list.pop(0)  # delete the first line which is the command itself
+          while ("" in list):  ## every output contains empty lines, we remove it
+              list.remove("")
+          return list
+
 #############      
 # Functions # ####################################################################
 #############
@@ -389,12 +428,15 @@ def spsqlengine( select, tokens = [] ):
 
     if select == "select node_name from nodes":
         sqlresults = [ 'WINnode', 'SQLnode', 'AIXnode', 'LINUXnode', 'HPUXnode' ]
+        sqlresults = DSM.send_command_array( DSM, select )
     elif select == "select node_name from nodes where domain_name like where domain_name like upper( '-3' )":
         sqlresults = [ 'NODE_1_' + tokens[ -3 ] + '_', 'NODE_2_' + tokens[ -3 ] + '_', 'NODE_3_' + tokens[ -3 ] + '_' ]
     elif select == "select session_id from sessions":
         sqlresults = [ '28', '456', '12345' ]
+        sqlresults = DSM.send_command_array( DSM, select )
     elif select == "select domain_name from domains":
-        sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX', 'TEST_DOM' ]    
+        sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX', 'TEST_DOM' ]
+        sqlresults = DSM.send_command_array( DSM, select )    
     elif select == "select domain_name from domains {Prefix: DOmain=}":
         prefix = search( '(\w+=*)', tokens[ -1 ] )[ 1 ]
         sqlresults = [ prefix + 'WIN', prefix + 'SQL', prefix + 'AIX', prefix + 'LINUX', prefix + 'HPUX', prefix + 'TEST_DOM' ]
@@ -480,7 +522,7 @@ print( consolefilledline( '', '-', '', columns ) )
 rulesfilename  = "spadmin.rules"
 histoyfilename = ".spadmin_history"
 rlprompt       = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
-rlprompt       = '[' + colored( 'SERVER1', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' '
+rlprompt       = '[' + colored( DSM.send_command_array( DSM, 'select SERVER_NAME from STATUS' )[ 0 ], 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' '
 
 # Command line history
 # Based on this: https://docs.python.org/3/library/readline.html
@@ -552,6 +594,8 @@ while True:
         
         # Quit the program
         break
+        
+    print( DSM.send_command( DSM, line ) )
     
     consoleline( '-' )
 
