@@ -24,10 +24,13 @@
 - 
 
 ## ADD: popen?, pexpect?
+- 
 
 ## Table printer
 - text (colored, left, right, center, cut, ?)
 - PDF
+	- TSM riport q node, q sched, q vol acc reado, unava, q lic
+- HTML email?
 - CSV
 - > filename
 
