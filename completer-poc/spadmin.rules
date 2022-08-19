@@ -40,12 +40,10 @@ ASsign -> DEFMGmtclass
 ###################
 BAckup -> DB
 
-BAckup                  -> DEVCONFig
-#BAckup DEVCONFig ?!\w+= -> Filenames=
+BAckup           -> DEVCONFig
 BAckup DEVCONFig -> Filenames=
 
-BAckup                   -> VOLHistory
-#BAckup VOLHistory ?!\w+= -> Filenames=
+BAckup             -> VOLHistory
 BAckup VOLHistory  -> Filenames=
 
 ###################
@@ -64,29 +62,32 @@ DELete -> STGpool
 ##################
 # Query commands #
 ##################
-Query -> PRocess
+Query -> ACtlog
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINTime|begintim|beginti|begint)=
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ENDDate|enddat|endda|endd)=
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ENDTime|endtim|endti|endt)=
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(Search|searc|sear|sea|se|s)=
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(NODEname|nodenam|nodena|noden|node)=
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ORiginator|originato|originat|origina|origin|origi|orig|ori|or)=
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(OWNERname|ownernam|ownerna|ownern|owner)=
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SCHedname|schednam|schedna|schedn|sched|sche|sch)=
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(DOmainname|domainnam|domainna|domainn|domain|domai|doma|dom|do)=
+#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SESsnum|sessnu|sessn|sess|ses)=
 
-Query            -> Node
-Query Node       -> select node_name from nodes
-Query Node       -> DOmain=
-Query Node       -> Format=
-Query Node       -> Type=
+Query                 -> Node
+Query Node            -> select node_name from nodes
+Query Node            -> DOmain=
+Query Node            -> Format=
+Query Node            -> Type=
 
-# 3. szint
-Query Node DOmain= -> select domain_name from domains {Prefix: DOmain=}
+# 3.
+Query Node DOmain=    -> select domain_name from domains {Prefix: DOmain=}
 
 # a 4. szinten ne ez legyen, de lehet ez em is kell
-#Query Node \w+ ?!\w+= -> DOmain=
-#Query Node \w+ ?!\w+= -> Format=
-#Query Node \w+ ?!\w+= -> Type=
-#Query Node \w+ DOmain= -> select domain_name from domains
-
-#Query Node \w+ ?!\w+= -> DOmain=
-#Query Node \w+ ?!\w+= -> Format=
-#Query Node \w+ ?!\w+= -> Type=
-Query Node \w+  -> DOmain=
-Query Node \w+  -> Format=
-Query Node \w+  -> Type=
+Query Node \w+         -> DOmain=
+Query Node \w+         -> Format=
+Query Node \w+         -> Type=
 
 Query Node \w+ DOmain= -> select domain_name from domains {Prefix: DOmain=}
 
@@ -112,27 +113,17 @@ Query -> STGpool
 
 Query -> STGPOOLDIRectory
 
-Query           -> LOG
-Query LOG ?!\w+ -> Format=
+Query     -> LOG
+Query LOG -> Format=
 
-Query -> ACtlog
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINTime|begintim|beginti|begint)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ENDDate|enddat|endda|endd)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ENDTime|endtim|endti|endt)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(Search|searc|sear|sea|se|s)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(NODEname|nodenam|nodena|noden|node)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ORiginator|originato|originat|origina|origin|origi|orig|ori|or)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(OWNERname|ownernam|ownerna|ownern|owner)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SCHedname|schednam|schedna|schedn|sched|sche|sch)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(DOmainname|domainnam|domainna|domainn|domain|domai|doma|dom|do)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SESsnum|sessnu|sessn|sess|ses)=
+Query         -> PRocess
+Query PRocess -> select process_num from processes
 
 ##################
 # REMove command #
 ##################
 REMove          -> Node
-REMove Node ?!\w+ -> SYNCldapdelete
+#REMove Node     -> SYNCldapdelete
 
 ################
 # SHow command #

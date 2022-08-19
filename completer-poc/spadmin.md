@@ -1,5 +1,17 @@
 # toDos
 
+## directory struct
+
+./
+ spadmin.py
+ spadmin.rules
+ spadmin.log
+
+	/cache
+	/reports
+	/history
+	/timemachine
+
 ## readline vs. GNUreadline vs. ...
 - Microsoft Windows WSL
 - esetleg CygWin

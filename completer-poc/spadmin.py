@@ -313,44 +313,45 @@ class IBMSPrlCompleter:
             word = 1
             print()
           word += 1
-      print( '\n[' + colored( 'SERVER1', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' ' + readline.get_line_buffer(),end='' )
+      print( '\n' + rlprompt + ' ' + readline.get_line_buffer(), end='' )
       # sys.stdout.flush()
 
 class DSM:
+  
       START_DSMADMC = "dsmadmc"
-      id = "support"
-      pa = "asdpoi123"
-      STARTCOMMAND = START_DSMADMC + " -id=" + id + " -pa=" + pa + " -dataonly=yes" + " -comma"
-      MORE1   = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
-      MORE2   = 'The character \'#\' stands for any decimal integer.'  # meg itt
-      MORE3   = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt
-      PROMPT1 = 'Protect: .*'
-      PROMPT2 = 'tsm: .*'
+      id            = "support"
+      pa            = "asdpoi123"
+      STARTCOMMAND  = START_DSMADMC + " -id=" + id + " -pa=" + pa + " -dataonly=yes" + " -comma"
+      MORE1         = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
+      MORE2         = 'The character \'#\' stands for any decimal integer.'  # meg itt
+      MORE3         = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt
+      PROMPT1       = 'Protect: .*'
+      PROMPT2       = 'tsm: .*'
       tsm = None
       
-      def get_tsm(self):
+      def get_tsm( self ):
           if self.tsm is None or not self.tsm.isalive:
-              self.tsm = pexpect.spawn('%s' % self.STARTCOMMAND, encoding='utf-8', echo=False)
-              self.tsm.setwinsize(65534, 65534)
-              self.tsm.expect([self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF])
+              self.tsm = pexpect.spawn( '%s' % self.STARTCOMMAND, encoding = 'utf-8', echo = False )
+              self.tsm.setwinsize( 65534, 65534 )
+              self.tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
           return self.tsm
       
-      def send_command(self, command):
-          tsm = DSM.get_tsm(DSM)
+      def send_command( self, command ):
+          tsm = DSM.get_tsm( DSM )
           try:
-              tsm.sendline(command)
+              tsm.sendline( command )
           except:
-              print("An error occurred during a dsmadmc execution. Please try again...")
-              quit(1)
-          tsm.expect([self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF])
+              print( 'An error occurred during a dsmadmc execution. Please try again...' )
+              quit( 1 )
+          tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
           return tsm.before
       
-      def send_command_array(self, command):
-          list = DSM.send_command(DSM,command).splitlines()
-          if len(list) > 0:
-              list.pop(0)  # delete the first line which is the command itself
-          while ("" in list):  ## every output contains empty lines, we remove it
-              list.remove("")
+      def send_command_array( self, command ):
+          list = DSM.send_command( DSM, command ).splitlines()
+          if len( list ) > 0:
+              list.pop( 0 )  # delete the first line which is the command itself
+          while ( '' in list ):  ## every output contains empty lines, we remove it
+              list.remove( '' )
           return list
 
 #############      
@@ -585,8 +586,10 @@ while True:
     # Own commands
     if search( '^' + regexpgenerator( 'REload' ), line, IGNORECASE ):
         myIBMSPrlCompleter.loadrules( rulesfilename )
+        continue
     elif search( '^' + regexpgenerator( 'Show Log' ), line, IGNORECASE ):
         os.system( 'open ./' + logfilename )
+        continue
     elif search( '^' + regexpgenerator( 'QUIt' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'LOGout' ), line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'Exit' ), line, IGNORECASE ) or \
@@ -608,8 +611,6 @@ print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend
 consoleline( '-' )
 
 sys.exit( 0 )
-
-sdsds
 
 __author__     = [ "Fleischmann György", "Szabó Marcell" ]
 __copyright__  = "Copyright 2022, The SPadmin Project"
