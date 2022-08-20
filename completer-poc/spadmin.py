@@ -394,9 +394,9 @@ class DSM2:
         for i in tsm.before.splitlines()[ 1: ]:
             if search( '^Session established with server \w+:', i ):
                 continue
-            elif search( '^Server Version \d+, Release \d+, Level \d+.\d\d\d', i ):
+            elif search( '^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i ):
                 continue
-            elif search( '^Server date\/time\:', i ):
+            elif search( '^\s\sServer date\/time\:', i ):
                 continue
                 
             ret.append( i )
