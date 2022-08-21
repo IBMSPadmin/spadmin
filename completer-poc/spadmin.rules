@@ -33,7 +33,12 @@ ACTivate POlicyset     -> select domain_name from domains
 ACTivate POlicyset \w+ -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
 
 # ASsign DEFMGmtclass domain_name policy_set_name class_name
-ASsign -> DEFMGmtclass
+ASsign                      -> DEFMGmtclass
+ASsign DEFMGmtclass         -> select domain_name from domains
+ASsign DEFMGmtclass \w+     -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
+
+# lehet itt két opció kezelését is bele kellene venni a buliba?!
+ASsign DEFMGmtclass \w+ \w+ -> select class_name from mgmtclasses where domain_name = upper( '-3' )
 
 ###################
 # BAckup commands #
@@ -109,7 +114,8 @@ Query SEssion \d+ -> Format=
 Query SEssion \d+ -> Type= 
 Query SEssion \d+ -> CLIENTName=
 
-Query -> STGpool
+Query         -> STGpool
+Query STGpool -> select stgpool_name from stgpools
 
 Query -> STGPOOLDIRectory
 

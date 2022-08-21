@@ -574,19 +574,20 @@ def ruler():
 
 # SPadmin settings
 spadmin_settings = { 
-           'cache_age'      : 20,
-           'cache_disable'  : False,
-           'rulefile'       : 'spadmin.rules',
-           'historyfile'    : '',
-           'dsmadmc_path'   : 'dsmadmc',
-           'dsmadmc_id'     : 'support',
-           'DSM_DIR'        : '',
-           'DSM_OPT'        : '',
-           'DSM_LOG'        : '',
-           'logfile'        : 'spadmin.log',
-           'debuglog'       : False,
-           'autoexec'	      : '',
-           'cache_prefetch' : True
+           'cache_age'       : 20,
+           'cache_disable'   : False,
+           'cache_prefetch'  : True,
+           'rulefile'        : 'spadmin.rules',
+           'historyfile'     : '',
+           'dsmadmc_path'    : 'dsmadmc',
+           'dsmadmc_id'      : 'support',
+           'DSM_DIR'         : '',
+           'DSM_OPT'         : '',
+           'DSM_LOG'         : '',
+           'logfile'         : 'spadmin.log',
+           'debuglog'        : False,
+           'autoexec'	       : '',
+           'online_readline' : True
 }
 
 # cache store
