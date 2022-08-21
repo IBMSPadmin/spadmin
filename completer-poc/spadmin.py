@@ -574,25 +574,25 @@ def ruler():
 
 # SPadmin settings
 spadmin_settings = { 
-           'cache_age'       : 20,
-           'cache_disable'   : False,
-           'cache_prefetch'  : True,
-           'rulefile'        : 'spadmin.rules',
-           'historyfile'     : '',
-           'dsmadmc_path'    : 'dsmadmc',
-           'dsmadmc_id'      : 'support',
-           'DSM_DIR'         : '',
-           'DSM_OPT'         : '',
-           'DSM_LOG'         : '',
-           'logfile'         : 'spadmin.log',
-           'debuglog'        : False,
-           'autoexec'	       : '',
-           'online_readline' : True
+           'cache_age'        : 60,              # cache entry age
+           'cache_disable'    : False,           # disable the dynamic SQL queries for readline
+           'cache_prefetch'   : True,            # prefetch cache data when the program starts
+           'rulefile'         : 'spadmin.rules', # rule file name
+           'historyfile'      : '',              # history file name
+           'dsmadmc_path'     : 'dsmadmc',       # the patch of dsmadmc
+           'dsmadmc_id'       : 'support',       # username for dsmadmc
+           'DSM_DIR'          : '',
+           'DSM_OPT'          : '',
+           'DSM_LOG'          : '',
+           'logfile'          : 'spadmin.log',   # SPadmin main logfile
+           'debug'            : False,           # enable debug info to the main logfile
+           'autoexec'	        : '',              # auto command execution when spadmin starts
+           'dynamic_readline' : True             # dynamic SQL queries when TAB + TAB 
 }
 
 # cache store
-cache           = {}
-cache_timestamp = {}
+cache           = {} # global cache data store 
+cache_timestamp = {} # global cache timestamp store
 
 # Clear screen
 if platform.system() == 'Windows':
