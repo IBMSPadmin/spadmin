@@ -313,7 +313,7 @@ class IBMSPrlCompleter:
             word = 1
             print()
           word += 1
-      print( '\n' + rlprompt + ' ' + readline.get_line_buffer(), end='' )
+      print( '\n' + rlprompt + '' + readline.get_line_buffer(), end='' )
       # sys.stdout.flush()
 
 class DSM:
@@ -471,29 +471,65 @@ def old_regexpgenerator( regexp ):
 def spsqlengine( select, tokens = [] ):
     # Handle SQL requests
     
-    logging.info( ' SP SQL Engine reached with select: [' + select  + ']' )
-    logging.info( ' SP SQL Engine reached with tokens: [' + pformat( tokens ) + ']' )
+    logging.info( ' SP SQL Engine reached with this select: [' + select  + '] command and' )
+    logging.info( ' SP SQL Engine reached with these tokens: [' + pformat( tokens ) + '].' )
 
     ret = []
 
-    if select == "select node_name from nodes":
-        sqlresults = [ 'WINnode', 'SQLnode', 'AIXnode', 'LINUXnode', 'HPUXnode' ]
-        sqlresults = DSM.send_command_array( DSM, select )
-    elif select == "select node_name from nodes where domain_name like where domain_name like upper( '-3' )":
-        sqlresults = [ 'NODE_1_' + tokens[ -3 ] + '_', 'NODE_2_' + tokens[ -3 ] + '_', 'NODE_3_' + tokens[ -3 ] + '_' ]
-    elif select == "select session_id from sessions":
-        sqlresults = [ '28', '456', '12345' ]
-        sqlresults = DSM.send_command_array( DSM, select )
-    elif select == "select domain_name from domains":
-        sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX', 'TEST_DOM' ]
-        sqlresults = DSM.send_command_array( DSM, select )    
-    elif select == "select domain_name from domains {Prefix: DOmain=}":
-        prefix = search( '(\w+=*)', tokens[ -1 ] )[ 1 ]
-        sqlresults = [ prefix + 'WIN', prefix + 'SQL', prefix + 'AIX', prefix + 'LINUX', prefix + 'HPUX', prefix + 'TEST_DOM' ]
-    elif select == "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
-        sqlresults = [ 'STANDARD_' + tokens[ -2 ] + '_', 'STANDARD_2_' + tokens[ -2 ] + '_', 'NONSTANDARD_' + tokens[ -2 ] + '_' ]
-    elif select == "select schedule_name from client_schedules where domain_name like upper( '-2' )":
-        sqlresults = [ 'SCHED_1_' + tokens[ -2 ] + '_', 'SCHED_2_' + tokens[ -2 ] + '_', 'SCHED_3_' + tokens[ -2 ] + '_' ]
+    # select preparation 
+    if search( '\'(-\d)\'', select ):
+        # extra index
+        index = search( '\'(-\d)\'', select )[ 1 ]
+        select = select.replace( str( index ), tokens[ int( index ) ] )
+        logging.info( ' SP SQL Engine select index preparation result: [' + select + '].' )
+    
+    if search( '\{Prefix:\s+(\w+=)}', select ):
+        # extra prefix
+        prefix = search( '\{Prefix: (\w+=)}', select )[ 1 ]
+        select = select.replace( '{Prefix: ' + prefix + '}', '' ) # remove the logic description
+        select = select.replace( '%PREFIX%', prefix )   
+            
+        logging.info( ' SP SQL Engine select prefix preparation result: [' + select  + '].' )
+
+    # logging.info( ' CACHE: [' + pformat( cache ) + '].' )
+
+    # cache engine
+#    if select in cache.keys() and time() - cache_timestamp[ select ] > spadmin_settings[ 'cache_age' ]:
+    if select in cache.keys():
+        # refresh needed
+        if time() - cache_timestamp[ select ] > spadmin_settings[ 'cache_age' ]:
+            logging.info( " SP SQL Engine hit the cache but the stored one is too old." )
+            logging.info( ' CACHE TIMEDIFF in second(s): [' + str( time() - cache_timestamp[ select ] ) + '].' )
+            cache[ select ]           = DSM.send_command_array( DSM, select )
+            cache_timestamp[ select ] = time()
+    else:
+        # new, init 
+        logging.info( " SP SQL Engine still no cached data store a new one." )
+        cache[ select ]           = DSM.send_command_array( DSM, select )
+        cache_timestamp[ select ] = time()
+
+    # logging.info( ' CACHE2: [' + pformat( cache ) + '].' )
+
+    sqlresults = cache[ select ]
+
+    # if select == "select node_name from nodes":
+    #     sqlresults = [ 'WINnode', 'SQLnode', 'AIXnode', 'LINUXnode', 'HPUXnode' ]
+    #     sqlresults = DSM.send_command_array( DSM, select )
+    # elif select == "select node_name from nodes where domain_name like where domain_name like upper( '-3' )":
+    #     sqlresults = [ 'NODE_1_' + tokens[ -3 ] + '_', 'NODE_2_' + tokens[ -3 ] + '_', 'NODE_3_' + tokens[ -3 ] + '_' ]
+    # elif select == "select session_id from sessions":
+    #     sqlresults = [ '28', '456', '12345' ]
+    #     sqlresults = DSM.send_command_array( DSM, select )
+    # elif select == "select domain_name from domains":
+    #     sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX', 'TEST_DOM' ]
+    #     sqlresults = DSM.send_command_array( DSM, select )    
+    # elif select == "select domain_name from domains {Prefix: DOmain=}":
+    #     prefix = search( '(\w+=*)', tokens[ -1 ] )[ 1 ]
+    #     sqlresults = [ prefix + 'WIN', prefix + 'SQL', prefix + 'AIX', prefix + 'LINUX', prefix + 'HPUX', prefix + 'TEST_DOM' ]
+    # elif select == "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )":
+    #     sqlresults = [ 'STANDARD_' + tokens[ -2 ] + '_', 'STANDARD_2_' + tokens[ -2 ] + '_', 'NONSTANDARD_' + tokens[ -2 ] + '_' ]
+    # elif select == "select schedule_name from client_schedules where domain_name like upper( '-2' )":
+    #     sqlresults = [ 'SCHED_1_' + tokens[ -2 ] + '_', 'SCHED_2_' + tokens[ -2 ] + '_', 'SCHED_3_' + tokens[ -2 ] + '_' ]
         
     # Filter the sqlresults with the last word if possible    
     for x in sqlresults:
@@ -533,6 +569,29 @@ def ruler():
 ########## ###############################################################################################################
 # main() # 
 ########## ###############################################################################################################
+
+# GLOBAL variables
+
+# SPadmin settings
+spadmin_settings = { 
+           'cache_age'      : 20,
+           'cache_disable'  : False,
+           'rulefile'       : 'spadmin.rules',
+           'historyfile'    : '',
+           'dsmadmc_path'   : 'dsmadmc',
+           'dsmadmc_id'     : 'support',
+           'DSM_DIR'        : '',
+           'DSM_OPT'        : '',
+           'DSM_LOG'        : '',
+           'logfile'        : 'spadmin.log',
+           'debuglog'       : False,
+           'autoexec'	      : '',
+           'cache_prefetch' : True
+}
+
+# cache store
+cache           = {}
+cache_timestamp = {}
 
 # Clear screen
 if platform.system() == 'Windows':
