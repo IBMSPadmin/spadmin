@@ -393,7 +393,7 @@ class DSM2:
     def get_tsm2( self ):
         if self.tsm is None or not self.tsm.isalive:
             self.tsm = pexpect.spawn( '%s' % self.STARTCOMMAND, encoding = 'utf-8', echo = False )
-            self.tsm.setwinsize( 65534, 65534 )
+            self.tsm.setwinsize( 65534, 120 )
             self.tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
         return self.tsm
     
