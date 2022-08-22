@@ -642,12 +642,12 @@ print( colored( "= Once you start to use it, you can't live without it!!!", 'mag
 print()
 
 # Logger settings
-logfilename = 'spadmin.log'
+logfilename                   = 'spadmin.log'
 logging.basicConfig( filename = logfilename,
                      filemode = 'a',
                      format   = '%(asctime)s %(levelname)s %(message)s',
                      datefmt  = '%Y%m%d %H%M%S',
-                     level    = logging.INFO )
+                     level    = logging.DEBUG )
  
 print( consolefilledline( '', '-', '', columns ) )
 
