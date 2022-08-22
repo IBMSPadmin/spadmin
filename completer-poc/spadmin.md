@@ -5,7 +5,7 @@
 - pexpect tudjon két dsmamdc-t indítani
 - pexpect tudjon másik szerverhez csatlakozni
 - pexpect timout lekezelése, mert még mindig előjön
-- wsl doksi
+- WSL doksi és dsmadmc-s teszt
 - python 3.6.8 ✅, python 3.10.6 ✅
 - python 2.7.5 kompatibilitást ❌ meg kellene csinálni! Nekem eddig sikerült:
 

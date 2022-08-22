@@ -6,6 +6,7 @@
 
 # v1.0.0
 #
+#       Changed: all print( ..., end='' ) to sys.stdout.write() for better compatibility with python2
 #         Added: simple cache mechanism to spsqlengine
 #         Added: new rules up to 4th levels
 #         Added: DSM and DSM2 pexpect classes for testing         
@@ -327,12 +328,12 @@ class IBMSPrlCompleter:
               ppp = search ( '^\w+=(\w+)', match )[1]
           else:
               ppp = match          
-          print( ppp + ' ', end='' )
+          sys.stdout.write( ppp + ' ' )
           if word == 8:
             word = 1
             print()
           word += 1
-      print( '\n' + rlprompt + '' + readline.get_line_buffer(), end='' )
+      sys.stdout.write( '\n' + rlprompt + '' + readline.get_line_buffer() )
       # sys.stdout.flush()
 
 class DSM:
@@ -563,30 +564,30 @@ def spsqlengine( select, tokens = [] ):
 def ruler():
     cc = 1
     for i in range( 1, columns + 1, 1 ):
-      if i % 100:
-        print( ' ', end='' ) 
-      else:
-        print( colored( cc, 'green' ), end='' )
-        cc += 1
-        cc = 0 if cc == 100 else cc
+        if i % 100:
+            sys.stdout.write( ' ' ) 
+        else:
+            sys.stdout.write( colored( str( cc ), 'green' ) )
+            cc += 1
+            cc = 0 if cc == 100 else cc
     print()
     
     cc = 1
     for i in range( 1, columns + 1, 1 ):
-      if i % 10:
-        print( ' ', end='' ) 
-      else:
-        print( colored( cc, 'green' ), end='' )
-        cc += 1
-        cc = 0 if cc == 10 else cc
+        if i % 10:
+            sys.stdout.write( ' ' ) 
+        else:
+            sys.stdout.write( colored( str( cc ), 'green' ) )
+            cc += 1
+            cc = 0 if cc == 10 else cc
     print()
     
     for i in range( 1, columns + 1, 1 ):
-      c = i % 10
-      if c:
-        print( c, end='' ) 
-      else:
-        print( colored( c, 'green' ), end='' )  
+        c = i % 10
+        if c:
+            sys.stdout.write( str( c ) ) 
+        else:
+            sys.stdout.write( colored( str( c ), 'green' ) )  
  
 ########## ###############################################################################################################
 # main() # 
