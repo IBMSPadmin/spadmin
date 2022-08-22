@@ -67,7 +67,7 @@ import pexpect
 class IBMSPrlCompleter:
 
     def __init__( self, rulefilename ):
-        print( ' Loading rules...')
+        print( ' Loading rules...                                          ')
         self.loadrules( rulefilename )
 
     def loadrules( self, rulefilename ):
@@ -655,6 +655,7 @@ print( consolefilledline( '', '-', '', columns ) )
 rulesfilename  = "spadmin.rules"
 histoyfilename = ".spadmin_history"
 rlprompt       = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
+sys.stdout.write( " Let's try to get the prompt...\r" )
 rlprompt       = '[' + colored( DSM.send_command_array( DSM, 'select SERVER_NAME from STATUS' )[ 0 ], 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' '
 
 # Command line history
