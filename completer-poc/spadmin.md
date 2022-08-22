@@ -1,5 +1,21 @@
 # toDos
 
+## Fontos!
+
+- pexpect tudjon két dsmamdc-t indítani
+- pexpect tudjon másik szerverhez csatlakozni
+- pexpect timout lekezelése, mert még mindig előjön
+- wsl doksi
+- python 3.6.8 ✅, python 3.10.6 ✅
+- python 2.7.5 kompatibilitást ❌ meg kellene csinálni! Nekem eddig sikerült:
+
+```
+Traceback (most recent call last):
+  File "./spadmin", line 647, in <module>
+	rlprompt       = '[' + colored( DSM.send_command_array( DSM, 'select SERVER_NAME from STATUS' )[ 0 ], 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' '
+TypeError: unbound method send_command_array() must be called with DSM instance as first argument (got classobj instance instead)
+```
+
 ## directory struct
 
 ./
@@ -17,26 +33,26 @@
 - esetleg CygWin
 
 ## getopt, GNU getopt, parameters
-- Kell valami paraméterkezelés: --debug 1 --commands q sess; q log; quit --version --help --prereqcheck 
+- Kell valami paraméterkezelés: --debug 1 --commands 'q sess; q log; quit' --version --help --prereqcheck --consoleonly
  
 ## Level 1 
-- no recursion! Test Ezt m;g ;rdemes lenne megnézni
-- case problem lower: QUIt       Query
+- no recursion! Teszt Ezt még érdemes lenne megnézni!!!
+- case problem lower: QUIt       Query és Q STG!!!
 
 ## TESTs
-- on Linux
+- on Linux RH ✅
 - on MS Windows 10, 11
 	- cygwin
-	- WSL
-	- Microsoft Windows 7 + python 3.8 nem megy, mert nincs readline és a színezés sem ment
-	- latest Microsoft Windows 10 + python 3.10.6 ugyan az: nics readline és szín
-	- prompt_toolkit megy Microsoft Windows-on
+	- WSL ✅
+	- Microsoft Windows 7 + python 3.8 nem megy, mert nincs readline és a színezés sem ment ❌
+	- latest Microsoft Windows 10 + python 3.10.6 ugyanaz: nincs readline és szín ❌
+	- prompt_toolkit megy Microsoft Windows-on ❓
 	
 ## Plugin handler
 - 
 
 ## ADD: popen?, pexpect?
-- 
+- egyelőre pexpect
 
 ## Table printer
 - text (colored, left, right, center, cut, ?)
@@ -90,6 +106,9 @@ Ha sortöréskor volt elkezdett szín, akkor azzal kell az újat is elkezdeni.
 - 
 
 # Start console 
+
+Azaz lehessen ablakban valami mást nyitni.
+
 - log
 - actlog
 	

@@ -327,7 +327,7 @@ class IBMSPrlCompleter:
               ppp = search ( '^\w+=(\w+)', match )[1]
           else:
               ppp = match          
-          print( ppp + ' ', end='',  )
+          print( ppp + ' ', end='' )
           if word == 8:
             word = 1
             print()
