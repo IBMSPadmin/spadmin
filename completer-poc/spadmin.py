@@ -4,6 +4,25 @@
 # Original idea and the base source came from: https://sites.google.com/site/xiangyangsite/home/technical-tips/software-development/python/python-readline-completions
 # 
 
+# v1.0.0
+#
+#         Added: simple cache mechanism to spsqlengine
+#         Added: new rules up to 4th levels
+#         Added: DSM and DSM2 pexpect classes for testing         
+#         Added: ruler sub
+#         Added: spadmin_settings
+#         Added: simple logo
+#         Added: simple match_display_hook sub
+#       Changed: regexpgenerator to be able to handle multiple members
+#         Added: regexpgenerator functionality
+#              .
+#              .
+#              .
+#
+#         Added:
+#       Changed: 
+#         Fixed: 
+
 # Let's do some mess!!!
 
 import sys
@@ -368,6 +387,9 @@ class DSM2:
     PROMPT2       = 'tsm: .*'
     tsm           = None
     
+    #except pexpect.TIMEOUT:
+    #
+    
     def get_tsm2( self ):
         if self.tsm is None or not self.tsm.isalive:
             self.tsm = pexpect.spawn( '%s' % self.STARTCOMMAND, encoding = 'utf-8', echo = False )
@@ -616,9 +638,9 @@ print( colored( '= Welcome! Enter any ', 'grey', attrs=[ 'bold' ] ) + colored( '
 print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
 print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )
 print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
-print( colored( "= Once you start using it, you can't live without it!!!", 'magenta', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
+print( colored( "= Once you start to use it, you can't live without it!!!", 'magenta', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
 print()
- 
+
 # Logger settings
 logfilename = 'spadmin.log'
 logging.basicConfig( filename = logfilename,
