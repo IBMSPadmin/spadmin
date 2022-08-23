@@ -350,29 +350,39 @@ class DSM:
     tsm           = None
     
     def get_tsm( self ):
+        
         if self.tsm is None or not self.tsm.isalive:
             self.tsm = pexpect.spawn( '%s' % self.STARTCOMMAND, encoding = 'utf-8', echo = False )
             self.tsm.setwinsize( 65534, 65534 )
             self.tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
+        
         return self.tsm
 
     def send_command( self, command ):
+        
         tsm = DSM.get_tsm( DSM )
+        
         logging.info( ' DSMADMC pid: [' + str( tsm.pid ) + ']' )
+        
         try:
             tsm.sendline( command )
         except:
             print( 'An error occurred during a dsmadmc execution. Please try again...' )
             quit( 1 )
+        
         tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
+        
         return tsm.before
     
     def send_command_array( self, command ):
+        
         list = DSM.send_command( DSM, command ).splitlines()[ 1: ]
+        
         if len( list ) > 0:
             list.pop( 0 )  # delete the first line which is the command itself
         while ( '' in list ):  ## every output contains empty lines, we remove it
             list.remove( '' )
+        
         return list
 
 class DSM2:
@@ -392,22 +402,32 @@ class DSM2:
     #
     
     def get_tsm2( self ):
+        
         if self.tsm is None or not self.tsm.isalive:
             self.tsm = pexpect.spawn( '%s' % self.STARTCOMMAND, encoding = 'utf-8', echo = False )
             self.tsm.setwinsize( 65534, 120 )
             self.tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
+        
         return self.tsm
     
     def send_command2( self, command ):
+        
         tsm = DSM2.get_tsm2( DSM2 )
+        
         logging.info( ' DSMADMC pid2: [' + str( tsm.pid ) + ']' )
+        
         try:
             tsm.sendline( command )
         except:
             print( 'An error occurred during a dsmadmc execution. Please try again...' )
             quit( 1 )
-        tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
         
+        try:
+          tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
+        except:
+            print( 'An error occurred during a dsmadmc execution. Please try again...' )
+
+              
         # Session established with server CLOUDTSM1: Linux/x86_64
         # Server Version 8, Release 1, Level 7.000
         # Server date/time: 08/20/2022 19:12:44  Last access: 08/20/2022 16:48:38
