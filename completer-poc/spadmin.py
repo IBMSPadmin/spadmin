@@ -107,9 +107,9 @@ class IBMSPrlCompleter:
         print()
         
         consoleline( '#' )
-        print( colored( ' Imported LEVEL 0 starters', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored( rulefilename, 'green' ) + ']' )
+        print( colored( ' Imported LEVEL 0 starters', 'green', attrs=[ 'bold' ] ) + ' from this file:\t[' + colored( rulefilename, 'green' ) + ']' )
         #pprint( self.start )
-        print( colored( ' Imported LEVEL >1 other rules', 'green', attrs=[ 'bold' ] ) + ' from this file: [' + colored(  rulefilename, 'green' ) + ']' )
+        print( colored( ' Imported LEVEL >1 other rules', 'green', attrs=[ 'bold' ] ) + ' from this file:\t[' + colored(  rulefilename, 'green' ) + ']' )
         #pprint( self.rules )
         logging.info( 'Rule file imported as starters:\n'    + pformat( self.start ) )
         logging.info( 'Rule file imported as other rules:\n' + pformat( self.rules ) )

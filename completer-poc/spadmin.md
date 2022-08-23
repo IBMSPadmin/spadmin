@@ -5,6 +5,81 @@
 - pexpect tudjon két dsmamdc-t indítani
 - pexpect tudjon másik szerverhez csatlakozni
 - pexpect timout lekezelése, mert még mindig előjön
+
+```
+[CLOUDTSM1] > q STG
+Traceback (most recent call last):
+  File "/Users/flex/GitHub/spadmin/completer-poc/./spadmin.py", line 734, in <module>
+	for textline in DSM2.send_command2( DSM2, line ):
+  File "/Users/flex/GitHub/spadmin/completer-poc/./spadmin.py", line 409, in send_command2
+	tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
+  File "/usr/local/lib/python3.10/site-packages/pexpect/spawnbase.py", line 343, in expect
+	return self.expect_list(compiled_pattern_list,
+  File "/usr/local/lib/python3.10/site-packages/pexpect/spawnbase.py", line 372, in expect_list
+	return exp.expect_loop(timeout)
+  File "/usr/local/lib/python3.10/site-packages/pexpect/expect.py", line 181, in expect_loop
+	return self.timeout(e)
+  File "/usr/local/lib/python3.10/site-packages/pexpect/expect.py", line 144, in timeout
+	raise exc
+pexpect.exceptions.TIMEOUT: Timeout exceeded.
+<pexpect.pty_spawn.spawn object at 0x1083b39d0>
+command: /usr/local/bin/dsmadmc
+args: [b'/usr/local/bin/dsmadmc', b'-id=support', b'-pa=asdpoi123']
+buffer (last 100 chars): 'q STG\r\n\r'
+before (last 100 chars): 'q STG\r\n\r'
+after: <class 'pexpect.exceptions.TIMEOUT'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: False
+pid: 94120
+child_fd: 7
+closed: False
+timeout: 30
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: None
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+searcher: searcher_re:
+	0: re.compile('Protect: .*')
+	1: re.compile('tsm: .*')
+	2: re.compile("more...   \\(\\<ENTER\\> to continue, 'C' to cancel\\)")
+	3: re.compile("The character '#' stands for any decimal integer.")
+	4: re.compile('Do you wish to proceed\\? \\(Yes \\(Y\\)/No \\(N\\)\\)')
+	5: EOF
+
+21:14:39 Mon Aug 22 [flex@MBP16:[~/gith/spadmin/completer-poc] [1]
+```
+
+- pexpect eldobja a fonalat a: help q node, help q lic, ... parancsokra
+
+```
+Traceback (most recent call last):
+  File "/Users/flex/GitHub/spadmin/completer-poc/./spadmin.py", line 734, in <module>
+	for textline in DSM2.send_command2( DSM2, line ):
+  File "/Users/flex/GitHub/spadmin/completer-poc/./spadmin.py", line 409, in send_command2
+	tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
+  File "/usr/local/lib/python3.10/site-packages/pexpect/spawnbase.py", line 343, in expect
+	return self.expect_list(compiled_pattern_list,
+  File "/usr/local/lib/python3.10/site-packages/pexpect/spawnbase.py", line 372, in expect_list
+	return exp.expect_loop(timeout)
+  File "/usr/local/lib/python3.10/site-packages/pexpect/expect.py", line 169, in expect_loop
+	incoming = spawn.read_nonblocking(spawn.maxread, timeout)
+  File "/usr/local/lib/python3.10/site-packages/pexpect/pty_spawn.py", line 467, in read_nonblocking
+	incoming += super(spawn, self).read_nonblocking(size - len(incoming))
+  File "/usr/local/lib/python3.10/site-packages/pexpect/spawnbase.py", line 181, in read_nonblocking
+	s = self._decoder.decode(s, final=False)
+  File "/usr/local/Cellar/python@3.10/3.10.6_1/Frameworks/Python.framework/Versions/3.10/lib/python3.10/codecs.py", line 322, in decode
+	(result, consumed) = self._buffer_decode(data, self.errors, final)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xae in position 65: invalid start byte
+```
+
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
 - python 3.6.8 RH Linux ✅, python 3.10.6 macOS ✅
 - python 2.7.5 kompatibilitást ❌ meg kellene csinálni! Nekem eddig sikerült:

@@ -80,6 +80,8 @@ Query -> ACtlog
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(DOmainname|domainnam|domainna|domainn|domain|domai|doma|dom|do)=
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SESsnum|sessnu|sessn|sess|ses)=
 
+Query -> LICense
+
 Query                 -> Node
 Query Node            -> select node_name from nodes
 Query Node            -> DOmain=
