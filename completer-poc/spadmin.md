@@ -109,7 +109,7 @@ TypeError: unbound method send_command_array() must be called with DSM instance 
 # Dev
 
 - rugalmasabb prompt kezelés
-- settings + servername, verzió, csere lehetőség
+- settings + servername %SERVERNAME%, verzió %SPVERSION%, csere lehetőség
 - ?
 
 ## Directory struct?

@@ -320,21 +320,32 @@ class IBMSPrlCompleter:
           consoleline( coloreed( 'E', 'red' ) )
           
       return None
-          
+
+    ######################      
+    # match_display_hook #
+    ######################  
     def match_display_hook( self, substitution, matches, longest_match_length ):
+      
       word = 1
+      
       print()
       for match in matches:
+        
+          # cleanup for PARAMETER= values
           if search ( '^\w+=(\w+)', match ):
-              ppp = search ( '^\w+=(\w+)', match )[1]
+              ppp = search ( '^\w+=(\w+)', match )[ 1 ]
           else:
-              ppp = match          
-          sys.stdout.write( ppp + ' ' )
-          if word == 8:
+              ppp = match
+              
+          sys.stdout.write( ppp + '   ' )
+          
+          # line separation
+          if word == spadmin_settings[ 'rlwordseparation' ]:
             word = 1
             print()
           word += 1
-      sys.stdout.write( '\n' + rlprompt + '' + readline.get_line_buffer() )
+          
+      sys.stdout.write( '\n' + prompt() + '' + readline.get_line_buffer() )
       # sys.stdout.flush()
 
 class DSM:
@@ -581,7 +592,19 @@ def spsqlengine( select, tokens = [] ):
             ret.append( x + ' ' )
         
     return ret
+
+def prompt():
+    prompt = spadmin_settings[ 'prompt' ]
+
+    # versions    
+    prompt = prompt.replace( '%SPVERSION%',  spversion )
+    prompt = prompt.replace( '%SPRELEASE%',  sprelease )
+    prompt = prompt.replace( '%SPLEVEL%',    splevel )
+    prompt = prompt.replace( '%SPSUBLEVEL%', spsublevel )
     
+    # prompt
+    return prompt.replace( '%SPSERVERNAME%', spprompt )
+     
 def ruler():
     cc = 1
     for i in range( 1, columns + 1, 1 ):
@@ -631,12 +654,23 @@ spadmin_settings = {
            'logfile'          : 'spadmin.log',   # SPadmin main logfile
            'debug'            : False,           # enable debug info to the main logfile
            'autoexec'	        : '',              # auto command execution when spadmin starts
-           'dynamic_readline' : True             # dynamic SQL queries when TAB + TAB 
+           'dynamic_readline' : True,            # dynamic SQL queries when TAB + TAB
+           'prompt'           : '[' + colored( '%SPSERVERNAME%', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' ',
+           'rlwordseparation' : 8
 }
 
 # cache store
 cache           = {} # global cache data store 
 cache_timestamp = {} # global cache timestamp store
+
+# SP prompt
+spprompt = ''
+
+# SP version
+spversion  = '1'
+sprelease  = '0'
+splevel    = '0'
+spsublevel = '0'
 
 # Clear screen
 if platform.system() == 'Windows':
@@ -675,9 +709,11 @@ print( consolefilledline( '', '-', '', columns ) )
 
 rulesfilename  = "spadmin.rules"
 histoyfilename = ".spadmin_history"
-rlprompt       = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
-sys.stdout.write( " Let's try to get the prompt...\r" )
-rlprompt       = '[' + colored( DSM.send_command_array( DSM, 'select SERVER_NAME from STATUS' )[ 0 ], 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' '
+#rlprompt       = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
+sys.stdout.write( " Let's try to get the name of the server ...\r" )
+spprompt       = DSM.send_command_array( DSM, 'select SERVER_NAME from STATUS' )[ 0 ]
+sys.stdout.write( " Let's try to get the version of the SP server...                 \r" )
+spversion, sprelease, splevel, spsublevel = DSM.send_command_array( DSM, 'select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS' )[ 0 ].split( ',' )
 
 # Command line history
 # Based on this: https://docs.python.org/3/library/readline.html
@@ -722,7 +758,7 @@ logging.info( consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
 # Infinite loop
 while True:
     try:
-      line = input( rlprompt )
+      line = input( prompt() )
     
       # Skip the empty command
       if not line.rstrip():
