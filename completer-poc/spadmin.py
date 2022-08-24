@@ -42,9 +42,10 @@ readline.parse_and_bind( 'tab: complete' )
 readline.set_completer_delims( ' ' )
 
 import os
-rows, columns = os.popen( 'stty size', 'r' ).read().split()
-rows    = int( rows )
-columns = int( columns )
+# it moved to refreshrowscolumns()
+#rows, columns = os.popen( 'stty size', 'r' ).read().split()
+#rows    = int( rows )
+#columns = int( columns )
 
 import platform
 
@@ -469,7 +470,7 @@ def consolefilledline( left = '', pattern = '-', right = '', width = 80 ):
     patternwith = width - len( left ) - len( right ) - 2
     return left + ' ' + pattern * patternwith + ' ' + right
         
-def progressbar( count, total = columns ):
+def progressbar( count, total ):
     barlength = columns - 2   # [...]
     filledlength = int( round( ( barlength ) * count / float( total ) ) )
 
@@ -631,8 +632,13 @@ def ruler():
         if c:
             sys.stdout.write( str( c ) ) 
         else:
-            sys.stdout.write( colored( str( c ), 'green' ) )  
- 
+            sys.stdout.write( colored( str( c ), 'green' ) )
+
+def refreshrowscolumns():
+    rows, columns = os.popen( 'stty size', 'r' ).read().split()
+    rows    = int( rows )
+    columns = int( columns )
+    
 ########## ###############################################################################################################
 # main() # 
 ########## ###############################################################################################################
@@ -659,6 +665,10 @@ spadmin_settings = {
            'rlwordseparation' : 8
 }
 
+# screen properies
+columns = 80
+rows    = 25
+
 # cache store
 cache           = {} # global cache data store 
 cache_timestamp = {} # global cache timestamp store
@@ -667,16 +677,18 @@ cache_timestamp = {} # global cache timestamp store
 spprompt = ''
 
 # SP version
-spversion  = '1'
-sprelease  = '0'
-splevel    = '0'
-spsublevel = '0'
+spversion  = ''
+sprelease  = ''
+splevel    = ''
+spsublevel = ''
 
 # Clear screen
 if platform.system() == 'Windows':
     os.system( 'cls' )
 else:
     os.system( 'clear' )
+    
+refreshrowscolumns()
 
 # https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
 print( colored( '''
@@ -685,12 +697,12 @@ print( colored( '''
  ███████╗ ██████╔╝ ███████║ ██║  ██║ ██╔████╔██║ ██║ ██╔██╗ ██║     ██████╔╝  ╚████╔╝ 
  ╚════██║ ██╔═══╝  ██╔══██║ ██║  ██║ ██║╚██╔╝██║ ██║ ██║╚██╗██║     ██╔═══╝    ╚██╔╝  
  ███████║ ██║      ██║  ██║ ██████╔╝ ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██╗ ██║         ██║   
- ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝
- Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager''', 'white', attrs=[ 'bold' ] ) )
+ ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝''' ))
+print( colored(' Powerful CLI administration tool for ', 'white', attrs=[ 'bold' ] ) + colored( ' IBM ', 'white', 'on_blue', attrs=[ 'bold' ] ) + colored(' Spectrum Protect aka Tivoli Storage Manager', 'white', attrs=[ 'bold' ] ) )
 
 print()
 print( colored( '= Python3 [' + sys.version + '] spadmin + readline DEMO POC', 'grey', attrs=[ 'bold' ] ) )
-print( colored( '= Welcome! Enter any ', 'grey', attrs=[ 'bold' ] ) + colored( ' IBM ', 'white', 'on_blue', attrs=[ 'bold', 'underline' ] ) + colored( " Spectrum Protect commands and if you're lost type help!", 'grey', attrs=[ 'bold' ] ) )
+print( colored( "= Welcome! Enter any IBM Spectrum Protect commands and if you're lost type help!", 'grey', attrs=[ 'bold' ] ) )
 print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
 print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )
 print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
@@ -757,9 +769,12 @@ logging.info( consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
 
 # Infinite loop
 while True:
+    
+    refreshrowscolumns()
+    
     try:
       line = input( prompt() )
-    
+      
       # Skip the empty command
       if not line.rstrip():
         continue
