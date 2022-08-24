@@ -804,12 +804,16 @@ while True:
         # Quit the program
         break
         
-    # simple command runner    
+    # simple command runner engine
     for command in line.split( ';' ):
         
         # q actlog | grep alma | grep alma | count ;
-        # disassembly it
-        
+        # disassembly it first
+        # $->grep
+        # $->invgrep
+        # $->count
+        # $->mailto
+        # $->SPadmin
         
         for textline in DSM2.send_command2( DSM2, command ):    
             if textline != '':
