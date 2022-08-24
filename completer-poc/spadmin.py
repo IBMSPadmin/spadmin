@@ -635,6 +635,7 @@ def ruler():
             sys.stdout.write( colored( str( c ), 'green' ) )
 
 def refreshrowscolumns():
+    global rows, columns
     rows, columns = os.popen( 'stty size', 'r' ).read().split()
     rows    = int( rows )
     columns = int( columns )
@@ -722,9 +723,9 @@ print( consolefilledline( '', '-', '', columns ) )
 rulesfilename  = "spadmin.rules"
 histoyfilename = ".spadmin_history"
 #rlprompt       = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
-sys.stdout.write( " Let's try to get the name of the server ...\r" )
+sys.stdout.write( " Let's try to get the name of the server...\r" )
 spprompt       = DSM.send_command_array( DSM, 'select SERVER_NAME from STATUS' )[ 0 ]
-sys.stdout.write( " Let's try to get the version of the SP server...                 \r" )
+sys.stdout.write( " and get the version of the IBM SP server...\r" )
 spversion, sprelease, splevel, spsublevel = DSM.send_command_array( DSM, 'select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS' )[ 0 ].split( ',' )
 
 # Command line history
@@ -789,23 +790,30 @@ while True:
     #print ( ' You said: [' + line.strip() + ']' )
     
     # Own commands
-    if search( '^' + regexpgenerator( 'REload' ), line, IGNORECASE ):
+    if search( '^' + regexpgenerator( 'REload' ),     line, IGNORECASE ):
         myIBMSPrlCompleter.loadrules( rulesfilename )
         continue
     elif search( '^' + regexpgenerator( 'Show Log' ), line, IGNORECASE ):
         os.system( 'open ./' + logfilename )
         continue
-    elif search( '^' + regexpgenerator( 'QUIt' ), line, IGNORECASE ) or \
-         search( '^' + regexpgenerator( 'LOGout' ), line, IGNORECASE ) or \
-         search( '^' + regexpgenerator( 'Exit' ), line, IGNORECASE ) or \
-         search( '^' + regexpgenerator( 'BYe' ), line, IGNORECASE ):
+    elif search( '^' + regexpgenerator( 'QUIt' ),     line, IGNORECASE ) or \
+         search( '^' + regexpgenerator( 'LOGout' ),   line, IGNORECASE ) or \
+         search( '^' + regexpgenerator( 'Exit' ),     line, IGNORECASE ) or \
+         search( '^' + regexpgenerator( 'BYe' ),      line, IGNORECASE ):
         
         # Quit the program
         break
         
-    for textline in DSM2.send_command2( DSM2, line ):    
-        if textline != '':
-            print( textline )
+    # simple command runner    
+    for command in line.split( ';' ):
+        
+        # q actlog | grep alma | grep alma | count ;
+        # disassembly it
+        
+        
+        for textline in DSM2.send_command2( DSM2, command ):    
+            if textline != '':
+                print( textline )
     
     #consoleline( '-' )
 

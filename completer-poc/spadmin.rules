@@ -26,10 +26,23 @@ $->grep
 $->invgrep
 $->count
 $->mailto
+$->SPadmin
 
 ################################
 # and the rest LEVEL 2, 3, ... #
 ################################
+
+SPadmin -> UPDate
+SPadmin -> VERsion
+
+SPadmin      -> SHow
+SPadmin SHow -> CONFig
+SPadmin SHow -> ENVinronment
+SPadmin SHow -> PROCessinfo
+
+SPadmin     -> SET
+SPadmin SET -> DEBUG
+
 # ACCept Date
 ACCept -> Date
 

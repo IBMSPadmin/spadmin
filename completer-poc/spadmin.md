@@ -130,6 +130,11 @@ TypeError: unbound method send_command_array() must be called with DSM instance 
 
 ## getopt, GNU getopt, parameters
 - Kell valami paraméterkezelés: --debug 1 --commands 'q sess; q log; quit' --version --help --prereqcheck --consoleonly
+
+## getopt, GNU getopt, parameters
+- Kell valami configfájl kezelés is
+ 
+## kell valami setup wizard is 
  
 ## Level 1 
 - no recursion! Teszt Ezt még érdemes lenne megnézni!!!
