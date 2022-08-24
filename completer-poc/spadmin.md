@@ -90,7 +90,7 @@ TypeError: unbound method send_command_array() must be called with DSM instance 
 ```
 
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
-- python 3.6.8 RH Linux ✅, python 3.10.6 macOS ✅
+- python 3.6.8 RH Linux ✅ python 3.10.6 macOS ✅
 - python 2.7.5 kompatibilitást ❌ meg kellene csinálni! Nekem eddig sikerült:
 
 - rules fájlban listakezelés
@@ -106,10 +106,17 @@ Traceback (most recent call last):
 TypeError: unbound method send_command_array() must be called with DSM instance as first argument (got classobj instance instead)
 ```
 
+-- DSM ezt le kell majd kezelni:
+
+```
+ANR0944E QUERY PROCESS: No active processes found.
+ANS8001I Return code 11.
+```
+
 # Dev
 
-- rugalmasabb prompt kezelés
-- settings + servername %SERVERNAME%, verzió %SPVERSION%, csere lehetőség
+- rugalmasabb prompt kezelés ✅
+- settings + servername %SERVERNAME%, verzió %SPVERSION%, csere lehetőség ✅
 - ?
 
 ## Directory struct?
@@ -134,7 +141,7 @@ TypeError: unbound method send_command_array() must be called with DSM instance 
 ## getopt, GNU getopt, parameters
 - Kell valami configfájl kezelés is
  
-## kell valami setup wizard is 
+## kell valami setup wizard is az elejére 
  
 ## Level 1 
 - no recursion! Teszt Ezt még érdemes lenne megnézni!!!

@@ -13,20 +13,20 @@ $->REMove
 $->SHow
 
 # Own commands:
-$->Exit
+$ -> Exit
 # !!!QUIt, Query collision problem!!!
-$->QUIt
-$->BYe
-$->Logout
-$->REload
-$->RULer
-$->debug
+$ -> QUIt
+$ -> BYe
+$ -> Logout
+$ -> REload
+$ -> RULer
+$ -> debug
 
-$->grep
-$->invgrep
-$->count
-$->mailto
-$->SPadmin
+$ -> grep
+$ -> invgrep
+$ -> count
+$ -> mailto
+$ -> SPadmin
 
 ################################
 # and the rest LEVEL 2, 3, ... #
