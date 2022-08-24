@@ -20,6 +20,12 @@ $->BYe
 $->Logout
 $->REload
 $->RULer
+$->debug
+
+$->grep
+$->invgrep
+$->count
+$->mailto
 
 ################################
 # and the rest LEVEL 2, 3, ... #

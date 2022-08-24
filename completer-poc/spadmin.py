@@ -6,6 +6,7 @@
 
 # v1.0.0
 #
+#         Added: simple debug, grep, invgrep, count, mailto handling (a later check maybe needed or not, BUT a collector certainly!!! Don't know hot to hadnle it)
 #       Changed: all print( ..., end='' ) to sys.stdout.write() for better compatibility with python2
 #         Added: simple cache mechanism to spsqlengine
 #         Added: new rules up to 4th levels
@@ -297,7 +298,7 @@ class IBMSPrlCompleter:
           # Read CLI and split commands
           # first ;
           # tokens = readline.get_line_buffer().split()
-          tokens = readline.get_line_buffer().split( ';' )[ -1 ].split()
+          tokens = readline.get_line_buffer().split( ';' )[ -1 ].split( '|' )[-1].split()
           if not tokens or readline.get_line_buffer()[ -1 ] == ' ':
               tokens.append( '' )
           

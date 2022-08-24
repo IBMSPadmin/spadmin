@@ -80,6 +80,15 @@ Traceback (most recent call last):
 UnicodeDecodeError: 'utf-8' codec can't decode byte 0xae in position 65: invalid start byte
 ```
 
+- pexpect nem az osztállyal van valami baja 2-es python-on (v2.7.5)
+
+```
+Traceback (most recent call last):
+  File "./spadmin", line 647, in <module>
+	rlprompt       = '[' + colored( DSM.send_command_array( DSM, 'select SERVER_NAME from STATUS' )[ 0 ], 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' '
+TypeError: unbound method send_command_array() must be called with DSM instance as first argument (got classobj instance instead)
+```
+
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
 - python 3.6.8 RH Linux ✅, python 3.10.6 macOS ✅
 - python 2.7.5 kompatibilitást ❌ meg kellene csinálni! Nekem eddig sikerült:
@@ -96,6 +105,12 @@ Traceback (most recent call last):
 	rlprompt       = '[' + colored( DSM.send_command_array( DSM, 'select SERVER_NAME from STATUS' )[ 0 ], 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' '
 TypeError: unbound method send_command_array() must be called with DSM instance as first argument (got classobj instance instead)
 ```
+
+# Dev
+
+- rugalmasabb prompt kezelés
+- settings + servername, verzió, csere lehetőség
+- ?
 
 ## Directory struct?
 
