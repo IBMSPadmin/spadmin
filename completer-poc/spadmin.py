@@ -289,7 +289,7 @@ class IBMSPrlCompleter:
     ##################      
     # IBMSPcompleter #
     ##################
-    def IBMSPcompleter( self, text, state ):
+    def IBMSPcompleter_( self, text, state ):
  
       logging.info( '' )
       logging.info( consolefilledline( 'COMPLETER Text: ', '-', '[' + text + '] and state[' + str( state ) + '].', 120 ) )
@@ -311,7 +311,7 @@ class IBMSPrlCompleter:
               logging.info( 'COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------' )
               logging.info( '' )
           else:
-              logging.info( consolefilledline( 'COMPLETER results push cycle: ', '-', '[' + str( state ) + '] [' + self.results[ state ] + '].', 120 ) )
+              logging.info( consolefilledline( 'COMPLETER results push cycle: [' + results[ state ] + ']', '-', '[' + str( state ) + '] [' + self.results[ state ] + '].', 120 ) )
           
           return self.results[ state ] 
           
@@ -321,6 +321,54 @@ class IBMSPrlCompleter:
           consoleline( coloreed( 'E', 'red' ) )
           
       return None
+      
+    rrr = []
+    def IBMSPcompleter( self, text, state ):
+    
+        logging.info( '' )
+        logging.info( consolefilledline( 'COMPLETER Text: ', '-', '[' + text + '] and state[' + str( state ) + '].', 120 ) )
+        
+        if len( self.rrr ) == 0:
+        
+            try:
+                logging.info( 'Readline buffer: [' + readline.get_line_buffer() + '].' )
+                
+                # Read CLI and split commands
+                # first ;
+                # tokens = readline.get_line_buffer().split()
+                tokens = readline.get_line_buffer().split( ';' )[ -1 ].split( '|' )[-1].split()
+                if not tokens or readline.get_line_buffer()[ -1 ] == ' ':
+                    tokens.append( '' )
+                
+                # Call the Engine
+                self.rrr = self.tokenEngine( tokens ) + [ None ]
+                                        
+                logging.info( 'RETURNED results from the engine: ' + pformat( self.rrr, width=180 ) )
+                
+                tmp = self.rrr.pop( 0 ) 
+                logging.info( ': ' + pformat( self.rrr, width=180 ) )
+                
+                if tmp == None:
+                    logging.info( 'COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------' )
+                    logging.info( '' )
+                else:
+                  logging.info( consolefilledline( 'COMPLETER results push cycle: [' + tmp + ']', '-', '[' + str( state ) + '] [' + '].', 120 ) )
+                
+                return tmp
+                
+            except Exception as e:
+                consoleline( coloreed( 'E', 'red' ) )
+                print( coloreed( '\nOS error: {0}'.format(e), 'red' ) )
+                consoleline( coloreed( 'E', 'red' ) )
+                
+        else: 
+          
+          tmp = self.rrr.pop( 0 )
+          if tmp == None:
+              self.rrr = []
+          return tmp           
+            
+        return None
 
     ######################      
     # match_display_hook #
