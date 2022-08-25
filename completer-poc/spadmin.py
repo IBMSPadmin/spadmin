@@ -322,6 +322,7 @@ class IBMSPrlCompleter:
           
       return None
       
+    # v2 optimization
     rrr = []
     def IBMSPcompleter( self, text, state ):
     
