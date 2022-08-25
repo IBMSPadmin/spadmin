@@ -531,7 +531,7 @@ def spsqlengine( select, tokens = [] ):
     logging.info( ' SP SQL Engine reached with these tokens: [' + pformat( tokens ) + '].' )
 
     ret = []
-
+    
     # select preparation 
     if search( '\'(-\d)\'', select ):
         # extra index
@@ -552,21 +552,25 @@ def spsqlengine( select, tokens = [] ):
     # cache engine
 #    if select in cache.keys() and time() - cache_timestamp[ select ] > spadmin_settings[ 'cache_age' ]:
     if select in cache.keys():
-        # refresh needed
+        cache_hitratio[ 'hit' ] += 1
         if time() - cache_timestamp[ select ] > spadmin_settings[ 'cache_age' ]:
+            # refresh needed
             logging.info( " SP SQL Engine hit the cache but the stored one is too old." )
             logging.info( ' CACHE TIMEDIFF in second(s): [' + str( time() - cache_timestamp[ select ] ) + '].' )
             cache[ select ]           = DSM.send_command_array( DSM, select )
             cache_timestamp[ select ] = time()
+            cache_hitratio[ 'hitupdate' ] += 1
     else:
         # new, init 
         logging.info( " SP SQL Engine still no cached data store a new one." )
         cache[ select ]           = DSM.send_command_array( DSM, select )
         cache_timestamp[ select ] = time()
+        cache_hitratio[ 'new' ] += 1
 
     # logging.info( ' CACHE2: [' + pformat( cache ) + '].' )
 
     sqlresults = cache[ select ]
+    cache_hitratio[ 'request' ] += 1 
 
     # if select == "select node_name from nodes":
     #     sqlresults = [ 'WINnode', 'SQLnode', 'AIXnode', 'LINUXnode', 'HPUXnode' ]
@@ -673,6 +677,7 @@ rows    = 25
 # cache store
 cache           = {} # global cache data store 
 cache_timestamp = {} # global cache timestamp store
+cache_hitratio  = { 'new' : 0, 'request' : 0, 'hit' : 0, 'hitupdate' : 0 }
 
 # SP prompt
 spprompt = ''
@@ -796,6 +801,9 @@ while True:
     elif search( '^' + regexpgenerator( 'Show Log' ), line, IGNORECASE ):
         os.system( 'open ./' + logfilename )
         continue
+    elif search( '^' + regexpgenerator( 'CAChe' ), line, IGNORECASE ):
+        pprint( cache_hitratio )
+        continue
     elif search( '^' + regexpgenerator( 'QUIt' ),     line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'LOGout' ),   line, IGNORECASE ) or \
          search( '^' + regexpgenerator( 'Exit' ),     line, IGNORECASE ) or \
@@ -814,6 +822,8 @@ while True:
         # $->count
         # $->mailto
         # $->SPadmin
+        
+        # ha van \([\w\d|]+\), akkor védeni kell
         
         for textline in DSM2.send_command2( DSM2, command ):    
             if textline != '':
