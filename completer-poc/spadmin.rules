@@ -76,7 +76,7 @@ BAckup VOLHistory  -> Filenames=
 DEFine                     -> ASSOCiation
 DEFine ASSOCiation         -> select domain_name from domains
 DEFine ASSOCiation \w+     -> select schedule_name from client_schedules where domain_name like upper( '-2' )
-DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like where domain_name like upper( '-3' )
+DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like upper( '-3' )
 
 ###################
 # DELete commands #
