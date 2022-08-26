@@ -27,7 +27,7 @@
 #         Fixed: 
 
 # Let's do some mess!!!
-
+import re
 import sys
 
 from time import time, sleep
@@ -63,6 +63,9 @@ import logging
 import atexit
 
 import pexpect
+
+from click import style
+import columnar
 
 #####################################
 # IBMSPrlCompleter Class definition #
@@ -403,8 +406,8 @@ class DSM:
     
     START_DSMADMC = 'dsmadmc'
     id            = 'support'
-    pa            = 'asdpoi123'
-    STARTCOMMAND  = START_DSMADMC + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -comma'
+    pa            = 'userkft1q2'
+    STARTCOMMAND  = START_DSMADMC + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
     MORE1         = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
     MORE2         = 'The character \'#\' stands for any decimal integer.'  # meg itt
     MORE3         = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt
@@ -417,7 +420,7 @@ class DSM:
         if self.tsm is None or not self.tsm.isalive:
             self.tsm = pexpect.spawn( '%s' % self.STARTCOMMAND, encoding = 'utf-8', echo = False )
             self.tsm.setwinsize( 65534, 65534 )
-            self.tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
+            self.tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF, pexpect.TIMEOUT ] )
         
         return self.tsm
 
@@ -433,26 +436,46 @@ class DSM:
             print( 'An error occurred during a dsmadmc execution. Please try again...' )
             quit( 1 )
         
-        tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
+        tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF, pexpect.TIMEOUT ] )
         
         return tsm.before
-    
-    def send_command_array( self, command ):
-        
-        list = DSM.send_command( DSM, command ).splitlines()[ 1: ]
-        
-        if len( list ) > 0:
-            list.pop( 0 )  # delete the first line which is the command itself
-        while ( '' in list ):  ## every output contains empty lines, we remove it
-            list.remove( '' )
-        
+
+    def send_command_array(self, command):
+        """
+        1. It executes a dsmadmc command
+        2. splits the output line-by-line
+        3. remove empty lines
+        4. returns an array, where every line is a field
+        """
+        list = DSM.send_command(DSM, command).splitlines()
+        if len(list) > 0:
+            list.pop(0)  # delete the first line which is the command itself
+        while ("" in list):  ## every output contains empty lines, we remove it
+            list.remove("")
         return list
+
+    def send_command_array_array(self, command):
+        """
+        1. It executes a dsmadmc command
+        2. splits the output line-by-line
+        3. remove empty lines
+        4. returns an array-in-an-array, outter array is separated line-by-line, inner array is tab separated
+        """
+        list = DSM.send_command(DSM, command).splitlines()
+        ar = []
+        if len(list) > 0:
+            list.pop(0)  # delete the first line which is the command itself
+        while ("" in list):  ## every output contains empty lines, we remove it
+            list.remove("")
+        for i in list:
+            ar.append(re.split(r'\t', i))
+        return ar
 
 class DSM2:
           
     START_DSMADMC = 'dsmadmc'
     id            = 'support'
-    pa            = 'asdpoi123'
+    pa            = 'userkft1q2'
     STARTCOMMAND  = START_DSMADMC + ' -id=' + id + ' -pa=' + pa
     MORE1         = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
     MORE2         = 'The character \'#\' stands for any decimal integer.'  # meg itt
@@ -469,7 +492,7 @@ class DSM2:
         if self.tsm is None or not self.tsm.isalive:
             self.tsm = pexpect.spawn( '%s' % self.STARTCOMMAND, encoding = 'utf-8', echo = False )
             self.tsm.setwinsize( 65534, 120 )
-            self.tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
+            self.tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF, pexpect.TIMEOUT ] )
         
         return self.tsm
     
@@ -486,7 +509,7 @@ class DSM2:
             quit( 1 )
         
         try:
-          tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF ] )
+          tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF, pexpect.TIMEOUT ] )
         except:
             print( 'An error occurred during a dsmadmc execution. Please try again...' )
 
@@ -781,7 +804,7 @@ histoyfilename = ".spadmin_history"
 sys.stdout.write( " Let's try to get the name of the server...\r" )
 spprompt       = DSM.send_command_array( DSM, 'select SERVER_NAME from STATUS' )[ 0 ]
 sys.stdout.write( " and get the version of the IBM SP server...\r" )
-spversion, sprelease, splevel, spsublevel = DSM.send_command_array( DSM, 'select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS' )[ 0 ].split( ',' )
+spversion, sprelease, splevel, spsublevel = DSM.send_command_array_array( DSM, 'select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS' )[ 0 ]
 
 # Command line history
 # Based on this: https://docs.python.org/3/library/readline.html

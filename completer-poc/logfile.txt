@@ -1,0 +1,702 @@
+root INFO Level 0: []
+root INFO 	 [backup ]
+root INFO 		 [backup ]
+root INFO 			 length: [backup ]: 6
+root INFO 	 [backup db ]
+root INFO 		 [backup db ]
+root INFO 			 [backup db ]
+root INFO 				 [backup db ]
+root INFO 	 [backup db type= ]
+root INFO 		 [backup db type= ]
+root INFO 			 [backup db type= ]
+root INFO 				 [backup db type= ]
+root INFO 					 [backup db type= ]
+root INFO 	 [backup db type=incremental ]
+root INFO 		 [backup db type=incremental ]
+root INFO 			 [backup db type=incremental ]
+root INFO 				 [backup db type=incremental ]
+root INFO 					 [backup db type=incremental ]
+root INFO 	 [backup d]
+root INFO 		 [backup d]
+root INFO 			 length: [backup d]: 1
+root INFO 	 [backup db]
+root INFO 		 [backup db]
+root INFO 			 [backup db]
+root INFO 	 [backup db ]
+root INFO 		 [backup db ]
+root INFO 			 [backup db ]
+root INFO 				 [backup db ]
+root INFO 	 [backup db type= ]
+root INFO 		 [backup db type= ]
+root INFO 			 [backup db type= ]
+root INFO 				 [backup db type= ]
+root INFO 					 [backup db type= ]
+root INFO 	 [backup db type=dbsnapshot ]
+root INFO 		 [backup db type=dbsnapshot ]
+root INFO 			 [backup db type=dbsnapshot ]
+root INFO 				 [backup db type=dbsnapshot ]
+root INFO 					 [backup db type=dbsnapshot ]
+root INFO 	 [backup db type=dbsnapshotincremental ]
+root INFO 		 [backup db type=dbsnapshotincremental ]
+root INFO 			 [backup db type=dbsnapshotincremental ]
+root INFO 				 [backup db type=dbsnapshotincremental ]
+root INFO 					 [backup db type=dbsnapshotincremental ]
+root INFO Level 0: []
+root INFO 	 [b]
+root INFO 	 [backup ]
+root INFO 		 [backup ]
+root INFO 			 length: [backup ]: 6
+root INFO 	 [bac]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [back]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [bac]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [bac]
+root INFO 	 [backup]
+root INFO 	 [b]
+root INFO 	 [ba]
+root INFO 	 [backupc]
+root INFO 	 [bac]
+root INFO 	 [bac]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [bac]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [backup]
+root INFO 	 [b]
+root INFO 	 [ba]
+root INFO 	 [backup ]
+root INFO 		 [backup ]
+root INFO 			 length: [backup ]: 6
+root INFO 	 [backup db ]
+root INFO 		 [backup db ]
+root INFO 			 [backup db ]
+root INFO 				 [backup db ]
+root INFO 	 [b]
+root INFO 	 [ba]
+root INFO 	 [b]
+root INFO 	 [ba]
+root INFO 	 [backup d]
+root INFO 		 [backup d]
+root INFO 			 length: [backup d]: 1
+root INFO 	 [backup db ]
+root INFO 		 [backup db ]
+root INFO 			 [backup db ]
+root INFO 				 [backup db ]
+root INFO 	 [backup db type= ]
+root INFO 		 [backup db type= ]
+root INFO 			 [backup db type= ]
+root INFO 				 [backup db type= ]
+root INFO 					 [backup db type= ]
+root INFO 	 [backup db type=full ]
+root INFO 		 [backup db type=full ]
+root INFO 			 [backup db type=full ]
+root INFO 				 [backup db type=full ]
+root INFO 					 [backup db type=full ]
+root INFO 	 [b]
+root INFO 	 [ba]
+root INFO 	 [backup  ]
+root INFO 		 [backup  ]
+root INFO 			 length: [backup  ]: 6
+root INFO 	 [backup  db ]
+root INFO 		 [backup  db ]
+root INFO 			 [backup  db ]
+root INFO 				 [backup  db ]
+root INFO 	 [backup  db type= ]
+root INFO 		 [backup  db type= ]
+root INFO 			 [backup  db type= ]
+root INFO 				 [backup  db type= ]
+root INFO 					 [backup  db type= ]
+root INFO 	 [backup  db type=  ]
+root INFO 		 [backup  db type=  ]
+root INFO 			 [backup  db type=  ]
+root INFO 				 [backup  db type=  ]
+root INFO 					 [backup  db type=  ]
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 0: []
+root INFO Level 1: 1
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 2
+root INFO Level 1: 1 - 2
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 8
+root INFO Level 1: 1 - 1
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 1 - 2
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 0: []
+root INFO Level 1: 1 - 0
+root INFO Level 1: 1 - 2
+root INFO Level 1: 2 - 7
+root INFO Level 1: 1 - 2
+root INFO Level 1: 2 - 7
+root INFO Level 1: 1 - 2
+root INFO Level 1: 2 - 8
+root INFO Level 1: 1 - 2
+root INFO Level 1: 2 - 7
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 2 - 7
+root INFO Level 1: 1 - 1
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 8
+root INFO Level 1: 1 - 1
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 1 - 1
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 9
+root INFO Level 1: 2 - 9
+root INFO Level 1: 2 - 9
+root INFO Level 1: 2 - 9
+root INFO Level 1: 2 - 9
+root INFO Level 1: 2 - 9
+root INFO Level 1: 2 - 9
+root INFO Level 1: 2 - 9
+root INFO Level 1: 2 - 9
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 3 - 10
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 8
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 1 - 6
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 1: 1 - 6
+root INFO Level 1: 2 - 7
+root INFO Level 1: 2 - 7
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 2
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 2
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 2
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 3
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: 
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: b
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: backup d
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: b
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: backup d
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 3, Token: ba 
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: d
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [d]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup de]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [d]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 12, Token: [backup dbdb ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup de]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 11, Token: [backup db  ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 13, Token: [backup devc  ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup de]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup de]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup de]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup de]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 11, Token: [backup db  ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup v]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 18, Token: [backup volhistory ]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup v]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db e]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [q]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [qu]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 3, Token: [que]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [q]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 3, Token: [quu]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 3, Token: [quu]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [qu]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 3, Token: [qui]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [q]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 7, Token: [query  ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 6, Token: [query ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query q]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 6, Token: [query ]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [q]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 3, Token: [que]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 6, Token: [query ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query n]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query s]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [q]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 3, Token: [que]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 6, Token: [query ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query n]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query s]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query s]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [q]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 3, Token: [que]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 6, Token: [query ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query n]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query s]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query s]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [query st]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [query stg]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query q]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query q]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [query s]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 14, Token: [query stgpool ]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 3, Token: [qui]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 5, Token: [quit ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 5, Token: [quit ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 5, Token: [quit ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 5, Token: [quit ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 5, Token: [quit ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 5, Token: [quit ]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup de]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 17, Token: [backup db type= v]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 16, Token: [backup db type= ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 16, Token: [backup db type= ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 14, Token: [backup db type]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 14, Token: [backup db type]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 14, Token: [backup db type]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 16, Token: [backup db type= ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 14, Token: [backup db type]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 5 Length of prompt: 21, Token: [backup db type=full  ]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 16, Token: [backup db type= ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 14, Token: [backup db type]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=dbs d]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 11, Token: [backup db  ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 11, Token: [backup db  ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 15, Token: [backup db type ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 15, Token: [backup db type ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 13, Token: [backup db typ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 12, Token: [backup db ty]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=f]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 19, Token: [backup db type=full]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 21, Token: [backup db type=full d]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=f]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 19, Token: [backup db type=full]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 21, Token: [backup db type=full b]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 22, Token: [backup db type=full de]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 29, Token: [backup db type=full devclass=]
+root INFO Level 1: Nr. of tokens: 6 Length of prompt: 36, Token: [backup db type=full devclass=AC_01  ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=f]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 19, Token: [backup db type=full]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 21, Token: [backup db type=full d]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 29, Token: [backup db type=full devclass=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 19, Token: [backup db type=full]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=f]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 17, Token: [backup db type=fu]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 19, Token: [backup db type=full]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 28, Token: [backup db type=full devclass]
+root INFO Level 1: Nr. of tokens: 5 Length of prompt: 30, Token: [backup db type=full devclass= ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 29, Token: [backup db type=full devclass=]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 19, Token: [backup db devclass=]
+root INFO Level 1: Nr. of tokens: 5 Length of prompt: 26, Token: [backup db devclass=BC_01  ]
+root INFO Level 1: Nr. of tokens: 5 Length of prompt: 27, Token: [backup db devclass=BC_01  t]
+root INFO Level 1: Nr. of tokens: 5 Length of prompt: 31, Token: [backup db devclass=BC_01  type=]
+root INFO Level 1: Nr. of tokens: 5 Length of prompt: 32, Token: [backup db devclass=BC_01  type=f]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 10, Token: [backup dbb]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 11, Token: [backup db  ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 16, Token: [backup db  type=]
+root INFO Level 1: Nr. of tokens: 6 Length of prompt: 21, Token: [backup db  type=dbs  ]
+root INFO Level 1: Nr. of tokens: 6 Length of prompt: 28, Token: [backup db  type=dbs  devclas]
+root INFO Level 1: Nr. of tokens: 7 Length of prompt: 31, Token: [backup db  type=dbs  devclass= ]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 15, Token: [backup db type ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 5 Length of prompt: 21, Token: [backup db type=full  ]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 5 Length of prompt: 25, Token: [backup db type=full type ]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db z]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 19, Token: [backup db type=dbs ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 28, Token: [backup db type=dbs devclass=]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 22, Token: [backup db type=dbs dev]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 28, Token: [backup db type=dbs devclass=]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 7, Token: [backup ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 12, Token: [backup devc ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 12, Token: [backup devc ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 11, Token: [backup devc]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 12, Token: [backup devc ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 12, Token: [backup devc ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=f]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 17, Token: [backup db type=fu]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=f]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 9, Token: [backup db]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 2, Token: [ba]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 11, Token: [backup db t]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=f]
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 1, Token: [b]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=f]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 18, Token: [backup db type=ful]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=f]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 13, Token: [backup db typ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 16, Token: [backup db type=f]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 20, Token: [backup db type=full ]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 25, Token: [backup db type=full type=]
+root INFO Level 1: Nr. of tokens: 4 Length of prompt: 26, Token: [backup db type=full type=f]
+root INFO Level 0: []
+root INFO Level 1: Nr. of tokens: 1 Length of prompt: 0, Token: []
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 8, Token: [backup  ]
+root INFO Level 1: Nr. of tokens: 2 Length of prompt: 8, Token: [backup d]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 10, Token: [backup db ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 13, Token: [backup db typ]
+root INFO Level 1: Nr. of tokens: 3 Length of prompt: 15, Token: [backup db type=]

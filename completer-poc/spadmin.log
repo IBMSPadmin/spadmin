@@ -1,0 +1,2506 @@
+20220819 102500 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer']
+20220819 102500 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'DB': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  'domain_name like where domain_name like '
+                                  "upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PRocess': [],
+ 'Query': ['PRocess',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'ACtlog'],
+ 'Query LOG ?!\\w+': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ['select domain_name from domains {Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ['select domain_name from domains {Prefix: '
+                             'DOmain=}'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'REMove': ['Node'],
+ 'REMove Node ?!\\w+': ['SYNCldapdelete'],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'LOG'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'SYNCldapdelete': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ 'select domain_name from domains': [],
+ 'select domain_name from domains {Prefix: DOmain=}': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like where domain_name like upper( '-3' )": [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'teszt': ['parancs']}
+20220819 102500 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [0] [ACCept ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------ [1] [ACTivate ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [2] [ASsign ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [3] [BAckup ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [4] [DEFine ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [5] [DELete ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  --------------------------------------------------------------------------- [6] [Help! ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  --------------------------------------------------------------------------- [7] [Query ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [8] [REMove ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  ---------------------------------------------------------------------------- [9] [SHow ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  --------------------------------------------------------------------------- [10] [Exit ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  --------------------------------------------------------------------------- [11] [QUIt ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  ---------------------------------------------------------------------------- [12] [BYe ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------- [13] [Logout ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------- [14] [REload ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [15] [RULer ].
+20220819 102500 INFO 
+20220819 102500 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220819 102500 INFO Readline buffer: [].
+20220819 102500 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102500 INFO  Stepped into LEVEL 1.
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102500 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102500 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102500 INFO  PROCESS RETURNED.
+20220819 102500 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102500 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102500 INFO 
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [0] [ACCept ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------ [1] [ACTivate ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [2] [ASsign ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [3] [BAckup ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [4] [DEFine ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [5] [DELete ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  --------------------------------------------------------------------------- [6] [Help! ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  --------------------------------------------------------------------------- [7] [Query ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [8] [REMove ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  ---------------------------------------------------------------------------- [9] [SHow ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  --------------------------------------------------------------------------- [10] [Exit ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  --------------------------------------------------------------------------- [11] [QUIt ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  ---------------------------------------------------------------------------- [12] [BYe ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------- [13] [Logout ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------- [14] [REload ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [15] [RULer ].
+20220819 102501 INFO 
+20220819 102501 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220819 102501 INFO Readline buffer: [].
+20220819 102501 INFO  PROCESS TOKENS, received tokens: ['']
+20220819 102501 INFO  Stepped into LEVEL 1.
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220819 102501 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220819 102501 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ']]
+20220819 102501 INFO  PROCESS RETURNED.
+20220819 102501 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', 'BAckup ', 'DEFine ', 'DELete ', 'Help! ', 'Query ', 'REMove ', 'SHow ', 'Exit ', 'QUIt ', 'BYe ', 'Logout ', 'REload ', 'RULer ', None]
+20220819 102501 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102501 INFO 
+20220819 102503 INFO 
+20220819 102503 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [a] and state[0].
+20220819 102503 INFO Readline buffer: [a].
+20220819 102503 INFO  PROCESS TOKENS, received tokens: ['a']
+20220819 102503 INFO  Stepped into LEVEL 1.
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102503 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ']]
+20220819 102503 INFO  PROCESS RETURNED.
+20220819 102503 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', None]
+20220819 102503 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [0] [ACCept ].
+20220819 102503 INFO 
+20220819 102503 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [a] and state[1].
+20220819 102503 INFO Readline buffer: [a].
+20220819 102503 INFO  PROCESS TOKENS, received tokens: ['a']
+20220819 102503 INFO  Stepped into LEVEL 1.
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102503 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ']]
+20220819 102503 INFO  PROCESS RETURNED.
+20220819 102503 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', None]
+20220819 102503 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------ [1] [ACTivate ].
+20220819 102503 INFO 
+20220819 102503 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [a] and state[2].
+20220819 102503 INFO Readline buffer: [a].
+20220819 102503 INFO  PROCESS TOKENS, received tokens: ['a']
+20220819 102503 INFO  Stepped into LEVEL 1.
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102503 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ']]
+20220819 102503 INFO  PROCESS RETURNED.
+20220819 102503 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', None]
+20220819 102503 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [2] [ASsign ].
+20220819 102503 INFO 
+20220819 102503 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [a] and state[3].
+20220819 102503 INFO Readline buffer: [a].
+20220819 102503 INFO  PROCESS TOKENS, received tokens: ['a']
+20220819 102503 INFO  Stepped into LEVEL 1.
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102503 INFO  found this part [a] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102503 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ']]
+20220819 102503 INFO  PROCESS RETURNED.
+20220819 102503 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', None]
+20220819 102503 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102503 INFO 
+20220819 102503 INFO 
+20220819 102503 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [A] and state[0].
+20220819 102503 INFO Readline buffer: [A].
+20220819 102503 INFO  PROCESS TOKENS, received tokens: ['A']
+20220819 102503 INFO  Stepped into LEVEL 1.
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102503 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ']]
+20220819 102503 INFO  PROCESS RETURNED.
+20220819 102503 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', None]
+20220819 102503 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [0] [ACCept ].
+20220819 102503 INFO 
+20220819 102503 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [A] and state[1].
+20220819 102503 INFO Readline buffer: [A].
+20220819 102503 INFO  PROCESS TOKENS, received tokens: ['A']
+20220819 102503 INFO  Stepped into LEVEL 1.
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102503 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ']]
+20220819 102503 INFO  PROCESS RETURNED.
+20220819 102503 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', None]
+20220819 102503 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------ [1] [ACTivate ].
+20220819 102503 INFO 
+20220819 102503 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [A] and state[2].
+20220819 102503 INFO Readline buffer: [A].
+20220819 102503 INFO  PROCESS TOKENS, received tokens: ['A']
+20220819 102503 INFO  Stepped into LEVEL 1.
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102503 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ']]
+20220819 102503 INFO  PROCESS RETURNED.
+20220819 102503 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', None]
+20220819 102503 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [2] [ASsign ].
+20220819 102503 INFO 
+20220819 102503 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [A] and state[3].
+20220819 102503 INFO Readline buffer: [A].
+20220819 102503 INFO  PROCESS TOKENS, received tokens: ['A']
+20220819 102503 INFO  Stepped into LEVEL 1.
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102503 INFO  found this part [A] of the command in the 1st LEVEL list items: [ASsign].
+20220819 102503 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ', 'ASsign ']]
+20220819 102503 INFO  PROCESS RETURNED.
+20220819 102503 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', 'ASsign ', None]
+20220819 102503 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102503 INFO 
+20220819 102505 INFO 
+20220819 102505 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [Ac] and state[0].
+20220819 102505 INFO Readline buffer: [Ac].
+20220819 102505 INFO  PROCESS TOKENS, received tokens: ['Ac']
+20220819 102505 INFO  Stepped into LEVEL 1.
+20220819 102505 INFO  found this part [Ac] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102505 INFO  found this part [Ac] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102505 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ']]
+20220819 102505 INFO  PROCESS RETURNED.
+20220819 102505 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', None]
+20220819 102505 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [0] [ACCept ].
+20220819 102505 INFO 
+20220819 102505 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [Ac] and state[1].
+20220819 102505 INFO Readline buffer: [Ac].
+20220819 102505 INFO  PROCESS TOKENS, received tokens: ['Ac']
+20220819 102505 INFO  Stepped into LEVEL 1.
+20220819 102505 INFO  found this part [Ac] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102505 INFO  found this part [Ac] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102505 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ']]
+20220819 102505 INFO  PROCESS RETURNED.
+20220819 102505 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', None]
+20220819 102505 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------ [1] [ACTivate ].
+20220819 102505 INFO 
+20220819 102505 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [Ac] and state[2].
+20220819 102505 INFO Readline buffer: [Ac].
+20220819 102505 INFO  PROCESS TOKENS, received tokens: ['Ac']
+20220819 102505 INFO  Stepped into LEVEL 1.
+20220819 102505 INFO  found this part [Ac] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102505 INFO  found this part [Ac] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102505 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ']]
+20220819 102505 INFO  PROCESS RETURNED.
+20220819 102505 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', None]
+20220819 102505 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102505 INFO 
+20220819 102509 INFO 
+20220819 102509 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AC] and state[0].
+20220819 102509 INFO Readline buffer: [AC].
+20220819 102509 INFO  PROCESS TOKENS, received tokens: ['AC']
+20220819 102509 INFO  Stepped into LEVEL 1.
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102509 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ']]
+20220819 102509 INFO  PROCESS RETURNED.
+20220819 102509 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', None]
+20220819 102509 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [0] [ACCept ].
+20220819 102509 INFO 
+20220819 102509 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AC] and state[1].
+20220819 102509 INFO Readline buffer: [AC].
+20220819 102509 INFO  PROCESS TOKENS, received tokens: ['AC']
+20220819 102509 INFO  Stepped into LEVEL 1.
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102509 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ']]
+20220819 102509 INFO  PROCESS RETURNED.
+20220819 102509 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', None]
+20220819 102509 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------ [1] [ACTivate ].
+20220819 102509 INFO 
+20220819 102509 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AC] and state[2].
+20220819 102509 INFO Readline buffer: [AC].
+20220819 102509 INFO  PROCESS TOKENS, received tokens: ['AC']
+20220819 102509 INFO  Stepped into LEVEL 1.
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102509 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ']]
+20220819 102509 INFO  PROCESS RETURNED.
+20220819 102509 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', None]
+20220819 102509 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102509 INFO 
+20220819 102509 INFO 
+20220819 102509 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AC] and state[0].
+20220819 102509 INFO Readline buffer: [AC].
+20220819 102509 INFO  PROCESS TOKENS, received tokens: ['AC']
+20220819 102509 INFO  Stepped into LEVEL 1.
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102509 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ']]
+20220819 102509 INFO  PROCESS RETURNED.
+20220819 102509 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', None]
+20220819 102509 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [0] [ACCept ].
+20220819 102509 INFO 
+20220819 102509 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AC] and state[1].
+20220819 102509 INFO Readline buffer: [AC].
+20220819 102509 INFO  PROCESS TOKENS, received tokens: ['AC']
+20220819 102509 INFO  Stepped into LEVEL 1.
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102509 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ']]
+20220819 102509 INFO  PROCESS RETURNED.
+20220819 102509 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', None]
+20220819 102509 INFO COMPLETER results push cycle:  ------------------------------------------------------------------------ [1] [ACTivate ].
+20220819 102509 INFO 
+20220819 102509 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AC] and state[2].
+20220819 102509 INFO Readline buffer: [AC].
+20220819 102509 INFO  PROCESS TOKENS, received tokens: ['AC']
+20220819 102509 INFO  Stepped into LEVEL 1.
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102509 INFO  found this part [AC] of the command in the 1st LEVEL list items: [ACTivate].
+20220819 102509 INFO  Here's what we have in ret: [['ACCept ', 'ACTivate ']]
+20220819 102509 INFO  PROCESS RETURNED.
+20220819 102509 INFO RETURNED results from the engine: ['ACCept ', 'ACTivate ', None]
+20220819 102509 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102509 INFO 
+20220819 102510 INFO 
+20220819 102510 INFO COMPLETER Text:  ----------------------------------------------------------------------------------- [ACc] and state[0].
+20220819 102510 INFO Readline buffer: [ACc].
+20220819 102510 INFO  PROCESS TOKENS, received tokens: ['ACc']
+20220819 102510 INFO  Stepped into LEVEL 1.
+20220819 102510 INFO  found this part [ACc] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102510 INFO  Here's what we have in ret: [['ACCept ']]
+20220819 102510 INFO  PROCESS RETURNED.
+20220819 102510 INFO RETURNED results from the engine: ['ACCept ', None]
+20220819 102510 INFO COMPLETER results push cycle:  -------------------------------------------------------------------------- [0] [ACCept ].
+20220819 102510 INFO 
+20220819 102510 INFO COMPLETER Text:  ----------------------------------------------------------------------------------- [ACc] and state[1].
+20220819 102510 INFO Readline buffer: [ACc].
+20220819 102510 INFO  PROCESS TOKENS, received tokens: ['ACc']
+20220819 102510 INFO  Stepped into LEVEL 1.
+20220819 102510 INFO  found this part [ACc] of the command in the 1st LEVEL list items: [ACCept].
+20220819 102510 INFO  Here's what we have in ret: [['ACCept ']]
+20220819 102510 INFO  PROCESS RETURNED.
+20220819 102510 INFO RETURNED results from the engine: ['ACCept ', None]
+20220819 102510 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102510 INFO 
+20220819 102510 INFO 
+20220819 102510 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220819 102510 INFO Readline buffer: [ACCept ].
+20220819 102510 INFO  PROCESS TOKENS, received tokens: ['ACCept', '']
+20220819 102510 INFO  Stepped into LEVEL 2.
+20220819 102510 INFO  Found this part [ACCept] of the command in the 2nd LEVEL dictionary items: [ACCept].
+20220819 102510 INFO  Let's continue searching with this pattern [['Date']]
+20220819 102510 INFO  as (regexp) starts with [ > Date]
+20220819 102510 INFO  Found this part [ACCept] of the command in the 2nd LEVEL dictionary items: [ACtlog].
+20220819 102510 INFO  Let's continue searching with this pattern [[]]
+20220819 102510 INFO  Here's what we have in ret: [['Date ']]
+20220819 102510 INFO  PROCESS RETURNED.
+20220819 102510 INFO RETURNED results from the engine: ['Date ', None]
+20220819 102510 INFO COMPLETER results push cycle:  ---------------------------------------------------------------------------- [0] [Date ].
+20220819 102510 INFO 
+20220819 102510 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220819 102510 INFO Readline buffer: [ACCept ].
+20220819 102510 INFO  PROCESS TOKENS, received tokens: ['ACCept', '']
+20220819 102510 INFO  Stepped into LEVEL 2.
+20220819 102510 INFO  Found this part [ACCept] of the command in the 2nd LEVEL dictionary items: [ACCept].
+20220819 102510 INFO  Let's continue searching with this pattern [['Date']]
+20220819 102510 INFO  as (regexp) starts with [ > Date]
+20220819 102510 INFO  Found this part [ACCept] of the command in the 2nd LEVEL dictionary items: [ACtlog].
+20220819 102510 INFO  Let's continue searching with this pattern [[]]
+20220819 102510 INFO  Here's what we have in ret: [['Date ']]
+20220819 102510 INFO  PROCESS RETURNED.
+20220819 102510 INFO RETURNED results from the engine: ['Date ', None]
+20220819 102510 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102510 INFO 
+20220819 102510 INFO 
+20220819 102510 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220819 102510 INFO Readline buffer: [ACCept Date ].
+20220819 102510 INFO  PROCESS TOKENS, received tokens: ['ACCept', 'Date', '']
+20220819 102510 INFO  Stepped into LEVEL 3.
+20220819 102510 INFO  Here's what we have in ret: [[]]
+20220819 102510 INFO  PROCESS RETURNED.
+20220819 102510 INFO RETURNED results from the engine: [None]
+20220819 102510 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102510 INFO 
+20220819 102616 INFO 
+20220819 102616 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220819 102616 INFO Readline buffer: [ACCept Date ].
+20220819 102616 INFO  PROCESS TOKENS, received tokens: ['ACCept', 'Date', '']
+20220819 102616 INFO  Stepped into LEVEL 3.
+20220819 102616 INFO  Here's what we have in ret: [[]]
+20220819 102616 INFO  PROCESS RETURNED.
+20220819 102616 INFO RETURNED results from the engine: [None]
+20220819 102616 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102616 INFO 
+20220819 102616 INFO 
+20220819 102616 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220819 102616 INFO Readline buffer: [ACCept Date ].
+20220819 102616 INFO  PROCESS TOKENS, received tokens: ['ACCept', 'Date', '']
+20220819 102616 INFO  Stepped into LEVEL 3.
+20220819 102616 INFO  Here's what we have in ret: [[]]
+20220819 102616 INFO  PROCESS RETURNED.
+20220819 102616 INFO RETURNED results from the engine: [None]
+20220819 102616 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220819 102616 INFO 
+20220819 102622 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220826 154342 INFO  DSMADMC pid: [12917]
+20220826 154342 INFO  DSMADMC pid: [12917]
+20220826 154431 INFO  DSMADMC pid: [12986]
+20220826 154431 INFO  DSMADMC pid: [12986]
+20220826 154432 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220826 154432 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220826 154432 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220826 154435 INFO Readline buffer: [].
+20220826 154435 INFO  PROCESS TOKENS, received tokens: ['']
+20220826 154435 INFO  Stepped into LEVEL 1.
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [debug].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [grep].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [invgrep].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [count].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [mailto].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [SPadmin].
+20220826 154435 INFO  Here's what we have in ret: [['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ']]
+20220826 154435 INFO  PROCESS RETURNED.
+20220826 154435 INFO RETURNED results from the engine: ['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 154435 INFO : ['ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 154435 INFO COMPLETER results push cycle: [ACCept ] ------------------------------------------------------------------------ [0] [].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[17].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[18].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[19].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[20].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[21].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[22].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220826 154435 INFO Readline buffer: [].
+20220826 154435 INFO  PROCESS TOKENS, received tokens: ['']
+20220826 154435 INFO  Stepped into LEVEL 1.
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [debug].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [grep].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [invgrep].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [count].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [mailto].
+20220826 154435 INFO  found this part [] of the command in the 1st LEVEL list items: [SPadmin].
+20220826 154435 INFO  Here's what we have in ret: [['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ']]
+20220826 154435 INFO  PROCESS RETURNED.
+20220826 154435 INFO RETURNED results from the engine: ['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 154435 INFO : ['ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 154435 INFO COMPLETER results push cycle: [ACCept ] ------------------------------------------------------------------------ [0] [].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[17].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[18].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[19].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[20].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[21].
+20220826 154435 INFO 
+20220826 154435 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[22].
+20220826 154946 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220826 154948 INFO  DSMADMC pid: [13319]
+20220826 154948 INFO  DSMADMC pid: [13319]
+20220826 154948 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220826 154948 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220826 154948 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220826 154952 INFO  DSMADMC pid2: [13330]
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220826 154958 INFO Readline buffer: [].
+20220826 154958 INFO  PROCESS TOKENS, received tokens: ['']
+20220826 154958 INFO  Stepped into LEVEL 1.
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [debug].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [grep].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [invgrep].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [count].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [mailto].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [SPadmin].
+20220826 154958 INFO  Here's what we have in ret: [['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ']]
+20220826 154958 INFO  PROCESS RETURNED.
+20220826 154958 INFO RETURNED results from the engine: ['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 154958 INFO : ['ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 154958 INFO COMPLETER results push cycle: [ACCept ] ------------------------------------------------------------------------ [0] [].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[17].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[18].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[19].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[20].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[21].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[22].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220826 154958 INFO Readline buffer: [].
+20220826 154958 INFO  PROCESS TOKENS, received tokens: ['']
+20220826 154958 INFO  Stepped into LEVEL 1.
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [debug].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [grep].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [invgrep].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [count].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [mailto].
+20220826 154958 INFO  found this part [] of the command in the 1st LEVEL list items: [SPadmin].
+20220826 154958 INFO  Here's what we have in ret: [['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ']]
+20220826 154958 INFO  PROCESS RETURNED.
+20220826 154958 INFO RETURNED results from the engine: ['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 154958 INFO : ['ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 154958 INFO COMPLETER results push cycle: [ACCept ] ------------------------------------------------------------------------ [0] [].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[17].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[18].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[19].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[20].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[21].
+20220826 154958 INFO 
+20220826 154958 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[22].
+20220826 154959 INFO 
+20220826 154959 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[0].
+20220826 154959 INFO Readline buffer: [sh].
+20220826 154959 INFO  PROCESS TOKENS, received tokens: ['sh']
+20220826 154959 INFO  Stepped into LEVEL 1.
+20220826 154959 INFO  found this part [sh] of the command in the 1st LEVEL list items: [SHow].
+20220826 154959 INFO  Here's what we have in ret: [['SHow ']]
+20220826 154959 INFO  PROCESS RETURNED.
+20220826 154959 INFO RETURNED results from the engine: ['SHow ', None]
+20220826 154959 INFO : [None]
+20220826 154959 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220826 154959 INFO 
+20220826 154959 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[1].
+20220826 155000 INFO 
+20220826 155000 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220826 155000 INFO Readline buffer: [SHow ].
+20220826 155000 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220826 155000 INFO  Stepped into LEVEL 2.
+20220826 155000 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220826 155000 INFO  Let's continue searching with this pattern [['TIME', 'LOG']]
+20220826 155000 INFO  as (regexp) starts with [ > TIME]
+20220826 155000 INFO  as (regexp) starts with [ > LOG]
+20220826 155000 INFO  Here's what we have in ret: [['TIME ', 'LOG ']]
+20220826 155000 INFO  PROCESS RETURNED.
+20220826 155000 INFO RETURNED results from the engine: ['TIME ', 'LOG ', None]
+20220826 155000 INFO : ['LOG ', None]
+20220826 155000 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220826 155000 INFO 
+20220826 155000 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220826 155000 INFO 
+20220826 155000 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220826 155000 INFO 
+20220826 155000 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220826 155000 INFO Readline buffer: [SHow ].
+20220826 155000 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220826 155000 INFO  Stepped into LEVEL 2.
+20220826 155000 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220826 155000 INFO  Let's continue searching with this pattern [['TIME', 'LOG']]
+20220826 155000 INFO  as (regexp) starts with [ > TIME]
+20220826 155000 INFO  as (regexp) starts with [ > LOG]
+20220826 155000 INFO  Here's what we have in ret: [['TIME ', 'LOG ']]
+20220826 155000 INFO  PROCESS RETURNED.
+20220826 155000 INFO RETURNED results from the engine: ['TIME ', 'LOG ', None]
+20220826 155000 INFO : ['LOG ', None]
+20220826 155000 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220826 155000 INFO 
+20220826 155000 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220826 155000 INFO 
+20220826 155000 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220826 155002 INFO 
+20220826 155002 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [lo] and state[0].
+20220826 155002 INFO Readline buffer: [SHow lo].
+20220826 155002 INFO  PROCESS TOKENS, received tokens: ['SHow', 'lo']
+20220826 155002 INFO  Stepped into LEVEL 2.
+20220826 155002 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220826 155002 INFO  Let's continue searching with this pattern [['TIME', 'LOG']]
+20220826 155002 INFO  as (regexp) starts with [lo > LOG]
+20220826 155002 INFO  Here's what we have in ret: [['LOG ']]
+20220826 155002 INFO  PROCESS RETURNED.
+20220826 155002 INFO RETURNED results from the engine: ['LOG ', None]
+20220826 155002 INFO : [None]
+20220826 155002 INFO COMPLETER results push cycle: [LOG ] --------------------------------------------------------------------------- [0] [].
+20220826 155002 INFO 
+20220826 155002 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [lo] and state[1].
+20220826 155017 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220826 155045 INFO  DSMADMC pid: [13403]
+20220826 155045 INFO  DSMADMC pid: [13403]
+20220826 155045 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220826 155045 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220826 155045 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220826 155046 INFO Readline buffer: [].
+20220826 155046 INFO  PROCESS TOKENS, received tokens: ['']
+20220826 155046 INFO  Stepped into LEVEL 1.
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [debug].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [grep].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [invgrep].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [count].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [mailto].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [SPadmin].
+20220826 155046 INFO  Here's what we have in ret: [['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ']]
+20220826 155046 INFO  PROCESS RETURNED.
+20220826 155046 INFO RETURNED results from the engine: ['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 155046 INFO : ['ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 155046 INFO COMPLETER results push cycle: [ACCept ] ------------------------------------------------------------------------ [0] [].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[17].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[18].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[19].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[20].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[21].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[22].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220826 155046 INFO Readline buffer: [].
+20220826 155046 INFO  PROCESS TOKENS, received tokens: ['']
+20220826 155046 INFO  Stepped into LEVEL 1.
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [debug].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [grep].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [invgrep].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [count].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [mailto].
+20220826 155046 INFO  found this part [] of the command in the 1st LEVEL list items: [SPadmin].
+20220826 155046 INFO  Here's what we have in ret: [['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ']]
+20220826 155046 INFO  PROCESS RETURNED.
+20220826 155046 INFO RETURNED results from the engine: ['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 155046 INFO : ['ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220826 155046 INFO COMPLETER results push cycle: [ACCept ] ------------------------------------------------------------------------ [0] [].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[17].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[18].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[19].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[20].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[21].
+20220826 155046 INFO 
+20220826 155046 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[22].

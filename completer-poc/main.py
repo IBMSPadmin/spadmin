@@ -44,11 +44,11 @@ class DsmadmcSelectCompleter(NestedCompleter):
                         yield Completion("type", start_position=0)
                         yield Completion("devclass", start_position=0)
                     elif search('t.*=f.*', tokens[len(tokens) - 1]):  # Backup, DB
-                        yield Completion("full ", start_position=0 - len(tokens[len(tokens)-1]))
+                        yield Completion("full ", start_position=0 - len(tokens[len(tokens)-2]+1))
                     elif search('t.*=d.*', tokens[len(tokens) - 1]):  # Backup, DB
-                        yield Completion("dbs ", start_position=0 - len(tokens[len(tokens)-1]))
+                        yield Completion("dbs ", start_position=0 - len(tokens[len(tokens)-2]+1))
                     elif search('t.*=i.*', tokens[len(tokens) - 1]):  # Backup, DB
-                        yield Completion("incr ", start_position=0 - len(tokens[len(tokens)-1]))
+                        yield Completion("incr ", start_position=0 - len(tokens[len(tokens)-2]+1))
                     elif search('t.*=', tokens[len(tokens)-1]):  # Backup, DB
                         yield Completion("full", start_position=0 )
                         yield Completion("dbs", start_position=0)
