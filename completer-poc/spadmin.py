@@ -6,6 +6,7 @@
 
 # v1.0.0
 #
+#       Changed: IBMSPcompleter regression algorithm to a faster one
 #         Added: simple debug, grep, invgrep, count, mailto handling (a later check maybe needed or not, BUT a collector certainly!!! Don't know hot to hadnle it)
 #       Changed: all print( ..., end='' ) to sys.stdout.write() for better compatibility with python2
 #         Added: simple cache mechanism to spsqlengine
