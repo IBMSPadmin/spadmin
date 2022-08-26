@@ -864,6 +864,7 @@ while True:
     except KeyboardInterrupt:
         # Suppress ctrl-c
         print( '\a' ) # Bell
+        print('Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ')
         continue
     
     # Command executor
@@ -879,7 +880,11 @@ while True:
         continue
     elif search('^' + regexpgenerator('Show STGP'), line, IGNORECASE):
         data = DSM.send_command_array_array(DSM,"select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
-        table = columnar(data, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Capacity ',
+        for index, row in enumerate(data):
+            (a,b,c,d,e,f,g,h,i,j) = row
+            data[index][3] = round((float(d)/1024),1)
+
+        table = columnar(data, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
                                         'Pct. Utilized','Pct. Migr.','High Mig.','Low Mig.','Recl. ','Next'],
                          no_borders=True, preformatted_headers=True, justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
         print(table)
