@@ -67,6 +67,9 @@ import pexpect
 from click import style
 import columnar
 
+columnar = columnar.Columnar()
+
+
 #####################################
 # IBMSPrlCompleter Class definition #
 #####################################
@@ -445,7 +448,7 @@ class DSM:
         1. It executes a dsmadmc command
         2. splits the output line-by-line
         3. remove empty lines
-        4. returns an array, where every line is a field
+        4. returns a list, where every line is an item
         """
         list = DSM.send_command(DSM, command).splitlines()
         if len(list) > 0:
@@ -459,7 +462,7 @@ class DSM:
         1. It executes a dsmadmc command
         2. splits the output line-by-line
         3. remove empty lines
-        4. returns an array-in-an-array, outter array is separated line-by-line, inner array is tab separated
+        4. returns a list of list, outter list is separated line-by-line, inner list is tab separated
         """
         list = DSM.send_command(DSM, command).splitlines()
         ar = []
@@ -873,6 +876,22 @@ while True:
         continue
     elif search( '^' + regexpgenerator( 'Show Log' ), line, IGNORECASE ):
         os.system( 'open ./' + logfilename )
+        continue
+    elif search('^' + regexpgenerator('Show STGP'), line, IGNORECASE):
+        data = DSM.send_command_array_array(DSM,"select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
+        table = columnar(data, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Capacity ',
+                                        'Pct. Utilized','Pct. Migr.','High Mig.','Low Mig.','Recl. ','Next'],
+                         no_borders=True, preformatted_headers=True, justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
+        print(table)
+        continue
+    elif search('^' + regexpgenerator('Show Actlog'), line, IGNORECASE):
+        data = DSM.send_command_array_array(DSM,"q actlog")
+        patterns = [
+            ('ANR....E', lambda text: style(text, fg='red')),
+            ('ANR....W', lambda text: style(text, fg='yellow')),
+        ]
+        table = columnar(data, headers=['Date/Time', 'Message'], patterns=patterns, no_borders=True, preformatted_headers=True)
+        print(table)
         continue
     elif search( '^' + regexpgenerator( 'CAChe' ), line, IGNORECASE ):
         pprint( cache_hitratio )
