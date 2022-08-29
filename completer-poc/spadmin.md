@@ -2,6 +2,38 @@
 
 ## Fontos!
 
+- pexpect tudjon ezzel mit kezdeni:
+
+```
+IBM Spectrum Protect
+Command Line Administrative Interface - Version 8, Release 1, Level 15.0
+(c) Copyright by IBM Corporation and other(s) 1990, 2022. All Rights Reserved.
+
+ANS1051I Invalid user id or password
+Enter your password:
+
+ANS1051I Invalid user id or password
+Enter your password:
+
+ANS1051I Invalid user id or password
+ANS8023E Unable to establish session with server.
+
+ANS8002I Highest return code was 137.
+```
+
+és ezzel is:
+
+```
+ANS1217E Server name not found in System Options File
+```
+
+```
+ANS1017E Session rejected: TCP/IP connection failure.
+ANS8023E Unable to establish session with server.
+
+ANS8002I Highest return code was -50.
+```
+
 - pexpect tudjon két dsmamdc-t indítani
 - pexpect tudjon másik szerverhez csatlakozni
 - pexpect timout lekezelése, mert még mindig előjön
