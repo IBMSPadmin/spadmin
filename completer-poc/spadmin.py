@@ -27,10 +27,15 @@
 #         Fixed: 
 
 # Let's do some mess!!!
-import re
 import sys
+from DSM import DSM
+from DSM2 import DSM2
+import columnar
 
-from time import time, sleep
+columnar = columnar.Columnar()
+
+from time import time
+
 prgstart = time()
 
 import datetime
@@ -62,12 +67,8 @@ import logging
 
 import atexit
 
-import pexpect
-
 from click import style
-import columnar
 
-columnar = columnar.Columnar()
 
 
 #####################################
@@ -405,136 +406,7 @@ class IBMSPrlCompleter:
       sys.stdout.write( '\n' + prompt() + '' + readline.get_line_buffer() )
       # sys.stdout.flush()
 
-class DSM:
-    
-    START_DSMADMC = 'dsmadmc'
-    id            = 'support'
-    pa            = 'userkft1q2'
-    STARTCOMMAND  = START_DSMADMC + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
-    MORE1         = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
-    MORE2         = 'The character \'#\' stands for any decimal integer.'  # meg itt
-    MORE3         = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt
-    PROMPT1       = 'Protect: .*'
-    PROMPT2       = 'tsm: .*'
-    tsm           = None
-    
-    def get_tsm( self ):
-        
-        if self.tsm is None or not self.tsm.isalive:
-            self.tsm = pexpect.spawn( '%s' % self.STARTCOMMAND, encoding = 'utf-8', echo = False )
-            self.tsm.setwinsize( 65534, 65534 )
-            self.tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF, pexpect.TIMEOUT ] )
-        
-        return self.tsm
 
-    def send_command( self, command ):
-        
-        tsm = DSM.get_tsm( DSM )
-        
-        logging.info( ' DSMADMC pid: [' + str( tsm.pid ) + ']' )
-        
-        try:
-            tsm.sendline( command )
-        except:
-            print( 'An error occurred during a dsmadmc execution. Please try again...' )
-            quit( 1 )
-        
-        tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF, pexpect.TIMEOUT ] )
-        
-        return tsm.before
-
-    def send_command_array(self, command):
-        """
-        1. It executes a dsmadmc command
-        2. splits the output line-by-line
-        3. remove empty lines
-        4. returns a list, where every line is an item
-        """
-        list = DSM.send_command(DSM, command).splitlines()
-        if len(list) > 0:
-            list.pop(0)  # delete the first line which is the command itself
-        while ("" in list):  ## every output contains empty lines, we remove it
-            list.remove("")
-        return list
-
-    def send_command_array_array(self, command):
-        """
-        1. It executes a dsmadmc command
-        2. splits the output line-by-line
-        3. remove empty lines
-        4. returns a list of list, outter list is separated line-by-line, inner list is tab separated
-        """
-        list = DSM.send_command(DSM, command).splitlines()
-        ar = []
-        if len(list) > 0:
-            list.pop(0)  # delete the first line which is the command itself
-        while ("" in list):  ## every output contains empty lines, we remove it
-            list.remove("")
-        for i in list:
-            ar.append(re.split(r'\t', i))
-        return ar
-
-class DSM2:
-          
-    START_DSMADMC = 'dsmadmc'
-    id            = 'support'
-    pa            = 'userkft1q2'
-    STARTCOMMAND  = START_DSMADMC + ' -id=' + id + ' -pa=' + pa
-    MORE1         = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
-    MORE2         = 'The character \'#\' stands for any decimal integer.'  # meg itt
-    MORE3         = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt
-    PROMPT1       = 'Protect: .*'
-    PROMPT2       = 'tsm: .*'
-    tsm           = None
-    
-    #except pexpect.TIMEOUT:
-    #
-    
-    def get_tsm2( self ):
-        
-        if self.tsm is None or not self.tsm.isalive:
-            self.tsm = pexpect.spawn( '%s' % self.STARTCOMMAND, encoding = 'utf-8', echo = False )
-            self.tsm.setwinsize( 65534, 120 )
-            self.tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF, pexpect.TIMEOUT ] )
-        
-        return self.tsm
-    
-    def send_command2( self, command ):
-        
-        tsm = DSM2.get_tsm2( DSM2 )
-        
-        logging.info( ' DSMADMC pid2: [' + str( tsm.pid ) + ']' )
-        
-        try:
-            tsm.sendline( command )
-        except:
-            print( 'An error occurred during a dsmadmc execution. Please try again...' )
-            quit( 1 )
-        
-        try:
-          tsm.expect( [ self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF, pexpect.TIMEOUT ] )
-        except:
-            print( 'An error occurred during a dsmadmc execution. Please try again...' )
-
-              
-        # Session established with server CLOUDTSM1: Linux/x86_64
-        # Server Version 8, Release 1, Level 7.000
-        # Server date/time: 08/20/2022 19:12:44  Last access: 08/20/2022 16:48:38
-        
-        # Let's dance
-        ret = []
-        for i in tsm.before.splitlines()[ 1: ]:
-            if search( '^Session established with server \w+:', i ):
-                continue
-            elif search( '^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i ):
-                continue
-            elif search( '^\s\sServer date\/time\:', i ):
-                continue
-                
-            ret.append( i )
-            
-        return ret
-             
 #############      
 # Functions # ####################################################################
 #############
@@ -633,13 +505,13 @@ def spsqlengine( select, tokens = [] ):
             # refresh needed
             logging.info( " SP SQL Engine hit the cache but the stored one is too old." )
             logging.info( ' CACHE TIMEDIFF in second(s): [' + str( time() - cache_timestamp[ select ] ) + '].' )
-            cache[ select ]           = DSM.send_command_array( DSM, select )
+            cache[ select ]           = tsm.send_command_array( select )
             cache_timestamp[ select ] = time()
             cache_hitratio[ 'hitupdate' ] += 1
     else:
         # new, init 
         logging.info( " SP SQL Engine still no cached data store a new one." )
-        cache[ select ]           = DSM.send_command_array( DSM, select )
+        cache[ select ]           = tsm.send_command_array( select )
         cache_timestamp[ select ] = time()
         cache_hitratio[ 'new' ] += 1
 
@@ -650,15 +522,15 @@ def spsqlengine( select, tokens = [] ):
 
     # if select == "select node_name from nodes":
     #     sqlresults = [ 'WINnode', 'SQLnode', 'AIXnode', 'LINUXnode', 'HPUXnode' ]
-    #     sqlresults = DSM.send_command_array( DSM, select )
+    #     sqlresults = tsm.send_command_array( select )
     # elif select == "select node_name from nodes where domain_name like where domain_name like upper( '-3' )":
     #     sqlresults = [ 'NODE_1_' + tokens[ -3 ] + '_', 'NODE_2_' + tokens[ -3 ] + '_', 'NODE_3_' + tokens[ -3 ] + '_' ]
     # elif select == "select session_id from sessions":
     #     sqlresults = [ '28', '456', '12345' ]
-    #     sqlresults = DSM.send_command_array( DSM, select )
+    #     sqlresults = tsm.send_command_array(  select )
     # elif select == "select domain_name from domains":
     #     sqlresults = [ 'WIN', 'SQL', 'AIX', 'LINUX', 'HPUX', 'TEST_DOM' ]
-    #     sqlresults = DSM.send_command_array( DSM, select )    
+    #     sqlresults = tsm.send_command_array( select )
     # elif select == "select domain_name from domains {Prefix: DOmain=}":
     #     prefix = search( '(\w+=*)', tokens[ -1 ] )[ 1 ]
     #     sqlresults = [ prefix + 'WIN', prefix + 'SQL', prefix + 'AIX', prefix + 'LINUX', prefix + 'HPUX', prefix + 'TEST_DOM' ]
@@ -719,230 +591,239 @@ def refreshrowscolumns():
     rows, columns = os.popen( 'stty size', 'r' ).read().split()
     rows    = int( rows )
     columns = int( columns )
-    
-########## ###############################################################################################################
-# main() # 
-########## ###############################################################################################################
 
-# GLOBAL variables
+if __name__ == "__main__":
 
-# SPadmin settings
-spadmin_settings = { 
-           'cache_age'        : 60,              # cache entry age
-           'cache_disable'    : False,           # disable the dynamic SQL queries for readline
-           'cache_prefetch'   : True,            # prefetch cache data when the program starts
-           'rulefile'         : 'spadmin.rules', # rule file name
-           'historyfile'      : '',              # history file name
-           'dsmadmc_path'     : 'dsmadmc',       # the patch of dsmadmc
-           'dsmadmc_id'       : 'support',       # username for dsmadmc
-           'DSM_DIR'          : '',
-           'DSM_OPT'          : '',
-           'DSM_LOG'          : '',
-           'logfile'          : 'spadmin.log',   # SPadmin main logfile
-           'debug'            : False,           # enable debug info to the main logfile
-           'autoexec'	        : '',              # auto command execution when spadmin starts
-           'dynamic_readline' : True,            # dynamic SQL queries when TAB + TAB
-           'prompt'           : '[' + colored( '%SPSERVERNAME%', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' ',
-           'rlwordseparation' : 8
-}
+    ########## ###############################################################################################################
+    # main() #
+    ########## ###############################################################################################################
 
-# screen properies
-columns = 80
-rows    = 25
+    # GLOBAL variables
 
-# cache store
-cache           = {} # global cache data store 
-cache_timestamp = {} # global cache timestamp store
-cache_hitratio  = { 'new' : 0, 'request' : 0, 'hit' : 0, 'hitupdate' : 0 }
+    # SPadmin settings
+    spadmin_settings = {
+               'cache_age'        : 60,              # cache entry age
+               'cache_disable'    : False,           # disable the dynamic SQL queries for readline
+               'cache_prefetch'   : True,            # prefetch cache data when the program starts
+               'rulefile'         : 'spadmin.rules', # rule file name
+               'historyfile'      : '',              # history file name
+               'dsmadmc_path'     : 'dsmadmc',       # the patch of dsmadmc
+               'dsmadmc_id'       : 'support',       # username for dsmadmc
+               'dsmadmc_password' : 'userkft1q2',    # password for dsmadmc
+               'DSM_DIR'          : '',
+               'DSM_OPT'          : '',
+               'DSM_LOG'          : '',
+               'logfile'          : 'spadmin.log',   # SPadmin main logfile
+               'debug'            : False,           # enable debug info to the main logfile
+               'autoexec'	        : '',              # auto command execution when spadmin starts
+               'dynamic_readline' : True,            # dynamic SQL queries when TAB + TAB
+               'prompt'           : '[' + colored( '%SPSERVERNAME%', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' ',
+               'rlwordseparation' : 8
+    }
 
-# SP prompt
-spprompt = ''
+    # screen properies
+    columns = 80
+    rows    = 25
 
-# SP version
-spversion  = ''
-sprelease  = ''
-splevel    = ''
-spsublevel = ''
+    # cache store
+    cache           = {} # global cache data store
+    cache_timestamp = {} # global cache timestamp store
+    cache_hitratio  = { 'new' : 0, 'request' : 0, 'hit' : 0, 'hitupdate' : 0 }
 
-# Clear screen
-if platform.system() == 'Windows':
-    os.system( 'cls' )
-else:
-    os.system( 'clear' )
-    
-refreshrowscolumns()
+    # SP prompt
+    spprompt = ''
 
-# https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
-print( colored( '''
- ███████╗ ██████╗   █████╗  ██████╗  ███╗   ███╗ ██╗ ███╗   ██╗     ██████╗  ██╗   ██╗
- ██╔════╝ ██╔══██╗ ██╔══██╗ ██╔══██╗ ████╗ ████║ ██║ ████╗  ██║     ██╔══██╗ ╚██╗ ██╔╝
- ███████╗ ██████╔╝ ███████║ ██║  ██║ ██╔████╔██║ ██║ ██╔██╗ ██║     ██████╔╝  ╚████╔╝ 
- ╚════██║ ██╔═══╝  ██╔══██║ ██║  ██║ ██║╚██╔╝██║ ██║ ██║╚██╗██║     ██╔═══╝    ╚██╔╝  
- ███████║ ██║      ██║  ██║ ██████╔╝ ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██╗ ██║         ██║   
- ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝''' ))
-print( colored(' Powerful CLI administration tool for ', 'white', attrs=[ 'bold' ] ) + colored( ' IBM ', 'white', 'on_blue', attrs=[ 'bold' ] ) + colored(' Spectrum Protect aka Tivoli Storage Manager', 'white', attrs=[ 'bold' ] ) )
+    # SP version
+    spversion  = ''
+    sprelease  = ''
+    splevel    = ''
+    spsublevel = ''
 
-print()
-print( colored( '= Python3 [' + sys.version + '] spadmin + readline DEMO POC', 'grey', attrs=[ 'bold' ] ) )
-print( colored( "= Welcome! Enter any IBM Spectrum Protect commands and if you're lost type help!", 'grey', attrs=[ 'bold' ] ) )
-print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
-print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )
-print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
-print( colored( "= Once you start to use it, you can't live without it!!!", 'magenta', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
-print()
 
-# Logger settings
-logfilename                   = 'spadmin.log'
-logging.basicConfig( filename = logfilename,
-                     filemode = 'a',
-                     format   = '%(asctime)s %(levelname)s %(message)s',
-                     datefmt  = '%Y%m%d %H%M%S',
-                     level    = logging.DEBUG )
- 
-print( consolefilledline( '', '-', '', columns ) )
+    # Clear screen
+    if platform.system() == 'Windows':
+        os.system( 'cls' )
+    else:
+        os.system( 'clear' )
 
-rulesfilename  = "spadmin.rules"
-histoyfilename = ".spadmin_history"
-#rlprompt       = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
-sys.stdout.write( " Let's try to get the name of the server...\r" )
-spprompt       = DSM.send_command_array( DSM, 'select SERVER_NAME from STATUS' )[ 0 ]
-sys.stdout.write( " and get the version of the IBM SP server...\r" )
-spversion, sprelease, splevel, spsublevel = DSM.send_command_array_array( DSM, 'select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS' )[ 0 ]
-
-# Command line history
-# Based on this: https://docs.python.org/3/library/readline.html
-# rlhistfile = os.path.join( os.path.expanduser( "~" ), ".python_history" )
-rlhistfile = os.path.join( "./", histoyfilename )
-try:
-    readline.read_history_file( rlhistfile )
-    # default history len is -1 (infinite), which may grow unruly
-    readline.set_history_length( 1000 )
-except FileNotFoundError:
-    pass
-
-# Register history file as "autosaver"
-atexit.register( readline.write_history_file, rlhistfile )
-
-myIBMSPrlCompleter = IBMSPrlCompleter( rulesfilename )
-readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
-readline.set_completion_display_matches_hook( myIBMSPrlCompleter.match_display_hook )
-
-# Short text help
-print()
-print( ' ' + colored( 'Short HELP:', 'cyan', attrs=[ 'bold', 'underline' ] ) )
-print( '''
-  Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
-  use: "REload" to reload the rule file! and
-  use: "SHow LOG" to reach the local log file!''' )
-#print()
-
-#def showspadmncommand():
-#  print( '> showspadmncommand <' )
-#  return
-#spadmincommands = { 'SHow Commands' : showspadmncommand() }
-#rules[ '^' + regexpgenerator( 'SHow' ) + '\s+' + regexpgenerator( 'COMmands' )  ].append( second )
-# locals()["myfunction"]()
-#
-
-ruler()
-print()
-
-logging.info( consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
-
-# Infinite loop
-while True:
-    
     refreshrowscolumns()
-    
+
+    # https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
+    print( colored( '''
+     ███████╗ ██████╗   █████╗  ██████╗  ███╗   ███╗ ██╗ ███╗   ██╗     ██████╗  ██╗   ██╗
+     ██╔════╝ ██╔══██╗ ██╔══██╗ ██╔══██╗ ████╗ ████║ ██║ ████╗  ██║     ██╔══██╗ ╚██╗ ██╔╝
+     ███████╗ ██████╔╝ ███████║ ██║  ██║ ██╔████╔██║ ██║ ██╔██╗ ██║     ██████╔╝  ╚████╔╝ 
+     ╚════██║ ██╔═══╝  ██╔══██║ ██║  ██║ ██║╚██╔╝██║ ██║ ██║╚██╗██║     ██╔═══╝    ╚██╔╝  
+     ███████║ ██║      ██║  ██║ ██████╔╝ ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██╗ ██║         ██║   
+     ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝''' ))
+    print( colored(' Powerful CLI administration tool for ', 'white', attrs=[ 'bold' ] ) + colored( ' IBM ', 'white', 'on_blue', attrs=[ 'bold' ] ) + colored(' Spectrum Protect aka Tivoli Storage Manager', 'white', attrs=[ 'bold' ] ) )
+
+    print()
+    print( colored( '= Python3 [' + sys.version + '] spadmin + readline DEMO POC', 'grey', attrs=[ 'bold' ] ) )
+    print( colored( "= Welcome! Enter any IBM Spectrum Protect commands and if you're lost type help!", 'grey', attrs=[ 'bold' ] ) )
+    print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
+    print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )
+    print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
+    print( colored( "= Once you start to use it, you can't live without it!!!", 'magenta', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
+    print()
+
+    # Logger settings
+    logfilename                   = 'spadmin.log'
+    logging.basicConfig( filename = logfilename,
+                         filemode = 'a',
+                         format   = '%(asctime)s %(levelname)s %(message)s',
+                         datefmt  = '%Y%m%d %H%M%S',
+                         level    = logging.DEBUG )
+
+    print( consolefilledline( '', '-', '', columns ) )
+
+    rulesfilename  = "spadmin.rules"
+    histoyfilename = ".spadmin_history"
+    #rlprompt       = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
+    sys.stdout.write( " Let's try to get the name of the server...\r" )
+    tsm = DSM(spadmin_settings[ 'dsmadmc_id' ], spadmin_settings[ 'dsmadmc_password' ])
+    tsm2 = DSM2(spadmin_settings[ 'dsmadmc_id' ], spadmin_settings[ 'dsmadmc_password' ])
+    spprompt       = tsm.send_command_array('select SERVER_NAME from STATUS' )[ 0 ]
+    sys.stdout.write( " and get the version of the IBM SP server...\r" )
+    spversion, sprelease, splevel, spsublevel = tsm.send_command_array_array( 'select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS' )[ 0 ]
+
+    # Command line history
+    # Based on this: https://docs.python.org/3/library/readline.html
+    # rlhistfile = os.path.join( os.path.expanduser( "~" ), ".python_history" )
+    rlhistfile = os.path.join( "./", histoyfilename )
     try:
-      line = input( prompt() )
-      
-      # Skip the empty command
-      if not line.rstrip():
-        continue
-        
-    except KeyboardInterrupt:
-        # Suppress ctrl-c
-        print( '\a' ) # Bell
-        print('Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ')
-        continue
-    
-    # Command executor
-    #consoleline( '-' )
-    #print ( ' You said: [' + line.strip() + ']' )
-    
-    # Own commands
-    if search( '^' + regexpgenerator( 'REload' ),     line, IGNORECASE ):
-        myIBMSPrlCompleter.loadrules( rulesfilename )
-        continue
-    elif search( '^' + regexpgenerator( 'Show Log' ), line, IGNORECASE ):
-        os.system( 'open ./' + logfilename )
-        continue
-    elif search('^' + regexpgenerator('Show STGP'), line, IGNORECASE):
-        data = DSM.send_command_array_array(DSM,"select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
-        for index, row in enumerate(data):
-            (a,b,c,d,e,f,g,h,i,j) = row
-            data[index][3] = round((float(d)/1024),1)
+        readline.read_history_file( rlhistfile )
+        # default history len is -1 (infinite), which may grow unruly
+        readline.set_history_length( 1000 )
+    except FileNotFoundError:
+        pass
 
-        table = columnar(data, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
-                                        'Pct. Utilized','Pct. Migr.','High Mig.','Low Mig.','Recl. ','Next'],
-                         no_borders=True, preformatted_headers=True, justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-        print(table)
-        continue
-    elif search('^' + regexpgenerator('Show Actlog'), line, IGNORECASE):
-        data = DSM.send_command_array_array(DSM,"q actlog")
-        patterns = [
-            ('ANR....E', lambda text: style(text, fg='red')),
-            ('ANR....W', lambda text: style(text, fg='yellow')),
-        ]
-        table = columnar(data, headers=['Date/Time', 'Message'], patterns=patterns, no_borders=True, preformatted_headers=True)
-        print(table)
-        continue
-    elif search( '^' + regexpgenerator( 'CAChe' ), line, IGNORECASE ):
-        pprint( cache_hitratio )
-        continue
-    elif search( '^' + regexpgenerator( 'QUIt' ),     line, IGNORECASE ) or \
-         search( '^' + regexpgenerator( 'LOGout' ),   line, IGNORECASE ) or \
-         search( '^' + regexpgenerator( 'Exit' ),     line, IGNORECASE ) or \
-         search( '^' + regexpgenerator( 'BYe' ),      line, IGNORECASE ):
-        
-        # Quit the program
-        break
-        
-    # simple command runner engine
-    for command in line.split( ';' ):
-        
-        # q actlog | grep alma | grep alma | count ;
-        # disassembly it first
-        # $->grep
-        # $->invgrep
-        # $->count
-        # $->mailto
-        # $->SPadmin
-        
-        # ha van \([\w\d|]+\), akkor védeni kell
-        
-        for textline in DSM2.send_command2( DSM2, command ):    
-            if textline != '':
-                print( textline )
-    
-    #consoleline( '-' )
+    # Register history file as "autosaver"
+    atexit.register( readline.write_history_file, rlhistfile )
 
-logging.info( consolefilledline( 'INPUT LOOP END ', '-', '', 120 ) )
+    myIBMSPrlCompleter = IBMSPrlCompleter( rulesfilename )
+    readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
+    readline.set_completion_display_matches_hook( myIBMSPrlCompleter.match_display_hook )
 
-# End of the prg
-prgend = time()
-consoleline( '-' )
-print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
-consoleline( '-' )
+    # Short text help
+    print()
+    print( ' ' + colored( 'Short HELP:', 'cyan', attrs=[ 'bold', 'underline' ] ) )
+    print( '''
+      Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
+      use: "REload" to reload the rule file! and
+      use: "SHow LOG" to reach the local log file!''' )
+    #print()
 
-sys.exit( 0 )
+    #def showspadmncommand():
+    #  print( '> showspadmncommand <' )
+    #  return
+    #spadmincommands = { 'SHow Commands' : showspadmncommand() }
+    #rules[ '^' + regexpgenerator( 'SHow' ) + '\s+' + regexpgenerator( 'COMmands' )  ].append( second )
+    # locals()["myfunction"]()
+    #
 
-__author__     = [ "Fleischmann György", "Szabó Marcell" ]
-__copyright__  = "Copyright 2022, The SPadmin Project"
-__credits__    = [ "Fleischmann György", "Szabó Marcell"]
-__license__    = "MIT"
-__version__    = "1.0.0"
-__maintainer__ = "Fleischmann György"
-__email__      = "gyorgy@fleischmann.hu"
-__status__     = "Production"
+    ruler()
+    print()
+
+    logging.info( consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
+
+    # Infinite loop
+    while True:
+
+        refreshrowscolumns()
+
+        try:
+          line = input( prompt() )
+
+          # Skip the empty command
+          if not line.rstrip():
+            continue
+
+        except KeyboardInterrupt:
+            # Suppress ctrl-c
+            print( '\a' ) # Bell
+            print('Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ')
+            continue
+
+        # Command executor
+        #consoleline( '-' )
+        #print ( ' You said: [' + line.strip() + ']' )
+
+        # Own commands
+        if search( '^' + regexpgenerator( 'REload' ),     line, IGNORECASE ):
+            myIBMSPrlCompleter.loadrules( rulesfilename )
+            continue
+        elif search( '^' + regexpgenerator( 'Show Log' ), line, IGNORECASE ):
+            os.system( 'open ./' + logfilename )
+            continue
+        elif search('^' + regexpgenerator('Show STGP'), line, IGNORECASE):
+            data = tsm.send_command_array_array("select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
+            for index, row in enumerate(data):
+                (a, b, c, d, e, f, g, h, i, j) = row
+                if d == '':
+                    data[index][3] = 0
+                else:
+                    data[index][3] = round((float(d)/1024),1)
+
+            table = columnar(data, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
+                                            'Pct. Utilized','Pct. Migr.','High Mig.','Low Mig.','Recl. ','Next'],
+                             no_borders=True, preformatted_headers=True, justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
+            print(table)
+            continue
+        elif search('^' + regexpgenerator('Show Actlog'), line, IGNORECASE):
+            data = tsm.send_command_array_array("q actlog")
+            patterns = [
+                ('ANR....E', lambda text: style(text, fg='red')),
+                ('ANR....W', lambda text: style(text, fg='yellow')),
+            ]
+            table = columnar(data, headers=['Date/Time', 'Message'], patterns=patterns, no_borders=True, preformatted_headers=True)
+            print(table)
+            continue
+        elif search( '^' + regexpgenerator( 'CAChe' ), line, IGNORECASE ):
+            pprint( cache_hitratio )
+            continue
+        elif search( '^' + regexpgenerator( 'QUIt' ),     line, IGNORECASE ) or \
+             search( '^' + regexpgenerator( 'LOGout' ),   line, IGNORECASE ) or \
+             search( '^' + regexpgenerator( 'Exit' ),     line, IGNORECASE ) or \
+             search( '^' + regexpgenerator( 'BYe' ),      line, IGNORECASE ):
+
+            # Quit the program
+            break
+
+        # simple command runner engine
+        for command in line.split( ';' ):
+
+            # q actlog | grep alma | grep alma | count ;
+            # disassembly it first
+            # $->grep
+            # $->invgrep
+            # $->count
+            # $->mailto
+            # $->SPadmin
+
+            # ha van \([\w\d|]+\), akkor védeni kell
+
+            for textline in tsm2.send_command2(  command ):
+                if textline != '':
+                    print( textline )
+
+        #consoleline( '-' )
+
+    logging.info( consolefilledline( 'INPUT LOOP END ', '-', '', 120 ) )
+
+    # End of the prg
+    prgend = time()
+    consoleline( '-' )
+    print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
+    consoleline( '-' )
+
+    sys.exit( 0 )
+
+    __author__     = [ "Fleischmann György", "Szabó Marcell" ]
+    __copyright__  = "Copyright 2022, The SPadmin Project"
+    __credits__    = [ "Fleischmann György", "Szabó Marcell"]
+    __license__    = "MIT"
+    __version__    = "1.0.0"
+    __maintainer__ = "Fleischmann György"
+    __email__      = "gyorgy@fleischmann.hu"
+    __status__     = "Production"

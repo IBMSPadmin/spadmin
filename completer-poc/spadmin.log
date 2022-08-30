@@ -13813,3 +13813,3585 @@
 20220826 194545 INFO 
 20220826 194545 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[1].
 20220826 194546 INFO  DSMADMC pid: [6635]
+20220829 150244 INFO  DSMADMC pid: [4644]
+20220829 150244 INFO  DSMADMC pid: [4644]
+20220829 150245 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 150245 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 150245 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 150248 INFO Readline buffer: [].
+20220829 150248 INFO  PROCESS TOKENS, received tokens: ['']
+20220829 150248 INFO  Stepped into LEVEL 1.
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [debug].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [grep].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [invgrep].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [count].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [mailto].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [SPadmin].
+20220829 150248 INFO  Here's what we have in ret: [['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ']]
+20220829 150248 INFO  PROCESS RETURNED.
+20220829 150248 INFO RETURNED results from the engine: ['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220829 150248 INFO : ['ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220829 150248 INFO COMPLETER results push cycle: [ACCept ] ------------------------------------------------------------------------ [0] [].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[17].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[18].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[19].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[20].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[21].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[22].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 150248 INFO Readline buffer: [].
+20220829 150248 INFO  PROCESS TOKENS, received tokens: ['']
+20220829 150248 INFO  Stepped into LEVEL 1.
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [debug].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [grep].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [invgrep].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [count].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [mailto].
+20220829 150248 INFO  found this part [] of the command in the 1st LEVEL list items: [SPadmin].
+20220829 150248 INFO  Here's what we have in ret: [['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ']]
+20220829 150248 INFO  PROCESS RETURNED.
+20220829 150248 INFO RETURNED results from the engine: ['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220829 150248 INFO : ['ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220829 150248 INFO COMPLETER results push cycle: [ACCept ] ------------------------------------------------------------------------ [0] [].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[17].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[18].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[19].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[20].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[21].
+20220829 150248 INFO 
+20220829 150248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[22].
+20220829 150253 INFO 
+20220829 150253 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[0].
+20220829 150253 INFO Readline buffer: [sh].
+20220829 150253 INFO  PROCESS TOKENS, received tokens: ['sh']
+20220829 150253 INFO  Stepped into LEVEL 1.
+20220829 150253 INFO  found this part [sh] of the command in the 1st LEVEL list items: [SHow].
+20220829 150253 INFO  Here's what we have in ret: [['SHow ']]
+20220829 150253 INFO  PROCESS RETURNED.
+20220829 150253 INFO RETURNED results from the engine: ['SHow ', None]
+20220829 150253 INFO : [None]
+20220829 150253 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220829 150253 INFO 
+20220829 150253 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[1].
+20220829 150253 INFO 
+20220829 150253 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 150253 INFO Readline buffer: [SHow ].
+20220829 150253 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220829 150253 INFO  Stepped into LEVEL 2.
+20220829 150253 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 150253 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 150253 INFO  as (regexp) starts with [ > TIME]
+20220829 150253 INFO  as (regexp) starts with [ > Stgp]
+20220829 150253 INFO  as (regexp) starts with [ > Actlog]
+20220829 150253 INFO  as (regexp) starts with [ > LOG]
+20220829 150253 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 150253 INFO  Let's continue searching with this pattern [[]]
+20220829 150253 INFO  Here's what we have in ret: [['TIME ', 'Stgp ', 'Actlog ', 'LOG ']]
+20220829 150253 INFO  PROCESS RETURNED.
+20220829 150253 INFO RETURNED results from the engine: ['TIME ', 'Stgp ', 'Actlog ', 'LOG ', None]
+20220829 150253 INFO : ['Stgp ', 'Actlog ', 'LOG ', None]
+20220829 150253 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220829 150253 INFO 
+20220829 150253 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 150253 INFO 
+20220829 150253 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 150253 INFO 
+20220829 150253 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 150253 INFO 
+20220829 150253 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 150254 INFO 
+20220829 150254 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 150254 INFO Readline buffer: [SHow ].
+20220829 150254 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220829 150254 INFO  Stepped into LEVEL 2.
+20220829 150254 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 150254 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 150254 INFO  as (regexp) starts with [ > TIME]
+20220829 150254 INFO  as (regexp) starts with [ > Stgp]
+20220829 150254 INFO  as (regexp) starts with [ > Actlog]
+20220829 150254 INFO  as (regexp) starts with [ > LOG]
+20220829 150254 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 150254 INFO  Let's continue searching with this pattern [[]]
+20220829 150254 INFO  Here's what we have in ret: [['TIME ', 'Stgp ', 'Actlog ', 'LOG ']]
+20220829 150254 INFO  PROCESS RETURNED.
+20220829 150254 INFO RETURNED results from the engine: ['TIME ', 'Stgp ', 'Actlog ', 'LOG ', None]
+20220829 150254 INFO : ['Stgp ', 'Actlog ', 'LOG ', None]
+20220829 150254 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220829 150254 INFO 
+20220829 150254 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 150254 INFO 
+20220829 150254 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 150254 INFO 
+20220829 150254 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 150254 INFO 
+20220829 150254 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 150305 INFO 
+20220829 150305 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [ac] and state[0].
+20220829 150305 INFO Readline buffer: [SHow ac].
+20220829 150305 INFO  PROCESS TOKENS, received tokens: ['SHow', 'ac']
+20220829 150305 INFO  Stepped into LEVEL 2.
+20220829 150305 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 150305 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 150305 INFO  as (regexp) starts with [ac > Actlog]
+20220829 150305 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 150305 INFO  Let's continue searching with this pattern [[]]
+20220829 150305 INFO  Here's what we have in ret: [['Actlog ']]
+20220829 150305 INFO  PROCESS RETURNED.
+20220829 150305 INFO RETURNED results from the engine: ['Actlog ', None]
+20220829 150305 INFO : [None]
+20220829 150305 INFO COMPLETER results push cycle: [Actlog ] ------------------------------------------------------------------------ [0] [].
+20220829 150305 INFO 
+20220829 150305 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [ac] and state[1].
+20220829 150310 INFO 
+20220829 150310 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[0].
+20220829 150310 INFO Readline buffer: [sh].
+20220829 150310 INFO  PROCESS TOKENS, received tokens: ['sh']
+20220829 150310 INFO  Stepped into LEVEL 1.
+20220829 150310 INFO  found this part [sh] of the command in the 1st LEVEL list items: [SHow].
+20220829 150310 INFO  Here's what we have in ret: [['SHow ']]
+20220829 150310 INFO  PROCESS RETURNED.
+20220829 150310 INFO RETURNED results from the engine: ['SHow ', None]
+20220829 150310 INFO : [None]
+20220829 150310 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220829 150310 INFO 
+20220829 150310 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[1].
+20220829 150311 INFO 
+20220829 150311 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 150311 INFO Readline buffer: [SHow ].
+20220829 150311 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220829 150311 INFO  Stepped into LEVEL 2.
+20220829 150311 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 150311 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 150311 INFO  as (regexp) starts with [ > TIME]
+20220829 150311 INFO  as (regexp) starts with [ > Stgp]
+20220829 150311 INFO  as (regexp) starts with [ > Actlog]
+20220829 150311 INFO  as (regexp) starts with [ > LOG]
+20220829 150311 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 150311 INFO  Let's continue searching with this pattern [[]]
+20220829 150311 INFO  Here's what we have in ret: [['TIME ', 'Stgp ', 'Actlog ', 'LOG ']]
+20220829 150311 INFO  PROCESS RETURNED.
+20220829 150311 INFO RETURNED results from the engine: ['TIME ', 'Stgp ', 'Actlog ', 'LOG ', None]
+20220829 150311 INFO : ['Stgp ', 'Actlog ', 'LOG ', None]
+20220829 150311 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220829 150311 INFO 
+20220829 150311 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 150311 INFO 
+20220829 150311 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 150311 INFO 
+20220829 150311 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 150311 INFO 
+20220829 150311 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 150311 INFO 
+20220829 150311 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 150311 INFO Readline buffer: [SHow ].
+20220829 150311 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220829 150311 INFO  Stepped into LEVEL 2.
+20220829 150311 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 150311 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 150311 INFO  as (regexp) starts with [ > TIME]
+20220829 150311 INFO  as (regexp) starts with [ > Stgp]
+20220829 150311 INFO  as (regexp) starts with [ > Actlog]
+20220829 150311 INFO  as (regexp) starts with [ > LOG]
+20220829 150311 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 150311 INFO  Let's continue searching with this pattern [[]]
+20220829 150311 INFO  Here's what we have in ret: [['TIME ', 'Stgp ', 'Actlog ', 'LOG ']]
+20220829 150311 INFO  PROCESS RETURNED.
+20220829 150311 INFO RETURNED results from the engine: ['TIME ', 'Stgp ', 'Actlog ', 'LOG ', None]
+20220829 150311 INFO : ['Stgp ', 'Actlog ', 'LOG ', None]
+20220829 150311 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220829 150311 INFO 
+20220829 150311 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 150311 INFO 
+20220829 150311 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 150311 INFO 
+20220829 150311 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 150311 INFO 
+20220829 150311 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 150314 INFO 
+20220829 150314 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [st] and state[0].
+20220829 150314 INFO Readline buffer: [SHow st].
+20220829 150314 INFO  PROCESS TOKENS, received tokens: ['SHow', 'st']
+20220829 150314 INFO  Stepped into LEVEL 2.
+20220829 150314 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 150314 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 150314 INFO  as (regexp) starts with [st > Stgp]
+20220829 150314 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 150314 INFO  Let's continue searching with this pattern [[]]
+20220829 150314 INFO  Here's what we have in ret: [['Stgp ']]
+20220829 150314 INFO  PROCESS RETURNED.
+20220829 150314 INFO RETURNED results from the engine: ['Stgp ', None]
+20220829 150314 INFO : [None]
+20220829 150314 INFO COMPLETER results push cycle: [Stgp ] -------------------------------------------------------------------------- [0] [].
+20220829 150314 INFO 
+20220829 150314 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [st] and state[1].
+20220829 150315 INFO  DSMADMC pid: [4644]
+20220829 150340 INFO 
+20220829 150340 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [ac] and state[0].
+20220829 150340 INFO Readline buffer: [sh ac].
+20220829 150340 INFO  PROCESS TOKENS, received tokens: ['sh', 'ac']
+20220829 150340 INFO  Stepped into LEVEL 2.
+20220829 150340 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 150340 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 150340 INFO  as (regexp) starts with [ac > Actlog]
+20220829 150340 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 150340 INFO  Let's continue searching with this pattern [[]]
+20220829 150340 INFO  Here's what we have in ret: [['Actlog ']]
+20220829 150340 INFO  PROCESS RETURNED.
+20220829 150340 INFO RETURNED results from the engine: ['Actlog ', None]
+20220829 150340 INFO : [None]
+20220829 150340 INFO COMPLETER results push cycle: [Actlog ] ------------------------------------------------------------------------ [0] [].
+20220829 150340 INFO 
+20220829 150340 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [ac] and state[1].
+20220829 150342 INFO  DSMADMC pid: [4644]
+20220829 151020 INFO  DSMADMC pid: [4644]
+20220829 151152 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220829 151154 INFO  DSMADMC pid: [4939]
+20220829 151154 INFO  DSMADMC pid: [4939]
+20220829 151155 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 151155 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 151155 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 151512 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220829 151514 INFO  DSMADMC pid: [5083]
+20220829 151514 INFO  DSMADMC pid: [5083]
+20220829 151515 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 151515 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 151515 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 151516 INFO  DSMADMC pid: [5083]
+20220829 151634 INFO  DSMADMC pid2: [5131]
+20220829 151637 INFO  DSMADMC pid2: [5131]
+20220829 151642 INFO 
+20220829 151642 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[0].
+20220829 151642 INFO Readline buffer: [sh].
+20220829 151642 INFO  PROCESS TOKENS, received tokens: ['sh']
+20220829 151642 INFO  Stepped into LEVEL 1.
+20220829 151642 INFO  found this part [sh] of the command in the 1st LEVEL list items: [SHow].
+20220829 151642 INFO  Here's what we have in ret: [['SHow ']]
+20220829 151642 INFO  PROCESS RETURNED.
+20220829 151642 INFO RETURNED results from the engine: ['SHow ', None]
+20220829 151642 INFO : [None]
+20220829 151642 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220829 151642 INFO 
+20220829 151642 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[1].
+20220829 151643 INFO 
+20220829 151643 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [pr] and state[0].
+20220829 151643 INFO Readline buffer: [SHow pr].
+20220829 151643 INFO  PROCESS TOKENS, received tokens: ['SHow', 'pr']
+20220829 151643 INFO  Stepped into LEVEL 2.
+20220829 151643 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 151643 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 151643 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 151643 INFO  Let's continue searching with this pattern [[]]
+20220829 151643 INFO  Here's what we have in ret: [[]]
+20220829 151643 INFO  PROCESS RETURNED.
+20220829 151643 INFO RETURNED results from the engine: [None]
+20220829 151643 INFO : []
+20220829 151643 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220829 151643 INFO 
+20220829 151644 INFO 
+20220829 151644 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [pr] and state[0].
+20220829 151644 INFO Readline buffer: [SHow pr].
+20220829 151644 INFO  PROCESS TOKENS, received tokens: ['SHow', 'pr']
+20220829 151644 INFO  Stepped into LEVEL 2.
+20220829 151644 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 151644 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 151644 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 151644 INFO  Let's continue searching with this pattern [[]]
+20220829 151644 INFO  Here's what we have in ret: [[]]
+20220829 151644 INFO  PROCESS RETURNED.
+20220829 151644 INFO RETURNED results from the engine: [None]
+20220829 151644 INFO : []
+20220829 151644 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220829 151644 INFO 
+20220829 151645 INFO 
+20220829 151645 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [p] and state[0].
+20220829 151645 INFO Readline buffer: [SHow p].
+20220829 151645 INFO  PROCESS TOKENS, received tokens: ['SHow', 'p']
+20220829 151645 INFO  Stepped into LEVEL 2.
+20220829 151645 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 151645 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 151645 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 151645 INFO  Let's continue searching with this pattern [[]]
+20220829 151645 INFO  Here's what we have in ret: [[]]
+20220829 151645 INFO  PROCESS RETURNED.
+20220829 151645 INFO RETURNED results from the engine: [None]
+20220829 151645 INFO : []
+20220829 151645 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220829 151645 INFO 
+20220829 151645 INFO 
+20220829 151645 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [p] and state[0].
+20220829 151645 INFO Readline buffer: [SHow p].
+20220829 151645 INFO  PROCESS TOKENS, received tokens: ['SHow', 'p']
+20220829 151645 INFO  Stepped into LEVEL 2.
+20220829 151645 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 151645 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 151645 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 151645 INFO  Let's continue searching with this pattern [[]]
+20220829 151645 INFO  Here's what we have in ret: [[]]
+20220829 151645 INFO  PROCESS RETURNED.
+20220829 151645 INFO RETURNED results from the engine: [None]
+20220829 151645 INFO : []
+20220829 151645 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220829 151645 INFO 
+20220829 151645 INFO 
+20220829 151645 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 151645 INFO Readline buffer: [SHow ].
+20220829 151645 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220829 151645 INFO  Stepped into LEVEL 2.
+20220829 151645 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 151645 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 151645 INFO  as (regexp) starts with [ > TIME]
+20220829 151645 INFO  as (regexp) starts with [ > Stgp]
+20220829 151645 INFO  as (regexp) starts with [ > Actlog]
+20220829 151645 INFO  as (regexp) starts with [ > LOG]
+20220829 151645 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 151645 INFO  Let's continue searching with this pattern [[]]
+20220829 151645 INFO  Here's what we have in ret: [['TIME ', 'Stgp ', 'Actlog ', 'LOG ']]
+20220829 151645 INFO  PROCESS RETURNED.
+20220829 151645 INFO RETURNED results from the engine: ['TIME ', 'Stgp ', 'Actlog ', 'LOG ', None]
+20220829 151645 INFO : ['Stgp ', 'Actlog ', 'LOG ', None]
+20220829 151645 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220829 151645 INFO 
+20220829 151645 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 151645 INFO 
+20220829 151645 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 151645 INFO 
+20220829 151645 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 151645 INFO 
+20220829 151645 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 151647 INFO 
+20220829 151647 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 151647 INFO Readline buffer: [SHow proc ].
+20220829 151647 INFO  PROCESS TOKENS, received tokens: ['SHow', 'proc', '']
+20220829 151647 INFO  Stepped into LEVEL 3.
+20220829 151647 INFO  Here's what we have in ret: [[]]
+20220829 151647 INFO  PROCESS RETURNED.
+20220829 151647 INFO RETURNED results from the engine: [None]
+20220829 151647 INFO : []
+20220829 151647 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220829 151647 INFO 
+20220829 151647 INFO 
+20220829 151647 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 151647 INFO Readline buffer: [SHow proc ].
+20220829 151647 INFO  PROCESS TOKENS, received tokens: ['SHow', 'proc', '']
+20220829 151647 INFO  Stepped into LEVEL 3.
+20220829 151647 INFO  Here's what we have in ret: [[]]
+20220829 151647 INFO  PROCESS RETURNED.
+20220829 151647 INFO RETURNED results from the engine: [None]
+20220829 151647 INFO : []
+20220829 151647 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220829 151647 INFO 
+20220829 151650 INFO 
+20220829 151650 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 151650 INFO Readline buffer: [SHow ].
+20220829 151650 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220829 151650 INFO  Stepped into LEVEL 2.
+20220829 151650 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 151650 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 151650 INFO  as (regexp) starts with [ > TIME]
+20220829 151650 INFO  as (regexp) starts with [ > Stgp]
+20220829 151650 INFO  as (regexp) starts with [ > Actlog]
+20220829 151650 INFO  as (regexp) starts with [ > LOG]
+20220829 151650 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 151650 INFO  Let's continue searching with this pattern [[]]
+20220829 151650 INFO  Here's what we have in ret: [['TIME ', 'Stgp ', 'Actlog ', 'LOG ']]
+20220829 151650 INFO  PROCESS RETURNED.
+20220829 151650 INFO RETURNED results from the engine: ['TIME ', 'Stgp ', 'Actlog ', 'LOG ', None]
+20220829 151650 INFO : ['Stgp ', 'Actlog ', 'LOG ', None]
+20220829 151650 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220829 151650 INFO 
+20220829 151650 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 151650 INFO 
+20220829 151650 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 151650 INFO 
+20220829 151650 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 151650 INFO 
+20220829 151650 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 151650 INFO 
+20220829 151650 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 151650 INFO Readline buffer: [SHow ].
+20220829 151650 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220829 151650 INFO  Stepped into LEVEL 2.
+20220829 151650 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 151650 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 151650 INFO  as (regexp) starts with [ > TIME]
+20220829 151650 INFO  as (regexp) starts with [ > Stgp]
+20220829 151650 INFO  as (regexp) starts with [ > Actlog]
+20220829 151650 INFO  as (regexp) starts with [ > LOG]
+20220829 151650 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 151650 INFO  Let's continue searching with this pattern [[]]
+20220829 151650 INFO  Here's what we have in ret: [['TIME ', 'Stgp ', 'Actlog ', 'LOG ']]
+20220829 151650 INFO  PROCESS RETURNED.
+20220829 151650 INFO RETURNED results from the engine: ['TIME ', 'Stgp ', 'Actlog ', 'LOG ', None]
+20220829 151650 INFO : ['Stgp ', 'Actlog ', 'LOG ', None]
+20220829 151650 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220829 151650 INFO 
+20220829 151650 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 151650 INFO 
+20220829 151650 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 151650 INFO 
+20220829 151650 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 151650 INFO 
+20220829 151650 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 151655 INFO 
+20220829 151655 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [pr] and state[0].
+20220829 151655 INFO Readline buffer: [q pr].
+20220829 151655 INFO  PROCESS TOKENS, received tokens: ['q', 'pr']
+20220829 151655 INFO  Stepped into LEVEL 2.
+20220829 151655 INFO  Found this part [q] of the command in the 2nd LEVEL dictionary items: [Query].
+20220829 151655 INFO  Let's continue searching with this pattern [['ACtlog', 'LICense', 'Node', 'SEssion', 'STGpool', 'STGPOOLDIRectory', 'LOG', 'PRocess']]
+20220829 151655 INFO  as (regexp) starts with [pr > PRocess]
+20220829 151655 INFO  Here's what we have in ret: [['PRocess ']]
+20220829 151655 INFO  PROCESS RETURNED.
+20220829 151655 INFO RETURNED results from the engine: ['PRocess ', None]
+20220829 151655 INFO : [None]
+20220829 151655 INFO COMPLETER results push cycle: [PRocess ] ----------------------------------------------------------------------- [0] [].
+20220829 151655 INFO 
+20220829 151655 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [pr] and state[1].
+20220829 151656 INFO  DSMADMC pid2: [5131]
+20220829 151659 INFO 
+20220829 151659 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [pr] and state[0].
+20220829 151659 INFO Readline buffer: [q pr].
+20220829 151659 INFO  PROCESS TOKENS, received tokens: ['q', 'pr']
+20220829 151659 INFO  Stepped into LEVEL 2.
+20220829 151659 INFO  Found this part [q] of the command in the 2nd LEVEL dictionary items: [Query].
+20220829 151659 INFO  Let's continue searching with this pattern [['ACtlog', 'LICense', 'Node', 'SEssion', 'STGpool', 'STGPOOLDIRectory', 'LOG', 'PRocess']]
+20220829 151659 INFO  as (regexp) starts with [pr > PRocess]
+20220829 151659 INFO  Here's what we have in ret: [['PRocess ']]
+20220829 151659 INFO  PROCESS RETURNED.
+20220829 151659 INFO RETURNED results from the engine: ['PRocess ', None]
+20220829 151659 INFO : [None]
+20220829 151659 INFO COMPLETER results push cycle: [PRocess ] ----------------------------------------------------------------------- [0] [].
+20220829 151659 INFO 
+20220829 151659 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [pr] and state[1].
+20220829 151659 INFO 
+20220829 151659 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 151659 INFO Readline buffer: [q PRocess ].
+20220829 151659 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', '']
+20220829 151659 INFO  Stepped into LEVEL 3.
+20220829 151659 INFO  and found [q PRocess] command in the 3rd LEVEL dictionary item: [Query PRocess].
+20220829 151659 INFO  let's continue searching with this item(s) [['select process_num from processes']]
+20220829 151659 INFO  it's an SQL select [ > select process_num from processes]
+20220829 151659 INFO  SP SQL Engine reached with this select: [select process_num from processes] command and
+20220829 151659 INFO  SP SQL Engine reached with these tokens: [['q', 'PRocess', '']].
+20220829 151659 INFO  SP SQL Engine still no cached data store a new one.
+20220829 151659 INFO  DSMADMC pid: [5083]
+20220829 151659 INFO  Here's what we have in ret: [['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ']]
+20220829 151659 INFO  PROCESS RETURNED.
+20220829 151659 INFO RETURNED results from the engine: ['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ', None]
+20220829 151659 INFO : ['ANS8001I Return code 11. ', None]
+20220829 151659 INFO COMPLETER results push cycle: [ANR2034E SELECT: No match found using this criteria. ] -------------------------- [0] [].
+20220829 151659 INFO 
+20220829 151659 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 151659 INFO 
+20220829 151659 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 151659 INFO 
+20220829 151659 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[0].
+20220829 151659 INFO Readline buffer: [q PRocess AN].
+20220829 151659 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', 'AN']
+20220829 151659 INFO  Stepped into LEVEL 3.
+20220829 151659 INFO  and found [q PRocess] command in the 3rd LEVEL dictionary item: [Query PRocess].
+20220829 151659 INFO  let's continue searching with this item(s) [['select process_num from processes']]
+20220829 151659 INFO  it's an SQL select [AN > select process_num from processes]
+20220829 151659 INFO  SP SQL Engine reached with this select: [select process_num from processes] command and
+20220829 151659 INFO  SP SQL Engine reached with these tokens: [['q', 'PRocess', 'AN']].
+20220829 151659 INFO  Here's what we have in ret: [['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ']]
+20220829 151659 INFO  PROCESS RETURNED.
+20220829 151659 INFO RETURNED results from the engine: ['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ', None]
+20220829 151659 INFO : ['ANS8001I Return code 11. ', None]
+20220829 151659 INFO COMPLETER results push cycle: [ANR2034E SELECT: No match found using this criteria. ] -------------------------- [0] [].
+20220829 151659 INFO 
+20220829 151659 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[1].
+20220829 151659 INFO 
+20220829 151659 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[2].
+20220829 151700 INFO 
+20220829 151700 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[0].
+20220829 151700 INFO Readline buffer: [q PRocess AN].
+20220829 151700 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', 'AN']
+20220829 151700 INFO  Stepped into LEVEL 3.
+20220829 151700 INFO  and found [q PRocess] command in the 3rd LEVEL dictionary item: [Query PRocess].
+20220829 151700 INFO  let's continue searching with this item(s) [['select process_num from processes']]
+20220829 151700 INFO  it's an SQL select [AN > select process_num from processes]
+20220829 151700 INFO  SP SQL Engine reached with this select: [select process_num from processes] command and
+20220829 151700 INFO  SP SQL Engine reached with these tokens: [['q', 'PRocess', 'AN']].
+20220829 151700 INFO  Here's what we have in ret: [['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ']]
+20220829 151700 INFO  PROCESS RETURNED.
+20220829 151700 INFO RETURNED results from the engine: ['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ', None]
+20220829 151700 INFO : ['ANS8001I Return code 11. ', None]
+20220829 151700 INFO COMPLETER results push cycle: [ANR2034E SELECT: No match found using this criteria. ] -------------------------- [0] [].
+20220829 151700 INFO 
+20220829 151700 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[1].
+20220829 151700 INFO 
+20220829 151700 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[2].
+20220829 151700 INFO 
+20220829 151700 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[0].
+20220829 151700 INFO Readline buffer: [q PRocess AN].
+20220829 151700 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', 'AN']
+20220829 151700 INFO  Stepped into LEVEL 3.
+20220829 151700 INFO  and found [q PRocess] command in the 3rd LEVEL dictionary item: [Query PRocess].
+20220829 151700 INFO  let's continue searching with this item(s) [['select process_num from processes']]
+20220829 151700 INFO  it's an SQL select [AN > select process_num from processes]
+20220829 151700 INFO  SP SQL Engine reached with this select: [select process_num from processes] command and
+20220829 151700 INFO  SP SQL Engine reached with these tokens: [['q', 'PRocess', 'AN']].
+20220829 151700 INFO  Here's what we have in ret: [['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ']]
+20220829 151700 INFO  PROCESS RETURNED.
+20220829 151700 INFO RETURNED results from the engine: ['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ', None]
+20220829 151700 INFO : ['ANS8001I Return code 11. ', None]
+20220829 151700 INFO COMPLETER results push cycle: [ANR2034E SELECT: No match found using this criteria. ] -------------------------- [0] [].
+20220829 151700 INFO 
+20220829 151700 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[1].
+20220829 151700 INFO 
+20220829 151700 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[2].
+20220829 151718 INFO 
+20220829 151718 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 151718 INFO Readline buffer: [q PRocess ].
+20220829 151718 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', '']
+20220829 151718 INFO  Stepped into LEVEL 3.
+20220829 151718 INFO  and found [q PRocess] command in the 3rd LEVEL dictionary item: [Query PRocess].
+20220829 151718 INFO  let's continue searching with this item(s) [['select process_num from processes']]
+20220829 151718 INFO  it's an SQL select [ > select process_num from processes]
+20220829 151718 INFO  SP SQL Engine reached with this select: [select process_num from processes] command and
+20220829 151718 INFO  SP SQL Engine reached with these tokens: [['q', 'PRocess', '']].
+20220829 151718 INFO  Here's what we have in ret: [['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ']]
+20220829 151718 INFO  PROCESS RETURNED.
+20220829 151718 INFO RETURNED results from the engine: ['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ', None]
+20220829 151718 INFO : ['ANS8001I Return code 11. ', None]
+20220829 151718 INFO COMPLETER results push cycle: [ANR2034E SELECT: No match found using this criteria. ] -------------------------- [0] [].
+20220829 151718 INFO 
+20220829 151718 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 151718 INFO 
+20220829 151718 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 151718 INFO 
+20220829 151718 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[0].
+20220829 151718 INFO Readline buffer: [q PRocess AN].
+20220829 151718 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', 'AN']
+20220829 151718 INFO  Stepped into LEVEL 3.
+20220829 151718 INFO  and found [q PRocess] command in the 3rd LEVEL dictionary item: [Query PRocess].
+20220829 151718 INFO  let's continue searching with this item(s) [['select process_num from processes']]
+20220829 151718 INFO  it's an SQL select [AN > select process_num from processes]
+20220829 151718 INFO  SP SQL Engine reached with this select: [select process_num from processes] command and
+20220829 151718 INFO  SP SQL Engine reached with these tokens: [['q', 'PRocess', 'AN']].
+20220829 151718 INFO  Here's what we have in ret: [['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ']]
+20220829 151718 INFO  PROCESS RETURNED.
+20220829 151718 INFO RETURNED results from the engine: ['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ', None]
+20220829 151718 INFO : ['ANS8001I Return code 11. ', None]
+20220829 151718 INFO COMPLETER results push cycle: [ANR2034E SELECT: No match found using this criteria. ] -------------------------- [0] [].
+20220829 151718 INFO 
+20220829 151718 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[1].
+20220829 151718 INFO 
+20220829 151718 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[2].
+20220829 151719 INFO 
+20220829 151719 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[0].
+20220829 151719 INFO Readline buffer: [q PRocess AN].
+20220829 151719 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', 'AN']
+20220829 151719 INFO  Stepped into LEVEL 3.
+20220829 151719 INFO  and found [q PRocess] command in the 3rd LEVEL dictionary item: [Query PRocess].
+20220829 151719 INFO  let's continue searching with this item(s) [['select process_num from processes']]
+20220829 151719 INFO  it's an SQL select [AN > select process_num from processes]
+20220829 151719 INFO  SP SQL Engine reached with this select: [select process_num from processes] command and
+20220829 151719 INFO  SP SQL Engine reached with these tokens: [['q', 'PRocess', 'AN']].
+20220829 151719 INFO  Here's what we have in ret: [['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ']]
+20220829 151719 INFO  PROCESS RETURNED.
+20220829 151719 INFO RETURNED results from the engine: ['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ', None]
+20220829 151719 INFO : ['ANS8001I Return code 11. ', None]
+20220829 151719 INFO COMPLETER results push cycle: [ANR2034E SELECT: No match found using this criteria. ] -------------------------- [0] [].
+20220829 151719 INFO 
+20220829 151719 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[1].
+20220829 151719 INFO 
+20220829 151719 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[2].
+20220829 151719 INFO 
+20220829 151719 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[0].
+20220829 151719 INFO Readline buffer: [q PRocess AN].
+20220829 151719 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', 'AN']
+20220829 151719 INFO  Stepped into LEVEL 3.
+20220829 151719 INFO  and found [q PRocess] command in the 3rd LEVEL dictionary item: [Query PRocess].
+20220829 151719 INFO  let's continue searching with this item(s) [['select process_num from processes']]
+20220829 151719 INFO  it's an SQL select [AN > select process_num from processes]
+20220829 151719 INFO  SP SQL Engine reached with this select: [select process_num from processes] command and
+20220829 151719 INFO  SP SQL Engine reached with these tokens: [['q', 'PRocess', 'AN']].
+20220829 151719 INFO  Here's what we have in ret: [['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ']]
+20220829 151719 INFO  PROCESS RETURNED.
+20220829 151719 INFO RETURNED results from the engine: ['ANR2034E SELECT: No match found using this criteria. ', 'ANS8001I Return code 11. ', None]
+20220829 151719 INFO : ['ANS8001I Return code 11. ', None]
+20220829 151719 INFO COMPLETER results push cycle: [ANR2034E SELECT: No match found using this criteria. ] -------------------------- [0] [].
+20220829 151719 INFO 
+20220829 151719 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[1].
+20220829 151719 INFO 
+20220829 151719 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [AN] and state[2].
+20220829 152037 INFO 
+20220829 152037 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [q] and state[0].
+20220829 152037 INFO Readline buffer: [q].
+20220829 152037 INFO  PROCESS TOKENS, received tokens: ['q']
+20220829 152037 INFO  Stepped into LEVEL 1.
+20220829 152037 INFO  found this part [q] of the command in the 1st LEVEL list items: [Query].
+20220829 152037 INFO  found this part [q] of the command in the 1st LEVEL list items: [QUIt].
+20220829 152037 INFO  Here's what we have in ret: [['Query ', 'QUIt ']]
+20220829 152037 INFO  PROCESS RETURNED.
+20220829 152037 INFO RETURNED results from the engine: ['Query ', 'QUIt ', None]
+20220829 152037 INFO : ['QUIt ', None]
+20220829 152037 INFO COMPLETER results push cycle: [Query ] ------------------------------------------------------------------------- [0] [].
+20220829 152037 INFO 
+20220829 152037 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [q] and state[1].
+20220829 152037 INFO 
+20220829 152037 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [q] and state[2].
+20220829 152037 INFO 
+20220829 152037 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [Q] and state[0].
+20220829 152037 INFO Readline buffer: [Q].
+20220829 152037 INFO  PROCESS TOKENS, received tokens: ['Q']
+20220829 152037 INFO  Stepped into LEVEL 1.
+20220829 152037 INFO  found this part [Q] of the command in the 1st LEVEL list items: [Query].
+20220829 152037 INFO  found this part [Q] of the command in the 1st LEVEL list items: [QUIt].
+20220829 152037 INFO  Here's what we have in ret: [['Query ', 'QUIt ']]
+20220829 152037 INFO  PROCESS RETURNED.
+20220829 152037 INFO RETURNED results from the engine: ['Query ', 'QUIt ', None]
+20220829 152037 INFO : ['QUIt ', None]
+20220829 152037 INFO COMPLETER results push cycle: [Query ] ------------------------------------------------------------------------- [0] [].
+20220829 152037 INFO 
+20220829 152037 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [Q] and state[1].
+20220829 152037 INFO 
+20220829 152037 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [Q] and state[2].
+20220829 152038 INFO 
+20220829 152038 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [n] and state[0].
+20220829 152038 INFO Readline buffer: [Q n].
+20220829 152038 INFO  PROCESS TOKENS, received tokens: ['Q', 'n']
+20220829 152038 INFO  Stepped into LEVEL 2.
+20220829 152038 INFO  Found this part [Q] of the command in the 2nd LEVEL dictionary items: [Query].
+20220829 152038 INFO  Let's continue searching with this pattern [['ACtlog', 'LICense', 'Node', 'SEssion', 'STGpool', 'STGPOOLDIRectory', 'LOG', 'PRocess']]
+20220829 152038 INFO  as (regexp) starts with [n > Node]
+20220829 152038 INFO  Here's what we have in ret: [['Node ']]
+20220829 152038 INFO  PROCESS RETURNED.
+20220829 152038 INFO RETURNED results from the engine: ['Node ', None]
+20220829 152038 INFO : [None]
+20220829 152038 INFO COMPLETER results push cycle: [Node ] -------------------------------------------------------------------------- [0] [].
+20220829 152038 INFO 
+20220829 152038 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [n] and state[1].
+20220829 152039 INFO  DSMADMC pid2: [5131]
+20220829 152041 INFO 
+20220829 152041 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [q] and state[0].
+20220829 152041 INFO Readline buffer: [q].
+20220829 152041 INFO  PROCESS TOKENS, received tokens: ['q']
+20220829 152041 INFO  Stepped into LEVEL 1.
+20220829 152041 INFO  found this part [q] of the command in the 1st LEVEL list items: [Query].
+20220829 152041 INFO  found this part [q] of the command in the 1st LEVEL list items: [QUIt].
+20220829 152041 INFO  Here's what we have in ret: [['Query ', 'QUIt ']]
+20220829 152041 INFO  PROCESS RETURNED.
+20220829 152041 INFO RETURNED results from the engine: ['Query ', 'QUIt ', None]
+20220829 152041 INFO : ['QUIt ', None]
+20220829 152041 INFO COMPLETER results push cycle: [Query ] ------------------------------------------------------------------------- [0] [].
+20220829 152041 INFO 
+20220829 152041 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [q] and state[1].
+20220829 152041 INFO 
+20220829 152041 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [q] and state[2].
+20220829 152041 INFO 
+20220829 152041 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [Q] and state[0].
+20220829 152041 INFO Readline buffer: [Q].
+20220829 152041 INFO  PROCESS TOKENS, received tokens: ['Q']
+20220829 152041 INFO  Stepped into LEVEL 1.
+20220829 152041 INFO  found this part [Q] of the command in the 1st LEVEL list items: [Query].
+20220829 152041 INFO  found this part [Q] of the command in the 1st LEVEL list items: [QUIt].
+20220829 152041 INFO  Here's what we have in ret: [['Query ', 'QUIt ']]
+20220829 152041 INFO  PROCESS RETURNED.
+20220829 152041 INFO RETURNED results from the engine: ['Query ', 'QUIt ', None]
+20220829 152041 INFO : ['QUIt ', None]
+20220829 152041 INFO COMPLETER results push cycle: [Query ] ------------------------------------------------------------------------- [0] [].
+20220829 152041 INFO 
+20220829 152041 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [Q] and state[1].
+20220829 152041 INFO 
+20220829 152041 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [Q] and state[2].
+20220829 152042 INFO 
+20220829 152042 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [Q] and state[0].
+20220829 152042 INFO Readline buffer: [Q].
+20220829 152042 INFO  PROCESS TOKENS, received tokens: ['Q']
+20220829 152042 INFO  Stepped into LEVEL 1.
+20220829 152042 INFO  found this part [Q] of the command in the 1st LEVEL list items: [Query].
+20220829 152042 INFO  found this part [Q] of the command in the 1st LEVEL list items: [QUIt].
+20220829 152042 INFO  Here's what we have in ret: [['Query ', 'QUIt ']]
+20220829 152042 INFO  PROCESS RETURNED.
+20220829 152042 INFO RETURNED results from the engine: ['Query ', 'QUIt ', None]
+20220829 152042 INFO : ['QUIt ', None]
+20220829 152042 INFO COMPLETER results push cycle: [Query ] ------------------------------------------------------------------------- [0] [].
+20220829 152042 INFO 
+20220829 152042 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [Q] and state[1].
+20220829 152042 INFO 
+20220829 152042 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [Q] and state[2].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 152044 INFO Readline buffer: [Q ].
+20220829 152044 INFO  PROCESS TOKENS, received tokens: ['Q', '']
+20220829 152044 INFO  Stepped into LEVEL 2.
+20220829 152044 INFO  Found this part [Q] of the command in the 2nd LEVEL dictionary items: [Query].
+20220829 152044 INFO  Let's continue searching with this pattern [['ACtlog', 'LICense', 'Node', 'SEssion', 'STGpool', 'STGPOOLDIRectory', 'LOG', 'PRocess']]
+20220829 152044 INFO  as (regexp) starts with [ > ACtlog]
+20220829 152044 INFO  as (regexp) starts with [ > LICense]
+20220829 152044 INFO  as (regexp) starts with [ > Node]
+20220829 152044 INFO  as (regexp) starts with [ > SEssion]
+20220829 152044 INFO  as (regexp) starts with [ > STGpool]
+20220829 152044 INFO  as (regexp) starts with [ > STGPOOLDIRectory]
+20220829 152044 INFO  as (regexp) starts with [ > LOG]
+20220829 152044 INFO  as (regexp) starts with [ > PRocess]
+20220829 152044 INFO  Here's what we have in ret: [['ACtlog ', 'LICense ', 'Node ', 'SEssion ', 'STGpool ', 'STGPOOLDIRectory ', 'LOG ', 'PRocess ']]
+20220829 152044 INFO  PROCESS RETURNED.
+20220829 152044 INFO RETURNED results from the engine: ['ACtlog ', 'LICense ', 'Node ', 'SEssion ', 'STGpool ', 'STGPOOLDIRectory ', 'LOG ', 'PRocess ', None]
+20220829 152044 INFO : ['LICense ', 'Node ', 'SEssion ', 'STGpool ', 'STGPOOLDIRectory ', 'LOG ', 'PRocess ', None]
+20220829 152044 INFO COMPLETER results push cycle: [ACtlog ] ------------------------------------------------------------------------ [0] [].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 152044 INFO Readline buffer: [Q ].
+20220829 152044 INFO  PROCESS TOKENS, received tokens: ['Q', '']
+20220829 152044 INFO  Stepped into LEVEL 2.
+20220829 152044 INFO  Found this part [Q] of the command in the 2nd LEVEL dictionary items: [Query].
+20220829 152044 INFO  Let's continue searching with this pattern [['ACtlog', 'LICense', 'Node', 'SEssion', 'STGpool', 'STGPOOLDIRectory', 'LOG', 'PRocess']]
+20220829 152044 INFO  as (regexp) starts with [ > ACtlog]
+20220829 152044 INFO  as (regexp) starts with [ > LICense]
+20220829 152044 INFO  as (regexp) starts with [ > Node]
+20220829 152044 INFO  as (regexp) starts with [ > SEssion]
+20220829 152044 INFO  as (regexp) starts with [ > STGpool]
+20220829 152044 INFO  as (regexp) starts with [ > STGPOOLDIRectory]
+20220829 152044 INFO  as (regexp) starts with [ > LOG]
+20220829 152044 INFO  as (regexp) starts with [ > PRocess]
+20220829 152044 INFO  Here's what we have in ret: [['ACtlog ', 'LICense ', 'Node ', 'SEssion ', 'STGpool ', 'STGPOOLDIRectory ', 'LOG ', 'PRocess ']]
+20220829 152044 INFO  PROCESS RETURNED.
+20220829 152044 INFO RETURNED results from the engine: ['ACtlog ', 'LICense ', 'Node ', 'SEssion ', 'STGpool ', 'STGPOOLDIRectory ', 'LOG ', 'PRocess ', None]
+20220829 152044 INFO : ['LICense ', 'Node ', 'SEssion ', 'STGpool ', 'STGPOOLDIRectory ', 'LOG ', 'PRocess ', None]
+20220829 152044 INFO COMPLETER results push cycle: [ACtlog ] ------------------------------------------------------------------------ [0] [].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220829 152044 INFO 
+20220829 152044 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220829 152045 INFO 
+20220829 152045 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [n] and state[0].
+20220829 152045 INFO Readline buffer: [Q n].
+20220829 152045 INFO  PROCESS TOKENS, received tokens: ['Q', 'n']
+20220829 152045 INFO  Stepped into LEVEL 2.
+20220829 152045 INFO  Found this part [Q] of the command in the 2nd LEVEL dictionary items: [Query].
+20220829 152045 INFO  Let's continue searching with this pattern [['ACtlog', 'LICense', 'Node', 'SEssion', 'STGpool', 'STGPOOLDIRectory', 'LOG', 'PRocess']]
+20220829 152045 INFO  as (regexp) starts with [n > Node]
+20220829 152045 INFO  Here's what we have in ret: [['Node ']]
+20220829 152045 INFO  PROCESS RETURNED.
+20220829 152045 INFO RETURNED results from the engine: ['Node ', None]
+20220829 152045 INFO : [None]
+20220829 152045 INFO COMPLETER results push cycle: [Node ] -------------------------------------------------------------------------- [0] [].
+20220829 152045 INFO 
+20220829 152045 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [n] and state[1].
+20220829 152046 INFO  DSMADMC pid2: [5131]
+20220829 152330 INFO  DSMADMC pid2: [5131]
+20220829 152503 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220829 152506 INFO  DSMADMC pid: [5567]
+20220829 152507 INFO  DSMADMC pid: [5567]
+20220829 152507 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 152507 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 152507 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 152511 INFO  DSMADMC pid2: [5577]
+20220829 152517 INFO  DSMADMC pid2: [5577]
+20220829 152520 INFO  DSMADMC pid2: [5577]
+20220829 153144 INFO  DSMADMC pid2: [5577]
+20220829 153156 INFO  DSMADMC pid2: [5577]
+20220829 154032 INFO  DSMADMC pid2: [5577]
+20220829 154033 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220829 154037 INFO  DSMADMC pid: [6039]
+20220829 154037 INFO  DSMADMC pid: [6039]
+20220829 154037 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 154037 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 154037 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 154041 INFO  DSMADMC pid2: [6053]
+20220829 154043 INFO  DSMADMC pid2: [6053]
+20220829 154047 INFO 
+20220829 154047 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [st] and state[0].
+20220829 154047 INFO Readline buffer: [sh st].
+20220829 154047 INFO  PROCESS TOKENS, received tokens: ['sh', 'st']
+20220829 154047 INFO  Stepped into LEVEL 2.
+20220829 154047 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 154047 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 154047 INFO  as (regexp) starts with [st > Stgp]
+20220829 154047 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 154047 INFO  Let's continue searching with this pattern [[]]
+20220829 154047 INFO  Here's what we have in ret: [['Stgp ']]
+20220829 154047 INFO  PROCESS RETURNED.
+20220829 154047 INFO RETURNED results from the engine: ['Stgp ', None]
+20220829 154047 INFO : [None]
+20220829 154047 INFO COMPLETER results push cycle: [Stgp ] -------------------------------------------------------------------------- [0] [].
+20220829 154047 INFO 
+20220829 154047 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [st] and state[1].
+20220829 154047 INFO  DSMADMC pid: [6039]
+20220829 155320 INFO  DSMADMC pid2: [6053]
+20220829 161900 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220829 162031 INFO  DSMADMC pid: [7336]
+20220829 162031 INFO  DSMADMC pid: [7336]
+20220829 162032 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 162032 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 162032 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 162033 INFO Readline buffer: [].
+20220829 162033 INFO  PROCESS TOKENS, received tokens: ['']
+20220829 162033 INFO  Stepped into LEVEL 1.
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [ACCept].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [ACTivate].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [ASsign].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [BAckup].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [DEFine].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [DELete].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [Help!].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [Query].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [REMove].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [SHow].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [Exit].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [QUIt].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [BYe].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [Logout].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [REload].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [RULer].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [debug].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [grep].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [invgrep].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [count].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [mailto].
+20220829 162033 INFO  found this part [] of the command in the 1st LEVEL list items: [SPadmin].
+20220829 162033 INFO  Here's what we have in ret: [['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ']]
+20220829 162033 INFO  PROCESS RETURNED.
+20220829 162033 INFO RETURNED results from the engine: ['ACCept ',
+ 'ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220829 162033 INFO : ['ACTivate ',
+ 'ASsign ',
+ 'BAckup ',
+ 'DEFine ',
+ 'DELete ',
+ 'Help! ',
+ 'Query ',
+ 'REMove ',
+ 'SHow ',
+ 'Exit ',
+ 'QUIt ',
+ 'BYe ',
+ 'Logout ',
+ 'REload ',
+ 'RULer ',
+ 'debug ',
+ 'grep ',
+ 'invgrep ',
+ 'count ',
+ 'mailto ',
+ 'SPadmin ',
+ None]
+20220829 162033 INFO COMPLETER results push cycle: [ACCept ] ------------------------------------------------------------------------ [0] [].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[5].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[6].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[7].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[8].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[9].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[10].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[11].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[12].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[13].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[14].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[15].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[16].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[17].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[18].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[19].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[20].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[21].
+20220829 162033 INFO 
+20220829 162033 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [] and state[22].
+20220829 162034 INFO 
+20220829 162034 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[0].
+20220829 162034 INFO Readline buffer: [sh].
+20220829 162034 INFO  PROCESS TOKENS, received tokens: ['sh']
+20220829 162034 INFO  Stepped into LEVEL 1.
+20220829 162034 INFO  found this part [sh] of the command in the 1st LEVEL list items: [SHow].
+20220829 162034 INFO  Here's what we have in ret: [['SHow ']]
+20220829 162034 INFO  PROCESS RETURNED.
+20220829 162034 INFO RETURNED results from the engine: ['SHow ', None]
+20220829 162034 INFO : [None]
+20220829 162034 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220829 162034 INFO 
+20220829 162034 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[1].
+20220829 162035 INFO 
+20220829 162035 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [n] and state[0].
+20220829 162035 INFO Readline buffer: [SHow n].
+20220829 162035 INFO  PROCESS TOKENS, received tokens: ['SHow', 'n']
+20220829 162035 INFO  Stepped into LEVEL 2.
+20220829 162035 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 162035 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 162035 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 162035 INFO  Let's continue searching with this pattern [[]]
+20220829 162035 INFO  Here's what we have in ret: [[]]
+20220829 162035 INFO  PROCESS RETURNED.
+20220829 162035 INFO RETURNED results from the engine: [None]
+20220829 162035 INFO : []
+20220829 162035 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220829 162035 INFO 
+20220829 162035 INFO 
+20220829 162035 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [n] and state[0].
+20220829 162035 INFO Readline buffer: [SHow n].
+20220829 162035 INFO  PROCESS TOKENS, received tokens: ['SHow', 'n']
+20220829 162035 INFO  Stepped into LEVEL 2.
+20220829 162035 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 162035 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 162035 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 162035 INFO  Let's continue searching with this pattern [[]]
+20220829 162035 INFO  Here's what we have in ret: [[]]
+20220829 162035 INFO  PROCESS RETURNED.
+20220829 162035 INFO RETURNED results from the engine: [None]
+20220829 162035 INFO : []
+20220829 162035 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220829 162035 INFO 
+20220829 162035 INFO 
+20220829 162035 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 162035 INFO Readline buffer: [SHow ].
+20220829 162035 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220829 162035 INFO  Stepped into LEVEL 2.
+20220829 162035 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 162035 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 162035 INFO  as (regexp) starts with [ > TIME]
+20220829 162035 INFO  as (regexp) starts with [ > Stgp]
+20220829 162035 INFO  as (regexp) starts with [ > Actlog]
+20220829 162035 INFO  as (regexp) starts with [ > LOG]
+20220829 162035 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 162035 INFO  Let's continue searching with this pattern [[]]
+20220829 162035 INFO  Here's what we have in ret: [['TIME ', 'Stgp ', 'Actlog ', 'LOG ']]
+20220829 162035 INFO  PROCESS RETURNED.
+20220829 162035 INFO RETURNED results from the engine: ['TIME ', 'Stgp ', 'Actlog ', 'LOG ', None]
+20220829 162035 INFO : ['Stgp ', 'Actlog ', 'LOG ', None]
+20220829 162035 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220829 162035 INFO 
+20220829 162035 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 162035 INFO 
+20220829 162035 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 162035 INFO 
+20220829 162035 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 162035 INFO 
+20220829 162035 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 162036 INFO 
+20220829 162036 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220829 162036 INFO Readline buffer: [SHow ].
+20220829 162036 INFO  PROCESS TOKENS, received tokens: ['SHow', '']
+20220829 162036 INFO  Stepped into LEVEL 2.
+20220829 162036 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 162036 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 162036 INFO  as (regexp) starts with [ > TIME]
+20220829 162036 INFO  as (regexp) starts with [ > Stgp]
+20220829 162036 INFO  as (regexp) starts with [ > Actlog]
+20220829 162036 INFO  as (regexp) starts with [ > LOG]
+20220829 162036 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 162036 INFO  Let's continue searching with this pattern [[]]
+20220829 162036 INFO  Here's what we have in ret: [['TIME ', 'Stgp ', 'Actlog ', 'LOG ']]
+20220829 162036 INFO  PROCESS RETURNED.
+20220829 162036 INFO RETURNED results from the engine: ['TIME ', 'Stgp ', 'Actlog ', 'LOG ', None]
+20220829 162036 INFO : ['Stgp ', 'Actlog ', 'LOG ', None]
+20220829 162036 INFO COMPLETER results push cycle: [TIME ] -------------------------------------------------------------------------- [0] [].
+20220829 162036 INFO 
+20220829 162036 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220829 162036 INFO 
+20220829 162036 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[2].
+20220829 162036 INFO 
+20220829 162036 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[3].
+20220829 162036 INFO 
+20220829 162036 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[4].
+20220829 162036 INFO 
+20220829 162036 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[0].
+20220829 162036 INFO Readline buffer: [SHow s].
+20220829 162036 INFO  PROCESS TOKENS, received tokens: ['SHow', 's']
+20220829 162036 INFO  Stepped into LEVEL 2.
+20220829 162036 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 162036 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 162036 INFO  as (regexp) starts with [s > Stgp]
+20220829 162036 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 162036 INFO  Let's continue searching with this pattern [[]]
+20220829 162036 INFO  Here's what we have in ret: [['Stgp ']]
+20220829 162036 INFO  PROCESS RETURNED.
+20220829 162036 INFO RETURNED results from the engine: ['Stgp ', None]
+20220829 162036 INFO : [None]
+20220829 162036 INFO COMPLETER results push cycle: [Stgp ] -------------------------------------------------------------------------- [0] [].
+20220829 162036 INFO 
+20220829 162036 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[1].
+20220829 162037 INFO  DSMADMC pid: [7336]
+20220829 162039 INFO 
+20220829 162039 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[0].
+20220829 162039 INFO Readline buffer: [sh].
+20220829 162039 INFO  PROCESS TOKENS, received tokens: ['sh']
+20220829 162039 INFO  Stepped into LEVEL 1.
+20220829 162039 INFO  found this part [sh] of the command in the 1st LEVEL list items: [SHow].
+20220829 162039 INFO  Here's what we have in ret: [['SHow ']]
+20220829 162039 INFO  PROCESS RETURNED.
+20220829 162039 INFO RETURNED results from the engine: ['SHow ', None]
+20220829 162039 INFO : [None]
+20220829 162039 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220829 162039 INFO 
+20220829 162039 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[1].
+20220829 162245 INFO  DSMADMC pid: [7449]
+20220829 162245 INFO  DSMADMC pid: [7449]
+20220829 162246 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 162246 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 162246 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 162246 INFO 
+20220829 162246 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[0].
+20220829 162246 INFO Readline buffer: [s].
+20220829 162246 INFO  PROCESS TOKENS, received tokens: ['s']
+20220829 162246 INFO  Stepped into LEVEL 1.
+20220829 162246 INFO  found this part [s] of the command in the 1st LEVEL list items: [SHow].
+20220829 162246 INFO  found this part [s] of the command in the 1st LEVEL list items: [SPadmin].
+20220829 162246 INFO  Here's what we have in ret: [['SHow ', 'SPadmin ']]
+20220829 162246 INFO  PROCESS RETURNED.
+20220829 162246 INFO RETURNED results from the engine: ['SHow ', 'SPadmin ', None]
+20220829 162246 INFO : ['SPadmin ', None]
+20220829 162246 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220829 162246 INFO 
+20220829 162246 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[1].
+20220829 162246 INFO 
+20220829 162246 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[2].
+20220829 162247 INFO 
+20220829 162247 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [S] and state[0].
+20220829 162247 INFO Readline buffer: [S].
+20220829 162247 INFO  PROCESS TOKENS, received tokens: ['S']
+20220829 162247 INFO  Stepped into LEVEL 1.
+20220829 162247 INFO  found this part [S] of the command in the 1st LEVEL list items: [SHow].
+20220829 162247 INFO  found this part [S] of the command in the 1st LEVEL list items: [SPadmin].
+20220829 162247 INFO  Here's what we have in ret: [['SHow ', 'SPadmin ']]
+20220829 162247 INFO  PROCESS RETURNED.
+20220829 162247 INFO RETURNED results from the engine: ['SHow ', 'SPadmin ', None]
+20220829 162247 INFO : ['SPadmin ', None]
+20220829 162247 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220829 162247 INFO 
+20220829 162247 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [S] and state[1].
+20220829 162247 INFO 
+20220829 162247 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [S] and state[2].
+20220829 162247 INFO 
+20220829 162247 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [S] and state[0].
+20220829 162247 INFO Readline buffer: [S].
+20220829 162247 INFO  PROCESS TOKENS, received tokens: ['S']
+20220829 162247 INFO  Stepped into LEVEL 1.
+20220829 162247 INFO  found this part [S] of the command in the 1st LEVEL list items: [SHow].
+20220829 162247 INFO  found this part [S] of the command in the 1st LEVEL list items: [SPadmin].
+20220829 162247 INFO  Here's what we have in ret: [['SHow ', 'SPadmin ']]
+20220829 162247 INFO  PROCESS RETURNED.
+20220829 162247 INFO RETURNED results from the engine: ['SHow ', 'SPadmin ', None]
+20220829 162247 INFO : ['SPadmin ', None]
+20220829 162247 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220829 162247 INFO 
+20220829 162247 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [S] and state[1].
+20220829 162247 INFO 
+20220829 162247 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [S] and state[2].
+20220829 162248 INFO 
+20220829 162248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [Sh] and state[0].
+20220829 162248 INFO Readline buffer: [Sh].
+20220829 162248 INFO  PROCESS TOKENS, received tokens: ['Sh']
+20220829 162248 INFO  Stepped into LEVEL 1.
+20220829 162248 INFO  found this part [Sh] of the command in the 1st LEVEL list items: [SHow].
+20220829 162248 INFO  Here's what we have in ret: [['SHow ']]
+20220829 162248 INFO  PROCESS RETURNED.
+20220829 162248 INFO RETURNED results from the engine: ['SHow ', None]
+20220829 162248 INFO : [None]
+20220829 162248 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220829 162248 INFO 
+20220829 162248 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [Sh] and state[1].
+20220829 162249 INFO 
+20220829 162249 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [a] and state[0].
+20220829 162249 INFO Readline buffer: [SHow a].
+20220829 162249 INFO  PROCESS TOKENS, received tokens: ['SHow', 'a']
+20220829 162249 INFO  Stepped into LEVEL 2.
+20220829 162249 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 162249 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 162249 INFO  as (regexp) starts with [a > Actlog]
+20220829 162249 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 162249 INFO  Let's continue searching with this pattern [[]]
+20220829 162249 INFO  Here's what we have in ret: [['Actlog ']]
+20220829 162249 INFO  PROCESS RETURNED.
+20220829 162249 INFO RETURNED results from the engine: ['Actlog ', None]
+20220829 162249 INFO : [None]
+20220829 162249 INFO COMPLETER results push cycle: [Actlog ] ------------------------------------------------------------------------ [0] [].
+20220829 162249 INFO 
+20220829 162249 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [a] and state[1].
+20220829 162249 INFO  DSMADMC pid: [7449]
+20220829 162251 INFO 
+20220829 162251 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [no] and state[0].
+20220829 162251 INFO Readline buffer: [q no].
+20220829 162251 INFO  PROCESS TOKENS, received tokens: ['q', 'no']
+20220829 162251 INFO  Stepped into LEVEL 2.
+20220829 162251 INFO  Found this part [q] of the command in the 2nd LEVEL dictionary items: [Query].
+20220829 162251 INFO  Let's continue searching with this pattern [['ACtlog', 'LICense', 'Node', 'SEssion', 'STGpool', 'STGPOOLDIRectory', 'LOG', 'PRocess']]
+20220829 162251 INFO  as (regexp) starts with [no > Node]
+20220829 162251 INFO  Here's what we have in ret: [['Node ']]
+20220829 162251 INFO  PROCESS RETURNED.
+20220829 162251 INFO RETURNED results from the engine: ['Node ', None]
+20220829 162251 INFO : [None]
+20220829 162251 INFO COMPLETER results push cycle: [Node ] -------------------------------------------------------------------------- [0] [].
+20220829 162251 INFO 
+20220829 162251 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [no] and state[1].
+20220829 162252 INFO  DSMADMC pid2: [7461]
+20220829 162520 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220829 162903 INFO  DSMADMC pid: [7745]
+20220829 162918 INFO  DSMADMC pid: [7762]
+20220829 163007 INFO  DSMADMC pid: [7797]
+20220829 163116 INFO  DSMADMC pid: [7851]
+20220829 170748 INFO  DSMADMC pid: [9517]
+20220829 170748 INFO  DSMADMC pid: [9517]
+20220829 170748 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 170748 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 170748 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 170959 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220829 171001 INFO  DSMADMC pid: [9610]
+20220829 171001 INFO  DSMADMC pid: [9610]
+20220829 171001 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 171001 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 171001 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 171002 INFO 
+20220829 171002 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[0].
+20220829 171002 INFO Readline buffer: [sh].
+20220829 171002 INFO  PROCESS TOKENS, received tokens: ['sh']
+20220829 171002 INFO  Stepped into LEVEL 1.
+20220829 171002 INFO  found this part [sh] of the command in the 1st LEVEL list items: [SHow].
+20220829 171002 INFO  Here's what we have in ret: [['SHow ']]
+20220829 171002 INFO  PROCESS RETURNED.
+20220829 171002 INFO RETURNED results from the engine: ['SHow ', None]
+20220829 171002 INFO : [None]
+20220829 171002 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220829 171002 INFO 
+20220829 171002 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[1].
+20220829 171003 INFO 
+20220829 171003 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [ac] and state[0].
+20220829 171003 INFO Readline buffer: [SHow ac].
+20220829 171003 INFO  PROCESS TOKENS, received tokens: ['SHow', 'ac']
+20220829 171003 INFO  Stepped into LEVEL 2.
+20220829 171003 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 171003 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 171003 INFO  as (regexp) starts with [ac > Actlog]
+20220829 171003 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 171003 INFO  Let's continue searching with this pattern [[]]
+20220829 171003 INFO  Here's what we have in ret: [['Actlog ']]
+20220829 171003 INFO  PROCESS RETURNED.
+20220829 171003 INFO RETURNED results from the engine: ['Actlog ', None]
+20220829 171003 INFO : [None]
+20220829 171003 INFO COMPLETER results push cycle: [Actlog ] ------------------------------------------------------------------------ [0] [].
+20220829 171003 INFO 
+20220829 171003 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [ac] and state[1].
+20220829 171003 INFO  DSMADMC pid: [9610]
+20220829 171007 INFO  DSMADMC pid2: [9618]
+20220829 171050 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220829 171051 INFO  DSMADMC pid: [9656]
+20220829 171052 INFO  DSMADMC pid: [9656]
+20220829 171052 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 171052 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 171052 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 171052 INFO  DSMADMC pid2: [9663]
+20220829 171101 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220829 171102 INFO  DSMADMC pid: [9683]
+20220829 171102 INFO  DSMADMC pid: [9683]
+20220829 171103 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 171103 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 171103 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 171104 INFO  DSMADMC pid2: [9691]
+20220829 171212 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220829 171213 INFO  DSMADMC pid: [9751]
+20220829 171213 INFO  DSMADMC pid: [9751]
+20220829 171213 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 171213 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 171213 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 171214 INFO 
+20220829 171214 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [ac] and state[0].
+20220829 171214 INFO Readline buffer: [sh ac].
+20220829 171214 INFO  PROCESS TOKENS, received tokens: ['sh', 'ac']
+20220829 171214 INFO  Stepped into LEVEL 2.
+20220829 171214 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 171214 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 171214 INFO  as (regexp) starts with [ac > Actlog]
+20220829 171214 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 171214 INFO  Let's continue searching with this pattern [[]]
+20220829 171214 INFO  Here's what we have in ret: [['Actlog ']]
+20220829 171214 INFO  PROCESS RETURNED.
+20220829 171214 INFO RETURNED results from the engine: ['Actlog ', None]
+20220829 171214 INFO : [None]
+20220829 171214 INFO COMPLETER results push cycle: [Actlog ] ------------------------------------------------------------------------ [0] [].
+20220829 171214 INFO 
+20220829 171214 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [ac] and state[1].
+20220829 171214 INFO  DSMADMC pid: [9751]
+20220829 171217 INFO  DSMADMC pid2: [9764]
+20220829 192912 INFO  DSMADMC pid2: [9764]
+20220829 192946 INFO  DSMADMC pid2: [9764]
+20220829 193005 INFO  DSMADMC pid: [10297]
+20220829 193005 INFO  DSMADMC pid: [10297]
+20220829 193006 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220829 193006 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220829 193006 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220829 193008 INFO  DSMADMC pid2: [10304]
+20220829 193010 INFO  DSMADMC pid2: [10304]
+20220829 193541 INFO  DSMADMC pid2: [10304]
+20220829 193543 INFO  DSMADMC pid2: [10304]
+20220829 193545 INFO  DSMADMC pid2: [10304]
+20220829 193548 INFO 
+20220829 193548 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[0].
+20220829 193548 INFO Readline buffer: [sh s].
+20220829 193548 INFO  PROCESS TOKENS, received tokens: ['sh', 's']
+20220829 193548 INFO  Stepped into LEVEL 2.
+20220829 193548 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220829 193548 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220829 193548 INFO  as (regexp) starts with [s > Stgp]
+20220829 193548 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220829 193548 INFO  Let's continue searching with this pattern [[]]
+20220829 193548 INFO  Here's what we have in ret: [['Stgp ']]
+20220829 193548 INFO  PROCESS RETURNED.
+20220829 193548 INFO RETURNED results from the engine: ['Stgp ', None]
+20220829 193548 INFO : [None]
+20220829 193548 INFO COMPLETER results push cycle: [Stgp ] -------------------------------------------------------------------------- [0] [].
+20220829 193548 INFO 
+20220829 193548 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[1].
+20220829 193548 INFO  DSMADMC pid: [10297]
+20220830 064841 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220830 065957 INFO  DSMADMC pid: [17333]
+20220830 070121 INFO  DSMADMC pid: [17398]
+20220830 070532 INFO  DSMADMC pid: [17632]
+20220830 070539 INFO  DSMADMC pid: [17632]
+20220830 070540 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220830 070540 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220830 070540 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220830 070542 INFO 
+20220830 070542 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[0].
+20220830 070542 INFO Readline buffer: [sh].
+20220830 070542 INFO  PROCESS TOKENS, received tokens: ['sh']
+20220830 070542 INFO  Stepped into LEVEL 1.
+20220830 070542 INFO  found this part [sh] of the command in the 1st LEVEL list items: [SHow].
+20220830 070542 INFO  Here's what we have in ret: [['SHow ']]
+20220830 070542 INFO  PROCESS RETURNED.
+20220830 070542 INFO RETURNED results from the engine: ['SHow ', None]
+20220830 070542 INFO : [None]
+20220830 070542 INFO COMPLETER results push cycle: [SHow ] -------------------------------------------------------------------------- [0] [].
+20220830 070542 INFO 
+20220830 070542 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [sh] and state[1].
+20220830 070543 INFO 
+20220830 070543 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [ac] and state[0].
+20220830 070543 INFO Readline buffer: [SHow ac].
+20220830 070543 INFO  PROCESS TOKENS, received tokens: ['SHow', 'ac']
+20220830 070543 INFO  Stepped into LEVEL 2.
+20220830 070543 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220830 070543 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220830 070543 INFO  as (regexp) starts with [ac > Actlog]
+20220830 070543 INFO  Found this part [SHow] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220830 070543 INFO  Let's continue searching with this pattern [[]]
+20220830 070543 INFO  Here's what we have in ret: [['Actlog ']]
+20220830 070543 INFO  PROCESS RETURNED.
+20220830 070543 INFO RETURNED results from the engine: ['Actlog ', None]
+20220830 070543 INFO : [None]
+20220830 070543 INFO COMPLETER results push cycle: [Actlog ] ------------------------------------------------------------------------ [0] [].
+20220830 070543 INFO 
+20220830 070543 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [ac] and state[1].
+20220830 070543 INFO  DSMADMC pid: [17632]
+20220830 070547 INFO 
+20220830 070547 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [st] and state[0].
+20220830 070547 INFO Readline buffer: [sh st].
+20220830 070547 INFO  PROCESS TOKENS, received tokens: ['sh', 'st']
+20220830 070547 INFO  Stepped into LEVEL 2.
+20220830 070547 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220830 070547 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220830 070547 INFO  as (regexp) starts with [st > Stgp]
+20220830 070547 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220830 070547 INFO  Let's continue searching with this pattern [[]]
+20220830 070547 INFO  Here's what we have in ret: [['Stgp ']]
+20220830 070547 INFO  PROCESS RETURNED.
+20220830 070547 INFO RETURNED results from the engine: ['Stgp ', None]
+20220830 070547 INFO : [None]
+20220830 070547 INFO COMPLETER results push cycle: [Stgp ] -------------------------------------------------------------------------- [0] [].
+20220830 070547 INFO 
+20220830 070547 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [st] and state[1].
+20220830 070548 INFO  DSMADMC pid: [17632]
+20220830 070559 INFO 
+20220830 070559 INFO COMPLETER Text:  ----------------------------------------------------------------------------------- [nod] and state[0].
+20220830 070559 INFO Readline buffer: [q nod].
+20220830 070559 INFO  PROCESS TOKENS, received tokens: ['q', 'nod']
+20220830 070559 INFO  Stepped into LEVEL 2.
+20220830 070559 INFO  Found this part [q] of the command in the 2nd LEVEL dictionary items: [Query].
+20220830 070559 INFO  Let's continue searching with this pattern [['ACtlog', 'LICense', 'Node', 'SEssion', 'STGpool', 'STGPOOLDIRectory', 'LOG', 'PRocess']]
+20220830 070559 INFO  as (regexp) starts with [nod > Node]
+20220830 070559 INFO  Here's what we have in ret: [['Node ']]
+20220830 070559 INFO  PROCESS RETURNED.
+20220830 070559 INFO RETURNED results from the engine: ['Node ', None]
+20220830 070559 INFO : [None]
+20220830 070559 INFO COMPLETER results push cycle: [Node ] -------------------------------------------------------------------------- [0] [].
+20220830 070559 INFO 
+20220830 070559 INFO COMPLETER Text:  ----------------------------------------------------------------------------------- [nod] and state[1].
+20220830 070600 INFO  DSMADMC pid2: [17656]
+20220830 070602 INFO 
+20220830 070602 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[0].
+20220830 070602 INFO Readline buffer: [sh s].
+20220830 070602 INFO  PROCESS TOKENS, received tokens: ['sh', 's']
+20220830 070602 INFO  Stepped into LEVEL 2.
+20220830 070602 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220830 070602 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220830 070602 INFO  as (regexp) starts with [s > Stgp]
+20220830 070602 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220830 070602 INFO  Let's continue searching with this pattern [[]]
+20220830 070602 INFO  Here's what we have in ret: [['Stgp ']]
+20220830 070602 INFO  PROCESS RETURNED.
+20220830 070602 INFO RETURNED results from the engine: ['Stgp ', None]
+20220830 070602 INFO : [None]
+20220830 070602 INFO COMPLETER results push cycle: [Stgp ] -------------------------------------------------------------------------- [0] [].
+20220830 070602 INFO 
+20220830 070602 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[1].
+20220830 070602 INFO  DSMADMC pid: [17632]
+20220830 070606 INFO 
+20220830 070606 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[0].
+20220830 070606 INFO Readline buffer: [sh s].
+20220830 070606 INFO  PROCESS TOKENS, received tokens: ['sh', 's']
+20220830 070606 INFO  Stepped into LEVEL 2.
+20220830 070606 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220830 070606 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220830 070606 INFO  as (regexp) starts with [s > Stgp]
+20220830 070606 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220830 070606 INFO  Let's continue searching with this pattern [[]]
+20220830 070606 INFO  Here's what we have in ret: [['Stgp ']]
+20220830 070606 INFO  PROCESS RETURNED.
+20220830 070606 INFO RETURNED results from the engine: ['Stgp ', None]
+20220830 070606 INFO : [None]
+20220830 070606 INFO COMPLETER results push cycle: [Stgp ] -------------------------------------------------------------------------- [0] [].
+20220830 070606 INFO 
+20220830 070606 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[1].
+20220830 070607 INFO  DSMADMC pid: [17632]
+20220830 070803 INFO INPUT LOOP END  ------------------------------------------------------------------------------------------------------- 
+20220830 071151 INFO  DSMADMC pid: [17917]
+20220830 071152 INFO  DSMADMC pid: [17917]
+20220830 071152 INFO Rule file imported as starters:
+['ACCept',
+ 'ACTivate',
+ 'ASsign',
+ 'BAckup',
+ 'DEFine',
+ 'DELete',
+ 'Help!',
+ 'Query',
+ 'REMove',
+ 'SHow',
+ 'Exit',
+ 'QUIt',
+ 'BYe',
+ 'Logout',
+ 'REload',
+ 'RULer',
+ 'debug',
+ 'grep',
+ 'invgrep',
+ 'count',
+ 'mailto',
+ 'SPadmin']
+20220830 071152 INFO Rule file imported as other rules:
+{'ACCept': ['Date'],
+ 'ACTivate': ['POlicyset'],
+ 'ACTivate POlicyset': ['select domain_name from domains'],
+ 'ACTivate POlicyset \\w+': ['select set_name from policysets where set_name '
+                             "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ACtlog': [],
+ 'ASSOCiation': [],
+ 'ASsign': ['DEFMGmtclass'],
+ 'ASsign DEFMGmtclass': ['select domain_name from domains'],
+ 'ASsign DEFMGmtclass \\w+': ['select set_name from policysets where set_name '
+                              "!= 'ACTIVE' and domain_name like upper( '-2' )"],
+ 'ASsign DEFMGmtclass \\w+ \\w+': ['select class_name from mgmtclasses where '
+                                   "domain_name = upper( '-3' )"],
+ 'Actlog': [],
+ 'BAckup': ['DB', 'DEVCONFig', 'VOLHistory'],
+ 'BAckup DEVCONFig': ['Filenames='],
+ 'BAckup VOLHistory': ['Filenames='],
+ 'CLIENTName=': [],
+ 'CONFig': [],
+ 'DB': [],
+ 'DEBUG': [],
+ 'DEFMGmtclass': [],
+ 'DEFine': ['ASSOCiation'],
+ 'DEFine ASSOCiation': ['select domain_name from domains'],
+ 'DEFine ASSOCiation \\w+': ['select schedule_name from client_schedules where '
+                             "domain_name like upper( '-2' )"],
+ 'DEFine ASSOCiation \\w+ \\w+': ['select node_name from nodes where '
+                                  "domain_name like upper( '-3' )"],
+ 'DELete': ['STGpool'],
+ 'DEVCONFig': [],
+ 'DOmain=': [],
+ 'Date': [],
+ 'ENVinronment': [],
+ 'Filenames=': [],
+ 'Format=': [],
+ 'LICense': [],
+ 'LOG': [],
+ 'MAXTHRoughput=': [],
+ 'MINTIMethreshold=': [],
+ 'Node': [],
+ 'POlicyset': [],
+ 'PROCessinfo': [],
+ 'PRocess': [],
+ 'Query': ['ACtlog',
+           'LICense',
+           'Node',
+           'SEssion',
+           'STGpool',
+           'STGPOOLDIRectory',
+           'LOG',
+           'PRocess'],
+ 'Query LOG': ['Format='],
+ 'Query Node': ['select node_name from nodes', 'DOmain=', 'Format=', 'Type='],
+ 'Query Node DOmain=': ["select concat( '%PREFIX%', domain_name) from domains "
+                        '{Prefix: DOmain=}'],
+ 'Query Node \\w+': ['DOmain=', 'Format=', 'Type='],
+ 'Query Node \\w+ DOmain=': ["select concat( '%PREFIX%', domain_name) from "
+                             'domains {Prefix: DOmain=}'],
+ 'Query PRocess': ['select process_num from processes'],
+ 'Query SEssion': ['select session_id from sessions',
+                   'MINTIMethreshold=',
+                   'MAXTHRoughput=',
+                   'Format=',
+                   'Type=',
+                   'CLIENTName='],
+ 'Query SEssion \\d+': ['MINTIMethreshold=',
+                        'MAXTHRoughput=',
+                        'Format=',
+                        'Type=',
+                        'CLIENTName='],
+ 'Query STGpool': ['select stgpool_name from stgpools'],
+ 'REMove': ['Node'],
+ 'SET': [],
+ 'SEssion': [],
+ 'SHow': ['TIME', 'Stgp', 'Actlog', 'LOG'],
+ 'SPadmin': ['UPDate', 'VERsion', 'SHow', 'SET'],
+ 'SPadmin SET': ['DEBUG'],
+ 'SPadmin SHow': ['CONFig', 'ENVinronment', 'PROCessinfo'],
+ 'STGPOOLDIRectory': [],
+ 'STGpool': [],
+ 'Stgp': [],
+ 'TIME': [],
+ 'Type=': [],
+ 'UPDate': [],
+ 'VERsion': [],
+ 'VOLHistory': [],
+ 'parancs': [],
+ "select class_name from mgmtclasses where domain_name = upper( '-3' )": [],
+ "select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}": [],
+ 'select domain_name from domains': [],
+ 'select node_name from nodes': [],
+ "select node_name from nodes where domain_name like upper( '-3' )": [],
+ 'select process_num from processes': [],
+ "select schedule_name from client_schedules where domain_name like upper( '-2' )": [],
+ 'select session_id from sessions': [],
+ "select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )": [],
+ 'select stgpool_name from stgpools': [],
+ 'teszt': ['parancs']}
+20220830 071152 INFO INPUT LOOP START  ----------------------------------------------------------------------------------------------------- 
+20220830 071157 INFO  DSMADMC pid2: [17925]
+20220830 071202 INFO  DSMADMC pid2: [17925]
+20220830 071205 INFO 
+20220830 071205 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[0].
+20220830 071205 INFO Readline buffer: [sh s].
+20220830 071205 INFO  PROCESS TOKENS, received tokens: ['sh', 's']
+20220830 071205 INFO  Stepped into LEVEL 2.
+20220830 071205 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [SHow].
+20220830 071205 INFO  Let's continue searching with this pattern [['TIME', 'Stgp', 'Actlog', 'LOG']]
+20220830 071205 INFO  as (regexp) starts with [s > Stgp]
+20220830 071205 INFO  Found this part [sh] of the command in the 2nd LEVEL dictionary items: [Stgp].
+20220830 071205 INFO  Let's continue searching with this pattern [[]]
+20220830 071205 INFO  Here's what we have in ret: [['Stgp ']]
+20220830 071205 INFO  PROCESS RETURNED.
+20220830 071205 INFO RETURNED results from the engine: ['Stgp ', None]
+20220830 071205 INFO : [None]
+20220830 071205 INFO COMPLETER results push cycle: [Stgp ] -------------------------------------------------------------------------- [0] [].
+20220830 071205 INFO 
+20220830 071205 INFO COMPLETER Text:  ------------------------------------------------------------------------------------- [s] and state[1].
+20220830 071206 INFO  DSMADMC pid: [17917]
+20220830 071349 INFO  DSMADMC pid2: [17925]
+20220830 071353 INFO  DSMADMC pid2: [17925]
+20220830 071356 INFO 
+20220830 071356 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [pr] and state[0].
+20220830 071356 INFO Readline buffer: [q pr].
+20220830 071356 INFO  PROCESS TOKENS, received tokens: ['q', 'pr']
+20220830 071356 INFO  Stepped into LEVEL 2.
+20220830 071356 INFO  Found this part [q] of the command in the 2nd LEVEL dictionary items: [Query].
+20220830 071356 INFO  Let's continue searching with this pattern [['ACtlog', 'LICense', 'Node', 'SEssion', 'STGpool', 'STGPOOLDIRectory', 'LOG', 'PRocess']]
+20220830 071356 INFO  as (regexp) starts with [pr > PRocess]
+20220830 071356 INFO  Here's what we have in ret: [['PRocess ']]
+20220830 071356 INFO  PROCESS RETURNED.
+20220830 071356 INFO RETURNED results from the engine: ['PRocess ', None]
+20220830 071356 INFO : [None]
+20220830 071356 INFO COMPLETER results push cycle: [PRocess ] ----------------------------------------------------------------------- [0] [].
+20220830 071356 INFO 
+20220830 071356 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [pr] and state[1].
+20220830 071356 INFO 
+20220830 071356 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220830 071356 INFO Readline buffer: [q PRocess ].
+20220830 071356 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', '']
+20220830 071356 INFO  Stepped into LEVEL 3.
+20220830 071356 INFO  and found [q PRocess] command in the 3rd LEVEL dictionary item: [Query PRocess].
+20220830 071356 INFO  let's continue searching with this item(s) [['select process_num from processes']]
+20220830 071356 INFO  it's an SQL select [ > select process_num from processes]
+20220830 071356 INFO  SP SQL Engine reached with this select: [select process_num from processes] command and
+20220830 071356 INFO  SP SQL Engine reached with these tokens: [['q', 'PRocess', '']].
+20220830 071356 INFO  SP SQL Engine still no cached data store a new one.
+20220830 071356 INFO  DSMADMC pid: [17917]
+20220830 071359 INFO  Here's what we have in ret: [['258 ']]
+20220830 071359 INFO  PROCESS RETURNED.
+20220830 071359 INFO RETURNED results from the engine: ['258 ', None]
+20220830 071359 INFO : [None]
+20220830 071359 INFO COMPLETER results push cycle: [258 ] --------------------------------------------------------------------------- [0] [].
+20220830 071359 INFO 
+20220830 071359 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220830 071359 INFO 
+20220830 071359 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220830 071359 INFO Readline buffer: [q PRocess 258 ].
+20220830 071359 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', '258', '']
+20220830 071359 INFO  Stepped into LEVEL 4.
+20220830 071359 INFO  Here's what we have in ret: [[]]
+20220830 071359 INFO  PROCESS RETURNED.
+20220830 071359 INFO RETURNED results from the engine: [None]
+20220830 071359 INFO : []
+20220830 071359 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220830 071359 INFO 
+20220830 071359 INFO  DSMADMC pid2: [17925]
+20220830 071402 INFO  DSMADMC pid2: [17925]
+20220830 071404 INFO 
+20220830 071404 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [pr] and state[0].
+20220830 071404 INFO Readline buffer: [q pr].
+20220830 071404 INFO  PROCESS TOKENS, received tokens: ['q', 'pr']
+20220830 071404 INFO  Stepped into LEVEL 2.
+20220830 071404 INFO  Found this part [q] of the command in the 2nd LEVEL dictionary items: [Query].
+20220830 071404 INFO  Let's continue searching with this pattern [['ACtlog', 'LICense', 'Node', 'SEssion', 'STGpool', 'STGPOOLDIRectory', 'LOG', 'PRocess']]
+20220830 071404 INFO  as (regexp) starts with [pr > PRocess]
+20220830 071404 INFO  Here's what we have in ret: [['PRocess ']]
+20220830 071404 INFO  PROCESS RETURNED.
+20220830 071404 INFO RETURNED results from the engine: ['PRocess ', None]
+20220830 071404 INFO : [None]
+20220830 071404 INFO COMPLETER results push cycle: [PRocess ] ----------------------------------------------------------------------- [0] [].
+20220830 071404 INFO 
+20220830 071404 INFO COMPLETER Text:  ------------------------------------------------------------------------------------ [pr] and state[1].
+20220830 071404 INFO 
+20220830 071404 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220830 071404 INFO Readline buffer: [q PRocess ].
+20220830 071404 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', '']
+20220830 071404 INFO  Stepped into LEVEL 3.
+20220830 071404 INFO  and found [q PRocess] command in the 3rd LEVEL dictionary item: [Query PRocess].
+20220830 071404 INFO  let's continue searching with this item(s) [['select process_num from processes']]
+20220830 071404 INFO  it's an SQL select [ > select process_num from processes]
+20220830 071404 INFO  SP SQL Engine reached with this select: [select process_num from processes] command and
+20220830 071404 INFO  SP SQL Engine reached with these tokens: [['q', 'PRocess', '']].
+20220830 071404 INFO  Here's what we have in ret: [['258 ']]
+20220830 071404 INFO  PROCESS RETURNED.
+20220830 071404 INFO RETURNED results from the engine: ['258 ', None]
+20220830 071404 INFO : [None]
+20220830 071404 INFO COMPLETER results push cycle: [258 ] --------------------------------------------------------------------------- [0] [].
+20220830 071404 INFO 
+20220830 071404 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[1].
+20220830 071406 INFO 
+20220830 071406 INFO COMPLETER Text:  -------------------------------------------------------------------------------------- [] and state[0].
+20220830 071406 INFO Readline buffer: [q PRocess 258 ].
+20220830 071406 INFO  PROCESS TOKENS, received tokens: ['q', 'PRocess', '258', '']
+20220830 071406 INFO  Stepped into LEVEL 4.
+20220830 071406 INFO  Here's what we have in ret: [[]]
+20220830 071406 INFO  PROCESS RETURNED.
+20220830 071406 INFO RETURNED results from the engine: [None]
+20220830 071406 INFO : []
+20220830 071406 INFO COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------
+20220830 071406 INFO 
