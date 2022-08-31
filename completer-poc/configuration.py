@@ -18,8 +18,8 @@ class Configuration:
         'DSM_LOG': '',
         'logfile': 'spadmin.log',  # SPadmin main logfile
         'debug': False,  # enable debug info to the main logfile
-        'autoexec'	: '',              # auto command execution when spadmin starts
-        'dynamic_readline' : True,            # dynamic SQL queries when TAB + TAB
+        'autoexec'	: '',  # auto command execution when spadmin starts
+        'dynamic_readline' : True,   # dynamic SQL queries when TAB + TAB
         'prompt'           : '[' + colored( '%%SPSERVERNAME%%', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' ',
         'rlwordseparation' : 8
     }
@@ -43,8 +43,3 @@ class Configuration:
     def getconfiguration(self):
 
         return self.configparser
-
-if __name__ == "__main__":
-    c = Configuration("spadmin.ini")
-    print ("Print: ", c.getconfiguration()['DEFAULT'])
-    print ("Print: ", c.getconfiguration()['DEFAULT']['cache_age'])

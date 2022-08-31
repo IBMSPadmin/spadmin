@@ -1,44 +1,38 @@
 import re
 import pexpect
 import logging
+import globals
+
+
+
+
 
 class DSM:
+    STARTCOMMAND_TABDEL = None
     STARTCOMMAND = None
     MORE1 = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
     MORE2 = 'The character \'#\' stands for any decimal integer.'  # meg itt
     MORE3 = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt
     PROMPT1 = 'Protect: .*'
     PROMPT2 = 'tsm: .*'
+    EXPECTATIONS = [PROMPT1, PROMPT2, MORE1, MORE2, MORE3, pexpect.EOF, pexpect.TIMEOUT,
+                 'ANS8023E',
+                 'Enter your password:', 'ANS1051I']
     tsm = None
+    tsm2 = None
 
     def __init__(self, id, pa):
-        self.STARTCOMMAND = 'dsmadmc' + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
+        self.STARTCOMMAND_TABDEL = 'dsmadmc' + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
+        self.STARTCOMMAND = 'dsmadmc' + ' -id=' + id + ' -pa=' + pa
 
     def get_tsm(self):
 
         if self.tsm is None or not self.tsm.isalive:
             #debug purposes only: print ("Spawn: ", self.STARTCOMMAND)
-            self.tsm = pexpect.spawn('%s' % self.STARTCOMMAND, encoding='utf-8', echo=False)
+            self.tsm = pexpect.spawn('%s' % self.STARTCOMMAND_TABDEL, encoding='utf-8', echo=False)
             self.tsm.setwinsize(65534, 65534)
-            rc = self.tsm.expect(
-                [self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF, pexpect.TIMEOUT,
-                 'ANS8023E',
-                 'Enter your password:', 'ANS1051I'])
-            if rc == 6:
-                print('Timeout occured.')
-                print('Please check the connection parameters and restart spadmin')
-                print(self.tsm.before)
-                quit(1)
-            if rc == 7:
-                print('TCP/IP connection failure.')
-                print('Please check the connection parameters and restart spadmin')
-                print(self.tsm.before)
-                quit(1)
-            if rc == 8 or rc == 9:
-                print('Invalid user id or password.')
-                print('Please check the connection parameters and restart spadmin')
-                print(self.tsm.before)
-                quit(1)
+            rc = self.tsm.expect(self.EXPECTATIONS)
+            self.check_rc(self.tsm, rc)
         return self.tsm
 
     def send_command(self, command):
@@ -55,24 +49,9 @@ class DSM:
             print('Please check the connection parameters and restart spadmin')
             quit(1)
 
-        rc = self.tsm.expect(
-            [self.PROMPT1, self.PROMPT2, self.MORE1, self.MORE2, self.MORE3, pexpect.EOF, pexpect.TIMEOUT, 'ANS8023E',
-             'Enter your password:', 'ANS1051I'])
-        if rc == 6:
-            print('Timeout occured.')
-            print('Please check the connection parameters and restart spadmin')
-            print(tsm.before)
-            quit(1)
-        if rc == 7:
-            print('TCP/IP connection failure.')
-            print('Please check the connection parameters and restart spadmin')
-            print(tsm.before)
-            quit(1)
-        if rc == 8 or rc == 9:
-            print('Invalid user id or password.')
-            print('Please check the connection parameters and restart spadmin')
-            print(tsm.before)
-            quit(1)
+        rc = self.tsm.expect(self.EXPECTATIONS)
+        self.check_rc(tsm, rc)
+
         return tsm.before
 
     def send_command_array(self, command):
@@ -107,3 +86,64 @@ class DSM:
         return ar
 
 
+    def get_tsm2(self):
+
+        if self.tsm2 is None or not self.tsm2.isalive:
+            self.tsm2 = pexpect.spawn('%s' % self.STARTCOMMAND, encoding='utf-8', echo=False)
+            self.tsm2.setwinsize(65534, globals.columns)
+            rc = self.tsm2.expect(self.EXPECTATIONS)
+            self.check_rc(self.tsm2, rc)
+
+        return self.tsm2
+
+    def send_command2(self, command):
+
+        tsm2 = self.get_tsm2()
+
+        logging.info(' DSMADMC pid2: [' + str(tsm2.pid) + ']')
+
+        try:
+            tsm2.sendline(command)
+        except:
+            print('An error occurred during a dsmadmc execution:')
+            print(tsm2.before)
+            print('Please check the connection parameters and restart spadmin')
+            quit(1)
+
+        rc = self.tsm2.expect(self.EXPECTATIONS)
+        self.check_rc(tsm2, rc)
+
+        # Session established with server CLOUDTSM1: Linux/x86_64
+        # Server Version 8, Release 1, Level 7.000
+        # Server date/time: 08/20/2022 19:12:44  Last access: 08/20/2022 16:48:38
+
+        # Let's dance
+        ret = []
+        for i in tsm2.before.splitlines()[1:]:
+            if re.search('^Session established with server \w+:', i):
+                continue
+            elif re.search('^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i):
+                continue
+            elif re.search('^\s\sServer date\/time\:', i):
+                continue
+
+            ret.append(i)
+
+        return ret
+
+    def check_rc(self, tsm, rc):
+        if rc == 6:
+            print('Timeout occured.')
+            print('Please check the connection parameters and restart spadmin')
+            print(tsm.before)
+            quit(1)
+        if rc == 7:
+            print('TCP/IP connection failure.')
+            print('Please check the connection parameters and restart spadmin')
+            print(tsm.before)
+            quit(1)
+        if rc == 8 or rc == 9:
+            print('Invalid user id or password.')
+            print('Please check the connection parameters and restart spadmin')
+            print(tsm.before)
+            quit(1)

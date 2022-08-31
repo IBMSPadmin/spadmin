@@ -29,7 +29,6 @@
 # Let's do some mess!!!
 import sys
 from DSM import DSM
-from DSM2 import DSM2
 import columnar
 from configuration import Configuration
 from IBMSPrlCompleter import IBMSPrlCompleter
@@ -158,7 +157,6 @@ if __name__ == "__main__":
     histoyfilename = ".spadmin_history"
 
     tsm = DSM(globals.config.getconfiguration()['DEFAULT'][ 'dsmadmc_id' ], globals.config.getconfiguration()['DEFAULT'][ 'dsmadmc_password' ])
-    tsm2 = DSM2(globals.config.getconfiguration()['DEFAULT'][ 'dsmadmc_id' ], globals.config.getconfiguration()['DEFAULT'][ 'dsmadmc_password' ])
 
     myIBMSPrlCompleter = IBMSPrlCompleter( tsm )
 
@@ -267,7 +265,7 @@ if __name__ == "__main__":
 
             # ha van \([\w\d|]+\), akkor védeni kell
 
-            for textline in tsm2.send_command2(  command ):
+            for textline in tsm.send_command2(  command ):
                 if textline != '':
                     print( textline )
 
