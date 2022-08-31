@@ -502,23 +502,23 @@ def spsqlengine( select, tokens = [] ):
 #    if select in cache.keys() and time() - cache_timestamp[ select ] > spadmin_settings[ 'cache_age' ]:
     if select in cache.keys():
         cache_hitratio[ 'hit' ] += 1
-        if time() - cache_timestamp[ select ] > int( config.getconfiguration()['DEFAULT']['cache_age'] ):
+        if time() - cache_timestamp[ select ] > int( config.getconfiguration()[ 'DEFAULT' ][ 'cache_age' ] ):
             # refresh needed
-            logging.info( " SP SQL Engine hit the cache but the stored one is too old." )
+            logging.info( ' SP SQL Engine hit the cache but the stored one is too old.' )
             logging.info( ' CACHE TIMEDIFF in second(s): [' + str( time() - cache_timestamp[ select ] ) + '].' )
-            cache[ select ]           = tsm.send_command_array( select )
-            cache_timestamp[ select ] = time()
+            cache[ select ]                = tsm.send_command_array( select )
+            cache_timestamp[ select ]      = time()
             cache_hitratio[ 'hitupdate' ] += 1
     else:
         # new, init 
         logging.info( " SP SQL Engine still no cached data store a new one." )
         cache[ select ]           = tsm.send_command_array( select )
         cache_timestamp[ select ] = time()
-        cache_hitratio[ 'new' ] += 1
+        cache_hitratio[ 'new' ]  += 1
 
     # logging.info( ' CACHE2: [' + pformat( cache ) + '].' )
 
-    sqlresults = cache[ select ]
+    sqlresults                   = cache[ select ]
     cache_hitratio[ 'request' ] += 1 
 
     # if select == "select node_name from nodes":
