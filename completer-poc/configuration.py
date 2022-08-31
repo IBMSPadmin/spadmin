@@ -25,7 +25,7 @@ class Configuration:
     }
     def __init__(self, configfile):
         if not configfile:
-            configfile = 'ispadmin.ini'
+            configfile = 'spadmin.ini'
         self.configparser = configparser.ConfigParser()
         self.configparser.read(configfile)
         ### check existance of DEFAULTS
