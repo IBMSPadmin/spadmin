@@ -1,8 +1,10 @@
 .DS_Store
 completer-poc/backup/
 completer-poc/poc helpers/
-ispadmin/__pycache__/
+ispadmin/__pycache__
 completer-poc/*.log
 completer-poc/.spadmin_history
 completer-poc/__pycache__/
+completer-poc/spadmin.ini
+completer-poc/spadmin.log
 completer-poc/spadmin.ini
