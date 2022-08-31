@@ -14,7 +14,7 @@ from typing import (
 
 from toolz import frequencies
 from wcwidth import wcwidth, wcswidth
-
+from click import style
 
 # Types
 NonWrappedCell = str
@@ -36,7 +36,10 @@ class Columnar:
         min_column_width: int = 5,
         row_sep: str = "-",
         column_sep: str = "|",
-        patterns: Sequence[str] = [],
+        patterns: Sequence[str] = [
+                ('ANR....E', lambda text: style(text, fg='red')),
+                ('ANR....W', lambda text: style(text, fg='yellow')),
+            ],
         drop: Sequence[str] = [],
         select: Sequence[str] = [],
         no_borders: bool = False,

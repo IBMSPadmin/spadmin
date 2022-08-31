@@ -64,7 +64,6 @@ import logging
 
 import atexit
 
-from click import style
 
 
 #############
@@ -206,11 +205,8 @@ if __name__ == "__main__":
             continue
         elif search('^' + myIBMSPrlCompleter.regexpgenerator('Show Actlog'), line, IGNORECASE):
             data = tsm.send_command_array_array("q actlog" )
-            patterns = [
-                ('ANR....E', lambda text: style(text, fg='red')),
-                ('ANR....W', lambda text: style(text, fg='yellow')),
-            ]
-            table = columnar(data, headers=['Date/Time', 'Message'], patterns=patterns, no_borders=True, preformatted_headers=True)
+
+            table = columnar(data, headers=['Date/Time', 'Message'],  no_borders=True, preformatted_headers=True)
             print(table)
             continue
         elif search( '^' + myIBMSPrlCompleter.regexpgenerator( 'CAChe' ), line, IGNORECASE ):
