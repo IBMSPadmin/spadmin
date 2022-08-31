@@ -399,7 +399,7 @@ class IBMSPrlCompleter:
           sys.stdout.write( ppp + '   ' )
           
           # line separation
-          if word == spadmin_settings[ 'rlwordseparation' ]:
+          if word == config.getconfiguration()['DEFAULT']['rlwordseparation']:
             word = 1
             print()
           word += 1
@@ -502,7 +502,7 @@ def spsqlengine( select, tokens = [] ):
 #    if select in cache.keys() and time() - cache_timestamp[ select ] > spadmin_settings[ 'cache_age' ]:
     if select in cache.keys():
         cache_hitratio[ 'hit' ] += 1
-        if time() - cache_timestamp[ select ] > spadmin_settings[ 'cache_age' ]:
+        if time() - cache_timestamp[ select ] > config.getconfiguration()['DEFAULT']['cache_age']:
             # refresh needed
             logging.info( " SP SQL Engine hit the cache but the stored one is too old." )
             logging.info( ' CACHE TIMEDIFF in second(s): [' + str( time() - cache_timestamp[ select ] ) + '].' )
@@ -548,7 +548,7 @@ def spsqlengine( select, tokens = [] ):
     return ret
 
 def prompt():
-    prompt = spadmin_settings[ 'prompt' ]
+    prompt = config.getconfiguration()['DEFAULT']['prompt']
 
     # versions    
     prompt = prompt.replace( '%SPVERSION%',  spversion )
@@ -606,25 +606,25 @@ if __name__ == "__main__":
     # SPadmin settings
     config = Configuration("spadmin.ini")
 
-    spadmin_settings = {
-               'cache_age'        : 60,              # cache entry age (seconds)
-               'cache_disable'    : False,           # disable the dynamic SQL queries for readline
-               'cache_prefetch'   : True,            # prefetch cache data when the program starts
-               'rulefile'         : 'spadmin.rules', # rule file name
-               'historyfile'      : '',              # history file name
-               'dsmadmc_path'     : 'dsmadmc',       # the patch of dsmadmc
-               'dsmadmc_id'       : 'support',       # username for dsmadmc
-               'dsmadmc_password' : 'userkft1q2',    # password for dsmadmc
-               'DSM_DIR'          : '',
-               'DSM_OPT'          : '',
-               'DSM_LOG'          : '',
-               'logfile'          : 'spadmin.log',   # SPadmin main logfile
-               'debug'            : False,           # enable debug info to the main logfile
-               'autoexec'	        : '',              # auto command execution when spadmin starts
-               'dynamic_readline' : True,            # dynamic SQL queries when TAB + TAB
-               'prompt'           : '[' + colored( '%SPSERVERNAME%', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' ',
-               'rlwordseparation' : 8
-    }
+   # spadmin_settings = {
+   #            'cache_age'        : 60,              # cache entry age (seconds)
+   #            'cache_disable'    : False,           # disable the dynamic SQL queries for readline
+   #            'cache_prefetch'   : True,            # prefetch cache data when the program starts
+   #            'rulefile'         : 'spadmin.rules', # rule file name
+   #            'historyfile'      : '',              # history file name
+   #            'dsmadmc_path'     : 'dsmadmc',       # the patch of dsmadmc
+   #            'dsmadmc_id'       : 'support',       # username for dsmadmc
+   #            'dsmadmc_password' : 'userkft1q2',    # password for dsmadmc
+   #            'DSM_DIR'          : '',
+   #            'DSM_OPT'          : '',
+   #            'DSM_LOG'          : '',
+   #            'logfile'          : 'spadmin.log',   # SPadmin main logfile
+   #            'debug'            : False,           # enable debug info to the main logfile
+   #            'autoexec'	        : '',              # auto command execution when spadmin starts
+   #            'dynamic_readline' : True,            # dynamic SQL queries when TAB + TAB
+   #            'prompt'           : '[' + colored( '%SPSERVERNAME%', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' ',
+   #            'rlwordseparation' : 8
+   # }
 
     # screen properies
     columns = 80
@@ -682,12 +682,12 @@ if __name__ == "__main__":
 
     print( consolefilledline( '', '-', '', columns ) )
 
-    rulesfilename  = "spadmin.rules"
+    rulesfilename  = config.getconfiguration()['DEFAULT']['rulefile']
     histoyfilename = ".spadmin_history"
     #rlprompt       = colored( 'SP>', 'white', 'on_green', attrs=[ 'bold' ] ) + ' '
     sys.stdout.write( " Let's try to get the name of the server...\r" )
-    tsm = DSM(spadmin_settings[ 'dsmadmc_id' ], spadmin_settings[ 'dsmadmc_password' ])
-    tsm2 = DSM2(spadmin_settings[ 'dsmadmc_id' ], spadmin_settings[ 'dsmadmc_password' ])
+    tsm = DSM(config.getconfiguration()['DEFAULT'][ 'dsmadmc_id' ], config.getconfiguration()['DEFAULT'][ 'dsmadmc_password' ])
+    tsm2 = DSM2(config.getconfiguration()['DEFAULT'][ 'dsmadmc_id' ], config.getconfiguration()['DEFAULT'][ 'dsmadmc_password' ])
     spprompt       = tsm.send_command_array('select SERVER_NAME from STATUS' )[ 0 ]
     sys.stdout.write( " and get the version of the IBM SP server...\r" )
     spversion, sprelease, splevel, spsublevel = tsm.send_command_array_array( 'select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS' )[ 0 ]
