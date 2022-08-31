@@ -31,6 +31,7 @@ import sys
 from DSM import DSM
 from DSM2 import DSM2
 import columnar
+from configuration import Configuration
 
 columnar = columnar.Columnar()
 
@@ -586,11 +587,13 @@ def ruler():
         else:
             sys.stdout.write( colored( str( c ), 'green' ) )
 
+
 def refreshrowscolumns():
     global rows, columns
     rows, columns = os.popen( 'stty size', 'r' ).read().split()
     rows    = int( rows )
     columns = int( columns )
+
 
 if __name__ == "__main__":
 
@@ -601,8 +604,10 @@ if __name__ == "__main__":
     # GLOBAL variables
 
     # SPadmin settings
+    config = Configuration("spadmin.ini")
+
     spadmin_settings = {
-               'cache_age'        : 60,              # cache entry age
+               'cache_age'        : 60,              # cache entry age (seconds)
                'cache_disable'    : False,           # disable the dynamic SQL queries for readline
                'cache_prefetch'   : True,            # prefetch cache data when the program starts
                'rulefile'         : 'spadmin.rules', # rule file name

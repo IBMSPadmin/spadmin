@@ -70,7 +70,8 @@ class Columnar:
             headers = [""] * len(data[0])
 
         if self.no_borders:
-            self.column_sep = " " * 2
+            ## spadmin special need
+            self.column_sep = " " * 1
             self.row_sep = ""
             self.header_sep = "="
             if not preformatted_headers:
@@ -101,9 +102,8 @@ class Columnar:
         out = io.StringIO()
         write_header = True if not self.no_headers else False
         self.write_row_separators(out, column_widths)
-        out.write( ## ez kell, hogy az első sorban is legyem header
-            self.column_sep
-            + (self.header_sep * (sum(column_widths) + (len(column_widths) * 2)))
+        out.write( ## ez kell, hogy az első sorban is legyem header spadmin special need
+             (self.header_sep * (sum(column_widths) + (len(column_widths) * 1)))
             + "\n"
         )
         for lrow, color_row in zip(truncated_rows, self.color_grid):
@@ -119,8 +119,7 @@ class Columnar:
                     for text, code in zip(justified_row_parts, color_row)
                 ]
                 out.write(
-                    self.column_sep
-                    + self.column_sep.join(colorized_row_parts)
+                     self.column_sep.join(colorized_row_parts)
                     + self.column_sep
                     + "\n"
                 )
@@ -130,8 +129,7 @@ class Columnar:
                 #    + (self.header_sep * (table_width - (len(self.column_sep * 2))))
                 #    + self.column_sep
                 #    + "\n"
-                    self.column_sep
-                    + (self.header_sep * (sum(column_widths) + (len(column_widths) * 2)))
+                     (self.header_sep * (sum(column_widths) + (len(column_widths) * 1)))
                     + "\n"
                 )
                 write_header = False
