@@ -502,7 +502,7 @@ def spsqlengine( select, tokens = [] ):
 #    if select in cache.keys() and time() - cache_timestamp[ select ] > spadmin_settings[ 'cache_age' ]:
     if select in cache.keys():
         cache_hitratio[ 'hit' ] += 1
-        if time() - cache_timestamp[ select ] > config.getconfiguration()['DEFAULT']['cache_age']:
+        if time() - cache_timestamp[ select ] > int( config.getconfiguration()['DEFAULT']['cache_age'] ):
             # refresh needed
             logging.info( " SP SQL Engine hit the cache but the stored one is too old." )
             logging.info( ' CACHE TIMEDIFF in second(s): [' + str( time() - cache_timestamp[ select ] ) + '].' )
@@ -671,7 +671,7 @@ if __name__ == "__main__":
     print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
     print( colored( "= Once you start to use it, you can't live without it!!!", 'magenta', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
     print()
-
+    
     # Logger settings
     logfilename                   = 'spadmin.log'
     logging.basicConfig( filename = logfilename,
