@@ -4,12 +4,13 @@ from termcolor import colored
 
 class Configuration:
     configparser = None
+    configfile = None
     defaults = {
         'cache_age': 60,  # cache entry age (seconds)
         'cache_disable': False,  # disable the dynamic SQL queries for readline
         'cache_prefetch': True,  # prefetch cache data when the program starts
         'rulefile': 'spadmin.rules',  # rule file name
-        'historyfile': '',  # history file name
+        'historyfile': '.spadmin_history',  # history file name
         'dsmadmc_path': 'dsmadmc',  # the patch of dsmadmc
         'dsmadmc_id': 'admin',  # username for dsmadmc
         'dsmadmc_password': 'admin',  # password for dsmadmc
@@ -26,6 +27,7 @@ class Configuration:
     def __init__(self, configfile):
         if not configfile:
             configfile = 'spadmin.ini'
+        self.configfile = configfile
         self.configparser = configparser.ConfigParser()
         self.configparser.read(configfile)
         ### check existance of DEFAULTS
@@ -37,7 +39,7 @@ class Configuration:
         self.writeconfig()
 
     def writeconfig(self):
-        with open('spadmin.ini', 'w') as configfile:
+        with open(self.configfile, 'w') as configfile:
             self.configparser.write(configfile)
 
     def getconfiguration(self):

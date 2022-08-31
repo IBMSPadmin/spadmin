@@ -101,10 +101,10 @@ class Columnar:
         table_width = sum(column_widths) + ((len(column_widths) + 1) * len(row_sep))
         out = io.StringIO()
         write_header = True if not self.no_headers else False
-        self.write_row_separators(out, column_widths)
+      #  self.write_row_separators(out, column_widths) # remove starting empty line
         out.write( ## ez kell, hogy az első sorban is legyem header spadmin special need
              (self.header_sep * (sum(column_widths) + (len(column_widths) * 1)))
-            + "\n"
+            + self.header_sep + "\n"
         )
         for lrow, color_row in zip(truncated_rows, self.color_grid):
             for row in lrow:
@@ -130,12 +130,12 @@ class Columnar:
                 #    + self.column_sep
                 #    + "\n"
                      (self.header_sep * (sum(column_widths) + (len(column_widths) * 1)))
-                    + "\n"
+                    + self.header_sep + "\n"
                 )
                 write_header = False
             else:
                 if not self.no_borders:
-                    self.write_row_separators(out, column_widths)
+                   self.write_row_separators(out, column_widths)
         return out.getvalue()
 
     def write_row_separators(
@@ -369,7 +369,7 @@ class Columnar:
                 return self.widths_sorted_by(columns, "column_no")
 
         raise Exception(
-            "Could not fit table in current terminal, try reducing the number of columns."
+            "Could not fit table in current terminal."
         )
 
     def wrap_and_truncate_logical_cells(

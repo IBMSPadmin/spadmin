@@ -1,10 +1,12 @@
 import sys
+import utilities
 import globals
+import logging
+
 from termcolor import colored
 from pprint import pprint, pformat
 from re import search, IGNORECASE
 from time import time
-import logging
 try:
     import gnureadline as readline
 except ImportError:
@@ -12,11 +14,10 @@ except ImportError:
 readline.parse_and_bind( 'tab: complete' )
 readline.set_completer_delims( ' ' )
 
+
 #####################################
 # IBMSPrlCompleter Class definition #
 #####################################
-
-
 class IBMSPrlCompleter:
     rows = None
     columns = None
@@ -34,17 +35,24 @@ class IBMSPrlCompleter:
     cache_timestamp = {} # global cache timestamp store
     cache_hitratio  = { 'new' : 0, 'request' : 0, 'hit' : 0, 'hitupdate' : 0 }
 
+    def __init__(self, tsm):
+        print(' Loading rules...                                          ')
+        sys.stdout.write(" Let's try to get the name of the server...\r")
+        spprompt = tsm.send_command_array('select SERVER_NAME from STATUS')[0]
 
-    def progressbar(self, count, total):
-        barlength = self.columns - 2  # [...]
-        filledlength = int(round((barlength) * count / float(total)))
+        sys.stdout.write(" and get the version of the IBM SP server...\r")
+        spversion, sprelease, splevel, spsublevel = tsm.send_command_array_array('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
 
-        percent = round(100.0 * count / float(total), 1)
-        barline = '=' * filledlength + colored('-', 'grey', attrs=['bold']) * (barlength - filledlength)
-
-        sys.stdout.write('[%s]\r' % (barline))
-        sys.stdout.write('[%s%s\r' % (colored(percent, 'grey', 'on_white'), colored('%', 'grey', 'on_white')))
-        sys.stdout.flush()
+        self.rows = globals.rows
+        self.columns = globals.columns
+        self.config = globals.config
+        self.tsm = tsm
+        self.spversion = spversion
+        self.sprelease = sprelease
+        self.splevel = splevel
+        self.spsublevel = spsublevel
+        self.spprompt = spprompt
+        self.loadrules(self.config.getconfiguration()['DEFAULT']['rulefile'])
 
     def prompt(self):
         prompt = self.config.getconfiguration()['DEFAULT']['prompt']
@@ -57,10 +65,6 @@ class IBMSPrlCompleter:
 
         # prompt
         return prompt.replace('%SPSERVERNAME%', self.spprompt)
-
-    def consoleline(self, char='-'):
-        print(char * self.columns)
-
 
     def regexpgenerator(self, regexp):
 
@@ -145,31 +149,6 @@ class IBMSPrlCompleter:
 
         return ret
 
-
-    def consolefilledline(self, left='', pattern='-', right='', width=80):
-        patternwith = width - len(left) - len(right) - 2
-        return left + ' ' + pattern * patternwith + ' ' + right
-
-
-    def __init__(self, tsm):
-        print(' Loading rules...                                          ')
-        sys.stdout.write(" Let's try to get the name of the server...\r")
-        spprompt = tsm.send_command_array('select SERVER_NAME from STATUS')[0]
-
-        sys.stdout.write(" and get the version of the IBM SP server...\r")
-        spversion, sprelease, splevel, spsublevel = tsm.send_command_array_array('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
-
-        self.rows = globals.rows
-        self.columns = globals.columns
-        self.config = globals.config
-        self.tsm = tsm
-        self.spversion = spversion
-        self.sprelease = sprelease
-        self.splevel = splevel
-        self.spsublevel = spsublevel
-        self.spprompt = spprompt
-        self.loadrules(self.config.getconfiguration()['DEFAULT']['rulefile'])
-
     def loadrules(self, rulefilename):
         rulefile = open(rulefilename, 'r')
         rulefilelines = rulefile.readlines()
@@ -178,7 +157,7 @@ class IBMSPrlCompleter:
         i = 0
         for line in rulefilelines:
             i += 1
-            self.progressbar(i, len(rulefilelines))
+            utilities.progressbar(i, len(rulefilelines))
             # ez mi? assert?
             # assert( '->' in line )
             # Skip the remark and empty lines
@@ -206,7 +185,7 @@ class IBMSPrlCompleter:
         rulefile.close()
         print()
 
-        self.consoleline('#')
+        utilities.consoleline('#')
         print(colored(' Imported LEVEL 0 starters', 'green', attrs=['bold']) + ' from this file:\t[' + colored(
             rulefilename, 'green') + ']')
         # pprint( self.start )
@@ -215,7 +194,7 @@ class IBMSPrlCompleter:
         # pprint( self.rules )
         logging.info('Rule file imported as starters:\n' + pformat(self.start))
         logging.info('Rule file imported as other rules:\n' + pformat(self.rules))
-        self.consoleline('#')
+        utilities.consoleline('#')
 
         # self.results = self.start
         # self.results += [ None ]
@@ -371,7 +350,7 @@ class IBMSPrlCompleter:
     def IBMSPcompleter(self, text, state):
 
         logging.info('')
-        logging.info(self.consolefilledline('COMPLETER Text: ', '-', '[' + text + '] and state[' + str(state) + '].', 120))
+        logging.info(utilities.consolefilledline('COMPLETER Text: ', '-', '[' + text + '] and state[' + str(state) + '].', 120))
 
         if len(self.rrr) == 0:
             logging.info('Readline buffer: [' + readline.get_line_buffer() + '].')
@@ -396,7 +375,7 @@ class IBMSPrlCompleter:
                     'COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------')
                 logging.info('')
             else:
-                logging.info(self.consolefilledline('COMPLETER results push cycle: [' + tmp + ']', '-',
+                logging.info(utilities.consolefilledline('COMPLETER results push cycle: [' + tmp + ']', '-',
                                                '[' + str(state) + '] [' + '].', 120))
 
             return tmp

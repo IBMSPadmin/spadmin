@@ -28,6 +28,7 @@
 
 # Let's do some mess!!!
 import sys
+import utilities
 from DSM import DSM
 import columnar
 from configuration import Configuration
@@ -71,33 +72,6 @@ from click import style
 #############
 
 
-def ruler():
-    cc = 1
-    for i in range( 1, globals.columns + 1, 1 ):
-        if i % 100:
-            sys.stdout.write( ' ' )
-        else:
-            sys.stdout.write( colored( str( cc ), 'green' ) )
-            cc += 1
-            cc = 0 if cc == 100 else cc
-    print()
-
-    cc = 1
-    for i in range( 1, globals.columns + 1, 1 ):
-        if i % 10:
-            sys.stdout.write( ' ' )
-        else:
-            sys.stdout.write( colored( str( cc ), 'green' ) )
-            cc += 1
-            cc = 0 if cc == 10 else cc
-    print()
-
-    for i in range( 1, globals.columns + 1, 1 ):
-        c = i % 10
-        if c:
-            sys.stdout.write( str( c ) )
-        else:
-            sys.stdout.write( colored( str( c ), 'green' ) )
 
 
 def refreshrowscolumns():
@@ -154,18 +128,16 @@ if __name__ == "__main__":
                          datefmt  = '%Y%m%d %H%M%S',
                          level    = logging.DEBUG )
 
-    histoyfilename = ".spadmin_history"
-
     tsm = DSM(globals.config.getconfiguration()['DEFAULT'][ 'dsmadmc_id' ], globals.config.getconfiguration()['DEFAULT'][ 'dsmadmc_password' ])
 
     myIBMSPrlCompleter = IBMSPrlCompleter( tsm )
 
-    print( myIBMSPrlCompleter.consolefilledline( '', '-', '', globals.columns ) )
+    print( utilities.consolefilledline( '', '-', '', globals.columns ) )
 
     # Command line history
     # Based on this: https://docs.python.org/3/library/readline.html
     # rlhistfile = os.path.join( os.path.expanduser( "~" ), ".python_history" )
-    rlhistfile = os.path.join( "./", histoyfilename )
+    rlhistfile = os.path.join( "./", globals.config.getconfiguration()['DEFAULT'][ 'historyfile' ] )
     try:
         readline.read_history_file( rlhistfile )
         # default history len is -1 (infinite), which may grow unruly
@@ -186,10 +158,10 @@ if __name__ == "__main__":
       use: "REload" to reload the rule file! and
       use: "SHow LOG" to reach the local log file!''' )
 
-    ruler()
+    utilities.ruler()
     print()
 
-    logging.info( myIBMSPrlCompleter.consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
+    logging.info( utilities.consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
 
     # Infinite loop
     while True:
@@ -271,13 +243,13 @@ if __name__ == "__main__":
 
         #consoleline( '-' )
 
-    logging.info( myIBMSPrlCompleter.consolefilledline( 'INPUT LOOP END ', '-', '', 120 ) )
+    logging.info( utilities.consolefilledline( 'INPUT LOOP END ', '-', '', 120 ) )
 
     # End of the prg
     prgend = time()
-    myIBMSPrlCompleter.consoleline( '-' )
+    utilities.consoleline( '-' )
     print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
-    myIBMSPrlCompleter.consoleline( '-' )
+    utilities.consoleline( '-' )
 
     sys.exit( 0 )
 
