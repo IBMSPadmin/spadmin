@@ -204,19 +204,7 @@ if __name__ == "__main__":
             print('Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ')
             continue
 
-        # own command executor
-        match = False
-        for key in spadmin_commands: 
-            if search( '^' + utilities.regexpgenerator( key ), line, IGNORECASE ):
-                # just transfer the parameters
-                spadmin_commands[ key ]( line.split()[ 2: ] )
-                match = True
-                break 
-        if match:
-            continue
-        # own command executor
-                            
-        # Own commands
+                                    # Own commands
         if search( '^' + utilities.regexpgenerator( 'REload' ),     line, IGNORECASE ):
             myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT'][ 'rulesfilename' ] )
             continue
@@ -256,7 +244,7 @@ if __name__ == "__main__":
 
         # simple command runner engine
         for command in line.split( ';' ):
-
+            command = command.strip()
             # q actlog | grep alma | grep alma | count ;
             # disassembly it first
             # $->grep
@@ -266,6 +254,19 @@ if __name__ == "__main__":
             # $->SPadmin
 
             # ha van \([\w\d|]+\), akkor védeni kell
+
+            # own command executor
+            match = False
+            for key in spadmin_commands: 
+                if search( '^' + utilities.regexpgenerator( key ), command, IGNORECASE ):
+                    # just transfer the parameters
+                    spadmin_commands[ key ]( command.split()[ 2: ] )
+                    match = True
+                    break 
+            
+            if match:
+                continue
+            # own command executor
 
             for textline in tsm.send_command2(  command ):
                 if textline != '':
