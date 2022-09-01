@@ -4,8 +4,8 @@ from termcolor import colored
 
 class Configuration:
     configparser = None
-    configfile = None
-    defaults = {
+    configfile   = None
+    defaults     = {
         'cache_age'        : 60,  # cache entry age (seconds)
         'cache_disable'    : False,  # disable the dynamic SQL queries for readline
         'cache_prefetch'   : True,  # prefetch cache data when the program starts
