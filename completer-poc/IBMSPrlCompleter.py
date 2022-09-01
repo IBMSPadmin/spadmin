@@ -55,7 +55,7 @@ class IBMSPrlCompleter:
         self.loadrules(self.config.getconfiguration()['DEFAULT']['rulefile'])
 
     def prompt(self):
-        prompt = self.config.getconfiguration()['DEFAULT']['prompt']
+        prompt = self.config.getconfiguration()['DEFAULT']['prompt'].strip( '"' )
 
         # versions
         prompt = prompt.replace('%SPVERSION%', self.spversion)

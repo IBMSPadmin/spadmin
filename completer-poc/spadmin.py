@@ -64,7 +64,7 @@ import logging
 
 import atexit
 
-
+import argparse
 
 #############
 # Functions # ####################################################################
@@ -79,8 +79,21 @@ def refreshrowscolumns():
     globals.columns = int( column )
 
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
+    
+    parser = argparse.ArgumentParser( description = 'Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.', epilog='''
+    epilog szaskalska sal slak lskal sla ksla lskskl a''')
+    
+    parser.add_argument( '-d', '--debug', action=argparse.BooleanOptionalAction, help='debug help' )
+    parser.add_argument( '-p', '--prereqcheck', action=argparse.BooleanOptionalAction, help='prereqcheck help' )
+    parser.add_argument( '--consoleonly', default=True, type=bool, help='consoleonly help' )
+    parser.add_argument( '-c', '--commands', nargs='?', help='consoleonly help' )
+    parser.add_argument( '-v', '--version', action='version', version='%(prog)s v1.0', help='show version information')
+    
+    #parser.parse_args( ['--version'] )
+    #parser.print_help()
+    
     ########## ###############################################################################################################
     # main() #
     ########## ###############################################################################################################
