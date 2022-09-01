@@ -1,8 +1,16 @@
+import os
 import sys
 import globals
 
 from termcolor import colored
 from re import search, IGNORECASE
+
+
+def refreshrowscolumns():
+    row, column = os.popen( 'stty size', 'r' ).read().split()
+    globals.rows    = int( row )
+    globals.columns = int( column )
+
 
 def progressbar(count, total):
     barlength = globals.columns - 2  # [...]

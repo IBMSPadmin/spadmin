@@ -5,7 +5,9 @@
 # 
 
 # v1.0.0
+
 #
+#       Changed: refactoring utilities, globals, IBMSPrlCompleter, DSM
 #       Changed: IBMSPcompleter regression algorithm to a faster one
 #         Added: simple debug, grep, invgrep, count, mailto handling (a later check maybe needed or not, BUT a collector certainly!!! Don't know hot to hadnle it)
 #       Changed: all print( ..., end='' ) to sys.stdout.write() for better compatibility with python2
@@ -26,9 +28,7 @@
 #       Changed: 
 #         Fixed: 
 
-# Let's do some mess!!!
 import sys
-import utilities
 from DSM import DSM
 import columnar
 from configuration import Configuration
@@ -69,17 +69,11 @@ import argparse
 #############
 # Functions # ####################################################################
 #############
+import utilities
 
-
-
-
-def refreshrowscolumns():
-    row, column = os.popen( 'stty size', 'r' ).read().split()
-    globals.rows    = int( row )
-    globals.columns = int( column )
-
-
-
+########## ###############################################################################################################
+# main() #  Let's dance
+########## ###############################################################################################################
 if __name__ == "__main__":
     
     parser = argparse.ArgumentParser( description = 'Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.', epilog='''
@@ -93,11 +87,7 @@ if __name__ == "__main__":
     
     #parser.parse_args( ['--version'] )
     #parser.print_help()
-    
-    ########## ###############################################################################################################
-    # main() #
-    ########## ###############################################################################################################
-
+     
     # GLOBAL variables
     import globals
     globals.initialize()
@@ -110,8 +100,6 @@ if __name__ == "__main__":
         os.system( 'cls' )
     else:
         os.system( 'clear' )
-
-    refreshrowscolumns()
 
     # https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
     print( colored( '''
@@ -186,10 +174,28 @@ if __name__ == "__main__":
     myIBMSPrlCompleter.rules[ 'SHow RULer' ].append( 'Help' )
     myIBMSPrlCompleter.rules[ 'SHow RULer' ].append( 'INVerse' )
     
+    def spadmin_show_cache( parameters ):
+        
+        data  = []
+        
+        for key in myIBMSPrlCompleter.cache_hitratio:
+            data.append( [ key, myIBMSPrlCompleter.cache_hitratio[ key ] ] )
+        
+        print( columnar( data, headers=[ colored( 'Name', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], no_borders=True, preformatted_headers=True, justify=[ 'l', 'c' ] ) )
+        
+    #    
+    spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
+    myIBMSPrlCompleter.rules[ 'SPadmin' ] = []
+    myIBMSPrlCompleter.rules[ 'SPadmin' ].append( 'SHow' )
+    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'RULer' )
+    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ] = []
+    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'CAche' )
+       
     # Infinite loop
     while True:
-
-        refreshrowscolumns()
+    
+        # refresh the terminal size 
+        utilities.refreshrowscolumns()
 
         try:
           line = input( myIBMSPrlCompleter.prompt() )
@@ -201,10 +207,10 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             # Suppress ctrl-c
             print( '\a' ) # Bell
-            print('Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ')
+            print( 'Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ' )
             continue
 
-                                    # Own commands
+        # Own commands
         if search( '^' + utilities.regexpgenerator( 'REload' ),     line, IGNORECASE ):
             myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT'][ 'rulesfilename' ] )
             continue
