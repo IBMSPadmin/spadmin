@@ -176,8 +176,7 @@ if __name__ == "__main__":
     
     def spadmin_show_cache( parameters ):
         
-        data  = []
-        
+        data  = [] 
         for key in myIBMSPrlCompleter.cache_hitratio:
             data.append( [ key, myIBMSPrlCompleter.cache_hitratio[ key ] ] )
         
