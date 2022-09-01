@@ -31,9 +31,9 @@ def ruler( parameters ):
         ruler10()
         ruler1()
     else:    
-        if search ( regexpgenerator('Help'), parameters[0] ):
+        if search ( regexpgenerator('Help'), parameters[0], IGNORECASE ):
             print( 'SHow Ruler Help message!' )
-        elif search ( regexpgenerator('INVerse'), parameters[0] ):
+        elif search ( regexpgenerator('INVerse'), parameters[0], IGNORECASE ):
             ruler1()    
             ruler10()
             ruler100()
