@@ -217,7 +217,7 @@ if __name__ == "__main__":
 
         # Own commands
         if search( '^' + utilities.regexpgenerator( 'REload' ),     line, IGNORECASE ):
-            myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT'][ 'rulesfilename' ] )
+            myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT']['rulefile'] )
             continue
         elif search( '^' + utilities.regexpgenerator( 'Show Log' ), line, IGNORECASE ):
             os.system( 'open ./' + logfilename )
