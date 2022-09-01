@@ -296,7 +296,7 @@ if __name__ == "__main__":
     sys.exit( 0 )
 
     __author__     = [ "Fleischmann György", "Szabó Marcell" ]
-    __copyright__  = "Copyright 2022, The SPadmin Project"
+    __copyright__  = "Copyright 2022, as The SPadmin Python Project"
     __credits__    = [ "Fleischmann György", "Szabó Marcell"]
     __license__    = "MIT"
     __version__    = "1.0.0"

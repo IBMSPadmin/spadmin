@@ -11,8 +11,8 @@ try:
     import gnureadline as readline
 except ImportError:
     import readline
-readline.parse_and_bind( 'tab: complete' )
-readline.set_completer_delims( ' ' )
+#readline.parse_and_bind( 'tab: complete' )
+#readline.set_completer_delims( ' ' )
 
 
 #####################################
