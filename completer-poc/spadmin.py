@@ -181,6 +181,7 @@ if __name__ == "__main__":
     }
     # command injection
     spadmin_commands[ 'SHow RULer' ] = utilities.ruler
+    myIBMSPrlCompleter.rules[ 'SHow' ].append( 'RULer' )
     
     # Infinite loop
     while True:
