@@ -174,21 +174,27 @@ if __name__ == "__main__":
     myIBMSPrlCompleter.rules[ 'SHow RULer' ].append( 'Help' )
     myIBMSPrlCompleter.rules[ 'SHow RULer' ].append( 'INVerse' )
     
+    
     def spadmin_show_cache( parameters ):
-        
         data  = [] 
         for key in myIBMSPrlCompleter.cache_hitratio:
             data.append( [ key, myIBMSPrlCompleter.cache_hitratio[ key ] ] )
         
         print( columnar( data, headers=[ colored( 'Name', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], no_borders=True, preformatted_headers=True, justify=[ 'l', 'c' ] ) )
-        
     #    
     spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
     myIBMSPrlCompleter.rules[ 'SPadmin' ] = []
     myIBMSPrlCompleter.rules[ 'SPadmin' ].append( 'SHow' )
-    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'RULer' )
     myIBMSPrlCompleter.rules[ 'SPadmin SHow' ] = []
     myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'CAche' )
+    
+
+    def spadmin_show_version( parameters ):        
+        print( 'Version: v1.0' )        
+    #    
+    spadmin_commands[ 'SPadmin SHow VERsion' ] = spadmin_show_version
+    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'VERsion' )
+
        
     # Infinite loop
     while True:
