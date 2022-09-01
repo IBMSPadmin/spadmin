@@ -182,6 +182,9 @@ if __name__ == "__main__":
     # command injection
     spadmin_commands[ 'SHow RULer' ] = utilities.ruler
     myIBMSPrlCompleter.rules[ 'SHow' ].append( 'RULer' )
+    myIBMSPrlCompleter.rules[ 'SHow RULer' ] = []
+    myIBMSPrlCompleter.rules[ 'SHow RULer' ].append( 'Help' )
+    myIBMSPrlCompleter.rules[ 'SHow RULer' ].append( 'INVerse' )
     
     # Infinite loop
     while True:
@@ -201,25 +204,26 @@ if __name__ == "__main__":
             print('Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ')
             continue
 
-        # Command executor
+        # own command executor
         match = False
-        for key in spadmin_commands:     
-            if search( '^' + myIBMSPrlCompleter.regexpgenerator( key ), line, IGNORECASE ):
-                spadmin_commands[ key ]( line )
+        for key in spadmin_commands: 
+            if search( '^' + utilities.regexpgenerator( key ), line, IGNORECASE ):
+                # just transfer the parameters
+                spadmin_commands[ key ]( line.split()[ 2: ] )
                 match = True
                 break 
         if match:
             continue
-        # Command executor
+        # own command executor
                             
         # Own commands
-        if search( '^' + myIBMSPrlCompleter.regexpgenerator( 'REload' ),     line, IGNORECASE ):
+        if search( '^' + utilities.regexpgenerator( 'REload' ),     line, IGNORECASE ):
             myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT'][ 'rulesfilename' ] )
             continue
-        elif search( '^' + myIBMSPrlCompleter.regexpgenerator( 'Show Log' ), line, IGNORECASE ):
+        elif search( '^' + utilities.regexpgenerator( 'Show Log' ), line, IGNORECASE ):
             os.system( 'open ./' + logfilename )
             continue
-        elif search('^' + myIBMSPrlCompleter.regexpgenerator('Show STGP'), line, IGNORECASE):
+        elif search('^' + utilities.regexpgenerator('Show STGP'), line, IGNORECASE):
             data = tsm.send_command_array_array("select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
             for index, row in enumerate(data):
                 (a, b, c, d, e, f, g, h, i, j) = row
@@ -233,19 +237,19 @@ if __name__ == "__main__":
                              no_borders=True, preformatted_headers=True, justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
             print(table)
             continue
-        elif search('^' + myIBMSPrlCompleter.regexpgenerator('Show Actlog'), line, IGNORECASE):
+        elif search('^' + utilities.regexpgenerator('Show Actlog'), line, IGNORECASE):
             data = tsm.send_command_array_array("q actlog" )
 
             table = columnar(data, headers=['Date/Time', 'Message'],  no_borders=True, preformatted_headers=True)
             print(table)
             continue
-        elif search( '^' + myIBMSPrlCompleter.regexpgenerator( 'CAChe' ), line, IGNORECASE ):
+        elif search( '^' + utilities.regexpgenerator( 'CAChe' ), line, IGNORECASE ):
             pprint( myIBMSPrlCompleter.cache_hitratio )
             continue
-        elif search( '^' + myIBMSPrlCompleter.regexpgenerator( 'QUIt' ),     line, IGNORECASE ) or \
-             search( '^' + myIBMSPrlCompleter.regexpgenerator( 'LOGout' ),   line, IGNORECASE ) or \
-             search( '^' + myIBMSPrlCompleter.regexpgenerator( 'Exit' ),     line, IGNORECASE ) or \
-             search( '^' + myIBMSPrlCompleter.regexpgenerator( 'BYe' ),      line, IGNORECASE ):
+        elif search( '^' + utilities.regexpgenerator( 'QUIt' ),     line, IGNORECASE ) or \
+             search( '^' + utilities.regexpgenerator( 'LOGout' ),   line, IGNORECASE ) or \
+             search( '^' + utilities.regexpgenerator( 'Exit' ),     line, IGNORECASE ) or \
+             search( '^' + utilities.regexpgenerator( 'BYe' ),      line, IGNORECASE ):
 
             # Quit the program
             break

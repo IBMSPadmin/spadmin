@@ -66,35 +66,6 @@ class IBMSPrlCompleter:
         # prompt
         return prompt.replace('%SPSERVERNAME%', self.spprompt)
 
-    def regexpgenerator(self, regexp):
-
-        savelastchar = ''
-        if regexp[-1] == '=':
-            savelastchar = regexp[-1]
-            regexp = regexp[: -1]
-
-        result = ''
-        for part in regexp.split():
-
-            if part[0].isupper():
-
-                tmpregexp = part
-                tmpstring = part
-                for x in part:
-                    if tmpstring[-1].isupper():
-                        break
-                    tmpstring = part[0: len(tmpstring) - 1]
-                    tmpregexp += '|' + tmpstring
-
-                result += '(' + tmpregexp + ')'
-
-            else:
-                result += '(' + part + ')'
-
-            result += '\s+'
-
-        return result[:-3] + savelastchar
-
     def spsqlengine(self, select, tokens=[]):
         # Handle SQL requests
 
@@ -235,7 +206,7 @@ class IBMSPrlCompleter:
                     continue
                 # logging.info( ' and searching for regexp pattern [' + key + ']' )
                 # logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + '(?!.*\w)' + ']' )
-                if search('^' + self.regexpgenerator(key), tokens[-2], IGNORECASE):
+                if search('^' + utilities.regexpgenerator(key), tokens[-2], IGNORECASE):
                     logging.info(' Found this part [' + tokens[
                         -2] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].')
 
@@ -260,7 +231,7 @@ class IBMSPrlCompleter:
                 # logging.info( ' and searching for regexp pattern [' + key + ']' )
                 # logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
                 # logging.info( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
-                if search('^' + self.regexpgenerator(key), tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE):
+                if search('^' + utilities.regexpgenerator(key), tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE):
                     logging.info(' and found [' + tokens[-3] + ' ' + tokens[
                         -2] + '] command in the 3rd LEVEL dictionary item: [' + key + '].')
 
@@ -287,7 +258,7 @@ class IBMSPrlCompleter:
                     continue
                 elif key.startswith('select'):  # ???????????????????????????????
                     continue
-                if search('^' + self.regexpgenerator(key),
+                if search('^' + utilities.regexpgenerator(key),
                           tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE):
                     logging.info(' and found [' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[
                         -2] + '] command in the 4th LEVEL dictionary item: [' + key + '].')
@@ -316,7 +287,7 @@ class IBMSPrlCompleter:
                     continue
                 elif key.startswith('select'):  # ???????????????????????????????
                     continue
-                if search('^' + self.regexpgenerator(key),
+                if search('^' + utilities.regexpgenerator(key),
                           tokens[-5] + ' ' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1],
                           IGNORECASE):
                     logging.info(' and found [' + tokens[-5] + ' ' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[
