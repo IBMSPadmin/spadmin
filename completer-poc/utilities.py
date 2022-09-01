@@ -25,9 +25,7 @@ def consolefilledline(left='', pattern='-', right='', width=80):
     return left + ' ' + pattern * patternwith + ' ' + right
 
 
-
-
-def ruler():
+def ruler( line ):
     cc = 1
     for i in range( 1, globals.columns + 1, 1 ):
         if i % 100:

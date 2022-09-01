@@ -157,11 +157,18 @@ if __name__ == "__main__":
       use: "REload" to reload the rule file! and
       use: "SHow LOG" to reach the local log file!''' )
 
-    utilities.ruler()
+    utilities.ruler( '' )
     print()
 
     logging.info( utilities.consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
 
+    # sub injection test
+    spadmin_commands = {
+        
+    }
+    # command injection
+    spadmin_commands[ 'SHow RULer' ] = utilities.ruler
+    
     # Infinite loop
     while True:
 
@@ -181,7 +188,16 @@ if __name__ == "__main__":
             continue
 
         # Command executor
-
+        match = False
+        for key in spadmin_commands:     
+            if search( '^' + myIBMSPrlCompleter.regexpgenerator( key ), line, IGNORECASE ):
+                spadmin_commands[ key ]( line )
+                match = True
+                break 
+        if match:
+            continue
+        # Command executor
+                            
         # Own commands
         if search( '^' + myIBMSPrlCompleter.regexpgenerator( 'REload' ),     line, IGNORECASE ):
             myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT'][ 'rulesfilename' ] )
