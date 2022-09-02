@@ -4,10 +4,7 @@ import logging
 import globals
 
 
-
-
-
-class DSM:
+class dsmadmc_pexpect:
     STARTCOMMAND_TABDEL = None
     STARTCOMMAND = None
     MORE1 = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt

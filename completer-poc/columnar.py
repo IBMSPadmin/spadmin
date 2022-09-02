@@ -42,9 +42,9 @@ class Columnar:
             ],
         drop: Sequence[str] = [],
         select: Sequence[str] = [],
-        no_borders: bool = False,
+        no_borders: bool = True,
         terminal_width: Union[None, int] = None,
-        preformatted_headers: bool = False,
+        preformatted_headers: bool = True,
     ) -> str:
         self.wrap_max = wrap_max
         self.max_column_width = max_column_width
@@ -104,11 +104,11 @@ class Columnar:
         table_width = sum(column_widths) + ((len(column_widths) + 1) * len(row_sep))
         out = io.StringIO()
         write_header = True if not self.no_headers else False
-      #  self.write_row_separators(out, column_widths) # remove starting empty line
-        out.write( ## ez kell, hogy az első sorban is legyem header spadmin special need
-             (self.header_sep * (sum(column_widths) + (len(column_widths) * 1)))
-            + self.header_sep + "\n"
-        )
+        # self.write_row_separators(out, column_widths) # remove starting empty line
+        for width in column_widths:
+            out.write((self.header_sep * width) + " ")
+        out.write("\n")
+
         for lrow, color_row in zip(truncated_rows, self.color_grid):
             for row in lrow:
                 justified_row_parts = [
@@ -127,14 +127,17 @@ class Columnar:
                     + "\n"
                 )
             if write_header:
-                out.write(
-                #    self.column_sep
-                #    + (self.header_sep * (table_width - (len(self.column_sep * 2))))
-                #    + self.column_sep
-                #    + "\n"
-                     (self.header_sep * (sum(column_widths) + (len(column_widths) * 1)))
-                    + self.header_sep + "\n"
-                )
+                #out.write(
+                ##    self.column_sep
+                ##    + (self.header_sep * (table_width - (len(self.column_sep * 2))))
+                ##    + self.column_sep
+                ##    + "\n"
+                #     (self.header_sep * (sum(column_widths) + (len(column_widths) * 1)))
+                #    + self.header_sep + "\n"
+                #)
+                for width in column_widths:
+                    out.write((self.header_sep * width) + " ")
+                out.write("\n")
                 write_header = False
             else:
                 if not self.no_borders:
