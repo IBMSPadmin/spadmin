@@ -103,9 +103,14 @@ Query -> LICense
 
 Query                 -> Node
 Query Node            -> select node_name from nodes
+#Query Node            -> \*
 Query Node            -> DOmain=
 Query Node            -> Format=
 Query Node            -> Type=
+Query Node Type=      -> Type=Client
+Query Node Type=      -> Type=NAS
+Query Node Type=      -> Type=Server
+Query Node Type=      -> Type=Any
 
 # 3.
 Query Node DOmain=    -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
@@ -116,6 +121,10 @@ Query Node \w+         -> Format=
 Query Node \w+         -> Type=
 
 Query Node \w+ DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
+Query Node \w+ Type=   -> Type=Client
+Query Node \w+ Type=   -> Type=NAS
+Query Node \w+ Type=   -> Type=Server
+Query Node \w+ Type=   -> Type=Any
 
 # de ez már az 5. szint
 #Query Node \w+ (\w+=\w*\s+){1,} -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}

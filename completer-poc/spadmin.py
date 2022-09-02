@@ -167,8 +167,6 @@ if __name__ == "__main__":
     utilities.ruler( '' )
     print()
 
-    logging.info( utilities.consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
-
     # sub injection test
     spadmin_commands = {
         
@@ -211,6 +209,28 @@ if __name__ == "__main__":
         print(table)
 
 
+    def spadmin_show_rules( parameters ):        
+        data  = [] 
+        for key in myIBMSPrlCompleter.rules:
+            if myIBMSPrlCompleter.rules[ key ] != []:
+                data.append( [ key, myIBMSPrlCompleter.rules[ key ] ] )
+        
+        print( columnar( data, headers=[ colored( 'Regexp', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ] ) )
+        
+    #    
+    spadmin_commands[ 'SPadmin SHow RULes' ] = spadmin_show_rules
+    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'RULes' )
+    
+    
+    def show_actlog ( parameters ):
+        data = None
+        if parameters == None or parameters == '' or parameters == []:
+            data = tsm.send_command_array_array("q actlog")
+        else:
+            data = tsm.send_command_array_array("q actlog " + parameters[0] )
+        table = columnar(data, headers=['Date/Time', 'Message'])
+        print(table)
+    #
     spadmin_commands[ 'SHow ACTlog' ] = show_actlog
     myIBMSPrlCompleter.rules['SHow'].append('ACTlog')
     
@@ -229,9 +249,11 @@ if __name__ == "__main__":
 
     # push the autoexec command(s)
     if globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]:
+        logging.info( utilities.consolefilledline( 'Push autoexec commands: [' + globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ] + ']', '-', '', 120 ) )
         line = globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]
 
     # Infinite loop
+    logging.info( utilities.consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
     while True:
     
         # refresh the terminal size 
