@@ -76,25 +76,32 @@ import utilities
 ########## ###############################################################################################################
 if __name__ == "__main__":
     
-    parser = argparse.ArgumentParser( description = 'Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.', epilog='''
-    epilog szaskalska sal slak lskal sla ksla lskskl a''')
+    # https://docs.python.org/3/library/argparse.html
+    parser = argparse.ArgumentParser( prog = colored( 'spadmin.py', 'white', attrs=[ 'bold' ] ), description = 'Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.', epilog = colored( 'Thank you very much for downloading and starting to use it!', 'white', attrs = [ 'bold' ] ) )
     
-    parser.add_argument( '-d', '--debug',       action='store_const', const=sum, help='debug help' )
-    parser.add_argument( '-p', '--prereqcheck', action='store_const', const=sum, help='prereqcheck help' )
-    parser.add_argument( '--consoleonly',       action='store_const', const=sum, help='consoleonly help' )
-    parser.add_argument( '-c', '--commands', nargs='?', help='consoleonly help' )
-    parser.add_argument( '-v', '--version',     action='version', version='%(prog)s v1.0', help='show version information')
+    parser.add_argument( '-d', '--debug',       action = 'store_const', const = True,          help = 'debug messages into log file' )
+    parser.add_argument( '-p', '--prereqcheck', action = 'store_const', const = True,          help = 'prerequisite check' )
+    parser.add_argument( '--consoleonly',       action = 'store_const', const = True,          help = 'run console mode only!' )
+    parser.add_argument( '-c', '--commands',    nargs = '?',                                   help = 'Autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
+    parser.add_argument( '-v', '--version',     action = 'version', version = '%(prog)s v1.0', help = 'SHow VERsion information')
     
-    parser.print_help()
-    #parser.parse_args( ['--version'] ) 
+    args = parser.parse_args()
 
     # GLOBAL variables
     import globals
     globals.initialize()
 
     # SPadmin settings
-    globals.config = Configuration("spadmin.ini")
+    globals.config = Configuration( "spadmin.ini" )
 
+    # override config with cli parameters
+    if args.debug:
+        globals.config.getconfiguration()[ 'DEFAULT' ][ 'debug' ]       = 'True'
+    if args.prereqcheck:
+        globals.config.getconfiguration()[ 'DEFAULT' ][ 'prereqcheck' ] = 'True'     
+    if args.commands:
+        globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]    = args.commands
+        
     # Clear screen
     if platform.system() == 'Windows':
         os.system( 'cls' )
@@ -119,10 +126,9 @@ if __name__ == "__main__":
     print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
     print( colored( "= Once you start to use it, you can't live without it!!!", 'magenta', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
     print()
-
+    
     # Logger settings
-    logfilename                   = globals.config.getconfiguration()['DEFAULT']['logfile']
-    logging.basicConfig( filename = logfilename,
+    logging.basicConfig( filename = globals.config.getconfiguration()['DEFAULT']['logfile'],
                          filemode = 'a',
                          format   = '%(asctime)s %(levelname)s %(message)s',
                          datefmt  = '%Y%m%d %H%M%S',
@@ -205,8 +211,25 @@ if __name__ == "__main__":
         print(table)
 
 
-    spadmin_commands['SHow ACTlog'] = show_actlog
+    spadmin_commands[ 'SHow ACTlog' ] = show_actlog
     myIBMSPrlCompleter.rules['SHow'].append('ACTlog')
+    
+    def reload( parameters ):
+        myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT']['rulefile'] )
+    
+    spadmin_commands[ 'REload' ] = reload
+    
+    def spadmin_show_log( parameters ):
+        os.system( 'open ./' + globals.config.getconfiguration()['DEFAULT']['logfile'] )
+        
+    spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
+    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'Log' )
+    
+    # -----------------------------------------
+
+    # push the autoexec command(s)
+    if globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]:
+        line = globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]
 
     # Infinite loop
     while True:
@@ -215,26 +238,20 @@ if __name__ == "__main__":
         utilities.refreshrowscolumns()
 
         try:
-          line = input( myIBMSPrlCompleter.prompt() )
-
-          # Skip the empty command
-          if not line.rstrip():
-            continue
+            if line == '':
+                line = input( myIBMSPrlCompleter.prompt() )
+            
+            # Skip the empty command
+            if not line.rstrip():
+                continue
 
         except KeyboardInterrupt:
             # Suppress ctrl-c
             print( '\a' ) # Bell
-            print( 'Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ' )
+            #print( 'Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ' )
             continue
 
-        # Own commands
-        if search( '^' + utilities.regexpgenerator( 'REload' ),     line, IGNORECASE ):
-            myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT']['rulefile'] )
-            continue
-        elif search( '^' + utilities.regexpgenerator( 'Show Log' ), line, IGNORECASE ):
-            os.system( 'open ./' + logfilename )
-            continue
-        elif search('^' + utilities.regexpgenerator('Show STGP'), line, IGNORECASE):
+        if search('^' + utilities.regexpgenerator('Show STGP'), line, IGNORECASE):
             data = tsm.send_command_array_array("select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
             for index, row in enumerate(data):
                 (a, b, c, d, e, f, g, h, i, j) = row
@@ -247,18 +264,9 @@ if __name__ == "__main__":
                                             'Pct. Utilized','Pct. Migr.','High Mig.','Low Mig.','Recl. ','Next'],
                              justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
             print(table)
+            line = ''
             continue
-        elif search( '^' + utilities.regexpgenerator( 'CAChe' ), line, IGNORECASE ):
-            pprint( myIBMSPrlCompleter.cache_hitratio )
-            continue
-        elif search( '^' + utilities.regexpgenerator( 'QUIt' ),     line, IGNORECASE ) or \
-             search( '^' + utilities.regexpgenerator( 'LOGout' ),   line, IGNORECASE ) or \
-             search( '^' + utilities.regexpgenerator( 'Exit' ),     line, IGNORECASE ) or \
-             search( '^' + utilities.regexpgenerator( 'BYe' ),      line, IGNORECASE ):
-
-            # Quit the program
-            break
-
+        
         # simple command runner engine
         for command in line.split( ';' ):
             command = command.strip()
@@ -272,8 +280,25 @@ if __name__ == "__main__":
 
             # ha van \([\w\d|]+\), akkor védeni kell
 
+            # it's not onw command. Does the user want to possibly exit???
+            if search( '^' + utilities.regexpgenerator( 'QUIt' ),   command, IGNORECASE ) or \
+               search( '^' + utilities.regexpgenerator( 'LOGout' ), command, IGNORECASE ) or \
+               search( '^' + utilities.regexpgenerator( 'Exit' ),   command, IGNORECASE ) or \
+               search( '^' + utilities.regexpgenerator( 'BYe' ),    command, IGNORECASE ):
+            
+                logging.info( utilities.consolefilledline( 'INPUT LOOP END ', '-', '', 120 ) )
+                
+                # End of the prg
+                prgend = time()
+                utilities.consoleline( '-' )
+                print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
+                utilities.consoleline( '-' )
+                
+                sys.exit( 0 )
+
             # own command executor
             match = False
+            # let's try to find maybe it's an own command
             for key in spadmin_commands: 
                 if search( '^' + utilities.regexpgenerator( key ), command, IGNORECASE ):
                     # just transfer the parameters
@@ -281,26 +306,19 @@ if __name__ == "__main__":
                     match = True
                     break 
             
+            # if it was then go to the next command
             if match:
+                line = ''
                 continue
-            # own command executor
+            
 
+            # No own command, no exit then let dsmadmc run the command!
             for textline in tsm.send_command2(  command ):
                 if textline != '':
                     print( textline )
-
-        #consoleline( '-' )
-
-    logging.info( utilities.consolefilledline( 'INPUT LOOP END ', '-', '', 120 ) )
-
-    # End of the prg
-    prgend = time()
-    utilities.consoleline( '-' )
-    print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
-    utilities.consoleline( '-' )
-
-    sys.exit( 0 )
-
+            line = ''
+    
+    # 
     __author__     = [ "Fleischmann György", "Szabó Marcell" ]
     __copyright__  = "Copyright 2022, as The SPadmin Python Project"
     __credits__    = [ "Fleischmann György", "Szabó Marcell"]
