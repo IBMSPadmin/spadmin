@@ -215,7 +215,7 @@ if __name__ == "__main__":
             if myIBMSPrlCompleter.rules[ key ] != []:
                 data.append( [ key, myIBMSPrlCompleter.rules[ key ] ] )
         
-        print( columnar( data, headers=[ colored( 'Regexp', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ] ) )
+        print( columnar( data, headers=[ colored( 'Regexp', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ], max_column_width = 120 ) )
         
     #    
     spadmin_commands[ 'SPadmin SHow RULes' ] = spadmin_show_rules
@@ -245,6 +245,23 @@ if __name__ == "__main__":
     spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
     myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'Log' )
     
+    def show_stgpool( parameters ):
+        data = tsm.send_command_array_array("select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
+        for index, row in enumerate(data):
+            (a, b, c, d, e, f, g, h, i, j) = row
+            if d == '':
+                data[index][3] = 0
+            else:
+                data[index][3] = round((float(d)/1024),1)
+        
+        table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
+                                        'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
+                         justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
+        print(table)
+    #
+    spadmin_commands[ 'SHow STGpools' ] = show_stgpool
+    myIBMSPrlCompleter.rules[ 'SHow' ].append( 'STGpools' )
+    
     # -----------------------------------------
 
     # push the autoexec command(s)
@@ -273,22 +290,6 @@ if __name__ == "__main__":
             #print( 'Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ' )
             continue
 
-        if search('^' + utilities.regexpgenerator('Show STGP'), line, IGNORECASE):
-            data = tsm.send_command_array_array("select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
-            for index, row in enumerate(data):
-                (a, b, c, d, e, f, g, h, i, j) = row
-                if d == '':
-                    data[index][3] = 0
-                else:
-                    data[index][3] = round((float(d)/1024),1)
-
-            table = columnar(data, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
-                                            'Pct. Utilized','Pct. Migr.','High Mig.','Low Mig.','Recl. ','Next'],
-                             justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-            print(table)
-            line = ''
-            continue
-        
         # simple command runner engine
         for command in line.split( ';' ):
             command = command.strip()

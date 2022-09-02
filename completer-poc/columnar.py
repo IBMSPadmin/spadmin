@@ -16,6 +16,8 @@ from toolz import frequencies
 from wcwidth import wcwidth, wcswidth
 from click import style
 
+from termcolor import colored
+
 # Types
 NonWrappedCell = str
 WrappedCellLine = str
@@ -75,8 +77,8 @@ class Columnar:
         if self.no_borders:
             ## spadmin special need
             self.column_sep = " " * 1
-            self.row_sep = ""
-            self.header_sep = "-"
+            self.row_sep = ''
+            self.header_sep = colored( '-', 'white', attrs=[ 'bold' ] )
             if not preformatted_headers:
                 headers = [text.upper() for text in headers]
 

@@ -165,8 +165,6 @@ REMove          -> Node
 # SHow command #
 ################
 SHow -> TIME
-SHow -> Stgp
-SHow -> ACTlog
 
 ###############################################################
 
