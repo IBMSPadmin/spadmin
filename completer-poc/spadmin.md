@@ -5,6 +5,36 @@
 - pexpect tudjon ezzel mit kezdeni:
 
 ```
+[CLOUDTSM1] > q Node Timeout occured.
+Please check the connection parameters and restart spadmin
+select node_name from nodes
+
+
+AD1BUD1HU    AD2BUD1HU    AD2BUD1HU_TECH    BLACKHOLE    CEVA_BACKUP    DFS1BUD1HU    DOmain=   FLEXS-MACBOOK-PRO.LOCAL
+Format=   Type=
+[CLOUDTSM1] > q Nod
+Node Name                     Platform     Policy Domain      Days Sinc-     Days Sinc-     Locked?
+										   Name                  e Last      e Passwor-
+																  Access          d Set
+-------------------------     --------     --------------     ----------     ----------     -------
+AD1BUD1HU                     WinNT        CEVA_WIN                    1             30       No
+AD2BUD1HU                     WinNT        CEVA_NAS                   <1             25       No
+AD2BUD1HU_TECH                WinNT        CEVA_NAS                   <1             69       No
+BLACKHOLE                     Linux        EG_LINUX                   <1             27       No
+							   x86-64
+CEVA_BACKUP                   Linux        EG_LINUX                   37            323       No
+							   x86-64
+DFS1BUD1HU                    WinNT        CEVA_WIN                    1            683       No
+FLEXS-MACBOOK-PRO.LOCAL       Mac          EG_MAC                      4              4       No
+[CLOUDTSM1] > Traceback (most recent call last):
+  File "/Users/flex/GitHub/spadmin/completer-poc/./spadmin.py", line 206, in <module>
+	line = input( myIBMSPrlCompleter.prompt() )
+ValueError: I/O operation on closed file.
+
+06:44:27 Fri Sep 02 [flex@flexs-MacBook-Pro-16:[~/gith/spadmin/completer-poc] [1]
+```
+
+```
 IBM Spectrum Protect
 Command Line Administrative Interface - Version 8, Release 1, Level 15.0
 (c) Copyright by IBM Corporation and other(s) 1990, 2022. All Rights Reserved.
