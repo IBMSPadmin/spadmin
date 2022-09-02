@@ -373,11 +373,16 @@ class IBMSPrlCompleter:
                 ppp = search('^\w+=(\w+)', match)[1]
             else:
                 ppp = match
+            
+            # colorize the result
+            match = search( '^[A-Z]+', ppp )
+            if match:
+                ppp = ppp.replace( match[0], colored( match[0], 'green', attrs=[ 'bold' ] ) )
 
-            sys.stdout.write(ppp + '   ')
+            sys.stdout.write( ppp + '   ' )
 
             # line separation
-            if word == int(self.config.getconfiguration()['DEFAULT']['rlwordseparation']):
+            if word > int(self.config.getconfiguration()['DEFAULT']['rlwordseparation']):
                 word = 1
                 print()
             word += 1
