@@ -1,5 +1,16 @@
 # toDos
 
+- WSL doksi és dsmadmc-s teszt Microsoft Windows-on
+- paraméterkezelés
+-- DSM ezt le kell majd kezelni:
+  - global változóba eltenni az rc-t és message-et
+  - ha rc11 jön akkor üres listát adjon vissza
+
+```
+ANR0944E QUERY PROCESS: No active processes found.
+ANS8001I Return code 11.
+```
+
 ## Fontos!
 
 - pexpect tudjon ezzel mit kezdeni:
@@ -151,16 +162,14 @@ Traceback (most recent call last):
 TypeError: unbound method send_command_array() must be called with DSM instance as first argument (got classobj instance instead)
 ```
 
-- WSL doksi és dsmadmc-s teszt Microsoft Windows-on
-- python 3.6.8 RH Linux ✅ python 3.10.6 macOS ✅
-- python 2.7.5 kompatibilitást ❌ meg kellene csinálni! Nekem eddig sikerült:
+
+
 
 - rules fájlban listakezelés
 - opciókra ( ...=... ) egy stabil megoldás
 - és ez az egészet úgy, hogy tovább kezelődjön
 - spsqlengine több paraméter kezelésére felkészíteni vagy lebutítani sima lekérdezésekre és akkor a végén lévő kreső keres mindig mintákat
 - ha mindenhol ez a kereső kell, akkor legyen melőle sub()
-
 ```
 Traceback (most recent call last):
   File "./spadmin", line 647, in <module>
@@ -168,12 +177,7 @@ Traceback (most recent call last):
 TypeError: unbound method send_command_array() must be called with DSM instance as first argument (got classobj instance instead)
 ```
 
--- DSM ezt le kell majd kezelni:
 
-```
-ANR0944E QUERY PROCESS: No active processes found.
-ANS8001I Return code 11.
-```
 
 # Dev
 

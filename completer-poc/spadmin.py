@@ -29,7 +29,7 @@
 #         Fixed: 
 
 import sys
-from DSM import DSM
+from dsmadmc_pexpect import dsmadmc_pexpect
 import columnar
 from configuration import Configuration
 from IBMSPrlCompleter import IBMSPrlCompleter
@@ -128,7 +128,7 @@ if __name__ == "__main__":
                          datefmt  = '%Y%m%d %H%M%S',
                          level    = logging.DEBUG )
 
-    tsm = DSM(globals.config.getconfiguration()['DEFAULT'][ 'dsmadmc_id' ], globals.config.getconfiguration()['DEFAULT'][ 'dsmadmc_password' ])
+    tsm = dsmadmc_pexpect(globals.config.getconfiguration()['DEFAULT']['dsmadmc_id'], globals.config.getconfiguration()['DEFAULT']['dsmadmc_password'])
 
     myIBMSPrlCompleter = IBMSPrlCompleter( tsm )
 
