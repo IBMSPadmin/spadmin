@@ -199,15 +199,6 @@ if __name__ == "__main__":
     spadmin_commands[ 'SPadmin SHow VERsion' ] = spadmin_show_version
     myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'VERsion' )
 
-    def show_actlog ( parameters ):
-        data = None
-        if parameters == None or parameters == '' or parameters == []:
-            data = tsm.send_command_array_array("q actlog")
-        else:
-            data = tsm.send_command_array_array("q actlog " + parameters[0] )
-        table = columnar(data, headers=['Date/Time', 'Message'])
-        print(table)
-
 
     def spadmin_show_rules( parameters ):        
         data  = [] 
@@ -234,16 +225,18 @@ if __name__ == "__main__":
     spadmin_commands[ 'SHow ACTlog' ] = show_actlog
     myIBMSPrlCompleter.rules['SHow'].append('ACTlog')
     
+    
     def reload( parameters ):
         myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT']['rulefile'] )
-    
+    #
     spadmin_commands[ 'REload' ] = reload
     
     def spadmin_show_log( parameters ):
         os.system( 'open ./' + globals.config.getconfiguration()['DEFAULT']['logfile'] )
-        
+    #    
     spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
     myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'Log' )
+    
     
     def show_stgpool( parameters ):
         data = tsm.send_command_array_array("select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
@@ -261,7 +254,7 @@ if __name__ == "__main__":
     #
     spadmin_commands[ 'SHow STGpools' ] = show_stgpool
     myIBMSPrlCompleter.rules[ 'SHow' ].append( 'STGpools' )
-    
+        
     # -----------------------------------------
 
     # push the autoexec command(s)
@@ -269,6 +262,8 @@ if __name__ == "__main__":
         logging.info( utilities.consolefilledline( 'Push autoexec commands: [' + globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ] + ']', '-', '', 120 ) )
         line = globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]
 
+
+    extras = {}
     # Infinite loop
     logging.info( utilities.consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
     while True:
@@ -294,16 +289,29 @@ if __name__ == "__main__":
         for command in line.split( ';' ):
             command = command.strip()
             # q actlog | grep alma | grep alma | count ;
-            # disassembly it first
+            
             # $->grep
             # $->invgrep
             # $->count
             # $->mailto
-            # $->SPadmin
-
+            
+            # disassembly it first
+            commandparts = command.split( '|' )
+            # keep the first one as the main command
+            command = commandparts.pop( 0 ).strip()
+            
+            for extracommand in commandparts:
+                pairs = extracommand.split()
+                if len( pairs ) > 1:
+                    extras[ pairs[ 0 ] ] = pairs[ 1 ]
+                else:
+                    extras[ pairs[ 0 ] ] = None
+               
+            pprint( extras )
+            
             # ha van \([\w\d|]+\), akkor védeni kell
 
-            # it's not onw command. Does the user want to possibly exit???
+            # it's not own command. Does the user want to possibly exit???
             if search( '^' + utilities.regexpgenerator( 'QUIt' ),   command, IGNORECASE ) or \
                search( '^' + utilities.regexpgenerator( 'LOGout' ), command, IGNORECASE ) or \
                search( '^' + utilities.regexpgenerator( 'Exit' ),   command, IGNORECASE ) or \
@@ -340,6 +348,7 @@ if __name__ == "__main__":
                 if textline != '':
                     print( textline )
             line = ''
+            # continue
     
     # 
     __author__     = [ "Fleischmann György", "Szabó Marcell" ]
