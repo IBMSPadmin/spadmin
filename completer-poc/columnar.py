@@ -76,7 +76,7 @@ class Columnar:
             ## spadmin special need
             self.column_sep = " " * 1
             self.row_sep = ""
-            self.header_sep = "="
+            self.header_sep = "-"
             if not preformatted_headers:
                 headers = [text.upper() for text in headers]
 
