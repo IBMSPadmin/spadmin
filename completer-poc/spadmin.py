@@ -180,14 +180,14 @@ if __name__ == "__main__":
         for key in myIBMSPrlCompleter.cache_hitratio:
             data.append( [ key, myIBMSPrlCompleter.cache_hitratio[ key ] ] )
         
-        print( columnar( data, headers=[ colored( 'Name', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], no_borders=True, preformatted_headers=True, justify=[ 'l', 'c' ] ) )
+        print( columnar( data, headers=[ colored( 'Name', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'c' ] ) )
     #    
     spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
     myIBMSPrlCompleter.rules[ 'SPadmin' ] = []
     myIBMSPrlCompleter.rules[ 'SPadmin' ].append( 'SHow' )
     myIBMSPrlCompleter.rules[ 'SPadmin SHow' ] = []
     myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'CAche' )
-    
+
 
     def spadmin_show_version( parameters ):        
         print( 'Version: v1.0' )        
@@ -195,7 +195,19 @@ if __name__ == "__main__":
     spadmin_commands[ 'SPadmin SHow VERsion' ] = spadmin_show_version
     myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'VERsion' )
 
-       
+    def show_actlog ( parameters ):
+        data = None
+        if parameters == None or parameters == '' or parameters == []:
+            data = tsm.send_command_array_array("q actlog")
+        else:
+            data = tsm.send_command_array_array("q actlog " + parameters[0] )
+        table = columnar(data, headers=['Date/Time', 'Message'])
+        print(table)
+
+
+    spadmin_commands['SHow ACTlog'] = show_actlog
+    myIBMSPrlCompleter.rules['SHow'].append('ACTlog')
+
     # Infinite loop
     while True:
     
@@ -233,13 +245,7 @@ if __name__ == "__main__":
 
             table = columnar(data, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
                                             'Pct. Utilized','Pct. Migr.','High Mig.','Low Mig.','Recl. ','Next'],
-                             no_borders=True, preformatted_headers=True, justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-            print(table)
-            continue
-        elif search('^' + utilities.regexpgenerator('Show Actlog'), line, IGNORECASE):
-            data = tsm.send_command_array_array("q actlog" )
-
-            table = columnar(data, headers=['Date/Time', 'Message'],  no_borders=True, preformatted_headers=True)
+                             justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
             print(table)
             continue
         elif search( '^' + utilities.regexpgenerator( 'CAChe' ), line, IGNORECASE ):
