@@ -254,6 +254,14 @@ if __name__ == "__main__":
     #
     spadmin_commands[ 'SHow STGpools' ] = show_stgpool
     myIBMSPrlCompleter.rules[ 'SHow' ].append( 'STGpools' )
+
+
+    def spadmin_show_extras( parameters ):        
+        print( 'CLI extra' )
+        pprint( extras)        
+    #    
+    spadmin_commands[ 'SPadmin SHow EXtras' ] = spadmin_show_extras
+    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'EXtras' )
         
     # -----------------------------------------
 
@@ -285,10 +293,12 @@ if __name__ == "__main__":
             #print( 'Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ' )
             continue
 
+        # protect the || as ##
+        line = line.replace( '||', '##' )
         # simple command runner engine
         for command in line.split( ';' ):
             command = command.strip()
-            # q actlog | grep alma | grep alma | count ;
+            # q actlog | grep alma | invgrep alma | count | mailto alma@alma.hu,korte@korte.hu ; q node
             
             # $->grep
             # $->invgrep
@@ -307,10 +317,6 @@ if __name__ == "__main__":
                 else:
                     extras[ pairs[ 0 ] ] = None
                
-            pprint( extras )
-            
-            # ha van \([\w\d|]+\), akkor védeni kell
-
             # it's not own command. Does the user want to possibly exit???
             if search( '^' + utilities.regexpgenerator( 'QUIt' ),   command, IGNORECASE ) or \
                search( '^' + utilities.regexpgenerator( 'LOGout' ), command, IGNORECASE ) or \
@@ -339,7 +345,8 @@ if __name__ == "__main__":
             
             # if it was then go to the next command
             if match:
-                line = ''
+                line   = ''
+                extras = {}
                 continue
             
 
@@ -347,7 +354,8 @@ if __name__ == "__main__":
             for textline in tsm.send_command2(  command ):
                 if textline != '':
                     print( textline )
-            line = ''
+            line   = ''
+            extras = {}
             # continue
     
     # 
