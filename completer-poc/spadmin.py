@@ -82,8 +82,8 @@ if __name__ == "__main__":
     parser.add_argument( '-d', '--debug',       action = 'store_const', const = True,          help = 'debug messages into log file' )
     parser.add_argument( '-p', '--prereqcheck', action = 'store_const', const = True,          help = 'prerequisite check' )
     parser.add_argument( '--consoleonly',       action = 'store_const', const = True,          help = 'run console mode only!' )
-    parser.add_argument( '-c', '--commands',    nargs = '?',                                   help = 'Autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
-    parser.add_argument( '-v', '--version',     action = 'version', version = '%(prog)s v1.0', help = 'SHow VERsion information')
+    parser.add_argument( '-c', '--commands',    nargs = '?',                                   help = 'autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
+    parser.add_argument( '-v', '--version',     action = 'version', version = '%(prog)s v1.0', help = 'show version information' )
     
     args = parser.parse_args()
 
@@ -180,7 +180,7 @@ if __name__ == "__main__":
     
     
     def spadmin_show_cache( parameters ):
-        data  = [] 
+        data  = []
         for key in myIBMSPrlCompleter.cache_hitratio:
             data.append( [ key, myIBMSPrlCompleter.cache_hitratio[ key ] ] )
         
