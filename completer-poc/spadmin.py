@@ -216,9 +216,9 @@ if __name__ == "__main__":
     def show_actlog ( parameters ):
         data = None
         if parameters == None or parameters == '' or parameters == []:
-            data = tsm.send_command_array_array("q actlog")
+            data = tsm.send_command_array_array_tabdel("q actlog")
         else:
-            data = tsm.send_command_array_array("q actlog " + parameters[0] )
+            data = tsm.send_command_array_array_tabdel("q actlog " + parameters[0] )
         table = columnar(data, headers=['Date/Time', 'Message'])
         print(table)
     #
@@ -239,7 +239,8 @@ if __name__ == "__main__":
     
     
     def show_stgpool( parameters ):
-        data = tsm.send_command_array_array("select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
+        data = tsm.send_command_array_array_tabdel(
+            "select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
         for index, row in enumerate(data):
             (a, b, c, d, e, f, g, h, i, j) = row
             if d == '':
@@ -266,6 +267,7 @@ if __name__ == "__main__":
     # -----------------------------------------
 
     # push the autoexec command(s)
+    line = ''
     if globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]:
         logging.info( utilities.consolefilledline( 'Push autoexec commands: [' + globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ] + ']', '-', '', 120 ) )
         line = globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]
@@ -351,7 +353,7 @@ if __name__ == "__main__":
             
 
             # No own command, no exit then let dsmadmc run the command!
-            for textline in tsm.send_command2(  command ):
+            for textline in tsm.send_command_normal(  command ):
                 if textline != '':
                     print( textline )
             line   = ''

@@ -38,10 +38,10 @@ class IBMSPrlCompleter:
     def __init__(self, tsm):
         print(' Loading rules...                                          ')
         sys.stdout.write(" Let's try to get the name of the server...\r")
-        spprompt = tsm.send_command_array('select SERVER_NAME from STATUS')[0]
+        spprompt = tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
 
         sys.stdout.write(" and get the version of the IBM SP server...\r")
-        spversion, sprelease, splevel, spsublevel = tsm.send_command_array_array('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
+        spversion, sprelease, splevel, spsublevel = tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
 
         self.rows = globals.rows
         self.columns = globals.columns
@@ -98,13 +98,13 @@ class IBMSPrlCompleter:
                 # refresh needed
                 logging.info(' SP SQL Engine hit the cache but the stored one is too old.')
                 logging.info(' CACHE TIMEDIFF in second(s): [' + str(time() - self.cache_timestamp[select]) + '].')
-                self.cache[select] = self.tsm.send_command_array(select)
+                self.cache[select] = self.tsm.send_command_array_tabdel(select)
                 self.cache_timestamp[select] = time()
                 self.cache_hitratio['hitupdate'] += 1
         else:
             # new, init
             logging.info(" SP SQL Engine still no cached data store a new one.")
-            self.cache[select] = self.tsm.send_command_array(select)
+            self.cache[select] = self.tsm.send_command_array_tabdel(select)
             self.cache_timestamp[select] = time()
             self.cache_hitratio['new'] += 1
 
