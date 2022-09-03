@@ -15,26 +15,27 @@ class dsmadmc_pexpect:
     EXPECTATIONS = [PROMPT1, PROMPT2, MORE1, MORE2, MORE3, pexpect.EOF, pexpect.TIMEOUT,
                  'ANS8023E',
                  'Enter your password:', 'ANS1051I']
-    tsm = None
-    tsm2 = None
+    tsm_tabdel = None
+    tsm_normal = None
 
     def __init__(self, id, pa):
         self.STARTCOMMAND_TABDEL = 'dsmadmc' + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
         self.STARTCOMMAND = 'dsmadmc' + ' -id=' + id + ' -pa=' + pa
 
-    def get_tsm(self):
+    def get_tsm_tabdel(self):
 
-        if self.tsm is None or not self.tsm.isalive:
-            #debug purposes only: print ("Spawn: ", self.STARTCOMMAND)
-            self.tsm = pexpect.spawn('%s' % self.STARTCOMMAND_TABDEL, encoding='utf-8', echo=False)
-            self.tsm.setwinsize(65534, 65534)
-            rc = self.tsm.expect(self.EXPECTATIONS)
-            self.check_rc(self.tsm, rc)
-        return self.tsm
+        if self.tsm_tabdel is None or not self.tsm_tabdel.isalive:
+            # debug purposes only:
+            # print ("Spawn: ", self.STARTCOMMAND)
+            self.tsm_tabdel = pexpect.spawn('%s' % self.STARTCOMMAND_TABDEL, encoding='utf-8', echo=False)
+            self.tsm_tabdel.setwinsize(65534, 65534)
+            rc = self.tsm_tabdel.expect(self.EXPECTATIONS)
+            self.check_rc(self.tsm_tabdel, rc)
+        return self.tsm_tabdel
 
-    def send_command(self, command):
+    def send_command_tabdel(self, command):
 
-        tsm = self.get_tsm()
+        tsm = self.get_tsm_tabdel()
 
         logging.info(' DSMADMC pid: [' + str(tsm.pid) + ']')
 
@@ -46,36 +47,39 @@ class dsmadmc_pexpect:
             print('Please check the connection parameters and restart spadmin')
             quit(1)
 
-        rc = self.tsm.expect(self.EXPECTATIONS)
+        rc = self.tsm_tabdel.expect(self.EXPECTATIONS)
         self.check_rc(tsm, rc)
-
         return tsm.before
 
-    def send_command_array(self, command):
+    def send_command_array_tabdel(self, command):
         """
         1. It executes a dsmadmc command
         2. splits the output line-by-line
         3. remove empty lines
         4. returns a list, where every line is an item
         """
-        list = self.send_command(command).splitlines()
+        list = self.send_command_tabdel(command).splitlines()
         if len(list) > 0:
             list.pop(0)  # delete the first line which is the command itself
+        if len(list) > 1:
+            globals.set_last_error(list[0],list[1])
         while ("" in list):  ## every output contains empty lines, we remove it
             list.remove("")
         return list
 
-    def send_command_array_array(self, command):
+    def send_command_array_array_tabdel(self, command):
         """
         1. It executes a dsmadmc command
         2. splits the output line-by-line
         3. remove empty lines
         4. returns a list of list, outter list is separated line-by-line, inner list is tab separated
         """
-        list = self.send_command(command).splitlines()
+        list = self.send_command_tabdel(command).splitlines()
         ar = []
         if len(list) > 0:
             list.pop(0)  # delete the first line which is the command itself
+        if len(list) > 1:
+            globals.set_last_error(list[0],list[1])
         while ("" in list):  ## every output contains empty lines, we remove it
             list.remove("")
         for i in list:
@@ -83,19 +87,19 @@ class dsmadmc_pexpect:
         return ar
 
 
-    def get_tsm2(self):
+    def get_tsm_normal(self):
 
-        if self.tsm2 is None or not self.tsm2.isalive:
-            self.tsm2 = pexpect.spawn('%s' % self.STARTCOMMAND, encoding='utf-8', echo=False)
-            self.tsm2.setwinsize(65534, globals.columns)
-            rc = self.tsm2.expect(self.EXPECTATIONS)
-            self.check_rc(self.tsm2, rc)
+        if self.tsm_normal is None or not self.tsm_normal.isalive:
+            self.tsm_normal = pexpect.spawn('%s' % self.STARTCOMMAND, encoding='utf-8', echo=False)
+            self.tsm_normal.setwinsize(65534, globals.columns)
+            rc = self.tsm_normal.expect(self.EXPECTATIONS)
+            self.check_rc(self.tsm_normal, rc)
 
-        return self.tsm2
+        return self.tsm_normal
 
-    def send_command2(self, command):
+    def send_command_normal(self, command):
 
-        tsm2 = self.get_tsm2()
+        tsm2 = self.get_tsm_normal()
 
         logging.info(' DSMADMC pid2: [' + str(tsm2.pid) + ']')
 
@@ -107,7 +111,7 @@ class dsmadmc_pexpect:
             print('Please check the connection parameters and restart spadmin')
             quit(1)
 
-        rc = self.tsm2.expect(self.EXPECTATIONS)
+        rc = self.tsm_normal.expect(self.EXPECTATIONS)
         self.check_rc(tsm2, rc)
 
         # Session established with server CLOUDTSM1: Linux/x86_64
@@ -134,12 +138,12 @@ class dsmadmc_pexpect:
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
             quit(1)
-        if rc == 7:
+        elif rc == 7:
             print('TCP/IP connection failure.')
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
             quit(1)
-        if rc == 8 or rc == 9:
+        elif rc == 8 or rc == 9:
             print('Invalid user id or password.')
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
