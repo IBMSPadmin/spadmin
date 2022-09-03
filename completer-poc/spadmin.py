@@ -332,6 +332,7 @@ if __name__ == "__main__":
                 utilities.consoleline( '-' )
                 print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
                 utilities.consoleline( '-' )
+                tsm.quit()
                 
                 sys.exit( 0 )
 

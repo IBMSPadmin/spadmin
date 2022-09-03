@@ -148,3 +148,8 @@ class dsmadmc_pexpect:
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
             quit(1)
+
+    def quit(self):
+        self.send_command_normal('quit')
+        self.send_command_tabdel('quit')
+        
