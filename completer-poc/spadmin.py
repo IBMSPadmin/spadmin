@@ -315,7 +315,7 @@ if __name__ == "__main__":
             for extracommand in commandparts:
                 pairs = extracommand.split()
                 if len( pairs ) > 1:
-                    extras[ pairs[ 0 ] ] = pairs[ 1 ]
+                    extras[ pairs[ 0 ] ] = pairs[ 1 ].replace( '##', '|' ) # change back if exists
                 else:
                     extras[ pairs[ 0 ] ] = None
                
