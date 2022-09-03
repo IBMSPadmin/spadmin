@@ -187,9 +187,9 @@ if __name__ == "__main__":
         print( columnar( data, headers=[ colored( 'Name', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'c' ] ) )
     #    
     spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
-    myIBMSPrlCompleter.rules[ 'SPadmin' ] = []
+    #myIBMSPrlCompleter.rules[ 'SPadmin' ] = []
     myIBMSPrlCompleter.rules[ 'SPadmin' ].append( 'SHow' )
-    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ] = []
+    #myIBMSPrlCompleter.rules[ 'SPadmin SHow' ] = []
     myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'CAche' )
 
 
