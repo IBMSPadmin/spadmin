@@ -120,11 +120,15 @@ class IBMSPrlCompleter:
 
         return ret
 
+    start    = []  # 1. level list
+    rules    = {}  # >2. level dictionary
+    dynrules = {}  # >2. level dynamic dictionary
+
     def loadrules(self, rulefilename):
         rulefile = open(rulefilename, 'r')
         rulefilelines = rulefile.readlines()
-        self.start = []  # 1. level list
-        self.rules = {}  # >2. level dictionary
+        #self.start = []  # 1. level list
+        #self.rules = {}  # >2. level dictionary
         i = 0
         for line in rulefilelines:
             i += 1
@@ -169,6 +173,7 @@ class IBMSPrlCompleter:
 
         # self.results = self.start
         # self.results += [ None ]
+        utilities.dictmerger( self.rules, self.dynrules )
 
         return None
 

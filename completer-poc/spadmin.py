@@ -173,10 +173,11 @@ if __name__ == "__main__":
     }
     # command injection
     spadmin_commands[ 'SHow RULer' ] = utilities.ruler
-    myIBMSPrlCompleter.rules[ 'SHow' ].append( 'RULer' )
-    myIBMSPrlCompleter.rules[ 'SHow RULer' ] = []
-    myIBMSPrlCompleter.rules[ 'SHow RULer' ].append( 'Help' )
-    myIBMSPrlCompleter.rules[ 'SHow RULer' ].append( 'INVerse' )
+    myIBMSPrlCompleter.dynrules[ 'SHow' ] = []
+    myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'RULer' )
+    myIBMSPrlCompleter.dynrules[ 'SHow RULer' ] = []
+    myIBMSPrlCompleter.dynrules[ 'SHow RULer' ].append( 'Help' )
+    myIBMSPrlCompleter.dynrules[ 'SHow RULer' ].append( 'INVerse' )
     
     
     def spadmin_show_cache( parameters ):
@@ -187,17 +188,17 @@ if __name__ == "__main__":
         print( columnar( data, headers=[ colored( 'Name', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'c' ] ) )
     #    
     spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
-    #myIBMSPrlCompleter.rules[ 'SPadmin' ] = []
-    myIBMSPrlCompleter.rules[ 'SPadmin' ].append( 'SHow' )
-    #myIBMSPrlCompleter.rules[ 'SPadmin SHow' ] = []
-    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'CAche' )
+    myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
+    myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
+    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
+    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CAche' )
 
 
     def spadmin_show_version( parameters ):        
         print( 'Version: v1.0' )        
     #    
     spadmin_commands[ 'SPadmin SHow VERsion' ] = spadmin_show_version
-    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'VERsion' )
+    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'VERsion' )
 
 
     def spadmin_show_rules( parameters ):        
@@ -210,7 +211,7 @@ if __name__ == "__main__":
         
     #    
     spadmin_commands[ 'SPadmin SHow RULes' ] = spadmin_show_rules
-    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'RULes' )
+    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
     
     
     def show_actlog ( parameters ):
@@ -223,7 +224,7 @@ if __name__ == "__main__":
         print(table)
     #
     spadmin_commands[ 'SHow ACTlog' ] = show_actlog
-    myIBMSPrlCompleter.rules['SHow'].append('ACTlog')
+    myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
     
     
     def reload( parameters ):
@@ -235,7 +236,7 @@ if __name__ == "__main__":
         os.system( 'open ./' + globals.config.getconfiguration()['DEFAULT']['logfile'] )
     #    
     spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
-    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'Log' )
+    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )
     
     
     def show_stgpool( parameters ):
@@ -254,14 +255,14 @@ if __name__ == "__main__":
         print(table)
     #
     spadmin_commands[ 'SHow STGpools' ] = show_stgpool
-    myIBMSPrlCompleter.rules[ 'SHow' ].append( 'STGpools' )
+    myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
 
     def show_last_error ( parameters):
         print ("Last error message: ", globals.last_error["message"])
         print ("Last return code: ", globals.last_error["rc"])
     #
     spadmin_commands['SHow LASTerror'] = show_last_error
-    myIBMSPrlCompleter.rules['SHow'].append('LASTerror')
+    myIBMSPrlCompleter.dynrules['SHow'].append('LASTerror')
 
 
     def spadmin_show_extras( parameters ):
@@ -269,7 +270,9 @@ if __name__ == "__main__":
         pprint( extras)        
     #    
     spadmin_commands[ 'SPadmin SHow EXtras' ] = spadmin_show_extras
-    myIBMSPrlCompleter.rules[ 'SPadmin SHow' ].append( 'EXtras' )
+    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'EXtras' )
+        
+    utilities.dictmerger( myIBMSPrlCompleter.rules, myIBMSPrlCompleter.dynrules )
         
     # -----------------------------------------
 

@@ -107,3 +107,10 @@ def regexpgenerator(regexp):
         result += '\s+'
     
     return result[:-3] + savelastchar
+
+
+def dictmerger( destination, source ):
+    for key in source:
+        if key not in destination:
+             destination[ key ] = []
+        destination[ key ].extend( source [ key ] )
