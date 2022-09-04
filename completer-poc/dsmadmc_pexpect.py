@@ -59,10 +59,10 @@ class dsmadmc_pexpect:
         4. returns a list, where every line is an item
         """
         list = self.send_command_tabdel(command).splitlines()
+        if globals.last_error['rc'] == "11.":
+            return []
         if len(list) > 0:
             list.pop(0)  # delete the first line which is the command itself
-        if len(list) > 1:
-            globals.set_last_error(list[0],list[1])
         while ("" in list):  ## every output contains empty lines, we remove it
             list.remove("")
         return list
@@ -76,10 +76,10 @@ class dsmadmc_pexpect:
         """
         list = self.send_command_tabdel(command).splitlines()
         ar = []
+        if globals.last_error['rc'] == "11.":
+            return ar
         if len(list) > 0:
             list.pop(0)  # delete the first line which is the command itself
-        if len(list) > 1:
-            globals.set_last_error(list[0],list[1])
         while ("" in list):  ## every output contains empty lines, we remove it
             list.remove("")
         for i in list:
@@ -120,6 +120,9 @@ class dsmadmc_pexpect:
 
         # Let's dance
         ret = []
+        if globals.last_error['rc'] == "11.":
+            return ret
+
         for i in tsm2.before.splitlines()[1:]:
             if re.search('^Session established with server \w+:', i):
                 continue
@@ -148,6 +151,11 @@ class dsmadmc_pexpect:
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
             quit(1)
+        if re.search("ANS8001I",tsm.before):
+            globals.last_error = {'rc': tsm.before.splitlines()[3].split(' ')[3], 'message': tsm.before.splitlines()[2]}
+        else:
+            globals.last_error = {'rc': 0, 'message': ''}
+
 
     def quit(self):
         self.send_command_normal('quit')

@@ -7,8 +7,3 @@ def initialize():
     columns = 80
     rows    = 25
     utilities.refreshrowscolumns()
-
-
-def set_last_error(rc, message):
-    print("RC: ", rc)
-    print("Message: ", message)

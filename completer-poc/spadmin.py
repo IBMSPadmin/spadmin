@@ -256,8 +256,15 @@ if __name__ == "__main__":
     spadmin_commands[ 'SHow STGpools' ] = show_stgpool
     myIBMSPrlCompleter.rules[ 'SHow' ].append( 'STGpools' )
 
+    def show_last_error ( parameters):
+        print ("Last error message: ", globals.last_error["message"])
+        print ("Last return code: ", globals.last_error["rc"])
+    #
+    spadmin_commands['SHow LASTerror'] = show_last_error
+    myIBMSPrlCompleter.rules['SHow'].append('LASTerror')
 
-    def spadmin_show_extras( parameters ):        
+
+    def spadmin_show_extras( parameters ):
         print( 'CLI extra' )
         pprint( extras)        
     #    
