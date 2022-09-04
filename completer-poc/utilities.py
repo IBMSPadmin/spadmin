@@ -33,7 +33,7 @@ def consolefilledline(left='', pattern='-', right='', width=80):
     return left + ' ' + pattern * patternwith + ' ' + right
 
 
-def ruler( parameters ):
+def ruler( self, parameters ):
     if parameters == None or parameters == '' or parameters == []:
         ruler100()
         ruler10()

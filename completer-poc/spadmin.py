@@ -134,9 +134,9 @@ if __name__ == "__main__":
                          datefmt  = '%Y%m%d %H%M%S',
                          level    = logging.DEBUG )
 
-    tsm = dsmadmc_pexpect(globals.config.getconfiguration()['DEFAULT']['dsmadmc_id'], globals.config.getconfiguration()['DEFAULT']['dsmadmc_password'])
+    globals.tsm = dsmadmc_pexpect(globals.config.getconfiguration()['DEFAULT']['dsmadmc_id'], globals.config.getconfiguration()['DEFAULT']['dsmadmc_password'])
 
-    myIBMSPrlCompleter = IBMSPrlCompleter( tsm )
+    globals.myIBMSPrlCompleter = IBMSPrlCompleter( globals.tsm )
 
     print( utilities.consolefilledline( '', '-', '', globals.columns ) )
 
@@ -153,8 +153,8 @@ if __name__ == "__main__":
 
     # Register history file as "autosaver"
     atexit.register( readline.write_history_file, rlhistfile )
-    readline.set_completer( myIBMSPrlCompleter.IBMSPcompleter )
-    readline.set_completion_display_matches_hook( myIBMSPrlCompleter.match_display_hook )
+    readline.set_completer( globals.myIBMSPrlCompleter.IBMSPcompleter )
+    readline.set_completion_display_matches_hook( globals.myIBMSPrlCompleter.match_display_hook )
 
     # Short text help
     print()
@@ -164,115 +164,10 @@ if __name__ == "__main__":
       use: "REload" to reload the rule file! and
       use: "SHow LOG" to reach the local log file!''' )
 
-    utilities.ruler( '' )
+    utilities.ruler( utilities, '' )
     print()
 
-    # sub injection test
-    spadmin_commands = {
-        
-    }
-    # command injection
-    spadmin_commands[ 'SHow RULer' ] = utilities.ruler
-    myIBMSPrlCompleter.dynrules[ 'SHow' ] = []
-    myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'RULer' )
-    myIBMSPrlCompleter.dynrules[ 'SHow RULer' ] = []
-    myIBMSPrlCompleter.dynrules[ 'SHow RULer' ].append( 'Help' )
-    myIBMSPrlCompleter.dynrules[ 'SHow RULer' ].append( 'INVerse' )
-    
-    
-    def spadmin_show_cache( parameters ):
-        data  = []
-        for key in myIBMSPrlCompleter.cache_hitratio:
-            data.append( [ key, myIBMSPrlCompleter.cache_hitratio[ key ] ] )
-        
-        print( columnar( data, headers=[ colored( 'Name', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'c' ] ) )
-    #    
-    spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
-    myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
-    myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
-    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
-    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CAche' )
-
-
-    def spadmin_show_version( parameters ):        
-        print( 'Version: v1.0' )        
-    #    
-    spadmin_commands[ 'SPadmin SHow VERsion' ] = spadmin_show_version
-    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'VERsion' )
-
-
-    def spadmin_show_rules( parameters ):        
-        data  = [] 
-        for key in myIBMSPrlCompleter.rules:
-            if myIBMSPrlCompleter.rules[ key ] != []:
-                data.append( [ key, myIBMSPrlCompleter.rules[ key ] ] )
-        
-        print( columnar( data, headers=[ colored( 'Regexp', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ], max_column_width = 120 ) )
-        
-    #    
-    spadmin_commands[ 'SPadmin SHow RULes' ] = spadmin_show_rules
-    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
-    
-    
-    def show_actlog ( parameters ):
-        data = None
-        if parameters == None or parameters == '' or parameters == []:
-            data = tsm.send_command_array_array_tabdel("q actlog")
-        else:
-            data = tsm.send_command_array_array_tabdel("q actlog " + parameters[0] )
-        table = columnar(data, headers=['Date/Time', 'Message'])
-        print(table)
-    #
-    spadmin_commands[ 'SHow ACTlog' ] = show_actlog
-    myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
-    
-    
-    def reload( parameters ):
-        myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT']['rulefile'] )
-    #
-    spadmin_commands[ 'REload' ] = reload
-    
-    def spadmin_show_log( parameters ):
-        os.system( 'open ./' + globals.config.getconfiguration()['DEFAULT']['logfile'] )
-    #    
-    spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
-    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )
-    
-    
-    def show_stgpool( parameters ):
-        data = tsm.send_command_array_array_tabdel(
-            "select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
-        for index, row in enumerate(data):
-            (a, b, c, d, e, f, g, h, i, j) = row
-            if d == '':
-                data[index][3] = 0
-            else:
-                data[index][3] = round((float(d)/1024),1)
-        
-        table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
-                                        'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
-                         justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-        print(table)
-    #
-    spadmin_commands[ 'SHow STGpools' ] = show_stgpool
-    myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
-
-    def show_last_error ( parameters):
-        print ("Last error message: ", globals.last_error["message"])
-        print ("Last return code: ", globals.last_error["rc"])
-    #
-    spadmin_commands['SHow LASTerror'] = show_last_error
-    myIBMSPrlCompleter.dynrules['SHow'].append('LASTerror')
-
-
-    def spadmin_show_extras( parameters ):
-        print( 'CLI extra' )
-        pprint( extras)        
-    #    
-    spadmin_commands[ 'SPadmin SHow EXtras' ] = spadmin_show_extras
-    myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'EXtras' )
-        
-    utilities.dictmerger( myIBMSPrlCompleter.rules, myIBMSPrlCompleter.dynrules )
+    import owncommands
         
     # -----------------------------------------
 
@@ -293,7 +188,7 @@ if __name__ == "__main__":
 
         try:
             if line == '':
-                line = input( myIBMSPrlCompleter.prompt() )
+                line = input( globals.myIBMSPrlCompleter.prompt() )
             
             # Skip the empty command
             if not line.rstrip():
@@ -342,17 +237,17 @@ if __name__ == "__main__":
                 utilities.consoleline( '-' )
                 print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
                 utilities.consoleline( '-' )
-                tsm.quit()
+                globals.tsm.quit()
                 
                 sys.exit( 0 )
 
             # own command executor
             match = False
             # let's try to find maybe it's an own command
-            for key in spadmin_commands: 
+            for key in owncommands.spadmin_commands: 
                 if search( '^' + utilities.regexpgenerator( key ), command, IGNORECASE ):
                     # just transfer the parameters
-                    spadmin_commands[ key ]( command.split()[ 2: ] )
+                    owncommands.spadmin_commands[ key ]( owncommands, command.split()[ 2: ] )
                     match = True
                     break 
             
@@ -364,7 +259,7 @@ if __name__ == "__main__":
             
 
             # No own command, no exit then let dsmadmc run the command!
-            for textline in tsm.send_command_normal(  command ):
+            for textline in globals.tsm.send_command_normal(  command ):
                 if textline != '':
                     print( textline )
             line   = ''
