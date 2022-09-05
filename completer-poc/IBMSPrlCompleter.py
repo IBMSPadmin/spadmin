@@ -37,12 +37,12 @@ class IBMSPrlCompleter:
 
     def __init__(self, tsm):
         
-        sys.stdout.write(" Let's try to get the name of the server...")
+        sys.stdout.write("Let's try to get the name of the server...")
         sys.stdout.flush()
         spprompt = tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
         sys.stdout.write( '\r' )
         
-        sys.stdout.write(" and get the version of the IBM SP server...")
+        sys.stdout.write("and get the version of the IBM SP server...")
         sys.stdout.flush()
         spversion, sprelease, splevel, spsublevel = tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
         sys.stdout.write( '\r' )
@@ -138,7 +138,7 @@ class IBMSPrlCompleter:
         i = 0
         for line in rulefilelines:
             i += 1
-            utilities.progressbar( i, len(rulefilelines), ' and loading rules: ' )
+            utilities.progressbar( i, len(rulefilelines), 'Loading rules: ' )
             # ez mi? assert?
             # assert( '->' in line )
             # Skip the remark and empty lines

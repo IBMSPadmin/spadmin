@@ -117,15 +117,15 @@ Query Node Type=      -> Type=Any
 Query Node DOmain=    -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
 
 # a 4. szinten ne ez legyen, de lehet ez em is kell
-Query Node \w+         -> DOmain=
-Query Node \w+         -> Format=
-Query Node \w+         -> Type=
+Query Node [\w\*]+         -> DOmain=
+Query Node [\w\*]+         -> Format=
+Query Node [\w\*]+         -> Type=
 
-Query Node \w+ DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
-Query Node \w+ Type=   -> Type=Client
-Query Node \w+ Type=   -> Type=NAS
-Query Node \w+ Type=   -> Type=Server
-Query Node \w+ Type=   -> Type=Any
+Query Node [\w\*]+ DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
+Query Node [\w\*]+ Type=   -> Type=Client
+Query Node [\w\*]+ Type=   -> Type=NAS
+Query Node [\w\*]+ Type=   -> Type=Server
+Query Node [\w\*]+ Type=   -> Type=Any
 
 # de ez már az 5. szint
 #Query Node \w+ (\w+=\w*\s+){1,} -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
