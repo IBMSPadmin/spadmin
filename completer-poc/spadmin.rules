@@ -27,6 +27,7 @@ $ -> invgrep
 $ -> count
 $ -> mailto
 $ -> SPadmin
+$ -> PRint
 
 ################################
 # and the rest LEVEL 2, 3, ... #

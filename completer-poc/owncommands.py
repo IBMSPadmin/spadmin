@@ -2,12 +2,14 @@ import globals
 import utilities
 import IBMSPrlCompleter
 
-import columnar
 from termcolor import colored
 
+import columnar
 columnar = columnar.Columnar()
 
 import os
+
+from pprint import pprint, pformat
 
 # sub injection test
 spadmin_commands = {}
@@ -61,7 +63,7 @@ def show_actlog ( self, parameters ):
     else:
         data = tsm.send_command_array_array_tabdel("q actlog " + parameters[0] )
     table = columnar(data, headers=['Date/Time', 'Message'])
-    print(table)
+    print( table[ :-1 ] )
 #
 spadmin_commands[ 'SHow ACTlog' ] = show_actlog
 globals.myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
@@ -92,7 +94,7 @@ def show_stgpool( self, parameters ):
     table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
                                     'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
                      justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-    print(table)
+    print( table[ :-1 ] )
 #
 spadmin_commands[ 'SHow STGpools' ] = show_stgpool
 globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
@@ -106,10 +108,16 @@ globals.myIBMSPrlCompleter.dynrules['SHow'].append('LASTerror')
 
 
 def spadmin_show_extras( self, parameters ):
-    print( 'CLI extra' )
-    pprint( extras)        
+    print( 'CLI extra pipe parameter tester' )
+    pprint( globals.extras )        
 #    
 spadmin_commands[ 'SPadmin SHow EXtras' ] = spadmin_show_extras
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'EXtras' )
-    
+
+def echo( self, parameters ):
+    print( parameters )        
+#    
+spadmin_commands[ 'PRint' ] = echo
+
+# merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )

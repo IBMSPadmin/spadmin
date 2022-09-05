@@ -36,22 +36,28 @@ class IBMSPrlCompleter:
     cache_hitratio  = { 'new' : 0, 'request' : 0, 'hit' : 0, 'hitupdate' : 0 }
 
     def __init__(self, tsm):
-        print(' Loading rules...                                          ')
-        sys.stdout.write(" Let's try to get the name of the server...\r")
+        
+        sys.stdout.write(" Let's try to get the name of the server...")
+        sys.stdout.flush()
         spprompt = tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
-
-        sys.stdout.write(" and get the version of the IBM SP server...\r")
+        sys.stdout.write( '\r' )
+        
+        sys.stdout.write(" and get the version of the IBM SP server...")
+        sys.stdout.flush()
         spversion, sprelease, splevel, spsublevel = tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
+        sys.stdout.write( '\r' )
 
-        self.rows = globals.rows
-        self.columns = globals.columns
-        self.config = globals.config
-        self.tsm = tsm
-        self.spversion = spversion
-        self.sprelease = sprelease
-        self.splevel = splevel
+        self.rows       = globals.rows
+        self.columns    = globals.columns
+        self.config     = globals.config
+        self.tsm        = tsm
+        self.spversion  = spversion
+        self.sprelease  = sprelease
+        self.splevel    = splevel
         self.spsublevel = spsublevel
-        self.spprompt = spprompt
+        self.spprompt   = spprompt
+
+        print(' and loading rules...                                          ')        
         self.loadrules(self.config.getconfiguration()['DEFAULT']['rulefile'])
 
     def prompt(self):
@@ -160,16 +166,14 @@ class IBMSPrlCompleter:
         rulefile.close()
         print()
 
-        utilities.consoleline('#')
-        print(colored(' Imported LEVEL 0 starters', 'green', attrs=['bold']) + ' from this file:\t[' + colored(
-            rulefilename, 'green') + ']')
+        #utilities.consoleline('#')
+        #print(colored(' Imported LEVEL 0 starters', 'green', attrs=['bold']) + ' from this file:\t[' + colored(rulefilename, 'green') + ']')
         # pprint( self.start )
-        print(colored(' Imported LEVEL >1 other rules', 'green', attrs=['bold']) + ' from this file:\t[' + colored(
-            rulefilename, 'green') + ']')
+        #print(colored(' Imported LEVEL >1 other rules', 'green', attrs=['bold']) + ' from this file:\t[' + colored(rulefilename, 'green') + ']')
         # pprint( self.rules )
         logging.info('Rule file imported as starters:\n' + pformat(self.start))
         logging.info('Rule file imported as other rules:\n' + pformat(self.rules))
-        utilities.consoleline('#')
+        #utilities.consoleline('#')
 
         # self.results = self.start
         # self.results += [ None ]

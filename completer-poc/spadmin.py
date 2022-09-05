@@ -95,8 +95,6 @@ if __name__ == "__main__":
     # SPadmin settings
     globals.config = Configuration( "spadmin.ini" )
     
-    
-    
     # override config with cli parameters
     if args.debug:
         globals.config.getconfiguration()[ 'DEFAULT' ][ 'debug' ]       = 'True'
@@ -113,21 +111,22 @@ if __name__ == "__main__":
 
     # https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
     print( colored( '''
-     ███████╗ ██████╗   █████╗  ██████╗  ███╗   ███╗ ██╗ ███╗   ██╗     ██████╗  ██╗   ██╗
-     ██╔════╝ ██╔══██╗ ██╔══██╗ ██╔══██╗ ████╗ ████║ ██║ ████╗  ██║     ██╔══██╗ ╚██╗ ██╔╝
-     ███████╗ ██████╔╝ ███████║ ██║  ██║ ██╔████╔██║ ██║ ██╔██╗ ██║     ██████╔╝  ╚████╔╝ 
-     ╚════██║ ██╔═══╝  ██╔══██║ ██║  ██║ ██║╚██╔╝██║ ██║ ██║╚██╗██║     ██╔═══╝    ╚██╔╝  
-     ███████║ ██║      ██║  ██║ ██████╔╝ ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██╗ ██║         ██║   
-     ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝''' ))
+ ███████╗ ██████╗   █████╗  ██████╗  ███╗   ███╗ ██╗ ███╗   ██╗     ██████╗  ██╗   ██╗
+ ██╔════╝ ██╔══██╗ ██╔══██╗ ██╔══██╗ ████╗ ████║ ██║ ████╗  ██║     ██╔══██╗ ╚██╗ ██╔╝
+ ███████╗ ██████╔╝ ███████║ ██║  ██║ ██╔████╔██║ ██║ ██╔██╗ ██║     ██████╔╝  ╚████╔╝ 
+ ╚════██║ ██╔═══╝  ██╔══██║ ██║  ██║ ██║╚██╔╝██║ ██║ ██║╚██╗██║     ██╔═══╝    ╚██╔╝  
+ ███████║ ██║      ██║  ██║ ██████╔╝ ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██╗ ██║         ██║   
+ ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝''' ))
+    print()
     print( colored(' Powerful CLI administration tool for ', 'white', attrs=[ 'bold' ] ) + colored( 'IBM', 'white', 'on_blue', attrs=[ 'bold' ] ) + colored(' Spectrum Protect aka Tivoli Storage Manager', 'white', attrs=[ 'bold' ] ) )
 
     print()
-    print( colored( '= Python3 [' + sys.version + '] spadmin + readline DEMO POC', 'grey', attrs=[ 'bold' ] ) )
-    print( colored( "= Welcome! Enter any IBM Spectrum Protect commands and if you're lost type help!", 'grey', attrs=[ 'bold' ] ) )
-    print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
-    print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( globals.columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( globals.rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )
+    print( colored( "= Welcome! Enter any IBM Spectrum Protect commands and if you're lost type Help!", 'grey', attrs=[ 'bold' ] ) )
     print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
-    print( colored( "= Once you start to use it, you can't live without it!!!", 'magenta', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
+    print( colored(  '= ', 'grey', attrs=[ 'bold' ] ) + colored( "Once you start to use it, you can't live without it!!!", 'grey', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
+    print( colored( '= Python3 [' + sys.version + ']', 'grey', attrs=[ 'bold' ] ) )
+    print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
+    print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( globals.columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( globals.rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )    
     print()
     
     # Logger settings
@@ -141,7 +140,7 @@ if __name__ == "__main__":
 
     globals.myIBMSPrlCompleter = IBMSPrlCompleter( globals.tsm )
 
-    print( utilities.consolefilledline( '', '-', '', globals.columns ) )
+    #print( utilities.consolefilledline( '', '-', '', globals.columns ) )
 
     # Command line history
     # Based on this: https://docs.python.org/3/library/readline.html
@@ -167,7 +166,7 @@ if __name__ == "__main__":
       use: "REload" to reload the rule file! and
       use: "SHow LOG" to reach the local log file!''' )
 
-    utilities.ruler( utilities, '' )
+    #utilities.ruler( utilities, '' )
     print()
 
     import owncommands
@@ -181,7 +180,7 @@ if __name__ == "__main__":
         line = globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]
 
 
-    extras = {}
+    globals.extras = {}
     # Infinite loop
     logging.info( utilities.consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
     while True:
@@ -223,10 +222,10 @@ if __name__ == "__main__":
             for extracommand in commandparts:
                 pairs = extracommand.split()
                 if len( pairs ) > 1:
-                    extras[ pairs[ 0 ] ] = pairs[ 1 ].replace( '##', '|' ) # change back if exists
+                    globals.extras[ pairs[ 0 ] ] = pairs[ 1 ].replace( '##', '|' ) # change back if exists
                 else:
-                    extras[ pairs[ 0 ] ] = None
-               
+                    globals.extras[ pairs[ 0 ] ] = None
+                    
             # it's not own command. Does the user want to possibly exit???
             if search( '^' + utilities.regexpgenerator( 'QUIt' ),   command, IGNORECASE ) or \
                search( '^' + utilities.regexpgenerator( 'LOGout' ), command, IGNORECASE ) or \
@@ -250,14 +249,14 @@ if __name__ == "__main__":
             for key in owncommands.spadmin_commands: 
                 if search( '^' + utilities.regexpgenerator( key ), command, IGNORECASE ):
                     # just transfer the parameters
-                    owncommands.spadmin_commands[ key ]( owncommands, command.split()[ 2: ] )
+                    owncommands.spadmin_commands[ key ]( owncommands, search( '^' + utilities.regexpgenerator( key ) + '(.*)$', command, IGNORECASE )[2].strip() )
                     match = True
                     break 
             
             # if it was then go to the next command
             if match:
                 line   = ''
-                extras = {}
+                globals.extras = {}
                 continue
             
 
@@ -266,7 +265,7 @@ if __name__ == "__main__":
                 if textline != '':
                     print( textline )
             line   = ''
-            extras = {}
+            globals.extras = {}
             # continue
     
     # 
