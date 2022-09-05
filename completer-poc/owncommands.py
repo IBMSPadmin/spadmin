@@ -59,9 +59,9 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
 def show_actlog ( self, parameters ):
     data = None
     if parameters == None or parameters == '' or parameters == []:
-        data = tsm.send_command_array_array_tabdel("q actlog")
+        data = globals.tsm.send_command_array_array_tabdel("q actlog")
     else:
-        data = tsm.send_command_array_array_tabdel("q actlog " + parameters[0] )
+        data = globals.tsm.send_command_array_array_tabdel("q actlog ")
     table = columnar(data, headers=['Date/Time', 'Message'])
     print( table[ :-1 ] )
 #
