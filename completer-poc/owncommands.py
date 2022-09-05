@@ -10,7 +10,6 @@ columnar = columnar.Columnar()
 import os
 
 # sub injection test
-global spadmin_commands
 spadmin_commands = {
     
 }

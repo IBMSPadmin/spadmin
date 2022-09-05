@@ -93,7 +93,7 @@ if __name__ == "__main__":
 
     # SPadmin settings
     globals.config = Configuration( "spadmin.ini" )
-
+    
     # override config with cli parameters
     if args.debug:
         globals.config.getconfiguration()[ 'DEFAULT' ][ 'debug' ]       = 'True'

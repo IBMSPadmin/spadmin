@@ -1,10 +1,11 @@
 import utilities
 
 def initialize():
-    global rows, columns, config, last_error
-    global myIBMSPrlCompleter, tsm
+    #rows, columns, config, last_error
+    #myIBMSPrlCompleter, tsm
 
-    last_error = { 'rc': 0, 'message': "" }
+    last_error = { 'rc': 0, 'message': '' }
+    
     columns = 80
     rows    = 25
     utilities.refreshrowscolumns()
