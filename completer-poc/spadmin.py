@@ -89,10 +89,13 @@ if __name__ == "__main__":
 
     # GLOBAL variables
     import globals
-    globals.initialize()
+    #globals.initialize()
+    utilities.refreshrowscolumns()
 
     # SPadmin settings
     globals.config = Configuration( "spadmin.ini" )
+    
+    
     
     # override config with cli parameters
     if args.debug:

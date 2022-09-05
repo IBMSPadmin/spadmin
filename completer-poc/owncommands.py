@@ -10,9 +10,7 @@ columnar = columnar.Columnar()
 import os
 
 # sub injection test
-spadmin_commands = {
-    
-}
+spadmin_commands = {}
 # command injection
 spadmin_commands[ 'SHow RULer' ] = utilities.ruler
 globals.myIBMSPrlCompleter.dynrules[ 'SHow' ] = []
