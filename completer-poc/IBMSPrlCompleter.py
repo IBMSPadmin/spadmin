@@ -57,8 +57,8 @@ class IBMSPrlCompleter:
         self.spsublevel = spsublevel
         self.spprompt   = spprompt
 
-        print(' and loading rules...                                          ')        
-        self.loadrules(self.config.getconfiguration()['DEFAULT']['rulefile'])
+        # print(' and loading rules: ')        
+        self.loadrules( self.config.getconfiguration()['DEFAULT']['rulefile'] )
 
     def prompt(self):
         prompt = self.config.getconfiguration()['DEFAULT']['prompt'].strip( '"' )
@@ -138,7 +138,7 @@ class IBMSPrlCompleter:
         i = 0
         for line in rulefilelines:
             i += 1
-            utilities.progressbar(i, len(rulefilelines))
+            utilities.progressbar( i, len(rulefilelines), ' and loading rules: ' )
             # ez mi? assert?
             # assert( '->' in line )
             # Skip the remark and empty lines

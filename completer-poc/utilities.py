@@ -12,15 +12,15 @@ def refreshrowscolumns():
     globals.columns = int( column )
 
 
-def progressbar(count, total):
-    barlength = globals.columns - 2  # [...]
+def progressbar( count, total, leadtext = '' ):
+    barlength = globals.columns - 2 - len( leadtext )  # [...]
     filledlength = int(round((barlength) * count / float(total)))
 
     percent = round(100.0 * count / float(total), 1)
     barline = '=' * filledlength + colored('-', 'grey', attrs=['bold']) * (barlength - filledlength)
 
-    sys.stdout.write('[%s]\r' % (barline))
-    sys.stdout.write('[%s%s\r' % (colored(percent, 'grey', 'on_white'), colored('%', 'grey', 'on_white')))
+    sys.stdout.write( leadtext + '[%s]\r' % (barline))
+    sys.stdout.write( leadtext + '[%s%s\r' % (colored(percent, 'grey', 'on_white'), colored('%', 'grey', 'on_white')))
     sys.stdout.flush()
 
 
