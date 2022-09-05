@@ -1,10 +1,8 @@
 # toDos
 
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
-- paraméterkezelés
--- DSM ezt le kell majd kezelni:
-  - global változóba eltenni az rc-t és message-et
-  - ha rc11 jön akkor üres listát adjon vissza
+- színezés
+- columnar üres sorok és sor végi space-ek eltűntetése
 
 ```
 ANR0944E QUERY PROCESS: No active processes found.

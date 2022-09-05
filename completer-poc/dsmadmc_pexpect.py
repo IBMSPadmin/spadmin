@@ -156,7 +156,7 @@ class dsmadmc_pexpect:
         if groups:
             globals.last_error = {'rc': groups[1], 'message': tsm.before.splitlines()[2]}
         else:
-            globals.last_error = {'rc': 0, 'message': ''}
+            globals.last_error = {'rc': "0", 'message': ''}
 
 
     def quit(self):
