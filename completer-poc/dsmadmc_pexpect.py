@@ -1,4 +1,4 @@
-import re
+from re import search, IGNORECASE, MULTILINE, split
 import pexpect
 import logging
 import globals
@@ -59,7 +59,7 @@ class dsmadmc_pexpect:
         4. returns a list, where every line is an item
         """
         list = self.send_command_tabdel(command).splitlines()
-        if globals.last_error['rc'] == "11.":
+        if globals.last_error['rc'] == "11":
             return []
         if len(list) > 0:
             list.pop(0)  # delete the first line which is the command itself
@@ -76,14 +76,14 @@ class dsmadmc_pexpect:
         """
         list = self.send_command_tabdel(command).splitlines()
         ar = []
-        if globals.last_error['rc'] == "11.":
+        if globals.last_error['rc'] == "11":
             return ar
         if len(list) > 0:
             list.pop(0)  # delete the first line which is the command itself
         while ("" in list):  ## every output contains empty lines, we remove it
             list.remove("")
         for i in list:
-            ar.append(re.split(r'\t', i))
+            ar.append(split(r'\t', i))
         return ar
 
 
@@ -120,15 +120,15 @@ class dsmadmc_pexpect:
 
         # Let's dance
         ret = []
-        if globals.last_error['rc'] == "11.":
+        if globals.last_error['rc'] == "11":
             return ret
 
         for i in tsm2.before.splitlines()[1:]:
-            if re.search('^Session established with server \w+:', i):
+            if search('^Session established with server \w+:', i):
                 continue
-            elif re.search('^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i):
+            elif search('^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i):
                 continue
-            elif re.search('^\s\sServer date\/time\:', i):
+            elif search('^\s\sServer date\/time\:', i):
                 continue
 
             ret.append(i)
@@ -151,8 +151,10 @@ class dsmadmc_pexpect:
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
             quit(1)
-        if re.search("ANS8001I",tsm.before):
-            globals.last_error = {'rc': tsm.before.splitlines()[3].split(' ')[3], 'message': tsm.before.splitlines()[2]}
+
+        groups = search("ANS8001I Return code (\d+).", tsm.before, MULTILINE )
+        if groups:
+            globals.last_error = {'rc': groups[1], 'message': tsm.before.splitlines()[2]}
         else:
             globals.last_error = {'rc': 0, 'message': ''}
 

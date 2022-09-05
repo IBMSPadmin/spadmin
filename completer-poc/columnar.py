@@ -124,9 +124,7 @@ class Columnar:
                     for text, code in zip(justified_row_parts, color_row)
                 ]
                 out.write(
-                     self.column_sep.join(colorized_row_parts)
-                    + self.column_sep
-                    + "\n"
+                     self.column_sep.join(colorized_row_parts) + "\n"
                 )
             if write_header:
                 #out.write(
