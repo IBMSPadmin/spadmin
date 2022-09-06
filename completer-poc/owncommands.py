@@ -55,7 +55,7 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SET' ].append( 'DEBUG' )
 
 def spadmin_unset_debug( self, parameters ):        
     print( 'Debug is set to OFF. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + '].' ) 
-    globals.logger.setLevel( logging.DEBUG )
+    globals.logger.setLevel( logging.INFO )
 #    
 spadmin_commands[ 'SPadmin UNSET DEBUG' ] = spadmin_unset_debug
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'UNSET' )

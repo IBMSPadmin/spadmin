@@ -185,7 +185,7 @@ class IBMSPrlCompleter:
     # tokenEngine #
     ###############
     def tokenEngine(self, tokens):
-        globals.logger.debug(' PROCESS TOKENS, received tokens: ' + pformat(tokens))
+        globals.logger.debug(' PROCESS TOKENS with token engine, received tokens: ' + pformat(tokens))
 
         # Reset the results dictionary
         ret = []
@@ -201,9 +201,8 @@ class IBMSPrlCompleter:
             # Simple check the beginning of the command on start list
             for x in self.start:
                 if search('^' + tokens[-1], x, IGNORECASE):
-                    globals.logger.debug(' found this part [' + tokens[
-                        -1] + '] of the command in the 1st LEVEL list items: [' + x + '].')
-                    ret.append(x + ' ')
+                    globals.logger.debug(' found this part [' + tokens[ -1 ] + '] of the command in the 1st LEVEL list items: [' + x + '].')
+                    ret.append( x + ' ' )
 
         elif len(tokens) == 2:
             # LEVEL 2
@@ -323,23 +322,22 @@ class IBMSPrlCompleter:
                             continue
 
         else:
-            logging.info(' Stepped into LEVEL Bzzz...')
+            globals.logger.debug( ' Stepped into LEVEL Bzzz...' )
 
-        logging.info(' Here\'s what we have in ret: [' + pformat(ret, width=180) + ']')
-        logging.info(' PROCESS RETURNED.')
+        #globals.logger.debug( " Here's what we have in ret: [" + pformat( ret, width=180 ) + ']')
+        globals.logger.debug( ' PROCESS token engine RETURNED.')
 
         return ret
 
     # v2 optimization
     rrr = []
 
-    def IBMSPcompleter(self, text, state):
+    def IBMSPcompleter( self, text, state ):
 
-        logging.info('')
-        logging.info(utilities.consolefilledline('COMPLETER Text: ', '-', '[' + text + '] and state[' + str(state) + '].', 120))
+        globals.logger.debug( utilities.consolefilledline( ' Step into IBMSPcompleter v2 with this text: ', '-', '[' + text + '] and with this state[' + str(state) + '].' ) )
 
-        if len(self.rrr) == 0:
-            logging.info('Readline buffer: [' + readline.get_line_buffer() + '].')
+        if len( self.rrr ) == 0:
+            globals.logger.debug( ' The readline buffer has the following: [' + readline.get_line_buffer() + '].')
 
             # Read CLI and split commands
             # first ;
@@ -347,38 +345,39 @@ class IBMSPrlCompleter:
             tokens = readline.get_line_buffer().split(';')[-1].split('|')[-1].split()
             if not tokens or readline.get_line_buffer()[-1] == ' ':
                 tokens.append('')
-
+            
             # Call the Engine
             self.rrr = self.tokenEngine(tokens) + [None]
 
-            logging.info('RETURNED results from the engine: ' + pformat(self.rrr, width=180))
+            globals.logger.debug( ' RETURNED results from the token engine:' )
+            globals.logger.debug( pformat( self.rrr, width=180 ) )
 
-            tmp = self.rrr.pop(0)
+            tmp = self.rrr.pop( 0 )
             #logging.info(': ' + pformat(self.rrr, width=180))
 
             if tmp == None:
-                logging.info(
-                    'COMPLETER RESULT PUSH CYCLES ENDED! --------------------------------------------------------------------------')
-                logging.info('')
+                globals.logger.debug( ' COMPLETER RESULT PUSH CYCLES ENDED!!! --------------------------------------------------------------------------')
             else:
-                logging.info(utilities.consolefilledline('COMPLETER results push cycle: [' + tmp + ']', '-',
-                                               '[' + str(state) + '] [' + '].', 120))
-
+                globals.logger.debug( utilities.consolefilledline( ' COMPLETER results push cycle:  [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
             return tmp
 
         else:
-                tmp = self.rrr.pop(0)
-                if tmp == None:
-                    self.rrr = []
-                return tmp
-
+            tmp = self.rrr.pop( 0 )
+            if tmp == None:
+                self.rrr = []
+            else:
+                globals.logger.debug( utilities.consolefilledline( ' COMPLETER results push cycle2: [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
+            return tmp
 
     ######################
     # match_display_hook #
     ######################
-    def match_display_hook(self, substitution, matches, longest_match_length):
+    def match_display_hook( self, substitution, matches, longest_match_length ):
 
-        globals.logger.debug( 'Step into : match_display_hook' )
+        globals.logger.debug( 'Step into: match_display_hook with this:' )
+        globals.logger.debug( 'substitution: ' + str( substitution ) )
+        globals.logger.debug( 'matches: ' + str( matches ) )
+        globals.logger.debug( 'longest_match_length: ' + str( longest_match_length ) )
 
         word = 1
 
@@ -407,4 +406,4 @@ class IBMSPrlCompleter:
         sys.stdout.write('\n' + self.prompt() + '' + readline.get_line_buffer())
         # sys.stdout.flush()
 
-        globals.logger.debug( 'Leave : match_display_hook' )
+        globals.logger.debug( 'Leave: match_display_hook.' )
