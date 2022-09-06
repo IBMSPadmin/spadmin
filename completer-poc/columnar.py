@@ -89,6 +89,11 @@ class Columnar:
             logical_rows = self.convert_data_to_logical_rows([headers] + data)
         column_widths = self.get_column_widths(logical_rows)
         # Add +3 or +2 char extra for the last column
+        print (self.terminal_width)
+        print (sum(column_widths) + len(column_widths))
+        self.end_char = ""
+        if (self.terminal_width - sum(column_widths)) > 2:
+            self.end_char = "\n"
         if ((self.terminal_width - sum(column_widths)) % 2) == 0:
             column_widths[-1] = column_widths[-1] + 3
         else:
@@ -122,7 +127,7 @@ class Columnar:
                 out.write((self.header_sep * width))
             else:
                 out.write((self.header_sep * width) + " ")
-        #out.write("\n")
+        out.write(self.end_char)
 
         for lrow, color_row in zip(truncated_rows, self.color_grid):
             for i, row in enumerate(lrow):
@@ -138,7 +143,7 @@ class Columnar:
                 ]
 
                 out.write( self.column_sep.join(colorized_row_parts))
-
+                out.write(self.end_char)
 
             if write_header:
                 ###
@@ -149,7 +154,7 @@ class Columnar:
                         out.write((self.header_sep * width))
                     else:
                         out.write((self.header_sep * width) + " ")
-                # out.write("\n")
+                out.write(self.end_char)
                 write_header = False
             else:
                 if not self.no_borders:
