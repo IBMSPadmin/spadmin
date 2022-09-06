@@ -28,25 +28,25 @@ LogicalRow = List[List[WrappedCellLine]]
 
 class Columnar:
     def __call__(
-        self,
-        data: Sequence[Sequence[Any]],
-        headers: Union[None, Sequence[Any]] = None,
-        head: int = 0,
-        justify: Union[str, List[str]] = "l",
-        wrap_max: int = 5,
-        max_column_width: Union[None, int] = None,
-        min_column_width: int = 5,
-        row_sep: str = "-",
-        column_sep: str = "|",
-        patterns: Sequence[str] = [
+            self,
+            data: Sequence[Sequence[Any]],
+            headers: Union[None, Sequence[Any]] = None,
+            head: int = 0,
+            justify: Union[str, List[str]] = "l",
+            wrap_max: int = 5,
+            max_column_width: Union[None, int] = None,
+            min_column_width: int = 5,
+            row_sep: str = "-",
+            column_sep: str = "|",
+            patterns: Sequence[str] = [
                 ('ANR....E', lambda text: style(text, fg='red')),
                 ('ANR....W', lambda text: style(text, fg='yellow')),
             ],
-        drop: Sequence[str] = [],
-        select: Sequence[str] = [],
-        no_borders: bool = True,
-        terminal_width: Union[None, int] = None,
-        preformatted_headers: bool = True,
+            drop: Sequence[str] = [],
+            select: Sequence[str] = [],
+            no_borders: bool = True,
+            terminal_width: Union[None, int] = None,
+            preformatted_headers: bool = True,
     ) -> str:
         self.wrap_max = wrap_max
         self.max_column_width = max_column_width
@@ -75,10 +75,10 @@ class Columnar:
             headers = [""] * len(data[0])
 
         if self.no_borders:
-            ## spadmin special need
+            # spadmin special need
             self.column_sep = " " * 1
             self.row_sep = ''
-            self.header_sep = colored( '-', 'white', attrs=[ 'bold' ] )
+            self.header_sep = colored('-', 'white', attrs=['bold'])
             if not preformatted_headers:
                 headers = [text.upper() for text in headers]
 
@@ -88,6 +88,12 @@ class Columnar:
         else:
             logical_rows = self.convert_data_to_logical_rows([headers] + data)
         column_widths = self.get_column_widths(logical_rows)
+        # Add +3 or +2 char extra for the last column
+        if ((self.terminal_width - sum(column_widths)) % 2) == 0:
+            column_widths[-1] = column_widths[-1] + 3
+        else:
+            column_widths[-1] = column_widths[-1] + 2
+
         truncated_rows = self.wrap_and_truncate_logical_cells(
             logical_rows, column_widths
         )
@@ -103,16 +109,23 @@ class Columnar:
         else:
             justifications = [justification_map[spec] for spec in justify]
 
-        table_width = sum(column_widths) + ((len(column_widths) + 1) * len(row_sep))
+        # table_width = sum(column_widths) + ((len(column_widths) + 1) * len(row_sep))
         out = io.StringIO()
         write_header = True if not self.no_headers else False
         # self.write_row_separators(out, column_widths) # remove starting empty line
-        for width in column_widths:
-            out.write((self.header_sep * width) + " ")
-        out.write("\n")
+        ####
+        #### Header 1st spearator line
+        ####
+
+        for i, width in enumerate(column_widths):
+            if i+1 == len(column_widths):
+                out.write((self.header_sep * width))
+            else:
+                out.write((self.header_sep * width) + " ")
+        #out.write("\n")
 
         for lrow, color_row in zip(truncated_rows, self.color_grid):
-            for row in lrow:
+            for i, row in enumerate(lrow):
                 justified_row_parts = [
                     justifier(text, width)
                     for text, justifier, width in zip(
@@ -123,29 +136,28 @@ class Columnar:
                     self.colorize(text, code)
                     for text, code in zip(justified_row_parts, color_row)
                 ]
-                out.write(
-                     self.column_sep.join(colorized_row_parts) + "\n"
-                )
+
+                out.write( self.column_sep.join(colorized_row_parts))
+
+
             if write_header:
-                #out.write(
-                ##    self.column_sep
-                ##    + (self.header_sep * (table_width - (len(self.column_sep * 2))))
-                ##    + self.column_sep
-                ##    + "\n"
-                #     (self.header_sep * (sum(column_widths) + (len(column_widths) * 1)))
-                #    + self.header_sep + "\n"
-                #)
-                for width in column_widths:
-                    out.write((self.header_sep * width) + " ")
-                out.write("\n")
+                ###
+                ### Header 2nd separator line
+                ###
+                for i, width in enumerate(column_widths):
+                    if i + 1 == len(column_widths):
+                        out.write((self.header_sep * width))
+                    else:
+                        out.write((self.header_sep * width) + " ")
+                # out.write("\n")
                 write_header = False
             else:
                 if not self.no_borders:
-                   self.write_row_separators(out, column_widths)
+                    self.write_row_separators(out, column_widths)
         return out.getvalue()
 
     def write_row_separators(
-        self, out_stream: io.StringIO, column_widths: Sequence[int]
+            self, out_stream: io.StringIO, column_widths: Sequence[int]
     ) -> None:
         cells = [self.row_sep * width for width in column_widths]
         out_stream.write(
@@ -369,8 +381,8 @@ class Columnar:
                 # keep distributing the size so we have evenly-shrunken columns
                 continue
             elif (
-                columns[0]["width"] >= self.min_column_width
-                and self.current_table_width(columns) <= self.terminal_width
+                    columns[0]["width"] >= self.min_column_width
+                    and self.current_table_width(columns) <= self.terminal_width
             ):
                 return self.widths_sorted_by(columns, "column_no")
 
@@ -379,7 +391,7 @@ class Columnar:
         )
 
     def wrap_and_truncate_logical_cells(
-        self, logical_rows: List[LogicalRow], column_widths: List[int]
+            self, logical_rows: List[LogicalRow], column_widths: List[int]
     ) -> List[LogicalRow]:
         lrows_out = []
         for lrow in logical_rows:
