@@ -72,7 +72,8 @@ class IBMSPrlCompleter:
         # prompt
         return prompt.replace('%SPSERVERNAME%', globals.spprompt)
 
-    def spsqlengine(self, select, tokens=[]):
+    def spsqlengine( self, select, tokens=[] ):
+        
         # Handle SQL requests
 
         globals.logger.debug(' SP SQL Engine reached with this select:  [' + select + '] command and')
@@ -185,74 +186,75 @@ class IBMSPrlCompleter:
     # tokenEngine #
     ###############
     def tokenEngine(self, tokens):
-        globals.logger.debug(' >>> PROCESS TOKENS with token engine, received tokens: ' + pformat(tokens))
+        globals.logger.debug( ' >>> PROCESS TOKENS with token engine, received tokens: ' + pformat( tokens ) )
 
         # Reset the results dictionary
         ret = []
 
-        if len(tokens) == 0:
+        if len( tokens ) == 0:
             # Never happen this
-            globals.logger.debug('Stepped into LEVEL 0.')
+            globals.logger.debug( ' Stepped into LEVEL 0.' )
 
         elif len(tokens) == 1:
             # LEVEL 1 searches in start commands
-            globals.logger.debug(' Stepped into LEVEL 1.')
+            globals.logger.debug( ' Stepped into LEVEL 1.' )
 
             # Simple check the beginning of the command on start list
             for x in self.start:
-                if search('^' + tokens[-1], x, IGNORECASE):
-                    globals.logger.debug(' found this part [' + tokens[ -1 ] + '] of the command in the 1st LEVEL list items: [' + x + '].')
+                if search('^' + tokens[ -1 ], x, IGNORECASE):
+                    globals.logger.debug( ' found this part [' + tokens[ -1 ] + '] of the command in the 1st LEVEL list items: [' + x + '].' )
                     ret.append( x + ' ' )
 
-        elif len(tokens) == 2:
+        elif len( tokens ) == 2:
             # LEVEL 2
-            globals.logger.debug(' Stepped into LEVEL 2.')
+            globals.logger.debug( ' Stepped into LEVEL 2.' )
 
             for key in self.rules:
+                
                 # skip the previous level entries
                 if len(key.split()) + 1 < 2:
                     continue
-                # logging.info( ' and searching for regexp pattern [' + key + ']' )
-                # logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + '(?!.*\w)' + ']' )
-                if search('^' + utilities.regexpgenerator(key), tokens[ -2 ], IGNORECASE):
-                    globals.logger.debug(' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].')
-
-                    globals.logger.debug( " Let's continue searching with this pattern [" + pformat(self.rules[key], width=180) + ']')
-                    for x in self.rules[key]:
-                        if search('^' + tokens[-1], x, IGNORECASE):
-                            globals.logger.debug(' as (regexp) starts with [' + tokens[-1] + ' > ' + x + ']')
-                            ret.append(x + ' ')
+                
+                globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
+                globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                if search( '^' + utilities.regexpgenerator( key ), tokens[ -2 ], IGNORECASE ):
+                    #globals.logger.debug( ' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
+                    #globals.logger.debug( " Let's continue searching with this pattern [" + pformat( self.rules[ key ], width=180 ) + ']')
+                    for x in self.rules[ key ]:
+                        if search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                            globals.logger.debug( ' as (regexp) starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                            ret.append( x + ' ' )
                             continue
 
-        elif len(tokens) == 3:
+        elif len( tokens ) == 3:
             # LEVEL 3
-            globals.logger.debug(' Stepped into LEVEL 3.')
+            globals.logger.debug( ' Stepped into LEVEL 3.' )
 
             for key in self.rules:
+                
                 # skip the previous level entries
                 if len(key.split()) + 1 < 3:
                     continue
                 elif key.startswith('select'):  # ???????????????????????????????
                     continue
-                # logging.info( ' and searching for regexp pattern [' + key + ']' )
-                # logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + ']' )
+                
+                globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
+                globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 # logging.info( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
-                if search('^' + utilities.regexpgenerator(key), tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE):
-                    logging.info(' and found [' + tokens[-3] + ' ' + tokens[
-                        -2] + '] command in the 3rd LEVEL dictionary item: [' + key + '].')
+                if search('^' + utilities.regexpgenerator(key), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
+                    globals.logger.debug( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
 
-                    logging.info(
-                        ' let\'s continue searching with this item(s) [' + pformat(self.rules[key], width=180) + ']')
+                    globals.logger.debug( " let's continue searching with this item(s) [" + pformat(self.rules[key], width=180) + ']' )
                     for x in self.rules[key]:
                         if x.startswith('select'):
                             # First try as an SQL pattern!
-                            logging.info(' it\'s an SQL select [' + tokens[-1] + ' > ' + x + ']')
-                            ret += self.spsqlengine(x.strip(), tokens)
+                            globals.logger.debug( " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
+                            ret += self.spsqlengine( x.strip(), tokens )
                             continue
-                        elif search('^' + tokens[-1], x, IGNORECASE):
-                            logging.info(' as a regexp starts with [' + tokens[-1] + ' > ' + x + ']')
-                            separator = '' if x[-1] == '=' else ' '
-                            ret.append(x + separator)
+                        elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                            globals.logger.debug( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                            separator = '' if x[ -1 ] == '=' else ' '
+                            ret.append( x + separator )
                             continue
                             
         elif len(tokens) == 4:
@@ -334,7 +336,7 @@ class IBMSPrlCompleter:
 
     def IBMSPcompleter( self, text, state ):
 
-        globals.logger.debug( utilities.consolefilledline( ' >>> Step into IBMSPcompleter v2 with this text: ', '-', '[' + text + '] and with this state[' + str(state) + '].' ) )
+        globals.logger.debug( utilities.consolefilledline( '>>> Step into IBMSPcompleter v2 with this text: ', '-', '[' + text + '] and with this state[' + str(state) + '].' ) )
 
         if len( self.rrr ) == 0:
             globals.logger.debug( ' The readline buffer has the following: [' + readline.get_line_buffer() + '].')
@@ -356,7 +358,7 @@ class IBMSPrlCompleter:
             #logging.info(': ' + pformat(self.rrr, width=180))
 
             if tmp == None:
-                globals.logger.debug( utilities.consolefilledline( ' >>> COMPLETER RESULT PUSH CYCLES ENDED!!!' ) )
+                globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER RESULT PUSH CYCLES ENDED!!!' ) )
             else:
                 globals.logger.debug( utilities.consolefilledline( ' COMPLETER results push cycle:  [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
             
@@ -365,10 +367,11 @@ class IBMSPrlCompleter:
         else:
             tmp = self.rrr.pop( 0 )
             if tmp == None:
-                globals.logger.debug( utilities.consolefilledline( ' <<< COMPLETER RESULT PUSH CYCLES ENDED2!!!' ) )
+                globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER RESULT PUSH CYCLES ENDED2!!!' ) )
                 self.rrr = []
             else:
                 globals.logger.debug( utilities.consolefilledline( ' COMPLETER results push cycle2: [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
+            
             return tmp
 
     ######################

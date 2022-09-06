@@ -99,10 +99,14 @@ Query ACtlog                  -> MSGno=
 Query ACtlog                  -> NODEname=
 Query ACtlog                  -> JOB=
 Query ACtlog                  -> ORiginator=
-     
-Query ACtlog ORiginator=      -> ORiginator=ALL
-Query ACtlog ORiginator=      -> ORiginator=SErver
-Query ACtlog ORiginator=      -> ORiginator=CLient
+
+# !!!!!! ?????
+Query ACtlog ORiginator=(?!.*\w)      -> ORiginator=ALL
+Query ACtlog ORiginator=(?!.*\w)      -> ORiginator=SErver
+Query ACtlog ORiginator=(?!.*\w)      -> ORiginator=CLient
+Query ACtlog ORiginator=\w+      -> ORiginator=ALL
+Query ACtlog ORiginator=\w+      -> ORiginator=SErver
+Query ACtlog ORiginator=\w+      -> ORiginator=CLient
      
 Query ACtlog (\w+=.*\s+){1,} -> Search=
 Query ACtlog (\w+=.*\s+){1,} -> BEGINTime=

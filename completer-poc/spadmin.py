@@ -190,7 +190,7 @@ if __name__ == "__main__":
     #utilities.ruler( utilities, '' )
     print()
 
-    globals.logger.debug( 'Import own command.' )
+    globals.logger.debug( 'Import own commands.' )
     import owncommands
         
     # -----------------------------------------
@@ -228,16 +228,11 @@ if __name__ == "__main__":
         line = line.replace( '||', '##' )
         # simple command runner engine
         for command in line.split( ';' ):
-            command = command.strip()
-            # q actlog | grep alma | invgrep alma | count | mailto alma@alma.hu,korte@korte.hu ; q node
-            
-            # $->grep
-            # $->invgrep
-            # $->count
-            # $->mailto
+            command      = command.strip()
             
             # disassembly it first
             commandparts = command.split( '|' )
+
             # keep the first one as the main command
             command = commandparts.pop( 0 ).strip()
             
@@ -248,8 +243,7 @@ if __name__ == "__main__":
                 else:
                     globals.extras[ pairs[ 0 ] ] = None
             
-            globals.logger.info( 'Base command: [' + command + '].' )        
-            globals.logger.info( 'and extras:' )
+            globals.logger.info( 'Base command: [' + command + '] and extras:' )        
             globals.logger.info( pformat( globals.extras ) )
                     
             # it's not own command. Does the user want to possibly exit???

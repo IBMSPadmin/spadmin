@@ -82,21 +82,25 @@ def ruler1():
 def regexpgenerator(regexp):
             
     savelastchar = ''
-    if regexp[-1] == '=':
-        savelastchar = regexp[-1]
-        regexp = regexp[: -1]
+    # if regexp[-1] == '=':
+    #     savelastchar = regexp[-1]
+    #     regexp = regexp[: -1]
+    match = search( '(=.*)$', regexp )
+    if match:
+      savelastchar = match[ 1 ]
+      regexp = regexp.replace( match[ 1 ], '' )  
     
     result = ''
     for part in regexp.split():
     
-        if part[0].isupper():
+        if part[ 0 ].isupper():
     
             tmpregexp = part
             tmpstring = part
             for x in part:
-                if tmpstring[-1].isupper():
+                if tmpstring[ -1 ].isupper():
                     break
-                tmpstring = part[0: len(tmpstring) - 1]
+                tmpstring = part[ 0:len( tmpstring ) - 1 ]
                 tmpregexp += '|' + tmpstring
     
             result += '(' + tmpregexp + ')'
@@ -106,7 +110,7 @@ def regexpgenerator(regexp):
     
         result += '\s+'
     
-    return result[:-3] + savelastchar
+    return result[ :-3 ] + savelastchar
 
 
 def dictmerger( destination, source ):
