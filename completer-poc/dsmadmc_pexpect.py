@@ -37,7 +37,7 @@ class dsmadmc_pexpect:
 
         tsm = self.get_tsm_tabdel()
 
-        logging.info(' DSMADMC pid: [' + str(tsm.pid) + ']')
+        globals.logger.debug(' DSMADMC tabdel pid: [' + str(tsm.pid) + ']')
 
         try:
             tsm.sendline(command)
@@ -101,7 +101,7 @@ class dsmadmc_pexpect:
 
         tsm2 = self.get_tsm_normal()
 
-        logging.info(' DSMADMC pid2: [' + str(tsm2.pid) + ']')
+        globals.logger..info(' DSMADMC normal pid: [' + str(tsm2.pid) + ']')
 
         try:
             tsm2.sendline(command)
@@ -160,6 +160,7 @@ class dsmadmc_pexpect:
 
 
     def quit(self):
+        globals.logger.debug(' DSMADMC normal quit: [' + str(tsm.pid) + ']')
         self.send_command_normal('quit')
+        globals.logger.debug(' DSMADMC tabdel quit: [' + str(tsm.pid) + ']')
         self.send_command_tabdel('quit')
-

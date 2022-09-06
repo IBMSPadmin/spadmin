@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Python based readline completions POC
-# Original idea and the base source came from: https://sites.google.com/site/xiangyangsite/home/technical-tips/software-development/python/python-readline-completions
+# Original idea and the base source skeleton came from: https://sites.google.com/site/xiangyangsite/home/technical-tips/software-development/python/python-readline-completions
 # 
 
 # v1.0.0
@@ -29,14 +29,16 @@
 #         Fixed: 
 
 import sys
+
 from dsmadmc_pexpect import dsmadmc_pexpect
+
 import columnar
-from configuration import Configuration
-from IBMSPrlCompleter import IBMSPrlCompleter
 columnar = columnar.Columnar()
 
-from time import time
+from configuration import Configuration
+from IBMSPrlCompleter import IBMSPrlCompleter
 
+from time import time
 prgstart = time()
 
 import datetime
@@ -87,27 +89,44 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
 
-    # GLOBAL variables
+    # create a namespace for global variables
     import globals
-    #globals.initialize()
-    utilities.refreshrowscolumns()
-
+    
     # SPadmin settings
     globals.config = Configuration( "spadmin.ini" )
     
+    # Logger settings
+    logging.basicConfig( filename = globals.config.getconfiguration()['DEFAULT']['logfile'],
+                         filemode = 'a',
+                         format   = '%(asctime)s %(levelname)s %(message)s',
+                         datefmt  = '%Y%m%d %H%M%S',
+                         level    = logging.INFO )
+    
+    globals.logger = logging.getLogger( 'spadmin.py logger' )
+
     # override config with cli parameters
     if args.debug:
         globals.config.getconfiguration()[ 'DEFAULT' ][ 'debug' ]       = 'True'
+        globals.logger.setLevel( logging.DEBUG )
     if args.prereqcheck:
         globals.config.getconfiguration()[ 'DEFAULT' ][ 'prereqcheck' ] = 'True'     
     if args.commands:
         globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]    = args.commands
+
+    globals.logger.info( utilities.consolefilledline( 'START ' ) )
+    globals.logger.info( utilities.consolefilledline( 'START ' ) )
+    globals.logger.info( utilities.consolefilledline( 'START ' ) )
+
+    globals.logger.debug( 'ARGS: ' + pformat( args ) )
         
     # Clear screen
     if platform.system() == 'Windows':
         os.system( 'cls' )
     else:
         os.system( 'clear' )
+    
+    # get the screen size and store it as a global variable
+    utilities.refreshrowscolumns()
 
     # https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
     print( colored( '''
@@ -129,15 +148,10 @@ if __name__ == "__main__":
     print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( globals.columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( globals.rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )    
     print()
     
-    # Logger settings
-    logging.basicConfig( filename = globals.config.getconfiguration()['DEFAULT']['logfile'],
-                         filemode = 'a',
-                         format   = '%(asctime)s %(levelname)s %(message)s',
-                         datefmt  = '%Y%m%d %H%M%S',
-                         level    = logging.DEBUG )
-
-    globals.tsm = dsmadmc_pexpect(globals.config.getconfiguration()['DEFAULT']['dsmadmc_id'], globals.config.getconfiguration()['DEFAULT']['dsmadmc_password'])
-
+    globals.logger.debug( 'Fork dsmadmc processes.' )
+    globals.tsm = dsmadmc_pexpect( globals.config.getconfiguration()['DEFAULT']['dsmadmc_id'], globals.config.getconfiguration()['DEFAULT']['dsmadmc_password'] )
+    
+    globals.logger.debug( 'readline class instance' )
     globals.myIBMSPrlCompleter = IBMSPrlCompleter( globals.tsm )
 
     #print( utilities.consolefilledline( '', '-', '', globals.columns ) )
@@ -146,15 +160,17 @@ if __name__ == "__main__":
     # Based on this: https://docs.python.org/3/library/readline.html
     # rlhistfile = os.path.join( os.path.expanduser( "~" ), ".python_history" )
     rlhistfile = os.path.join( "./", globals.config.getconfiguration()['DEFAULT'][ 'historyfile' ] )
+    globals.logger.debug( 'readline history file: [' + rlhistfile + ']' )
     try:
         readline.read_history_file( rlhistfile )
         # default history len is -1 (infinite), which may grow unruly
         readline.set_history_length( 1000 )
     except FileNotFoundError:
         pass
-
     # Register history file as "autosaver"
     atexit.register( readline.write_history_file, rlhistfile )
+    
+    globals.logger.debug( 'Inject new readline handlers for compelter and display.' )
     readline.set_completer( globals.myIBMSPrlCompleter.IBMSPcompleter )
     readline.set_completion_display_matches_hook( globals.myIBMSPrlCompleter.match_display_hook )
 
@@ -169,6 +185,7 @@ if __name__ == "__main__":
     #utilities.ruler( utilities, '' )
     print()
 
+    globals.logger.debug( 'Import own command.' )
     import owncommands
         
     # -----------------------------------------
@@ -176,13 +193,12 @@ if __name__ == "__main__":
     # push the autoexec command(s)
     line = ''
     if globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]:
-        logging.info( utilities.consolefilledline( 'Push autoexec commands: [' + globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ] + ']', '-', '', 120 ) )
+        globals.logger.info( utilities.consolefilledline( 'Push autoexec commands into global config: [' + globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ] + ']' ) )
         line = globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]
-
 
     globals.extras = {}
     # Infinite loop
-    logging.info( utilities.consolefilledline( 'INPUT LOOP START ', '-', '', 120 ) )
+    globals.logger.debug( utilities.consolefilledline( 'INPUT LOOP START ' ) )
     while True:
     
         # refresh the terminal size 
@@ -232,13 +248,15 @@ if __name__ == "__main__":
                search( '^' + utilities.regexpgenerator( 'Exit' ),   command, IGNORECASE ) or \
                search( '^' + utilities.regexpgenerator( 'BYe' ),    command, IGNORECASE ):
             
-                logging.info( utilities.consolefilledline( 'INPUT LOOP END ', '-', '', 120 ) )
+                globals.logger.debug( utilities.consolefilledline( 'INPUT LOOP END ' ) )
                 
                 # End of the prg
                 prgend = time()
                 utilities.consoleline( '-' )
                 print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
                 utilities.consoleline( '-' )
+                
+                print ( 'Background dsmadmc processes cleaning...' )
                 globals.tsm.quit()
                 
                 sys.exit( 0 )

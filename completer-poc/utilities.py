@@ -28,7 +28,7 @@ def consoleline( char='-'):
     print(char * globals.columns)
 
 
-def consolefilledline(left='', pattern='-', right='', width=80):
+def consolefilledline(left = '', pattern = '-', right = '', width = 120):
     patternwith = width - len(left) - len(right) - 2
     return left + ' ' + pattern * patternwith + ' ' + right
 
