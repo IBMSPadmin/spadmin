@@ -293,7 +293,7 @@ class IBMSPrlCompleter:
 
             for key in self.rules:
                 # skip the previous level entries
-                if len(key.split()) + 1 < 5:
+                if len(key.split()) + 1 < 5 and ( len( key.split() ) == 3 and key.split()[2] != '(\w+=\w*\s+){1,}' ):
                     continue
                 elif key.startswith('select'):  # ???????????????????????????????
                     continue
@@ -379,7 +379,7 @@ class IBMSPrlCompleter:
             logging.info('RETURNED results from the engine: ' + pformat(self.rrr, width=180))
 
             tmp = self.rrr.pop(0)
-            logging.info(': ' + pformat(self.rrr, width=180))
+            #logging.info(': ' + pformat(self.rrr, width=180))
 
             if tmp == None:
                 logging.info(
