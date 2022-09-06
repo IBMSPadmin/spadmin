@@ -82,7 +82,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser( prog = colored( 'spadmin.py', 'white', attrs=[ 'bold' ] ), description = 'Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.', epilog = colored( 'Thank you very much for downloading and starting to use it!', 'white', attrs = [ 'bold' ] ) )
     
     parser.add_argument( '--consoleonly',          action = 'store_const', const = True,          help = 'run console only mode!' )
-    parser.add_argument( '-c', '--commands',    nargs = '?',                                   help = 'autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
+    parser.add_argument( '-c', '--commands',    nargs = '?',                                      help = 'autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
     parser.add_argument( '-d', '--debug',          action = 'store_const', const = True,          help = 'debug messages into log file' )
     parser.add_argument( '-i', '--inifilename',    nargs = '?',                                   help = 'ini filename' )
     parser.add_argument( '-l', '--logfilename',    nargs = '?',                                   help = 'log filename' )
@@ -247,9 +247,10 @@ if __name__ == "__main__":
                     globals.extras[ pairs[ 0 ] ] = pairs[ 1 ].replace( '##', '|' ) # change back if exists
                 else:
                     globals.extras[ pairs[ 0 ] ] = None
-                    
-            globals.logger.debug( 'Extra parameters:' )
-            globals.logger.debug( pformat( globals.extras ) )
+            
+            globals.logger.info( 'Base command: [' + command + '].' )        
+            globals.logger.info( 'and extras:' )
+            globals.logger.info( pformat( globals.extras ) )
                     
             # it's not own command. Does the user want to possibly exit???
             if search( '^' + utilities.regexpgenerator( 'QUIt' ),   command, IGNORECASE ) or \
@@ -262,10 +263,13 @@ if __name__ == "__main__":
                 # End of the prg
                 prgend = time()
                 utilities.consoleline( '-' )
-                print ( 'Program execution time:', colored( datetime.timedelta( seconds = prgend - prgstart ), 'green' ) )
+                exetime = datetime.timedelta( seconds = prgend - prgstart )
+                print ( 'Program execution time:', colored( exetime, 'green' ) )
+                globals.logger.info( 'Program execution time: ' + str( exetime ) + 's' )
                 utilities.consoleline( '-' )
                 
                 print ( 'Background dsmadmc processes cleaning...' )
+                globals.logger.info( 'Background dsmadmc processes cleaning...' )    
                 globals.tsm.quit()
                 
                 globals.logger.info( utilities.consolefilledline( 'END ' ) )
@@ -280,25 +284,27 @@ if __name__ == "__main__":
             for key in owncommands.spadmin_commands: 
                 if search( '^' + utilities.regexpgenerator( key ), command, IGNORECASE ):
                     # just transfer the parameters
+                    globals.logger.info( 'Own command found: [' + command + '] and try to execute.' )
                     owncommands.spadmin_commands[ key ]( owncommands, search( '^' + utilities.regexpgenerator( key ) + '(.*)$', command, IGNORECASE )[2].strip() )
                     match = True
                     break 
             
-            # if it was then go to the next command
+            # if it was own command then go to the next command
             if match:
                 line   = ''
                 globals.extras = {}
                 continue
             
-
             # No own command, no exit then let dsmadmc run the command!
+            globals.logger.info( 'Pass it on to dsmadmc: [' + command + '].' )
             for textline in globals.tsm.send_command_normal(  command ):
                 if textline != '':
                     print( textline )
             line   = ''
             globals.extras = {}
             # continue
-    
+            
+    # ---------------------------------------------------------------------------------
     # 
     __author__     = [ "Fleischmann György", "Szabó Marcell" ]
     __copyright__  = "Copyright 2022, as The SPadmin Python Project"
