@@ -381,29 +381,29 @@ class IBMSPrlCompleter:
 
         word = 1
 
-        print()
+        sys.stdout.write( '\n' )
         for match in matches:
 
             # cleanup for PARAMETER= values
-            if search('^\w+=(\w+)', match):
-                ppp = search('^\w+=(\w+)', match)[1]
+            if search( '^\w+=(\w+)', match ):
+                ppp = search( '^\w+=(\w+)', match )[ 1 ]
             else:
                 ppp = match
             
             # colorize the result
             match = search( '^[A-Z]+', ppp )
             if match:
-                ppp = ppp.replace( match[0], colored( match[0], 'green', attrs=[ 'bold' ] ) )
+                ppp = ppp.replace( match[ 0 ], colored( match[ 0 ], 'green', attrs=[ 'bold' ] ) )
 
             sys.stdout.write( ppp + '   ' )
 
             # line separation
-            if word > int(globals.config.getconfiguration()['DEFAULT']['rlwordseparation']):
+            if word > int( globals.config.getconfiguration()[ 'DEFAULT' ][ 'rlwordseparation' ] ):
                 word = 1
-                print()
+                sys.stdout.write( '\n' )
             word += 1
 
-        sys.stdout.write('\n' + self.prompt() + '' + readline.get_line_buffer())
-        # sys.stdout.flush()
+        sys.stdout.write( '\n' + self.prompt() + '' + readline.get_line_buffer() )
+        sys.stdout.flush()
 
         globals.logger.debug( 'Leave: match_display_hook.' )
