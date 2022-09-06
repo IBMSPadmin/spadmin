@@ -273,9 +273,15 @@ class IBMSPrlCompleter:
                     logging.info(' and found [' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[
                         -2] + '] command in the 4th LEVEL dictionary item: [' + key + '].')
 
-                    logging.info(
-                        ' let\'s continue searching with this item(s) [' + pformat(self.rules[key], width=180) + ']')
+                    logging.info( ' let\'s continue searching with this item(s) [' + pformat(self.rules[key], width=180) + ']')
                     for x in self.rules[key]:
+                        
+                        # {Mustexist: \w+} feature test
+                        if search( '{Mustexist: .+}', x, IGNORECASE ):  
+                            mustexist = search( '{Mustexist: (.+)}', x )[ 1 ] 
+                            if not search( mustexist, tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE ):
+                                continue                       
+                            
                         if x.startswith('select'):
                             # First try as an SQL pattern!
                             logging.info(' it\'s an SQL select [' + tokens[-1] + ' > ' + x + ']')
@@ -283,8 +289,14 @@ class IBMSPrlCompleter:
                             continue
                         elif search('^' + tokens[-1], x, IGNORECASE):
                             logging.info(' as a regexp starts with [' + tokens[-1] + ' > ' + x + ']')
+                            
+                            # remove the option part if it exists
+                            match = search( '{Mustexist: .+}', x )
+                            if match:
+                                x = x.replace( match[0], '' )
+                                
                             separator = '' if x[-1] == '=' else ' '
-                            ret.append(x + separator)
+                            ret.append( x + separator )
                             continue
 
         elif len( tokens ) == 5:
@@ -303,43 +315,7 @@ class IBMSPrlCompleter:
                     logging.info( ' and found [' + tokens[-5] + ' ' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + '] command in the 5th LEVEL dictionary item: [' + key + '].' )
 
                     logging.info( ' let\'s continue searching with this item(s) [' + pformat(self.rules[key], width=180) + ']' )
-                    for x in self.rules[ key ]:
-                        
-                        if search( '{Mustexist: \w+}', x, IGNORECASE ):
-                            mustexist = search( '{Mustexist: (\w+)}', x )[ 1 ] 
-                            if not search( mustexist, tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE ):
-                                continue                       
-                        
-                        if x.startswith('select'):
-                            # First try as an SQL pattern!
-                            logging.info(' it\'s an SQL select [' + tokens[-1] + ' > ' + x + ']')
-                            ret += self.spsqlengine(x.strip(), tokens)
-                            continue
-                        elif search('^' + tokens[-1], x, IGNORECASE):
-                            logging.info(' as a regexp starts with [' + tokens[-1] + ' > ' + x + ']')
-                            separator = '' if x[-1] == '=' else ' '
-                            ret.append(x + separator)
-                            continue
-
-        elif len(tokens) == 6:
-            # LEVEL 6
-            logging.info(' Stepped into LEVEL 5.')
-            
-            for key in self.rules:
-                # skip the previous level entries
-                if len(key.split()) + 1 < 6:
-                    continue
-                elif key.startswith('select'):  # ???????????????????????????????
-                    continue
-                if search('^' + utilities.regexpgenerator(key),
-                          tokens[-5] + ' ' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1],
-                          IGNORECASE):
-                    logging.info(' and found [' + tokens[-5] + ' ' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[
-                        -2] + '] command in the 5th LEVEL dictionary item: [' + key + '].')
-            
-                    logging.info(
-                        ' let\'s continue searching with this item(s) [' + pformat(self.rules[key], width=180) + ']')
-                    for x in self.rules[key]:
+                    for x in self.rules[ key ]:                        
                         if x.startswith('select'):
                             # First try as an SQL pattern!
                             logging.info(' it\'s an SQL select [' + tokens[-1] + ' > ' + x + ']')
