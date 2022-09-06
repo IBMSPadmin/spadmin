@@ -64,9 +64,9 @@ class IBMSPrlCompleter:
         prompt = globals.config.getconfiguration()['DEFAULT']['prompt'].strip( '"' )
 
         # versions
-        prompt = prompt.replace('%SPVERSION%', globals.spversion)
-        prompt = prompt.replace('%SPRELEASE%', globals.sprelease)
-        prompt = prompt.replace('%SPLEVEL%', globals.splevel)
+        prompt = prompt.replace('%SPVERSION%',  globals.spversion)
+        prompt = prompt.replace('%SPRELEASE%',  globals.sprelease)
+        prompt = prompt.replace('%SPLEVEL%',    globals.splevel)
         prompt = prompt.replace('%SPSUBLEVEL%', globals.spsublevel)
 
         # prompt
@@ -75,8 +75,8 @@ class IBMSPrlCompleter:
     def spsqlengine(self, select, tokens=[]):
         # Handle SQL requests
 
-        logging.info(' SP SQL Engine reached with this select: [' + select + '] command and')
-        logging.info(' SP SQL Engine reached with these tokens: [' + pformat(tokens) + '].')
+        globals.logger.debug(' SP SQL Engine reached with this select:  [' + select + '] command and')
+        globals.logger.debug(' SP SQL Engine reached with these tokens: [' + pformat(tokens) + '].')
 
         ret = []
 
@@ -85,7 +85,7 @@ class IBMSPrlCompleter:
             # extra index
             index = search('\'(-\d)\'', select)[1]
             select = select.replace(str(index), tokens[int(index)])
-            logging.info(' SP SQL Engine select index preparation result: [' + select + '].')
+            globals.logger.debug(' SP SQL Engine select index preparation result: [' + select + '].')
 
         if search('\{Prefix:\s+(\w+=)}', select):
             # extra prefix
@@ -93,7 +93,7 @@ class IBMSPrlCompleter:
             select = select.replace('{Prefix: ' + prefix + '}', '')  # remove the logic description
             select = select.replace('%PREFIX%', prefix)
 
-            logging.info(' SP SQL Engine select prefix preparation result: [' + select + '].')
+            globals.logger.debug(' SP SQL Engine select prefix preparation result: [' + select + '].')
 
         # logging.info( ' CACHE: [' + pformat( cache ) + '].' )
 
@@ -102,14 +102,14 @@ class IBMSPrlCompleter:
             self.cache_hitratio['hit'] += 1
             if time() - self.cache_timestamp[select] > int(globals.config.getconfiguration()['DEFAULT']['cache_age']):
                 # refresh needed
-                logging.info(' SP SQL Engine hit the cache but the stored one is too old.')
-                logging.info(' CACHE TIMEDIFF in second(s): [' + str(time() - self.cache_timestamp[select]) + '].')
+                globals.logger.debug(' SP SQL Engine hit the cache but the stored one is too old!')
+                globals.logger.debug(' CACHE timediff in second(s): [' + str(time() - self.cache_timestamp[select]) + '].')
                 self.cache[select] = globals.tsm.send_command_array_tabdel(select)
                 self.cache_timestamp[select] = time()
                 self.cache_hitratio['hitupdate'] += 1
         else:
             # new, init
-            logging.info(" SP SQL Engine still no cached data store a new one.")
+            globals.logger.debug(' SP SQL Engine still no cached data store a new one.')
             self.cache[select] = globals.tsm.send_command_array_tabdel(select)
             self.cache_timestamp[select] = time()
             self.cache_hitratio['new'] += 1
@@ -171,8 +171,8 @@ class IBMSPrlCompleter:
         # pprint( self.start )
         #print(colored(' Imported LEVEL >1 other rules', 'green', attrs=['bold']) + ' from this file:\t[' + colored(rulefilename, 'green') + ']')
         # pprint( self.rules )
-        logging.info('Rule file imported as starters:\n' + pformat(self.start))
-        logging.info('Rule file imported as other rules:\n' + pformat(self.rules))
+        globals.logger.debug('Rule file imported as starters:\n' + pformat(self.start))
+        globals.logger.debug('Rule file imported as other rules:\n' + pformat(self.rules))
         #utilities.consoleline('#')
 
         # self.results = self.start
@@ -185,29 +185,29 @@ class IBMSPrlCompleter:
     # tokenEngine #
     ###############
     def tokenEngine(self, tokens):
-        logging.info(' PROCESS TOKENS, received tokens: ' + pformat(tokens))
+        globals.logger.debug(' PROCESS TOKENS, received tokens: ' + pformat(tokens))
 
         # Reset the results dictionary
         ret = []
 
         if len(tokens) == 0:
             # Never happen this
-            logging.info('Stepped into LEVEL 0.')
+            globals.logger.debug('Stepped into LEVEL 0.')
 
         elif len(tokens) == 1:
             # LEVEL 1 searches in start commands
-            logging.info(' Stepped into LEVEL 1.')
+            globals.logger.debug(' Stepped into LEVEL 1.')
 
             # Simple check the beginning of the command on start list
             for x in self.start:
                 if search('^' + tokens[-1], x, IGNORECASE):
-                    logging.info(' found this part [' + tokens[
+                    globals.logger.debug(' found this part [' + tokens[
                         -1] + '] of the command in the 1st LEVEL list items: [' + x + '].')
                     ret.append(x + ' ')
 
         elif len(tokens) == 2:
             # LEVEL 2
-            logging.info(' Stepped into LEVEL 2.')
+            globals.logger.debug(' Stepped into LEVEL 2.')
 
             for key in self.rules:
                 # skip the previous level entries
@@ -215,21 +215,19 @@ class IBMSPrlCompleter:
                     continue
                 # logging.info( ' and searching for regexp pattern [' + key + ']' )
                 # logging.info( ' and searching for regexp pattern [' + '^' + regexpgenerator( key ) + '(?!.*\w)' + ']' )
-                if search('^' + utilities.regexpgenerator(key), tokens[-2], IGNORECASE):
-                    logging.info(' Found this part [' + tokens[
-                        -2] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].')
+                if search('^' + utilities.regexpgenerator(key), tokens[ -2 ], IGNORECASE):
+                    globals.logger.debug(' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].')
 
-                    logging.info(
-                        ' Let\'s continue searching with this pattern [' + pformat(self.rules[key], width=180) + ']')
+                    globals.logger.debug( " Let's continue searching with this pattern [" + pformat(self.rules[key], width=180) + ']')
                     for x in self.rules[key]:
                         if search('^' + tokens[-1], x, IGNORECASE):
-                            logging.info(' as (regexp) starts with [' + tokens[-1] + ' > ' + x + ']')
+                            globals.logger.debug(' as (regexp) starts with [' + tokens[-1] + ' > ' + x + ']')
                             ret.append(x + ' ')
                             continue
 
         elif len(tokens) == 3:
             # LEVEL 3
-            logging.info(' Stepped into LEVEL 3.')
+            globals.logger.debug(' Stepped into LEVEL 3.')
 
             for key in self.rules:
                 # skip the previous level entries
