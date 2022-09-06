@@ -81,18 +81,23 @@ if __name__ == "__main__":
     # https://docs.python.org/3/library/argparse.html
     parser = argparse.ArgumentParser( prog = colored( 'spadmin.py', 'white', attrs=[ 'bold' ] ), description = 'Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.', epilog = colored( 'Thank you very much for downloading and starting to use it!', 'white', attrs = [ 'bold' ] ) )
     
-    parser.add_argument( '-d', '--debug',       action = 'store_const', const = True,          help = 'debug messages into log file' )
-    parser.add_argument( '-p', '--prereqcheck', action = 'store_const', const = True,          help = 'prerequisite check' )
-    parser.add_argument( '--consoleonly',       action = 'store_const', const = True,          help = 'run console mode only!' )
+    parser.add_argument( '--consoleonly',          action = 'store_const', const = True,          help = 'run console only mode!' )
     parser.add_argument( '-c', '--commands',    nargs = '?',                                   help = 'autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
-    parser.add_argument( '-v', '--version',     action = 'version', version = '%(prog)s v1.0', help = 'show version information' )
+    parser.add_argument( '-d', '--debug',          action = 'store_const', const = True,          help = 'debug messages into log file' )
+    parser.add_argument( '-i', '--inifilename',    nargs = '?',                                   help = 'ini filename' )
+    parser.add_argument( '-l', '--logfilename',    nargs = '?',                                   help = 'log filename' )
+    parser.add_argument( '-m', '--norlsqlcache',   action = 'store_const', const = True,          help = 'no cache for sql queries in reradline' )
+    parser.add_argument( '-n', '--norlsqlhelpepr', action = 'store_const', const = True,          help = 'no sql queries in reradline' )
+    parser.add_argument( '-p', '--prereqcheck',    action = 'store_const', const = True,          help = 'prerequisite check' )
+    parser.add_argument( '-r', '--disablerl',      action = 'store_const', const = True,          help = 'disable readline functionality' )
+    parser.add_argument( '-v', '--version',        action = 'version', version = '%(prog)s v1.0', help = 'show version information' )
     
     args = parser.parse_args()
 
     # create a namespace for global variables
     import globals
     
-    # SPadmin settings
+    # SPadmin global settings
     globals.config = Configuration( "spadmin.ini" )
     
     # Logger settings
@@ -101,7 +106,7 @@ if __name__ == "__main__":
                          format   = '%(asctime)s %(levelname)s %(message)s',
                          datefmt  = '%Y%m%d %H%M%S',
                          level    = logging.INFO )
-    
+    # and a global object
     globals.logger = logging.getLogger( 'spadmin.py logger' )
 
     # override config with cli parameters
@@ -198,7 +203,7 @@ if __name__ == "__main__":
 
     globals.extras = {}
     # Infinite loop
-    globals.logger.debug( utilities.consolefilledline( 'INPUT LOOP START ' ) )
+    globals.logger.debug( utilities.consolefilledline( '>>> INPUT LOOP START ' ) )
     while True:
     
         # refresh the terminal size 
@@ -207,6 +212,7 @@ if __name__ == "__main__":
         try:
             if line == '':
                 line = input( globals.myIBMSPrlCompleter.prompt() )
+                globals.logger.info( 'COMMAND line received: [' + line + '].' )
             
             # Skip the empty command
             if not line.rstrip():
@@ -242,13 +248,16 @@ if __name__ == "__main__":
                 else:
                     globals.extras[ pairs[ 0 ] ] = None
                     
+            globals.logger.debug( 'Extra parameters:' )
+            globals.logger.debug( pformat( globals.extras ) )
+                    
             # it's not own command. Does the user want to possibly exit???
             if search( '^' + utilities.regexpgenerator( 'QUIt' ),   command, IGNORECASE ) or \
                search( '^' + utilities.regexpgenerator( 'LOGout' ), command, IGNORECASE ) or \
                search( '^' + utilities.regexpgenerator( 'Exit' ),   command, IGNORECASE ) or \
                search( '^' + utilities.regexpgenerator( 'BYe' ),    command, IGNORECASE ):
             
-                globals.logger.debug( utilities.consolefilledline( 'INPUT LOOP END ' ) )
+                globals.logger.debug( utilities.consolefilledline( '<<< INPUT LOOP END ' ) )
                 
                 # End of the prg
                 prgend = time()
@@ -258,6 +267,10 @@ if __name__ == "__main__":
                 
                 print ( 'Background dsmadmc processes cleaning...' )
                 globals.tsm.quit()
+                
+                globals.logger.info( utilities.consolefilledline( 'END ' ) )
+                globals.logger.info( utilities.consolefilledline( 'END ' ) )
+                globals.logger.info( utilities.consolefilledline( 'END ' ) )
                 
                 sys.exit( 0 )
 
