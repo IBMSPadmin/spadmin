@@ -152,7 +152,7 @@ if __name__ == "__main__":
     globals.tsm = dsmadmc_pexpect( globals.config.getconfiguration()['DEFAULT']['dsmadmc_id'], globals.config.getconfiguration()['DEFAULT']['dsmadmc_password'] )
     
     globals.logger.debug( 'readline class instance' )
-    globals.myIBMSPrlCompleter = IBMSPrlCompleter( globals.tsm )
+    globals.myIBMSPrlCompleter = IBMSPrlCompleter( )
 
     #print( utilities.consolefilledline( '', '-', '', globals.columns ) )
 

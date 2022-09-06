@@ -19,58 +19,58 @@ except ImportError:
 # IBMSPrlCompleter Class definition #
 #####################################
 class IBMSPrlCompleter:
-    rows = None
-    columns = None
-    logging = None
-    config = None
-    tsm = None
-    spversion = None
-    sprelease = None
-    splevel = None
-    spsublevel = None
-    spprompt = None
+    # rows = None
+    # columns = None
+    # logging = None
+    # config = None
+    # tsm = None
+    # spversion = None
+    # sprelease = None
+    # splevel = None
+    # spsublevel = None
+    # spprompt = None
 
     # cache store
     cache           = {} # global cache data store
     cache_timestamp = {} # global cache timestamp store
     cache_hitratio  = { 'new' : 0, 'request' : 0, 'hit' : 0, 'hitupdate' : 0 }
 
-    def __init__(self, tsm):
+    def __init__( self ):
         
         sys.stdout.write("Let's try to get the name of the server...")
         sys.stdout.flush()
-        spprompt = tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
+        globals.spprompt = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
         sys.stdout.write( '\r' )
         
         sys.stdout.write("and get the version of the IBM SP server...")
         sys.stdout.flush()
-        spversion, sprelease, splevel, spsublevel = tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
+        globals.spversion, globals.sprelease, globals.splevel, globals.spsublevel = globals.tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
         sys.stdout.write( '\r' )
 
-        self.rows       = globals.rows
-        self.columns    = globals.columns
-        self.config     = globals.config
-        self.tsm        = tsm
-        self.spversion  = spversion
-        self.sprelease  = sprelease
-        self.splevel    = splevel
-        self.spsublevel = spsublevel
-        self.spprompt   = spprompt
+        # self.rows       = globals.rows
+        # self.columns    = globals.columns
+        # self.config     = globals.config
+        # self.tsm        = tsm
+        # self.spversion  = spversion
+        # self.sprelease  = sprelease
+        # self.splevel    = splevel
+        # self.spsublevel = spsublevel
+        # self.spprompt   = spprompt
 
         # print(' and loading rules: ')        
-        self.loadrules( self.config.getconfiguration()['DEFAULT']['rulefile'] )
+        self.loadrules( globals.config.getconfiguration()['DEFAULT']['rulefile'] )
 
     def prompt(self):
-        prompt = self.config.getconfiguration()['DEFAULT']['prompt'].strip( '"' )
+        prompt = globals.config.getconfiguration()['DEFAULT']['prompt'].strip( '"' )
 
         # versions
-        prompt = prompt.replace('%SPVERSION%', self.spversion)
-        prompt = prompt.replace('%SPRELEASE%', self.sprelease)
-        prompt = prompt.replace('%SPLEVEL%', self.splevel)
-        prompt = prompt.replace('%SPSUBLEVEL%', self.spsublevel)
+        prompt = prompt.replace('%SPVERSION%', globals.spversion)
+        prompt = prompt.replace('%SPRELEASE%', globals.sprelease)
+        prompt = prompt.replace('%SPLEVEL%', globals.splevel)
+        prompt = prompt.replace('%SPSUBLEVEL%', globals.spsublevel)
 
         # prompt
-        return prompt.replace('%SPSERVERNAME%', self.spprompt)
+        return prompt.replace('%SPSERVERNAME%', globals.spprompt)
 
     def spsqlengine(self, select, tokens=[]):
         # Handle SQL requests
@@ -100,17 +100,17 @@ class IBMSPrlCompleter:
         # cache engine
         if select in self.cache.keys():
             self.cache_hitratio['hit'] += 1
-            if time() - self.cache_timestamp[select] > int(self.config.getconfiguration()['DEFAULT']['cache_age']):
+            if time() - self.cache_timestamp[select] > int(globals.config.getconfiguration()['DEFAULT']['cache_age']):
                 # refresh needed
                 logging.info(' SP SQL Engine hit the cache but the stored one is too old.')
                 logging.info(' CACHE TIMEDIFF in second(s): [' + str(time() - self.cache_timestamp[select]) + '].')
-                self.cache[select] = self.tsm.send_command_array_tabdel(select)
+                self.cache[select] = globals.tsm.send_command_array_tabdel(select)
                 self.cache_timestamp[select] = time()
                 self.cache_hitratio['hitupdate'] += 1
         else:
             # new, init
             logging.info(" SP SQL Engine still no cached data store a new one.")
-            self.cache[select] = self.tsm.send_command_array_tabdel(select)
+            self.cache[select] = globals.tsm.send_command_array_tabdel(select)
             self.cache_timestamp[select] = time()
             self.cache_hitratio['new'] += 1
 
@@ -380,6 +380,8 @@ class IBMSPrlCompleter:
     ######################
     def match_display_hook(self, substitution, matches, longest_match_length):
 
+        globals.logger.debug( 'Step into : match_display_hook' )
+
         word = 1
 
         print()
@@ -399,10 +401,12 @@ class IBMSPrlCompleter:
             sys.stdout.write( ppp + '   ' )
 
             # line separation
-            if word > int(self.config.getconfiguration()['DEFAULT']['rlwordseparation']):
+            if word > int(globals.config.getconfiguration()['DEFAULT']['rlwordseparation']):
                 word = 1
                 print()
             word += 1
 
         sys.stdout.write('\n' + self.prompt() + '' + readline.get_line_buffer())
         # sys.stdout.flush()
+
+        globals.logger.debug( 'Leave : match_display_hook' )
