@@ -268,11 +268,8 @@ class IBMSPrlCompleter:
                     continue
                 elif key.startswith('select'):  # ???????????????????????????????
                     continue
-                if search('^' + utilities.regexpgenerator(key),
-                          tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE):
-                    logging.info(' and found [' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[
-                        -2] + '] command in the 4th LEVEL dictionary item: [' + key + '].')
-
+                if search('^' + utilities.regexpgenerator(key), tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE):
+                    logging.info(' and found [' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + '] command in the 4th LEVEL dictionary item: [' + key + '].')
                     logging.info( ' let\'s continue searching with this item(s) [' + pformat(self.rules[key], width=180) + ']')
                     for x in self.rules[key]:
                         
@@ -305,7 +302,7 @@ class IBMSPrlCompleter:
 
             for key in self.rules:
                 # skip the previous level entries
-                if len( key.split() ) + 1 < 5 and ( len( key.split() ) == 3 and key.split()[ 2 ] != '(\w+=\w*\s+){1,}' ):
+                if len( key.split() ) + 1 < 5 and ( len( key.split() ) == 3 and key.split()[ 2 ] != '(\w+=.*\s+){1,}' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
