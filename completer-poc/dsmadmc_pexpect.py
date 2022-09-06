@@ -120,8 +120,8 @@ class dsmadmc_pexpect:
 
         # Let's dance
         ret = []
-        if globals.last_error['rc'] == "11":
-            return ret
+        #if globals.last_error['rc'] == "11":
+        #    return ret
 
         for i in tsm2.before.splitlines()[1:]:
             if search('^Session established with server \w+:', i):
