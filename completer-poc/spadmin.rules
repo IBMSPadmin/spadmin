@@ -87,7 +87,39 @@ DELete -> STGpool
 ##################
 # Query commands #
 ##################
-Query -> ACtlog
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-actlog-query-activity-log
+Query                         -> ACtlog
+     
+Query ACtlog                  -> BEGINDate=
+Query ACtlog                  -> BEGINTime=
+Query ACtlog                  -> ENDDate=
+Query ACtlog                  -> ENDTime=
+Query ACtlog                  -> Search=
+Query ACtlog                  -> MSGno=
+Query ACtlog                  -> NODEname=
+Query ACtlog                  -> JOB=
+Query ACtlog                  -> ORiginator=
+     
+Query ACtlog ORiginator=      -> ORiginator=ALL
+Query ACtlog ORiginator=      -> ORiginator=SErver
+Query ACtlog ORiginator=      -> ORiginator=CLient
+     
+# ?
+Query ACtlog (\w+=\w*\s+){1,} -> OWNERname={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=\w*\s+){1,} -> SCHedname={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=\w*\s+){1,} -> DOmainname={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=\w*\s+){1,} -> SESsnum={Mustexist: ORiginator=CLient}
+
+Query ACtlog (\w+=\w*\s+){1,} -> Search=
+Query ACtlog (\w+=\w*\s+){1,} -> BEGINTime=
+Query ACtlog (\w+=\w*\s+){1,} -> ENDDate=
+Query ACtlog (\w+=\w*\s+){1,} -> ENDTime=
+Query ACtlog (\w+=\w*\s+){1,} -> Search=
+Query ACtlog (\w+=\w*\s+){1,} -> MSGno=
+Query ACtlog (\w+=\w*\s+){1,} -> NODEname=
+Query ACtlog (\w+=\w*\s+){1,} -> JOB=
+Query ACtlog (\w+=\w*\s+){1,} -> ORiginator=
+
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINTime|begintim|beginti|begint)=
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ENDDate|enddat|endda|endd)=
@@ -100,8 +132,10 @@ Query -> ACtlog
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(DOmainname|domainnam|domainna|domainn|domain|domai|doma|dom|do)=
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SESsnum|sessnu|sessn|sess|ses)=
 
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-license-display-license-information
 Query -> LICense
 
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-node-query-nodes
 Query                              -> Node
 Query Node                         -> select node_name from nodes
 #Query Node            -> \*
