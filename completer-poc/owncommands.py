@@ -44,7 +44,7 @@ spadmin_commands[ 'SPadmin SHow VERsion' ] = spadmin_show_version
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'VERsion' )
 
 def spadmin_set_debug( self, parameters ):        
-    print( 'Debug is set to ON. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + ']' ) 
+    print( 'Debug is set to ON. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + '].' ) 
     globals.logger.setLevel( logging.DEBUG )
 #    
 spadmin_commands[ 'SPadmin SET DEBUG' ] = spadmin_set_debug
@@ -54,7 +54,7 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SET' ].append( 'DEBUG' )
 
 
 def spadmin_unset_debug( self, parameters ):        
-    print( 'Debug is set to OFF. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + ']' ) 
+    print( 'Debug is set to OFF. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + '].' ) 
     globals.logger.setLevel( logging.DEBUG )
 #    
 spadmin_commands[ 'SPadmin UNSET DEBUG' ] = spadmin_unset_debug
