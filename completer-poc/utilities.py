@@ -82,9 +82,9 @@ def ruler1():
 def regexpgenerator(regexp):
             
     savelastchar = ''
-    # if regexp[-1] == '=':
-    #     savelastchar = regexp[-1]
-    #     regexp = regexp[: -1]
+    # if regexp[ -1 ] == '=':
+    #     savelastchar = regexp[ -1 ]
+    #     regexp = regexp[ : -1 ]
     match = search( '(=.*)$', regexp )
     if match:
       savelastchar = match[ 1 ]

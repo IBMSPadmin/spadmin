@@ -212,11 +212,11 @@ class IBMSPrlCompleter:
             for key in self.rules:
                 
                 # skip the previous level entries
-                if len(key.split()) + 1 < 2:
+                if len( key.split() ) + 1 < 2:
                     continue
                 
-                globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
-                globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
+                #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 if search( '^' + utilities.regexpgenerator( key ), tokens[ -2 ], IGNORECASE ):
                     #globals.logger.debug( ' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
                     #globals.logger.debug( " Let's continue searching with this pattern [" + pformat( self.rules[ key ], width=180 ) + ']')
@@ -233,18 +233,18 @@ class IBMSPrlCompleter:
             for key in self.rules:
                 
                 # skip the previous level entries
-                if len(key.split()) + 1 < 3:
+                if len( key.split() ) + 1 < 3:
                     continue
                 elif key.startswith('select'):  # ???????????????????????????????
                     continue
                 
-                globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
-                globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' + str( len( key.split() ) ) )
+                #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 # logging.info( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
                 if search('^' + utilities.regexpgenerator(key), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
                     globals.logger.debug( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
 
-                    globals.logger.debug( " let's continue searching with this item(s) [" + pformat(self.rules[key], width=180) + ']' )
+                    globals.logger.debug( " let's continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:
                         if x.startswith('select'):
                             # First try as an SQL pattern!
@@ -259,39 +259,42 @@ class IBMSPrlCompleter:
                             
         elif len(tokens) == 4:
             # LEVEL 4
-            logging.info(' Stepped into LEVEL 4.')
+            logging.info( ' Stepped into LEVEL 4.' )
 
             for key in self.rules:
                 # skip the previous level entries
-                if len(key.split()) + 1 < 4:
+                if len( key.split() ) + 1 < 4:
                     continue
-                elif key.startswith('select'):  # ???????????????????????????????
+                elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
-                if search('^' + utilities.regexpgenerator(key), tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE):
-                    logging.info(' and found [' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + '] command in the 4th LEVEL dictionary item: [' + key + '].')
-                    logging.info( ' let\'s continue searching with this item(s) [' + pformat(self.rules[key], width=180) + ']')
-                    for x in self.rules[key]:
+                    
+                #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
+                #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                if search( '^' + utilities.regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                    globals.logger.debug( ' and found [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
+                    globals.logger.debug( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
+                    for x in self.rules[ key ]:
                         
                         # {Mustexist: \w+} feature test
                         if search( '{Mustexist: .+}', x, IGNORECASE ):  
                             mustexist = search( '{Mustexist: (.+)}', x )[ 1 ] 
-                            if not search( mustexist, tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE ):
+                            if not search( mustexist, tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                                 continue                       
                             
-                        if x.startswith('select'):
+                        if x.startswith( 'select' ):
                             # First try as an SQL pattern!
-                            logging.info(' it\'s an SQL select [' + tokens[-1] + ' > ' + x + ']')
-                            ret += self.spsqlengine(x.strip(), tokens)
+                            globals.logger.debug( ' it\'s an SQL select [' + tokens[ -1 ] + ' > ' + x + ']' )
+                            ret += self.spsqlengine( x.strip(), tokens )
                             continue
-                        elif search('^' + tokens[-1], x, IGNORECASE):
-                            logging.info(' as a regexp starts with [' + tokens[-1] + ' > ' + x + ']')
+                        elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                            globals.logger.debug( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
                             
                             # remove the option part if it exists
                             match = search( '{Mustexist: .+}', x )
                             if match:
-                                x = x.replace( match[0], '' )
+                                x = x.replace( match[ 0 ], '' )
                                 
-                            separator = '' if x[-1] == '=' else ' '
+                            separator = '' if x[ -1 ] == '=' else ' '
                             ret.append( x + separator )
                             continue
 
