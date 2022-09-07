@@ -33,52 +33,6 @@ def consolefilledline(left = '', pattern = '-', right = '', width = 120):
     return left + ' ' + pattern * patternwith + ' ' + right
 
 
-def ruler( self, parameters ):
-    if parameters == None or parameters == '' or parameters == []:
-        ruler100()
-        ruler10()
-        ruler1()
-    else:    
-        if search ( regexpgenerator('Help'), parameters[0], IGNORECASE ):
-            print( 'SHow Ruler Help message!' )
-        elif search ( regexpgenerator('INVerse'), parameters[0], IGNORECASE ):
-            ruler1()    
-            ruler10()
-            ruler100()
-            
-
-def ruler100():
-    cc = 1
-    for i in range( 1, globals.columns + 1, 1 ):
-        if i % 100:
-            sys.stdout.write( ' ' )
-        else:
-            sys.stdout.write( colored( str( cc ), 'green' ) )
-            cc += 1
-            cc = 0 if cc == 100 else cc
-    print()
-
-
-def ruler10():
-    cc = 1
-    for i in range( 1, globals.columns + 1, 1 ):
-        if i % 10:
-            sys.stdout.write( ' ' )
-        else:
-            sys.stdout.write( colored( str( cc ), 'green' ) )
-            cc += 1
-            cc = 0 if cc == 10 else cc
-    print()
-
-    
-def ruler1():
-    for i in range( 1, globals.columns + 1, 1 ):
-        c = i % 10
-        if c:
-            sys.stdout.write( str( c ) )
-        else:
-            sys.stdout.write( colored( str( c ), 'green' ) )    
-
 def regexpgenerator(regexp):
             
     savelastchar = ''
