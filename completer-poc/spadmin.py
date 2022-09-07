@@ -279,7 +279,7 @@ if __name__ == "__main__":
                 if search( '^' + utilities.regexpgenerator( key ), command, IGNORECASE ):
                     # just transfer the parameters
                     globals.logger.info( 'Own command found: [' + command + '] and try to execute.' )
-                    owncommands.spadmin_commands[ key ]( owncommands, search( '^' + utilities.regexpgenerator( key ) + '(.*)$', command, IGNORECASE )[2].strip() )
+                    owncommands.spadmin_commands[ key ]( owncommands, search( '^' + utilities.regexpgenerator( key ) + '(.*)$', command, IGNORECASE )[ 3 ].strip() )
                     match = True
                     break 
             

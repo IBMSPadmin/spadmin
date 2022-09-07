@@ -19,9 +19,7 @@ from re import search, IGNORECASE
 # sub injection test
 spadmin_commands = {}
 
-def ruler( parameters = '1234' ):
-
-    pprint(parameters)
+def ruler( self, parameters ):
     
     if parameters == None or parameters == '' or parameters == []:
         
@@ -29,9 +27,9 @@ def ruler( parameters = '1234' ):
         ruler10()
         ruler1()
     else:    
-        if search( utilities.regexpgenerator( 'Help' ), parameters[ 0 ], IGNORECASE ):
+        if search( utilities.regexpgenerator( 'Help' ), parameters, IGNORECASE ):
             print( 'SHow Ruler Help message!' )
-        elif search( utilities.regexpgenerator( 'INVerse' ), parameters[ 0 ], IGNORECASE ):
+        elif search( utilities.regexpgenerator( 'INVerse' ), parameters, IGNORECASE ):
             ruler1()    
             ruler10()
             ruler100()
@@ -67,8 +65,6 @@ def ruler1():
             sys.stdout.write( str( c ) )
         else:
             sys.stdout.write( colored( str( c ), 'green' ) )    
-
-ruler()
 
 # command injection
 spadmin_commands[ 'SHow RULer' ] = ruler
