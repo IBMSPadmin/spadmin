@@ -21,8 +21,7 @@ spadmin_commands = {}
 
 def ruler( self, parameters ):
     
-    if parameters == None or parameters == '' or parameters == []:
-        
+    if parameters == None or parameters == '' or parameters == []:    
         ruler100()
         ruler10()
         ruler1()
