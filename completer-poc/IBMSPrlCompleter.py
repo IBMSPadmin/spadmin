@@ -88,11 +88,11 @@ class IBMSPrlCompleter:
             select = select.replace(str(index), tokens[int(index)])
             globals.logger.debug(' SP SQL Engine select index preparation result: [' + select + '].')
 
-        if search('\{Prefix:\s+(\w+=)}', select):
+        if search( '{Prefix: (.+)}', select ):
             # extra prefix
-            prefix = search('\{Prefix: (\w+=)}', select)[1]
-            select = select.replace('{Prefix: ' + prefix + '}', '')  # remove the logic description
-            select = select.replace('%PREFIX%', prefix)
+            prefix = search( '{Prefix: (.+)}', select )[ 1 ]
+            select = select.replace( '{Prefix: ' + prefix + '}', '' )  # remove the logic description
+            select = select.replace( '%PREFIX%', search( '(\w+=)\w*', tokens[ int( prefix ) ] )[ 1 ] )
 
             globals.logger.debug(' SP SQL Engine select prefix preparation result: [' + select + '].')
 
@@ -238,15 +238,15 @@ class IBMSPrlCompleter:
                 elif key.startswith('select'):  # ???????????????????????????????
                     continue
                 
-                #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' + str( len( key.split() ) ) )
-                #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
-                # logging.info( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
+                globals.logger.debug( ' and searching for regexp pattern [' + key + ']' + str( len( key.split() ) ) )
+                globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                globals.logger.debug( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
                 if search('^' + utilities.regexpgenerator(key), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
                     globals.logger.debug( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
 
                     globals.logger.debug( " let's continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[key]:
-                        if x.startswith('select'):
+                        if x.startswith( 'select' ):
                             # First try as an SQL pattern!
                             globals.logger.debug( " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
                             ret += self.spsqlengine( x.strip(), tokens )
@@ -272,7 +272,7 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 if search( '^' + utilities.regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                     globals.logger.debug( ' and found [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
-                    globals.logger.debug( ' let\'s continue searching with this item(s) [' + pformat( self.rules[key], width=180 ) + ']' )
+                    globals.logger.debug( " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[ key ]:
                         
                         # {Mustexist: \w+} feature test
@@ -363,7 +363,7 @@ class IBMSPrlCompleter:
             if tmp == None:
                 globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER RESULT PUSH CYCLES ENDED!!!' ) )
             else:
-                globals.logger.debug( utilities.consolefilledline( ' COMPLETER results push cycle:  [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
+                globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER results push cycle:  [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
             
             return tmp
 
@@ -373,7 +373,7 @@ class IBMSPrlCompleter:
                 globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER RESULT PUSH CYCLES ENDED2!!!' ) )
                 self.rrr = []
             else:
-                globals.logger.debug( utilities.consolefilledline( ' COMPLETER results push cycle2: [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
+                globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER results push cycle2: [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
             
             return tmp
 

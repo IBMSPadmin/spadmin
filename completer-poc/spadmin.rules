@@ -63,7 +63,37 @@ ASsign DEFMGmtclass \w+ \w+ -> select class_name from mgmtclasses where domain_n
 ###################
 # BAckup commands #
 ###################
-BAckup -> DB
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-backup-db-back-up-database
+BAckup                 -> DB
+
+BAckup DB              -> DEVclass=
+BAckup DB              -> Type=
+BAckup DB              -> VOLumenames=
+BAckup DB              -> NUMStreams=
+BAckup DB              -> Scratch=
+BAckup DB              -> Wait=
+BAckup DB              -> DEDUPDEVice=
+BAckup DB              -> ENCRypt=
+BAckup DB              -> COMPress=
+BAckup DB              -> PROTECTKeys=
+BAckup DB              -> PASSword=
+
+BAckup DB DEVclass=    -> select concat( '%PREFIX%', devclass_name ) from devclasses {Prefix: -1}
+BAckup DB Type=        -> Type=Incremental
+BAckup DB Type=        -> Type=Full
+BAckup DB Type=        -> Type=DBSnapshot
+BAckup DB Scratch=     -> Scratch=Yes
+BAckup DB Scratch=     -> Scratch=No
+BAckup DB Wait=        -> Wait=Yes
+BAckup DB Wait=        -> Wait=No
+BAckup DB DEDUPDEVice= -> DEDUPDEVice=Yes
+BAckup DB DEDUPDEVice= -> DEDUPDEVice=No
+BAckup DB ENCRypt=     -> ENCRypt=Yes
+BAckup DB ENCRypt=     -> ENCRypt=No
+BAckup DB COMPress=    -> COMPress=Yes
+BAckup DB COMPress=    -> COMPress=No
+BAckup DB PROTECTKeys= -> PROTECTKeys=Yes
+BAckup DB PROTECTKeys= -> PROTECTKeys=No
 
 BAckup           -> DEVCONFig
 BAckup DEVCONFig -> Filenames=
@@ -78,6 +108,9 @@ DEFine                     -> ASSOCiation
 DEFine ASSOCiation         -> select domain_name from domains
 DEFine ASSOCiation \w+     -> select schedule_name from client_schedules where domain_name like upper( '-2' )
 DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like upper( '-3' )
+
+
+
 
 ###################
 # DELete commands #
@@ -101,13 +134,16 @@ Query ACtlog                  -> JOB=
 Query ACtlog                  -> ORiginator=
 
 # !!!!!! ?????
-Query ACtlog ORiginator=(?!.*\w)      -> ORiginator=ALL
-Query ACtlog ORiginator=(?!.*\w)      -> ORiginator=SErver
-Query ACtlog ORiginator=(?!.*\w)      -> ORiginator=CLient
-Query ACtlog ORiginator=\w+      -> ORiginator=ALL
-Query ACtlog ORiginator=\w+      -> ORiginator=SErver
-Query ACtlog ORiginator=\w+      -> ORiginator=CLient
-     
+#Query ACtlog ORiginator=(?!.*\w+\s)      -> ORiginator=ALL
+#Query ACtlog ORiginator=(?!.*\w+\s)      -> ORiginator=SErver
+#Query ACtlog ORiginator=(?!.*\w+\s)      -> ORiginator=CLient
+#Query ACtlog ORiginator=      -> ORiginator=ALL
+#Query ACtlog ORiginator=      -> ORiginator=SErver
+#Query ACtlog ORiginator=      -> ORiginator=CLient
+Query ACtlog ORiginator=      -> ORiginator=ALL
+Query ACtlog ORiginator=      -> ORiginator=SErver
+Query ACtlog ORiginator=      -> ORiginator=CLient
+
 Query ACtlog (\w+=.*\s+){1,} -> Search=
 Query ACtlog (\w+=.*\s+){1,} -> BEGINTime=
 Query ACtlog (\w+=.*\s+){1,} -> ENDDate=
@@ -152,7 +188,7 @@ Query Node Type=                   -> Type=Client
 Query Node Type=                   -> Type=NAS
 Query Node Type=                   -> Type=Server
 Query Node Type=                   -> Type=Any 
-Query Node DOmain=                 -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
+Query Node DOmain=                 -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
 Query Node Format=                 -> Format=Standard
 Query Node Format=                 -> Format=Detailed
 Query Node AUTHentication=         -> AUTHentication=LOcal
@@ -166,7 +202,7 @@ Query Node [\w\*]+ Type=           -> Type=Client
 Query Node [\w\*]+ Type=           -> Type=NAS
 Query Node [\w\*]+ Type=           -> Type=Server
 Query Node [\w\*]+ Type=           -> Type=Any
-Query Node [\w\*]+ DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
+Query Node [\w\*]+ DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
 Query Node [\w\*]+ Format=         -> Format=Standard
 Query Node [\w\*]+ Format=         -> Format=Detailed
 Query Node [\w\*]+ AUTHentication= -> AUTHentication=LOcal

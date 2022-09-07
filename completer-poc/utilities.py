@@ -82,13 +82,14 @@ def ruler1():
 def regexpgenerator(regexp):
             
     savelastchar = ''
-    # if regexp[ -1 ] == '=':
-    #     savelastchar = regexp[ -1 ]
-    #     regexp = regexp[ : -1 ]
-    match = search( '(=.*)$', regexp )
-    if match:
-      savelastchar = match[ 1 ]
-      regexp = regexp.replace( match[ 1 ], '' )  
+    if regexp[ -1 ] == '=':
+        savelastchar = regexp[ -1 ]
+        regexp = regexp[ : -1 ]
+    # # save v2 with regexp pattern
+    # match = search( '(=.*)$', regexp )
+    # if match:
+    #   savelastchar = match[ 1 ]
+    #   regexp = regexp.replace( match[ 1 ], '' )  
     
     result = ''
     for part in regexp.split():
