@@ -1,7 +1,6 @@
 import globals
 import utilities
 import IBMSPrlCompleter
-
 import logging
 
 from termcolor import colored
@@ -128,10 +127,14 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
 
 def show_actlog ( self, parameters ):
     data = None
-    if parameters == None or parameters == '' or parameters == []:
+    if parameters is None or parameters == '' or parameters == []:
         data = globals.tsm.send_command_array_array_tabdel("q actlog")
     else:
         data = globals.tsm.send_command_array_array_tabdel("q actlog ")
+
+    for index, row in enumerate(data):
+        (a, b) = row
+       # data[index][1] = str(b).replace("Session",colored("Session","blue"))
     table = columnar(data, headers=['Date/Time', 'Message'])
     print( table[ :-1 ] )
 #
