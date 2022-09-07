@@ -275,11 +275,12 @@ if __name__ == "__main__":
             # own command executor
             match = False
             # let's try to find maybe it's an own command
-            for key in owncommands.spadmin_commands: 
-                if search( '^' + utilities.regexpgenerator( key ), command, IGNORECASE ):
+            for key in owncommands.spadmin_commands:
+                maincommandpart = search( '^' + utilities.regexpgenerator( key ) + '(?!.*\w+)', command, IGNORECASE ) 
+                if maincommandpart:
                     # just transfer the parameters
                     globals.logger.info( 'Own command found: [' + command + '] and try to execute.' )
-                    owncommands.spadmin_commands[ key ]( owncommands, search( '^' + utilities.regexpgenerator( key ) + '(.*)$', command, IGNORECASE )[ 3 ].strip() )
+                    owncommands.spadmin_commands[ key ]( owncommands, command.replace( maincommandpart[ 0 ], '' ).strip() )
                     match = True
                     break 
             
