@@ -299,35 +299,6 @@ class IBMSPrlCompleter:
                             ret.append( x + separator )
                             continue
 
-        elif len( tokens ) == 5:
-            # LEVEL 5
-            logging.info( ' Stepped into LEVEL 5.' )
-
-            for key in self.rules:
-                # skip the previous level entries
-                if len( key.split() ) + 1 < 5: 
-                #and ( len( key.split() ) == 4 and key.split()[ 2 ] != '(\w+=.*\s+){1,}' ):
-                    continue
-                elif key.startswith( 'select' ):  # ???????????????????????????????
-                    continue
-
-                if search( '^' + utilities.regexpgenerator(key),
-                          tokens[-5] + ' ' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + ' ' + tokens[-1], IGNORECASE):
-                    logging.info( ' and found [' + tokens[-5] + ' ' + tokens[-4] + ' ' + tokens[-3] + ' ' + tokens[-2] + '] command in the 5th LEVEL dictionary item: [' + key + '].' )
-
-                    logging.info( ' let\'s continue searching with this item(s) [' + pformat(self.rules[key], width=180) + ']' )
-                    for x in self.rules[ key ]:                        
-                        if x.startswith('select'):
-                            # First try as an SQL pattern!
-                            logging.info(' it\'s an SQL select [' + tokens[-1] + ' > ' + x + ']')
-                            ret += self.spsqlengine(x.strip(), tokens)
-                            continue
-                        elif search('^' + tokens[-1], x, IGNORECASE):
-                            logging.info(' as a regexp starts with [' + tokens[-1] + ' > ' + x + ']')
-                            separator = '' if x[-1] == '=' else ' '
-                            ret.append(x + separator)
-                            continue
-
         else:
             globals.logger.debug( ' Stepped into LEVEL Bzzz...' )
 
