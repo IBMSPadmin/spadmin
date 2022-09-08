@@ -1,6 +1,7 @@
 # Status
 
-Global spadmin.py development progress status: ![spadmin progress](https://progress-bar.dev/40/)
+Global spadmin.py development progress status: 
+![spadmin progress](https://progress-bar.dev/40/)
 
 # toDos
 
