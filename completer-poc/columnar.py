@@ -89,8 +89,6 @@ class Columnar:
             logical_rows = self.convert_data_to_logical_rows([headers] + data)
         column_widths = self.get_column_widths(logical_rows)
         # Add +3 or +2 char extra for the last column
-        print (self.terminal_width)
-        print (sum(column_widths) + len(column_widths))
         self.end_char = ""
         if (self.terminal_width - sum(column_widths)) > 2:
             self.end_char = "\n"
@@ -138,7 +136,7 @@ class Columnar:
                     )
                 ]
                 colorized_row_parts = [
-                    self.colorize(text, code)
+                    self.add_color(text, code)
                     for text, code in zip(justified_row_parts, color_row)
                 ]
 
@@ -178,7 +176,7 @@ class Columnar:
         return out
 
     def colorize(self, text, code):
-        if code == None:
+        if code is None:
             return text
         return "".join([code, text, self.color_reset])
 
@@ -422,6 +420,16 @@ class Columnar:
             ]
             lrows_out.append(cells_out_padded)
         return lrows_out
+
+    def add_color(self, string, color):
+        if color is None:
+            return string
+        color_pattern = r"\x1b\[.+?m"
+        color_reset = "\x1b[0m"
+        ret = string
+        matches = re.findall(color_pattern, string)
+        ret = ret.replace(color_reset, color)
+        return color + ret + color_reset
 
     def visual_justify(self, text: str, width: int, alignment: str) -> str:
         """
