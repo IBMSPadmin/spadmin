@@ -1,5 +1,7 @@
 # toDos
 
+![spadmin progress](https://progress-bar.dev/80/)
+
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
 - színezés
 - columnar üres sorok és sor végi space-ek eltűntetése
