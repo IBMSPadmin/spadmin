@@ -19,16 +19,22 @@ from re import search, IGNORECASE
 spadmin_commands = {}
 
 def ruler( self, parameters = '' ):
-    if parameters == '':
-        ruler100()
-        ruler10()
-        ruler1()
-    elif search( utilities.regexpgenerator( 'Help' ), parameters, IGNORECASE ):
-        print( 'SHow Ruler Help message!' )
-    elif search( utilities.regexpgenerator( 'INVerse' ), parameters, IGNORECASE ):
-        ruler1()    
-        ruler10()
-        ruler100()
+    if len( parameters ) > 0:
+        if search( utilities.regexpgenerator( 'Help!' ) + '(?!.*.+)' , parameters, IGNORECASE ):
+            print( '''SHow RULer: Help message!
+
+This command will print a simple text ruler.
+
+    SHow RULer Help!    - print this help message
+    SHow RULer          - print simple ruler
+    SHow RULer INVerse  - print simple inverse ruler''' )
+            
+        elif search( utilities.regexpgenerator( 'INVerse' ), parameters, IGNORECASE ):
+            ruler1()    
+            ruler10()
+            ruler100()
+        else: 
+            print( colored( 'Wrong parameter(s)!', 'red', attrs=[ 'bold' ] ) )
     else:
         ruler100()
         ruler10()
@@ -71,7 +77,7 @@ spadmin_commands[ 'SHow RULer' ] = ruler
 globals.myIBMSPrlCompleter.dynrules[ 'SHow' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'RULer' )
 globals.myIBMSPrlCompleter.dynrules[ 'SHow RULer' ] = []
-globals.myIBMSPrlCompleter.dynrules[ 'SHow RULer' ].append( 'Help' )
+globals.myIBMSPrlCompleter.dynrules[ 'SHow RULer' ].append( 'Help!' )
 globals.myIBMSPrlCompleter.dynrules[ 'SHow RULer' ].append( 'INVerse' )
 
 
