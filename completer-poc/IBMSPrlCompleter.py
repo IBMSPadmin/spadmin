@@ -213,14 +213,14 @@ class IBMSPrlCompleter:
             for key in self.rules:
                 
                 # skip the previous level entries
-                if len( key.split() ) + 1 < 2:
+                if len( key.split() ) + 1 != 2:
                     continue
                 
-                #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
-                #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
+                globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 if search( '^' + utilities.regexpgenerator( key ), tokens[ -2 ], IGNORECASE ):
-                    #globals.logger.debug( ' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
-                    #globals.logger.debug( " Let's continue searching with this pattern [" + pformat( self.rules[ key ], width=180 ) + ']')
+                    globals.logger.debug( ' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
+                    globals.logger.debug( " Let's continue searching with this pattern [" + pformat( self.rules[ key ], width=180 ) + ']')
                     for x in self.rules[ key ]:
                         if search( '^' + tokens[ -1 ], x, IGNORECASE ):
                             globals.logger.debug( ' as (regexp) starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
@@ -234,7 +234,7 @@ class IBMSPrlCompleter:
             for key in self.rules:
                 
                 # skip the previous level entries
-                if len( key.split() ) + 1 < 3:
+                if len( key.split() ) + 1 != 3 and not ( len( key.split() ) == 3 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith('select'):  # ???????????????????????????????
                     continue
@@ -264,7 +264,7 @@ class IBMSPrlCompleter:
 
             for key in self.rules:
                 # skip the previous level entries
-                if len( key.split() ) + 1 < 4:
+                if ( len( key.split() ) + 1 != 4 or ( len( key.split() ) == 3 and key[ -1 ] == '=' ) ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
@@ -305,7 +305,8 @@ class IBMSPrlCompleter:
 
             for key in self.rules:
                 # skip the previous level entries
-                if len( key.split() ) + 1 < 5 and ( len( key.split() ) == 3 and key.split()[ 2 ] != '(\w+=.*\s+){1,}' ):
+                if len( key.split() ) + 1 < 5: 
+                #and ( len( key.split() ) == 4 and key.split()[ 2 ] != '(\w+=.*\s+){1,}' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
