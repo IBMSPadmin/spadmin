@@ -89,7 +89,7 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CAche' )
 
 def spadmin_show_version( self, parameters ):        
-    print( 'Version: v1.0' )        
+    print( 'spadmin version: v1.0' )        
 #    
 spadmin_commands[ 'SPadmin SHow VERsion' ] = spadmin_show_version
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'VERsion' )
@@ -173,6 +173,7 @@ def show_stgpool( self, parameters ):
 #
 spadmin_commands[ 'SHow STGpools' ] = show_stgpool
 globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
+
 
 def show_last_error ( self, parameters):
     print ("Last error message: ", globals.last_error["message"])
