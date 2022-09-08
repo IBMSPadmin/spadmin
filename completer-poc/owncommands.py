@@ -94,6 +94,21 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CAche' )
 
+
+def spadmin_show_aliases( self, parameters ):
+    data  = []
+    for key in globals.aliases:
+        data.append( [ key, globals.aliases[ key ] ] )
+    
+    print( columnar( data, headers=[ colored( 'Alias', 'white', attrs=[ 'bold' ] ), colored( 'Command', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ] ) )
+#    
+spadmin_commands[ 'SPadmin SHow ALIases' ] = spadmin_show_aliases
+#globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
+#globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
+#globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'ALIases' )
+
+
 def spadmin_show_version( self, parameters ):        
     print( 'spadmin version: v1.0' )        
 #    
