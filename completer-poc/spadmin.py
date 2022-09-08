@@ -7,6 +7,10 @@
 # v1.0.0
 
 #
+#         Added: simple alias handling without alias command
+#         Added: more parameters: ini, log files, rldisable, nosql, nocache, ... 
+#         Fixed: owncommands parameters transfer 
+#       Changed: logging to globals.logger
 #       Changed: refactoring utilities, globals, IBMSPrlCompleter, DSM
 #       Changed: IBMSPcompleter regression algorithm to a faster one
 #         Added: simple debug, grep, invgrep, count, mailto handling (a later check maybe needed or not, BUT a collector certainly!!! Don't know hot to hadnle it)
@@ -213,7 +217,17 @@ if __name__ == '__main__':
         globals.logger.info( utilities.consolefilledline( 'Push autoexec commands into global config: [' + globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ] + ']' ) )
         line = globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]
 
-    globals.extras = {}
+    globals.extras  = {}
+    globals.aliases = {}
+    # test aliases
+    globals.aliases[ 'shrlr' ] = 'SHow Ruler'
+    globals.aliases[ 'shtim' ] = 'SHow TIME'
+    globals.aliases[ 'shtgp' ] = 'SHow STGp'
+    globals.aliases[ 'shcac' ] = 'SPadmin SHow CAche'
+    globals.aliases[ 'ver' ]   = 'SPadmin SHow VERsion'
+    globals.aliases[ 'rul' ]   = 'SPadmin SHow RULes'
+    globals.aliases[ 'deb' ]   = 'SPadmin SET DEBUG'
+    
     # Infinite loop
     globals.logger.debug( utilities.consolefilledline( '>>> INPUT LOOP START ' ) )
     while True:
@@ -241,6 +255,11 @@ if __name__ == '__main__':
         # simple command runner engine
         for command in line.split( ';' ):
             command      = command.strip()
+            
+            # handling aliases
+            firstcmdpart = command.split( ' ' )[ 0 ]
+            if firstcmdpart.lower() in globals.aliases:
+                command = command.replace( firstcmdpart,  globals.aliases[ firstcmdpart.lower() ] ) 
             
             # disassembly it first
             commandparts = command.split( '|' )
