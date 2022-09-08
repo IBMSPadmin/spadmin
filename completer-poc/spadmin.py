@@ -47,8 +47,6 @@ try:
     import gnureadline as readline
 except ImportError:
     import readline
-readline.parse_and_bind( 'tab: complete' )
-readline.set_completer_delims( ' ' )
 
 import os
 
@@ -76,7 +74,7 @@ import utilities
 ########## ###############################################################################################################
 # main() #  Let's dance
 ########## ###############################################################################################################
-if __name__ == "__main__":
+if __name__ == '__main__':
     
     # https://docs.python.org/3/library/argparse.html
     parser = argparse.ArgumentParser( prog = colored( 'spadmin.py', 'white', attrs=[ 'bold' ] ), description = 'Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.', epilog = colored( 'Thank you very much for downloading and starting to use it!', 'white', attrs = [ 'bold' ] ) )
@@ -98,10 +96,18 @@ if __name__ == "__main__":
     import globals
     
     # SPadmin global settings
-    globals.config = Configuration( "spadmin.ini" )
+    if args.inifilename:
+        globals.config = Configuration( args.inifilename )
+    else:
+        globals.config = Configuration( 'spadmin.ini' )
+        
+    if args.logfilename:
+        logfilename = args.logfilename
+    else:
+        logfilename = globals.config.getconfiguration()[ 'DEFAULT' ][ 'logfile' ]
     
     # Logger settings
-    logging.basicConfig( filename = globals.config.getconfiguration()['DEFAULT']['logfile'],
+    logging.basicConfig( filename = logfilename,
                          filemode = 'a',
                          format   = '%(asctime)s %(levelname)s %(message)s',
                          datefmt  = '%Y%m%d %H%M%S',
@@ -109,18 +115,20 @@ if __name__ == "__main__":
     # and a global object
     globals.logger = logging.getLogger( 'spadmin.py logger' )
 
-    # override config with cli parameters
+    # override config with the cli parameters
     if args.debug:
         globals.config.getconfiguration()[ 'DEFAULT' ][ 'debug' ]       = 'True'
         globals.logger.setLevel( logging.DEBUG )
+        
     if args.prereqcheck:
-        globals.config.getconfiguration()[ 'DEFAULT' ][ 'prereqcheck' ] = 'True'     
+        globals.config.getconfiguration()[ 'DEFAULT' ][ 'prereqcheck' ] = 'True'
+             
     if args.commands:
         globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]    = args.commands
 
-    globals.logger.info( utilities.consolefilledline( 'START ' ) )
-    globals.logger.info( utilities.consolefilledline( 'START ' ) )
-    globals.logger.info( utilities.consolefilledline( 'START ' ) )
+    globals.logger.info( utilities.consolefilledline( 'START' ) )
+    globals.logger.info( utilities.consolefilledline( 'START' ) )
+    globals.logger.info( utilities.consolefilledline( 'START' ) )
 
     globals.logger.debug( 'ARGS: ' + pformat( args ) )
         
@@ -176,8 +184,12 @@ if __name__ == "__main__":
     atexit.register( readline.write_history_file, rlhistfile )
     
     globals.logger.debug( 'Inject new readline handlers for compelter and display.' )
-    readline.set_completer( globals.myIBMSPrlCompleter.IBMSPcompleter )
-    readline.set_completion_display_matches_hook( globals.myIBMSPrlCompleter.match_display_hook )
+    
+    if not args.disablerl:
+        readline.parse_and_bind( 'tab: complete' )
+        readline.set_completer_delims( ' ' )
+        readline.set_completer( globals.myIBMSPrlCompleter.IBMSPcompleter )
+        readline.set_completion_display_matches_hook( globals.myIBMSPrlCompleter.match_display_hook )
 
     # Short text help
     print()
@@ -266,9 +278,9 @@ if __name__ == "__main__":
                 globals.logger.info( 'Background dsmadmc processes cleaning...' )    
                 globals.tsm.quit()
                 
-                globals.logger.info( utilities.consolefilledline( 'END ' ) )
-                globals.logger.info( utilities.consolefilledline( 'END ' ) )
-                globals.logger.info( utilities.consolefilledline( 'END ' ) )
+                globals.logger.info( utilities.consolefilledline( 'END' ) )
+                globals.logger.info( utilities.consolefilledline( 'END' ) )
+                globals.logger.info( utilities.consolefilledline( 'END' ) )
                 
                 sys.exit( 0 )
 
@@ -276,11 +288,11 @@ if __name__ == "__main__":
             match = False
             # let's try to find maybe it's an own command
             for key in owncommands.spadmin_commands:
-                maincommandpart = search( '^' + utilities.regexpgenerator( key ) + '(?!.*\w+)', command, IGNORECASE ) 
+                maincommandpart = search( '^' + utilities.regexpgenerator( key ) + '\s+', command + ' ', IGNORECASE ) 
                 if maincommandpart:
                     # just transfer the parameters
                     globals.logger.info( 'Own command found: [' + command + '] and try to execute.' )
-                    owncommands.spadmin_commands[ key ]( owncommands, command.replace( maincommandpart[ 0 ], '' ).strip() )
+                    owncommands.spadmin_commands[ key ]( owncommands, command.replace( maincommandpart[ 0 ].strip(), '' ).strip() )
                     match = True
                     break 
             

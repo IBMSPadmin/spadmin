@@ -7,6 +7,7 @@ from termcolor import colored
 from pprint import pprint, pformat
 from re import search, IGNORECASE
 from time import time
+
 try:
     import gnureadline as readline
 except ImportError:
