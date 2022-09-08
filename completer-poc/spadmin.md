@@ -1,6 +1,8 @@
-# toDos
+# Status
 
-![spadmin progress](https://progress-bar.dev/80/)
+Global spadmin.py development progress status: ![spadmin progress](https://progress-bar.dev/40/)
+
+# toDos
 
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
 - színezés
