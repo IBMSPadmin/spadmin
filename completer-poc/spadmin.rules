@@ -20,7 +20,8 @@ $ -> BYe
 $ -> Logout
 $ -> REload
 $ -> RULer
-$ -> debug
+$ -> deb
+$ -> ver
 
 $ -> grep
 $ -> invgrep
