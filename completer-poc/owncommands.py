@@ -94,6 +94,8 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'Add' )
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ] = []
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'DELete' )
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CAche' )
 
 
@@ -180,18 +182,29 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )
 
 def spadmin_add_alias( self, parameters ):
     if len(str(parameters).split(':')) != 2:
-        print('Please use the following command format: \'add alias cmd:command\'')
+        print('Please use the following command format: \'SPadmin Add ALIas cmd:command\'')
         return
     else:
         key,value = str(parameters).split(':')
         globals.aliases[key] = value
         globals.config.getconfiguration()['ALIAS'][key] = value
         globals.config.writeconfig()
-#
+
 #
 spadmin_commands[ 'SPadmin Add ALIas' ] = spadmin_add_alias
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'ALIas' )
 
+def spadmin_del_alias( self, parameters ):
+    if not parameters:
+        print('Please use the following command format: \'SPadmin DELete ALIas cmd\'')
+        return
+    else:
+        globals.aliases.pop(parameters)
+        globals.config.getconfiguration()['ALIAS'].pop(parameters)
+        globals.config.writeconfig()
+#
+spadmin_commands[ 'SPadmin DELete ALIas' ] = spadmin_del_alias
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ].append( 'ALIas' )
 
 def show_stgpool( self, parameters ):
     data = globals.tsm.send_command_array_array_tabdel(
