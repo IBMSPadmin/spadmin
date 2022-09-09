@@ -1,6 +1,8 @@
 import os
+import re
 import sys
 import globals
+import readchar
 
 from termcolor import colored
 from re import search, IGNORECASE
@@ -22,6 +24,36 @@ def progressbar( count, total, leadtext = '' ):
     sys.stdout.write( leadtext + '[%s]\r' % (barline))
     sys.stdout.write( leadtext + '[%s%s\r' % (colored(percent, 'grey', 'on_white'), colored('%', 'grey', 'on_white')))
     sys.stdout.flush()
+
+def add_remove_color(color, string):
+    color_pattern = r"\x1b\[.+?m"
+    color_reset = "\x1b[0m"
+    ret = string
+    matches = re.findall(color_pattern, string)
+    ret = ret.replace(color_reset,color)
+    return color + ret + color_reset
+
+
+def printer(string):
+    s = str(string).split("\n")
+    i = 0
+    grep = globals.extras['grep'] if 'grep' in globals.extras else ''
+
+    for line in s:
+        if grep != '':
+            if re.search(grep, line):
+                i += 1
+                print(line.replace(grep,'\x1b[1;37;40m'+ grep + "\x1b[0m"), sep="\n")
+        else:
+            i += 1
+            print(line, sep="\n")
+        if 'more' in globals.extras and i > globals.rows - 3:
+            print("more...   (<ENTER> to continue, 'C' to cancel)")
+            key = readchar.readkey()
+            if str(key).lower() == "c":
+                print(*s[i + globals.rows - 2:], sep="\n")
+                break
+            i = 0
 
 
 def consoleline( char='-'):

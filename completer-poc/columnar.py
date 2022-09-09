@@ -65,6 +65,7 @@ class Columnar:
         self.ansi_color_pattern = re.compile(r"\x1b\[.+?m")
         self.color_reset = "\x1b[0m"
         self.color_grid = None
+        self.matches_grid = None
         self.drop = drop
         self.select = select
         self.no_borders = no_borders
@@ -127,7 +128,7 @@ class Columnar:
                 out.write((self.header_sep * width) + " ")
         out.write(self.end_char)
 
-        for lrow, color_row in zip(truncated_rows, self.color_grid):
+        for lrow, color_row, matches_row in zip(truncated_rows, self.color_grid, self.matches_grid):
             for i, row in enumerate(lrow):
                 justified_row_parts = [
                     justifier(text, width)
@@ -136,11 +137,11 @@ class Columnar:
                     )
                 ]
                 colorized_row_parts = [
-                    self.add_color(text, code)
+                    self.add_color(text, code, None)
                     for text, code in zip(justified_row_parts, color_row)
                 ]
 
-                out.write( self.column_sep.join(colorized_row_parts))
+                out.write(self.column_sep.join(colorized_row_parts))
                 out.write(self.end_char)
 
             if write_header:
@@ -243,12 +244,13 @@ class Columnar:
         """
         logical_rows = []
         color_grid = []
+        matches_grid = []
         for row in full_data:
             cells_varying_lengths = []
             color_row = []
             for cell in row:
                 cell = self.apply_patterns(cell)
-                cell, color = self.strip_color(cell)
+                cell, color, matches = self.strip_color(cell)
                 color_row.append(color)
                 lines = cell.split("\n")
                 cells_varying_lengths.append(lines)
@@ -258,7 +260,10 @@ class Columnar:
             ]
             logical_rows.append(cells)
             color_grid.append(color_row)
+            matches_grid.append(matches)
         self.color_grid = color_grid
+        self.matches_grid = matches_grid
+       ### print(matches_grid)
         return logical_rows
 
     def apply_patterns(self, cell_text):
@@ -276,7 +281,7 @@ class Columnar:
         if matches:
             clean_text = self.ansi_color_pattern.sub("", cell_text)
             color_codes = "".join([match.group(0) for match in matches[:-1]])
-        return clean_text, color_codes
+        return clean_text, color_codes, matches
 
     def distribute_between(self, diff: int, columns: List[dict], n: int) -> List[dict]:
         """
@@ -421,7 +426,7 @@ class Columnar:
             lrows_out.append(cells_out_padded)
         return lrows_out
 
-    def add_color(self, string, color):
+    def add_color(self, string, color, matches):
         if color is None:
             return string
         color_pattern = r"\x1b\[.+?m"

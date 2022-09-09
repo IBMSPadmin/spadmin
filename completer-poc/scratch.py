@@ -1,6 +1,6 @@
 import re
-# import columnar
-from termcolor import colored
+import columnar
+# from termcolor import colored
 
 q_actlog = [['09/05/2022 17:58:54', 'ANR1959I Status monitor collecting current data at 05:58:54 PM. '],
             ['09/05/2022 17:58:57',
@@ -491,42 +491,27 @@ q_stgp = [['DB2_DSK', 'DISK', '', 0.0, '0.0', '0.0', '80', '20', '', 'DB2_LTO'],
           ['VMWARE_DSK', 'DISK', '', 10000.0, '76.4', '16.8', '80', '20', '', 'VMWARE_LTO'],
           ['VMWARE_LTO', 'DCLTO_05', 'GROUP', 42915.7, '29.1', '64.0', '80', '20', '60', '']]
 
-# columnar = columnar.Columnar()
-
-# table = columnar(q_actlog, headers=['Date/Time', 'Message'], justify=['l', 'l'])
-# print(table)
+columnar = columnar.Columnar()
 
 
-# table = columnar(q_stgp, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
-#                                'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next'],
-#                 justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-# print(table)
+table = columnar(q_actlog, headers=['Date/Time', 'Message'], justify=['l', 'l'])
+print(table)
 
 
-ansi_color_pattern = re.compile(r"\x1b\[.+?m")
+table = columnar(q_stgp, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
+                                'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next'],
+                 justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
+print(table)
 
 
-def strip_color(cell_text):
-    matches = [match for match in ansi_color_pattern.finditer(cell_text)]
-    color_codes = None
-    clean_text = cell_text
-    if matches:
-        clean_text = ansi_color_pattern.sub("", cell_text)
-        color_codes = "".join([match.group(0) for match in matches[:-1]])
-    return clean_text, color_codes
+#ansi_color_pattern = re.compile(r"\x1b\[.+?m")
 
 
-def useothercolor(param):
-    clean_text, color_codes = strip_color(param)
-    if color_codes:
-        return color_codes.join(clean_text).join('\x1b[0m')
-    else:
-        return clean_text
 
 
-# print (useothercolor('ez itt zöld lesz!'))
-# print (useothercolor(colored( 'ez itt zöld lesz!','red', attrs=['bold'])))
-# print (useothercolor('ez itt zöld lesz!'))
+#print (useothercolor('ez itt zöld lesz!'))
+#print (useothercolor(colored( 'ez itt zöld lesz!','red', attrs=['bold'])))
+#print (useothercolor('ez itt zöld lesz!'))
 import re
 from colored import fore, back, style
 
@@ -538,7 +523,7 @@ def add_remove_color(color, string):
     matches = re.findall(color_pattern, string)
     ret = ret.replace(color_reset,color)
     return color + ret + color_reset
-
+from colored import fore, back, style
 s = add_remove_color(fore.RED, 'ez itt piros lesz!')
 print("REPR: ", (s))
 print("REPR: ", repr(s))

@@ -86,7 +86,7 @@ def spadmin_show_cache( self, parameters ):
     for key in globals.myIBMSPrlCompleter.cache_hitratio:
         data.append( [ key, globals.myIBMSPrlCompleter.cache_hitratio[ key ] ] )
     
-    print( columnar( data, headers=[ colored( 'Name', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'c' ] ) )
+    utilities.printer( columnar( data, headers=[ colored( 'Name', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'c' ] ) )
 #    
 spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
@@ -100,7 +100,7 @@ def spadmin_show_aliases( self, parameters ):
     for key in globals.aliases:
         data.append( [ key, globals.aliases[ key ] ] )
     
-    print( columnar( data, headers=[ colored( 'Alias', 'white', attrs=[ 'bold' ] ), colored( 'Command', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ] ) )
+    utilities.printer( columnar( data, headers=[ colored( 'Alias', 'white', attrs=[ 'bold' ] ), colored( 'Command', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ] ) )
 #    
 spadmin_commands[ 'SPadmin SHow ALIases' ] = spadmin_show_aliases
 #globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
@@ -141,7 +141,7 @@ def spadmin_show_rules( self, parameters ):
         if globals.myIBMSPrlCompleter.rules[ key ] != []:
             data.append( [ key, globals.myIBMSPrlCompleter.rules[ key ] ] )
     
-    print( columnar( data, headers=[ colored( 'Regexp', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ], max_column_width = 120 ) )
+    utilities.printer(columnar(data, headers=[colored('Regexp', 'white', attrs=['bold']), colored('Value', 'white', attrs=['bold'])], justify=['l', 'l'], max_column_width = 120))
     
 #    
 spadmin_commands[ 'SPadmin SHow RULes' ] = spadmin_show_rules
@@ -159,7 +159,7 @@ def show_actlog ( self, parameters ):
         (a, b) = row
        # data[index][1] = str(b).replace("Session",colored("Session","blue"))
     table = columnar(data, headers=['Date/Time', 'Message'])
-    print( table[ :-1 ] )
+    utilities.printer( table[ :-1 ] )
 #
 spadmin_commands[ 'SHow ACTlog' ] = show_actlog
 globals.myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
@@ -190,7 +190,7 @@ def show_stgpool( self, parameters ):
     table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
                                     'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
                      justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-    print( table[ :-1 ] )
+    utilities.printer( table[ :-1 ] )
 #
 spadmin_commands[ 'SHow STGpools' ] = show_stgpool
 globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
