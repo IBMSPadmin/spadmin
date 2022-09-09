@@ -267,12 +267,14 @@ if __name__ == '__main__':
             # keep the first one as the main command
             command = commandparts.pop( 0 ).strip()
             
-            for extracommand in commandparts:
+            for extracommand in commandparts:                
                 pairs = extracommand.split()
                 if len( pairs ) > 1:
                     globals.extras[ pairs[ 0 ] ] = pairs[ 1 ].replace( '##', '|' ) # change back if exists
-                else:
+                elif len( pairs ) == 1:
                     globals.extras[ pairs[ 0 ] ] = None
+                else:
+                    continue
             
             globals.logger.info( 'Base command: [' + command + '] and extras:' )        
             globals.logger.info( pformat( globals.extras ) )
