@@ -166,12 +166,12 @@ globals.myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
 
 
 def reload( self, parameters ):
-    globals.myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['DEFAULT']['rulefile'] )
+    globals.myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['SPADMIN']['rulefile'] )
 #
 spadmin_commands[ 'REload' ] = reload
 
 def spadmin_show_log( self, parameters ):
-    os.system( 'open ./' + globals.config.getconfiguration()['DEFAULT']['logfile'] )
+    os.system( 'open ./' + globals.config.getconfiguration()['SPADMIN']['logfile'] )
 #    
 spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )

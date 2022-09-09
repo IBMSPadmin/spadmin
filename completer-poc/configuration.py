@@ -24,18 +24,34 @@ class Configuration:
         'prompt'           : '"[' + colored( '%%SPSERVERNAME%%', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' "',
         'rlwordseparation' : 8
     }
+    aliases = {
+        'shrlr': 'SHow Ruler',
+        'shtim': 'SHow TIME',
+        'shtgp': 'SHow STGp',
+        'shcac': 'SPadmin SHow CAche',
+        'ver': 'SPadmin SHow VERsion',
+        'rul': 'SPadmin SHow RULes',
+        'deb': 'SPadmin SET DEBUG',
+    }
     def __init__(self, configfile):
         if not configfile:
             configfile   = 'spadmin.ini'
         self.configfile  = configfile
         self.configparser = configparser.ConfigParser()
         self.configparser.read(configfile)
-        ### check existance of DEFAULTS
-        if not self.configparser.has_section('DEFAULT'):
-            self.configparser.sections().append('DEFAULT')
+
+        # check existence of DEFAULTS
+        if not self.configparser.has_section('SPADMIN'):
+            self.configparser.add_section('SPADMIN')
         for key in self.defaults:
-            if not self.configparser.has_option('DEFAULT', key):
-                self.configparser['DEFAULT'][key] = str(self.defaults[key])
+            if not self.configparser.has_option('SPADMIN', key):
+                self.configparser['SPADMIN'][key] = str(self.defaults[key])
+        # check default aliases
+        if not self.configparser.has_section('ALIAS'):
+            self.configparser.add_section('ALIAS')
+        for key in self.aliases:
+            if not self.configparser.has_option('ALIAS', key):
+                self.configparser['ALIAS'][key] = str(self.aliases[key])
         self.writeconfig()
 
     def writeconfig(self):

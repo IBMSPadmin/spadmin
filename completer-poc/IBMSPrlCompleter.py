@@ -59,10 +59,10 @@ class IBMSPrlCompleter:
         # self.spprompt   = spprompt
 
         # print(' and loading rules: ')        
-        self.loadrules( globals.config.getconfiguration()['DEFAULT']['rulefile'] )
+        self.loadrules( globals.config.getconfiguration()['SPADMIN']['rulefile'] )
 
     def prompt(self):
-        prompt = globals.config.getconfiguration()['DEFAULT']['prompt'].strip( '"' )
+        prompt = globals.config.getconfiguration()['SPADMIN']['prompt'].strip( '"' )
 
         # versions
         prompt = prompt.replace('%SPVERSION%',  globals.spversion)
@@ -102,7 +102,7 @@ class IBMSPrlCompleter:
         # cache engine
         if select in self.cache.keys():
             self.cache_hitratio['hit'] += 1
-            if time() - self.cache_timestamp[select] > int(globals.config.getconfiguration()['DEFAULT']['cache_age']):
+            if time() - self.cache_timestamp[select] > int(globals.config.getconfiguration()['SPADMIN']['cache_age']):
                 # refresh needed
                 globals.logger.debug(' SP SQL Engine hit the cache but the stored one is too old!')
                 globals.logger.debug(' CACHE timediff in second(s): [' + str(time() - self.cache_timestamp[select]) + '].')
@@ -379,7 +379,7 @@ class IBMSPrlCompleter:
             sys.stdout.write( ppp + '   ' )
 
             # line separation
-            if word > int( globals.config.getconfiguration()[ 'DEFAULT' ][ 'rlwordseparation' ] ):
+            if word > int( globals.config.getconfiguration()[ 'SPADMIN' ][ 'rlwordseparation' ] ):
                 word = 1
                 sys.stdout.write( '\n' )
             word += 1

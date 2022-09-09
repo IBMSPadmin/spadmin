@@ -108,7 +108,7 @@ if __name__ == '__main__':
     if args.logfilename:
         logfilename = args.logfilename
     else:
-        logfilename = globals.config.getconfiguration()[ 'DEFAULT' ][ 'logfile' ]
+        logfilename = globals.config.getconfiguration()[ 'SPADMIN' ][ 'logfile' ]
     
     # Logger settings
     logging.basicConfig( filename = logfilename,
@@ -121,14 +121,14 @@ if __name__ == '__main__':
 
     # override config with the cli parameters
     if args.debug:
-        globals.config.getconfiguration()[ 'DEFAULT' ][ 'debug' ]       = 'True'
+        globals.config.getconfiguration()[ 'SPADMIN' ][ 'debug' ]       = 'True'
         globals.logger.setLevel( logging.DEBUG )
         
     if args.prereqcheck:
-        globals.config.getconfiguration()[ 'DEFAULT' ][ 'prereqcheck' ] = 'True'
+        globals.config.getconfiguration()[ 'SPADMIN' ][ 'prereqcheck' ] = 'True'
              
     if args.commands:
-        globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]    = args.commands
+        globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ]    = args.commands
 
     globals.logger.info( utilities.consolefilledline( 'START' ) )
     globals.logger.info( utilities.consolefilledline( 'START' ) )
@@ -166,7 +166,7 @@ if __name__ == '__main__':
     print()
     
     globals.logger.debug( 'Fork dsmadmc processes.' )
-    globals.tsm = dsmadmc_pexpect( globals.config.getconfiguration()['DEFAULT']['dsmadmc_id'], globals.config.getconfiguration()['DEFAULT']['dsmadmc_password'] )
+    globals.tsm = dsmadmc_pexpect( globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'], globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'] )
     
     globals.logger.debug( 'readline class instance' )
     globals.myIBMSPrlCompleter = IBMSPrlCompleter( )
@@ -176,7 +176,7 @@ if __name__ == '__main__':
     # Command line history
     # Based on this: https://docs.python.org/3/library/readline.html
     # rlhistfile = os.path.join( os.path.expanduser( "~" ), ".python_history" )
-    rlhistfile = os.path.join( "./", globals.config.getconfiguration()['DEFAULT'][ 'historyfile' ] )
+    rlhistfile = os.path.join( "./", globals.config.getconfiguration()['SPADMIN'][ 'historyfile' ] )
     globals.logger.debug( 'readline history file: [' + rlhistfile + ']' )
     try:
         readline.read_history_file( rlhistfile )
@@ -213,20 +213,24 @@ if __name__ == '__main__':
 
     # push the autoexec command(s)
     line = ''
-    if globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]:
-        globals.logger.info( utilities.consolefilledline( 'Push autoexec commands into global config: [' + globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ] + ']' ) )
-        line = globals.config.getconfiguration()[ 'DEFAULT' ][ 'autoexec' ]
+    if globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ]:
+        globals.logger.info( utilities.consolefilledline( 'Push autoexec commands into global config: [' + globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ] + ']' ) )
+        line = globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ]
 
     globals.extras  = {}
     globals.aliases = {}
     # test aliases
-    globals.aliases[ 'shrlr' ] = 'SHow Ruler'
-    globals.aliases[ 'shtim' ] = 'SHow TIME'
-    globals.aliases[ 'shtgp' ] = 'SHow STGp'
-    globals.aliases[ 'shcac' ] = 'SPadmin SHow CAche'
-    globals.aliases[ 'ver' ]   = 'SPadmin SHow VERsion'
-    globals.aliases[ 'rul' ]   = 'SPadmin SHow RULes'
-    globals.aliases[ 'deb' ]   = 'SPadmin SET DEBUG'
+    if globals.config.getconfiguration().has_section('ALIAS'):
+        for key in globals.config.getconfiguration()['ALIAS'].keys():
+            globals.aliases[key] = globals.config.getconfiguration()['ALIAS'][key]
+
+ #   globals.aliases[ 'shrlr' ] = 'SHow Ruler'
+ #   globals.aliases[ 'shtim' ] = 'SHow TIME'
+ #   globals.aliases[ 'shtgp' ] = 'SHow STGp'
+ #   globals.aliases[ 'shcac' ] = 'SPadmin SHow CAche'
+ #   globals.aliases[ 'ver' ]   = 'SPadmin SHow VERsion'
+ #   globals.aliases[ 'rul' ]   = 'SPadmin SHow RULes'
+ #   globals.aliases[ 'deb' ]   = 'SPadmin SET DEBUG'
     
     # Infinite loop
     globals.logger.debug( utilities.consolefilledline( '>>> INPUT LOOP START ' ) )
