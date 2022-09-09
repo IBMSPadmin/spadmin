@@ -102,32 +102,27 @@ ACCept
 - Date
 	
 ACTivate
-
 - POlicyset  
 
 ASsign
-
 - DEFMGmtclass    
 
 BAckup
-
 - DB
 - DEVCONFig
 - VOLHistory
 	
 DEFine
-    
 - ASSOCiation
 
 DELete
-
 - STGpool
 
 REMove 
-
 - Node
  
 SHow
+- STGpools
 
 Reload - újraolvassa a rule fájt
 
@@ -135,7 +130,6 @@ SPadmin
 
 - SET DEBUG - bekpcsolja a debog szintű log-olást
 - SHow
-
 	- ALIases - kiírja az alias-okat    
 	- CAche - kiírja a cache statisztikát   
 	- CONFig    
