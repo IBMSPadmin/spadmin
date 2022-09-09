@@ -99,7 +99,6 @@ $
 ## A következő parancsok mennek:
 
 ACCept
-
 - Date
 	
 ACTivate
