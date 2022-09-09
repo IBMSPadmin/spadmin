@@ -100,33 +100,33 @@ $
 
 ACCept
 
-	- Date
+- Date
 	
 ACTivate
 
-	- POlicyset  
+- POlicyset  
 
 ASsign
 
-	- DEFMGmtclass    
+- DEFMGmtclass    
 
 BAckup
 
-	- DB
-	- DEVCONFig
-	- VOLHistory
+- DB
+- DEVCONFig
+- VOLHistory
 	
 DEFine
     
-	- ASSOCiation
+- ASSOCiation
 
 DELete
 
-	- STGpool
+- STGpool
 
 REMove 
 
-	- Node
+- Node
  
 SHow
 
@@ -134,23 +134,23 @@ Reload - újraolvassa a rule fájt
 
 SPadmin
 
-	- SET DEBUG - bekpcsolja a debog szintű log-olást
-	- SHow
+- SET DEBUG - bekpcsolja a debog szintű log-olást
+- SHow
 
-		- ALIases - kiírja az alias-okat    
-		- CAche - kiírja a cache statisztikát   
-		- CONFig    
-		- ENVinronment    
-		- EXtras - kiírja a parancs után megadott extra pipe opciókat [DEV]    
-		- Log - megnyitja az spadmin log-ját   
-		- PROCessinfo    
-		- RULes - kiírja a szabályokat, amit a readline használ   
-		- VERsion - kiírja az spadin verzióját
+	- ALIases - kiírja az alias-okat    
+	- CAche - kiírja a cache statisztikát   
+	- CONFig    
+	- ENVinronment    
+	- EXtras - kiírja a parancs után megadott extra pipe opciókat [DEV]    
+	- Log - megnyitja az spadmin log-ját   
+	- PROCessinfo    
+	- RULes - kiírja a szabályokat, amit a readline használ   
+	- VERsion - kiírja az spadin verzióját
 		  
-	- UNSET DEBUG - kikpcsolja a debog szintű log-olást
-	
-	- UPDate ???   
-	
-	- VERsion !!!ez nem kell+
+- UNSET DEBUG - kikpcsolja a debog szintű log-olást
+
+- UPDate ???   
+
+- VERsion !!!ez nem kell+
 
 ##
