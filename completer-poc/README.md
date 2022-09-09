@@ -1,6 +1,6 @@
 # spadmin.py
 
-Maradhat ez a név. Amivel megvagyunk.
+Maradhat ez a név. Amivel megvagyunk:
 
 ### prerequisites
 
@@ -20,7 +20,7 @@ Még nem tiszta 100%-ban, hogy mi a különbség a readline és a gnureadline k�
 
 ./spadmin paraméterek
 
-<pre>
+```
 $ ./spadmin.py -h
 usage: spadmin.py [-h] [--consoleonly] [-c [COMMANDS]] [-d] [-i [INIFILENAME]] [-l [LOGFILENAME]] [-m] [-n] [-p] [-r] [-v]
 
@@ -43,7 +43,7 @@ options:
   -v, --version         show version information
 
 Thank you very much for downloading and starting to use it!
-</pre>
+```
 
 ```
 $ ./spadmin.py -c 'SHow Stgp; quit'
@@ -99,28 +99,44 @@ $
 ## A következő parancsok mennek:
 
 ACCept
+
 	- Date
+	
 ACTivate
+
 	- POlicyset  
+
 ASsign
+
 	- DEFMGmtclass    
+
 BAckup
+
 	- DB
 	- DEVCONFig
 	- VOLHistory
-DEFine    
+	
+DEFine
+    
 	- ASSOCiation
+
 DELete
+
 	- STGpool
+
 REMove 
+
 	- Node
  
 SHow
 
 Reload - újraolvassa a rule fájt
+
 SPadmin
+
 	- SET DEBUG - bekpcsolja a debog szintű log-olást
 	- SHow
+
 		- ALIases - kiírja az alias-okat    
 		- CAche - kiírja a cache statisztikát   
 		- CONFig    
@@ -129,9 +145,12 @@ SPadmin
 		- Log - megnyitja az spadmin log-ját   
 		- PROCessinfo    
 		- RULes - kiírja a szabályokat, amit a readline használ   
-		- VERsion - kiírja az spadin verzióját  
+		- VERsion - kiírja az spadin verzióját
+		  
 	- UNSET DEBUG - kikpcsolja a debog szintű log-olást
+	
 	- UPDate ???   
+	
 	- VERsion !!!ez nem kell+
 
 ##
