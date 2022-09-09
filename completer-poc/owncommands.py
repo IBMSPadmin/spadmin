@@ -92,6 +92,8 @@ spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'Add' )
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CAche' )
 
 
@@ -175,6 +177,20 @@ def spadmin_show_log( self, parameters ):
 #    
 spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )
+
+def spadmin_add_alias( self, parameters ):
+    if len(str(parameters).split(':')) != 2:
+        print('Please use the following command format: \'add alias cmd:command\'')
+        return
+    else:
+        key,value = str(parameters).split(':')
+        globals.aliases[key] = value
+        globals.config.getconfiguration()['ALIAS'][key] = value
+        globals.config.writeconfig()
+#
+#
+spadmin_commands[ 'SPadmin Add ALIas' ] = spadmin_add_alias
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'ALIas' )
 
 
 def show_stgpool( self, parameters ):

@@ -59,5 +59,4 @@ class Configuration:
             self.configparser.write(configfile)
 
     def getconfiguration(self):
-
         return self.configparser
