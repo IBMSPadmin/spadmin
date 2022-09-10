@@ -168,7 +168,7 @@ if __name__ == '__main__':
     print()
     
     globals.logger.debug( 'Fork dsmadmc processes.' )
-    globals.tsm = dsmadmc_pexpect( globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'], globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'] )
+    globals.tsm = dsmadmc_pexpect( '', globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'], globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'] )
     
     globals.logger.debug( 'readline class instance' )
     globals.myIBMSPrlCompleter = IBMSPrlCompleter( )
