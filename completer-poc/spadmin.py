@@ -6,7 +6,8 @@
 
 # v1.0.0
 
-#         Added: switch|add|del|show server
+#
+#       Changed: after TAB-TAB alignment POC
 #         Added: simple alias handling without alias command
 #         Added: more parameters: ini, log files, rldisable, nosql, nocache, ... 
 #         Fixed: owncommands parameters transfer 
@@ -167,7 +168,7 @@ if __name__ == '__main__':
     print()
     
     globals.logger.debug( 'Fork dsmadmc processes.' )
-    globals.tsm = dsmadmc_pexpect( "", globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'], globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'] )
+    globals.tsm = dsmadmc_pexpect( globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'], globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'] )
     
     globals.logger.debug( 'readline class instance' )
     globals.myIBMSPrlCompleter = IBMSPrlCompleter( )
