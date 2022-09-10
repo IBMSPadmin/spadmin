@@ -252,11 +252,27 @@ def show_server( self, parameters ):
         if section not in disabled_words:
             print(section)
 #
-spadmin_commands[ 'SHow SErver' ] = show_server
-globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'SErver' )
+spadmin_commands[ 'SPadmin SHow SErver' ] = show_server
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'SErver' )
 
 def switch_server( self, parameters ):
     print("SWITCH SERVER")
+    if not parameters:
+        print('Please use the following command format: \'SPadmin SWitch SErver servername\'')
+        return
+    else:
+        server = str(parameters).upper()
+        if globals.config.getconfiguration().has_section(server) and parameters not in disabled_words:
+            print ("switch")
+            globals.tsm.quit()
+            from dsmadmc_pexpect import dsmadmc_pexpect
+            globals.tsm = dsmadmc_pexpect(server, globals.config.getconfiguration()[server]['dsmadmc_id'],
+                                          globals.config.getconfiguration()[server]['dsmadmc_password'])
+
+        else:
+            print (f'The given server \'{server}\' not found')
+
+
 #
 spadmin_commands[ 'SPadmin SWitch SErver' ] = switch_server
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ].append( 'SErver' )
