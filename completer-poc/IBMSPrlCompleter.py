@@ -258,7 +258,7 @@ class IBMSPrlCompleter:
                             ret.append( x + separator )
                             continue
                             
-        elif len(tokens) == 4:
+        elif len( tokens ) == 4:
             # LEVEL 4
             logging.info( ' Stepped into LEVEL 4.' )
 
@@ -273,6 +273,46 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 if search( '^' + utilities.regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                     globals.logger.debug( ' and found [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
+                    globals.logger.debug( " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
+                    for x in self.rules[ key ]:
+                        
+                        # {Mustexist: \w+} feature test
+                        if search( '{Mustexist: .+}', x, IGNORECASE ):  
+                            mustexist = search( '{Mustexist: (.+)}', x )[ 1 ] 
+                            if not search( mustexist, tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                                continue                       
+                            
+                        if x.startswith( 'select' ):
+                            # First try as an SQL pattern!
+                            globals.logger.debug( ' it\'s an SQL select [' + tokens[ -1 ] + ' > ' + x + ']' )
+                            ret += self.spsqlengine( x.strip(), tokens )
+                            continue
+                        elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                            globals.logger.debug( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                            
+                            # remove the option part if it exists
+                            match = search( '{Mustexist: .+}', x )
+                            if match:
+                                x = x.replace( match[ 0 ], '' )
+                                
+                            separator = '' if x[ -1 ] == '=' else ' '
+                            ret.append( x + separator )
+                            continue
+        elif len( tokens ) == 5:
+            # LEVEL 5
+            logging.info( ' Stepped into LEVEL 5.' )
+            
+            for key in self.rules:
+                # skip the previous level entries
+                if ( len( key.split() ) + 1 != 4 or ( len( key.split() ) == 3 and key[ -1 ] == '=' ) ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
+                    continue
+                elif key.startswith( 'select' ):  # ???????????????????????????????
+                    continue
+                    
+                #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
+                #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                if search( '^' + utilities.regexpgenerator( key ), tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                    globals.logger.debug( ' and found [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
                     globals.logger.debug( " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[ key ]:
                         
@@ -360,7 +400,9 @@ class IBMSPrlCompleter:
         globals.logger.debug( 'matches: ' + str( matches ) )
         globals.logger.debug( 'longest_match_length: ' + str( longest_match_length ) )
 
-        word = 1
+        word       = 1
+        maxlength  = 0
+        tmpmatches = []
 
         sys.stdout.write( '\n' )
         for match in matches:
@@ -371,18 +413,34 @@ class IBMSPrlCompleter:
             else:
                 ppp = match
             
+            length = len( ppp )
+            if length > maxlength:
+                maxlength = length
+                            
+            tmpmatches.append( ppp )
+
+        maxlength += 3
+        separation = ( globals.columns // maxlength ) - 1 
+        
+        for ppp in tmpmatches:
+            
+            ppp = ppp.ljust( maxlength )
+            
             # colorize the result
             match = search( '^[A-Z]+', ppp )
             if match:
                 ppp = ppp.replace( match[ 0 ], colored( match[ 0 ], 'green', attrs=[ 'bold' ] ) )
-
-            sys.stdout.write( ppp + '   ' )
+                        
+            sys.stdout.write( ppp )
 
             # line separation
-            if word > int( globals.config.getconfiguration()[ 'SPADMIN' ][ 'rlwordseparation' ] ):
-                word = 1
+            #if word > int( globals.config.getconfiguration()[ 'SPADMIN' ][ 'rlwordseparation' ] ):
+            if word > separation:
+                word = 0
                 sys.stdout.write( '\n' )
             word += 1
+
+        sys.stdout.flush()
 
         sys.stdout.write( '\n' + self.prompt() + '' + readline.get_line_buffer() )
         sys.stdout.flush()
