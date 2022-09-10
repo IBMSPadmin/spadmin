@@ -142,7 +142,7 @@ class Columnar:
                 ]
 
                 out.write(self.column_sep.join(colorized_row_parts))
-                out.write(self.end_char)
+            out.write(self.end_char)
 
             if write_header:
                 ###
@@ -158,7 +158,7 @@ class Columnar:
             else:
                 if not self.no_borders:
                     self.write_row_separators(out, column_widths)
-        return out.getvalue()
+        return out.getvalue()[:-1]
 
     def write_row_separators(
             self, out_stream: io.StringIO, column_widths: Sequence[int]

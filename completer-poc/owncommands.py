@@ -163,7 +163,7 @@ def show_actlog ( self, parameters ):
         (a, b) = row
        # data[index][1] = str(b).replace("Session",colored("Session","blue"))
     table = columnar(data, headers=['Date/Time', 'Message'])
-    utilities.printer( table[ :-1 ] )
+    utilities.printer( table )
 #
 spadmin_commands[ 'SHow ACTlog' ] = show_actlog
 globals.myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
@@ -219,7 +219,7 @@ def show_stgpool( self, parameters ):
     table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
                                     'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
                      justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-    utilities.printer( table[ :-1 ] )
+    utilities.printer( table )
 #
 spadmin_commands[ 'SHow STGpools' ] = show_stgpool
 globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
