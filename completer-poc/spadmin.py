@@ -92,6 +92,7 @@ if __name__ == '__main__':
     parser.add_argument( '-n', '--norlsqlhelpepr', action = 'store_const', const = True,          help = 'no sql queries in reradline' )
     parser.add_argument( '-p', '--prereqcheck',    action = 'store_const', const = True,          help = 'prerequisite check' )
     parser.add_argument( '-r', '--disablerl',      action = 'store_const', const = True,          help = 'disable readline functionality' )
+    parser.add_argument( '-t', '--textcolor',      nargs = '?',                                   help = 'specify the text color [defualt: "white"]' )
     parser.add_argument( '-v', '--version',        action = 'version', version = '%(prog)s v1.0', help = 'show version information' )
     
     args = parser.parse_args()
