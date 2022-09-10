@@ -17,6 +17,7 @@ from re import search, IGNORECASE
 
 # sub injection test
 spadmin_commands = {}
+disabled_words = ['DEFAULT','ALIAS','SPADMIN']
 
 def ruler( self, parameters = '' ):
     if len( parameters ) > 0:
@@ -97,6 +98,8 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'DELete' )
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CAche' )
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SWitch' )
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ] = []
 
 
 def spadmin_show_aliases( self, parameters ):
@@ -163,7 +166,7 @@ def show_actlog ( self, parameters ):
         (a, b) = row
        # data[index][1] = str(b).replace("Session",colored("Session","blue"))
     table = columnar(data, headers=['Date/Time', 'Message'])
-    utilities.printer( table[ :-1 ] )
+    utilities.printer( table )
 #
 spadmin_commands[ 'SHow ACTlog' ] = show_actlog
 globals.myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
@@ -199,12 +202,82 @@ def spadmin_del_alias( self, parameters ):
         print('Please use the following command format: \'SPadmin DELete ALIas cmd\'')
         return
     else:
-        globals.aliases.pop(parameters)
-        globals.config.getconfiguration()['ALIAS'].pop(parameters)
-        globals.config.writeconfig()
+        if parameters in globals.config.getconfiguration()['ALIAS']:
+            globals.aliases.pop(parameters)
+            globals.config.getconfiguration()['ALIAS'].pop(parameters)
+            globals.config.writeconfig()
+        else:
+            print (f'The given alias \'{parameters}\' not found')
 #
 spadmin_commands[ 'SPadmin DELete ALIas' ] = spadmin_del_alias
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ].append( 'ALIas' )
+
+
+def spadmin_add_server( self, parameters ):
+    if len(str(parameters).split(' ')) != 3:
+        print('Please use the following command format: \'SPadmin Add SErver server_name user_id password\'')
+        return
+    else:
+        server, userid, password = str(parameters).split(' ')
+        server = str(server).upper()
+        if globals.config.getconfiguration().has_section(server) or server in disabled_words:
+            print (f'The given server name \'{server}\' already exists or not allowed')#
+        else:
+            globals.config.getconfiguration().add_section(server)
+            globals.config.getconfiguration()[server]['dsmadmc_id'] = userid
+            globals.config.getconfiguration()[server]['dsmadmc_password'] = password
+            globals.config.writeconfig()
+
+spadmin_commands[ 'SPadmin Add SErver' ] = spadmin_add_server
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'SErver' )
+
+def spadmin_del_server( self, parameters ):
+    if not parameters:
+        print('Please use the following command format: \'SPadmin DELete SErver servername\'')
+        return
+    else:
+        server = str(parameters).upper()
+        if globals.config.getconfiguration().has_section(server) and parameters not in disabled_words:
+            globals.config.getconfiguration().pop(server)
+            globals.config.writeconfig()
+        else:
+            print (f'The given server \'{server}\' not found')
+
+#
+spadmin_commands[ 'SPadmin DELete SErver' ] = spadmin_del_server
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ].append( 'SErver' )
+
+def show_server( self, parameters ):
+    for section in globals.config.getconfiguration().sections():
+        if section not in disabled_words:
+            print(section)
+#
+spadmin_commands[ 'SPadmin SHow SErver' ] = show_server
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'SErver' )
+
+def switch_server( self, parameters ):
+    print("SWITCH SERVER")
+    if not parameters:
+        print('Please use the following command format: \'SPadmin SWitch SErver servername\'')
+        return
+    else:
+        server = str(parameters).upper()
+        if globals.config.getconfiguration().has_section(server) and parameters not in disabled_words:
+            print ("switch")
+            globals.tsm.quit()
+            from dsmadmc_pexpect import dsmadmc_pexpect
+            globals.tsm = dsmadmc_pexpect(server, globals.config.getconfiguration()[server]['dsmadmc_id'],
+                                          globals.config.getconfiguration()[server]['dsmadmc_password'])
+
+        else:
+            print (f'The given server \'{server}\' not found')
+
+
+#
+spadmin_commands[ 'SPadmin SWitch SErver' ] = switch_server
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ].append( 'SErver' )
+
+
 
 def show_stgpool( self, parameters ):
     data = globals.tsm.send_command_array_array_tabdel(
@@ -219,7 +292,7 @@ def show_stgpool( self, parameters ):
     table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
                                     'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
                      justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-    utilities.printer( table[ :-1 ] )
+    utilities.printer( table )
 #
 spadmin_commands[ 'SHow STGpools' ] = show_stgpool
 globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )

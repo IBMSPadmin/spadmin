@@ -89,11 +89,11 @@ class Columnar:
         else:
             logical_rows = self.convert_data_to_logical_rows([headers] + data)
         column_widths = self.get_column_widths(logical_rows)
-        # Add +3 or +2 char extra for the last column
         self.end_char = ""
         if (self.terminal_width - sum(column_widths)) > 2:
             self.end_char = "\n"
-        if ((self.terminal_width - sum(column_widths)) % 2) == 0:
+        # Add +3 or +2 char extra for the last column
+        if (self.terminal_width - sum(column_widths)) < 2 and ((self.terminal_width - sum(column_widths)) % 2) == 0:
             column_widths[-1] = column_widths[-1] + 3
         else:
             column_widths[-1] = column_widths[-1] + 2
@@ -142,7 +142,7 @@ class Columnar:
                 ]
 
                 out.write(self.column_sep.join(colorized_row_parts))
-                out.write(self.end_char)
+            out.write(self.end_char)
 
             if write_header:
                 ###
@@ -158,7 +158,7 @@ class Columnar:
             else:
                 if not self.no_borders:
                     self.write_row_separators(out, column_widths)
-        return out.getvalue()
+        return out.getvalue()[:-1] # remove last end_char
 
     def write_row_separators(
             self, out_stream: io.StringIO, column_widths: Sequence[int]
