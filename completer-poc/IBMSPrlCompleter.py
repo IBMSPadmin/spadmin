@@ -338,6 +338,47 @@ class IBMSPrlCompleter:
                             separator = '' if x[ -1 ] == '=' else ' '
                             ret.append( x + separator )
                             continue
+        
+        elif len( tokens ) == 5:
+            # LEVEL 6
+            logging.info( ' Stepped into LEVEL 6.' )
+            
+            for key in self.rules:
+                # skip the previous level entries
+                if ( len( key.split() ) + 1 != 4 or ( len( key.split() ) == 3 and key[ -1 ] == '=' ) ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
+                    continue
+                elif key.startswith( 'select' ):  # ???????????????????????????????
+                    continue
+                    
+                #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
+                #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                if search( '^' + utilities.regexpgenerator( key ), tokens[ -6 ] + ' ' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                    globals.logger.debug( ' and found [' + tokens[ -6 ] + ' ' +  tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
+                    globals.logger.debug( " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
+                    for x in self.rules[ key ]:
+                        
+                        # {Mustexist: \w+} feature test
+                        if search( '{Mustexist: .+}', x, IGNORECASE ):  
+                            mustexist = search( '{Mustexist: (.+)}', x )[ 1 ] 
+                            if not search( mustexist, tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                                continue                       
+                            
+                        if x.startswith( 'select' ):
+                            # First try as an SQL pattern!
+                            globals.logger.debug( ' it\'s an SQL select [' + tokens[ -1 ] + ' > ' + x + ']' )
+                            ret += self.spsqlengine( x.strip(), tokens )
+                            continue
+                        elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                            globals.logger.debug( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                            
+                            # remove the option part if it exists
+                            match = search( '{Mustexist: .+}', x )
+                            if match:
+                                x = x.replace( match[ 0 ], '' )
+                                
+                            separator = '' if x[ -1 ] == '=' else ' '
+                            ret.append( x + separator )
+                            continue
 
         else:
             globals.logger.debug( ' Stepped into LEVEL Bzzz...' )
@@ -395,10 +436,10 @@ class IBMSPrlCompleter:
     ######################
     def match_display_hook( self, substitution, matches, longest_match_length ):
 
-        globals.logger.debug( '>>> Step into: match_display_hook with this:' )
-        globals.logger.debug( 'substitution: ' + str( substitution ) )
-        globals.logger.debug( 'matches: ' + str( matches ) )
-        globals.logger.debug( 'longest_match_length: ' + str( longest_match_length ) )
+        #globals.logger.debug( '>>> Step into: match_display_hook with this:' )
+        #globals.logger.debug( 'substitution: ' + str( substitution ) )
+        #globals.logger.debug( 'matches: ' + str( matches ) )
+        #globals.logger.debug( 'longest_match_length: ' + str( longest_match_length ) )
 
         word       = 1
         maxlength  = 0
