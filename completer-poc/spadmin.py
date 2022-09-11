@@ -287,7 +287,7 @@ if __name__ == '__main__':
                     
             # it's not own command. Does the user want to possibly exit???
             if search( '^' + utilities.regexpgenerator( 'QUIt' ),   command, IGNORECASE ) or \
-               search( '^' + utilities.regexpgenerator( 'LOGout' ), command, IGNORECASE ) or \
+               search( '^' + utilities.regexpgenerator( 'LOGOut' ), command, IGNORECASE ) or \
                search( '^' + utilities.regexpgenerator( 'Exit' ),   command, IGNORECASE ) or \
                search( '^' + utilities.regexpgenerator( 'BYe' ),    command, IGNORECASE ):
             

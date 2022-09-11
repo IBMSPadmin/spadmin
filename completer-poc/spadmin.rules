@@ -146,16 +146,27 @@ DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-define-devclass-define-device-class
 # DEFine DEVclass device_class_name LIBRary=library_name DEVType=3590
-DEFine                           -> DEVclass
-DEFine DEVclass (\w+)            -> DEVType=
-DEFine DEVclass (\w+) DEVType=   -> DEVType=3590
-DEFine DEVclass (\w+) DEVType=   -> DEVType=LTO
-DEFine DEVclass (\w+)            -> LIBRary=
-DEFine DEVclass (\w+) LIBRary=   -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
-DEFine DEVclass (\w+)            -> LBProtect={Mustexist: DEVType=LTO}
-DEFine DEVclass (\w+) LBProtect= -> LBProtect=READWrite{Mustexist: DEVType=LTO} 
-DEFine DEVclass (\w+) LBProtect= -> LBProtect=WRITEOnly{Mustexist: DEVType=LTO}
-DEFine DEVclass (\w+) LBProtect= -> LBProtect=No{Mustexist: DEVType=LTO}
+DEFine                                        -> DEVclass
+DEFine DEVclass                               -> <GIVE_a_valid_device_class_name>
+DEFine DEVclass (\w+)                         -> DEVType=
+DEFine DEVclass (\w+) DEVType=                -> DEVType=3590
+DEFine DEVclass (\w+) DEVType=                -> DEVType=LTO
+DEFine DEVclass (\w+)                         -> LIBRary=
+DEFine DEVclass (\w+) LIBRary=                -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
+#DEFine DEVclass (\w+)                         -> LBProtect={Mustexist: DEVType=LTO}
+DEFine DEVclass (\w+) LBProtect=              -> LBProtect=READWrite{Mustexist: DEVType=LTO} 
+DEFine DEVclass (\w+) LBProtect=              -> LBProtect=WRITEOnly{Mustexist: DEVType=LTO}
+DEFine DEVclass (\w+) LBProtect=              -> LBProtect=No{Mustexist: DEVType=LTO}
+
+DEFine DEVclass (\w+) (\w+=.*){1,}            -> DEVType=
+DEFine DEVclass (\w+) (\w+=.*){1,} DEVType=   -> DEVType=3590
+DEFine DEVclass (\w+) (\w+=.*){1,} DEVType=   -> DEVType=LTO
+DEFine DEVclass (\w+) (\w+=.*){1,}            -> LIBRary=
+DEFine DEVclass (\w+) (\w+=.*){1,} LIBRary=   -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
+DEFine DEVclass (\w+) (\w+=.*){1,}            -> LBProtect={Mustexist: DEVType=LTO}
+DEFine DEVclass (\w+) (\w+=.*){1,} LBProtect= -> LBProtect=READWrite{Mustexist: DEVType=LTO} 
+DEFine DEVclass (\w+) (\w+=.*){1,} LBProtect= -> LBProtect=WRITEOnly{Mustexist: DEVType=LTO}
+DEFine DEVclass (\w+) (\w+=.*){1,} LBProtect= -> LBProtect=No{Mustexist: DEVType=LTO}
 
 ###################
 # DELete commands #

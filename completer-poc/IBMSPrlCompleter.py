@@ -263,7 +263,7 @@ class IBMSPrlCompleter:
             logging.info( ' Stepped into LEVEL 4.' )
 
             for key in self.rules:
-                # skip the previous level entries
+                # skip the previous level entries but
                 if ( len( key.split() ) + 1 != 4 or ( len( key.split() ) == 3 and key[ -1 ] == '=' ) ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
@@ -278,7 +278,7 @@ class IBMSPrlCompleter:
                         
                         # {Mustexist: \w+} feature test
                         if search( '{Mustexist: .+}', x, IGNORECASE ):  
-                            mustexist = search( '{Mustexist: (.+)}', x )[ 1 ] 
+                            mustexist = search( '{Mustexist: (.+)}', x )[ 1 ]
                             if not search( mustexist, tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                                 continue                       
                             
@@ -339,7 +339,7 @@ class IBMSPrlCompleter:
                             ret.append( x + separator )
                             continue
         
-        elif len( tokens ) == 5:
+        elif len( tokens ) == 6:
             # LEVEL 6
             logging.info( ' Stepped into LEVEL 6.' )
             
@@ -486,4 +486,4 @@ class IBMSPrlCompleter:
         sys.stdout.write( '\n' + self.prompt() + '' + readline.get_line_buffer() )
         sys.stdout.flush()
 
-        globals.logger.debug( '<<< Leave: match_display_hook.' )
+        #globals.logger.debug( '<<< Leave: match_display_hook.' )
