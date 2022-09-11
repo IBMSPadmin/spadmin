@@ -144,8 +144,14 @@ DEFine ASSOCiation         -> select domain_name from domains
 DEFine ASSOCiation \w+     -> select schedule_name from client_schedules where domain_name like upper( '-2' )
 DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like upper( '-3' )
 
-
-
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-define-devclass-define-device-class
+# DEFine DEVclass device_class_name LIBRary=library_name DEVType=3590
+DEFine                         -> DEVclass
+DEFine DEVclass (\w+)          -> DEVType=
+DEFine DEVclass (\w+) DEVType= -> DEVType=3590
+DEFine DEVclass (\w+) DEVType= -> DEVType=LTO
+DEFine DEVclass (\w+)          -> LIBRary=
+DEFine DEVclass (\w+) LIBRary= -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
 
 ###################
 # DELete commands #
