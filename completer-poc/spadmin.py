@@ -274,11 +274,9 @@ if __name__ == '__main__':
             # handling aliases v2
             for alias in globals.aliases:
                 aliasmatch = search( '^' + alias, command )
-                print(aliasmatch)
                 if aliasmatch:
                     command = command.replace( aliasmatch[ 0 ],  globals.aliases[ alias ] )
                     break
-            #SPadmin SHow SErver
             
             # disassembly it first
             commandparts = command.split( '|' )
