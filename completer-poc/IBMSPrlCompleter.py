@@ -263,8 +263,12 @@ class IBMSPrlCompleter:
             logging.info( ' Stepped into LEVEL 4.' )
 
             for key in self.rules:
-                # skip the previous level entries but
-                if ( len( key.split() ) + 1 != 4 or ( len( key.split() ) == 3 and key[ -1 ] == '=' ) ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
+                # SKIP the previous or further level entries when
+                #  +key: query actlog asasaas=
+                #   key not 4 items: query actlog asasaas=asasas sdsdsds
+                # BUTNOT
+                #   key 4 items with '=' endings: query actlog asasaas=asasas sdsdsds=
+                if ( ( len( key.split() ) == 3 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 4 ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
@@ -298,13 +302,18 @@ class IBMSPrlCompleter:
                             separator = '' if x[ -1 ] == '=' else ' '
                             ret.append( x + separator )
                             continue
+                            
         elif len( tokens ) == 5:
             # LEVEL 5
             logging.info( ' Stepped into LEVEL 5.' )
             
             for key in self.rules:
-                # skip the previous level entries
-                if ( len( key.split() ) + 1 != 4 or ( len( key.split() ) == 3 and key[ -1 ] == '=' ) ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
+                # SKIP the previous or further level entries when
+                #  +key: query actlog asasaas=
+                #   key not 4 items: query actlog asasaas=asasas sdsdsds
+                # BUTNOT
+                #   key 4 items with '=' endings: query actlog asasaas=asasas sdsdsds=
+                if ( ( len( key.split() ) == 4 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 5 ) and not ( len( key.split() ) == 5 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
