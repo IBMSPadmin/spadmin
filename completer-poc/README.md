@@ -152,7 +152,7 @@ ASsign DEFMGmtclass    -> select domain_name from domains
 ACTivate POlicyset     -> select domain_name from domains
 ```
 
-Ha tartozik hozzá SQL lekérdezés és az SQL lekérdezésben fel akarunk használni egy a parancssorban megadott szót:
+Ha tartozik hozzá SQL lekérdezés és az SQL lekérdezésben fel akarunk használni egy a parancssorban korábban megadott szót:
 
 ```
 DEFine ASSOCiation \w+     -> select schedule_name from client_schedules where domain_name like upper( '-2' )
@@ -167,7 +167,7 @@ BAckup DB DEVclass=    -> select concat( '%PREFIX%', devclass_name ) from devcla
 
 ### 4-es szint
 
-Ha tartozik hozzá SQL lekérdezés és az SQL lekérdezésben fel akarunk használni egy a parancssorban megadott szót:
+Ha tartozik hozzá SQL lekérdezés és az SQL lekérdezésben fel akarunk használni egy a parancssorban korábban megadott szót:
 
 ```
 DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like upper( '-3' )

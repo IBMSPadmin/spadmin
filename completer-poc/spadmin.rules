@@ -271,14 +271,14 @@ Query Node [\w\*]+ AUTHentication= -> AUTHentication=LDap
 #Query Node \w+ (\w+=\w*\s+){1,} -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
 #Query Node \w+ (\w+=\w*\s+){1,} -> DOmainx=
 
-Query         -> SEssion
-Query SEssion -> select session_id from sessions
-Query SEssion -> MINTIMethreshold=
-Query SEssion -> MAXTHRoughput=
-Query SEssion -> Format=
-Query SEssion -> Type= 
-Query SEssion -> CLIENTName=
-
+Query             -> SEssion
+Query SEssion     -> select session_id from sessions
+Query SEssion     -> MINTIMethreshold=
+Query SEssion     -> MAXTHRoughput=
+Query SEssion     -> Format=
+Query SEssion     -> Type= 
+Query SEssion     -> CLIENTName=
+    
 Query SEssion \d+ -> MINTIMethreshold=
 Query SEssion \d+ -> MAXTHRoughput=
 Query SEssion \d+ -> Format=
@@ -290,8 +290,11 @@ Query STGpool -> select stgpool_name from stgpools
 
 Query -> STGPOOLDIRectory
 
-Query     -> LOG
-Query LOG -> Format=
+Query             -> LOG
+
+Query LOG         -> Format=
+Query LOG Format= -> Format=Standard
+Query LOG Format= -> Format=Detailed
 
 Query         -> PRocess
 Query PRocess -> select process_num from processes
