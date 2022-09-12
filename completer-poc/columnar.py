@@ -90,8 +90,8 @@ class Columnar:
             logical_rows = self.convert_data_to_logical_rows([headers] + data)
         column_widths = self.get_column_widths(logical_rows)
         self.end_char = ""
-        print("Terminál: ", self.terminal_width)
-        print("COLUMN: ", sum(column_widths))
+        #print("Terminál: ", self.terminal_width)
+        #print("COLUMN: ", sum(column_widths))
         if (self.terminal_width - sum(column_widths)) > 3:
             self.end_char = "\n"
         # Add +3 or +2 char extra for the last column
