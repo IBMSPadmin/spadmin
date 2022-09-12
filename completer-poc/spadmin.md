@@ -8,7 +8,7 @@ Global spadmin.py development progress status:
 
 @_flex
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
-- alias kezelő parancsok
+~~- alias kezelő parancsok~~
 - "intelligens" rule dictionary betöltő function és akkor nem kell az a sok kavarás az owncommand-ban
 
 @Marcell
@@ -18,10 +18,11 @@ Global spadmin.py development progress status:
 - columnar: kezelni kell, ha üres adat megy át. Akkor csak a fejléc legyen kiírva
 ~~- alias kezelés valahogy az inifájlba~~
 ~~- more / grep: (a példaparancs rá: **SPadmin SHow EXtras | grep | invgrep | count**)~~ 
-
+- columnar: több helyen van fölösleges szóköz még mindig!
+- more: nem működik, ha van sortörés
 ## Fontos!
 
-- pexpect tudjon másik szerverhez csatlakozni
+~~- pexpect tudjon másik szerverhez csatlakozni~~
 
 - rules fájlban listakezelés???
 - opciókra ( ...=... ) egy stabil megoldás
