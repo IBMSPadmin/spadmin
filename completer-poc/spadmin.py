@@ -214,7 +214,7 @@ if __name__ == '__main__':
     import owncommands
         
     # -----------------------------------------
-
+    
     # push the autoexec command(s)
     line = ''
     if globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ]:

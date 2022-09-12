@@ -102,6 +102,19 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SWitch' )
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ] = []
 
 
+def spadmin_show_config( self, parameters ):
+    data  = []
+    
+    for configclass in globals.config.getconfiguration():
+        for variable in globals.config.getconfiguration()[ configclass ]:
+            data.append( [ configclass, variable, '=', globals.config.getconfiguration()[ configclass ][ variable ] ] )
+        
+    utilities.printer( columnar( data, headers=[ colored( 'Class', 'white', attrs=[ 'bold' ] ), colored( 'Variable', 'white', attrs=[ 'bold' ] ), colored( '=', 'white', attrs=[ 'bold' ] ) ,colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l', 'l', 'l' ] ) )
+#    
+spadmin_commands[ 'SPadmin SHow CONFig' ] = spadmin_show_config
+globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CONFig' )
+
+
 def spadmin_show_aliases( self, parameters ):
     data  = []
     for key in globals.aliases:
