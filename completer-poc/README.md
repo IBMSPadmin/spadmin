@@ -96,6 +96,85 @@ Background dsmadmc processes cleaning...
 $
 ```
 
+## rules fájl használata
+
+### 1-es szint:
+
+Ez a legegszerűbb, mert egyelőre ezeket a parncsrészleteket külön kezeljük. A leírásuk így nézni ki:
+
+```
+$->ACCept
+```
+
+### 2-es szint:
+
+A 2-es szintet és a többi ezt követő szintet egyelőre közös helyen kezeljük. A leírása így néz ki:
+
+# ACCept Date
+
+```
+ACCept -> Date
+```
+
+### 3-as szint (innen jönnek az IBM SP opciók, mint lehetséges parancselemek):
+
+Ha csak sima három szóból álló parancsról van szó, akkor a következő:
+
+```
+SPadmin SHow -> CONFig
+```
+
+Ha csak sima három szóból álló parancsról van szó és valami szabadszöveges segítséget akarunk adni, akkor valami ilyet lehet:
+
+```
+DEFine DEVclass -> <GIVE_a_valid_device_class_name>
+```
+
+Ha csak egy opció van ezen a szinten és szabad az értéke:
+
+```
+BAckup DB              -> PASSword=
+```
+
+Ha opciók is tartoznak hozzá:
+
+```
+BAckup DB              -> Type=
+BAckup DB Type=        -> Type=Incremental
+BAckup DB Type=        -> Type=Full
+BAckup DB Type=        -> Type=DBSnapshot
+```
+
+Ha tartozik hozzá SQL lekérdezés:
+
+```
+ASsign DEFMGmtclass    -> select domain_name from domains
+ACTivate POlicyset     -> select domain_name from domains
+```
+
+Ha tartozik hozzá SQL lekérdezés és az SQL lekérdezésben fel akarunk használni egy a parancssorban megadott szót:
+
+```
+DEFine ASSOCiation \w+     -> select schedule_name from client_schedules where domain_name like upper( '-2' )
+```
+
+Ha opció és tartozik hozzá SQL lekérdezés:
+
+```
+BAckup DB              -> DEVclass=
+BAckup DB DEVclass=    -> select concat( '%PREFIX%', devclass_name ) from devclasses {Prefix: -1}
+```
+
+### 4-es szint
+
+Ha tartozik hozzá SQL lekérdezés és az SQL lekérdezésben fel akarunk használni egy a parancssorban megadott szót:
+
+```
+DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like upper( '-3' )
+```
+
+
+
 ## A következő parancsok mennek:
 
 ACCept
