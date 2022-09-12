@@ -3,6 +3,7 @@ import re
 import sys
 import globals
 import readchar
+import uuid
 
 from termcolor import colored
 from re import search, IGNORECASE
@@ -55,6 +56,9 @@ def printer(string):
                 break
             i = 0
 
+def getmac():
+    ret = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
+    return ret
 
 def consoleline( char='-'):
     print(char * globals.columns)
