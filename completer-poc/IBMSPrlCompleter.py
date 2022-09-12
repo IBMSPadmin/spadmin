@@ -353,8 +353,12 @@ class IBMSPrlCompleter:
             logging.info( ' Stepped into LEVEL 6.' )
             
             for key in self.rules:
-                # skip the previous level entries
-                if ( len( key.split() ) + 1 != 4 or ( len( key.split() ) == 3 and key[ -1 ] == '=' ) ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
+                # SKIP the previous or further level entries when
+                #  +key: query actlog asasaas=
+                #   key not 4 items: query actlog asasaas=asasas sdsdsds
+                # BUTNOT
+                #   key 4 items with '=' endings: query actlog asasaas=asasas sdsdsds=
+                if ( ( len( key.split() ) == 4 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 5 ) and not ( len( key.split() ) == 5 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue

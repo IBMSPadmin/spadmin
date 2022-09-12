@@ -6,7 +6,9 @@
 
 # v1.0.0
 
-#
+# 
+#       Changed: LVL4, 5, 6 test
+#       Changed: alias v2 handler hopefully can handle regexps in aliases
 #       Changed: after TAB-TAB alignment POC
 #         Added: simple alias handling without alias command
 #         Added: more parameters: ini, log files, rldisable, nosql, nocache, ... 
@@ -263,9 +265,16 @@ if __name__ == '__main__':
             command      = command.strip()
             
             # handling aliases
-            firstcmdpart = command.split( ' ' )[ 0 ]
-            if firstcmdpart.lower() in globals.aliases:
-                command = command.replace( firstcmdpart,  globals.aliases[ firstcmdpart.lower() ] ) 
+            #firstcmdpart = command.split( ' ' )[ 0 ]
+            #if firstcmdpart.lower() in globals.aliases:
+            #    command = command.replace( firstcmdpart,  globals.aliases[ firstcmdpart.lower() ] ) 
+            
+            # handling aliases v2
+            for alias in globals.aliases:
+                aliasmatch = search( alias, command )
+                if aliasmatch:
+                    command = command.replace( aliasmatch[ 0 ],  globals.aliases[ alias ] )
+                    break 
             
             # disassembly it first
             commandparts = command.split( '|' )
