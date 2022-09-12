@@ -2,6 +2,9 @@ import re
 import columnar
 # from termcolor import colored
 
+columnar = columnar.Columnar()
+
+
 q_actlog = [['09/05/2022 17:58:54', 'ANR1959I Status monitor collecting current data at 05:58:54 PM. '],
             ['09/05/2022 17:58:57',
              'ANR1960I Status monitor finished collecting data at 05:58:57 PM and will sleep for 10 minutes. '],
@@ -491,18 +494,16 @@ q_stgp = [['DB2_DSK', 'DISK', '', 0.0, '0.0', '0.0', '80', '20', '', 'DB2_LTO'],
           ['VMWARE_DSK', 'DISK', '', 10000.0, '76.4', '16.8', '80', '20', '', 'VMWARE_LTO'],
           ['VMWARE_LTO', 'DCLTO_05', 'GROUP', 42915.7, '29.1', '64.0', '80', '20', '60', '']]
 
-columnar = columnar.Columnar()
 
-
-table = columnar(q_actlog, headers=['Date/Time', 'Message'], justify=['l', 'l'])
-print(table)
-
+print(columnar(q_actlog, headers=['Date/Time', 'Message'], justify=['l', 'l']))
 
 table = columnar(q_stgp, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
                                 'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next'],
                  justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
 print(table)
 
+data = [['SPADMIN', 'cache_age', '=', '60'], ['SPADMIN', 'cache_disable', '=', 'False'], ['SPADMIN', 'cache_prefetch', '=', 'True'], ['SPADMIN', 'rulefile', '=', 'spadmin.rules'], ['SPADMIN', 'historyfile', '=', '.spadmin_history'], ['SPADMIN', 'dsmadmc_path', '=', 'dsmadmc'], ['SPADMIN', 'dsmadmc_id', '=', 'support'], ['SPADMIN', 'dsmadmc_password', '=', 'userkft1q2'], ['SPADMIN', 'dsm_dir', '=', ''], ['SPADMIN', 'dsm_opt', '=', ''], ['SPADMIN', 'dsm_log', '=', ''], ['SPADMIN', 'logfile', '=', 'spadmin.log'], ['SPADMIN', 'debug', '=', 'False'], ['SPADMIN', 'autoexec', '=', ''], ['SPADMIN', 'dynamic_readline', '=', 'True'], ['SPADMIN', 'prompt', '=', '"[\x1b[1m\x1b[37m%SPSERVERNAME%\x1b[0m] \x1b[1m\x1b[31m>\x1b[0m "'], ['SPADMIN', 'rlwordseparation', '=', '8'], ['ALIAS', 'shrlr', '=', 'SHow Ruler'], ['ALIAS', 'shtim', '=', 'SHow TIME'], ['ALIAS', 'shtgp', '=', 'SHow STGp'], ['ALIAS', 'shcac', '=', 'SPadmin SHow CAche'], ['ALIAS', 'ver', '=', 'SPadmin SHow VERsion'], ['ALIAS', 'rul', '=', 'SPadmin SHow RULes'], ['ALIAS', 'deb', '=', 'SPadmin SET DEBUG'], ['SERVER_A', 'dsmadmc_id', '=', 'support'], ['SERVER_A', 'dsmadmc_password', '=', 'userkft1q2'], ['SERVER_B', 'dsmadmc_id', '=', 'support'], ['SERVER_B', 'dsmadmc_password', '=', 'userkft1q2'], ['SERVER_C', 'dsmadmc_id', '=', 'support'], ['SERVER_C', 'dsmadmc_password', '=', 'userkft1q2']]
+print(columnar(data, headers=['Class', 'Variable', '=', 'Value'], justify=['l', 'l', 'l', 'l']))
 
 #ansi_color_pattern = re.compile(r"\x1b\[.+?m")
 
@@ -512,24 +513,24 @@ print(table)
 #print (useothercolor('ez itt zöld lesz!'))
 #print (useothercolor(colored( 'ez itt zöld lesz!','red', attrs=['bold'])))
 #print (useothercolor('ez itt zöld lesz!'))
-import re
-from colored import fore, back, style
+# import re
+# from colored import fore, back, style
 
 
-def add_remove_color(color, string):
-    color_pattern = r"\x1b\[.+?m"
-    color_reset = "\x1b[0m"
-    ret = string
-    matches = re.findall(color_pattern, string)
-    ret = ret.replace(color_reset,color)
-    return color + ret + color_reset
-from colored import fore, back, style
-s = add_remove_color(fore.RED, 'ez itt piros lesz!')
-print("REPR: ", (s))
-print("REPR: ", repr(s))
-s2 = add_remove_color(fore.GREEN, "zold " + s + " zold")
-print("REPR: ", (s2))
-print("REPR: ", repr(s2))
-s3 = add_remove_color(fore.LIGHT_BLUE, "kek " + s2 + " kek")
-print("REPR: ", (s3))
-print("REPR: ", repr(s3))
+# def add_remove_color(color, string):
+#     color_pattern = r"\x1b\[.+?m"
+#     color_reset = "\x1b[0m"
+#     ret = string
+#     matches = re.findall(color_pattern, string)
+#     ret = ret.replace(color_reset,color)
+#     return color + ret + color_reset
+# from colored import fore, back, style
+# s = add_remove_color(fore.RED, 'ez itt piros lesz!')
+# print("REPR: ", (s))
+# print("REPR: ", repr(s))
+# s2 = add_remove_color(fore.GREEN, "zold " + s + " zold")
+# print("REPR: ", (s2))
+# print("REPR: ", repr(s2))
+# s3 = add_remove_color(fore.LIGHT_BLUE, "kek " + s2 + " kek")
+# print("REPR: ", (s3))
+# print("REPR: ", repr(s3))

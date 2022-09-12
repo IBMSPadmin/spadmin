@@ -35,7 +35,7 @@ class Columnar:
             justify: Union[str, List[str]] = "l",
             wrap_max: int = 5,
             max_column_width: Union[None, int] = None,
-            min_column_width: int = 5,
+            min_column_width: int = 0,
             row_sep: str = "-",
             column_sep: str = "|",
             patterns: Sequence[str] = [
@@ -90,13 +90,16 @@ class Columnar:
             logical_rows = self.convert_data_to_logical_rows([headers] + data)
         column_widths = self.get_column_widths(logical_rows)
         self.end_char = ""
-        if (self.terminal_width - sum(column_widths)) > 2:
+        print("Terminál: ", self.terminal_width)
+        print("COLUMN: ", sum(column_widths))
+        if (self.terminal_width - sum(column_widths)) > 3:
             self.end_char = "\n"
         # Add +3 or +2 char extra for the last column
-        if (self.terminal_width - sum(column_widths)) < 2 and ((self.terminal_width - sum(column_widths)) % 2) == 0:
-            column_widths[-1] = column_widths[-1] + 3
         else:
-            column_widths[-1] = column_widths[-1] + 2
+            if (self.terminal_width - sum(column_widths)) < 3 and ((self.terminal_width - sum(column_widths)) % 2) == 0:
+                column_widths[-1] = column_widths[-1] + 3
+            else:
+                column_widths[-1] = column_widths[-1] + 2
 
         truncated_rows = self.wrap_and_truncate_logical_cells(
             logical_rows, column_widths

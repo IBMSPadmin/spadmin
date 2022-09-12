@@ -18,7 +18,7 @@ Global spadmin.py development progress status:
 - columnar: kezelni kell, ha üres adat megy át. Akkor csak a fejléc legyen kiírva
 ~~- alias kezelés valahogy az inifájlba~~
 ~~- more / grep: (a példaparancs rá: **SPadmin SHow EXtras | grep | invgrep | count**)~~ 
-- columnar: több helyen van fölösleges szóköz még mindig!
+~~- columnar: több helyen van fölösleges szóköz még mindig!~~
 - more: nem működik, ha van sortörés
 ## Fontos!
 
