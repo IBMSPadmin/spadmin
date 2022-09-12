@@ -267,16 +267,18 @@ if __name__ == '__main__':
             command      = command.strip()
             
             # handling aliases
-            firstcmdpart = command.split( ' ' )[ 0 ]
-            if firstcmdpart.lower() in globals.aliases:
-                command = command.replace( firstcmdpart,  globals.aliases[ firstcmdpart.lower() ] )
-            
+            # firstcmdpart = command.split( ' ' )[ 0 ]
+            # if firstcmdpart.lower() in globals.aliases:
+            #     command = command.replace( firstcmdpart,  globals.aliases[ firstcmdpart.lower() ] )
+             
             # handling aliases v2
-          #  for alias in globals.aliases:
-           #     aliasmatch = search( alias, command )
-            #    if aliasmatch:
-             #       command = command.replace( aliasmatch[ 0 ],  globals.aliases[ alias ] )
-              #      break
+            for alias in globals.aliases:
+                aliasmatch = search( '^' + alias, command )
+                print(aliasmatch)
+                if aliasmatch:
+                    command = command.replace( aliasmatch[ 0 ],  globals.aliases[ alias ] )
+                    break
+            #SPadmin SHow SErver
             
             # disassembly it first
             commandparts = command.split( '|' )
