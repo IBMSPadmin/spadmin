@@ -108,7 +108,6 @@ def spadmin_show_config( self, parameters ):
     for configclass in globals.config.getconfiguration():
         for variable in globals.config.getconfiguration()[ configclass ]:
             data.append( [ configclass, variable, '=', globals.config.getconfiguration()[ configclass ][ variable ] ] )
-
     utilities.printer( columnar( data, headers=[ colored( 'Class', 'white', attrs=[ 'bold' ] ), colored( 'Variable', 'white', attrs=[ 'bold' ] ), colored( '=', 'white', attrs=[ 'bold' ] ) ,colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l', 'l', 'l' ] ) )
 #
 spadmin_commands[ 'SPadmin SHow CONFig' ] = spadmin_show_config

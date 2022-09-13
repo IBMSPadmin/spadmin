@@ -495,15 +495,16 @@ q_stgp = [['DB2_DSK', 'DISK', '', 0.0, '0.0', '0.0', '80', '20', '', 'DB2_LTO'],
           ['VMWARE_LTO', 'DCLTO_05', 'GROUP', 42915.7, '29.1', '64.0', '80', '20', '60', '']]
 
 
-print(columnar(q_actlog, headers=['Date/Time', 'Message'], justify=['l', 'l']))
+print(columnar(q_actlog, headers=['Date/Time', 'Message'], justify=['l', 'l'], more=True))
 
 table = columnar(q_stgp, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
                                 'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next'],
-                 justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
+                 justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'], more=True)
 print(table)
 
 data = [['SPADMIN', 'cache_age', '=', '60'], ['SPADMIN', 'cache_disable', '=', 'False'], ['SPADMIN', 'cache_prefetch', '=', 'True'], ['SPADMIN', 'rulefile', '=', 'spadmin.rules'], ['SPADMIN', 'historyfile', '=', '.spadmin_history'], ['SPADMIN', 'dsmadmc_path', '=', 'dsmadmc'], ['SPADMIN', 'dsmadmc_id', '=', 'support'], ['SPADMIN', 'dsmadmc_password', '=', 'userkft1q2'], ['SPADMIN', 'dsm_dir', '=', ''], ['SPADMIN', 'dsm_opt', '=', ''], ['SPADMIN', 'dsm_log', '=', ''], ['SPADMIN', 'logfile', '=', 'spadmin.log'], ['SPADMIN', 'debug', '=', 'False'], ['SPADMIN', 'autoexec', '=', ''], ['SPADMIN', 'dynamic_readline', '=', 'True'], ['SPADMIN', 'prompt', '=', '"[\x1b[1m\x1b[37m%SPSERVERNAME%\x1b[0m] \x1b[1m\x1b[31m>\x1b[0m "'], ['SPADMIN', 'rlwordseparation', '=', '8'], ['ALIAS', 'shrlr', '=', 'SHow Ruler'], ['ALIAS', 'shtim', '=', 'SHow TIME'], ['ALIAS', 'shtgp', '=', 'SHow STGp'], ['ALIAS', 'shcac', '=', 'SPadmin SHow CAche'], ['ALIAS', 'ver', '=', 'SPadmin SHow VERsion'], ['ALIAS', 'rul', '=', 'SPadmin SHow RULes'], ['ALIAS', 'deb', '=', 'SPadmin SET DEBUG'], ['SERVER_A', 'dsmadmc_id', '=', 'support'], ['SERVER_A', 'dsmadmc_password', '=', 'userkft1q2'], ['SERVER_B', 'dsmadmc_id', '=', 'support'], ['SERVER_B', 'dsmadmc_password', '=', 'userkft1q2'], ['SERVER_C', 'dsmadmc_id', '=', 'support'], ['SERVER_C', 'dsmadmc_password', '=', 'userkft1q2']]
-print(columnar(data, headers=['Class', 'Variable', '=', 'Value'], justify=['l', 'l', 'l', 'l']))
+print(columnar(data, headers=['Class', 'Variable', '=', 'Value'], justify=['l', 'l', 'l', 'l'], more=True))
+print(columnar([], headers=['Class', 'Variable', '=', 'Value'], justify=['l', 'l', 'l', 'l'], more=True))
 
 #ansi_color_pattern = re.compile(r"\x1b\[.+?m")
 
