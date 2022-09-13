@@ -1,9 +1,9 @@
 import re
 import columnar
 # from termcolor import colored
+from colorama import Fore, Back, Style
 
 columnar = columnar.Columnar()
-
 
 q_actlog = [['09/05/2022 17:58:54', 'ANR1959I Status monitor collecting current data at 05:58:54 PM. '],
             ['09/05/2022 17:58:57',
@@ -376,7 +376,8 @@ q_actlog = [['09/05/2022 17:58:54', 'ANR1959I Status monitor collecting current 
             ['09/05/2022 18:44:44',
              'ANR0407I Session 44454 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:37958). (SESSION: 44454)'],
             ['09/05/2022 18:44:54',
-             'ANR0482W Session 44443 for node IBM-OC-USERTSM.USR (DSMAPI) terminated - idle for more than 15 minutes. (SESSION: 44443)'],
+             ''.join([
+                 'ANR0482W', Fore.RED, ' Session ', Style.RESET_ALL, '44443 for node IBM-OC-USERTSM.USR (DSMAPI) terminated - idle for more than 15 minutes. (SESSION: 44443)'])],
             ['09/05/2022 18:45:10',
              'ANR8592I Session 44455 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate TSM Self-Signed Certificate.  (SESSION: 44455)'],
             ['09/05/2022 18:45:10',
@@ -484,24 +485,39 @@ q_actlog = [['09/05/2022 17:58:54', 'ANR1959I Status monitor collecting current 
             ['09/05/2022 18:58:23',
              'ANR2017I Administrator SUPPORT issued command: select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS (SESSION: 44464)'],
             ['09/05/2022 18:58:27', 'ANR2017I Administrator SUPPORT issued command: QUERY ACTLOG  (SESSION: 44464)']]
+
 q_stgp = [['DB2_DSK', 'DISK', '', 0.0, '0.0', '0.0', '80', '20', '', 'DB2_LTO'],
           ['DB2_LTO', 'DCLTO_01', 'GROUP', 18458.2, '0.0', '40.0', '80', '70', '60', ''],
           ['FILES_CP', 'DCLTO_01C', 'NO', 3374.4, '5.1', '', '', '', '100', ''],
           ['FILES_DSK', 'DISK', '', 2000.0, '100.0', '0.9', '80', '20', '', 'FILES_LTO'],
-          ['FILES_LTO', 'DCLTO_02', 'GROUP', 63662.8, '16.1', '18.2', '80', '20', '60', ''],
+          [''.join(['F', Fore.RED, 'ILES_LTO', Style.RESET_ALL]), 'DCLTO_02', 'GROUP', 63662.8, '16.1', '18.2', '80',
+           '20', '60', ''],
           ['IBM_DEPLOY_CLIENT_POOL', 'IBM_DEPLOY_CLIENT_IMPORT', 'GROUP', 100.0, '10.0', '10.0', '90', '70', '60', ''],
           ['VMWARE_CTL', 'DISK', '', 50.0, '17.7', '17.7', '90', '70', '', ''],
           ['VMWARE_DSK', 'DISK', '', 10000.0, '76.4', '16.8', '80', '20', '', 'VMWARE_LTO'],
           ['VMWARE_LTO', 'DCLTO_05', 'GROUP', 42915.7, '29.1', '64.0', '80', '20', '60', '']]
 
-
 print(columnar(q_actlog, headers=['Date/Time', 'Message'], justify=['l', 'l'], more=True))
 
 table = columnar(q_stgp, headers=['Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
-                                'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next'],
+                                  'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next'],
                  justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'], more=True)
 print(table)
 
-data = [['SPADMIN', 'cache_age', '=', '60'], ['SPADMIN', 'cache_disable', '=', 'False'], ['SPADMIN', 'cache_prefetch', '=', 'True'], ['SPADMIN', 'rulefile', '=', 'spadmin.rules'], ['SPADMIN', 'historyfile', '=', '.spadmin_history'], ['SPADMIN', 'dsmadmc_path', '=', 'dsmadmc'], ['SPADMIN', 'dsmadmc_id', '=', 'support'], ['SPADMIN', 'dsmadmc_password', '=', 'userkft1q2'], ['SPADMIN', 'dsm_dir', '=', ''], ['SPADMIN', 'dsm_opt', '=', ''], ['SPADMIN', 'dsm_log', '=', ''], ['SPADMIN', 'logfile', '=', 'spadmin.log'], ['SPADMIN', 'debug', '=', 'False'], ['SPADMIN', 'autoexec', '=', ''], ['SPADMIN', 'dynamic_readline', '=', 'True'], ['SPADMIN', 'prompt', '=', '"[\x1b[1m\x1b[37m%SPSERVERNAME%\x1b[0m] \x1b[1m\x1b[31m>\x1b[0m "'], ['SPADMIN', 'rlwordseparation', '=', '8'], ['ALIAS', 'shrlr', '=', 'SHow Ruler'], ['ALIAS', 'shtim', '=', 'SHow TIME'], ['ALIAS', 'shtgp', '=', 'SHow STGp'], ['ALIAS', 'shcac', '=', 'SPadmin SHow CAche'], ['ALIAS', 'ver', '=', 'SPadmin SHow VERsion'], ['ALIAS', 'rul', '=', 'SPadmin SHow RULes'], ['ALIAS', 'deb', '=', 'SPadmin SET DEBUG'], ['SERVER_A', 'dsmadmc_id', '=', 'support'], ['SERVER_A', 'dsmadmc_password', '=', 'userkft1q2'], ['SERVER_B', 'dsmadmc_id', '=', 'support'], ['SERVER_B', 'dsmadmc_password', '=', 'userkft1q2'], ['SERVER_C', 'dsmadmc_id', '=', 'support'], ['SERVER_C', 'dsmadmc_password', '=', 'userkft1q2']]
+data = [['SPADMIN', 'cache_age', '=', '60'], ['SPADMIN', 'cache_disable', '=', 'False'],
+        ['SPADMIN', 'cache_prefetch', '=', 'True'], ['SPADMIN', 'rulefile', '=', 'spadmin.rules'],
+        ['SPADMIN', 'historyfile', '=', '.spadmin_history'], ['SPADMIN', 'dsmadmc_path', '=', 'dsmadmc'],
+        ['SPADMIN', 'dsmadmc_id', '=', 'support'], ['SPADMIN', 'dsmadmc_password', '=', 'userkft1q2'],
+        ['SPADMIN', 'dsm_dir', '=', ''], ['SPADMIN', 'dsm_opt', '=', ''], ['SPADMIN', 'dsm_log', '=', ''],
+        ['SPADMIN', 'logfile', '=', 'spadmin.log'], ['SPADMIN', 'debug', '=', 'False'],
+        ['SPADMIN', 'autoexec', '=', ''], ['SPADMIN', 'dynamic_readline', '=', 'True'],
+        ['SPADMIN', 'prompt', '=', '"[\x1b[1m\x1b[37m%SPSERVERNAME%\x1b[0m] \x1b[1m\x1b[31m>\x1b[0m "'],
+        ['SPADMIN', 'rlwordseparation', '=', '8'], ['ALIAS', 'shrlr', '=', 'SHow Ruler'],
+        ['ALIAS', 'shtim', '=', 'SHow TIME'], ['ALIAS', 'shtgp', '=', 'SHow STGp'],
+        ['ALIAS', 'shcac', '=', 'SPadmin SHow CAche'], ['ALIAS', 'ver', '=', 'SPadmin SHow VERsion'],
+        ['ALIAS', 'rul', '=', 'SPadmin SHow RULes'], ['ALIAS', 'deb', '=', 'SPadmin SET DEBUG'],
+        ['SERVER_A', 'dsmadmc_id', '=', 'support'], ['SERVER_A', 'dsmadmc_password', '=', 'userkft1q2'],
+        ['SERVER_B', 'dsmadmc_id', '=', 'support'], ['SERVER_B', 'dsmadmc_password', '=', 'userkft1q2'],
+        ['SERVER_C', 'dsmadmc_id', '=', 'support'], ['SERVER_C', 'dsmadmc_password', '=', 'userkft1q2']]
 print(columnar(data, headers=['Class', 'Variable', '=', 'Value'], justify=['l', 'l', 'l', 'l'], more=True))
-#print(columnar([], headers=['Class', 'Variable', '=', 'Value'], justify=['l', 'l', 'l', 'l'], more=True))
+# print(columnar([], headers=['Class', 'Variable', '=', 'Value'], justify=['l', 'l', 'l', 'l'], more=True))

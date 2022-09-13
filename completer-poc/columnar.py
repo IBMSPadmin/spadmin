@@ -2,8 +2,11 @@ import shutil
 import re
 import io
 import operator
+from click import style
+
 from functools import reduce
 from itertools import zip_longest
+from re import Match
 from typing import (
     Union,
     Tuple,
@@ -22,7 +25,16 @@ WrappedCellLine = str
 Data = List[List[NonWrappedCell]]
 Headers = List[str]
 LogicalRow = List[List[WrappedCellLine]]
+from colorama import Fore, Back, Style
 
+
+def add_color(string, color):
+    if color is None:
+        return string
+    color_reset = "\x1b[0m"
+    ret = string
+    ret = ret.replace(color_reset, color)
+    return color + ret + color_reset
 
 class Columnar:
     def __call__(
@@ -36,7 +48,10 @@ class Columnar:
             min_column_width: int = 1,
             row_sep: str = "-",
             column_sep: str = "|",
-            patterns: Sequence[str] = [],
+            patterns: Sequence[str] = [
+                ('ANR....E', lambda text: add_color(text, Fore.RED)),
+                ('ANR....W', lambda text: add_color(text, Fore.YELLOW)),
+            ],
             drop: Sequence[str] = [],
             select: Sequence[str] = [],
             no_borders: bool = True,
@@ -149,6 +164,9 @@ class Columnar:
             self.column_sep + self.column_sep.join(cells) + self.column_sep + "\n"
         )
 
+
+
+
     def compile_patterns(self, patterns):
         out = []
         for regex, func in patterns:
@@ -157,10 +175,13 @@ class Columnar:
             out.append((regex, func))
         return out
 
-    def colorize(self, text, code):
-        if code == None:
+    def colorize(self, text, code: Sequence[Match]):
+        if code is None:
             return text
-        return text  # "".join([code, text, self.color_reset])
+        for match in code:
+            # print("match: ", match)
+            text = text[:match.start()] + match.group() + text[match.start():] + self.color_reset
+        return text  # text # "".join([match.group(), text, self.color_reset])
 
     def clean_data(self, data: Sequence[Sequence[Any]]) -> Data:
         # First make sure data is a list of lists
@@ -258,7 +279,7 @@ class Columnar:
         if matches:
             clean_text = self.ansi_color_pattern.sub("", cell_text)
             color_codes = "".join([match.group(0) for match in matches[:-1]])
-        return clean_text, color_codes
+        return clean_text, matches
 
     def distribute_between(self, diff: int, columns: List[dict], n: int) -> List[dict]:
         """
