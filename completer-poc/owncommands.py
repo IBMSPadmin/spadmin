@@ -86,8 +86,13 @@ def spadmin_show_cache( self, parameters ):
     data  = []
     for key in globals.myIBMSPrlCompleter.cache_hitratio:
         data.append( [ key, globals.myIBMSPrlCompleter.cache_hitratio[ key ] ] )
-    
     utilities.printer( columnar( data, headers=[ colored( 'Name', 'white', attrs=[ 'bold' ] ), colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'c' ] ) )
+
+    data.clear()
+    for key in globals.myIBMSPrlCompleter.cache:
+        data.append( [ key.strip(), globals.myIBMSPrlCompleter.cache[ key ] ] )
+    utilities.printer( columnar( data, headers=[ colored( 'Query', 'white', attrs=[ 'bold' ] ), colored( 'Result', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ] ) )
+
 #    
 spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
@@ -158,10 +163,13 @@ def spadmin_show_rules( self, parameters ):
     data  = [] 
     for key in globals.myIBMSPrlCompleter.rules:
         if globals.myIBMSPrlCompleter.rules[ key ] != []:
-            data.append( [ key, globals.myIBMSPrlCompleter.rules[ key ] ] )
+            data.append( [ key, len( key.split() ),  globals.myIBMSPrlCompleter.rules[ key ] ] )
     
-    utilities.printer(columnar(data, headers=[colored('Regexp', 'white', attrs=['bold']), colored('Value', 'white', attrs=['bold'])], justify=['l', 'l'], max_column_width = 120))
-    
+    utilities.printer(columnar(data, headers=[
+        colored( 'Regexp', 'white', attrs=['bold']),
+        colored( 'LVL',    'white', attrs=['bold'] ),
+        colored( 'Value',  'white', attrs=['bold'])],
+        justify=['l', 'c', 'l'], max_column_width = 120))
 #    
 spadmin_commands[ 'SPadmin SHow RULes' ] = spadmin_show_rules
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
