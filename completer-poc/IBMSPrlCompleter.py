@@ -249,6 +249,15 @@ class IBMSPrlCompleter:
                     globals.logger.debug( " let's continue searching with this item(s) [" + pformat( self.rules[ key ], width=180 ) + ']' )
                     
                     for x in self.rules[ key ]:
+                        
+                        # {Mustexist: .+} feature test
+                        if search( '{Mustexist: .+}', x, IGNORECASE ):  
+                            mustexist = search( '{Mustexist: (.+)}', x )
+                            if not search( ' ' + mustexist[ 1 ], tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                                continue
+                            else:                        
+                                # it's Ok, we found it, then remove it not to disturb furthermore
+                                x = x.replace( mustexist[ 0 ], '' )
                                                                         
                         if x.startswith( 'select' ):
                             # First try as an SQL pattern!
@@ -256,7 +265,6 @@ class IBMSPrlCompleter:
                             ret += self.spsqlengine( x.strip(), tokens )
                             continue
                         else:
-                            
                             #if explicit option is given, then preparation may needed
                             if tokens[ -1 ] != '' and tokens[ -1 ][ -1 ] == '=':
                                 match = search( '(\w+=)\w+', x )
@@ -297,31 +305,66 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 if search( '^' + utilities.regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                     globals.logger.debug( ' and found [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
-                    globals.logger.debug( " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
+                    globals.logger.debug( " let's continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                     for x in self.rules[ key ]:
                         
-                        # {Mustexist: \w+} feature test
+                        # # {Mustexist: .+} feature test
+                        # if search( '{Mustexist: .+}', x, IGNORECASE ):  
+                        #     mustexist = search( '{Mustexist: (.+)}', x )
+                        #     if not search( mustexist[ 1 ], tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                        #         continue                       
+                        #     else:
+                        #         x = x.replace( mustexist[ 0 ], '' )
+                        #         
+                        #     
+                        # if x.startswith( 'select' ):
+                        #     # First try as an SQL pattern!
+                        #     globals.logger.debug( " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
+                        #     ret += self.spsqlengine( x.strip(), tokens )
+                        #     continue
+                        # elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                        #     globals.logger.debug( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                        #     
+                        #         
+                        #     separator = '' if x[ -1 ] == '=' else ' '
+                        #     ret.append( x + separator )
+                        #     continue
+                        
+                        # {Mustexist: .+} feature test
                         if search( '{Mustexist: .+}', x, IGNORECASE ):  
-                            mustexist = search( '{Mustexist: (.+)}', x )[ 1 ]
-                            if not search( mustexist, tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
-                                continue                       
-                            
+                            mustexist = search( '{Mustexist: (.+)}', x )
+                            if not search( ' ' + mustexist[ 1 ], tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                                continue
+                            else:                        
+                                # it's Ok, we found it, then remove it not to disturb furthermore
+                                x = x.replace( mustexist[ 0 ], '' )
+                        
                         if x.startswith( 'select' ):
                             # First try as an SQL pattern!
-                            globals.logger.debug( ' it\'s an SQL select [' + tokens[ -1 ] + ' > ' + x + ']' )
+                            globals.logger.debug( " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
                             ret += self.spsqlengine( x.strip(), tokens )
                             continue
-                        elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                            globals.logger.debug( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                        else:
+                            #if explicit option is given, then preparation may needed
+                            if tokens[ -1 ] != '' and tokens[ -1 ][ -1 ] == '=':
+                                match = search( '(\w+=)\w+', x )
+                                if match:
+                                    x = x.replace( match[ 1 ], tokens[ -1 ] )
                             
-                            # remove the option part if it exists
-                            match = search( '{Mustexist: .+}', x )
-                            if match:
-                                x = x.replace( match[ 0 ], '' )
-                                
-                            separator = '' if x[ -1 ] == '=' else ' '
-                            ret.append( x + separator )
-                            continue
+                            if search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                                globals.logger.debug( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                                separator = '' if x[ -1 ] == '=' else ' '
+                                ret.append( x + separator )
+                                continue
+                            
+                            if search( '\w+=\w+', x ):
+                                left, right = x.split( '=' ) 
+                                leftregexp  = utilities.regexpgenerator( left )
+                                rightregexp = utilities.regexpgenerator( right )
+                                match = search( '^' + leftregexp + '=' + rightregexp, tokens[ -1 ], IGNORECASE )
+                                if match:
+                                     ret.append( match[ 1 ] + '=' + right )
+                                     continue
                             
         elif len( tokens ) == 5:
             # LEVEL 5
