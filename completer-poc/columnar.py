@@ -15,6 +15,7 @@ from typing import (
 from toolz import frequencies
 from wcwidth import wcwidth, wcswidth
 from click import style
+import readchar
 
 from termcolor import colored
 
@@ -47,6 +48,8 @@ class Columnar:
             no_borders: bool = True,
             terminal_width: Union[None, int] = None,
             preformatted_headers: bool = True,
+            more: bool = False,
+            grep: str = ''
     ) -> str:
         self.wrap_max = wrap_max
         self.max_column_width = max_column_width
@@ -70,7 +73,7 @@ class Columnar:
         self.select = select
         self.no_borders = no_borders
         self.no_headers = headers is None
-        data = self.clean_data(data)
+        data = self.clean_data(data, headers)
 
         if self.no_headers:
             headers = [""] * len(data[0])
@@ -131,7 +134,7 @@ class Columnar:
                 out.write((self.header_sep * width) + " ")
         out.write(self.end_char)
 
-        for lrow, color_row, matches_row in zip(truncated_rows, self.color_grid, self.matches_grid):
+        for lrow, color_row in zip(truncated_rows, self.color_grid):
             for i, row in enumerate(lrow):
                 justified_row_parts = [
                     justifier(text, width)
@@ -161,6 +164,7 @@ class Columnar:
             else:
                 if not self.no_borders:
                     self.write_row_separators(out, column_widths)
+
         return out.getvalue()[:-1] # remove last end_char
 
     def write_row_separators(
@@ -184,14 +188,26 @@ class Columnar:
             return text
         return "".join([code, text, self.color_reset])
 
-    def clean_data(self, data: Sequence[Sequence[Any]]) -> Data:
+    def clean_data(self, data: Sequence[Sequence[Any]], headers) -> Data:
         # First make sure data is a list of lists
         if type(data) is not list:
-            raise TypeError(f"'data' must be a list of lists. Got a {type(data)}")
+            line =[]
+            for h in headers:
+                 line.append('')
+            data = [line]
+          #  raise TypeError(f"'data' must be a list of lists. Got a {type(data)}")
         if len(data) == 0:
-            raise TypeError(f"'data' must be a list of lists. Got an empty list")
+            line =[]
+            for h in headers:
+                 line.append('')
+            data = [line]
+          # raise TypeError(f"'data' must be a list of lists. Got an empty list")
         if type(data[0]) is not list:
-            raise TypeError(f"'data' must be a list of lists. Got a list of {type(data[0])}")
+            line = []
+            for h in headers:
+                line.append('')
+            data = [line]
+          # raise TypeError(f"'data' must be a list of lists. Got a list of {type(data[0])}")
         # Make sure all the lists are the same length
         num_columns = len(data[0])
         for row_num, row in enumerate(data):
@@ -263,9 +279,9 @@ class Columnar:
             ]
             logical_rows.append(cells)
             color_grid.append(color_row)
-            matches_grid.append(matches)
+         #   matches_grid.append(matches)
         self.color_grid = color_grid
-        self.matches_grid = matches_grid
+       # self.matches_grid = matches_grid
        ### print(matches_grid)
         return logical_rows
 
@@ -461,3 +477,24 @@ class Columnar:
             return left_padding + text
         else:
             raise ValueError(f"Got invalid justification value: {alignment}")
+
+    def printer(string):
+        s = str(string).split("\n")
+        i = 0
+        grep = globals.extras['grep'] if 'grep' in globals.extras else ''
+
+        for line in s:
+            if grep != '':
+                if re.search(grep, line):
+                    i += 1
+                    print(line.replace(grep, '\x1b[1;37;40m' + grep + "\x1b[0m"), sep="\n")
+            else:
+                i += 1
+                print(line, sep="\n")
+            if 'more' in globals.extras and i > globals.rows - 3:
+                print("more...   (<ENTER> to continue, 'C' to cancel)")
+                key = readchar.readkey()
+                if str(key).lower() == "c":
+                    print(*s[i + globals.rows - 2:], sep="\n")
+                    break
+                i = 0
