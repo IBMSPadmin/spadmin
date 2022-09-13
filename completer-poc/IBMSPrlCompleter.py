@@ -137,6 +137,8 @@ class IBMSPrlCompleter:
         rulefilelines = rulefile.readlines()
         #self.start = []  # 1. level list
         #self.rules = {}  # >2. level dictionary
+        self.start.clear()
+        self.rules.clear()
         i = 0
         for line in rulefilelines:
             i += 1
@@ -234,29 +236,47 @@ class IBMSPrlCompleter:
             for key in self.rules:
                 
                 # skip the previous level entries
-                if len( key.split() ) + 1 != 3 and not ( len( key.split() ) == 3 and key[ -1 ] == '=' ):
+                if len( key.split() ) + 1 != 3 and not ( len( key.split() ) == 3 and key[ -1 ] == '=' ):    
                     continue
-                elif key.startswith('select'):  # ???????????????????????????????
+                elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
                 
-                globals.logger.debug( ' and searching for regexp pattern [' + key + ']' + str( len( key.split() ) ) )
-                globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
-                globals.logger.debug( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
-                if search('^' + utilities.regexpgenerator(key), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
+                #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' + str( len( key.split() ) ) )
+                #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                #globals.logger.debug( ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
+                if search( '^' + utilities.regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
                     globals.logger.debug( ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
-
-                    globals.logger.debug( " let's continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
-                    for x in self.rules[key]:
+                    globals.logger.debug( " let's continue searching with this item(s) [" + pformat( self.rules[ key ], width=180 ) + ']' )
+                    
+                    for x in self.rules[ key ]:
+                                                                        
                         if x.startswith( 'select' ):
                             # First try as an SQL pattern!
                             globals.logger.debug( " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
                             ret += self.spsqlengine( x.strip(), tokens )
                             continue
-                        elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                            globals.logger.debug( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
-                            separator = '' if x[ -1 ] == '=' else ' '
-                            ret.append( x + separator )
-                            continue
+                        else:
+                            
+                            #if explicit option is given, then preparation may needed
+                            if tokens[ -1 ] != '' and tokens[ -1 ][ -1 ] == '=':
+                                match = search( '(\w+=)\w+', x )
+                                if match:
+                                    x = x.replace( match[ 1 ], tokens[ -1 ] )
+                            
+                            if search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                                globals.logger.debug( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                                separator = '' if x[ -1 ] == '=' else ' '
+                                ret.append( x + separator )
+                                continue
+                            
+                            if search( '\w+=\w+', x ):
+                                left, right = x.split( '=' ) 
+                                leftregexp  = utilities.regexpgenerator( left )
+                                rightregexp = utilities.regexpgenerator( right )
+                                match = search( '^' + leftregexp + '=' + rightregexp, tokens[ -1 ], IGNORECASE )
+                                if match:
+                                     ret.append( match[ 1 ] + '=' + right )
+                                     continue
                             
         elif len( tokens ) == 4:
             # LEVEL 4
