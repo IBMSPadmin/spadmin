@@ -12,9 +12,12 @@ from typing import (
     Any,
 )
 
-from termcolor import colored
 from toolz import frequencies
 from wcwidth import wcwidth, wcswidth
+from click import style
+import readchar
+
+from termcolor import colored
 
 # Types
 NonWrappedCell = str
@@ -33,16 +36,20 @@ class Columnar:
             justify: Union[str, List[str]] = "l",
             wrap_max: int = 5,
             max_column_width: Union[None, int] = None,
-            min_column_width: int = 1,
+            min_column_width: int = 0,
             row_sep: str = "-",
             column_sep: str = "|",
-            patterns: Sequence[str] = [],
+            patterns: Sequence[str] = [
+                ('ANR....E', lambda text: style(text, fg='red')),
+                ('ANR....W', lambda text: style(text, fg='yellow')),
+            ],
             drop: Sequence[str] = [],
             select: Sequence[str] = [],
             no_borders: bool = True,
             terminal_width: Union[None, int] = None,
-            preformatted_headers: bool = False,
+            preformatted_headers: bool = True,
             more: bool = False,
+            grep: str = ''
     ) -> str:
         self.wrap_max = wrap_max
         self.max_column_width = max_column_width
@@ -61,18 +68,20 @@ class Columnar:
         self.ansi_color_pattern = re.compile(r"\x1b\[.+?m")
         self.color_reset = "\x1b[0m"
         self.color_grid = None
+        self.matches_grid = None
         self.drop = drop
         self.select = select
         self.no_borders = no_borders
         self.no_headers = headers is None
-        data = self.clean_data(data)
+        data = self.clean_data(data, headers)
 
         if self.no_headers:
             headers = [""] * len(data[0])
 
         if self.no_borders:
+            # spadmin special need
             self.column_sep = " " * 1
-            self.row_sep = ""
+            self.row_sep = ''
             self.header_sep = colored('-', 'white', attrs=['bold'])
             if not preformatted_headers:
                 headers = [text.upper() for text in headers]
@@ -83,6 +92,18 @@ class Columnar:
         else:
             logical_rows = self.convert_data_to_logical_rows([headers] + data)
         column_widths = self.get_column_widths(logical_rows)
+        self.end_char = ""
+        #print("Terminál: ", self.terminal_width)
+        #print("COLUMN: ", sum(column_widths))
+        if (self.terminal_width - sum(column_widths)) > 3:
+            self.end_char = "\n"
+        # Add +3 or +2 char extra for the last column
+        else:
+            if (self.terminal_width - sum(column_widths)) < 3 and ((self.terminal_width - sum(column_widths)) % 2) == 0:
+                column_widths[-1] = column_widths[-1] + 3
+            else:
+                column_widths[-1] = column_widths[-1] + 2
+
         truncated_rows = self.wrap_and_truncate_logical_cells(
             logical_rows, column_widths
         )
@@ -98,20 +119,23 @@ class Columnar:
         else:
             justifications = [justification_map[spec] for spec in justify]
 
-        table_width = sum(column_widths) + ((len(column_widths) + 1) * len(row_sep))
+        # table_width = sum(column_widths) + ((len(column_widths) + 1) * len(row_sep))
         out = io.StringIO()
-        ###
-        # Header 1st separator line
-        ###
+        write_header = True if not self.no_headers else False
+        # self.write_row_separators(out, column_widths) # remove starting empty line
+        ####
+        #### Header 1st spearator line
+        ####
+
         for i, width in enumerate(column_widths):
-            if i + 1 == len(column_widths):
+            if i+1 == len(column_widths):
                 out.write((self.header_sep * width))
             else:
                 out.write((self.header_sep * width) + " ")
-        out.write('\n')
-        write_header = True if not self.no_headers else False
+        out.write(self.end_char)
+
         for lrow, color_row in zip(truncated_rows, self.color_grid):
-            for row in lrow:
+            for i, row in enumerate(lrow):
                 justified_row_parts = [
                     justifier(text, width)
                     for text, justifier, width in zip(
@@ -119,27 +143,29 @@ class Columnar:
                     )
                 ]
                 colorized_row_parts = [
-                    self.colorize(text, code)
+                    self.add_color(text, code, None)
                     for text, code in zip(justified_row_parts, color_row)
                 ]
-                out.write(
-                    self.column_sep.join(colorized_row_parts)
-                    + self.column_sep
-                    + "\n"
-                )
+
+                out.write(self.column_sep.join(colorized_row_parts))
+            out.write(self.end_char)
+
             if write_header:
                 ###
-                # Header 2nd separator line
+                ### Header 2nd separator line
                 ###
                 for i, width in enumerate(column_widths):
                     if i + 1 == len(column_widths):
                         out.write((self.header_sep * width))
                     else:
                         out.write((self.header_sep * width) + " ")
-                out.write('\n')
+                out.write(self.end_char)
                 write_header = False
+            else:
+                if not self.no_borders:
+                    self.write_row_separators(out, column_widths)
 
-        return out.getvalue()[:-1]
+        return out.getvalue()[:-1] # remove last end_char
 
     def write_row_separators(
             self, out_stream: io.StringIO, column_widths: Sequence[int]
@@ -158,18 +184,30 @@ class Columnar:
         return out
 
     def colorize(self, text, code):
-        if code == None:
+        if code is None:
             return text
-        return text  # "".join([code, text, self.color_reset])
+        return "".join([code, text, self.color_reset])
 
-    def clean_data(self, data: Sequence[Sequence[Any]]) -> Data:
+    def clean_data(self, data: Sequence[Sequence[Any]], headers) -> Data:
         # First make sure data is a list of lists
         if type(data) is not list:
-            raise TypeError(f"'data' must be a list of lists. Got a {type(data)}")
+            line =[]
+            for h in headers:
+                 line.append('')
+            data = [line]
+          #  raise TypeError(f"'data' must be a list of lists. Got a {type(data)}")
         if len(data) == 0:
-            raise TypeError(f"'data' must be a list of lists. Got an empty list")
+            line =[]
+            for h in headers:
+                 line.append('')
+            data = [line]
+          # raise TypeError(f"'data' must be a list of lists. Got an empty list")
         if type(data[0]) is not list:
-            raise TypeError(f"'data' must be a list of lists. Got a list of {type(data[0])}")
+            line = []
+            for h in headers:
+                line.append('')
+            data = [line]
+          # raise TypeError(f"'data' must be a list of lists. Got a list of {type(data[0])}")
         # Make sure all the lists are the same length
         num_columns = len(data[0])
         for row_num, row in enumerate(data):
@@ -225,12 +263,13 @@ class Columnar:
         """
         logical_rows = []
         color_grid = []
+        matches_grid = []
         for row in full_data:
             cells_varying_lengths = []
             color_row = []
             for cell in row:
                 cell = self.apply_patterns(cell)
-                cell, color = self.strip_color(cell)
+                cell, color, matches = self.strip_color(cell)
                 color_row.append(color)
                 lines = cell.split("\n")
                 cells_varying_lengths.append(lines)
@@ -240,7 +279,10 @@ class Columnar:
             ]
             logical_rows.append(cells)
             color_grid.append(color_row)
+         #   matches_grid.append(matches)
         self.color_grid = color_grid
+       # self.matches_grid = matches_grid
+       ### print(matches_grid)
         return logical_rows
 
     def apply_patterns(self, cell_text):
@@ -258,7 +300,7 @@ class Columnar:
         if matches:
             clean_text = self.ansi_color_pattern.sub("", cell_text)
             color_codes = "".join([match.group(0) for match in matches[:-1]])
-        return clean_text, color_codes
+        return clean_text, color_codes, matches
 
     def distribute_between(self, diff: int, columns: List[dict], n: int) -> List[dict]:
         """
@@ -371,8 +413,8 @@ class Columnar:
             ):
                 return self.widths_sorted_by(columns, "column_no")
 
-        raise ValueError(
-            "Could not fit table in current terminal, try reducing the number of columns."
+        raise Exception(
+            "Could not fit table in current terminal."
         )
 
     def wrap_and_truncate_logical_cells(
@@ -403,6 +445,16 @@ class Columnar:
             lrows_out.append(cells_out_padded)
         return lrows_out
 
+    def add_color(self, string, color, matches):
+        if color is None:
+            return string
+        color_pattern = r"\x1b\[.+?m"
+        color_reset = "\x1b[0m"
+        ret = string
+        matches = re.findall(color_pattern, string)
+        ret = ret.replace(color_reset, color)
+        return color + ret + color_reset
+
     def visual_justify(self, text: str, width: int, alignment: str) -> str:
         """
         The default python string methods, ljust, center, and rjust check
@@ -425,3 +477,24 @@ class Columnar:
             return left_padding + text
         else:
             raise ValueError(f"Got invalid justification value: {alignment}")
+
+    def printer(string):
+        s = str(string).split("\n")
+        i = 0
+        grep = globals.extras['grep'] if 'grep' in globals.extras else ''
+
+        for line in s:
+            if grep != '':
+                if re.search(grep, line):
+                    i += 1
+                    print(line.replace(grep, '\x1b[1;37;40m' + grep + "\x1b[0m"), sep="\n")
+            else:
+                i += 1
+                print(line, sep="\n")
+            if 'more' in globals.extras and i > globals.rows - 3:
+                print("more...   (<ENTER> to continue, 'C' to cancel)")
+                key = readchar.readkey()
+                if str(key).lower() == "c":
+                    print(*s[i + globals.rows - 2:], sep="\n")
+                    break
+                i = 0
