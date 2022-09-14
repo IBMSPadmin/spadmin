@@ -11,10 +11,6 @@ $->Help!
 $->Query
 $->REMove
 $->SHow
-$->Flex
-$->Flex2
-$->GPolik
-$->GPolik2
 
 # Own commands:
 $ -> Exit
