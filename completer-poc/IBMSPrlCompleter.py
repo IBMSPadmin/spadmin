@@ -248,6 +248,8 @@ class IBMSPrlCompleter:
                 if search( '^' + utilities.regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
                     globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
                     globals.logger.debug( str( tokenlength) + " let's continue searching with this item(s) [" + pformat( self.rules[ key ], width=180 ) + ']' )
+                
+                    # ret.appned( self.SPunversaltokenresolver( key, tokens ) )
                     
                     for x in self.rules[ key ]:
                         
@@ -507,6 +509,54 @@ class IBMSPrlCompleter:
                 globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER results push cycle2: [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
             
             return tmp
+            
+            
+    def SPunversaltokenresolver( self, key = '', tokens = [] ):
+        
+        self.ret = []
+        
+        print(key)
+        print(tokens)
+        
+        for x in self.rules[ key ]:
+        
+            # {Mustexist: .+} feature test
+            if search( '{Mustexist: .+}', x, IGNORECASE ):  
+                mustexist = search( '{Mustexist: (.+)}', x )
+                if not search( ' ' + mustexist[ 1 ], tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                    continue
+                else:                        
+                    # it's Ok, we found it, then remove it not to disturb furthermore
+                    x = x.replace( mustexist[ 0 ], '' )
+                                                            
+            if x.startswith( 'select' ):
+                # First try as an SQL pattern!
+                globals.logger.debug( str( tokenlength) + " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
+                ret += self.spsqlengine( x.strip(), tokens )
+                continue
+            else:
+                #if explicit option is given, then preparation may needed
+                if tokens[ -1 ] != '' and tokens[ -1 ][ -1 ] == '=':
+                    match = search( '(\w+=)\w+', x )
+                    if match:
+                        x = x.replace( match[ 1 ], tokens[ -1 ] )
+                
+                if search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                    globals.logger.debug( str( tokenlength) + ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                    separator = '' if x[ -1 ] == '=' else ' '
+                    ret.append( x + separator )
+                    continue
+                
+                if search( '\w+=\w+', x ):
+                    left, right = x.split( '=' ) 
+                    leftregexp  = utilities.regexpgenerator( left )
+                    rightregexp = utilities.regexpgenerator( right )
+                    match = search( '^' + leftregexp + '=' + rightregexp, tokens[ -1 ], IGNORECASE )
+                    if match:
+                         ret.append( match[ 1 ] + '=' + right )
+                         continue
+
+        return ret
 
     ######################
     # match_display_hook #
