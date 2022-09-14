@@ -309,11 +309,11 @@ class IBMSPrlCompleter:
                 if search( '^' + utilities.regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                     globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
                     globals.logger.debug( str( tokenlength) + " let's continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
-                   
-                    for x in self.rules[ key ]:
-
-                        ret += self.SPunversaltokenresolver( key, tokens )
+                                      
+                    ret += self.SPunversaltokenresolver( key, tokens )
                         
+                    # for x in self.rules[ key ]:
+                   
                         # # # {Mustexist: .+} feature test
                         # # if search( '{Mustexist: .+}', x, IGNORECASE ):  
                         # #     mustexist = search( '{Mustexist: (.+)}', x )
@@ -393,11 +393,11 @@ class IBMSPrlCompleter:
                 if search( '^' + utilities.regexpgenerator( key ), tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                     globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
                     globals.logger.debug( str( tokenlength) + " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
-                                        
-                    for x in self.rules[ key ]:
-                    
-                        ret += self.SPunversaltokenresolver( key, tokens )
-                        
+                      
+                    ret += self.SPunversaltokenresolver( key, tokens )
+                                                          
+                    # for x in self.rules[ key ]:
+                     
                         # # {Mustexist: \w+} feature test
                         # if search( '{Mustexist: .+}', x, IGNORECASE ):  
                         #     mustexist = search( '{Mustexist: (.+)}', x )[ 1 ] 
@@ -442,10 +442,10 @@ class IBMSPrlCompleter:
                     globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -6 ] + ' ' +  tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
                     globals.logger.debug( str( tokenlength) + " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                    
-                    for x in self.rules[ key ]:
-                        
-                        ret += self.SPunversaltokenresolver( key, tokens )
-                        
+                    ret += self.SPunversaltokenresolver( key, tokens )
+                                          
+                    # for x in self.rules[ key ]:
+                          
                         # # {Mustexist: \w+} feature test
                         # if search( '{Mustexist: .+}', x, IGNORECASE ):  
                         #     mustexist = search( '{Mustexist: (.+)}', x )[ 1 ] 
