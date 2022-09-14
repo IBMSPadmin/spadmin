@@ -12,6 +12,7 @@ $->Query
 $->REMove
 $->SHow
 $->Flex
+$->GPolik
 
 # Own commands:
 $ -> Exit
