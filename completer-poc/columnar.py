@@ -211,7 +211,7 @@ class Columnar:
                     if len(finds) > 0:
                         found = True
                         for find in finds:
-                            data[i][c] = cell.replace(grep, Fore.GREEN + find + Style.RESET_ALL)
+                            data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
                 if found is True:
                     grep_data.append(row)
         else:
