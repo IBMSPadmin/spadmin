@@ -80,7 +80,7 @@ class Columnar:
         self.select = select
         self.no_borders = no_borders
         self.no_headers = headers is None
-        data = self.clean_data(data)  # clean, check and grep
+        data = self.clean_data(data, headers)  # clean, check and grep
 
         if self.no_headers:
             headers = [""] * len(data[0])
@@ -179,14 +179,26 @@ class Columnar:
             text = text[:match.start()] + match.group() + text[match.start():] + self.color_reset
         return text  # text # "".join([match.group(), text, self.color_reset])
 
-    def clean_data(self, data: Sequence[Sequence[Any]]) -> Data:
+    def clean_data(self, data: Sequence[Sequence[Any]], headers) -> Data:
         # First make sure data is a list of lists
         if type(data) is not list:
-            raise TypeError(f"'data' must be a list of lists. Got a {type(data)}")
+            line = []
+            for h in headers:
+                line.append('')
+            data = [line]
+            # raise TypeError(f"'data' must be a list of lists. Got a {type(data)}")
         if len(data) == 0:
-            raise TypeError(f"'data' must be a list of lists. Got an empty list")
+            line = []
+            for h in headers:
+                line.append('')
+            data = [line]
+            # raise TypeError(f"'data' must be a list of lists. Got an empty list")
         if type(data[0]) is not list:
-            raise TypeError(f"'data' must be a list of lists. Got a list of {type(data[0])}")
+            line = []
+            for h in headers:
+                line.append('')
+            data = [line]
+            # raise TypeError(f"'data' must be a list of lists. Got a list of {type(data[0])}")
         # Make sure all the lists are the same length
         num_columns = len(data[0])
         for row_num, row in enumerate(data):

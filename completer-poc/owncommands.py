@@ -29,18 +29,18 @@ This command will print a simple text ruler.
     SHow RULer Help!    - print this help message
     SHow RULer          - print simple ruler
     SHow RULer INVerse  - print simple inverse ruler''' )
-            
+
         elif search( utilities.regexpgenerator( 'INVerse' ), parameters, IGNORECASE ):
-            ruler1()    
+            ruler1()
             ruler10()
             ruler100()
-        else: 
+        else:
             print( colored( 'Wrong parameter(s)!', 'red', attrs=[ 'bold' ] ) )
     else:
         ruler100()
         ruler10()
         ruler1()
-            
+
 def ruler100():
     cc = 1
     for i in range( 1, globals.columns + 1, 1 ):
@@ -64,14 +64,14 @@ def ruler10():
             cc = 0 if cc == 10 else cc
     print()
 
-    
+
 def ruler1():
     for i in range( 1, globals.columns + 1, 1 ):
         c = i % 10
         if c:
             sys.stdout.write( str( c ) )
         else:
-            sys.stdout.write( colored( str( c ), 'green' ) )    
+            sys.stdout.write( colored( str( c ), 'green' ) )
 
 # command injection
 spadmin_commands[ 'SHow RULer' ] = ruler
@@ -93,7 +93,7 @@ def spadmin_show_cache( self, parameters ):
         data.append( [ key.strip(), globals.myIBMSPrlCompleter.cache[ key ] ] )
     utilities.printer( columnar( data, headers=[ colored( 'Query', 'white', attrs=[ 'bold' ] ), colored( 'Result', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ] ) )
 
-#    
+#
 spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
@@ -109,7 +109,7 @@ globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ] = []
 
 def spadmin_show_config( self, parameters ):
     data  = []
-    
+
     for configclass in globals.config.getconfiguration():
         for variable in globals.config.getconfiguration()[ configclass ]:
             data.append( [ configclass, variable, '=', globals.config.getconfiguration()[ configclass ][ variable ] ] )
@@ -123,9 +123,9 @@ def spadmin_show_aliases( self, parameters ):
     data  = []
     for key in globals.aliases:
         data.append( [ key, globals.aliases[ key ] ] )
-    
+
     utilities.printer( columnar( data, headers=[ colored( 'Alias', 'white', attrs=[ 'bold' ] ), colored( 'Command', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ] ) )
-#    
+#
 spadmin_commands[ 'SPadmin SHow ALIases' ] = spadmin_show_aliases
 #globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
 #globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
@@ -133,44 +133,44 @@ spadmin_commands[ 'SPadmin SHow ALIases' ] = spadmin_show_aliases
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'ALIases' )
 
 
-def spadmin_show_version( self, parameters ):        
-    print( 'spadmin version: v1.0' )        
+def spadmin_show_version( self, parameters ):
+    print( 'spadmin version: v1.0' )
 #    
 spadmin_commands[ 'SPadmin SHow VERsion' ] = spadmin_show_version
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'VERsion' )
 
-def spadmin_set_debug( self, parameters ):        
-    print( 'Debug is set to ON. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + '].' ) 
+def spadmin_set_debug( self, parameters ):
+    print( 'Debug is set to ON. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + '].' )
     globals.logger.setLevel( logging.DEBUG )
-#    
+#
 spadmin_commands[ 'SPadmin SET DEBUG' ] = spadmin_set_debug
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SET' )
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SET' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SET' ].append( 'DEBUG' )
 
 
-def spadmin_unset_debug( self, parameters ):        
-    print( 'Debug is set to OFF. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + '].' ) 
+def spadmin_unset_debug( self, parameters ):
+    print( 'Debug is set to OFF. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + '].' )
     globals.logger.setLevel( logging.INFO )
-#    
+#
 spadmin_commands[ 'SPadmin UNSET DEBUG' ] = spadmin_unset_debug
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'UNSET' )
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin UNSET' ] = []
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin UNSET' ].append( 'DEBUG' )
 
 
-def spadmin_show_rules( self, parameters ):        
-    data  = [] 
+def spadmin_show_rules( self, parameters ):
+    data  = []
     for key in globals.myIBMSPrlCompleter.rules:
         if globals.myIBMSPrlCompleter.rules[ key ] != []:
             data.append( [ key, len( key.split() ),  globals.myIBMSPrlCompleter.rules[ key ] ] )
-    
+
     utilities.printer(columnar(data, headers=[
         colored( 'Regexp', 'white', attrs=['bold']),
         colored( 'LVL',    'white', attrs=['bold'] ),
         colored( 'Value',  'white', attrs=['bold'])],
         justify=['l', 'c', 'l'], max_column_width = 120))
-#    
+#
 spadmin_commands[ 'SPadmin SHow RULes' ] = spadmin_show_rules
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
 
@@ -180,7 +180,7 @@ def show_actlog ( self, parameters ):
     if parameters is None or parameters == '' or parameters == []:
         data = globals.tsm.send_command_array_array_tabdel("q actlog")
     else:
-        data = globals.tsm.send_command_array_array_tabdel("q actlog ")
+        data = globals.tsm.send_command_array_array_tabdel(str(''.join(["q actlog ", " ".join([parameters])])))
 
     for index, row in enumerate(data):
         (a, b) = row
@@ -199,7 +199,7 @@ spadmin_commands[ 'REload' ] = reload
 
 def spadmin_show_log( self, parameters ):
     os.system( 'open ./' + globals.config.getconfiguration()['SPADMIN']['logfile'] )
-#    
+#
 spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )
 
@@ -308,7 +308,7 @@ def show_stgpool( self, parameters ):
             data[index][3] = 0
         else:
             data[index][3] = round((float(d)/1024),1)
-    
+
     table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
                                     'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
                      justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
@@ -328,13 +328,13 @@ globals.myIBMSPrlCompleter.dynrules['SHow'].append('LASTerror')
 
 def spadmin_show_extras( self, parameters ):
     print( 'CLI extra pipe parameter tester' )
-    pprint( globals.extras )        
+    pprint( globals.extras )
 #    
 spadmin_commands[ 'SPadmin SHow EXtras' ] = spadmin_show_extras
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'EXtras' )
 
 def echo( self, parameters ):
-    print( parameters )        
+    print( parameters )
 #    
 spadmin_commands[ 'PRint' ] = echo
 

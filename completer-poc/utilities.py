@@ -47,6 +47,7 @@ def printer(string):
         #         print(line.replace(grep,'\x1b[1;37;40m'+ grep + "\x1b[0m"), sep="\n")
         # else:
         #     i += 1
+        i += 1
         print(line, sep="\n")
         if 'more' in globals.extras and i > globals.rows - 3:
             print("more...   (<ENTER> to continue, 'C' to cancel)")

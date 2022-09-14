@@ -44,6 +44,7 @@ class dsmadmc_pexpect:
         globals.logger.debug( 'DSMADMC tabdel pid: [' + str( tsm.pid ) + ']' )
 
         try:
+            globals.logger.info("Command will be sent to dsmadmc: " + command)
             tsm.sendline(command)
         except:
             print('An error occurred during a dsmadmc execution:')
