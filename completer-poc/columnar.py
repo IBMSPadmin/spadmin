@@ -32,10 +32,9 @@ from colorama import Fore, Back, Style
 def add_color(string, color):
     if color is None:
         return string
-    color_reset = "\x1b[0m"
-    ret = string
-    ret = ret.replace(color_reset, color)
-    return color + ret + color_reset
+    string = string.replace(Style.RESET_ALL, color)
+    return color + string + Style.RESET_ALL
+
 
 class Columnar:
     def __call__(
@@ -81,8 +80,7 @@ class Columnar:
         self.select = select
         self.no_borders = no_borders
         self.no_headers = headers is None
-        data = self.clean_data(data)
-
+        data = self.clean_data(data)  # clean, check and grep
 
         if self.no_headers:
             headers = [""] * len(data[0])
@@ -94,7 +92,7 @@ class Columnar:
             if not preformatted_headers:
                 headers = [text.upper() for text in headers]
 
-        data, headers = self.filter_columns(data, headers)
+        #  data, headers = self.filter_columns(data, headers)
         if self.no_headers:
             logical_rows = self.convert_data_to_logical_rows(data)
         else:
@@ -166,9 +164,6 @@ class Columnar:
             self.column_sep + self.column_sep.join(cells) + self.column_sep + "\n"
         )
 
-
-
-
     def compile_patterns(self, patterns):
         out = []
         for regex, func in patterns:
@@ -181,7 +176,6 @@ class Columnar:
         if code is None:
             return text
         for match in code:
-            # print("match: ", match)
             text = text[:match.start()] + match.group() + text[match.start():] + self.color_reset
         return text  # text # "".join([match.group(), text, self.color_reset])
 
