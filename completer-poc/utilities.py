@@ -41,13 +41,13 @@ def printer(string):
     grep = globals.extras['grep'] if 'grep' in globals.extras else ''
 
     for line in s:
-        if grep != '':
-            if re.search(grep, line):
-                i += 1
-                print(line.replace(grep,'\x1b[1;37;40m'+ grep + "\x1b[0m"), sep="\n")
-        else:
-            i += 1
-            print(line, sep="\n")
+        # if grep != '':
+        #     if re.search(grep, line):
+        #         i += 1
+        #         print(line.replace(grep,'\x1b[1;37;40m'+ grep + "\x1b[0m"), sep="\n")
+        # else:
+        #     i += 1
+        print(line, sep="\n")
         if 'more' in globals.extras and i > globals.rows - 3:
             print("more...   (<ENTER> to continue, 'C' to cancel)")
             key = readchar.readkey()

@@ -2,6 +2,7 @@ import shutil
 import re
 import io
 import operator
+import globals
 from click import style
 
 from functools import reduce
@@ -81,6 +82,7 @@ class Columnar:
         self.no_borders = no_borders
         self.no_headers = headers is None
         data = self.clean_data(data)
+
 
         if self.no_headers:
             headers = [""] * len(data[0])
@@ -198,10 +200,27 @@ class Columnar:
                 raise ValueError(
                     f"All the rows in 'data' must have the same number of columns, however the first row had {num_columns} columns and row number {row_num + 1} had {len(row)} column(s)."
                 )
+
+        grep = globals.extras['grep'] if 'grep' in globals.extras else ''
+        grep_data = []
+        if grep != '' and grep is not None:
+            for i, row in enumerate(data):
+                found = False
+                for c, cell in enumerate(row):
+                    finds = re.findall(grep, str(cell))
+                    if len(finds) > 0:
+                        found = True
+                        for find in finds:
+                            data[i][c] = cell.replace(grep, Fore.GREEN + find + Style.RESET_ALL)
+                if found is True:
+                    grep_data.append(row)
+        else:
+            grep_data = data
+
         carriage_return = re.compile("\r")
         tab = re.compile("\t")
         out = []
-        for row in data:
+        for row in grep_data:
             cleaned = []
             for cell in row:
                 cell = str(cell)
