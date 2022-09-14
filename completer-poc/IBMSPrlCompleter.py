@@ -245,7 +245,8 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + key + ']' + str( len( key.split() ) ) )
                 #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 #globals.logger.debug( str( tokenlength) + ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
-                if search( '^' + utilities.regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
+                #if search( '^' + utilities.regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
+                if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
                     globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
                     globals.logger.debug( str( tokenlength) + " let's continue searching with this item(s) [" + pformat( self.rules[ key ], width=180 ) + ']' )
                 
@@ -306,7 +307,8 @@ class IBMSPrlCompleter:
                     
                 #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + key + ']' )
                 #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
-                if search( '^' + utilities.regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                #if search( '^' + utilities.regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
                     globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
                     globals.logger.debug( str( tokenlength) + " let's continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                                       
@@ -383,14 +385,21 @@ class IBMSPrlCompleter:
                 #   key not 4 items: query actlog asasaas=asasas sdsdsds
                 # BUTNOT
                 #   key 4 items with '=' endings: query actlog asasaas=asasas sdsdsds=
-                if ( ( len( key.split() ) == 4 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 5 ) and not ( len( key.split() ) == 5 and key[ -1 ] == '=' ):
+                # if ( ( len( key.split() ) == 4 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 5 ) and not ( len( key.split() ) == 5 and key[ -1 ] == '=' ):
+                #     continue
+                # elif key.startswith( 'select' ):  # ???????????????????????????????
+                #     continue
+                #
+                
+                if ( ( len( key.split() ) == 3 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 4 ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
-                    
+                     
                 #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
                 #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
-                if search( '^' + utilities.regexpgenerator( key ), tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                #if search( '^' + utilities.regexpgenerator( key ), tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
                     globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
                     globals.logger.debug( str( tokenlength) + " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                       
@@ -438,7 +447,8 @@ class IBMSPrlCompleter:
                     
                 #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
                 #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
-                if search( '^' + utilities.regexpgenerator( key ), tokens[ -6 ] + ' ' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                #if search( '^' + utilities.regexpgenerator( key ), tokens[ -6 ] + ' ' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
                     globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -6 ] + ' ' +  tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
                     globals.logger.debug( str( tokenlength) + " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                    
@@ -468,6 +478,21 @@ class IBMSPrlCompleter:
                         #     separator = '' if x[ -1 ] == '=' else ' '
                         #     ret.append( x + separator )
                         #     continue
+
+        elif tokenlength == 7:
+            # LEVEL 7
+            logging.info( ' Stepped into LEVEL 7.' )
+            
+            for key in self.rules:
+                
+                if ( ( len( key.split() ) == 4 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 5 ) and not ( len( key.split() ) == 5 and key[ -1 ] == '=' ):
+                    continue
+
+                elif key.startswith( 'select' ):  # ???????????????????????????????
+                    continue
+                    
+                if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):   
+                    ret += self.SPunversaltokenresolver( key, tokens )
 
         else:
             globals.logger.debug( ' Stepped into LEVEL Bzzz...' )
@@ -528,9 +553,14 @@ class IBMSPrlCompleter:
         for x in self.rules[ key ]:
         
             # {Mustexist: .+} feature test
-            if search( '{Mustexist: .+}', x, IGNORECASE ):  
+            if search( '{Mustexist: .+}', x, IGNORECASE ):
                 mustexist = search( '{Mustexist: (.+)}', x )
-                if not search( ' ' + mustexist[ 1 ], tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
+                
+                left, right = mustexist[ 1 ].split( '=' ) 
+                leftregexp  = utilities.regexpgenerator( left )
+                rightregexp = utilities.regexpgenerator( right )
+                
+                if not search( ' ' +  leftregexp + '=' + rightregexp, ' '.join( tokens ), IGNORECASE ):
                     continue
                 else:                        
                     # it's Ok, we found it, then remove it not to disturb furthermore
