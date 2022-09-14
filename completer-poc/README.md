@@ -110,8 +110,6 @@ $->ACCept
 
 A 2-es szintet és a többi ezt követő szintet egyelőre közös helyen kezeljük. A leírása így néz ki:
 
-# ACCept Date
-
 ```
 ACCept -> Date
 ```
