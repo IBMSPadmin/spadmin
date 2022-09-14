@@ -13,6 +13,7 @@ $->REMove
 $->SHow
 $->Flex
 $->GPolik
+$->GPolik2
 
 # Own commands:
 $ -> Exit
