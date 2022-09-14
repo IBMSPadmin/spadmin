@@ -56,7 +56,7 @@ class Columnar:
             select: Sequence[str] = [],
             no_borders: bool = True,
             terminal_width: Union[None, int] = None,
-            preformatted_headers: bool = False,
+            preformatted_headers: bool = True,
             more: bool = False,
     ) -> str:
         self.wrap_max = wrap_max
