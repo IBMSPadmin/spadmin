@@ -1,3 +1,4 @@
+# kukucs
 # spadmin.py
 
 Maradhat ez a név. Amivel megvagyunk:
