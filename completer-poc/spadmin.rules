@@ -12,6 +12,7 @@ $->Query
 $->REMove
 $->SHow
 $->Flex
+$->Flex2
 $->GPolik
 
 # Own commands:
