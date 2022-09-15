@@ -13,7 +13,7 @@ Global spadmin.py development progress status:
 
 @Marcell
 - színezés
-- SPADMin show PROCessinfo
+~~- SPADMin show PROCessinfo~~
 ~~- columnar: üres sorok (valahogy megint viszakrült az üres sor a végére) és sor végi space-ek eltűntetése~~
 ~~- columnar: az utolsó oszlop több karaktert használ, mint illene. Ezeket eliminálni kellene~~
 - columnar: kezelni kell, ha üres adat megy át. Akkor csak a fejléc legyen kiírva

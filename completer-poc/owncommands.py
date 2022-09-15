@@ -261,6 +261,16 @@ spadmin_commands[ 'SPadmin Add ALIas' ] = spadmin_add_alias
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'ALIas' )
 dynruleinjector( 'SPadmin Add ALIas' )
 
+def spadmin_show_processinfo( self, parameters ):
+    data = [["Normal", globals.tsm.get_tsm_normal().pid], ["Tabdelimited", globals.tsm.get_tsm_tabdel().pid]]
+    table = columnar(data,
+                     headers=['dsmadmc','PID'])
+    utilities.printer(table)
+
+
+spadmin_commands[ 'SPadmin SHow PROCessinfo' ] = spadmin_show_processinfo
+dynruleinjector( 'SPadmin SHow PROCessinfo' )
+
 def spadmin_del_alias( self, parameters ):
     if not parameters:
         print('Please use the following command format: \'SPadmin DELete ALIas cmd\'')
