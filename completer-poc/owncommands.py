@@ -179,21 +179,37 @@ spadmin_commands[ 'SPadmin UNSET DEBUG' ] = spadmin_unset_debug
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin UNSET' ].append( 'DEBUG' )
 dynruleinjector( 'SPadmin SET DEBUG' )
 
+
 def spadmin_show_rules( self, parameters ):
     data  = []
     for key in globals.myIBMSPrlCompleter.rules:
         if globals.myIBMSPrlCompleter.rules[ key ] != []:
             data.append( [ key, len( key.split() ),  globals.myIBMSPrlCompleter.rules[ key ] ] )
 
-    utilities.printer(columnar(data, headers=[
-        colored( 'Regexp', 'white', attrs=['bold']),
+    utilities.printer( columnar( data, headers=[
+        colored( 'Regexp', 'white', attrs=['bold'] ),
         colored( 'LVL',    'white', attrs=['bold'] ),
-        colored( 'Value',  'white', attrs=['bold'])],
-        justify=['l', 'c', 'l'], max_column_width = 120))
+        colored( 'Value',  'white', attrs=['bold'] ) ],
+        justify = [ 'l', 'c', 'l' ], max_column_width = 120 ) )
 #
 spadmin_commands[ 'SPadmin SHow RULes' ] = spadmin_show_rules
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
 dynruleinjector( 'SPadmin SHow RULes' )
+
+
+def spadmin_show_commands( self, parameters ):
+    data  = []
+    for key in spadmin_commands:
+            data.append( [ key ] )
+
+    utilities.printer( columnar( data, headers=[ 
+        colored( 'Command name', 'white', attrs=['bold'] ) ], 
+        justify = [ 'l' ], max_column_width = 120 ) )
+#
+spadmin_commands[ 'SPadmin SHow COMmands' ] = spadmin_show_commands
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
+dynruleinjector( 'SPadmin SHow COMmands' )
+
 
 def show_actlog ( self, parameters ):
     data = None
@@ -218,12 +234,14 @@ def reload( self, parameters ):
 #
 spadmin_commands[ 'REload' ] = reload
 
+
 def spadmin_show_log( self, parameters ):
     os.system( 'open ./' + globals.config.getconfiguration()['SPADMIN']['logfile'] )
 #
 spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )
 dynruleinjector( 'SPadmin SHow Log' )
+
 
 def spadmin_add_alias( self, parameters ):
     if len(str(parameters).split(':')) != 2:
@@ -256,6 +274,7 @@ spadmin_commands[ 'SPadmin DELete ALIas' ] = spadmin_del_alias
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ].append( 'ALIas' )
 dynruleinjector( 'SPadmin DELete ALIas' )
 
+
 def spadmin_add_server( self, parameters ):
     if len(str(parameters).split(' ')) != 3:
         print('Please use the following command format: \'SPadmin Add SErver server_name user_id password\'')
@@ -274,6 +293,7 @@ def spadmin_add_server( self, parameters ):
 spadmin_commands[ 'SPadmin Add SErver' ] = spadmin_add_server
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'SErver' )
 dynruleinjector( 'SPadmin Add SErver' )
+
 
 def spadmin_del_server( self, parameters ):
     if not parameters:
