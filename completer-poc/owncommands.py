@@ -73,13 +73,29 @@ def ruler1():
         else:
             sys.stdout.write( colored( str( c ), 'green' ) )
 
+            
+def dynruleinjector( command ):
+            
+            commandpartcollected = ''
+            for commandpart in command.split()[ :-1 ]:
+                commandpartcollected += commandpart
+                if commandpartcollected not in globals.myIBMSPrlCompleter.dynrules:
+                    globals.myIBMSPrlCompleter.dynrules[ commandpartcollected ] = []
+                commandpartcollected += ' '
+            
+            commandpartcollected = command.split()        
+            for commandpart in command.split()[ :-1 ]:                      
+                    rightpart = commandpartcollected.pop( -1 )
+                    leftpart  = ' '.join( commandpartcollected )
+                    if rightpart not in globals.myIBMSPrlCompleter.dynrules[ leftpart ]:
+                        globals.myIBMSPrlCompleter.dynrules[ leftpart ].append( rightpart )
+    
+
 # command injection
 spadmin_commands[ 'SHow RULer' ] = ruler
-globals.myIBMSPrlCompleter.dynrules[ 'SHow' ] = []
-globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'RULer' )
-globals.myIBMSPrlCompleter.dynrules[ 'SHow RULer' ] = []
-globals.myIBMSPrlCompleter.dynrules[ 'SHow RULer' ].append( 'Help!' )
-globals.myIBMSPrlCompleter.dynrules[ 'SHow RULer' ].append( 'INVerse' )
+dynruleinjector( 'SHow RULer' )
+dynruleinjector( 'SHow RULer Help!' )
+dynruleinjector( 'SHow RULer INVerse' )
 
 
 def spadmin_show_cache( self, parameters ):
@@ -95,16 +111,17 @@ def spadmin_show_cache( self, parameters ):
 
 #
 spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'Add' )
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ] = []
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'DELete' )
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ] = []
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CAche' )
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SWitch' )
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ] = []
+dynruleinjector( 'SPadmin SHow CAche' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'Add' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ] = []
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'DELete' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ] = []
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CAche' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SWitch' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ] = []
 
 
 def spadmin_show_config( self, parameters ):
@@ -116,7 +133,8 @@ def spadmin_show_config( self, parameters ):
     utilities.printer( columnar( data, headers=[ colored( 'Class', 'white', attrs=[ 'bold' ] ), colored( 'Variable', 'white', attrs=[ 'bold' ] ), colored( '=', 'white', attrs=[ 'bold' ] ) ,colored( 'Value', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l', 'l', 'l' ] ) )
 #
 spadmin_commands[ 'SPadmin SHow CONFig' ] = spadmin_show_config
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CONFig' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CONFig' )
+dynruleinjector( 'SPadmin SHow CONFig' )
 
 
 def spadmin_show_aliases( self, parameters ):
@@ -130,34 +148,36 @@ spadmin_commands[ 'SPadmin SHow ALIases' ] = spadmin_show_aliases
 #globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
 #globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
 #globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'ALIases' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'ALIases' )
+dynruleinjector( 'SPadmin SHow ALIases' )
 
 
 def spadmin_show_version( self, parameters ):
     print( 'spadmin version: v1.0' )
 #    
 spadmin_commands[ 'SPadmin SHow VERsion' ] = spadmin_show_version
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'VERsion' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'VERsion' )
+dynruleinjector( 'SPadmin SHow VERsion' )
 
 def spadmin_set_debug( self, parameters ):
     print( 'Debug is set to ON. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + '].' )
     globals.logger.setLevel( logging.DEBUG )
 #
 spadmin_commands[ 'SPadmin SET DEBUG' ] = spadmin_set_debug
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SET' )
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SET' ] = []
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SET' ].append( 'DEBUG' )
-
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SET' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SET' ] = []
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SET' ].append( 'DEBUG' )
+dynruleinjector( 'SPadmin SET DEBUG' )
 
 def spadmin_unset_debug( self, parameters ):
     print( 'Debug is set to OFF. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + '].' )
     globals.logger.setLevel( logging.INFO )
 #
 spadmin_commands[ 'SPadmin UNSET DEBUG' ] = spadmin_unset_debug
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'UNSET' )
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin UNSET' ] = []
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin UNSET' ].append( 'DEBUG' )
-
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'UNSET' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin UNSET' ] = []
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin UNSET' ].append( 'DEBUG' )
+dynruleinjector( 'SPadmin SET DEBUG' )
 
 def spadmin_show_rules( self, parameters ):
     data  = []
@@ -172,8 +192,8 @@ def spadmin_show_rules( self, parameters ):
         justify=['l', 'c', 'l'], max_column_width = 120))
 #
 spadmin_commands[ 'SPadmin SHow RULes' ] = spadmin_show_rules
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
-
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
+dynruleinjector( 'SPadmin SHow RULes' )
 
 def show_actlog ( self, parameters ):
     data = None
@@ -189,7 +209,8 @@ def show_actlog ( self, parameters ):
     utilities.printer( table )
 #
 spadmin_commands[ 'SHow ACTlog' ] = show_actlog
-globals.myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
+# globals.myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
+dynruleinjector( 'SHow ACTlog' )
 
 
 def reload( self, parameters ):
@@ -201,7 +222,8 @@ def spadmin_show_log( self, parameters ):
     os.system( 'open ./' + globals.config.getconfiguration()['SPADMIN']['logfile'] )
 #
 spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )
+dynruleinjector( 'SPadmin SHow Log' )
 
 def spadmin_add_alias( self, parameters ):
     if len(str(parameters).split(':')) != 2:
@@ -215,7 +237,8 @@ def spadmin_add_alias( self, parameters ):
 
 #
 spadmin_commands[ 'SPadmin Add ALIas' ] = spadmin_add_alias
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'ALIas' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'ALIas' )
+dynruleinjector( 'SPadmin Add ALIas' )
 
 def spadmin_del_alias( self, parameters ):
     if not parameters:
@@ -230,8 +253,8 @@ def spadmin_del_alias( self, parameters ):
             print (f'The given alias \'{parameters}\' not found')
 #
 spadmin_commands[ 'SPadmin DELete ALIas' ] = spadmin_del_alias
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ].append( 'ALIas' )
-
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ].append( 'ALIas' )
+dynruleinjector( 'SPadmin DELete ALIas' )
 
 def spadmin_add_server( self, parameters ):
     if len(str(parameters).split(' ')) != 3:
@@ -249,7 +272,8 @@ def spadmin_add_server( self, parameters ):
             globals.config.writeconfig()
 
 spadmin_commands[ 'SPadmin Add SErver' ] = spadmin_add_server
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'SErver' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'SErver' )
+dynruleinjector( 'SPadmin Add SErver' )
 
 def spadmin_del_server( self, parameters ):
     if not parameters:
@@ -265,7 +289,8 @@ def spadmin_del_server( self, parameters ):
 
 #
 spadmin_commands[ 'SPadmin DELete SErver' ] = spadmin_del_server
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ].append( 'SErver' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ].append( 'SErver' )
+dynruleinjector( 'SPadmin DELete SErver' )
 
 def show_server( self, parameters ):
     for section in globals.config.getconfiguration().sections():
@@ -273,7 +298,8 @@ def show_server( self, parameters ):
             print(section)
 #
 spadmin_commands[ 'SPadmin SHow SErver' ] = show_server
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'SErver' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'SErver' )
+dynruleinjector( 'SPadmin SHow SErver' )
 
 def switch_server( self, parameters ):
     print("SWITCH SERVER")
@@ -295,8 +321,8 @@ def switch_server( self, parameters ):
 
 #
 spadmin_commands[ 'SPadmin SWitch SErver' ] = switch_server
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ].append( 'SErver' )
-
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ].append( 'SErver' )
+dynruleinjector( 'SPadmin SWitch SErver' )
 
 
 def show_stgpool( self, parameters ):
@@ -315,7 +341,8 @@ def show_stgpool( self, parameters ):
     utilities.printer( table )
 #
 spadmin_commands[ 'SHow STGpools' ] = show_stgpool
-globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
+dynruleinjector( 'SHow STGpools' )
 
 
 def show_last_error ( self, parameters):
@@ -323,7 +350,8 @@ def show_last_error ( self, parameters):
     print ("Last return code: ", globals.last_error["rc"])
 #
 spadmin_commands['SHow LASTerror'] = show_last_error
-globals.myIBMSPrlCompleter.dynrules['SHow'].append('LASTerror')
+# globals.myIBMSPrlCompleter.dynrules['SHow'].append('LASTerror')
+dynruleinjector( 'SHow LASTerror' )
 
 
 def spadmin_show_extras( self, parameters ):
@@ -331,7 +359,8 @@ def spadmin_show_extras( self, parameters ):
     pprint( globals.extras )
 #    
 spadmin_commands[ 'SPadmin SHow EXtras' ] = spadmin_show_extras
-globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'EXtras' )
+# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'EXtras' )
+dynruleinjector( 'SPadmin SHow EXtras' )
 
 def echo( self, parameters ):
     print( parameters )
