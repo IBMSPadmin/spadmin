@@ -44,9 +44,9 @@ class Configuration:
             for key in self.defaults:
                 if not self.configparser.has_option('SPADMIN', key):
                     self.configparser['SPADMIN'][key] = str(self.defaults[key])
-                setup_parameters = setup.Setup()
-                for key in setup_parameters:
-                    print(key, "=", setup_parameters[key])
+                # setup_parameters = setup.Setup()
+                # for key in setup_parameters:
+                #     print(key, "=", setup_parameters[key])
 
         # check default aliases
         if not self.configparser.has_section('ALIAS'):

@@ -41,7 +41,7 @@ class dsmadmc_pexpect:
 
         tsm = self.get_tsm_tabdel()
 
-        globals.logger.debug( 'DSMADMC tabdel pid: [' + str( tsm.pid ) + ']' )
+        # globals.logger.debug( 'DSMADMC tabdel pid: [' + str( tsm.pid ) + ']' )
 
         try:
             globals.logger.info("Command will be sent to dsmadmc: " + command)

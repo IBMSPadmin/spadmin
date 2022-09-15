@@ -270,12 +270,16 @@ def spadmin_del_alias( self, parameters ):
             globals.aliases.pop(parameters)
             globals.config.getconfiguration()['ALIAS'].pop(parameters)
             globals.config.writeconfig()
+            ### Megnézni!
+            globals.myIBMSPrlCompleter.dynrules['SPadmin DELete ALIas'] = globals.myIBMSPrlCompleter.dynrules['SPadmin DELete ALIas'].remove(parameters)
         else:
             print (f'The given alias \'{parameters}\' not found')
 #
 spadmin_commands[ 'SPadmin DELete ALIas' ] = spadmin_del_alias
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ].append( 'ALIas' )
 dynruleinjector( 'SPadmin DELete ALIas' )
+for key in globals.config.getconfiguration()['ALIAS']:
+    dynruleinjector('SPadmin DELete ALIas '+ key)
 
 
 def spadmin_add_server( self, parameters ):

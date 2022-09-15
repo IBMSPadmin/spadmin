@@ -36,7 +36,7 @@ class Setup:
         if platform.system() == 'Darwin':
             parameters['dsmadmc_path'] = '/usr/local/bin/dsmadmc'
         elif platform.system() == 'Linux':
-            pass
+            parameters['dsmadmc_path'] = '/bin/dsmadmc'
         else:
             print("Your \'", platform.system(), "\' platform is not supported. Sorry!")
             print("Please let us know, and we will port the application as-soon-as-possible to your platform.")
