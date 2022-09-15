@@ -269,6 +269,36 @@ Query Node [\w\*]+ Format=         -> Format=Detailed
 Query Node [\w\*]+ AUTHentication= -> AUTHentication=LOcal
 Query Node [\w\*]+ AUTHentication= -> AUTHentication=LDap
 
+#Query Node [\w\*=\s]{1,} Type= -> Type=Client
+#Query Node [\w\*=\s]{1,} Type= -> Type=NAS
+#Query Node [\w\*=\s]{1,} Type= -> Type=Server
+#Query Node [\w\*=\s]{1,} Type= -> Type=Any
+#Query Node [\w\*=\s]{1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+#Query Node [\w\*=\s]{1,} Format= -> Format=Standard
+#Query Node [\w\*=\s]{1,} Format= -> Format=Detailed
+#Query Node [\w\*=\s]{1,} AUTHentication= -> AUTHentication=LOcal
+#Query Node [\w\*=\s]{1,} AUTHentication= -> AUTHentication=LDap
+
+Query Node (\w+=\w*\s*){1,} Type= -> Type=Client
+Query Node (\w+=\w*\s*){1,} Type= -> Type=NAS
+Query Node (\w+=\w*\s*){1,} Type= -> Type=Server
+Query Node (\w+=\w*\s*){1,} Type= -> Type=Any
+Query Node (\w+=\w*\s*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node (\w+=\w*\s*){1,} Format= -> Format=Standard
+Query Node (\w+=\w*\s*){1,} Format= -> Format=Detailed
+Query Node (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LOcal
+Query Node (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LDap
+
+#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=Client
+#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=NAS
+#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=Server
+#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=Any
+#Query Node [\w\*]+ (\w+=\w*\s*){1,} DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+#Query Node [\w\*]+ (\w+=\w*\s*){1,} Format=         -> Format=Standard
+#Query Node [\w\*]+ (\w+=\w*\s*){1,} Format=         -> Format=Detailed
+#Query Node [\w\*]+ (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LOcal
+#Query Node [\w\*]+ (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LDap
+
 # de ez már az 5. szint
 #Query Node \w+ (\w+=\w*\s+){1,} -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
 #Query Node \w+ (\w+=\w*\s+){1,} -> DOmainx=
@@ -277,16 +307,30 @@ Query             -> SEssion
 Query SEssion     -> select session_id from sessions
 Query SEssion     -> MINTIMethreshold=
 Query SEssion     -> MAXTHRoughput=
-Query SEssion     -> Format=
+Query SEssion         -> Format=
+Query SEssion Format= -> Format=Standard
+Query SEssion Format= -> Format=Detailed
 Query SEssion     -> Type= 
+
+Query SEssion Type= -> Type=Admin
+Query SEssion Type= -> Type=Node
+Query SEssion Type= -> Type=Server
+Query SEssion Type= -> Type=*
+
 Query SEssion     -> CLIENTName=
     
-Query SEssion \d+ -> MINTIMethreshold=
-Query SEssion \d+ -> MAXTHRoughput=
-Query SEssion \d+ -> Format=
-Query SEssion \d+ -> Type= 
-Query SEssion \d+ -> CLIENTName=
+Query SEssion [\d\*]+ -> MINTIMethreshold=
+Query SEssion [\d\*]+ -> MAXTHRoughput=
+Query SEssion [\d\*]+ -> Format=
+Query SEssion [\d\*]+ Format= -> Format=Standard
+Query SEssion [\d\*]+ Format= -> Format=Detailed
+Query SEssion [\d\*]+ -> Type= 
+Query SEssion [\d\*]+ -> CLIENTName=
 
+Query SEssion [\d\*]+ (\w+=.*){1,} -> Format=
+Query SEssion [\d\*]+ (\w+=.*){1,} Format= -> Format=Standard
+Query SEssion [\d\*]+ (\w+=.*){1,} Format= -> Format=Detailed
+    
 Query         -> STGpool
 Query STGpool -> select stgpool_name from stgpools
 

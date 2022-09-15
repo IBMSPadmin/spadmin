@@ -193,7 +193,7 @@ globals.myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
 
 
 def reload( self, parameters ):
-    globals.myIBMSPrlCompleter.loadrules( globals.config.getconfiguration()['SPADMIN']['rulefile'] )
+    globals.myIBMSPrlCompleter.loadrules( globals.rulefilename )
 #
 spadmin_commands[ 'REload' ] = reload
 

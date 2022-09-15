@@ -95,8 +95,9 @@ if __name__ == '__main__':
     parser.add_argument( '-m', '--norlsqlcache',   action = 'store_const', const = True,          help = 'no cache for sql queries in reradline' )
     parser.add_argument( '-n', '--norlsqlhelpepr', action = 'store_const', const = True,          help = 'no sql queries in reradline' )
     parser.add_argument( '-p', '--prereqcheck',    action = 'store_const', const = True,          help = 'prerequisite check' )
-    parser.add_argument( '-r', '--disablerl',      action = 'store_const', const = True,          help = 'disable readline functionality' )
-    parser.add_argument( '-t', '--textcolor',      nargs = '?',                                   help = 'specify the text color [defualt: "white"]' )
+    parser.add_argument( '-r', '--rulefilename',   nargs = '?',                                   help = 'custom rule filename' )
+    parser.add_argument( '-s', '--disablerl',      action = 'store_const', const = True,          help = 'disable readline functionality' )
+    parser.add_argument( '-t', '--textcolor',      nargs = '?',                                   help = 'specify the text color [default: "white"]' )
     parser.add_argument( '-v', '--version',        action = 'version', version = '%(prog)s v1.0', help = 'show version information' )
     
     args = parser.parse_args()
@@ -114,6 +115,11 @@ if __name__ == '__main__':
         logfilename = args.logfilename
     else:
         logfilename = globals.config.getconfiguration()[ 'SPADMIN' ][ 'logfile' ]
+    
+    if args.rulefilename:
+        globals.rulefilename = args.rulefilename
+    else:
+        globals.rulefilename = globals.config.getconfiguration()[ 'SPADMIN' ][ 'rulefile' ]
     
     # Logger settings
     logging.basicConfig( filename = logfilename,
