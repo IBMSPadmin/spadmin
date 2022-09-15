@@ -402,7 +402,7 @@ def show_sessions( self, parameters ):
         else: 
             wait = row[ 2 ]            
         
-        bytes_sent     = humanbytes.HumanBytes.format( int( row[ 3] ), precision = 0 )
+        bytes_sent     = humanbytes.HumanBytes.format( int( row[ 3 ] ), precision = 0 )
         bytes_received = humanbytes.HumanBytes.format( int( row[ 4 ] ), precision = 0 )
         
         mediaaccess = ''.join( row[ 8:14 ] )
@@ -415,6 +415,25 @@ def show_sessions( self, parameters ):
     
 spadmin_commands[ 'SHow SESsions' ] = show_sessions
 dynruleinjector(  'SHow SESsions' )
+
+
+def show_processes( self, parameters ):
+    
+    data = globals.tsm.send_command_array_array_tabdel( 'select PROCESS_NUM, PROCESS, FILES_PROCESSED, BYTES_PROCESSED, STATUS from processes order by 1' )
+    
+    data2 = []
+    for index, row in enumerate( data ):
+               
+        bytes_prcessed = humanbytes.HumanBytes.format( int( row[ 3 ] ), precision = 0 )
+              
+        data2.append( [ index + 1,  row[ 0 ], row[ 1 ], row[ 2 ], bytes_prcessed, row[ 4 ] ] )
+    
+    utilities.printer( columnar( data2, headers = [ 
+        '#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status' ],
+        justify=[ 'r', 'l', 'l', 'r', 'r', 'l' ] ) )
+    
+spadmin_commands[ 'SHow PROCesses' ] = show_processes
+dynruleinjector(  'SHow PROCesses' )
 
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
