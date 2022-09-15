@@ -243,10 +243,13 @@ def spadmin_add_server( self, parameters ):
         if globals.config.getconfiguration().has_section(server) or server in disabled_words:
             print (f'The given server name \'{server}\' already exists or not allowed')#
         else:
-            globals.config.getconfiguration().add_section(server)
-            globals.config.getconfiguration()[server]['dsmadmc_id'] = userid
-            globals.config.getconfiguration()[server]['dsmadmc_password'] = password
-            globals.config.writeconfig()
+            if utilities.check_connection(server, userid, password):
+                globals.config.getconfiguration().add_section(server)
+                globals.config.getconfiguration()[server]['dsmadmc_id'] = userid
+                globals.config.getconfiguration()[server]['dsmadmc_password'] = password
+                globals.config.writeconfig()
+            else:
+                print ('Server parameters not saved!')
 
 spadmin_commands[ 'SPadmin Add SErver' ] = spadmin_add_server
 globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'SErver' )

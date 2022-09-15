@@ -1,6 +1,6 @@
 import configparser
 from termcolor import colored
-
+import setup
 
 class Configuration:
     configparser = None
@@ -11,12 +11,9 @@ class Configuration:
         'cache_prefetch'   : True,  # prefetch cache data when the program starts
         'rulefile'         : 'spadmin.rules',  # rule file name
         'historyfile'      : '.spadmin_history',  # history file name
-        'dsmadmc_path'     : 'dsmadmc',  # the patch of dsmadmc
+        'dsmadmc_path'     : 'dsmadmc',  # the path of dsmadmc
         'dsmadmc_id'       : 'admin',  # username for dsmadmc
         'dsmadmc_password' : 'admin',  # password for dsmadmc
-        'DSM_DIR'          : '',
-        'DSM_OPT'          : '',
-        'DSM_LOG'          : '',
         'logfile'          : 'spadmin.log',  # SPadmin main logfile
         'debug'            : False,  # enable debug info to the main logfile
         'autoexec'	       : '',  # auto command execution when spadmin starts
@@ -43,9 +40,14 @@ class Configuration:
         # check existence of DEFAULTS
         if not self.configparser.has_section('SPADMIN'):
             self.configparser.add_section('SPADMIN')
-        for key in self.defaults:
-            if not self.configparser.has_option('SPADMIN', key):
-                self.configparser['SPADMIN'][key] = str(self.defaults[key])
+            print("jaj")
+            for key in self.defaults:
+                if not self.configparser.has_option('SPADMIN', key):
+                    self.configparser['SPADMIN'][key] = str(self.defaults[key])
+                setup_parameters = setup.Setup()
+                for key in setup_parameters:
+                    print(key, "=", setup_parameters[key])
+
         # check default aliases
         if not self.configparser.has_section('ALIAS'):
             self.configparser.add_section('ALIAS')

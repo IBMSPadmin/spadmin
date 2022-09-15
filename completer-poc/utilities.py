@@ -4,6 +4,7 @@ import sys
 import globals
 import readchar
 import uuid
+import subprocess
 
 from termcolor import colored
 from re import search, IGNORECASE
@@ -56,6 +57,28 @@ def printer(string):
                 print(*s[i + globals.rows - 2:], sep="\n")
                 break
             i = 0
+
+def check_connection(server: str, id: str, password: str) -> bool:
+    if id == '' or password == '':
+        print ('Userid and password won\'t be empty!')
+        return False
+    try:
+        result = ''
+        if server != '':
+            result = subprocess.check_output(
+                ['dsmadmc', '-se=%s' % server, '-id=%s' % id, '-pa=%s' % password, '-dataonly=yes',
+                 'select SERVER_NAME from STATUS'], stderr=subprocess.STDOUT, timeout=10,
+                universal_newlines=True)
+        else:
+            result = subprocess.check_output(
+                ['dsmadmc', '-id=%s' % id, '-pa=%s' % password, '-dataonly=yes',
+                 'select SERVER_NAME from STATUS'], stderr=subprocess.STDOUT, timeout=10,
+                universal_newlines=True)
+        print("We have successfully connected to: ", result.strip())
+        return True
+    except subprocess.CalledProcessError as exc:
+        print(exc.output, "\nReturn code:", exc.returncode, "\n")
+        return False
 
 def getmac():
     ret = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
