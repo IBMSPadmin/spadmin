@@ -1,6 +1,5 @@
-from re import search, IGNORECASE, MULTILINE, split
+from re import search, MULTILINE, split
 import pexpect
-import logging
 import globals
 
 
@@ -20,11 +19,11 @@ class dsmadmc_pexpect:
 
     def __init__(self, server, id, pa):
         if not server:
-            self.STARTCOMMAND_TABDEL = 'dsmadmc' + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
-            self.STARTCOMMAND = 'dsmadmc' + ' -NOConfirm' + ' -id=' + id + ' -pa=' + pa
+            self.STARTCOMMAND_TABDEL = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
+            self.STARTCOMMAND = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -NOConfirm' + ' -id=' + id + ' -pa=' + pa
         else:
-            self.STARTCOMMAND_TABDEL = 'dsmadmc' + ' -se=' + server + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
-            self.STARTCOMMAND = 'dsmadmc' + ' -NOConfirm' + ' -se=' + server + ' -id=' + id + ' -pa=' + pa
+            self.STARTCOMMAND_TABDEL = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -se=' + server + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
+            self.STARTCOMMAND = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -NOConfirm' + ' -se=' + server + ' -id=' + id + ' -pa=' + pa
 
     def get_tsm_tabdel(self):
 

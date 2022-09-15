@@ -1,0 +1,29 @@
+[SPADMIN]
+cache_age = 60
+cache_disable = False
+cache_prefetch = True
+rulefile = spadmin.rules
+historyfile = .spadmin_history
+dsmadmc_path = /usr/local/bin/dsmadmc
+dsmadmc_id = support
+dsmadmc_password = userkft1q2
+logfile = spadmin.log
+debug = False
+autoexec = 
+dynamic_readline = True
+prompt = "[[1m[37m%%SPSERVERNAME%%[0m] [1m[31m>[0m "
+rlwordseparation = 8
+
+[ALIAS]
+shrlr = SHow Ruler
+shtim = SHow TIME
+shtgp = SHow STGp
+shcac = SPadmin SHow CAche
+rul = SPadmin SHow RULes
+deb = SPadmin SET DEBUG
+ver = SPadmin SHow VERsion
+
+[SERVER_A]
+dsmadmc_id = support
+dsmadmc_password = userkft1q2
+
