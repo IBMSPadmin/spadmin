@@ -15,6 +15,8 @@ from pprint import pprint, pformat
 
 from re import search, IGNORECASE
 
+import humanbytes
+
 # sub injection test
 spadmin_commands = {}
 disabled_words = ['DEFAULT','ALIAS','SPADMIN']
@@ -169,6 +171,7 @@ spadmin_commands[ 'SPadmin SET DEBUG' ] = spadmin_set_debug
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SET' ].append( 'DEBUG' )
 dynruleinjector( 'SPadmin SET DEBUG' )
 
+
 def spadmin_unset_debug( self, parameters ):
     print( 'Debug is set to OFF. The pervious debug level was: [' + logging.getLevelName( globals.logger.getEffectiveLevel() ) + '].' )
     globals.logger.setLevel( logging.INFO )
@@ -202,7 +205,7 @@ def spadmin_show_commands( self, parameters ):
     for key in spadmin_commands:
             data.append( [ key ] )
 
-    utilities.printer( columnar( data, headers=[ 
+    utilities.printer( columnar( sorted( data ), headers=[ 
         colored( 'Command name', 'white', attrs=['bold'] ) ], 
         justify = [ 'l' ], max_column_width = 120 ) )
 #
@@ -355,9 +358,8 @@ def show_stgpool( self, parameters ):
         else:
             data[index][3] = round((float(d)/1024),1)
 
-    table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)',
-                                    'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
-                     justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
+    table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)', 'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
+                justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
     utilities.printer( table )
 #
 spadmin_commands[ 'SHow STGpools' ] = show_stgpool
@@ -386,6 +388,33 @@ def echo( self, parameters ):
     print( parameters )
 #    
 spadmin_commands[ 'PRint' ] = echo
+
+
+def show_sessions( self, parameters ):
+    
+    data = globals.tsm.send_command_array_array_tabdel( 'select SESSION_ID, STATE, WAIT_SECONDS, BYTES_SENT, BYTES_RECEIVED, SESSION_TYPE, CLIENT_PLATFORM, CLIENT_NAME,MOUNT_POINT_WAIT, INPUT_MOUNT_WAIT, INPUT_VOL_WAIT, INPUT_VOL_ACCESS, OUTPUT_MOUNT_WAIT, OUTPUT_VOL_WAIT, OUTPUT_VOL_ACCESS, LAST_VERB, VERB_STATE from sessions order by 1' )
+    
+    data2 = []
+    for index, row in enumerate( data ):
+               
+        if int( row[ 2 ] ) > 60:
+            wait = colored( row[ 2 ], 'red', attrs = [ 'bold' ] )            
+        else: 
+            wait = row[ 2 ]            
+        
+        bytes_sent     = humanbytes.HumanBytes.format( int( row[ 3] ), precision = 0 )
+        bytes_received = humanbytes.HumanBytes.format( int( row[ 4 ] ), precision = 0 )
+        
+        mediaaccess = ''.join( row[ 8:14 ] )
+        
+        data2.append( [ index + 1,  row[ 0 ], row[ 1 ], row[ 2 ], bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
+    
+    utilities.printer( columnar( data2, headers = [ 
+        '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
+        justify=[ 'r', 'c', 'c', 'c', 'r', 'r', 'r', 'c', 'r', 'l', 'l' ] ) )
+    
+spadmin_commands[ 'SHow SESsions' ] = show_sessions
+dynruleinjector(  'SHow SESsions' )
 
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
