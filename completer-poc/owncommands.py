@@ -180,7 +180,7 @@ spadmin_commands[ 'SPadmin UNSET DEBUG' ] = spadmin_unset_debug
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'UNSET' )
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin UNSET' ] = []
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin UNSET' ].append( 'DEBUG' )
-dynruleinjector( 'SPadmin SET DEBUG' )
+dynruleinjector( 'SPadmin UNSET DEBUG' )
 
 
 def spadmin_show_rules( self, parameters ):
