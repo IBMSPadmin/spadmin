@@ -21,10 +21,10 @@ class dsmadmc_pexpect:
     def __init__(self, server, id, pa):
         if not server:
             self.STARTCOMMAND_TABDEL = 'dsmadmc' + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
-            self.STARTCOMMAND = 'dsmadmc' + ' -id=' + id + ' -pa=' + pa
+            self.STARTCOMMAND = 'dsmadmc' + ' -NOConfirm' + ' -id=' + id + ' -pa=' + pa
         else:
             self.STARTCOMMAND_TABDEL = 'dsmadmc' + ' -se=' + server + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
-            self.STARTCOMMAND = 'dsmadmc' + ' -se=' + server + ' -id=' + id + ' -pa=' + pa
+            self.STARTCOMMAND = 'dsmadmc' + ' -NOConfirm' + ' -se=' + server + ' -id=' + id + ' -pa=' + pa
 
     def get_tsm_tabdel(self):
 

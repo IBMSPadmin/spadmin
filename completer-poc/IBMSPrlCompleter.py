@@ -59,7 +59,7 @@ class IBMSPrlCompleter:
         # self.spprompt   = spprompt
 
         # print(' and loading rules: ')        
-        self.loadrules( globals.config.getconfiguration()['SPADMIN']['rulefile'] )
+        self.loadrules( globals.rulefilename )
 
     def prompt(self):
         prompt = globals.config.getconfiguration()['SPADMIN']['prompt'].strip( '"' )
@@ -442,6 +442,7 @@ class IBMSPrlCompleter:
                 #   key 4 items with '=' endings: query actlog asasaas=asasas sdsdsds=
                 if ( ( len( key.split() ) == 4 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 5 ) and not ( len( key.split() ) == 5 and key[ -1 ] == '=' ):
                     continue
+                
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
                     

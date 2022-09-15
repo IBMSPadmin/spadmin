@@ -22,7 +22,7 @@ Még nem tiszta 100%-ban, hogy mi a különbség a readline és a gnureadline k�
 
 ```
 $ ./spadmin.py -h
-usage: spadmin.py [-h] [--consoleonly] [-c [COMMANDS]] [-d] [-i [INIFILENAME]] [-l [LOGFILENAME]] [-m] [-n] [-p] [-r] [-v]
+usage: spadmin.py [-h] [--consoleonly] [-c [COMMANDS]] [-d] [-i [INIFILENAME]] [-l [LOGFILENAME]] [-m] [-n] [-p] [-r [RULEFILENAME]] [-s] [-t [TEXTCOLOR]] [-v]
 
 Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.
 
@@ -30,16 +30,20 @@ options:
   -h, --help            show this help message and exit
   --consoleonly         run console only mode!
   -c [COMMANDS], --commands [COMMANDS]
-						autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;
+                        autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;
   -d, --debug           debug messages into log file
   -i [INIFILENAME], --inifilename [INIFILENAME]
-						ini filename
+                        ini filename
   -l [LOGFILENAME], --logfilename [LOGFILENAME]
-						log filename
+                        log filename
   -m, --norlsqlcache    no cache for sql queries in reradline
   -n, --norlsqlhelpepr  no sql queries in reradline
   -p, --prereqcheck     prerequisite check
-  -r, --disablerl       disable readline functionality
+  -r [RULEFILENAME], --rulefilename [RULEFILENAME]
+                        custom rule filename
+  -s, --disablerl       disable readline functionality
+  -t [TEXTCOLOR], --textcolor [TEXTCOLOR]
+                        specify the text color [default: "white"]
   -v, --version         show version information
 
 Thank you very much for downloading and starting to use it!
