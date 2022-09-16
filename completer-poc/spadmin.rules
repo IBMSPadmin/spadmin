@@ -218,6 +218,7 @@ Query ACtlog (\w+=.*){1,} -> SCHedname={Mustexist: ORiginator=CLient}
 Query ACtlog (\w+=.*){1,} -> DOmainname={Mustexist: ORiginator=CLient}
 Query ACtlog (\w+=.*){1,} -> SESsnum={Mustexist: ORiginator=CLient}
 
+Query ACtlog (\w+=.*){1,} -> DOmainname=
 Query ACtlog (\w+=.*){1,} DOmainname= -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}{Mustexist: ORiginator=CLient}
 
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
@@ -298,6 +299,16 @@ Query Node (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LDap
 #Query Node [\w\*]+ (\w+=\w*\s*){1,} Format=         -> Format=Detailed
 #Query Node [\w\*]+ (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LOcal
 #Query Node [\w\*]+ (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LDap
+
+Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Client
+Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=NAS
+Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Server
+Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Any
+Query Node [\w\*]*\s*(\w+=\w*\s*)* DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node [\w\*]*\s*(\w+=\w*\s*)* Format=         -> Format=Standard
+Query Node [\w\*]*\s*(\w+=\w*\s*)* Format=         -> Format=Detailed
+Query Node [\w\*]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LOcal
+Query Node [\w\*]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LDap
 
 # de ez már az 5. szint
 #Query Node \w+ (\w+=\w*\s+){1,} -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}

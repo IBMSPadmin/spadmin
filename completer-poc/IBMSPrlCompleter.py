@@ -73,60 +73,63 @@ class IBMSPrlCompleter:
         # prompt
         return prompt.replace('%SPSERVERNAME%', globals.spprompt)
 
-    def spsqlengine( self, select, tokens=[] ):
+    def spsqlengine( self, select, tokens = [] ):
         
         # Handle SQL requests
 
-        globals.logger.debug(' SP SQL Engine reached with this select:  [' + select + '] command and')
-        globals.logger.debug(' SP SQL Engine reached with these tokens: [' + pformat(tokens) + '].')
+        globals.logger.debug('  SP SQL Engine reached with this select:  [' + select + '] command and' )
+        globals.logger.debug('  SP SQL Engine reached with these tokens: [' + pformat( tokens ) + '].' )
 
         ret = []
 
         # select preparation
-        if search('\'(-\d)\'', select):
+        if search( '\'(-\d)\'', select ):
             # extra index
-            index = search('\'(-\d)\'', select)[1]
-            select = select.replace(str(index), tokens[int(index)])
-            globals.logger.debug(' SP SQL Engine select index preparation result: [' + select + '].')
+            index = search( '\'(-\d)\'', select )[ 1 ]
+            select = select.replace( str( index ), tokens[ int( index ) ])
+            globals.logger.debug('  SP SQL Engine select index preparation result: [' + select + '].')
 
         if search( '{Prefix: (.+)}', select ):
             # extra prefix
             prefix = search( '{Prefix: (.+)}', select )[ 1 ]
             select = select.replace( '{Prefix: ' + prefix + '}', '' )  # remove the logic description
-            select = select.replace( '%PREFIX%', search( '(\w+=)\w*', tokens[ int( prefix ) ] )[ 1 ] )
+            match = search( '(\w+=)\w*', tokens[ int( prefix ) ] )
+            if match:
+                select = select.replace( '%PREFIX%', match[ 1 ] )
 
-            globals.logger.debug(' SP SQL Engine select prefix preparation result: [' + select + '].')
+            globals.logger.debug( '  SP SQL Engine select prefix preparation result: [' + select + '].' )
 
         # logging.info( ' CACHE: [' + pformat( cache ) + '].' )
 
         # cache engine
         if select in self.cache.keys():
-            self.cache_hitratio['hit'] += 1
-            if time() - self.cache_timestamp[select] > int(globals.config.getconfiguration()['SPADMIN']['cache_age']):
+            self.cache_hitratio[ 'hit' ] += 1
+            if time() - self.cache_timestamp[ select ] > int( globals.config.getconfiguration()[ 'SPADMIN' ][ 'cache_age' ]):
                 # refresh needed
-                globals.logger.debug(' SP SQL Engine hit the cache but the stored one is too old!')
-                globals.logger.debug(' CACHE timediff in second(s): [' + str(time() - self.cache_timestamp[select]) + '].')
-                self.cache[select] = globals.tsm.send_command_array_tabdel(select)
-                self.cache_timestamp[select] = time()
-                self.cache_hitratio['hitupdate'] += 1
+                globals.logger.debug( '  SP SQL Engine hit the cache but the stored one is too old!' )
+                globals.logger.debug( '  CACHE timediff in second(s): [' + str(time() - self.cache_timestamp[select]) + '].' )
+                self.cache[ select ] = globals.tsm.send_command_array_tabdel( select )
+                self.cache_timestamp[ select ] = time()
+                self.cache_hitratio[ 'hitupdate' ] += 1
         else:
             # new, init
-            globals.logger.debug(' SP SQL Engine still no cached data store a new one.')
-            self.cache[select] = globals.tsm.send_command_array_tabdel(select)
-            self.cache_timestamp[select] = time()
-            self.cache_hitratio['new'] += 1
+            globals.logger.debug( '  SP SQL Engine still no cached data store a new one.' )
+            self.cache[ select ] = globals.tsm.send_command_array_tabdel( select )
+            self.cache_timestamp[ select ] = time()
+            self.cache_hitratio[ 'new' ] += 1
 
         # logging.info( ' CACHE2: [' + pformat( cache ) + '].' )
 
-        sqlresults = self.cache[select]
-        self.cache_hitratio['request'] += 1
+        sqlresults = self.cache[ select ]
+        self.cache_hitratio[ 'request' ] += 1
 
         # Filter the sqlresults with the last word if possible
         for x in sqlresults:
-            if search('^' + tokens[-1], x, IGNORECASE):
-                ret.append(x + ' ')
+            if search( '^' + tokens[ -1 ], x, IGNORECASE ):
+                ret.append( x + ' ' )
 
         return ret
+
 
     start    = []  # 1. level list
     rules    = {}  # >2. level dictionary
@@ -300,7 +303,10 @@ class IBMSPrlCompleter:
                 #   key not 4 items: query actlog asasaas=asasas sdsdsds
                 # BUTNOT
                 #   key 4 items with '=' endings: query actlog asasaas=asasas sdsdsds=
-                if ( ( len( key.split() ) == 3 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 4 ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
+                
+                keylength = len( key.split() )
+                
+                if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
@@ -309,7 +315,7 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 #if search( '^' + utilities.regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                 if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
+                    globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str( keylength ) + '].' )
                     globals.logger.debug( str( tokenlength) + " let's continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                                       
                     ret += self.SPunversaltokenresolver( key, tokens )
@@ -379,7 +385,8 @@ class IBMSPrlCompleter:
             # LEVEL 5
             logging.info( ' Stepped into LEVEL 5.' )
             
-            for key in self.rules:
+            for key in self.rules:   
+            
                 # SKIP the previous or further level entries when
                 #  +key: query actlog asasaas=
                 #   key not 4 items: query actlog asasaas=asasas sdsdsds
@@ -390,17 +397,19 @@ class IBMSPrlCompleter:
                 # elif key.startswith( 'select' ):  # ???????????????????????????????
                 #     continue
                 #
-                
-                if ( ( len( key.split() ) == 3 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 4 ) and not ( len( key.split() ) == 4 and key[ -1 ] == '=' ):
+                   
+                keylength = len( key.split() )
+                    
+                if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
                      
-                #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
-                #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + key + ']' )
+                #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 #if search( '^' + utilities.regexpgenerator( key ), tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                 if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
+                    globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str( keylength ) + '].' )
                     globals.logger.debug( str( tokenlength) + " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                       
                     ret += self.SPunversaltokenresolver( key, tokens )
@@ -440,9 +449,11 @@ class IBMSPrlCompleter:
                 #   key not 4 items: query actlog asasaas=asasas sdsdsds
                 # BUTNOT
                 #   key 4 items with '=' endings: query actlog asasaas=asasas sdsdsds=
-                if ( ( len( key.split() ) == 4 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 5 ) and not ( len( key.split() ) == 5 and key[ -1 ] == '=' ):
-                    continue
                 
+                keylength = len( key.split() )
+                
+                if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
+                    continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
                     
@@ -450,7 +461,7 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 #if search( '^' + utilities.regexpgenerator( key ), tokens[ -6 ] + ' ' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                 if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -6 ] + ' ' +  tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '].' )
+                    globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -6 ] + ' ' +  tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str( keylength ) + '].' )
                     globals.logger.debug( str( tokenlength) + " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
                    
                     ret += self.SPunversaltokenresolver( key, tokens )
@@ -486,9 +497,10 @@ class IBMSPrlCompleter:
             
             for key in self.rules:
                 
-                if ( ( len( key.split() ) == 4 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 5 ) and not ( len( key.split() ) == 5 and key[ -1 ] == '=' ):
+                keylength = len( key.split() )
+                
+                if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
                     continue
-
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
                     

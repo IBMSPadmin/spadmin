@@ -125,7 +125,7 @@ def regexpgenerator(regexp):
     
         result += '\s+'
     
-    return result[ :-3 ] + savelastchar
+    return result[ :-3 ] + savelastchar + '(?!.*\w+\s)'
 
 
 def dictmerger( destination, source ):
