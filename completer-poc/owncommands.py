@@ -475,7 +475,7 @@ def spadmin_locallog( self, parameters ):
 
     for line in lines[ -30: ]:
         
-        match = search( '^(\d{8})\s(\d{6})\s(\w+)\s(.*)$', line )
+        match = search( '^(\d{8})\s(\d{6})\s(\w+)\s(.*)$', line.rstrip() )
         if match:
             data.append( [ match[ 1 ],  match[ 2 ], match[ 3 ], match[ 4 ] ] )
         else:    

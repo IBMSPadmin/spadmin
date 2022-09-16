@@ -40,6 +40,7 @@ SPadmin -> VERsion
 SPadmin      -> SHow
 SPadmin SHow -> CONFig
 SPadmin SHow -> ENVinronment
+SPadmin SHow -> PROCessinfo
 
 SPadmin     -> SET
 SPadmin SET -> DEBUG
@@ -217,7 +218,6 @@ Query ACtlog (\w+=.*){1,} -> SCHedname={Mustexist: ORiginator=CLient}
 Query ACtlog (\w+=.*){1,} -> DOmainname={Mustexist: ORiginator=CLient}
 Query ACtlog (\w+=.*){1,} -> SESsnum={Mustexist: ORiginator=CLient}
 
-Query ACtlog (\w+=.*){1,} -> DOmainname=
 Query ACtlog (\w+=.*){1,} DOmainname= -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}{Mustexist: ORiginator=CLient}
 
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
