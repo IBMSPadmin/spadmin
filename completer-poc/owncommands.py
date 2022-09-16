@@ -184,12 +184,27 @@ dynruleinjector( 'SPadmin UNSET DEBUG' )
 
 
 def spadmin_show_rules( self, parameters ):
+    
+    min = 0
+    max = 99
+    
+    match = search ( '(\d+)\s+(\d+)', parameters )
+    if match:
+        min = int( match[ 1 ] )
+        max = int( match[ 2 ] )
+    else:
+        match = search ( '(\d+)', parameters )
+        if match:
+            min = int( match[ 1 ] )    
+    
     data  = []
     for key in globals.myIBMSPrlCompleter.rules:
         if globals.myIBMSPrlCompleter.rules[key]:
-            data.append( [ key, len( key.split() ),  globals.myIBMSPrlCompleter.rules[ key ] ] )
+            rulelength = len( key.split() )
+            if rulelength >= min and rulelength <= max:
+                data.append( [ key, rulelength, globals.myIBMSPrlCompleter.rules[ key ] ] )
 
-    utilities.printer( columnar( data, headers=[
+    utilities.printer( columnar( sorted( data, key = lambda x: x[ 1 ] ), headers=[
         colored( 'Regexp', 'white', attrs=['bold'] ),
         colored( 'LVL',    'white', attrs=['bold'] ),
         colored( 'Value',  'white', attrs=['bold'] ) ],
@@ -387,7 +402,7 @@ def show_stgpool( self, parameters ):
            # data[index][3] = round((float(d)/1024),1)
             data[index][3] = humanbytes.HumanBytes.format(float(d)*1024*1024, precision=0)
 
-    table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)', 'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
+    table = columnar(data, headers = [ 'PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig', 'LowMig', 'Recl', 'Next' ],
                 justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
     utilities.printer( table )
 #
@@ -435,12 +450,12 @@ def show_sessions( self, parameters ):
         bytes_received = humanbytes.HumanBytes.format( int( row[ 4 ] ), precision = 0 )
         
         mediaaccess = ''.join( row[ 8:14 ] )
-        
-        data2.append( [ index + 1,  row[ 0 ], row[ 1 ], row[ 2 ], bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
+                
+        data2.append( [ index + 1,  row[ 0 ], row[ 1 ], wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
     
     utilities.printer( columnar( data2, headers = [ 
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
-        justify=[ 'r', 'c', 'c', 'c', 'r', 'r', 'r', 'c', 'r', 'l', 'l' ] ) )
+        justify=[ 'r', 'c', 'c', 'c', 'r', 'r', 'r', 'c', 'l', 'l', 'l' ] ) )
     
 spadmin_commands[ 'SHow SESsions' ] = show_sessions
 dynruleinjector(  'SHow SESsions' )
@@ -463,6 +478,31 @@ def show_processes( self, parameters ):
     
 spadmin_commands[ 'SHow PROCesses' ] = show_processes
 dynruleinjector(  'SHow PROCesses' )
+
+
+def spadmin_locallog( self, parameters ):
+
+    data = []
+
+    logfile = open( globals.logfilename, 'r' )
+    lines = logfile.readlines()
+    logfile.close()
+
+    for line in lines[ -30: ]:
+        
+        match = search( '^(\d{8})\s(\d{6})\s(\w+)\s(.*)$', line.rstrip() )
+        if match:
+            data.append( [ match[ 1 ],  match[ 2 ], match[ 3 ], match[ 4 ] ] )
+        else:    
+            data.append( [ '',  '', '', line ] )
+                         
+    
+    utilities.printer( columnar( data, headers = [ 
+        'Date', 'Time', 'Level', 'Text' ],
+        justify=[ 'l', 'l', 'l', 'l' ] ) )
+    
+spadmin_commands[ 'SPadmin SHow LOCALLOG' ] = spadmin_locallog
+dynruleinjector(  'SPadmin SHow LOCALLOG' )
 
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
