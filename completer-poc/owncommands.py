@@ -184,10 +184,25 @@ dynruleinjector( 'SPadmin UNSET DEBUG' )
 
 
 def spadmin_show_rules( self, parameters ):
+    
+    min = 0
+    max = 99
+    
+    match = search ( '(\d+)\s+(\d+)', parameters )
+    if match:
+        min = int( match[ 1 ] )
+        max = int( match[ 2 ] )
+    else:
+        match = search ( '(\d+)', parameters )
+        if match:
+            min = int( match[ 1 ] )    
+    
     data  = []
     for key in globals.myIBMSPrlCompleter.rules:
         if globals.myIBMSPrlCompleter.rules[key]:
-            data.append( [ key, len( key.split() ),  globals.myIBMSPrlCompleter.rules[ key ] ] )
+            rulelength = len( key.split() )
+            if rulelength >= min and rulelength <= max:
+                data.append( [ key, rulelength, globals.myIBMSPrlCompleter.rules[ key ] ] )
 
     utilities.printer( columnar( data, headers=[
         colored( 'Regexp', 'white', attrs=['bold'] ),
