@@ -204,7 +204,7 @@ def spadmin_show_rules( self, parameters ):
             if rulelength >= min and rulelength <= max:
                 data.append( [ key, rulelength, globals.myIBMSPrlCompleter.rules[ key ] ] )
 
-    utilities.printer( columnar( data, headers=[
+    utilities.printer( columnar( sorted( data, key = lambda x: x[ 1 ] ), headers=[
         colored( 'Regexp', 'white', attrs=['bold'] ),
         colored( 'LVL',    'white', attrs=['bold'] ),
         colored( 'Value',  'white', attrs=['bold'] ) ],
