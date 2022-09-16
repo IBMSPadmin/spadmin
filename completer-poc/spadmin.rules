@@ -34,32 +34,25 @@ $ -> PRint
 # and the rest LEVEL 2, 3, ... #
 ################################
 
-SPadmin -> UPDate
-SPadmin -> VERsion
-
-SPadmin      -> SHow
-SPadmin SHow -> CONFig
-SPadmin SHow -> ENVinronment
-SPadmin SHow -> PROCessinfo
-
-SPadmin     -> SET
-SPadmin SET -> DEBUG
-
 # ACCept Date
 ACCept -> Date
+# =========================================================================================================================
 
 # ACTivate POlicyset domain_name policy_set_name
 ACTivate               -> POlicyset
 ACTivate POlicyset     -> select domain_name from domains
 ACTivate POlicyset \w+ -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
+# =========================================================================================================================
 
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-assign-defmgmtclass-assign-default-management-class
 # ASsign DEFMGmtclass domain_name policy_set_name class_name
 ASsign                      -> DEFMGmtclass
 ASsign DEFMGmtclass         -> select domain_name from domains
 ASsign DEFMGmtclass \w+     -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
 
-# lehet itt két opció kezelését is bele kellene venni a buliba?!
+# lehet itt két opció kezelését is bele kellene venni a buliba?! azaz több tokent-t is lehessen megadni
 ASsign DEFMGmtclass \w+ \w+ -> select class_name from mgmtclasses where domain_name = upper( '-3' )
+# =========================================================================================================================
 
 ###################
 # BAckup commands #
@@ -67,7 +60,6 @@ ASsign DEFMGmtclass \w+ \w+ -> select class_name from mgmtclasses where domain_n
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-backup-db-back-up-database
 # 2
 BAckup                 -> DB
-
 # 3
 BAckup DB              -> DEVclass=
 BAckup DB              -> Type=
@@ -80,8 +72,7 @@ BAckup DB              -> ENCRypt=
 BAckup DB              -> COMPress=
 BAckup DB              -> PROTECTKeys=
 BAckup DB              -> PASSword=
-
-# +3
+# +3 (4)
 BAckup DB DEVclass=    -> select concat( '%PREFIX%', devclass_name ) from devclasses {Prefix: -1}
 BAckup DB Type=        -> Type=Incremental
 BAckup DB Type=        -> Type=Full
@@ -98,7 +89,6 @@ BAckup DB COMPress=    -> COMPress=Yes
 BAckup DB COMPress=    -> COMPress=No
 BAckup DB PROTECTKeys= -> PROTECTKeys=Yes
 BAckup DB PROTECTKeys= -> PROTECTKeys=No
-
 # 4
 BAckup DB (\w+=.*){1,} -> DEVclass=
 BAckup DB (\w+=.*){1,} -> Type=
@@ -111,8 +101,7 @@ BAckup DB (\w+=.*){1,} -> ENCRypt=
 BAckup DB (\w+=.*){1,} -> COMPress=
 BAckup DB (\w+=.*){1,} -> PROTECTKeys=
 BAckup DB (\w+=.*){1,} -> PASSword=
-
-# +4
+# +4 (5)
 BAckup DB (\w+=.*){1,} DEVclass=    -> select concat( '%PREFIX%', devclass_name ) from devclasses {Prefix: -1}
 BAckup DB (\w+=.*){1,} Type=        -> Type=Incremental
 BAckup DB (\w+=.*){1,} Type=        -> Type=Full
@@ -129,20 +118,25 @@ BAckup DB (\w+=.*){1,} COMPress=    -> COMPress=Yes
 BAckup DB (\w+=.*){1,} COMPress=    -> COMPress=No
 BAckup DB (\w+=.*){1,} PROTECTKeys= -> PROTECTKeys=Yes
 BAckup DB (\w+=.*){1,} PROTECTKeys= -> PROTECTKeys=No
+# =========================================================================================================================
 
 BAckup           -> DEVCONFig
 BAckup DEVCONFig -> Filenames=
+# =========================================================================================================================
 
 BAckup             -> VOLHistory
 BAckup VOLHistory  -> Filenames=
+# =========================================================================================================================
 
 ###################
 # DEFine commands #
 ###################
+
 DEFine                     -> ASSOCiation
 DEFine ASSOCiation         -> select domain_name from domains
 DEFine ASSOCiation \w+     -> select schedule_name from client_schedules where domain_name like upper( '-2' )
 DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like upper( '-3' )
+# =========================================================================================================================
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-define-devclass-define-device-class
 # DEFine DEVclass device_class_name LIBRary=library_name DEVType=3590
@@ -167,10 +161,14 @@ DEFine DEVclass \w+ (\w+=.*){1,}            -> LBProtect={Mustexist: DEVType=LTO
 DEFine DEVclass \w+ (\w+=.*){1,} LBProtect= -> LBProtect=READWrite{Mustexist: DEVType=LTO} 
 DEFine DEVclass \w+ (\w+=.*){1,} LBProtect= -> LBProtect=WRITEOnly{Mustexist: DEVType=LTO}
 DEFine DEVclass \w+ (\w+=.*){1,} LBProtect= -> LBProtect=No{Mustexist: DEVType=LTO}
-##################
+# =========================================================================================================================
+
+###################
 # DELete commands #
 ###################
+
 DELete -> STGpool
+# =========================================================================================================================
 
 ##################
 # Query commands #
@@ -219,6 +217,7 @@ Query ACtlog (\w+=.*){1,} -> DOmainname={Mustexist: ORiginator=CLient}
 Query ACtlog (\w+=.*){1,} -> SESsnum={Mustexist: ORiginator=CLient}
 
 Query ACtlog (\w+=.*){1,} DOmainname= -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}{Mustexist: ORiginator=CLient}
+# =========================================================================================================================
 
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
 #^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINTime|begintim|beginti|begint)=
@@ -234,6 +233,7 @@ Query ACtlog (\w+=.*){1,} DOmainname= -> select concat( '%PREFIX%', domain_name 
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-license-display-license-information
 Query -> LICense
+# =========================================================================================================================
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-node-query-nodes
 Query                              -> Node

@@ -97,7 +97,7 @@ def regexpgenerator(regexp):
             
     savelastchar = ''
     if regexp[ -1 ] == '=':
-        savelastchar = regexp[ -1 ]
+        savelastchar = regexp[ -1 ] + '(?!.*\w+\s)'
         regexp = regexp[ : -1 ]
     # # save v2 with regexp pattern
     # match = search( '(=.*)$', regexp )
@@ -125,7 +125,7 @@ def regexpgenerator(regexp):
     
         result += '\s+'
     
-    return result[ :-3 ] + savelastchar + '(?!.*\w+\s)'
+    return result[ :-3 ] + savelastchar
 
 
 def dictmerger( destination, source ):
