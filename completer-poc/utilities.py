@@ -5,9 +5,10 @@ import globals
 import readchar
 import uuid
 import subprocess
+from colorama import Fore, Back, Style
 
 from termcolor import colored
-from re import search, IGNORECASE
+ansi_color_pattern = re.compile(r"\x1b\[.+?m")
 
 
 def refreshrowscolumns():
@@ -80,6 +81,38 @@ def check_connection(server: str, id: str, password: str) -> bool:
         print(exc.output, "\nReturn code:", exc.returncode, "\n")
         return False
 
+
+def start_console(server: str, id: str, password: str) -> bool:
+    if id == '' or password == '':
+        print('Userid and password won\'t be empty!')
+        return False
+    try:
+        if server != '':
+            dsmadmc = subprocess.Popen(
+                ['dsmadmc', '-se=%s' % server, '-id=%s' % id, '-pa=%s' % password, '-console'], stdout=subprocess.PIPE)
+        else:
+            dsmadmc = subprocess.Popen(
+                ['dsmadmc', '-id=%s' % id, '-pa=%s' % password, '-console'], stdout=subprocess.PIPE)
+        print("Console mode started.")
+        while True:
+            line = dsmadmc.stdout.readline().decode("utf-8")
+            if not line:
+                break
+            line = re.sub(r"(Session)", green, line)
+            line = re.sub(r"(No match found using this criteria)", green, line)
+            line = re.sub(r"(Session)", green, line)
+            if re.search("ANR....W", line):
+                line = coloring(Fore.YELLOW, line)
+            if re.search("ANR....E", line):
+                line = coloring(Fore.RED, line)
+            print(line, end='')
+        print("Console mode ended.")
+        return True
+    except subprocess.CalledProcessError as exc:
+        print(exc.output, "\nAn error occured during the console mode, Return code:", exc.returncode, "\n")
+        return False
+
+
 def getmac():
     ret = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
     return ret
@@ -133,3 +166,24 @@ def dictmerger( destination, source ):
         if key not in destination:
              destination[ key ] = []
         destination[ key ].extend( source [ key ] )
+
+
+def green(match_obj):
+    for g in match_obj.groups():
+        if g is not None:
+            return Fore.GREEN + match_obj.group(1) + Style.RESET_ALL
+
+
+def yellow(match_obj):
+    for g in match_obj.groups():
+        if g is not None:
+            return Fore.YELLOW + match_obj.group(1) + Style.RESET_ALL
+
+
+def coloring(color, line) -> str:
+    for match in ansi_color_pattern.finditer(line):
+        if match.group() == Style.RESET_ALL:
+            line = line.replace(match.group(), Style.RESET_ALL + color)
+        else:
+            line = line.replace(match.group(), ''.join([Style.RESET_ALL, match.group()]))
+    return "".join([color, line, Style.RESET_ALL])
