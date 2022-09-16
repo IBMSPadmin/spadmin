@@ -1,0 +1,925 @@
+09/16/2022 15:00:25 ANR0405I Session 3737 ended for administrator SUPPORT (WinNT). (SESSION: 3737)
+09/16/2022 15:00:26 ANR8592I Session 3738 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3738)
+09/16/2022 15:00:26 ANR0407I Session 3738 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:60724). (SESSION: 37
+                    38)
+09/16/2022 15:00:26 ANR2017I Administrator SUPPORT issued command: select distinct stgpool_name,pct_migr,migr_running,pct_utilized from stgpools
+                    p,devclasses r where (p.stg_type='DIRECTORY') or ((r.devclass_name=p.devclass) and (r.devtype='FILE' or p.devclass='DISK')) (
+                    SESSION: 3738)
+09/16/2022 15:00:26 ANR0405I Session 3738 ended for administrator SUPPORT (WinNT). (SESSION: 3738)
+09/16/2022 15:00:27 ANR8592I Session 3739 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3739)
+09/16/2022 15:00:27 ANR0407I Session 3739 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:60725). (SESSION: 37
+                    39)
+09/16/2022 15:00:27 ANR2017I Administrator SUPPORT issued command: select count(*) from sessions where session_type='Node' (SESSION: 3739)
+09/16/2022 15:00:27 ANR0405I Session 3739 ended for administrator SUPPORT (WinNT). (SESSION: 3739)
+09/16/2022 15:02:47 ANR0405I Session 3726 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3726)
+09/16/2022 15:03:15 ANR8592I Session 3741 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3741)
+09/16/2022 15:03:15 ANR0407I Session 3741 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:47744). (SESSION: 3741)
+09/16/2022 15:03:25 ANR8592I Session 3742 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3742)
+09/16/2022 15:03:25 ANR0407I Session 3742 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:60822). (SESSION: 37
+                    42)
+09/16/2022 15:03:25 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3742)
+09/16/2022 15:03:25 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3742)
+09/16/2022 15:03:25 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3742)
+09/16/2022 15:03:25 ANR0405I Session 3742 ended for administrator SUPPORT (WinNT). (SESSION: 3742)
+09/16/2022 15:07:25 ANR8592I Session 3743 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3743)
+09/16/2022 15:07:25 ANR0407I Session 3743 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:60858). (SESSION: 37
+                    43)
+09/16/2022 15:07:25 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb from log (SESSION: 3743)
+09/16/2022 15:07:25 ANR0405I Session 3743 ended for administrator SUPPORT (WinNT). (SESSION: 3743)
+09/16/2022 15:08:15 ANR8592I Session 3745 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3745)
+09/16/2022 15:08:15 ANR0407I Session 3745 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:47222). (SESSION: 3745)
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DBSPACE' order by
+                    COLNO -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DBSPACE -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='LOG' order by COLN
+                    O -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM LOG -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES' order
+                    by COLNO -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES_DIR' or
+                    der by COLNO -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES_DIR -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOLS' order by
+                     COLNO -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOLS -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOL_DIRS' orde
+                    r by COLNO -comma
+09/16/2022 15:08:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOL_DIRS -comma
+09/16/2022 15:08:41 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 15:08:41 ANR2034E SELECT: No match found using this criteria.
+09/16/2022 15:08:51 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 15:08:51 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 15:08:51 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 15:08:51 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 15:08:51 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 15:08:51 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 15:08:51 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 15:08:51 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 15:08:51 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 15:08:51 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 15:08:51 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 15:08:51 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 15:08:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DBCONN
+09/16/2022 15:09:07 ANR1959I Status monitor collecting current data at 03:09:07 PM.
+09/16/2022 15:09:12 ANR1960I Status monitor finished collecting data at 03:09:12 PM and will sleep for 10 minutes.
+09/16/2022 15:12:09 ANR8592I Session 3746 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3746)
+09/16/2022 15:12:09 ANR0406I Session 3746 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:53416). (SESSION: 3746
+                    )
+09/16/2022 15:12:09 ANR0403I Session 3746 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3746)
+09/16/2022 15:12:10 ANR8592I Session 3747 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3747)
+09/16/2022 15:12:10 ANR0406I Session 3747 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:45244). (SESSION: 3747
+                    )
+09/16/2022 15:12:10 ANR0397I Session 3747 for node SP_VE_VMCLI has begun a proxy session for node SP_VE_DATACENTER.  (SESSION: 3747)
+09/16/2022 15:12:11 ANR0399I Session 3747 for node SP_VE_VMCLI has ended a proxy session for node SP_VE_DATACENTER.  (SESSION: 3747)
+09/16/2022 15:12:11 ANR0403I Session 3747 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3747)
+09/16/2022 15:13:15 ANR8592I Session 3749 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3749)
+09/16/2022 15:13:15 ANR0407I Session 3749 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:39090). (SESSION: 3749)
+09/16/2022 15:13:25 ANR0482W Session 3735 for node IBM-OC-USERTSM.USR (DSMAPI) terminated - idle for more than 15 minutes. (SESSION: 3735)
+09/16/2022 15:14:47 ANR0405I Session 3741 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3741)
+09/16/2022 15:15:25 ANR8592I Session 3750 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3750)
+09/16/2022 15:15:25 ANR0407I Session 3750 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:60884). (SESSION: 37
+                    50)
+09/16/2022 15:15:25 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb,int((archlog_used_fs_mb / archlog_tol_fs_m
+                    b) * 100),archlog_used_fs_mb from log (SESSION: 3750)
+09/16/2022 15:15:25 ANR0405I Session 3750 ended for administrator SUPPORT (WinNT). (SESSION: 3750)
+09/16/2022 15:15:26 ANR8592I Session 3751 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3751)
+09/16/2022 15:15:26 ANR0407I Session 3751 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:60885). (SESSION: 37
+                    51)
+09/16/2022 15:15:26 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3751)
+09/16/2022 15:15:26 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3751)
+09/16/2022 15:15:26 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3751)
+09/16/2022 15:15:26 ANR0405I Session 3751 ended for administrator SUPPORT (WinNT). (SESSION: 3751)
+09/16/2022 15:15:26 ANR8592I Session 3752 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3752)
+09/16/2022 15:15:26 ANR0407I Session 3752 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:60886). (SESSION: 37
+                    52)
+09/16/2022 15:15:27 ANR2017I Administrator SUPPORT issued command: select distinct stgpool_name,pct_migr,migr_running,pct_utilized from stgpools
+                    p,devclasses r where (p.stg_type='DIRECTORY') or ((r.devclass_name=p.devclass) and (r.devtype='FILE' or p.devclass='DISK')) (
+                    SESSION: 3752)
+09/16/2022 15:15:27 ANR0405I Session 3752 ended for administrator SUPPORT (WinNT). (SESSION: 3752)
+09/16/2022 15:15:28 ANR8592I Session 3753 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3753)
+09/16/2022 15:15:28 ANR0407I Session 3753 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:60887). (SESSION: 37
+                    53)
+09/16/2022 15:15:28 ANR2017I Administrator SUPPORT issued command: select count(*) from sessions where session_type='Node' (SESSION: 3753)
+09/16/2022 15:15:28 ANR0405I Session 3753 ended for administrator SUPPORT (WinNT). (SESSION: 3753)
+09/16/2022 15:18:15 ANR8592I Session 3755 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3755)
+09/16/2022 15:18:15 ANR0407I Session 3755 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:42740). (SESSION: 3755)
+09/16/2022 15:18:52 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 15:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 15:18:52 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 15:18:52 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 15:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 15:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 15:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 15:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 15:18:52 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 15:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 15:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 15:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 15:19:07 ANR1959I Status monitor collecting current data at 03:19:07 PM.
+09/16/2022 15:19:13 ANR1960I Status monitor finished collecting data at 03:19:13 PM and will sleep for 10 minutes.
+09/16/2022 15:20:47 ANR0405I Session 3745 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3745)
+09/16/2022 15:23:15 ANR8592I Session 3757 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3757)
+09/16/2022 15:23:15 ANR0407I Session 3757 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:54576). (SESSION: 3757)
+09/16/2022 15:23:25 ANR8592I Session 3758 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3758)
+09/16/2022 15:23:25 ANR0407I Session 3758 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:60898). (SESSION: 37
+                    58)
+09/16/2022 15:23:25 ANR2017I Administrator SUPPORT issued command: select archlog_free_fs_mb from log (SESSION: 3758)
+09/16/2022 15:23:25 ANR0405I Session 3758 ended for administrator SUPPORT (WinNT). (SESSION: 3758)
+09/16/2022 15:26:47 ANR0405I Session 3749 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3749)
+09/16/2022 15:27:25 ANR8592I Session 3759 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3759)
+09/16/2022 15:27:25 ANR0407I Session 3759 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:60908). (SESSION: 37
+                    59)
+09/16/2022 15:27:25 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3759)
+09/16/2022 15:27:25 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3759)
+09/16/2022 15:27:25 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3759)
+09/16/2022 15:27:25 ANR0405I Session 3759 ended for administrator SUPPORT (WinNT). (SESSION: 3759)
+09/16/2022 15:28:15 ANR8592I Session 3761 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3761)
+09/16/2022 15:28:15 ANR0407I Session 3761 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:60454). (SESSION: 3761)
+09/16/2022 15:28:15 ANR0405I Session 3761 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3761)
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DBSPACE' order by
+                    COLNO -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DBSPACE -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='LOG' order by COLN
+                    O -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM LOG -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES' order
+                    by COLNO -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES_DIR' or
+                    der by COLNO -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES_DIR -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOLS' order by
+                     COLNO -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOLS -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOL_DIRS' orde
+                    r by COLNO -comma
+09/16/2022 15:28:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOL_DIRS -comma
+09/16/2022 15:28:40 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 15:28:40 ANR2034E SELECT: No match found using this criteria.
+09/16/2022 15:28:52 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 15:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 15:28:52 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 15:28:52 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 15:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 15:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 15:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 15:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 15:28:52 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 15:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 15:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 15:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 15:28:54 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DBCONN
+09/16/2022 15:29:08 ANR1959I Status monitor collecting current data at 03:29:08 PM.
+09/16/2022 15:29:13 ANR1960I Status monitor finished collecting data at 03:29:13 PM and will sleep for 10 minutes.
+09/16/2022 15:30:25 ANR8592I Session 3762 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3762)
+09/16/2022 15:30:25 ANR0407I Session 3762 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61091). (SESSION: 37
+                    62)
+09/16/2022 15:30:25 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb,int((archlog_used_fs_mb / archlog_tol_fs_m
+                    b) * 100),archlog_used_fs_mb from log (SESSION: 3762)
+09/16/2022 15:30:25 ANR0405I Session 3762 ended for administrator SUPPORT (WinNT). (SESSION: 3762)
+09/16/2022 15:30:26 ANR8592I Session 3763 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3763)
+09/16/2022 15:30:26 ANR0407I Session 3763 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61092). (SESSION: 37
+                    63)
+09/16/2022 15:30:26 ANR2017I Administrator SUPPORT issued command: select distinct stgpool_name,pct_migr,migr_running,pct_utilized from stgpools
+                    p,devclasses r where (p.stg_type='DIRECTORY') or ((r.devclass_name=p.devclass) and (r.devtype='FILE' or p.devclass='DISK')) (
+                    SESSION: 3763)
+09/16/2022 15:30:26 ANR0405I Session 3763 ended for administrator SUPPORT (WinNT). (SESSION: 3763)
+09/16/2022 15:30:27 ANR8592I Session 3764 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3764)
+09/16/2022 15:30:27 ANR0407I Session 3764 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61093). (SESSION: 37
+                    64)
+09/16/2022 15:30:27 ANR2017I Administrator SUPPORT issued command: select count(*) from sessions where session_type='Node' (SESSION: 3764)
+09/16/2022 15:30:28 ANR0405I Session 3764 ended for administrator SUPPORT (WinNT). (SESSION: 3764)
+09/16/2022 15:31:25 ANR8592I Session 3765 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3765)
+09/16/2022 15:31:25 ANR0407I Session 3765 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61097). (SESSION: 37
+                    65)
+09/16/2022 15:31:25 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb from log (SESSION: 3765)
+09/16/2022 15:31:25 ANR0405I Session 3765 ended for administrator SUPPORT (WinNT). (SESSION: 3765)
+09/16/2022 15:32:07 ANR8592I Session 3766 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3766)
+09/16/2022 15:32:07 ANR0406I Session 3766 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:48458). (SESSION: 3766
+                    )
+09/16/2022 15:32:07 ANR0403I Session 3766 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3766)
+09/16/2022 15:32:09 ANR8592I Session 3767 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3767)
+09/16/2022 15:32:09 ANR0406I Session 3767 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:43570). (SESSION: 3767
+                    )
+09/16/2022 15:32:09 ANR0397I Session 3767 for node SP_VE_VMCLI has begun a proxy session for node SP_VE_DATACENTER.  (SESSION: 3767)
+09/16/2022 15:32:10 ANR0399I Session 3767 for node SP_VE_VMCLI has ended a proxy session for node SP_VE_DATACENTER.  (SESSION: 3767)
+09/16/2022 15:32:10 ANR0403I Session 3767 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3767)
+09/16/2022 15:32:47 ANR0405I Session 3755 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3755)
+09/16/2022 15:33:15 ANR8592I Session 3769 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3769)
+09/16/2022 15:33:15 ANR0407I Session 3769 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:41534). (SESSION: 3769)
+09/16/2022 15:38:15 ANR8592I Session 3771 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3771)
+09/16/2022 15:38:15 ANR0407I Session 3771 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:42134). (SESSION: 3771)
+09/16/2022 15:38:27 ANR0482W Session 3757 for node IBM-OC-USERTSM.USR (DSMAPI) terminated - idle for more than 15 minutes. (SESSION: 3757)
+09/16/2022 15:38:52 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 15:38:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 15:38:52 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 15:38:52 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 15:38:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 15:38:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 15:38:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 15:38:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 15:38:52 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 15:38:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 15:38:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 15:38:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 15:39:09 ANR1959I Status monitor collecting current data at 03:39:09 PM.
+09/16/2022 15:39:13 ANR1960I Status monitor finished collecting data at 03:39:13 PM and will sleep for 10 minutes.
+09/16/2022 15:39:25 ANR8592I Session 3772 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3772)
+09/16/2022 15:39:25 ANR0407I Session 3772 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61117). (SESSION: 37
+                    72)
+09/16/2022 15:39:25 ANR2017I Administrator SUPPORT issued command: select tot_file_system_mb,free_space_mb from db (SESSION: 3772)
+09/16/2022 15:39:25 ANR0405I Session 3772 ended for administrator SUPPORT (WinNT). (SESSION: 3772)
+09/16/2022 15:39:26 ANR8592I Session 3773 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3773)
+09/16/2022 15:39:26 ANR0407I Session 3773 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61118). (SESSION: 37
+                    73)
+09/16/2022 15:39:26 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3773)
+09/16/2022 15:39:26 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3773)
+09/16/2022 15:39:26 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3773)
+09/16/2022 15:39:26 ANR0405I Session 3773 ended for administrator SUPPORT (WinNT). (SESSION: 3773)
+09/16/2022 15:39:27 ANR8592I Session 3774 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3774)
+09/16/2022 15:39:27 ANR0407I Session 3774 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61119). (SESSION: 37
+                    74)
+09/16/2022 15:39:27 ANR2017I Administrator SUPPORT issued command: select session_id,client_name,wait_seconds from sessions where upper(session_t
+                    ype)<>'ADMIN' and wait_seconds>3600 (SESSION: 3774)
+09/16/2022 15:39:27 ANR2034E SELECT: No match found using this criteria. (SESSION: 3774)
+09/16/2022 15:39:27 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3774)
+09/16/2022 15:39:27 ANR0405I Session 3774 ended for administrator SUPPORT (WinNT). (SESSION: 3774)
+09/16/2022 15:39:28 ANR8592I Session 3775 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3775)
+09/16/2022 15:39:28 ANR0407I Session 3775 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61120). (SESSION: 37
+                    75)
+09/16/2022 15:39:28 ANR2017I Administrator SUPPORT issued command: select library_name,drive_name from drives where online<>'YES' (SESSION: 3775)
+09/16/2022 15:39:28 ANR2034E SELECT: No match found using this criteria. (SESSION: 3775)
+09/16/2022 15:39:28 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3775)
+09/16/2022 15:39:28 ANR0405I Session 3775 ended for administrator SUPPORT (WinNT). (SESSION: 3775)
+09/16/2022 15:39:30 ANR8592I Session 3776 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3776)
+09/16/2022 15:39:30 ANR0407I Session 3776 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61121). (SESSION: 37
+                    76)
+09/16/2022 15:39:30 ANR2017I Administrator SUPPORT issued command: select source_name,destination_name from paths where online<>'YES' (SESSION: 3
+                    776)
+09/16/2022 15:39:30 ANR2034E SELECT: No match found using this criteria. (SESSION: 3776)
+09/16/2022 15:39:30 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3776)
+09/16/2022 15:39:30 ANR0405I Session 3776 ended for administrator SUPPORT (WinNT). (SESSION: 3776)
+09/16/2022 15:43:15 ANR8592I Session 3778 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3778)
+09/16/2022 15:43:15 ANR0407I Session 3778 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:51636). (SESSION: 3778)
+09/16/2022 15:44:47 ANR0405I Session 3769 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3769)
+09/16/2022 15:45:25 ANR8592I Session 3779 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3779)
+09/16/2022 15:45:25 ANR0407I Session 3779 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61145). (SESSION: 37
+                    79)
+09/16/2022 15:45:25 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb,int((archlog_used_fs_mb / archlog_tol_fs_m
+                    b) * 100),archlog_used_fs_mb from log (SESSION: 3779)
+09/16/2022 15:45:25 ANR0405I Session 3779 ended for administrator SUPPORT (WinNT). (SESSION: 3779)
+09/16/2022 15:45:27 ANR8592I Session 3780 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3780)
+09/16/2022 15:45:27 ANR0407I Session 3780 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61146). (SESSION: 37
+                    80)
+09/16/2022 15:45:27 ANR2017I Administrator SUPPORT issued command: select distinct stgpool_name,pct_migr,migr_running,pct_utilized from stgpools
+                    p,devclasses r where (p.stg_type='DIRECTORY') or ((r.devclass_name=p.devclass) and (r.devtype='FILE' or p.devclass='DISK')) (
+                    SESSION: 3780)
+09/16/2022 15:45:27 ANR0405I Session 3780 ended for administrator SUPPORT (WinNT). (SESSION: 3780)
+09/16/2022 15:45:28 ANR8592I Session 3781 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3781)
+09/16/2022 15:45:28 ANR0407I Session 3781 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61147). (SESSION: 37
+                    81)
+09/16/2022 15:45:28 ANR2017I Administrator SUPPORT issued command: select count(*) from sessions where session_type='Node' (SESSION: 3781)
+09/16/2022 15:45:29 ANR0405I Session 3781 ended for administrator SUPPORT (WinNT). (SESSION: 3781)
+09/16/2022 15:47:25 ANR8592I Session 3782 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3782)
+09/16/2022 15:47:25 ANR0407I Session 3782 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61179). (SESSION: 37
+                    82)
+09/16/2022 15:47:25 ANR2017I Administrator SUPPORT issued command: select archlog_free_fs_mb from log (SESSION: 3782)
+09/16/2022 15:47:25 ANR0405I Session 3782 ended for administrator SUPPORT (WinNT). (SESSION: 3782)
+09/16/2022 15:47:34 ANR3638W Space reclamation skipped volume USER08L4 because the spanned volume SA1797L4 in storage pool FILES_LTO is inaccessi
+                    ble. (PROCESS: 21)
+09/16/2022 15:48:15 ANR8592I Session 3784 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3784)
+09/16/2022 15:48:15 ANR0407I Session 3784 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:46058). (SESSION: 3784)
+09/16/2022 15:48:36 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW ALLOC
+09/16/2022 15:48:36 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW REPLICATION
+09/16/2022 15:48:36 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 15:48:36 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS
+09/16/2022 15:48:36 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW CLOUDREADCACHE
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DBSPACE' order by
+                    COLNO -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DBSPACE -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='LOG' order by COLN
+                    O -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM LOG -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES' order
+                    by COLNO -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES_DIR' or
+                    der by COLNO -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES_DIR -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOLS' order by
+                     COLNO -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOLS -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOL_DIRS' orde
+                    r by COLNO -comma
+09/16/2022 15:48:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOL_DIRS -comma
+09/16/2022 15:48:40 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 15:48:40 ANR2034E SELECT: No match found using this criteria.
+09/16/2022 15:48:52 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 15:48:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 15:48:52 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 15:48:52 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 15:48:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 15:48:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 15:48:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 15:48:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 15:48:52 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 15:48:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 15:48:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 15:48:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 15:48:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DBCONN
+09/16/2022 15:49:09 ANR1959I Status monitor collecting current data at 03:49:09 PM.
+09/16/2022 15:49:14 ANR1960I Status monitor finished collecting data at 03:49:14 PM and will sleep for 10 minutes.
+09/16/2022 15:50:47 ANR0405I Session 3771 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3771)
+09/16/2022 15:51:25 ANR8592I Session 3785 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3785)
+09/16/2022 15:51:25 ANR0407I Session 3785 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61198). (SESSION: 37
+                    85)
+09/16/2022 15:51:25 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3785)
+09/16/2022 15:51:25 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3785)
+09/16/2022 15:51:25 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3785)
+09/16/2022 15:51:25 ANR0405I Session 3785 ended for administrator SUPPORT (WinNT). (SESSION: 3785)
+09/16/2022 15:52:07 ANR8592I Session 3786 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3786)
+09/16/2022 15:52:07 ANR0406I Session 3786 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:46242). (SESSION: 3786
+                    )
+09/16/2022 15:52:07 ANR0403I Session 3786 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3786)
+09/16/2022 15:52:09 ANR8592I Session 3787 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3787)
+09/16/2022 15:52:09 ANR0406I Session 3787 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:49624). (SESSION: 3787
+                    )
+09/16/2022 15:52:09 ANR0397I Session 3787 for node SP_VE_VMCLI has begun a proxy session for node SP_VE_DATACENTER.  (SESSION: 3787)
+09/16/2022 15:52:10 ANR0399I Session 3787 for node SP_VE_VMCLI has ended a proxy session for node SP_VE_DATACENTER.  (SESSION: 3787)
+09/16/2022 15:52:10 ANR0403I Session 3787 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3787)
+09/16/2022 15:53:15 ANR8592I Session 3789 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3789)
+09/16/2022 15:53:15 ANR0407I Session 3789 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:41342). (SESSION: 3789)
+09/16/2022 15:54:39 ANR8592I Session 3790 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3790)
+09/16/2022 15:54:39 ANR0407I Session 3790 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61224). (SESSION: 37
+                    90)
+09/16/2022 15:54:39 ANR2017I Administrator SUPPORT issued command: select process_num,process from processes (SESSION: 3790)
+09/16/2022 15:54:39 ANR0944E QUERY PROCESS: No active processes found. (SESSION: 3790)
+09/16/2022 15:54:39 ANR2034E SELECT: No match found using this criteria. (SESSION: 3790)
+09/16/2022 15:54:39 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3790)
+09/16/2022 15:54:39 ANR0405I Session 3790 ended for administrator SUPPORT (WinNT). (SESSION: 3790)
+09/16/2022 15:54:40 ANR8592I Session 3791 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3791)
+09/16/2022 15:54:40 ANR0407I Session 3791 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61225). (SESSION: 37
+                    91)
+09/16/2022 15:54:40 ANR2017I Administrator SUPPORT issued command: QUERY MOUNT  (SESSION: 3791)
+09/16/2022 15:54:40 ANR2034E QUERY MOUNT: No match found using this criteria. (SESSION: 3791)
+09/16/2022 15:54:40 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3791)
+09/16/2022 15:54:40 ANR0405I Session 3791 ended for administrator SUPPORT (WinNT). (SESSION: 3791)
+09/16/2022 15:55:26 ANR8592I Session 3792 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3792)
+09/16/2022 15:55:26 ANR0407I Session 3792 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61226). (SESSION: 37
+                    92)
+09/16/2022 15:55:26 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb from log (SESSION: 3792)
+09/16/2022 15:55:26 ANR0405I Session 3792 ended for administrator SUPPORT (WinNT). (SESSION: 3792)
+09/16/2022 15:56:47 ANR0405I Session 3778 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3778)
+09/16/2022 15:58:15 ANR8592I Session 3794 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3794)
+09/16/2022 15:58:15 ANR0407I Session 3794 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:51608). (SESSION: 3794)
+09/16/2022 15:58:52 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 15:58:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 15:58:52 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 15:58:52 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 15:58:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 15:58:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 15:58:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 15:58:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 15:58:52 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 15:58:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 15:58:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 15:58:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 15:59:10 ANR1959I Status monitor collecting current data at 03:59:10 PM.
+09/16/2022 15:59:15 ANR1960I Status monitor finished collecting data at 03:59:15 PM and will sleep for 10 minutes.
+09/16/2022 16:00:28 ANR8592I Session 3795 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3795)
+09/16/2022 16:00:28 ANR0407I Session 3795 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61279). (SESSION: 37
+                    95)
+09/16/2022 16:00:28 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb,int((archlog_used_fs_mb / archlog_tol_fs_m
+                    b) * 100),archlog_used_fs_mb from log (SESSION: 3795)
+09/16/2022 16:00:28 ANR0405I Session 3795 ended for administrator SUPPORT (WinNT). (SESSION: 3795)
+09/16/2022 16:00:33 ANR8592I Session 3796 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3796)
+09/16/2022 16:00:33 ANR0407I Session 3796 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61283). (SESSION: 37
+                    96)
+09/16/2022 16:00:33 ANR2017I Administrator SUPPORT issued command: select distinct stgpool_name,pct_migr,migr_running,pct_utilized from stgpools
+                    p,devclasses r where (p.stg_type='DIRECTORY') or ((r.devclass_name=p.devclass) and (r.devtype='FILE' or p.devclass='DISK')) (
+                    SESSION: 3796)
+09/16/2022 16:00:33 ANR0405I Session 3796 ended for administrator SUPPORT (WinNT). (SESSION: 3796)
+09/16/2022 16:00:35 ANR8592I Session 3797 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3797)
+09/16/2022 16:00:35 ANR0407I Session 3797 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61285). (SESSION: 37
+                    97)
+09/16/2022 16:00:35 ANR2017I Administrator SUPPORT issued command: select count(*) from sessions where session_type='Node' (SESSION: 3797)
+09/16/2022 16:00:35 ANR0405I Session 3797 ended for administrator SUPPORT (WinNT). (SESSION: 3797)
+09/16/2022 16:02:47 ANR0405I Session 3784 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3784)
+09/16/2022 16:03:15 ANR8592I Session 3799 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3799)
+09/16/2022 16:03:15 ANR0407I Session 3799 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:46206). (SESSION: 3799)
+09/16/2022 16:03:15 ANR0405I Session 3799 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3799)
+09/16/2022 16:03:26 ANR8592I Session 3800 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3800)
+09/16/2022 16:03:26 ANR0407I Session 3800 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61334). (SESSION: 38
+                    00)
+09/16/2022 16:03:26 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3800)
+09/16/2022 16:03:26 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3800)
+09/16/2022 16:03:26 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3800)
+09/16/2022 16:03:26 ANR0405I Session 3800 ended for administrator SUPPORT (WinNT). (SESSION: 3800)
+09/16/2022 16:08:15 ANR8592I Session 3802 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3802)
+09/16/2022 16:08:15 ANR0407I Session 3802 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:57770). (SESSION: 3802)
+09/16/2022 16:08:29 ANR0482W Session 3789 for node IBM-OC-USERTSM.USR (DSMAPI) terminated - idle for more than 15 minutes. (SESSION: 3789)
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DBSPACE' order by
+                    COLNO -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DBSPACE -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='LOG' order by COLN
+                    O -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM LOG -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES' order
+                    by COLNO -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES_DIR' or
+                    der by COLNO -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES_DIR -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOLS' order by
+                     COLNO -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOLS -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOL_DIRS' orde
+                    r by COLNO -comma
+09/16/2022 16:08:40 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOL_DIRS -comma
+09/16/2022 16:08:40 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 16:08:40 ANR2034E SELECT: No match found using this criteria.
+09/16/2022 16:08:52 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 16:08:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 16:08:53 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 16:08:53 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 16:08:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 16:08:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 16:08:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 16:08:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 16:08:53 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 16:08:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 16:08:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 16:08:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 16:08:54 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DBCONN
+09/16/2022 16:09:10 ANR1959I Status monitor collecting current data at 04:09:10 PM.
+09/16/2022 16:09:15 ANR1960I Status monitor finished collecting data at 04:09:15 PM and will sleep for 10 minutes.
+09/16/2022 16:11:26 ANR8592I Session 3803 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3803)
+09/16/2022 16:11:26 ANR0407I Session 3803 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61438). (SESSION: 38
+                    03)
+09/16/2022 16:11:26 ANR2017I Administrator SUPPORT issued command: select archlog_free_fs_mb from log (SESSION: 3803)
+09/16/2022 16:11:26 ANR0405I Session 3803 ended for administrator SUPPORT (WinNT). (SESSION: 3803)
+09/16/2022 16:12:07 ANR8592I Session 3804 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3804)
+09/16/2022 16:12:07 ANR0406I Session 3804 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:59638). (SESSION: 3804
+                    )
+09/16/2022 16:12:07 ANR0403I Session 3804 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3804)
+09/16/2022 16:12:08 ANR8592I Session 3805 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3805)
+09/16/2022 16:12:08 ANR0406I Session 3805 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:50048). (SESSION: 3805
+                    )
+09/16/2022 16:12:08 ANR0397I Session 3805 for node SP_VE_VMCLI has begun a proxy session for node SP_VE_DATACENTER.  (SESSION: 3805)
+09/16/2022 16:12:09 ANR0399I Session 3805 for node SP_VE_VMCLI has ended a proxy session for node SP_VE_DATACENTER.  (SESSION: 3805)
+09/16/2022 16:12:09 ANR0403I Session 3805 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3805)
+09/16/2022 16:13:15 ANR8592I Session 3807 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3807)
+09/16/2022 16:13:15 ANR0407I Session 3807 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:54508). (SESSION: 3807)
+09/16/2022 16:13:29 ANR0482W Session 3794 for node IBM-OC-USERTSM.USR (DSMAPI) terminated - idle for more than 15 minutes. (SESSION: 3794)
+09/16/2022 16:15:26 ANR8592I Session 3809 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3809)
+09/16/2022 16:15:26 ANR0407I Session 3809 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61442). (SESSION: 38
+                    09)
+09/16/2022 16:15:26 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb,int((archlog_used_fs_mb / archlog_tol_fs_m
+                    b) * 100),archlog_used_fs_mb from log (SESSION: 3809)
+09/16/2022 16:15:26 ANR0405I Session 3809 ended for administrator SUPPORT (WinNT). (SESSION: 3809)
+09/16/2022 16:15:26 ANR8592I Session 3808 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3808)
+09/16/2022 16:15:26 ANR0407I Session 3808 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61441). (SESSION: 38
+                    08)
+09/16/2022 16:15:26 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3808)
+09/16/2022 16:15:26 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3808)
+09/16/2022 16:15:26 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3808)
+09/16/2022 16:15:26 ANR0405I Session 3808 ended for administrator SUPPORT (WinNT). (SESSION: 3808)
+09/16/2022 16:15:27 ANR8592I Session 3810 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3810)
+09/16/2022 16:15:27 ANR0407I Session 3810 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61443). (SESSION: 38
+                    10)
+09/16/2022 16:15:27 ANR2017I Administrator SUPPORT issued command: select distinct stgpool_name,pct_migr,migr_running,pct_utilized from stgpools
+                    p,devclasses r where (p.stg_type='DIRECTORY') or ((r.devclass_name=p.devclass) and (r.devtype='FILE' or p.devclass='DISK')) (
+                    SESSION: 3810)
+09/16/2022 16:15:27 ANR0405I Session 3810 ended for administrator SUPPORT (WinNT). (SESSION: 3810)
+09/16/2022 16:15:28 ANR8592I Session 3811 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3811)
+09/16/2022 16:15:28 ANR0407I Session 3811 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61444). (SESSION: 38
+                    11)
+09/16/2022 16:15:28 ANR2017I Administrator SUPPORT issued command: select count(*) from sessions where session_type='Node' (SESSION: 3811)
+09/16/2022 16:15:29 ANR0405I Session 3811 ended for administrator SUPPORT (WinNT). (SESSION: 3811)
+09/16/2022 16:18:15 ANR8592I Session 3813 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3813)
+09/16/2022 16:18:15 ANR0407I Session 3813 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:46132). (SESSION: 3813)
+09/16/2022 16:18:52 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 16:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 16:18:52 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 16:18:52 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 16:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 16:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 16:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 16:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 16:18:52 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 16:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 16:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 16:18:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 16:19:11 ANR1959I Status monitor collecting current data at 04:19:11 PM.
+09/16/2022 16:19:17 ANR1960I Status monitor finished collecting data at 04:19:17 PM and will sleep for 10 minutes.
+09/16/2022 16:19:26 ANR8592I Session 3814 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3814)
+09/16/2022 16:19:26 ANR0407I Session 3814 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61547). (SESSION: 38
+                    14)
+09/16/2022 16:19:26 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb from log (SESSION: 3814)
+09/16/2022 16:19:26 ANR0405I Session 3814 ended for administrator SUPPORT (WinNT). (SESSION: 3814)
+09/16/2022 16:20:47 ANR0405I Session 3802 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3802)
+09/16/2022 16:23:15 ANR8592I Session 3816 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3816)
+09/16/2022 16:23:15 ANR0407I Session 3816 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:42992). (SESSION: 3816)
+09/16/2022 16:26:47 ANR0405I Session 3807 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3807)
+09/16/2022 16:27:28 ANR8592I Session 3817 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3817)
+09/16/2022 16:27:28 ANR0407I Session 3817 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:61919). (SESSION: 38
+                    17)
+09/16/2022 16:27:28 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3817)
+09/16/2022 16:27:28 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3817)
+09/16/2022 16:27:28 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3817)
+09/16/2022 16:27:28 ANR0405I Session 3817 ended for administrator SUPPORT (WinNT). (SESSION: 3817)
+09/16/2022 16:28:15 ANR8592I Session 3819 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3819)
+09/16/2022 16:28:15 ANR0407I Session 3819 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:36598). (SESSION: 3819)
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DBSPACE' order by
+                    COLNO -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DBSPACE -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='LOG' order by COLN
+                    O -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM LOG -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES' order
+                    by COLNO -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES_DIR' or
+                    der by COLNO -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES_DIR -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOLS' order by
+                     COLNO -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOLS -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOL_DIRS' orde
+                    r by COLNO -comma
+09/16/2022 16:28:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOL_DIRS -comma
+09/16/2022 16:28:41 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 16:28:41 ANR2034E SELECT: No match found using this criteria.
+09/16/2022 16:28:52 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 16:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 16:28:52 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 16:28:52 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 16:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 16:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 16:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 16:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 16:28:52 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 16:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 16:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 16:28:52 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 16:28:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DBCONN
+09/16/2022 16:29:11 ANR1959I Status monitor collecting current data at 04:29:11 PM.
+09/16/2022 16:29:17 ANR1960I Status monitor finished collecting data at 04:29:17 PM and will sleep for 10 minutes.
+09/16/2022 16:30:26 ANR8592I Session 3820 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3820)
+09/16/2022 16:30:26 ANR0407I Session 3820 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62098). (SESSION: 38
+                    20)
+09/16/2022 16:30:26 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb,int((archlog_used_fs_mb / archlog_tol_fs_m
+                    b) * 100),archlog_used_fs_mb from log (SESSION: 3820)
+09/16/2022 16:30:26 ANR0405I Session 3820 ended for administrator SUPPORT (WinNT). (SESSION: 3820)
+09/16/2022 16:30:27 ANR8592I Session 3821 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3821)
+09/16/2022 16:30:27 ANR0407I Session 3821 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62099). (SESSION: 38
+                    21)
+09/16/2022 16:30:27 ANR2017I Administrator SUPPORT issued command: select distinct stgpool_name,pct_migr,migr_running,pct_utilized from stgpools
+                    p,devclasses r where (p.stg_type='DIRECTORY') or ((r.devclass_name=p.devclass) and (r.devtype='FILE' or p.devclass='DISK')) (
+                    SESSION: 3821)
+09/16/2022 16:30:28 ANR0405I Session 3821 ended for administrator SUPPORT (WinNT). (SESSION: 3821)
+09/16/2022 16:30:29 ANR8592I Session 3822 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3822)
+09/16/2022 16:30:29 ANR0407I Session 3822 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62100). (SESSION: 38
+                    22)
+09/16/2022 16:30:29 ANR2017I Administrator SUPPORT issued command: select count(*) from sessions where session_type='Node' (SESSION: 3822)
+09/16/2022 16:30:29 ANR0405I Session 3822 ended for administrator SUPPORT (WinNT). (SESSION: 3822)
+09/16/2022 16:32:07 ANR8592I Session 3823 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3823)
+09/16/2022 16:32:07 ANR0406I Session 3823 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:55846). (SESSION: 3823
+                    )
+09/16/2022 16:32:07 ANR0403I Session 3823 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3823)
+09/16/2022 16:32:08 ANR8592I Session 3824 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3824)
+09/16/2022 16:32:08 ANR0406I Session 3824 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:44830). (SESSION: 3824
+                    )
+09/16/2022 16:32:08 ANR0397I Session 3824 for node SP_VE_VMCLI has begun a proxy session for node SP_VE_DATACENTER.  (SESSION: 3824)
+09/16/2022 16:32:09 ANR0399I Session 3824 for node SP_VE_VMCLI has ended a proxy session for node SP_VE_DATACENTER.  (SESSION: 3824)
+09/16/2022 16:32:09 ANR0403I Session 3824 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3824)
+09/16/2022 16:32:47 ANR0405I Session 3813 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3813)
+09/16/2022 16:33:15 ANR8592I Session 3826 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3826)
+09/16/2022 16:33:15 ANR0407I Session 3826 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:58482). (SESSION: 3826)
+09/16/2022 16:35:27 ANR8592I Session 3827 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3827)
+09/16/2022 16:35:27 ANR0407I Session 3827 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62253). (SESSION: 38
+                    27)
+09/16/2022 16:35:27 ANR2017I Administrator SUPPORT issued command: select archlog_free_fs_mb from log (SESSION: 3827)
+09/16/2022 16:35:27 ANR0405I Session 3827 ended for administrator SUPPORT (WinNT). (SESSION: 3827)
+09/16/2022 16:38:15 ANR8592I Session 3829 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3829)
+09/16/2022 16:38:15 ANR0407I Session 3829 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:54020). (SESSION: 3829)
+09/16/2022 16:38:15 ANR0405I Session 3829 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3829)
+09/16/2022 16:38:15 ANR0482W Session 3816 for node IBM-OC-USERTSM.USR (DSMAPI) terminated - idle for more than 15 minutes. (SESSION: 3816)
+09/16/2022 16:38:53 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 16:38:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 16:38:53 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 16:38:53 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 16:38:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 16:38:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 16:38:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 16:38:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 16:38:53 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 16:38:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 16:38:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 16:38:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 16:39:12 ANR1959I Status monitor collecting current data at 04:39:12 PM.
+09/16/2022 16:39:17 ANR1960I Status monitor finished collecting data at 04:39:17 PM and will sleep for 10 minutes.
+09/16/2022 16:39:26 ANR8592I Session 3830 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3830)
+09/16/2022 16:39:26 ANR0407I Session 3830 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62279). (SESSION: 38
+                    30)
+09/16/2022 16:39:26 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3830)
+09/16/2022 16:39:26 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3830)
+09/16/2022 16:39:26 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3830)
+09/16/2022 16:39:26 ANR0405I Session 3830 ended for administrator SUPPORT (WinNT). (SESSION: 3830)
+09/16/2022 16:43:15 ANR8592I Session 3832 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3832)
+09/16/2022 16:43:15 ANR0407I Session 3832 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:42490). (SESSION: 3832)
+09/16/2022 16:43:16 ANR0482W Session 3819 for node IBM-OC-USERTSM.USR (DSMAPI) terminated - idle for more than 15 minutes. (SESSION: 3819)
+09/16/2022 16:43:26 ANR8592I Session 3833 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3833)
+09/16/2022 16:43:26 ANR0407I Session 3833 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62289). (SESSION: 38
+                    33)
+09/16/2022 16:43:26 ANR2017I Administrator SUPPORT issued command: select tot_file_system_mb,free_space_mb from db (SESSION: 3833)
+09/16/2022 16:43:26 ANR0405I Session 3833 ended for administrator SUPPORT (WinNT). (SESSION: 3833)
+09/16/2022 16:43:27 ANR8592I Session 3834 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3834)
+09/16/2022 16:43:27 ANR0407I Session 3834 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62290). (SESSION: 38
+                    34)
+09/16/2022 16:43:27 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb from log (SESSION: 3834)
+09/16/2022 16:43:27 ANR0405I Session 3834 ended for administrator SUPPORT (WinNT). (SESSION: 3834)
+09/16/2022 16:43:28 ANR8592I Session 3835 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3835)
+09/16/2022 16:43:28 ANR0407I Session 3835 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62291). (SESSION: 38
+                    35)
+09/16/2022 16:43:28 ANR2017I Administrator SUPPORT issued command: select session_id,client_name,wait_seconds from sessions where upper(session_t
+                    ype)<>'ADMIN' and wait_seconds>3600 (SESSION: 3835)
+09/16/2022 16:43:28 ANR2034E SELECT: No match found using this criteria. (SESSION: 3835)
+09/16/2022 16:43:28 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3835)
+09/16/2022 16:43:28 ANR0405I Session 3835 ended for administrator SUPPORT (WinNT). (SESSION: 3835)
+09/16/2022 16:43:30 ANR8592I Session 3836 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3836)
+09/16/2022 16:43:30 ANR0407I Session 3836 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62292). (SESSION: 38
+                    36)
+09/16/2022 16:43:30 ANR2017I Administrator SUPPORT issued command: select library_name,drive_name from drives where online<>'YES' (SESSION: 3836)
+09/16/2022 16:43:30 ANR2034E SELECT: No match found using this criteria. (SESSION: 3836)
+09/16/2022 16:43:30 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3836)
+09/16/2022 16:43:30 ANR0405I Session 3836 ended for administrator SUPPORT (WinNT). (SESSION: 3836)
+09/16/2022 16:43:31 ANR8592I Session 3837 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3837)
+09/16/2022 16:43:31 ANR0407I Session 3837 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62293). (SESSION: 38
+                    37)
+09/16/2022 16:43:31 ANR2017I Administrator SUPPORT issued command: select source_name,destination_name from paths where online<>'YES' (SESSION: 3
+                    837)
+09/16/2022 16:43:31 ANR2034E SELECT: No match found using this criteria. (SESSION: 3837)
+09/16/2022 16:43:31 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3837)
+09/16/2022 16:43:31 ANR0405I Session 3837 ended for administrator SUPPORT (WinNT). (SESSION: 3837)
+09/16/2022 16:44:16 ANR8592I Session 3838 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3838)
+09/16/2022 16:44:16 ANR0407I Session 3838 started for administrator SUPPORT  (Mac) (SSL dhcp008.in.useribm.hu[10.228.43.8]:53764). (SESSION: 3838
+                    )
+09/16/2022 16:44:24 ANR8592I Session 3839 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3839)
+09/16/2022 16:44:24 ANR0407I Session 3839 started for administrator SUPPORT (Mac) (SSL dhcp008.in.useribm.hu[10.228.43.8]:53765). (SESSION: 3839)
+09/16/2022 16:44:38 ANR2017I Administrator SUPPORT issued command: QUERY ACTLOG  (SESSION: 3839)
+09/16/2022 16:44:47 ANR0405I Session 3826 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3826)
+09/16/2022 16:45:26 ANR8592I Session 3840 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3840)
+09/16/2022 16:45:26 ANR0407I Session 3840 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62295). (SESSION: 38
+                    40)
+09/16/2022 16:45:26 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb,int((archlog_used_fs_mb / archlog_tol_fs_m
+                    b) * 100),archlog_used_fs_mb from log (SESSION: 3840)
+09/16/2022 16:45:26 ANR0405I Session 3838 ended for administrator SUPPORT  (Mac). (SESSION: 3838)
+09/16/2022 16:45:26 ANR0405I Session 3840 ended for administrator SUPPORT (WinNT). (SESSION: 3840)
+09/16/2022 16:45:27 ANR8592I Session 3841 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3841)
+09/16/2022 16:45:27 ANR0407I Session 3841 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62296). (SESSION: 38
+                    41)
+09/16/2022 16:45:27 ANR2017I Administrator SUPPORT issued command: select distinct stgpool_name,pct_migr,migr_running,pct_utilized from stgpools
+                    p,devclasses r where (p.stg_type='DIRECTORY') or ((r.devclass_name=p.devclass) and (r.devtype='FILE' or p.devclass='DISK')) (
+                    SESSION: 3841)
+09/16/2022 16:45:27 ANR0405I Session 3841 ended for administrator SUPPORT (WinNT). (SESSION: 3841)
+09/16/2022 16:45:28 ANR8592I Session 3842 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3842)
+09/16/2022 16:45:28 ANR0407I Session 3842 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62297). (SESSION: 38
+                    42)
+09/16/2022 16:45:28 ANR2017I Administrator SUPPORT issued command: select count(*) from sessions where session_type='Node' (SESSION: 3842)
+09/16/2022 16:45:28 ANR0405I Session 3842 ended for administrator SUPPORT (WinNT). (SESSION: 3842)
+09/16/2022 16:47:34 ANR3638W Space reclamation skipped volume USER08L4 because the spanned volume SA1797L4 in storage pool FILES_LTO is inaccessi
+                    ble. (PROCESS: 21)
+09/16/2022 16:48:15 ANR8592I Session 3844 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3844)
+09/16/2022 16:48:15 ANR0407I Session 3844 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:48854). (SESSION: 3844)
+09/16/2022 16:48:36 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW ALLOC
+09/16/2022 16:48:36 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW REPLICATION
+09/16/2022 16:48:36 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 16:48:36 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS
+09/16/2022 16:48:36 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW CLOUDREADCACHE
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DBSPACE' order by
+                    COLNO -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DBSPACE -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='LOG' order by COLN
+                    O -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM LOG -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES' order
+                    by COLNO -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='DEVCLASSES_DIR' or
+                    der by COLNO -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM DEVCLASSES_DIR -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOLS' order by
+                     COLNO -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOLS -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: select colname,'' from syscat.columns where tabname='STGPOOL_DIRS' orde
+                    r by COLNO -comma
+09/16/2022 16:48:41 ANR2017I Administrator SERVER_CONSOLE issued command: SELECT * FROM STGPOOL_DIRS -comma
+09/16/2022 16:48:41 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 16:48:41 ANR2034E SELECT: No match found using this criteria.
+09/16/2022 16:48:53 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 16:48:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 16:48:53 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 16:48:53 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 16:48:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 16:48:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 16:48:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 16:48:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 16:48:53 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 16:48:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 16:48:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 16:48:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 16:48:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DBCONN
+09/16/2022 16:49:12 ANR1959I Status monitor collecting current data at 04:49:12 PM.
+09/16/2022 16:49:17 ANR1960I Status monitor finished collecting data at 04:49:17 PM and will sleep for 10 minutes.
+09/16/2022 16:51:26 ANR8592I Session 3845 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3845)
+09/16/2022 16:51:26 ANR0407I Session 3845 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62300). (SESSION: 38
+                    45)
+09/16/2022 16:51:26 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3845)
+09/16/2022 16:51:26 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3845)
+09/16/2022 16:51:26 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3845)
+09/16/2022 16:51:26 ANR0405I Session 3845 ended for administrator SUPPORT (WinNT). (SESSION: 3845)
+09/16/2022 16:52:07 ANR8592I Session 3846 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3846)
+09/16/2022 16:52:07 ANR0406I Session 3846 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:42712). (SESSION: 3846
+                    )
+09/16/2022 16:52:07 ANR0403I Session 3846 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3846)
+09/16/2022 16:52:09 ANR8592I Session 3847 connection is using protocol TLSV13, cipher specification TLS_AES_256_GCM_SHA384, certificate TSM Self-
+                    Signed Certificate.  (SESSION: 3847)
+09/16/2022 16:52:09 ANR0406I Session 3847 started for node SP_VE_VMCLI (TDP VMware) (SSL tsm.in.useribm.hu[10.228.109.249]:39686). (SESSION: 3847
+                    )
+09/16/2022 16:52:09 ANR0397I Session 3847 for node SP_VE_VMCLI has begun a proxy session for node SP_VE_DATACENTER.  (SESSION: 3847)
+09/16/2022 16:52:10 ANR0399I Session 3847 for node SP_VE_VMCLI has ended a proxy session for node SP_VE_DATACENTER.  (SESSION: 3847)
+09/16/2022 16:52:10 ANR0403I Session 3847 ended for node SP_VE_VMCLI (TDP VMware). (SESSION: 3847)
+09/16/2022 16:53:15 ANR8592I Session 3849 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3849)
+09/16/2022 16:53:15 ANR0407I Session 3849 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:36340). (SESSION: 3849)
+09/16/2022 16:54:39 ANR8592I Session 3850 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3850)
+09/16/2022 16:54:39 ANR0407I Session 3850 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62302). (SESSION: 38
+                    50)
+09/16/2022 16:54:39 ANR2017I Administrator SUPPORT issued command: select process_num,process from processes (SESSION: 3850)
+09/16/2022 16:54:39 ANR0944E QUERY PROCESS: No active processes found. (SESSION: 3850)
+09/16/2022 16:54:39 ANR2034E SELECT: No match found using this criteria. (SESSION: 3850)
+09/16/2022 16:54:39 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3850)
+09/16/2022 16:54:39 ANR0405I Session 3850 ended for administrator SUPPORT (WinNT). (SESSION: 3850)
+09/16/2022 16:54:40 ANR8592I Session 3851 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3851)
+09/16/2022 16:54:40 ANR0407I Session 3851 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62303). (SESSION: 38
+                    51)
+09/16/2022 16:54:40 ANR2017I Administrator SUPPORT issued command: QUERY MOUNT  (SESSION: 3851)
+09/16/2022 16:54:40 ANR2034E QUERY MOUNT: No match found using this criteria. (SESSION: 3851)
+09/16/2022 16:54:40 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3851)
+09/16/2022 16:54:40 ANR0405I Session 3851 ended for administrator SUPPORT (WinNT). (SESSION: 3851)
+09/16/2022 16:56:47 ANR0405I Session 3832 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3832)
+09/16/2022 16:58:15 ANR8592I Session 3853 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3853)
+09/16/2022 16:58:15 ANR0407I Session 3853 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:59064). (SESSION: 3853)
+09/16/2022 16:58:53 ANR0944E QUERY PROCESS: No active processes found.
+09/16/2022 16:58:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW LOCKS ONLYWAITERS=YES
+09/16/2022 16:58:53 ANR2034E QUERY STGPOOLDIRECTORY: No match found using this criteria.
+09/16/2022 16:58:53 ANR2034E QUERY REPLICATION: No match found using this criteria.
+09/16/2022 16:58:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW DEDUPTHREAD
+09/16/2022 16:58:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW BANNER
+09/16/2022 16:58:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW RESQUEUE
+09/16/2022 16:58:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW TXNTABLE LOCKDETAIL=NO
+09/16/2022 16:58:53 ANR2034E QUERY MOUNT: No match found using this criteria.
+09/16/2022 16:58:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW SESSION FORMAT=DETAILED
+09/16/2022 16:58:53 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW THREADS
+09/16/2022 16:58:54 ANR2017I Administrator SERVER_CONSOLE issued command: SHOW JVM
+09/16/2022 16:59:13 ANR1959I Status monitor collecting current data at 04:59:13 PM.
+09/16/2022 16:59:19 ANR1960I Status monitor finished collecting data at 04:59:19 PM and will sleep for 10 minutes.
+09/16/2022 16:59:26 ANR8592I Session 3854 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3854)
+09/16/2022 16:59:26 ANR0407I Session 3854 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62308). (SESSION: 38
+                    54)
+09/16/2022 16:59:26 ANR2017I Administrator SUPPORT issued command: select archlog_free_fs_mb from log (SESSION: 3854)
+09/16/2022 16:59:26 ANR0405I Session 3854 ended for administrator SUPPORT (WinNT). (SESSION: 3854)
+09/16/2022 16:59:47 ANR0482W Session 3839 for node SUPPORT (Mac) terminated - idle for more than 15 minutes. (SESSION: 3839)
+09/16/2022 17:00:26 ANR8592I Session 3855 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3855)
+09/16/2022 17:00:26 ANR0407I Session 3855 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62309). (SESSION: 38
+                    55)
+09/16/2022 17:00:26 ANR2017I Administrator SUPPORT issued command: select total_Space_mb,used_space_mb,int((archlog_used_fs_mb / archlog_tol_fs_m
+                    b) * 100),archlog_used_fs_mb from log (SESSION: 3855)
+09/16/2022 17:00:26 ANR0405I Session 3855 ended for administrator SUPPORT (WinNT). (SESSION: 3855)
+09/16/2022 17:00:27 ANR8592I Session 3856 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3856)
+09/16/2022 17:00:27 ANR0407I Session 3856 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62310). (SESSION: 38
+                    56)
+09/16/2022 17:00:27 ANR2017I Administrator SUPPORT issued command: select distinct stgpool_name,pct_migr,migr_running,pct_utilized from stgpools
+                    p,devclasses r where (p.stg_type='DIRECTORY') or ((r.devclass_name=p.devclass) and (r.devtype='FILE' or p.devclass='DISK')) (
+                    SESSION: 3856)
+09/16/2022 17:00:27 ANR0405I Session 3856 ended for administrator SUPPORT (WinNT). (SESSION: 3856)
+09/16/2022 17:00:29 ANR8592I Session 3857 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3857)
+09/16/2022 17:00:29 ANR0407I Session 3857 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62311). (SESSION: 38
+                    57)
+09/16/2022 17:00:29 ANR2017I Administrator SUPPORT issued command: select count(*) from sessions where session_type='Node' (SESSION: 3857)
+09/16/2022 17:00:29 ANR0405I Session 3857 ended for administrator SUPPORT (WinNT). (SESSION: 3857)
+09/16/2022 17:02:47 ANR0405I Session 3844 ended for administrator IBM-OC-USERTSM.USR (DSMAPI). (SESSION: 3844)
+09/16/2022 17:03:15 ANR8592I Session 3859 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3859)
+09/16/2022 17:03:15 ANR0407I Session 3859 started for administrator IBM-OC-USERTSM.USR (DSMAPI) (SSL localhost[127.0.0.1]:58180). (SESSION: 3859)
+09/16/2022 17:03:26 ANR8592I Session 3860 connection is using protocol TLSV12, cipher specification TLS_RSA_WITH_AES_256_GCM_SHA384, certificate
+                    TSM Self-Signed Certificate.  (SESSION: 3860)
+09/16/2022 17:03:26 ANR0407I Session 3860 started for administrator SUPPORT (WinNT) (SSL dhcp019.in.useribm.hu[10.228.43.19]:62315). (SESSION: 38
+                    60)
+09/16/2022 17:03:26 ANR2017I Administrator SUPPORT issued command: QUERY REQUEST  (SESSION: 3860)
+09/16/2022 17:03:26 ANR8346I QUERY REQUEST: No requests are outstanding. (SESSION: 3860)
+09/16/2022 17:03:26 ANR2017I Administrator SUPPORT issued command: ROLLBACK  (SESSION: 3860)
+09/16/2022 17:03:26 ANR0405I Session 3860 ended for administrator SUPPORT (WinNT). (SESSION: 3860)
+09/16/2022 17:03:53 ANR8592I Session 3861 connection is using protocol TLSV12, cipher specification TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, certif
+                    icate TSM Self-Signed Certificate.  (SESSION: 3861)
+09/16/2022 17:03:53 ANR0407I Session 3861 started for administrator SUPPORT (Mac) (SSL dhcp008.in.useribm.hu[10.228.43.8]:54234). (SESSION: 3861)
+09/16/2022 17:03:53 ANR2017I Administrator SUPPORT issued command: select SERVER_NAME from STATUS (SESSION: 3861)
+09/16/2022 17:03:53 ANR2017I Administrator SUPPORT issued command: select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS (SESSION: 3861)
+09/16/2022 17:03:56 ANR2017I Administrator SUPPORT issued command: QUERY ACTLOG  (SESSION: 3861)
+09/16/2022 17:04:10 ANR2017I Administrator SUPPORT issued command: QUERY ACTLOG begind=-1  (SESSION: 3861)

@@ -16,7 +16,7 @@ Global spadmin.py development progress status:
 ~~- SPADMin show PROCessinfo~~
 ~~- columnar: üres sorok (valahogy megint viszakrült az üres sor a végére) és sor végi space-ek eltűntetése~~
 ~~- columnar: az utolsó oszlop több karaktert használ, mint illene. Ezeket eliminálni kellene~~
-- columnar: kezelni kell, ha üres adat megy át. Akkor csak a fejléc legyen kiírva
+~~- columnar: kezelni kell, ha üres adat megy át. Akkor csak a fejléc legyen kiírva~~
 ~~- alias kezelés valahogy az inifájlba~~
 ~~- more / grep: (a példaparancs rá: **SPadmin SHow EXtras | grep | invgrep | count**)~~ 
 ~~- columnar: több helyen van fölösleges szóköz még mindig!~~
