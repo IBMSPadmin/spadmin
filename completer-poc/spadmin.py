@@ -112,9 +112,9 @@ if __name__ == '__main__':
         globals.config = Configuration( 'spadmin.ini' )
         
     if args.logfilename:
-        logfilename = args.logfilename
+        globals.logfilename = args.logfilename
     else:
-        logfilename = globals.config.getconfiguration()[ 'SPADMIN' ][ 'logfile' ]
+        globals.logfilename = globals.config.getconfiguration()[ 'SPADMIN' ][ 'logfile' ]
     
     if args.rulefilename:
         globals.rulefilename = args.rulefilename
@@ -122,7 +122,7 @@ if __name__ == '__main__':
         globals.rulefilename = globals.config.getconfiguration()[ 'SPADMIN' ][ 'rulefile' ]
     
     # Logger settings
-    logging.basicConfig( filename = logfilename,
+    logging.basicConfig( filename = globals.logfilename,
                          filemode = 'a',
                          format   = '%(asctime)s %(levelname)s %(message)s',
                          datefmt  = '%Y%m%d %H%M%S',

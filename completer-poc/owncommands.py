@@ -464,5 +464,30 @@ def show_processes( self, parameters ):
 spadmin_commands[ 'SHow PROCesses' ] = show_processes
 dynruleinjector(  'SHow PROCesses' )
 
+
+def spadmin_locallog( self, parameters ):
+
+    data = []
+
+    logfile = open( globals.logfilename, 'r' )
+    lines = logfile.readlines()
+    logfile.close()
+
+    for line in lines[ -30: ]:
+        
+        match = search( '^(\d{8})\s(\d{6})\s(\w+)(\s.*)$', line )
+        if match:
+            data.append( [ match[ 1 ],  match[ 2 ], match[ 3 ], match[ 4 ] ] )
+        else:    
+            data.append( [ '',  '', '', line ] )
+                         
+    
+    utilities.printer( columnar( data, headers = [ 
+        'Date', 'Time', 'Level', 'Text' ],
+        justify=[ 'l', 'l', 'l', 'l' ] ) )
+    
+spadmin_commands[ 'SPadmin SHow LOCALLOG' ] = spadmin_locallog
+dynruleinjector(  'SPadmin SHow LOCALLOG' )
+
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
