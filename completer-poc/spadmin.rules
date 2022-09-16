@@ -40,7 +40,6 @@ SPadmin -> VERsion
 SPadmin      -> SHow
 SPadmin SHow -> CONFig
 SPadmin SHow -> ENVinronment
-SPadmin SHow -> PROCessinfo
 
 SPadmin     -> SET
 SPadmin SET -> DEBUG

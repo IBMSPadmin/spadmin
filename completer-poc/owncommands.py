@@ -186,7 +186,7 @@ dynruleinjector( 'SPadmin UNSET DEBUG' )
 def spadmin_show_rules( self, parameters ):
     data  = []
     for key in globals.myIBMSPrlCompleter.rules:
-        if globals.myIBMSPrlCompleter.rules[ key ] != []:
+        if globals.myIBMSPrlCompleter.rules[key]:
             data.append( [ key, len( key.split() ),  globals.myIBMSPrlCompleter.rules[ key ] ] )
 
     utilities.printer( columnar( data, headers=[
@@ -255,11 +255,24 @@ def spadmin_add_alias( self, parameters ):
         globals.aliases[key] = value
         globals.config.getconfiguration()['ALIAS'][key] = value
         globals.config.writeconfig()
+        dynruleinjector('SPadmin Add ALIas ' + key)
+        globals.myIBMSPrlCompleter.rules['SPadmin Add ALIas'].append(key)
+
 
 #
 spadmin_commands[ 'SPadmin Add ALIas' ] = spadmin_add_alias
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'ALIas' )
 dynruleinjector( 'SPadmin Add ALIas' )
+
+def spadmin_show_processinfo( self, parameters ):
+    data = [["Normal", globals.tsm.get_tsm_normal().pid], ["Tabdelimited", globals.tsm.get_tsm_tabdel().pid]]
+    table = columnar(data,
+                     headers=['dsmadmc','PID'])
+    utilities.printer(table)
+
+
+spadmin_commands[ 'SPadmin SHow PROCessinfo' ] = spadmin_show_processinfo
+dynruleinjector( 'SPadmin SHow PROCessinfo' )
 
 def spadmin_del_alias( self, parameters ):
     if not parameters:
@@ -270,8 +283,7 @@ def spadmin_del_alias( self, parameters ):
             globals.aliases.pop(parameters)
             globals.config.getconfiguration()['ALIAS'].pop(parameters)
             globals.config.writeconfig()
-            ### Megnézni!
-            globals.myIBMSPrlCompleter.dynrules['SPadmin DELete ALIas'] = globals.myIBMSPrlCompleter.dynrules['SPadmin DELete ALIas'].remove(parameters)
+            globals.myIBMSPrlCompleter.rules['SPadmin DELete ALIas'].remove(parameters)
         else:
             print (f'The given alias \'{parameters}\' not found')
 #
@@ -297,11 +309,14 @@ def spadmin_add_server( self, parameters ):
                 globals.config.getconfiguration()[server]['dsmadmc_id'] = userid
                 globals.config.getconfiguration()[server]['dsmadmc_password'] = password
                 globals.config.writeconfig()
+                dynruleinjector('SPadmin DELete SErver ' + server)
+                globals.myIBMSPrlCompleter.rules['SPadmin DELete SErver'].append(server)
+
+
             else:
                 print ('Server parameters not saved!')
 
 spadmin_commands[ 'SPadmin Add SErver' ] = spadmin_add_server
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'SErver' )
 dynruleinjector( 'SPadmin Add SErver' )
 
 
@@ -314,6 +329,8 @@ def spadmin_del_server( self, parameters ):
         if globals.config.getconfiguration().has_section(server) and parameters not in disabled_words:
             globals.config.getconfiguration().pop(server)
             globals.config.writeconfig()
+            globals.myIBMSPrlCompleter.rules['SPadmin DELete SErver'].remove(server)
+
         else:
             print (f'The given server \'{server}\' not found')
 
@@ -321,6 +338,10 @@ def spadmin_del_server( self, parameters ):
 spadmin_commands[ 'SPadmin DELete SErver' ] = spadmin_del_server
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ].append( 'SErver' )
 dynruleinjector( 'SPadmin DELete SErver' )
+for section in globals.config.getconfiguration().sections():
+    if section not in disabled_words:
+        dynruleinjector('SPadmin DELete SErver ' + section)
+
 
 def show_server( self, parameters ):
     for section in globals.config.getconfiguration().sections():
@@ -363,7 +384,8 @@ def show_stgpool( self, parameters ):
         if d == '':
             data[index][3] = 0
         else:
-            data[index][3] = round((float(d)/1024),1)
+           # data[index][3] = round((float(d)/1024),1)
+            data[index][3] = humanbytes.HumanBytes.format(float(d)*1024*1024, precision=0)
 
     table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)', 'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
                 justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])

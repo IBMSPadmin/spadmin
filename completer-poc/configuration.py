@@ -2,24 +2,26 @@ import configparser
 from termcolor import colored
 import setup
 
+
 class Configuration:
     configparser = None
-    configfile   = None
-    defaults     = {
-        'cache_age'        : 60,  # cache entry age (seconds)
-        'cache_disable'    : False,  # disable the dynamic SQL queries for readline
-        'cache_prefetch'   : True,  # prefetch cache data when the program starts
-        'rulefile'         : 'spadmin.rules',  # rule file name
-        'historyfile'      : '.spadmin_history',  # history file name
-        'dsmadmc_path'     : 'dsmadmc',  # the path of dsmadmc
-        'dsmadmc_id'       : 'admin',  # username for dsmadmc
-        'dsmadmc_password' : 'admin',  # password for dsmadmc
-        'logfile'          : 'spadmin.log',  # SPadmin main logfile
-        'debug'            : False,  # enable debug info to the main logfile
-        'autoexec'	       : '',  # auto command execution when spadmin starts
-        'dynamic_readline' : True,   # dynamic SQL queries when TAB + TAB
-        'prompt'           : '"[' + colored( '%%SPSERVERNAME%%', 'white', attrs=[ 'bold' ] ) + '] ' + colored( '>', 'red', attrs=[ 'bold' ] ) + ' "',
-        'rlwordseparation' : 8
+    configfile = None
+    defaults = {
+        'cache_age': 60,  # cache entry age (seconds)
+        'cache_disable': False,  # disable the dynamic SQL queries for readline
+        'cache_prefetch': True,  # prefetch cache data when the program starts
+        'rulefile': 'spadmin.rules',  # rule file name
+        'historyfile': '.spadmin_history',  # history file name
+        'dsmadmc_path': 'dsmadmc',  # the path of dsmadmc
+        'dsmadmc_id': 'admin',  # username for dsmadmc
+        'dsmadmc_password': 'admin',  # password for dsmadmc
+        'logfile': 'spadmin.log',  # SPadmin main logfile
+        'debug': False,  # enable debug info to the main logfile
+        'autoexec': '',  # auto command execution when spadmin starts
+        'dynamic_readline': True,  # dynamic SQL queries when TAB + TAB
+        'prompt': '"[' + colored('%%SPSERVERNAME%%', 'white', attrs=['bold']) + '] ' + colored('>', 'red',
+                                                                                               attrs=['bold']) + ' "',
+        'rlwordseparation': 8
     }
     aliases = {
         'shrlr': 'SHow Ruler',
@@ -30,10 +32,11 @@ class Configuration:
         'rul': 'SPadmin SHow RULes',
         'deb': 'SPadmin SET DEBUG',
     }
+
     def __init__(self, configfile):
         if not configfile:
-            configfile   = 'spadmin.ini'
-        self.configfile  = configfile
+            configfile = 'spadmin.ini'
+        self.configfile = configfile
         self.configparser = configparser.ConfigParser()
         self.configparser.read(configfile)
 
@@ -44,9 +47,10 @@ class Configuration:
             for key in self.defaults:
                 if not self.configparser.has_option('SPADMIN', key):
                     self.configparser['SPADMIN'][key] = str(self.defaults[key])
-                # setup_parameters = setup.Setup()
-                # for key in setup_parameters:
-                #     print(key, "=", setup_parameters[key])
+
+            parameters = setup.Setup().get_parameters()
+            for key in parameters:
+                self.configparser['SPADMIN'][key] = str(parameters[key])
 
         # check default aliases
         if not self.configparser.has_section('ALIAS'):
