@@ -402,7 +402,7 @@ def show_stgpool( self, parameters ):
            # data[index][3] = round((float(d)/1024),1)
             data[index][3] = humanbytes.HumanBytes.format(float(d)*1024*1024, precision=0)
 
-    table = columnar(data, headers = [ 'Pool Name', 'Device class', 'Coll.', 'Est. Cap. (GB)', 'Pct. Utilized', 'Pct. Migr.', 'High Mig.', 'Low Mig.', 'Recl. ', 'Next' ],
+    table = columnar(data, headers = [ 'PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig', 'LowMig', 'Recl', 'Next' ],
                 justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
     utilities.printer( table )
 #
@@ -450,12 +450,12 @@ def show_sessions( self, parameters ):
         bytes_received = humanbytes.HumanBytes.format( int( row[ 4 ] ), precision = 0 )
         
         mediaaccess = ''.join( row[ 8:14 ] )
-        
-        data2.append( [ index + 1,  row[ 0 ], row[ 1 ], row[ 2 ], bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
+                
+        data2.append( [ index + 1,  row[ 0 ], row[ 1 ], wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
     
     utilities.printer( columnar( data2, headers = [ 
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
-        justify=[ 'r', 'c', 'c', 'c', 'r', 'r', 'r', 'c', 'r', 'l', 'l' ] ) )
+        justify=[ 'r', 'c', 'c', 'c', 'r', 'r', 'r', 'c', 'l', 'l', 'l' ] ) )
     
 spadmin_commands[ 'SHow SESsions' ] = show_sessions
 dynruleinjector(  'SHow SESsions' )
