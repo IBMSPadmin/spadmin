@@ -141,11 +141,6 @@ if __name__ == '__main__':
     if args.commands:
         globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ]    = args.commands
 
-    if args.consoleonly:
-        print ("CONSOLE")
-        quit(0)
-
-
     globals.logger.info( utilities.consolefilledline( 'START' ) )
     globals.logger.info( utilities.consolefilledline( 'START' ) )
     globals.logger.info( utilities.consolefilledline( 'START' ) )
@@ -276,9 +271,7 @@ if __name__ == '__main__':
         # simple command runner engine
         for command in line.split( ';' ):
             command      = command.strip()
-            if command.endswith('?'):
-                command = "".join(["help", " ", command[:-1], " | ", "more"])
-
+            
             # handling aliases
             # firstcmdpart = command.split( ' ' )[ 0 ]
             # if firstcmdpart.lower() in globals.aliases:
@@ -306,8 +299,7 @@ if __name__ == '__main__':
                 else:
                     continue
             
-            globals.logger.info( 'Base command: [' + command + '] and extras:' )        
-            globals.logger.info( pformat( globals.extras ) )
+            globals.logger.info( 'Base command: [' + command + '] and extras: ' + pformat( globals.extras ) )
                     
             # it's not own command. Does the user want to possibly exit???
             if search( '^' + utilities.regexpgenerator( 'QUIt' ),   command, IGNORECASE ) or \
