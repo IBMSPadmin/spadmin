@@ -366,6 +366,9 @@ REMove          -> Node
 ################
 SHow -> TIME
 
+SHow       -> SLOTS
+SHow SLOTS -> select library_name from libraries
+
 ###############################################################
 
 # DEBUG
