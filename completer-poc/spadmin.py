@@ -88,7 +88,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser( prog = colored( 'spadmin.py', 'white', attrs=[ 'bold' ] ), description = 'Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.', epilog = colored( 'Thank you very much for downloading and starting to use it!', 'white', attrs = [ 'bold' ] ) )
     
     parser.add_argument( '--consoleonly',          action = 'store_const', const = True,          help = 'run console only mode!' )
-    parser.add_argument( '-c', '--commands',    nargs = '?',                                      help = 'autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
+    parser.add_argument( '-c', '--commands',       nargs = '?',                                   help = 'autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
     parser.add_argument( '-d', '--debug',          action = 'store_const', const = True,          help = 'debug messages into log file' )
     parser.add_argument( '-i', '--inifilename',    nargs = '?',                                   help = 'ini filename' )
     parser.add_argument( '-l', '--logfilename',    nargs = '?',                                   help = 'log filename' )
@@ -99,7 +99,8 @@ if __name__ == '__main__':
     parser.add_argument( '-s', '--disablerl',      action = 'store_const', const = True,          help = 'disable readline functionality' )
     parser.add_argument( '-t', '--textcolor',      nargs = '?',                                   help = 'specify the text color [default: "white"]' )
     parser.add_argument( '-v', '--version',        action = 'version', version = '%(prog)s v1.0', help = 'show version information' )
-    
+    parser.add_argument( '-w', '--nowelcome',      nargs = '?',                                   help = 'no welcome messages' )
+
     args = parser.parse_args()
 
     # create a namespace for global variables
