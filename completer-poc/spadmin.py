@@ -315,6 +315,12 @@ if __name__ == '__main__':
             
                 globals.logger.debug( utilities.consolefilledline( '<<< INPUT LOOP END ' ) )
                 
+                # exit code override if exists
+                exitcode = 0
+                match    = search( '^\w+\s+(\d+)', command, IGNORECASE )
+                if match:
+                    exitcode = int( match[ 1 ] )
+                
                 # End of the prg
                 prgend = time()
                 utilities.consoleline( '-' )
@@ -331,7 +337,7 @@ if __name__ == '__main__':
                 globals.logger.info( utilities.consolefilledline( 'END' ) )
                 globals.logger.info( utilities.consolefilledline( 'END' ) )
                 
-                sys.exit( 0 )
+                sys.exit( exitcode )
 
             # own command executor
             match = False
