@@ -89,17 +89,18 @@ if __name__ == '__main__':
     
     parser.add_argument( '--consoleonly',          action = 'store_const', const = True,          help = 'run console only mode!' )
     parser.add_argument( '-c', '--commands',       nargs = '?',                                   help = 'autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
-    parser.add_argument( '-d', '--debug',          action = 'store_const', const = True,          help = 'debug messages into log file' )
-    parser.add_argument( '-i', '--inifilename',    nargs = '?',                                   help = 'ini filename' )
-    parser.add_argument( '-l', '--logfilename',    nargs = '?',                                   help = 'log filename' )
-    parser.add_argument( '-m', '--norlsqlcache',   action = 'store_const', const = True,          help = 'no cache for sql queries in reradline' )
-    parser.add_argument( '-n', '--norlsqlhelpepr', action = 'store_const', const = True,          help = 'no sql queries in reradline' )
-    parser.add_argument( '-p', '--prereqcheck',    action = 'store_const', const = True,          help = 'prerequisite check' )
-    parser.add_argument( '-r', '--rulefilename',   nargs = '?',                                   help = 'custom rule filename' )
-    parser.add_argument( '-s', '--disablerl',      action = 'store_const', const = True,          help = 'disable readline functionality' )
-    parser.add_argument( '-t', '--textcolor',      nargs = '?',                                   help = 'specify the text color [default: "white"]' )
-    parser.add_argument( '-v', '--version',        action = 'version', version = '%(prog)s v1.0', help = 'show version information' )
-    parser.add_argument( '-w', '--nowelcome',      action = 'store_const', const = True,          help = 'no welcome messages' )
+    parser.add_argument( '-d', '--debug',           action = 'store_const', const = True,          help = 'debug messages into log file' )
+    parser.add_argument( '-i', '--inifilename',     nargs = '?',                                   help = 'ini filename' )
+    parser.add_argument( '-l', '--logfilename',     nargs = '?',                                   help = 'log filename' )
+    parser.add_argument( '-m', '--norlsqlcache',    action = 'store_const', const = True,          help = 'no cache for sql queries in reradline' )
+    parser.add_argument( '-n', '--norlsqlhelpepr',  action = 'store_const', const = True,          help = 'no sql queries in reradline' )
+    parser.add_argument( '-p', '--prereqcheck',     action = 'store_const', const = True,          help = 'prerequisite check' )
+    parser.add_argument( '-r', '--rulefilename',    nargs = '?',                                   help = 'custom rule filename' )
+    parser.add_argument( '-s', '--disablerl',       action = 'store_const', const = True,          help = 'disable readline functionality' )
+    parser.add_argument( '-t', '--textcolor',       nargs = '?',                                   help = 'specify the text color [default: "white"]' )
+    parser.add_argument( '-u', '--nohumanreadable', action = 'version', version = '%(prog)s v1.0', help = 'no human readable conversions' )
+    parser.add_argument( '-v', '--version',         action = 'version', version = '%(prog)s v1.0', help = 'show version information' )
+    parser.add_argument( '-w', '--nowelcome',       action = 'store_const', const = True,          help = 'no welcome messages' )
 
     args = parser.parse_args()
 
@@ -220,10 +221,10 @@ if __name__ == '__main__':
         print()
         print( ' ' + colored( 'Short HELP:', 'cyan', attrs=[ 'bold', 'underline' ] ) )
         print( '''
-          Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
-          use: "REload" to reload the rule file! and
-          use: "SHow LOG" to reach the local log file!''' )
-    
+  Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
+  use: "REload" to reload the rule file! and
+  use: "SHow LOG" to reach the local log file!''' )
+
         #utilities.ruler( utilities, '' )
         print()
 
