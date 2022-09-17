@@ -99,7 +99,7 @@ if __name__ == '__main__':
     parser.add_argument( '-s', '--disablerl',      action = 'store_const', const = True,          help = 'disable readline functionality' )
     parser.add_argument( '-t', '--textcolor',      nargs = '?',                                   help = 'specify the text color [default: "white"]' )
     parser.add_argument( '-v', '--version',        action = 'version', version = '%(prog)s v1.0', help = 'show version information' )
-    parser.add_argument( '-w', '--nowelcome',      nargs = '?',                                   help = 'no welcome messages' )
+    parser.add_argument( '-w', '--nowelcome',      action = 'store_const', const = True,          help = 'no welcome messages' )
 
     args = parser.parse_args()
 
@@ -153,36 +153,37 @@ if __name__ == '__main__':
     globals.logger.info( utilities.consolefilledline( 'START' ) )
 
     globals.logger.debug( 'ARGS: ' + pformat( args ) )
-        
-    # Clear screen
-    if platform.system() == 'Windows':
-        os.system( 'cls' )
-    else:
-        os.system( 'clear' )
-    
+          
     # get the screen size and store it as a global variable
     utilities.refreshrowscolumns()
 
-    # https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
-    print( colored( '''
+    if not args.nowelcome:
+        # Clear screen
+        if platform.system() == 'Windows':
+            os.system( 'cls' )
+        else:
+            os.system( 'clear' )
+        
+        # https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
+        print( colored( '''
  ███████╗ ██████╗   █████╗  ██████╗  ███╗   ███╗ ██╗ ███╗   ██╗     ██████╗  ██╗   ██╗
  ██╔════╝ ██╔══██╗ ██╔══██╗ ██╔══██╗ ████╗ ████║ ██║ ████╗  ██║     ██╔══██╗ ╚██╗ ██╔╝
  ███████╗ ██████╔╝ ███████║ ██║  ██║ ██╔████╔██║ ██║ ██╔██╗ ██║     ██████╔╝  ╚████╔╝ 
  ╚════██║ ██╔═══╝  ██╔══██║ ██║  ██║ ██║╚██╔╝██║ ██║ ██║╚██╗██║     ██╔═══╝    ╚██╔╝  
  ███████║ ██║      ██║  ██║ ██████╔╝ ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██╗ ██║         ██║   
  ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝''' ))
-    print()
-    print( colored(' Powerful CLI administration tool for ', 'white', attrs=[ 'bold' ] ) + colored( 'IBM', 'white', 'on_blue', attrs=[ 'bold' ] ) + colored(' Spectrum Protect aka Tivoli Storage Manager', 'white', attrs=[ 'bold' ] ) )
-
-    print()
-    print( colored( "= Welcome! Enter any IBM Spectrum Protect commands and if you're lost type Help!", 'grey', attrs=[ 'bold' ] ) )
-    print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
-    print( colored(  '= ', 'grey', attrs=[ 'bold' ] ) + colored( "Once you start to use it, you can't live without it!!!", 'grey', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
-    print( colored( '= Python3 [' + sys.version + ']', 'grey', attrs=[ 'bold' ] ) )
-    print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
-    print( colored( '= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=[ 'bold' ] ) )
-    print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( globals.columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( globals.rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )
-    print()
+        print()
+        print( colored(' Powerful CLI administration tool for ', 'white', attrs=[ 'bold' ] ) + colored( 'IBM', 'white', 'on_blue', attrs=[ 'bold' ] ) + colored(' Spectrum Protect aka Tivoli Storage Manager', 'white', attrs=[ 'bold' ] ) )
+    
+        print()
+        print( colored( "= Welcome! Enter any IBM Spectrum Protect commands and if you're lost type Help!", 'grey', attrs=[ 'bold' ] ) )
+        print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
+        print( colored(  '= ', 'grey', attrs=[ 'bold' ] ) + colored( "Once you start to use it, you can't live without it!!!", 'grey', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
+        print( colored( '= Python3 [' + sys.version + ']', 'grey', attrs=[ 'bold' ] ) )
+        print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
+        print( colored( '= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=[ 'bold' ] ) )
+        print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( globals.columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( globals.rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )
+        print()
     
     globals.logger.debug( 'Fork dsmadmc processes.' )
     globals.tsm = dsmadmc_pexpect( '', globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'], globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'] )
@@ -214,16 +215,17 @@ if __name__ == '__main__':
         readline.set_completer( globals.myIBMSPrlCompleter.IBMSPcompleter )
         readline.set_completion_display_matches_hook( globals.myIBMSPrlCompleter.match_display_hook )
 
-    # Short text help
-    print()
-    print( ' ' + colored( 'Short HELP:', 'cyan', attrs=[ 'bold', 'underline' ] ) )
-    print( '''
-      Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
-      use: "REload" to reload the rule file! and
-      use: "SHow LOG" to reach the local log file!''' )
-
-    #utilities.ruler( utilities, '' )
-    print()
+    if not args.nowelcome:
+        # Short text help
+        print()
+        print( ' ' + colored( 'Short HELP:', 'cyan', attrs=[ 'bold', 'underline' ] ) )
+        print( '''
+          Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
+          use: "REload" to reload the rule file! and
+          use: "SHow LOG" to reach the local log file!''' )
+    
+        #utilities.ruler( utilities, '' )
+        print()
 
     globals.logger.debug( 'Import own commands.' )
     import owncommands
