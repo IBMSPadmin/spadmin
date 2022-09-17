@@ -141,6 +141,12 @@ if __name__ == '__main__':
     if args.commands:
         globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ]    = args.commands
 
+    if args.consoleonly:
+        print("\nConsole mode...")
+        utilities.start_console('',globals.config.getconfiguration()[ 'SPADMIN' ]['dsmadmc_id'],
+                                globals.config.getconfiguration()[ 'SPADMIN' ]['dsmadmc_password'])
+        quit(0)
+
     globals.logger.info( utilities.consolefilledline( 'START' ) )
     globals.logger.info( utilities.consolefilledline( 'START' ) )
     globals.logger.info( utilities.consolefilledline( 'START' ) )
