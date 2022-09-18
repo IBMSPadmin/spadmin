@@ -272,8 +272,6 @@ def spadmin_add_alias( self, parameters ):
         globals.config.writeconfig()
         dynruleinjector('SPadmin Add ALIas ' + key)
         globals.myIBMSPrlCompleter.rules['SPadmin Add ALIas'].append(key)
-
-
 #
 spadmin_commands[ 'SPadmin Add ALIas' ] = spadmin_add_alias
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'ALIas' )
@@ -284,8 +282,6 @@ def spadmin_show_processinfo( self, parameters ):
     table = columnar(data,
                      headers=['dsmadmc','PID'])
     utilities.printer(table)
-
-
 spadmin_commands[ 'SPadmin SHow PRocessinfo' ] = spadmin_show_processinfo
 dynruleinjector(  'SPadmin SHow PRocessinfo' )
 
