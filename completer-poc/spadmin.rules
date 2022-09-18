@@ -352,8 +352,21 @@ Query LOG         -> Format=
 Query LOG Format= -> Format=Standard
 Query LOG Format= -> Format=Detailed
 
-Query         -> PRocess
-Query PRocess -> select process_num from processes
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.16?topic=commands-query-process-query-one-more-server-processes
+# Query PRocess process_number DESCription=string STATus=string
+# LVL 2
+Query             -> PRocess
+# LVL 3(4)
+Query PRocess     -> select process_num from processes
+Query PRocess     -> DESCription=
+Query PRocess     -> STATus=
+Query PRocess (\w+=.*){1,} -> DESCription=
+Query PRocess (\w+=.*){1,} -> STATus=
+# LVL 4(5)
+Query PRocess \d+ -> DESCription=
+Query PRocess \d+ -> STATus=
+Query PRocess \d+ (\w+=.*){1,} -> DESCription=
+Query PRocess \d+ (\w+=.*){1,} -> STATus=
 
 ##################
 # REMove command #

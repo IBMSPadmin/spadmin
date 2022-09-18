@@ -286,8 +286,8 @@ def spadmin_show_processinfo( self, parameters ):
     utilities.printer(table)
 
 
-spadmin_commands[ 'SPadmin SHow PROCessinfo' ] = spadmin_show_processinfo
-dynruleinjector( 'SPadmin SHow PROCessinfo' )
+spadmin_commands[ 'SPadmin SHow PRocessinfo' ] = spadmin_show_processinfo
+dynruleinjector(  'SPadmin SHow PRocessinfo' )
 
 def spadmin_del_alias( self, parameters ):
     if not parameters:
@@ -476,8 +476,8 @@ def show_processes( self, parameters ):
         '#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status' ],
         justify=[ 'r', 'l', 'l', 'r', 'r', 'l' ] ) )
     
-spadmin_commands[ 'SHow PROCesses' ] = show_processes
-dynruleinjector(  'SHow PROCesses' )
+spadmin_commands[ 'SHow PRocesses' ] = show_processes
+dynruleinjector(  'SHow PRocesses' )
 
 
 def spadmin_locallog( self, parameters ):
