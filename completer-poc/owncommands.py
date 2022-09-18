@@ -455,7 +455,7 @@ def show_sessions( self, parameters ):
     
     utilities.printer( columnar( data2, headers = [ 
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
-        justify=[ 'r', 'c', 'c', 'c', 'r', 'r', 'r', 'c', 'l', 'l', 'l' ] ) )
+        justify=[ 'r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'l' ] ) )
     
 spadmin_commands[ 'SHow SESsions' ] = show_sessions
 dynruleinjector(  'SHow SESsions' )

@@ -31,6 +31,8 @@ class Configuration:
         'ver': 'SPadmin SHow VERsion',
         'rul': 'SPadmin SHow RULes',
         'deb': 'SPadmin SET DEBUG',
+        'ses': 'SHow SESsions',
+        'dsk': 'SH stgp | grep DISK'
     }
 
     def __init__(self, configfile):
