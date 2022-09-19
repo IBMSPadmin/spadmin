@@ -135,8 +135,8 @@ class IBMSPrlCompleter:
     rules    = {}  # >2. level dictionary
     dynrules = {}  # >2. level dynamic dictionary
 
-    def loadrules(self, rulefilename):
-        rulefile = open(rulefilename, 'r')
+    def loadrules( self, rulefilename ):
+        rulefile = open( rulefilename, 'r' )
         rulefilelines = rulefile.readlines()
         #self.start = []  # 1. level list
         #self.rules = {}  # >2. level dictionary
@@ -149,26 +149,26 @@ class IBMSPrlCompleter:
             # ez mi? assert?
             # assert( '->' in line )
             # Skip the remark and empty lines
-            if line.startswith("#") or not line.rstrip():
+            if line.startswith( "#" ) or not line.rstrip():
                 continue
             # lower ??? QUIt Query
             # line = line.strip().lower()
             line = line.strip()
-            first, second = line.split('->')
+            first, second = line.split( '->' )
             first = first.strip()
             second = second.strip()
             if first == '$':
                 # Starter
-                self.start.append(second)
+                self.start.append( second )
                 # ??? kell ez? bezavar regexp-nél
                 # if second not in self.rules:
                 #    self.rules[second] = []
             else:
                 if first not in self.rules:
-                    self.rules[first] = []
+                    self.rules[ first ] = []
                 if second not in self.rules:
-                    self.rules[second] = []
-                self.rules[first].append(second)
+                    self.rules[ second ] = []
+                self.rules[ first ].append( second )
 
         rulefile.close()
         print()

@@ -254,6 +254,10 @@ if __name__ == '__main__':
  #   globals.aliases[ 'rul' ]   = 'SPadmin SHow RULes'
  #   globals.aliases[ 'deb' ]   = 'SPadmin SET DEBUG'
     
+    # ???
+    IBMSPrlCompleter.start.append( 'SESs' )
+    IBMSPrlCompleter.start.append( 'DISKs' )
+    
     # Infinite loop
     globals.logger.debug( utilities.consolefilledline( '>>> INPUT LOOP START ' ) )
     while True:
@@ -289,7 +293,7 @@ if __name__ == '__main__':
              
             # handling aliases v2
             for alias in globals.aliases:
-                aliasmatch = search( '^' + alias, command )
+                aliasmatch = search( '^' + utilities.regexpgenerator( alias ) + '(?!.*\w+)', command, IGNORECASE )
                 if aliasmatch:
                     command = command.replace( aliasmatch[ 0 ],  globals.aliases[ alias ] )
                     break
