@@ -222,8 +222,8 @@ if __name__ == '__main__':
         print( ' ' + colored( 'Short HELP:', 'cyan', attrs=[ 'bold', 'underline' ] ) )
         print( '''
   Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
-  use: "REload" to reload the rule file! and
-  use: "SHow LOG" to reach the local log file!''' )
+  Use: "REload" to reload the rule file! and
+  Use: "SPadmin SHow LOG" or "SPadmin SHow LOCALLOG" to reach the local log file!''' )
 
         #utilities.ruler( utilities, '' )
         print()

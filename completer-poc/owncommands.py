@@ -256,9 +256,9 @@ spadmin_commands[ 'REload' ] = reload
 def spadmin_show_log( self, parameters ):
     os.system( 'open ./' + globals.config.getconfiguration()['SPADMIN']['logfile'] )
 #
-spadmin_commands[ 'SPadmin SHow Log' ] = spadmin_show_log
+spadmin_commands[ 'SPadmin SHow LOG' ] = spadmin_show_log
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )
-dynruleinjector( 'SPadmin SHow Log' )
+dynruleinjector( 'SPadmin SHow LOG' )
 
 
 def spadmin_add_alias( self, parameters ):

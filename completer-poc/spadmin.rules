@@ -383,9 +383,3 @@ SHow       -> SLOTS
 SHow SLOTS -> select library_name from libraries
 
 ###############################################################
-
-# DEBUG
-SHow -> LOG
-
-###############################################################
-teszt->parancs
