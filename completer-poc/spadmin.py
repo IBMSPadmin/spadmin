@@ -293,7 +293,7 @@ if __name__ == '__main__':
              
             # handling aliases v2
             for alias in globals.aliases:
-                aliasmatch = search( '^' + utilities.regexpgenerator( alias ) + '(?!.*\w+)', command, IGNORECASE )
+                aliasmatch = search( '^' + utilities.regexpgenerator( alias ), command, IGNORECASE )
                 if aliasmatch:
                     command = command.replace( aliasmatch[ 0 ],  globals.aliases[ alias ] )
                     break

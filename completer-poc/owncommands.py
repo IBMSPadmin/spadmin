@@ -500,5 +500,17 @@ def spadmin_locallog( self, parameters ):
 spadmin_commands[ 'SPadmin SHow LOCALLOG' ] = spadmin_locallog
 dynruleinjector(  'SPadmin SHow LOCALLOG' )
 
+def show_events( self, parameters ):
+    
+    data = globals.tsm.send_command_array_array_tabdel( 'q event * *' )
+    
+    utilities.printer( columnar( data, headers = [ 
+        '#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status' ],
+        justify=[ 'r', 'l', 'l', 'r', 'r', 'l' ] ) )
+    
+spadmin_commands[ 'SHow EVents' ] = show_events
+dynruleinjector(  'SHow EVents' )
+
+
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
