@@ -40,17 +40,11 @@ def add_remove_color(color, string):
 def printer(string):
     s = str(string).split("\n")
     i = 0
-    grep = globals.extras['grep'] if 'grep' in globals.extras else ''
 
     for line in s:
-        # if grep != '':
-        #     if re.search(grep, line):
-        #         i += 1
-        #         print(line.replace(grep,'\x1b[1;37;40m'+ grep + "\x1b[0m"), sep="\n")
-        # else:
-        #     i += 1
         i += 1
-        print(line, sep="\n")
+      #  print(repr(line), sep="\n")
+        print(line, sep="")
         if 'more' in globals.extras and i > globals.rows - 3:
             print("more...   (<ENTER> to continue, 'C' to cancel)")
             key = readchar.readkey()
@@ -61,7 +55,7 @@ def printer(string):
 
 def check_connection(server: str, id: str, password: str) -> bool:
     if id == '' or password == '':
-        print ('Userid and password won\'t be empty!')
+        print('Userid and password won\'t be empty!')
         return False
     try:
         result = ''
@@ -171,13 +165,13 @@ def dictmerger( destination, source ):
 def green(match_obj):
     for g in match_obj.groups():
         if g is not None:
-            return Fore.GREEN + match_obj.group(1) + Style.RESET_ALL
+            return Fore.GREEN + match_obj.group() + Style.RESET_ALL
 
 
 def yellow(match_obj):
     for g in match_obj.groups():
         if g is not None:
-            return Fore.YELLOW + match_obj.group(1) + Style.RESET_ALL
+            return Fore.YELLOW + match_obj.group() + Style.RESET_ALL
 
 
 def coloring(color, line) -> str:

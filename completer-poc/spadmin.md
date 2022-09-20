@@ -132,9 +132,9 @@ TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP0
 ~~- alias kezelés valahogy az inifájlba~~
 ~~- more / grep: (a példaparancs rá: **SPadmin SHow EXtras | grep | invgrep | count**)~~ 
 ~~- columnar: több helyen van fölösleges szóköz még mindig!~~
-- more: nem működik, ha van sortörés
-- orderby? sp stgp | orderby 3
-- az alias-ok mindig felülíródnak az .ini-ben
+~~- more: nem működik, ha van sortörés~~
+~~- orderby? sp stgp | orderby 3~~
+~~- az alias-ok mindig felülíródnak az .ini-ben~~
 
 ## Fontos!
 

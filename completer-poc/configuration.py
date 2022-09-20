@@ -57,9 +57,9 @@ class Configuration:
         # check default aliases
         if not self.configparser.has_section('ALIAS'):
             self.configparser.add_section('ALIAS')
-        for key in self.aliases:
-            if not self.configparser.has_option('ALIAS', key):
-                self.configparser['ALIAS'][key] = str(self.aliases[key])
+            for key in self.aliases:
+                if not self.configparser.has_option('ALIAS', key):
+                    self.configparser['ALIAS'][key] = str(self.aliases[key])
         self.writeconfig()
 
     def writeconfig(self):

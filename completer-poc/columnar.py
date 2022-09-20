@@ -5,6 +5,7 @@ import operator
 import globals
 from click import style
 
+from operator import itemgetter
 from functools import reduce
 from itertools import zip_longest
 from re import Match
@@ -80,6 +81,11 @@ class Columnar:
         self.select = select
         self.no_borders = no_borders
         self.no_headers = headers is None
+
+        orderby = globals.extras['orderby'] if 'orderby' in globals.extras else ''
+        if orderby != '' and orderby is not None and orderby.isnumeric() and int(orderby) < len(data[0]):
+            data = sorted(data, key=itemgetter(int(orderby)), reverse=False)
+
         data = self.clean_data(data, headers)  # clean, check and grep
 
         if self.no_headers:
