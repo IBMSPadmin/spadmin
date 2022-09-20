@@ -6,6 +6,15 @@ Global spadmin.py development progress status:
 
 # aktuális toDo-k
 
+ANR8805I Labeling volumes in library DELLML3; 5 volume(s) labeled.
+ANR8805I Labeling volumes in library DELLML3; 20 volume(s) labeled.\
+
+Volume MKP048M8 (storage pool VMW_B_T), Target Pool VMW_B_T, Moved Files: 0, Moved Bytes: 0 bytes, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 128 MB Waiting for mount of output volume MKP058M8 (26 seconds).
+
+Volume MKP048M8 (storage pool VMW_B_T), Target Pool VMW_B_T, Moved Files: 0, Moved Bytes: 0 bytes, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 128 MB Current output volume(s): MKP058M8.
+
+Volume MKP056M8 (storage pool SQL_B_T), Target Pool SQL_B_T, Moved Files: 9, Moved Bytes: 90,012 MB, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 10,001 MB Current input volume: MKP056M8. Current output volume(s): MKP074M8.
+
 @_flex
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
 ~~- alias kezelő parancsok~~
