@@ -502,11 +502,34 @@ dynruleinjector(  'SPadmin SHow LOCALLOG' )
 
 def show_events( self, parameters ):
     
-    data = globals.tsm.send_command_array_array_tabdel( 'q event * *' )
+    data = globals.tsm.send_command_array_array_tabdel( 'q event * * endd=today f=d' + ' ' + parameters )
     
-    utilities.printer( columnar( data, headers = [ 
-        '#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status' ],
-        justify=[ 'r', 'l', 'l', 'r', 'r', 'l' ] ) )
+    data2 = []
+    for index, row in enumerate( data ):
+        
+        startdate = search( '^.{10}', row[ 3 ] ) 
+        if row[ 4 ][ 0:10 ] == startdate[ 0 ]:
+           row[ 4 ] = '          ' + row[ 4 ][ 10: ]
+        if row[ 5 ][ 0:10 ] == startdate[ 0 ]:
+           row[ 5 ] = '          ' + row[ 5 ][ 10: ]
+        
+        if row[ 6 ] == 'Missed':
+            row[ 6 ] = colored( row[ 6 ], 'yellow', attrs=[ 'bold' ] )
+        if row[ 6 ] == 'Failed':
+            row[ 6 ] = colored( row[ 6 ], 'red', attrs=[ 'bold' ] )
+            row[ 7 ] = colored( row[ 7 ], 'red', attrs=[ 'bold' ] )
+        if row[ 6 ] == 'Pending':
+            row[ 6 ] = colored( row[ 6 ], 'cyan' )
+        if row[ 6 ] == 'Run':
+            row[ 6 ] = colored( row[ 6 ], 'green', attrs=[ 'bold' ] )
+        if row[ 6 ] == 'Completed' and row[ 7 ] != '0':
+            row[ 7 ] = colored( row[ 7 ], 'red', attrs=[ 'bold' ] )
+
+        data2.append( [ row[ 3 ], row[ 4 ], row[ 5 ], row[ 0 ], row[ 1 ], row[ 2 ], row[ 6 ], row[ 7 ] ] )
+    
+    utilities.printer( columnar( data2, headers = [ 
+        'StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC' ],
+        justify=[ 'r', 'c', 'l', 'l', 'l', 'l', 'l', 'l', 'r' ] ) )
     
 spadmin_commands[ 'SHow EVents' ] = show_events
 dynruleinjector(  'SHow EVents' )
