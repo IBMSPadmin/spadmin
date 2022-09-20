@@ -15,6 +15,9 @@ Volume MKP048M8 (storage pool VMW_B_T), Target Pool VMW_B_T, Moved Files: 0, Mov
 
 Volume MKP056M8 (storage pool SQL_B_T), Target Pool SQL_B_T, Moved Files: 9, Moved Bytes: 90,012 MB, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 10,001 MB Current input volume: MKP056M8. Current output volume(s): MKP074M8.
 
+TYPE=FULL in progress. Bytes backed up: 10 bytes. Current output volume(s): .
+TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP060M8.
+
 @_flex
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
 ~~- alias kezelő parancsok~~
