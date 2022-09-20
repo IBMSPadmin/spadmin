@@ -6,8 +6,10 @@ import readchar
 import uuid
 import subprocess
 from colorama import Fore, Back, Style
-
 from termcolor import colored
+from typing import (
+    Sequence,
+)
 ansi_color_pattern = re.compile(r"\x1b\[.+?m")
 
 
@@ -121,7 +123,7 @@ def consolefilledline(left = '', pattern = '-', right = '', width = 120):
 
 
 def regexpgenerator(regexp):
-            
+
     savelastchar = ''
     if regexp[ -1 ] == '=':
         savelastchar = regexp[ -1 ] + '(?!.*\w+\s)'
@@ -131,12 +133,12 @@ def regexpgenerator(regexp):
     # if match:
     #   savelastchar = match[ 1 ]
     #   regexp = regexp.replace( match[ 1 ], '' )  
-    
+
     result = ''
     for part in regexp.split():
-    
+
         if part[ 0 ].isupper():
-    
+
             tmpregexp = part
             tmpstring = part
             for x in part:
@@ -144,14 +146,14 @@ def regexpgenerator(regexp):
                     break
                 tmpstring = part[ 0:len( tmpstring ) - 1 ]
                 tmpregexp += '|' + tmpstring
-    
+
             result += '(' + tmpregexp + ')'
-    
+
         else:
             result += '(' + part + ')'
-    
+
         result += '\s+'
-    
+
     return result[ :-3 ] + savelastchar
 
 
@@ -181,3 +183,18 @@ def coloring(color, line) -> str:
         else:
             line = line.replace(match.group(), ''.join([Style.RESET_ALL, match.group()]))
     return "".join([color, line, Style.RESET_ALL])
+
+
+def szinezo(text: str, regexp: str, color: Sequence[str]):
+    ret = text
+    for m in reversed(list(re.finditer(regexp, text))):
+        last_colors = re.findall("(\x1b\[1m\x1b\[.+?m)|(\x1b\[.+?m)", text[0:m.start()])
+        if last_colors:
+            ret = ''.join(
+                [ret[0:m.start()], ''.join(color), ret[m.start():(m.start() + len(m.group()))], last_colors[-1],
+                 ret[m.start() + len(m.group()):]])
+        else:
+            ret = ''.join([text[0:m.start()], ''.join(color), text[m.start():(m.start() + len(m.group()))], text[
+                                                                                                     m.start() + len(
+                                                                                                         m.group()):]])
+    return ret

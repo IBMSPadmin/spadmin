@@ -20,6 +20,7 @@ from typing import (
 from termcolor import colored
 from toolz import frequencies
 from wcwidth import wcwidth, wcswidth
+import utilities
 
 # Types
 NonWrappedCell = str
@@ -85,7 +86,7 @@ class Columnar:
         orderby = globals.extras['orderby'] if 'orderby' in globals.extras else ''
         if orderby != '' and orderby is not None and orderby.isnumeric() and int(orderby) < len(data[0]):
             data = sorted(data, key=itemgetter(int(orderby)), reverse=False)
-            headers[int(orderby)] = Fore.GREEN + headers[int(orderby)] + Style.RESET_ALL
+            headers[int(orderby)] = utilities.szinezo(headers[int(orderby)], ".*", [Style.BRIGHT, Fore.GREEN])
 
         data = self.clean_data(data, headers)  # clean, check and grep
 
