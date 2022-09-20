@@ -74,7 +74,7 @@ class Columnar:
         self.column_sep = column_sep
         self.header_sep = "="
         self.patterns = self.compile_patterns(patterns)
-        self.ansi_color_pattern = re.compile(r"\x1b\[.+?m")
+        self.ansi_color_pattern = re.compile(r"\x1b\[.+?m|\x1b\[1m\x1b\[.+?m")
         self.color_reset = "\x1b[0m"
         self.color_grid = None
         self.drop = drop
@@ -85,6 +85,7 @@ class Columnar:
         orderby = globals.extras['orderby'] if 'orderby' in globals.extras else ''
         if orderby != '' and orderby is not None and orderby.isnumeric() and int(orderby) < len(data[0]):
             data = sorted(data, key=itemgetter(int(orderby)), reverse=False)
+            headers[int(orderby)] = Fore.GREEN + headers[int(orderby)] + Style.RESET_ALL
 
         data = self.clean_data(data, headers)  # clean, check and grep
 
@@ -182,8 +183,8 @@ class Columnar:
         if code is None:
             return text
         for match in code:
-            text = text[:match.start()] + match.group() + text[match.start():] + self.color_reset
-        return text  # text # "".join([match.group(), text, self.color_reset])
+            text = text[:match.start()] + match.group() + text[match.start():]
+        return text + self.color_reset # text # "".join([match.group(), text, self.color_reset])
 
     def clean_data(self, data: Sequence[Sequence[Any]], headers) -> Data:
         # First make sure data is a list of lists
