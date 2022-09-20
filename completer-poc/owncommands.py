@@ -520,7 +520,7 @@ def show_events( self, parameters ):
             row[ 7 ] = colored( row[ 7 ], 'red', attrs=[ 'bold' ] )
         if row[ 6 ] == 'Pending':
             row[ 6 ] = colored( row[ 6 ], 'cyan' )
-        if row[ 6 ] == 'Run':
+        if row[ 6 ] == 'Started':
             row[ 6 ] = colored( row[ 6 ], 'green', attrs=[ 'bold' ] )
         if row[ 6 ] == 'Completed' and row[ 7 ] != '0':
             row[ 7 ] = colored( row[ 7 ], 'red', attrs=[ 'bold' ] )
