@@ -94,13 +94,14 @@ def start_console(server: str, id: str, password: str) -> bool:
             line = dsmadmc.stdout.readline().decode("utf-8")
             if not line:
                 break
-            line = re.sub(r"(Session)", green, line)
-            line = re.sub(r"(No match found using this criteria)", green, line)
-            line = re.sub(r"(Session)", green, line)
             if re.search("ANR....W", line):
                 line = coloring(Fore.YELLOW, line)
             if re.search("ANR....E", line):
                 line = coloring(Fore.RED, line)
+            if re.search("ANR....D", line):
+                line = coloring(Fore.CYAN, line)
+            if re.search("AN.....S", line):
+                line = coloring(Fore.CYAN, line)
             print(line, end='')
         print("Console mode ended.")
         return True

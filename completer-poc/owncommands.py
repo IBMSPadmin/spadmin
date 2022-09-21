@@ -238,9 +238,12 @@ def show_actlog ( self, parameters ):
     else:
         data = globals.tsm.send_command_array_array_tabdel(str(''.join(["q actlog ", " ".join([parameters])])))
 
+    if len(data) == 0:
+        return
+
     for index, row in enumerate(data):
         (a, b) = row
-       # data[index][1] = str(b).replace("Session",colored("Session","blue"))
+
     table = columnar(data, headers=['Date/Time', 'Message'])
     utilities.printer( table )
 #

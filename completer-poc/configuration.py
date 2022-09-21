@@ -45,7 +45,6 @@ class Configuration:
         # check existence of DEFAULTS
         if not self.configparser.has_section('SPADMIN'):
             self.configparser.add_section('SPADMIN')
-            print("jaj")
             for key in self.defaults:
                 if not self.configparser.has_option('SPADMIN', key):
                     self.configparser['SPADMIN'][key] = str(self.defaults[key])
