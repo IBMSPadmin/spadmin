@@ -20,7 +20,7 @@ import humanbytes
 #
 spadmin_commands      = {}
 disabled_words        = [ 'DEFAULT','ALIAS','SPADMIN' ]
-lastdsmcommandtype    = ''
+lastdsmcommandtype    = '?'
 lastdsmcommandresults = []
 
 def ruler( self, parameters = '' ):
@@ -459,8 +459,8 @@ def show_sessions( self, parameters ):
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
         justify=[ 'r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'l' ] ) )
     
-    lastdsmcommandtype = "SESSIONS"
-    lastdsmcommandresults = data2
+    self.lastdsmcommandtype    = 'SESSIONS'
+    self.lastdsmcommandresults = data2
     
 spadmin_commands[ 'SHow SESsions' ] = show_sessions
 dynruleinjector(  'SHow SESsions' )
@@ -485,8 +485,8 @@ def show_processes( self, parameters ):
         '#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status' ],
         justify=[ 'r', 'l', 'l', 'r', 'r', 'l' ] ) )
     
-    lastdsmcommandtype = "PROCESSES"
-    lastdsmcommandresults = data2
+    self.lastdsmcommandtype    = 'PROCESSES'
+    self.lastdsmcommandresults = data2
     
 spadmin_commands[ 'SHow PRocesses' ] = show_processes
 dynruleinjector(  'SHow PRocesses' )
@@ -550,11 +550,18 @@ def show_events( self, parameters ):
         'StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC' ],
         justify=[ 'r', 'c', 'l', 'l', 'l', 'l', 'l', 'l', 'r' ] ) )
     
-    lastdsmcommandtype = "EVENTS"
-    lastdsmcommandresults.clear()
+    self.lastdsmcommandtype = 'EVENTS'
+    self.lastdsmcommandresults.clear()
     
 spadmin_commands[ 'SHow EVents' ] = show_events
 dynruleinjector(  'SHow EVents' )
+
+def kill( self, parameters ):
+    print(lastdsmcommandtype)
+    pprint(lastdsmcommandresults)
+    
+spadmin_commands[ 'KILL' ] = kill
+#dynruleinjector(  'SHow EVents' )
 
 
 # merge these commands to the global rules
