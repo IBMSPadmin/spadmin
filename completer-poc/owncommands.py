@@ -436,6 +436,10 @@ def show_sessions( self, parameters ):
     
     data = globals.tsm.send_command_array_array_tabdel( 'select SESSION_ID, STATE, WAIT_SECONDS, BYTES_SENT, BYTES_RECEIVED, SESSION_TYPE, CLIENT_PLATFORM, CLIENT_NAME,MOUNT_POINT_WAIT, INPUT_MOUNT_WAIT, INPUT_VOL_WAIT, INPUT_VOL_ACCESS, OUTPUT_MOUNT_WAIT, OUTPUT_VOL_WAIT, OUTPUT_VOL_ACCESS, LAST_VERB, VERB_STATE from sessions order by 1' )
     
+    if globals.last_error[ 'rc' ] != '0': 
+        print ( colored( globals.last_error["message"], 'red', attrs=[ 'bold' ] ) )
+        return
+    
     data2 = []
     for index, row in enumerate( data ):
                
@@ -465,6 +469,10 @@ dynruleinjector(  'SHow SESsions' )
 def show_processes( self, parameters ):
     
     data = globals.tsm.send_command_array_array_tabdel( 'select PROCESS_NUM, PROCESS, FILES_PROCESSED, BYTES_PROCESSED, STATUS from processes order by 1' )
+
+    if globals.last_error[ 'rc' ] != '0': 
+        print ( colored( globals.last_error["message"], 'red', attrs=[ 'bold' ] ) )
+        return
     
     data2 = []
     for index, row in enumerate( data ):
@@ -511,6 +519,10 @@ dynruleinjector(  'SPadmin SHow LOCALLOG' )
 def show_events( self, parameters ):
     
     data = globals.tsm.send_command_array_array_tabdel( 'q event * * endd=today f=d' + ' ' + parameters )
+    
+    if globals.last_error[ 'rc' ] != '0': 
+        print ( colored( globals.last_error["message"], 'red', attrs=[ 'bold' ] ) )
+        return
     
     data2 = []
     for index, row in enumerate( data ):
