@@ -81,8 +81,8 @@ class dsmadmc_pexpect:
         list = self.send_command_tabdel(command).splitlines()
         ar = []
         if globals.last_error['rc'] != "0":
-            print("Last error message: ", globals.last_error['message'])
-            print("Last return code: ", globals.last_error['rc'])
+            print(globals.last_error['message'])
+            print("ANS8001I Return code: ", globals.last_error['rc'])
             return ar
         if len(list) > 0:
             list.pop(0)  # delete the first line which is the command itself

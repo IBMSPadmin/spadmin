@@ -37,7 +37,7 @@ TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP0
  5   delete associations
  6     edit script
  7   fooooo
- 8  history
+ 8  ~~history~~
  9     kill
 10     load script
 11    login
@@ -52,7 +52,7 @@ TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP0
 20     show LICences
 21     show _backup
 22     show activity
-23     show actlog
+23     ~~show actlog~~
 24     show adminevents
 25     show archive_retention
 26     show association
@@ -95,7 +95,7 @@ TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP0
 63     show nodeoccuopancy
 64     show nodes
 65     show paths
-66     show processes
+66     ~~show processes~~
 67     show protectperformance
 68     show reclaim
 69     show reclamationperformance
@@ -107,9 +107,9 @@ TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP0
 75     show scratches
 76     show scripts
 77     show servers
-78     show sessions
+78     ~~show sessions~~
 79     show status
-80     show stgpools
+80     ~~show stgpools~~
 81     show summary
 82     show timing
 83     show transferrate

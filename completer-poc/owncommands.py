@@ -127,6 +127,19 @@ dynruleinjector( 'SPadmin SHow CAche' )
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SWitch' )
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ] = []
 
+def history(self, parameters):
+    data = []
+    rlhistfile = os.path.join( "./", globals.config.getconfiguration()['SPADMIN'][ 'historyfile' ] )
+    if os.path.exists(rlhistfile):
+        f = open(rlhistfile, "r")
+        count = 0
+        for line in f.readlines():
+            count += 1
+            data.append([count, line.strip()])
+    utilities.printer( columnar( data, headers=[ colored( '#', 'white', attrs=[ 'bold' ] ), colored( 'Command', 'white', attrs=[ 'bold' ] ) ], justify=[ 'r', 'l'] ) )
+#
+spadmin_commands[ 'HISTory' ] = history
+dynruleinjector( 'HISTory' )
 
 def spadmin_show_config( self, parameters ):
     data  = []
@@ -145,7 +158,6 @@ def spadmin_show_aliases( self, parameters ):
     data  = []
     for key in globals.aliases:
         data.append( [ key, globals.aliases[ key ] ] )
-
     utilities.printer( columnar( data, headers=[ colored( 'Alias', 'white', attrs=[ 'bold' ] ), colored( 'Command', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ] ) )
 #
 spadmin_commands[ 'SPadmin SHow ALIases' ] = spadmin_show_aliases
@@ -271,12 +283,14 @@ def spadmin_add_alias( self, parameters ):
         print('Please use the following command format: \'SPadmin Add ALIas cmd:command\'')
         return
     else:
-        key,value = str(parameters).split(':')
+        key, value = str(parameters).split(':')
+        key = key.strip()
+        value = value.strip()
         globals.aliases[key] = value
         globals.config.getconfiguration()['ALIAS'][key] = value
         globals.config.writeconfig()
         dynruleinjector('SPadmin Add ALIas ' + key)
-        globals.myIBMSPrlCompleter.rules['SPadmin Add ALIas'].append(key)
+        globals.myIBMSPrlCompleter.dynrules['SPadmin Add ALIas'].append(key)
 #
 spadmin_commands[ 'SPadmin Add ALIas' ] = spadmin_add_alias
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ].append( 'ALIas' )
@@ -295,6 +309,7 @@ def spadmin_del_alias( self, parameters ):
         print('Please use the following command format: \'SPadmin DELete ALIas cmd\'')
         return
     else:
+        parameters = parameters.strip()
         if parameters in globals.config.getconfiguration()['ALIAS']:
             globals.aliases.pop(parameters)
             globals.config.getconfiguration()['ALIAS'].pop(parameters)
@@ -326,9 +341,7 @@ def spadmin_add_server( self, parameters ):
                 globals.config.getconfiguration()[server]['dsmadmc_password'] = password
                 globals.config.writeconfig()
                 dynruleinjector('SPadmin DELete SErver ' + server)
-                globals.myIBMSPrlCompleter.rules['SPadmin DELete SErver'].append(server)
-
-
+                globals.myIBMSPrlCompleter.dynrules['SPadmin DELete SErver'].append(server)
             else:
                 print ('Server parameters not saved!')
 
@@ -401,7 +414,7 @@ def show_stgpool( self, parameters ):
             data[index][3] = 0
         else:
            # data[index][3] = round((float(d)/1024),1)
-            data[index][3] = humanbytes.HumanBytes.format(float(d)*1024*1024, precision=0)
+            data[index][3] = humanbytes.HumanBytes.format(float(d)*1024*1024, unit="BINARY_LABELS", precision=0)
 
     table = columnar(data, headers = [ 'PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig', 'LowMig', 'Recl', 'Next' ],
                 justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
@@ -451,8 +464,8 @@ def show_sessions( self, parameters ):
         else: 
             wait = row[ 2 ]            
         
-        bytes_sent     = humanbytes.HumanBytes.format( int( row[ 3 ] ), precision = 0 )
-        bytes_received = humanbytes.HumanBytes.format( int( row[ 4 ] ), precision = 0 )
+        bytes_sent     = humanbytes.HumanBytes.format( int( row[ 3 ] ), unit="BINARY_LABELS", precision = 0 )
+        bytes_received = humanbytes.HumanBytes.format( int( row[ 4 ] ), unit="BINARY_LABELS", precision = 0 )
         
         mediaaccess = ''.join( row[ 8:14 ] )
                 
@@ -480,7 +493,7 @@ def show_processes( self, parameters ):
     data2 = []
     for index, row in enumerate( data ):
                
-        bytes_prcessed = humanbytes.HumanBytes.format( int( row[ 3 ] ), precision = 0 )
+        bytes_prcessed = humanbytes.HumanBytes.format( int( row[ 3 ] ), unit="BINARY_LABELS", precision = 0 )
               
         data2.append( [ index + 1,  row[ 0 ], row[ 1 ], row[ 2 ], bytes_prcessed, row[ 4 ] ] )
     

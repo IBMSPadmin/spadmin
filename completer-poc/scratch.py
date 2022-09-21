@@ -6,7 +6,7 @@ from typing.re import Match
 
 from colorama import Fore, Back, Style
 from termcolor import colored
-
+import humanbytes
 
 def yellow(match_obj):
     for g in match_obj.groups():
@@ -171,12 +171,19 @@ text = 'ANR2034E QUERY STGPOuOuLDuuuIRECTORY: No match found u'
 
 print(text)
 print(code)
-print("1", szinezd_ki(code,text))
+# print("1", szinezd_ki(code,text))
 
-text = 'sing this criteria.'
-print("2", szinezd_ki(code,text))
+# text = 'sing this criteria.'
+# print("2", szinezd_ki(code,text))
+#
+# code = '\x1b[1m\x1b[31m 677 \x1b[0m'
+# text = 677
+#
+# print("3", szinezd_ki(code,str(text)))
 
-code = '\x1b[1m\x1b[31m 677 \x1b[0m'
-text = 677
-
-print("3", szinezd_ki(code,str(text)))
+print (humanbytes.HumanBytes.format(float(128)*1024*1024, unit="BINARY_LABELS", precision=0))
+print (humanbytes.HumanBytes.format(float(128)*1024*1024, unit="METRIC_LABELS",precision=0))
+print (humanbytes.HumanBytes.format(int(31), unit="TIME_LABELS",precision=0))
+print (humanbytes.HumanBytes.format(int(65), unit="TIME_LABELS",precision=0))
+print (humanbytes.HumanBytes.format(int(128), unit="TIME_LABELS",precision=0))
+print (humanbytes.HumanBytes.format(int(3600*23), unit="TIME_LABELS",precision=0))
