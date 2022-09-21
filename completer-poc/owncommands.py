@@ -17,9 +17,11 @@ from re import search, IGNORECASE
 
 import humanbytes
 
-# sub injection test
-spadmin_commands = {}
-disabled_words = ['DEFAULT','ALIAS','SPADMIN']
+#
+spadmin_commands      = {}
+disabled_words        = [ 'DEFAULT','ALIAS','SPADMIN' ]
+lastdsmcommandtype    = ''
+lastdsmcommandresults = []
 
 def ruler( self, parameters = '' ):
     if len( parameters ) > 0:
@@ -453,6 +455,9 @@ def show_sessions( self, parameters ):
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
         justify=[ 'r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'l' ] ) )
     
+    lastdsmcommandtype = "SESSIONS"
+    lastdsmcommandresults = data2
+    
 spadmin_commands[ 'SHow SESsions' ] = show_sessions
 dynruleinjector(  'SHow SESsions' )
 
@@ -471,6 +476,9 @@ def show_processes( self, parameters ):
     utilities.printer( columnar( data2, headers = [ 
         '#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status' ],
         justify=[ 'r', 'l', 'l', 'r', 'r', 'l' ] ) )
+    
+    lastdsmcommandtype = "PROCESSES"
+    lastdsmcommandresults = data2
     
 spadmin_commands[ 'SHow PRocesses' ] = show_processes
 dynruleinjector(  'SHow PRocesses' )
@@ -507,10 +515,9 @@ def show_events( self, parameters ):
     data2 = []
     for index, row in enumerate( data ):
         
-        startdate = search( '^.{10}', row[ 3 ] ) 
-        if row[ 4 ][ 0:10 ] == startdate[ 0 ]:
+        if row[ 4 ][ 0:10 ] == row[ 3 ][ 0:10 ]:
            row[ 4 ] = '          ' + row[ 4 ][ 10: ]
-        if row[ 5 ][ 0:10 ] == startdate[ 0 ]:
+        if row[ 5 ][ 0:10 ] == row[ 3 ][ 0:10 ]:
            row[ 5 ] = '          ' + row[ 5 ][ 10: ]
         
         if row[ 6 ] == 'Missed':
@@ -530,6 +537,9 @@ def show_events( self, parameters ):
     utilities.printer( columnar( data2, headers = [ 
         'StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC' ],
         justify=[ 'r', 'c', 'l', 'l', 'l', 'l', 'l', 'l', 'r' ] ) )
+    
+    lastdsmcommandtype = "EVENTS"
+    lastdsmcommandresults.clear()
     
 spadmin_commands[ 'SHow EVents' ] = show_events
 dynruleinjector(  'SHow EVents' )
