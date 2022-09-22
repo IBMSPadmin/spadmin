@@ -23,7 +23,7 @@ TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP0
 ~~- alias kezelő parancsok~~
 ~~- "intelligens" rule dictionary betöltő function és akkor nem kell az a sok kavarás az owncommand-ban~~
 - Ha az opciók végén = jel van, akkor az még az előzőhöz tartozik!
-- Kell egy másodperc humán kiíró m, H, d
+~~- Kell egy másodperc humán kiíró m, H, d~~
 - kisbetű nagybetű alias, grep (az alias-oknál kikapcsoltam)
 - alias regexp generator: SESs+, DISKs+
 
@@ -37,8 +37,8 @@ TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP0
  5   delete associations
  6     edit script
  7   fooooo
- 8  ~~history~~
- 9     kill
+ 8~~history~~
+ 9   ~~kill~~
 10     load script
 11    login
 12   moveit

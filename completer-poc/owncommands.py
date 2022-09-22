@@ -488,6 +488,8 @@ def show_processes( self, parameters ):
 
     if globals.last_error[ 'rc' ] != '0': 
         print ( colored( globals.last_error["message"], 'red', attrs=[ 'bold' ] ) )
+        self.lastdsmcommandtype = 'PROCESSES'
+        self.lastdsmcommandresults = []
         return
     
     data2 = []
@@ -573,8 +575,21 @@ spadmin_commands[ 'SHow EVents' ] = show_events
 dynruleinjector(  'SHow EVents' )
 
 def kill( self, parameters ):
-    print(lastdsmcommandtype)
-    pprint(lastdsmcommandresults)
+
+    if lastdsmcommandtype == "PROCESSES" or lastdsmcommandtype == "SESSIONS":
+        if parameters.strip().isnumeric():
+            if len(lastdsmcommandresults) >= int(parameters) > 0:
+                print("cancel session", lastdsmcommandresults[int(parameters)-1][1])
+                for line in (globals.tsm.send_command_array_tabdel("cancel session " + lastdsmcommandresults[int(parameters)-1][1])):
+                    print(line)
+            else:
+                print(colored("The given number is not found!", 'red', attrs=['bold']))
+        else:
+            print(colored("The given parameter should be a number!", 'red', attrs=['bold']))
+    else:
+        print(colored("Last command should be SHow SESSions or SHow PRocesses!", 'red', attrs=[ 'bold' ] ))
+        print(lastdsmcommandtype)
+        pprint(lastdsmcommandresults)
     
 spadmin_commands[ 'KILL' ] = kill
 #dynruleinjector(  'SHow EVents' )
