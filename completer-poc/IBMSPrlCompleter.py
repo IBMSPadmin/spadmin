@@ -293,9 +293,9 @@ class IBMSPrlCompleter:
                     #                  ret.append( match[ 1 ] + '=' + right )
                     #                  continue
                             
-        elif tokenlength == 4:
+        elif tokenlength >= 4:
             # LEVEL 4
-            logging.info( ' Stepped into LEVEL 4.' )
+            logging.info( ' Stepped into LEVEL >=4.' )
 
             for key in self.rules:
                 # SKIP the previous or further level entries when
