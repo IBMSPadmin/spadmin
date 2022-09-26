@@ -253,9 +253,6 @@ def show_actlog ( self, parameters ):
     if len(data) == 0:
         return
 
-    for index, row in enumerate(data):
-        (a, b) = row
-
     table = columnar(data, headers=['Date/Time', 'Message'])
     utilities.printer( table )
 #
@@ -404,6 +401,9 @@ spadmin_commands[ 'SPadmin SWitch SErver' ] = switch_server
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ].append( 'SErver' )
 dynruleinjector( 'SPadmin SWitch SErver' )
 
+command_type_and_index = {}
+command_help = {}
+
 
 def show_stgpool( self, parameters ):
     data = globals.tsm.send_command_array_array_tabdel(
@@ -419,11 +419,26 @@ def show_stgpool( self, parameters ):
     table = columnar(data, headers = [ 'PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig', 'LowMig', 'Recl', 'Next' ],
                 justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
     utilities.printer( table )
-#
-spadmin_commands[ 'SHow STGpools' ] = show_stgpool
-# globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
-dynruleinjector( 'SHow STGpools' )
+    print('HELP: ', help['SHow STGpools'])
+    print('TYPE: ', command_type_and_index['SHow STGpools'])
 
+
+def help(command_name):
+    print(help[command_name])
+
+#
+# spadmin_commands[ 'SHow STGpools' ] = show_stgpool
+# globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
+# dynruleinjector( 'SHow STGpools' )
+
+def defineowncommand(command_string, function_address, command_type, index, short_help, help):
+    spadmin_commands[command_string] = function_address
+    dynruleinjector(command_string)
+    command_type_and_index[command_string] = [command_type, index]
+    command_help[command_string] = [short_help, help]
+
+
+defineowncommand('SHow STGpools', show_stgpool, "STGP", 2, 'help 1 soros', 'help több soros\n')
 
 def show_last_error ( self, parameters):
     print ("Last error message: ", globals.last_error["message"])

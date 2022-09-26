@@ -30,10 +30,10 @@ TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP0
 -- -------- -------------------------
  # Commands
 -- -------- -------------------------
- 1    alias
+ 1    ~~alias~~
  2  console
- 3    debug
- 4    debug
+ 3    ~~debug~~
+ 4    ~~debug~~
  5   delete associations
  6     edit script
  7   fooooo
