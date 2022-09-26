@@ -293,9 +293,9 @@ class IBMSPrlCompleter:
                     #                  ret.append( match[ 1 ] + '=' + right )
                     #                  continue
                             
-        elif tokenlength >= 4:
+        elif tokenlength == 4:
             # LEVEL 4
-            logging.info( ' Stepped into LEVEL >=4.' )
+            logging.info( ' Stepped into LEVEL 4.' )
 
             for key in self.rules:
                 # SKIP the previous or further level entries when
@@ -400,7 +400,7 @@ class IBMSPrlCompleter:
                    
                 keylength = len( key.split() )
                     
-                if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
+                if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength == 5 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
