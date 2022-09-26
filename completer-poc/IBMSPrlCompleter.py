@@ -293,9 +293,9 @@ class IBMSPrlCompleter:
                     #                  ret.append( match[ 1 ] + '=' + right )
                     #                  continue
                             
-        elif tokenlength >= 4:
+        elif tokenlength == 4:
             # LEVEL 4
-            logging.info( ' Stepped into LEVEL >=4.' )
+            logging.info( ' Stepped into LEVEL 4.' )
 
             for key in self.rules:
                 # SKIP the previous or further level entries when
@@ -400,7 +400,7 @@ class IBMSPrlCompleter:
                    
                 keylength = len( key.split() )
                     
-                if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
+                if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength == 5 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
@@ -439,9 +439,9 @@ class IBMSPrlCompleter:
                         #     ret.append( x + separator )
                         #     continue
         
-        elif tokenlength == 6:
+        elif tokenlength >= 6:
             # LEVEL 6
-            logging.info( ' Stepped into LEVEL 6.' )
+            logging.info( ' Stepped into LEVEL >=6.' )
             
             for key in self.rules:
                 # SKIP the previous or further level entries when
@@ -452,10 +452,15 @@ class IBMSPrlCompleter:
                 
                 keylength = len( key.split() )
                 
-                if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
+                if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength == 5 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
+                
+                # if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
+                #     continue
+                # elif key.startswith( 'select' ):  # ???????????????????????????????
+                #     continue
                     
                 #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
                 #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
@@ -491,21 +496,21 @@ class IBMSPrlCompleter:
                         #     ret.append( x + separator )
                         #     continue
 
-        elif tokenlength == 7:
-            # LEVEL 7
-            logging.info( ' Stepped into LEVEL 7.' )
-            
-            for key in self.rules:
-                
-                keylength = len( key.split() )
-                
-                if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
-                    continue
-                elif key.startswith( 'select' ):  # ???????????????????????????????
-                    continue
-                    
-                if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):   
-                    ret += self.SPunversaltokenresolver( key, tokens )
+        # elif tokenlength == 7:
+        #     # LEVEL 7
+        #     logging.info( ' Stepped into LEVEL 7.' )
+        #     
+        #     for key in self.rules:
+        #         
+        #         keylength = len( key.split() )
+        #         
+        #         if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
+        #             continue
+        #         elif key.startswith( 'select' ):  # ???????????????????????????????
+        #             continue
+        #             
+        #         if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):   
+        #             ret += self.SPunversaltokenresolver( key, tokens )
 
         else:
             globals.logger.debug( ' Stepped into LEVEL Bzzz...' )
