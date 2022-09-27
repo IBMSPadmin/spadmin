@@ -1,15 +1,21 @@
-import globals
-import utilities
+import sys
+sys.path.append("..")
+import lib.globals as globals
+import lib.utilities as utilities
 import logging
+<<<<<<< HEAD:completer-poc/owncommands.py
 
 
 from termcolor import colored
 
 import columnar2
 
+=======
+import lib.columnar as columnar
+>>>>>>> 116cce880d3ae52287c4f01f101392aa5c7adb37:completer-poc/commands/owncommands.py
 import os
 import sys
-import humanbytes
+import lib.humanbytes as humanbytes
 from pprint import pprint
 from re import search, IGNORECASE
 from termcolor import colored
@@ -94,7 +100,7 @@ dynruleinjector( 'SPadmin SHow CAche' )
 
 def history(self, parameters):
     data = []
-    rlhistfile = os.path.join( "./", globals.config.getconfiguration()['SPADMIN'][ 'historyfile' ] )
+    rlhistfile = os.path.join("../", globals.config.getconfiguration()['SPADMIN']['historyfile'])
     if os.path.exists(rlhistfile):
         f = open(rlhistfile, "r")
         count = 0
@@ -429,9 +435,13 @@ def show_sessions( self, parameters ):
                 
         data2.append( [ index + 1,  row[ 0 ], row[ 1 ], wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
 
+<<<<<<< HEAD:completer-poc/owncommands.py
     utilities.printer( columnar( data2, headers = [ 
+=======
+    utilities.printer( columnar( data2, headers = [
+>>>>>>> 116cce880d3ae52287c4f01f101392aa5c7adb37:completer-poc/commands/owncommands.py
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
-        justify=[ 'r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'r' ] ) )
+        justify=[ 'r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'l' ] ) )
     
     self.lastdsmcommandtype    = 'SESSIONS'
     self.lastdsmcommandresults = data2

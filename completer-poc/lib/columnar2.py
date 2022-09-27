@@ -1,16 +1,13 @@
 import io
 import os
 
-import globals
-
-from operator import itemgetter
 from typing import (
     Union,
     Sequence,
     List,
     Any,
 )
-import utilities
+
 
 def clen( text ):
 
@@ -68,6 +65,8 @@ class Columnar:
 
         self.column_length = get_column_length(headers, data)
         
+        print(self.column_length)
+
         # Header 1st decorator line --------
         for i, cell in enumerate(headers):
             out.write(self.header_decorator * self.column_length[i] + self.column_separator)

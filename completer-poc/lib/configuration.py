@@ -1,6 +1,6 @@
 import configparser
 from termcolor import colored
-import setup
+from . import setup
 
 
 class Configuration:

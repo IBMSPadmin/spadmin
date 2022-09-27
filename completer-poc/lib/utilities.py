@@ -1,11 +1,11 @@
 import os
 import re
 import sys
-import globals
+from . import globals
 import readchar
 import uuid
 import subprocess
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 from termcolor import colored
 from typing import (
     Sequence,
@@ -15,12 +15,12 @@ ansi_color_pattern = re.compile(r"\x1b\[.+?m")
 
 def refreshrowscolumns():
     row, column = os.popen( 'stty size', 'r' ).read().split()
-    globals.rows    = int( row )
-    globals.columns = int( column )
+    globals.rows    = int(row)
+    globals.columns = int(column)
 
 
 def progressbar( count, total, leadtext = '' ):
-    barlength = globals.columns - 2 - len( leadtext )  # [...]
+    barlength = globals.columns - 2 - len(leadtext)  # [...]
     filledlength = int(round((barlength) * count / float(total)))
 
     percent = round(100.0 * count / float(total), 1)
@@ -111,7 +111,7 @@ def start_console(server: str, id: str, password: str) -> bool:
 
 
 def getmac():
-    ret = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
+    ret = ':'.join(re.findall('../..', '%012x' % uuid.getnode()))
     return ret
 
 def consoleline( char='-'):

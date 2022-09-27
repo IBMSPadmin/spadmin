@@ -1,6 +1,6 @@
 import getpass
 import platform
-import utilities
+from . import utilities
 import os.path
 
 class Setup:

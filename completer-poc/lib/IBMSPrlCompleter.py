@@ -1,10 +1,10 @@
 import sys
-import utilities
-import globals
+from . import utilities
+from . import globals
 import logging
 
 from termcolor import colored
-from pprint import pprint, pformat
+from pprint import pformat
 from re import search, IGNORECASE
 from time import time
 
@@ -59,15 +59,15 @@ class IBMSPrlCompleter:
         # self.spprompt   = spprompt
 
         # print(' and loading rules: ')        
-        self.loadrules( globals.rulefilename )
+        self.loadrules(globals.rulefilename)
 
     def prompt(self):
-        prompt = globals.config.getconfiguration()['SPADMIN']['prompt'].strip( '"' )
+        prompt = globals.config.getconfiguration()['SPADMIN']['prompt'].strip('"')
 
         # versions
-        prompt = prompt.replace('%SPVERSION%',  globals.spversion)
-        prompt = prompt.replace('%SPRELEASE%',  globals.sprelease)
-        prompt = prompt.replace('%SPLEVEL%',    globals.splevel)
+        prompt = prompt.replace('%SPVERSION%', globals.spversion)
+        prompt = prompt.replace('%SPRELEASE%', globals.sprelease)
+        prompt = prompt.replace('%SPLEVEL%', globals.splevel)
         prompt = prompt.replace('%SPSUBLEVEL%', globals.spsublevel)
 
         # prompt
@@ -77,8 +77,8 @@ class IBMSPrlCompleter:
         
         # Handle SQL requests
 
-        globals.logger.debug('  SP SQL Engine reached with this select:  [' + select + '] command and' )
-        globals.logger.debug('  SP SQL Engine reached with these tokens: [' + pformat( tokens ) + '].' )
+        globals.logger.debug('  SP SQL Engine reached with this select:  [' + select + '] command and')
+        globals.logger.debug('  SP SQL Engine reached with these tokens: [' + pformat(tokens) + '].')
 
         ret = []
 
@@ -97,24 +97,24 @@ class IBMSPrlCompleter:
             if match:
                 select = select.replace( '%PREFIX%', match[ 1 ] )
 
-            globals.logger.debug( '  SP SQL Engine select prefix preparation result: [' + select + '].' )
+            globals.logger.debug('  SP SQL Engine select prefix preparation result: [' + select + '].')
 
         # logging.info( ' CACHE: [' + pformat( cache ) + '].' )
 
         # cache engine
         if select in self.cache.keys():
             self.cache_hitratio[ 'hit' ] += 1
-            if time() - self.cache_timestamp[ select ] > int( globals.config.getconfiguration()[ 'SPADMIN' ][ 'cache_age' ]):
+            if time() - self.cache_timestamp[ select ] > int(globals.config.getconfiguration()['SPADMIN']['cache_age']):
                 # refresh needed
-                globals.logger.debug( '  SP SQL Engine hit the cache but the stored one is too old!' )
-                globals.logger.debug( '  CACHE timediff in second(s): [' + str(time() - self.cache_timestamp[select]) + '].' )
-                self.cache[ select ] = globals.tsm.send_command_array_tabdel( select )
+                globals.logger.debug('  SP SQL Engine hit the cache but the stored one is too old!')
+                globals.logger.debug('  CACHE timediff in second(s): [' + str(time() - self.cache_timestamp[select]) + '].')
+                self.cache[ select ] = globals.tsm.send_command_array_tabdel(select)
                 self.cache_timestamp[ select ] = time()
                 self.cache_hitratio[ 'hitupdate' ] += 1
         else:
             # new, init
-            globals.logger.debug( '  SP SQL Engine still no cached data store a new one.' )
-            self.cache[ select ] = globals.tsm.send_command_array_tabdel( select )
+            globals.logger.debug('  SP SQL Engine still no cached data store a new one.')
+            self.cache[ select ] = globals.tsm.send_command_array_tabdel(select)
             self.cache_timestamp[ select ] = time()
             self.cache_hitratio[ 'new' ] += 1
 
@@ -178,8 +178,8 @@ class IBMSPrlCompleter:
         # pprint( self.start )
         #print(colored(' Imported LEVEL >1 other rules', 'green', attrs=['bold']) + ' from this file:\t[' + colored(rulefilename, 'green') + ']')
         # pprint( self.rules )
-        globals.logger.debug( 'Rule file imported as starters:\n'    + pformat( self.start ) )
-        globals.logger.debug( 'Rule file imported as other rules:\n' + pformat( self.rules) )
+        globals.logger.debug('Rule file imported as starters:\n' + pformat(self.start))
+        globals.logger.debug('Rule file imported as other rules:\n' + pformat(self.rules))
         #utilities.consoleline('#')
 
         # self.results = self.start
@@ -192,7 +192,7 @@ class IBMSPrlCompleter:
     # tokenEngine #
     ###############
     def tokenEngine( self, tokens ):
-        globals.logger.debug( ' >>> PROCESS TOKENS with token engine, received tokens: ' + pformat( tokens ) )
+        globals.logger.debug(' >>> PROCESS TOKENS with token engine, received tokens: ' + pformat(tokens))
 
         # Reset the results dictionary
         ret         = []
@@ -200,21 +200,21 @@ class IBMSPrlCompleter:
 
         if tokenlength == 0:
             # Never happen this
-            globals.logger.debug( ' Stepped into LEVEL 0.' )
+            globals.logger.debug(' Stepped into LEVEL 0.')
 
         elif tokenlength == 1:
             # LEVEL 1 searches in start commands
-            globals.logger.debug( ' Stepped into LEVEL 1.' )
+            globals.logger.debug(' Stepped into LEVEL 1.')
 
             # Simple check the beginning of the command on start list
             for x in self.start:
                 if search('^' + tokens[ -1 ], x, IGNORECASE):
-                    globals.logger.debug( str( tokenlength) + ' found this part [' + tokens[ -1 ] + '] of the command in the 1st LEVEL list items: [' + x + '].' )
+                    globals.logger.debug(str(tokenlength) + ' found this part [' + tokens[ -1] + '] of the command in the 1st LEVEL list items: [' + x + '].')
                     ret.append( x + ' ' )
 
         elif tokenlength == 2:
             # LEVEL 2
-            globals.logger.debug( ' Stepped into LEVEL 2.' )
+            globals.logger.debug(' Stepped into LEVEL 2.')
 
             for key in self.rules:
                 
@@ -222,20 +222,20 @@ class IBMSPrlCompleter:
                 if len( key.split() ) + 1 != 2:
                     continue
                 
-                globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + key + ']' )
-                globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                globals.logger.debug(str(tokenlength) + ' and searching for regexp pattern [' + key + ']')
+                globals.logger.debug(str(tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator(key) + ']')
                 if search( '^' + utilities.regexpgenerator( key ), tokens[ -2 ], IGNORECASE ):
-                    globals.logger.debug( str( tokenlength) + ' Found this part [' + tokens[ -2 ] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
-                    globals.logger.debug( str( tokenlength) + " Let's continue searching with this pattern [" + pformat( self.rules[ key ], width=180 ) + ']')
+                    globals.logger.debug(str(tokenlength) + ' Found this part [' + tokens[ -2] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].')
+                    globals.logger.debug(str(tokenlength) + " Let's continue searching with this pattern [" + pformat(self.rules[ key], width=180) + ']')
                     for x in self.rules[ key ]:
                         if search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                            globals.logger.debug( str( tokenlength) + ' as (regexp) starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
+                            globals.logger.debug(str(tokenlength) + ' as (regexp) starts with [' + tokens[ -1] + ' > ' + x + ']')
                             ret.append( x + ' ' )
                             continue
 
         elif tokenlength == 3:
             # LEVEL 3
-            globals.logger.debug( ' Stepped into LEVEL 3.' )
+            globals.logger.debug(' Stepped into LEVEL 3.')
 
             for key in self.rules:
                 
@@ -250,8 +250,8 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( str( tokenlength) + ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
                 #if search( '^' + utilities.regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
                 if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 3rd LEVEL dictionary item: [' + key + '].' )
-                    globals.logger.debug( str( tokenlength) + " let's continue searching with this item(s) [" + pformat( self.rules[ key ], width=180 ) + ']' )
+                    globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 3rd LEVEL dictionary item: [' + key + '].')
+                    globals.logger.debug(str(tokenlength) + " let's continue searching with this item(s) [" + pformat(self.rules[ key], width=180) + ']')
                 
                     ret += self.SPunversaltokenresolver( key, tokens )
                                         
@@ -315,8 +315,8 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 #if search( '^' + utilities.regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                 if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str( keylength ) + '].' )
-                    globals.logger.debug( str( tokenlength) + " let's continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
+                    globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -4] + ' ' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str(keylength) + '].')
+                    globals.logger.debug(str(tokenlength) + " let's continue searching with this item(s) [" + pformat(self.rules[key], width=180) + ']')
                                       
                     ret += self.SPunversaltokenresolver( key, tokens )
                         
@@ -409,8 +409,8 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 #if search( '^' + utilities.regexpgenerator( key ), tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                 if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str( keylength ) + '].' )
-                    globals.logger.debug( str( tokenlength) + " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
+                    globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -5] + ' ' + tokens[ -4] + ' ' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str(keylength) + '].')
+                    globals.logger.debug(str(tokenlength) + " let\'s continue searching with this item(s) [" + pformat(self.rules[key], width=180) + ']')
                       
                     ret += self.SPunversaltokenresolver( key, tokens )
                                                           
@@ -466,8 +466,8 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 #if search( '^' + utilities.regexpgenerator( key ), tokens[ -6 ] + ' ' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                 if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug( str( tokenlength) + ' and found [' + tokens[ -6 ] + ' ' +  tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str( keylength ) + '].' )
-                    globals.logger.debug( str( tokenlength) + " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']' )
+                    globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -6] + ' ' + tokens[ -5] + ' ' + tokens[ -4] + ' ' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str(keylength) + '].')
+                    globals.logger.debug(str(tokenlength) + " let\'s continue searching with this item(s) [" + pformat(self.rules[key], width=180) + ']')
                    
                     ret += self.SPunversaltokenresolver( key, tokens )
                                           
@@ -513,10 +513,10 @@ class IBMSPrlCompleter:
         #             ret += self.SPunversaltokenresolver( key, tokens )
 
         else:
-            globals.logger.debug( ' Stepped into LEVEL Bzzz...' )
+            globals.logger.debug(' Stepped into LEVEL Bzzz...')
 
         #globals.logger.debug( " Here's what we have in ret: [" + pformat( ret, width=180 ) + ']')
-        globals.logger.debug( ' <<< PROCESS token engine RETURNED.')
+        globals.logger.debug(' <<< PROCESS token engine RETURNED.')
 
         return ret
 
@@ -525,10 +525,10 @@ class IBMSPrlCompleter:
 
     def IBMSPcompleter( self, text, state ):
 
-        globals.logger.debug( utilities.consolefilledline( '>>> Step into IBMSPcompleter v2 with this text: ', '-', '[' + text + '] and with this state[' + str(state) + '].' ) )
+        globals.logger.debug(utilities.consolefilledline('>>> Step into IBMSPcompleter v2 with this text: ', '-', '[' + text + '] and with this state[' + str(state) + '].'))
 
         if len( self.rrr ) == 0:
-            globals.logger.debug( ' The readline buffer has the following: [' + readline.get_line_buffer() + '].')
+            globals.logger.debug(' The readline buffer has the following: [' + readline.get_line_buffer() + '].')
 
             # Read CLI and split commands
             # first ;
@@ -540,26 +540,26 @@ class IBMSPrlCompleter:
             # Call the Engine
             self.rrr = self.tokenEngine(tokens) + [None]
 
-            globals.logger.debug( ' RETURNED results from the token engine:' )
-            globals.logger.debug( pformat( self.rrr, width=180 ) )
+            globals.logger.debug(' RETURNED results from the token engine:')
+            globals.logger.debug(pformat(self.rrr, width=180))
 
             tmp = self.rrr.pop( 0 )
             #logging.info(': ' + pformat(self.rrr, width=180))
 
             if tmp == None:
-                globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER RESULT PUSH CYCLES ENDED!!!' ) )
+                globals.logger.debug(utilities.consolefilledline('<<< COMPLETER RESULT PUSH CYCLES ENDED!!!'))
             else:
-                globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER results push cycle:  [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
+                globals.logger.debug(utilities.consolefilledline('<<< COMPLETER results push cycle:  [' + tmp + ']', '-', '[' + str(state) + '].'))
             
             return tmp
 
         else:
             tmp = self.rrr.pop( 0 )
             if tmp == None:
-                globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER RESULT PUSH CYCLES ENDED2!!!' ) )
+                globals.logger.debug(utilities.consolefilledline('<<< COMPLETER RESULT PUSH CYCLES ENDED2!!!'))
                 self.rrr = []
             else:
-                globals.logger.debug( utilities.consolefilledline( '<<< COMPLETER results push cycle2: [' + tmp + ']', '-', '[' + str( state ) + '].' ) )
+                globals.logger.debug(utilities.consolefilledline('<<< COMPLETER results push cycle2: [' + tmp + ']', '-', '[' + str(state) + '].'))
             
             return tmp
             
@@ -644,7 +644,7 @@ class IBMSPrlCompleter:
             tmpmatches.append( ppp )
 
         maxlength += 3
-        separation = ( globals.columns // maxlength ) - 1 
+        separation = (globals.columns // maxlength) - 1
         
         for ppp in tmpmatches:
             
