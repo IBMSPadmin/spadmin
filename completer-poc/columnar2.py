@@ -102,8 +102,11 @@ class Columnar:
     def get_justified_cell_text(self, i, cell):
         
         spacer = ' ' * ( self.column_length[i] - clen( str(cell) ) )
+        left, right = spacer [ :len( spacer ) // 2 ], spacer [ len( spacer ) // 2: ]
         
         if self.justify[ i ] and self.justify[ i ] == 'l':
             return str( cell ) + spacer 
+        elif self.justify[ i ] and self.justify[ i ] == 'c':
+            return left + str( cell ) + right
         else:
             return spacer + str( cell )

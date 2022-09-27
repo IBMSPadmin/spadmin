@@ -206,5 +206,5 @@ print(table)
 
 table = columnar(sess_data, headers = [
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
-        justify=[ 'l', 'l', 'l', 'r', 'l', 'l', 'l', 'l', 'l', 'l', 'l' ])
+        justify=[ 'l', 'l', 'l', 'r', 'l', 'l', 'l', 'l', 'c', 'l', 'c' ])
 print(table)
