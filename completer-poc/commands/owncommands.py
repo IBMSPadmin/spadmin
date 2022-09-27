@@ -1,15 +1,15 @@
 import sys
 sys.path.append("..")
-import lib.globals as globals
-import lib.utilities as utilities
 import logging
-import lib.columnar as columnar
 import os
 import sys
-import lib.humanbytes as humanbytes
 from pprint import pprint
 from re import search, IGNORECASE
 from termcolor import colored
+import lib.globals as globals
+import lib.utilities as utilities
+import lib.humanbytes as humanbytes
+import lib.columnar as columnar
 
 columnar = columnar.Columnar() # columnar: table creator/formatter utility
 spadmin_commands      = {}  # dictionary for the spadmin commands

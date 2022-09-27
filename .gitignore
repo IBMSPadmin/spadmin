@@ -23,3 +23,5 @@ completer-poc/scratch.py
 completer-poc/spadmin.ini_orig
 completer-poc/scratch.py
 completer-poc/commands/__pycache__/owncommands.cpython-310.pyc
+*.pyc
+*.pyc
