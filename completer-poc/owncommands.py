@@ -1,29 +1,34 @@
 import globals
 import utilities
 import logging
+<<<<<<< HEAD
 
 from termcolor import colored
 
 import columnar2
 columnar = columnar2.Columnar()
 
+=======
+import columnar
+>>>>>>> 3650cf7013514d7679a7868b2dfb8a32d9506f74
 import os
 import sys
-
-from pprint import pprint, pformat
-
-from re import search, IGNORECASE
-
 import humanbytes
+from pprint import pprint
+from re import search, IGNORECASE
+from termcolor import colored
 
-#
-spadmin_commands      = {}
-disabled_words        = [ 'DEFAULT','ALIAS','SPADMIN' ]
-lastdsmcommandtype    = '?'
-lastdsmcommandresults = []
+columnar = columnar.Columnar() # columnar: table creator/formatter utility
+spadmin_commands      = {}  # dictionary for the spadmin commands
+disabled_words        = ['DEFAULT', 'ALIAS', 'SPADMIN']  # disabled words: used in the configuration .ini file
+lastdsmcommandtype    = '?'  # last command type: used by "kill", "on", "off", etc. commands
+lastdsmcommandresults = []  # last command result: used by "kill", "on", "off", etc. commands
 
 
 class SpadminCommand:
+    """
+    This is the interface class for every Spadmin Command
+    """
     def __init__(self):
         self.command_string = ""
         self.command_type = ""
@@ -39,81 +44,25 @@ class SpadminCommand:
         return self.get_command_index
 
     def short_help(self) -> str:
-        return 'Short description of command'
+        return ''
 
     def help(self) -> str:
-        return """
-Detailed description of command
-with many lines
-"""
+        return ""
 
     def _execute(self, parameters: str) -> str:
         return "not defined: " + parameters
 
     def execute(self, dummy, parameters):
+        globals.logger.debug("Execution STARTED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
         if parameters == "help":
             print(self.help())
         else:
             utilities.printer(self._execute(parameters))
-            lastdsmcommandtype = self.get_command_type()
+        lastdsmcommandtype = self.get_command_type()
+        globals.logger.debug("Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
+        globals.logger.debug("Last command type set to: " + lastdsmcommandtype + ".")
 
 
-
-def ruler( self, parameters = '' ):
-    if len( parameters ) > 0:
-        if search( utilities.regexpgenerator( 'Help!' ) + '(?!.*.+)' , parameters, IGNORECASE ):
-            print( '''SHow RULer: Help message!
-
-This command will print a simple text ruler.
-
-    SHow RULer Help!    - print this help message
-    SHow RULer          - print simple ruler
-    SHow RULer INVerse  - print simple inverse ruler''' )
-
-        elif search( utilities.regexpgenerator( 'INVerse' ), parameters, IGNORECASE ):
-            ruler1()
-            ruler10()
-            ruler100()
-        else:
-            print( colored( 'Wrong parameter(s)!', 'red', attrs=[ 'bold' ] ) )
-    else:
-        ruler100()
-        ruler10()
-        ruler1()
-
-def ruler100():
-    cc = 1
-    for i in range( 1, globals.columns + 1, 1 ):
-        if i % 100:
-            sys.stdout.write( ' ' )
-        else:
-            sys.stdout.write( colored( str( cc ), 'green' ) )
-            cc += 1
-            cc = 0 if cc == 100 else cc
-    print()
-
-
-def ruler10():
-    cc = 1
-    for i in range( 1, globals.columns + 1, 1 ):
-        if i % 10:
-            sys.stdout.write( ' ' )
-        else:
-            sys.stdout.write( colored( str( cc ), 'green' ) )
-            cc += 1
-            cc = 0 if cc == 10 else cc
-    print()
-
-
-def ruler1():
-    for i in range( 1, globals.columns + 1, 1 ):
-        c = i % 10
-        if c:
-            sys.stdout.write( str( c ) )
-        else:
-            sys.stdout.write( colored( str( c ), 'green' ) )
-
-            
 def dynruleinjector( command ):
             
             commandpartcollected = ''
@@ -129,13 +78,6 @@ def dynruleinjector( command ):
                     leftpart  = ' '.join( commandpartcollected )
                     if rightpart not in globals.myIBMSPrlCompleter.dynrules[ leftpart ]:
                         globals.myIBMSPrlCompleter.dynrules[ leftpart ].append( rightpart )
-    
-
-# command injection
-spadmin_commands[ 'SHow RULer' ] = ruler
-dynruleinjector( 'SHow RULer' )
-dynruleinjector( 'SHow RULer Help!' )
-dynruleinjector( 'SHow RULer INVerse' )
 
 
 def spadmin_show_cache( self, parameters ):
@@ -152,16 +94,7 @@ def spadmin_show_cache( self, parameters ):
 #
 spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
 dynruleinjector( 'SPadmin SHow CAche' )
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ] = []
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SHow' )
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ] = []
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'Add' )
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin Add' ] = []
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'DELete' )
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin DELete' ] = []
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'CAche' )
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin' ].append( 'SWitch' )
-# globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SWitch' ] = []
+
 
 def history(self, parameters):
     data = []
@@ -500,7 +433,11 @@ def show_sessions( self, parameters ):
                 
         data2.append( [ index + 1,  row[ 0 ], row[ 1 ], wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
 
+<<<<<<< HEAD
     utilities.printer( columnar( data2, headers = [ 
+=======
+    utilities.printer( columnar( data2, headers = [
+>>>>>>> 3650cf7013514d7679a7868b2dfb8a32d9506f74
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
         justify=[ 'r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'r' ] ) )
     
@@ -563,46 +500,6 @@ def spadmin_locallog( self, parameters ):
 spadmin_commands[ 'SPadmin SHow LOCALLOG' ] = spadmin_locallog
 dynruleinjector(  'SPadmin SHow LOCALLOG' )
 
-def show_events( self, parameters ):
-    
-    data = globals.tsm.send_command_array_array_tabdel( 'q event * * endd=today f=d' + ' ' + parameters )
-    
-    if globals.last_error[ 'rc' ] != '0': 
-        print ( colored( globals.last_error["message"], 'red', attrs=[ 'bold' ] ) )
-        return
-    
-    data2 = []
-    for index, row in enumerate( data ):
-        
-        if row[ 4 ][ 0:10 ] == row[ 3 ][ 0:10 ]:
-           row[ 4 ] = '          ' + row[ 4 ][ 10: ]
-        if row[ 5 ][ 0:10 ] == row[ 3 ][ 0:10 ]:
-           row[ 5 ] = '          ' + row[ 5 ][ 10: ]
-        
-        if row[ 6 ] == 'Missed':
-            row[ 6 ] = colored( row[ 6 ], 'yellow', attrs=[ 'bold' ] )
-        if row[ 6 ] == 'Failed':
-            row[ 6 ] = colored( row[ 6 ], 'red', attrs=[ 'bold' ] )
-            row[ 7 ] = colored( row[ 7 ], 'red', attrs=[ 'bold' ] )
-        if row[ 6 ] == 'Pending':
-            row[ 6 ] = colored( row[ 6 ], 'cyan' )
-        if row[ 6 ] == 'Started':
-            row[ 6 ] = colored( row[ 6 ], 'green', attrs=[ 'bold' ] )
-        if row[ 6 ] == 'Completed' and row[ 7 ] != '0':
-            row[ 7 ] = colored( row[ 7 ], 'red', attrs=[ 'bold' ] )
-
-        data2.append( [ row[ 3 ], row[ 4 ], row[ 5 ], row[ 0 ], row[ 1 ], row[ 2 ], row[ 6 ], row[ 7 ] ] )
-    
-    utilities.printer( columnar( data2, headers = [ 
-        'StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC' ],
-        justify=[ 'r', 'c', 'l', 'l', 'l', 'l', 'l', 'l', 'r' ] ) )
-    
-    self.lastdsmcommandtype = 'EVENTS'
-    self.lastdsmcommandresults.clear()
-    
-spadmin_commands[ 'SHow EVents' ] = show_events
-dynruleinjector(  'SHow EVents' )
-
 def kill( self, parameters ):
 
     if lastdsmcommandtype == "PROCESSES" or lastdsmcommandtype == "SESSIONS":
@@ -621,11 +518,59 @@ def kill( self, parameters ):
         pprint(lastdsmcommandresults)
     
 spadmin_commands[ 'KILL' ] = kill
-#dynruleinjector(  'SHow EVents' )
 
 
-# merge these commands to the global rules
-utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
+class ShowEvents(SpadminCommand):
+    def __init__(self):
+        self.command_string = "SHow EVents"
+        self.command_type = "EVENT"
+        self.command_index = 0
+
+    def short_help(self) -> str:
+        return 'SHow EVents: display information about Events'
+
+    def help(self) -> dict:
+        return """Display the following information about events in the following order and format:
+------------------- ------------------- ------------------- ------ ------------ ------------------- --------- --
+        StartTime >     ActualStart     < Completed         Domain ScheduleName NodeName            Result    RC
+------------------- ------------------- ------------------- ------ ------------ ------------------- --------- --
+09/27/2022 13:00:00                                14:00:00 FILES  INC_1300     SERVER_A            Missed
+09/27/2022 13:00:00            13:05:35            13:13:54 FILES  INC_1300     SERVER_B            Completed 0
+09/27/2022 13:00:00            13:02:46            13:09:20 FILES  INC_1300     SERVER_C            Completed 8
+09/27/2022 13:00:00                                14:00:00 FILES  INC_1300     SERVER_D            Missed
+        """
+
+    def _execute(self, parameters: str) -> str:
+        data = globals.tsm.send_command_array_array_tabdel('q event * * endd=today f=d' + ' ' + parameters)
+
+        if globals.last_error['rc'] != '0':
+            print(colored(globals.last_error["message"], 'red', attrs=['bold']))
+            return
+
+        data2 = []
+        for index, row in enumerate(data):
+
+            if row[4][0:10] == row[3][0:10]:
+                row[4] = '          ' + row[4][10:]
+            if row[5][0:10] == row[3][0:10]:
+                row[5] = '          ' + row[5][10:]
+
+            if row[6] == 'Missed':
+                row[6] = colored(row[6], 'yellow', attrs=['bold'])
+            if row[6] == 'Failed':
+                row[6] = colored(row[6], 'red', attrs=['bold'])
+                row[7] = colored(row[7], 'red', attrs=['bold'])
+            if row[6] == 'Pending':
+                row[6] = colored(row[6], 'cyan')
+            if row[6] == 'Started':
+                row[6] = colored(row[6], 'green', attrs=['bold'])
+            if row[6] == 'Completed' and row[7] != '0':
+                row[7] = colored(row[7], 'red', attrs=['bold'])
+
+            data2.append([row[3], row[4], row[5], row[0], row[1], row[2], row[6], row[7]])
+
+            table = (columnar(data2, headers=['StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC'], justify=['r', 'c', 'l', 'l', 'l', 'l', 'l', 'l', 'r']))
+        return table
 
 
 class ShowStgp(SpadminCommand):
@@ -667,4 +612,81 @@ class ShowStgp(SpadminCommand):
                          justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
         return table
 
+
+class Ruler(SpadminCommand):
+    def __init__(self):
+        self.command_string = "SHow RULer"
+        self.command_type = "RULER"
+        self.command_index = 0
+
+    def short_help(self) -> str:
+        return 'SHow RULer: This command will print a simple text ruler.'
+
+    def help(self) -> dict:
+        return """This command will print a simple text ruler.
+
+            SHow RULer Help!    - print this help message
+            SHow RULer          - print simple ruler
+            SHow RULer INVerse  - print simple inverse ruler"""
+
+    def _execute(self, parameters: str) -> str:
+        if len(parameters) > 0:
+            if search(utilities.regexpgenerator('INVerse'), parameters, IGNORECASE):
+                self.ruler1()
+                self.ruler10()
+                self.ruler100()
+            else:
+                print(colored('Wrong parameter(s)!', 'red', attrs=['bold']))
+        else:
+            self.ruler100()
+            self.ruler10()
+            self.ruler1()
+        return ''
+
+    def ruler100(self):
+        cc = 1
+        for i in range( 1, globals.columns + 1, 1 ):
+            if i % 100:
+                sys.stdout.write( ' ' )
+            else:
+                sys.stdout.write( colored( str( cc ), 'green' ) )
+                cc += 1
+                cc = 0 if cc == 100 else cc
+        print()
+
+    def ruler10(self):
+        cc = 1
+        for i in range( 1, globals.columns + 1, 1 ):
+            if i % 10:
+                sys.stdout.write( ' ' )
+            else:
+                sys.stdout.write( colored( str( cc ), 'green' ) )
+                cc += 1
+                cc = 0 if cc == 10 else cc
+        print()
+
+    def ruler1(self):
+        for i in range( 1, globals.columns + 1, 1 ):
+            c = i % 10
+            if c:
+                sys.stdout.write( str( c ) )
+            else:
+                sys.stdout.write( colored( str( c ), 'green' ) )
+
+    def execute(self, dummy, parameters):
+        globals.logger.debug("Execution STARTED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
+        if parameters == "help":
+            print(self.help())
+        else:
+            self._execute(parameters)
+        lastdsmcommandtype = self.get_command_type()
+        globals.logger.debug("Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
+        globals.logger.debug("Last command type set to: " + lastdsmcommandtype + ".")
+
+
 define_command(ShowStgp())
+define_command(ShowEvents())
+define_command(Ruler())
+
+# merge these commands to the global rules
+utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
