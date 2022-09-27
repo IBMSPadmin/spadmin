@@ -1,6 +1,5 @@
 import globals
 import utilities
-import IBMSPrlCompleter
 import logging
 
 from termcolor import colored
@@ -22,6 +21,43 @@ spadmin_commands      = {}
 disabled_words        = [ 'DEFAULT','ALIAS','SPADMIN' ]
 lastdsmcommandtype    = '?'
 lastdsmcommandresults = []
+
+
+class SpadminCommand:
+    def __init__(self):
+        self.command_string = ""
+        self.command_type = ""
+        self.command_index = 0
+
+    def get_command_string(self):
+        return self.command_string
+
+    def get_command_type(self):
+        return self.command_type
+
+    def get_command_index(self):
+        return self.get_command_index
+
+    def short_help(self) -> str:
+        return 'Short description of command'
+
+    def help(self) -> str:
+        return """
+Detailed description of command
+with many lines
+"""
+
+    def _execute(self, parameters: str) -> str:
+        return "not defined: " + parameters
+
+    def execute(self, dummy, parameters):
+        if parameters == "help":
+            print(self.help())
+        else:
+            utilities.printer(self._execute(parameters))
+            lastdsmcommandtype = self.get_command_type()
+
+
 
 def ruler( self, parameters = '' ):
     if len( parameters ) > 0:
@@ -386,7 +422,6 @@ def switch_server( self, parameters ):
     else:
         server = str(parameters).upper()
         if globals.config.getconfiguration().has_section(server) and parameters not in disabled_words:
-            print ("switch")
             globals.tsm.quit()
             from dsmadmc_pexpect import dsmadmc_pexpect
             globals.tsm = dsmadmc_pexpect(server, globals.config.getconfiguration()[server]['dsmadmc_id'],
@@ -404,41 +439,20 @@ dynruleinjector( 'SPadmin SWitch SErver' )
 command_type_and_index = {}
 command_help = {}
 
-
-def show_stgpool( self, parameters ):
-    data = globals.tsm.send_command_array_array_tabdel(
-        "select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
-    for index, row in enumerate(data):
-        (a, b, c, d, e, f, g, h, i, j) = row
-        if d == '':
-            data[index][3] = 0
-        else:
-           # data[index][3] = round((float(d)/1024),1)
-            data[index][3] = humanbytes.HumanBytes.format(float(d)*1024*1024, unit="BINARY_LABELS", precision=0)
-
-    table = columnar(data, headers = [ 'PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig', 'LowMig', 'Recl', 'Next' ],
-                justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-    utilities.printer( table )
-    print('HELP: ', help['SHow STGpools'])
-    print('TYPE: ', command_type_and_index['SHow STGpools'])
-
-
 def help(command_name):
-    print(help[command_name])
+    print(command_help[command_name])
 
-#
-# spadmin_commands[ 'SHow STGpools' ] = show_stgpool
-# globals.myIBMSPrlCompleter.dynrules[ 'SHow' ].append( 'STGpools' )
-# dynruleinjector( 'SHow STGpools' )
 
-def defineowncommand(command_string, function_address, command_type, index, short_help, help):
+def define_own_command( command_string, function_address, command_type, index, short_help, help):
     spadmin_commands[command_string] = function_address
     dynruleinjector(command_string)
     command_type_and_index[command_string] = [command_type, index]
     command_help[command_string] = [short_help, help]
 
 
-defineowncommand('SHow STGpools', show_stgpool, "STGP", 2, 'help 1 soros', 'help több soros\n')
+def define_command(clazz: SpadminCommand):
+    define_own_command(clazz.get_command_string(), clazz.execute, clazz.get_command_type(), clazz.get_command_index(), clazz.short_help(), clazz.help())
+
 
 def show_last_error ( self, parameters):
     print ("Last error message: ", globals.last_error["message"])
@@ -613,3 +627,45 @@ spadmin_commands[ 'KILL' ] = kill
 
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
+
+
+class ShowStgp(SpadminCommand):
+    def __init__(self):
+        self.command_string = "SHow STGpools"
+        self.command_type = "STGP"
+        self.command_index = 0
+
+    def short_help(self) -> str:
+        return 'SHow STGpools: display information about storage pools'
+
+    def help(self) -> dict:
+        return """Display the following information about storage pools in the following order and format:
+ - Storage Pool name               
+ - Device Class name              
+ - Collocation   
+ - Estimated Capacity 
+ - Percent Utilized 
+ - Percent Migrate 
+ - High Migration threshold 
+ - Low Migration threshold 
+ - Reclamation
+ - Next Storage Pool name
+        """
+
+    def _execute(self, parameters: str) -> str:
+        data = globals.tsm.send_command_array_array_tabdel(
+            "select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
+        for index, row in enumerate(data):
+            (a, b, c, d, e, f, g, h, i, j) = row
+            if d == '':
+                data[index][3] = 0
+            else:
+                # data[index][3] = round((float(d)/1024),1)
+                data[index][3] = humanbytes.HumanBytes.format(float(d) * 1024 * 1024, unit="BINARY_LABELS", precision=0)
+
+        table = columnar(data, headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig',
+                                        'LowMig', 'Recl', 'Next'],
+                         justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
+        return table
+
+define_command(ShowStgp())
