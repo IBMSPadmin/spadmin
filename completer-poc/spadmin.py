@@ -20,7 +20,7 @@
 #       Changed: all print( ..., end='' ) to sys.stdout.write() for better compatibility with python2
 #         Added: simple cache mechanism to spsqlengine
 #         Added: new rules up to 4th levels
-#         Added: DSM and DSM2 pexpect classes for testing         
+#         Added: DSM and DSM2 pexpect classes for testing
 #         Added: ruler sub
 #         Added: spadmin_settings
 #         Added: simple logo
@@ -32,18 +32,18 @@
 #              .
 #
 #         Added:
-#       Changed: 
-#         Fixed: 
+#       Changed:
+#         Fixed:
 
 import sys
 
-from dsmadmc_pexpect import dsmadmc_pexpect
+from lib import dsmadmc_pexpect as dsmadmc_pexpect
 
-import columnar
-columnar = columnar.Columnar()
+import lib.columnar
+columnar = lib.columnar.Columnar()
 
-from configuration import Configuration
-from IBMSPrlCompleter import IBMSPrlCompleter
+from lib.configuration import Configuration
+from lib.IBMSPrlCompleter import IBMSPrlCompleter as IBMSPrlCompleter
 
 from time import time
 prgstart = time()
@@ -63,7 +63,7 @@ from termcolor import colored
 if platform.system() == 'Windows':
     os.system('color')
 
-from pprint import pprint, pformat
+from pprint import pformat
 
 from re import search, IGNORECASE
 
@@ -77,16 +77,16 @@ import argparse
 #############
 # Functions # ####################################################################
 #############
-import utilities
+import lib.utilities as utilities
 
 ########## ###############################################################################################################
 # main() #  Let's dance
 ########## ###############################################################################################################
 if __name__ == '__main__':
-    
+
     # https://docs.python.org/3/library/argparse.html
     parser = argparse.ArgumentParser( prog = colored( 'spadmin.py', 'white', attrs=[ 'bold' ] ), description = 'Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.', epilog = colored( 'Thank you very much for downloading and starting to use it!', 'white', attrs = [ 'bold' ] ) )
-    
+
     parser.add_argument( '--consoleonly',          action = 'store_const', const = True,          help = 'run console only mode!' )
     parser.add_argument( '-c', '--commands',       type=str,                                      help = 'autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
     parser.add_argument( '-d', '--debug',           action = 'store_const', const = True,          help = 'debug messages into log file' )
@@ -105,56 +105,56 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # create a namespace for global variables
-    import globals
-    
+    import lib.globals as globals
+
     # SPadmin global settings
     if args.inifilename:
-        globals.config = Configuration( args.inifilename )
+        globals.config = Configuration(args.inifilename)
     else:
-        globals.config = Configuration( 'spadmin.ini' )
-        
+        globals.config = Configuration('spadmin.ini')
+
     if args.logfilename:
         globals.logfilename = args.logfilename
     else:
-        globals.logfilename = globals.config.getconfiguration()[ 'SPADMIN' ][ 'logfile' ]
-    
+        globals.logfilename = globals.config.getconfiguration()['SPADMIN']['logfile']
+
     if args.rulefilename:
         globals.rulefilename = args.rulefilename
     else:
-        globals.rulefilename = globals.config.getconfiguration()[ 'SPADMIN' ][ 'rulefile' ]
-    
+        globals.rulefilename = globals.config.getconfiguration()['SPADMIN']['rulefile']
+
     # Logger settings
-    logging.basicConfig( filename = globals.logfilename,
-                         filemode = 'a',
-                         format   = '%(asctime)s %(levelname)s %(message)s',
-                         datefmt  = '%Y%m%d %H%M%S',
-                         level    = logging.INFO )
+    logging.basicConfig(filename = globals.logfilename,
+                        filemode = 'a',
+                        format   = '%(asctime)s %(levelname)s %(message)s',
+                        datefmt  = '%Y%m%d %H%M%S',
+                        level    = logging.INFO)
     # and a global object
-    globals.logger = logging.getLogger( 'spadmin.py logger' )
+    globals.logger = logging.getLogger('spadmin.py logger')
 
     # override config with the cli parameters
     if args.debug:
-        globals.config.getconfiguration()[ 'SPADMIN' ][ 'debug' ]       = 'True'
-        globals.logger.setLevel( logging.DEBUG )
-        
+        globals.config.getconfiguration()['SPADMIN']['debug']       = 'True'
+        globals.logger.setLevel(logging.DEBUG)
+
     if args.prereqcheck:
-        globals.config.getconfiguration()[ 'SPADMIN' ][ 'prereqcheck' ] = 'True'
-             
+        globals.config.getconfiguration()['SPADMIN']['prereqcheck'] = 'True'
+
     if args.commands:
-        globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ]    = args.commands
+        globals.config.getconfiguration()['SPADMIN']['autoexec']    = args.commands
 
     if args.consoleonly:
         print("\nConsole mode...")
-        utilities.start_console('',globals.config.getconfiguration()[ 'SPADMIN' ]['dsmadmc_id'],
-                                globals.config.getconfiguration()[ 'SPADMIN' ]['dsmadmc_password'])
+        utilities.start_console('', globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'],
+                                globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'])
         quit(0)
 
-    globals.logger.info( utilities.consolefilledline( 'START' ) )
-    globals.logger.info( utilities.consolefilledline( 'START' ) )
-    globals.logger.info( utilities.consolefilledline( 'START' ) )
+    globals.logger.info(utilities.consolefilledline('START'))
+    globals.logger.info(utilities.consolefilledline('START'))
+    globals.logger.info(utilities.consolefilledline('START'))
 
-    globals.logger.debug( 'ARGS: ' + pformat( args ) )
-          
+    globals.logger.debug('ARGS: ' + pformat(args))
+
     # get the screen size and store it as a global variable
     utilities.refreshrowscolumns()
 
@@ -164,7 +164,7 @@ if __name__ == '__main__':
             os.system( 'cls' )
         else:
             os.system( 'clear' )
-        
+
         # https://patorjk.com/software/taag/#p=testall&f=Slant&t=SPadmin.py
         print( colored( '''
  ███████╗ ██████╗   █████╗  ██████╗  ███╗   ███╗ ██╗ ███╗   ██╗     ██████╗  ██╗   ██╗
@@ -175,30 +175,30 @@ if __name__ == '__main__':
  ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝''' ))
         print()
         print( colored(' Powerful CLI administration tool for ', 'white', attrs=[ 'bold' ] ) + colored( 'IBM', 'white', 'on_blue', attrs=[ 'bold' ] ) + colored(' Spectrum Protect aka Tivoli Storage Manager', 'white', attrs=[ 'bold' ] ) )
-    
+
         print()
         print( colored( "= Welcome! Enter any IBM Spectrum Protect commands and if you're lost type Help!", 'grey', attrs=[ 'bold' ] ) )
         print( colored( "= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[ 'bold' ] ) )
         print( colored(  '= ', 'grey', attrs=[ 'bold' ] ) + colored( "Once you start to use it, you can't live without it!!!", 'grey', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
         print( colored( '= Python3 [' + sys.version + ']', 'grey', attrs=[ 'bold' ] ) )
         print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
-        print( colored( '= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=[ 'bold' ] ) )
-        print( colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) +  colored( str( globals.columns ), 'white', attrs=[ 'bold' ]  ) +  colored( 'x', 'grey', attrs=[ 'bold' ] ) + colored( str( globals.rows ), 'white', attrs=[ 'bold' ] ) + colored( ']', 'grey', attrs=[ 'bold' ] ) )
+        print(colored( '= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=['bold']))
+        print(colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) + colored(str(globals.columns), 'white', attrs=['bold']) + colored('x', 'grey', attrs=['bold']) + colored(str(globals.rows), 'white', attrs=['bold']) + colored(']', 'grey', attrs=['bold']))
         print()
-    
-    globals.logger.debug( 'Fork dsmadmc processes.' )
-    globals.tsm = dsmadmc_pexpect( '', globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'], globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'] )
-    
-    globals.logger.debug( 'readline class instance' )
-    globals.myIBMSPrlCompleter = IBMSPrlCompleter( )
+
+    globals.logger.debug('Fork dsmadmc processes.')
+    globals.tsm = dsmadmc_pexpect.dsmadmc_pexpect('', globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'], globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'])
+
+    globals.logger.debug('readline class instance')
+    globals.myIBMSPrlCompleter = IBMSPrlCompleter()
 
     #print( utilities.consolefilledline( '', '-', '', globals.columns ) )
 
     # Command line history
     # Based on this: https://docs.python.org/3/library/readline.html
     # rlhistfile = os.path.join( os.path.expanduser( "~" ), ".python_history" )
-    rlhistfile = os.path.join( "./", globals.config.getconfiguration()['SPADMIN'][ 'historyfile' ] )
-    globals.logger.debug( 'readline history file: [' + rlhistfile + ']' )
+    rlhistfile = os.path.join( "./", globals.config.getconfiguration()['SPADMIN']['historyfile'])
+    globals.logger.debug('readline history file: [' + rlhistfile + ']')
     try:
         readline.read_history_file( rlhistfile )
         # default history len is -1 (infinite), which may grow unruly
@@ -207,14 +207,14 @@ if __name__ == '__main__':
         pass
     # Register history file as "autosaver"
     atexit.register( readline.write_history_file, rlhistfile )
-    
-    globals.logger.debug( 'Inject new readline handlers for compelter and display.' )
-    
+
+    globals.logger.debug('Inject new readline handlers for compelter and display.')
+
     if not args.disablerl:
         readline.parse_and_bind( 'tab: complete' )
         readline.set_completer_delims( ' ' )
-        readline.set_completer( globals.myIBMSPrlCompleter.IBMSPcompleter )
-        readline.set_completion_display_matches_hook( globals.myIBMSPrlCompleter.match_display_hook )
+        readline.set_completer(globals.myIBMSPrlCompleter.IBMSPcompleter)
+        readline.set_completion_display_matches_hook(globals.myIBMSPrlCompleter.match_display_hook)
 
     if not args.nowelcome:
         # Short text help
@@ -228,16 +228,16 @@ if __name__ == '__main__':
         #utilities.ruler( utilities, '' )
         print()
 
-    globals.logger.debug( 'Import own commands.' )
-    import owncommands
-        
+    globals.logger.debug('Import own commands.')
+    import commands.owncommands as owncommands
+
     # -----------------------------------------
-    
+
     # push the autoexec command(s)
     line = ''
-    if globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ]:
-        globals.logger.info( utilities.consolefilledline( 'Push autoexec commands into global config: [' + globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ] + ']' ) )
-        line = globals.config.getconfiguration()[ 'SPADMIN' ][ 'autoexec' ]
+    if globals.config.getconfiguration()['SPADMIN']['autoexec']:
+        globals.logger.info(utilities.consolefilledline('Push autoexec commands into global config: [' + globals.config.getconfiguration()['SPADMIN']['autoexec'] + ']'))
+        line = globals.config.getconfiguration()['SPADMIN']['autoexec']
 
     globals.extras  = {}
     globals.aliases = {}
@@ -253,23 +253,23 @@ if __name__ == '__main__':
  #   globals.aliases[ 'ver' ]   = 'SPadmin SHow VERsion'
  #   globals.aliases[ 'rul' ]   = 'SPadmin SHow RULes'
  #   globals.aliases[ 'deb' ]   = 'SPadmin SET DEBUG'
-    
+
     # ???
     IBMSPrlCompleter.start.append( 'SESs' )
     IBMSPrlCompleter.start.append( 'DISKs' )
-    
+
     # Infinite loop
-    globals.logger.debug( utilities.consolefilledline( '>>> INPUT LOOP START ' ) )
+    globals.logger.debug(utilities.consolefilledline('>>> INPUT LOOP START '))
     while True:
-    
-        # refresh the terminal size 
+
+        # refresh the terminal size
         utilities.refreshrowscolumns()
 
         try:
             if line == '':
-                line = input( globals.myIBMSPrlCompleter.prompt() )
-                globals.logger.info( 'COMMAND line received: [' + line + '].' )
-            
+                line = input(globals.myIBMSPrlCompleter.prompt())
+                globals.logger.info('COMMAND line received: [' + line + '].')
+
             # Skip the empty command
             if not line.rstrip():
                 continue
@@ -285,89 +285,89 @@ if __name__ == '__main__':
         # simple command runner engine
         for command in line.split( ';' ):
             command      = command.strip()
-            
+
             # handling aliases
             # firstcmdpart = command.split( ' ' )[ 0 ]
             # if firstcmdpart.lower() in globals.aliases:
             #     command = command.replace( firstcmdpart,  globals.aliases[ firstcmdpart.lower() ] )
-             
+
             # handling aliases v2
             for alias in globals.aliases:
-                aliasmatch = search( '^' + utilities.regexpgenerator( alias ), command, IGNORECASE )
+                aliasmatch = search( '^' + utilities.regexpgenerator(alias), command, IGNORECASE)
                 if aliasmatch:
-                    command = command.replace( aliasmatch[ 0 ],  globals.aliases[ alias ] )
+                    command = command.replace(aliasmatch[ 0 ], globals.aliases[ alias])
                     break
-            
+
             # disassembly it first
             commandparts = command.split( '|' )
 
             # keep the first one as the main command
             command = commandparts.pop( 0 ).strip()
-            
-            for extracommand in commandparts:                
+
+            for extracommand in commandparts:
                 pairs = extracommand.split()
                 if len( pairs ) > 1:
-                    globals.extras[ pairs[ 0 ] ] = pairs[ 1 ].replace( '##', '|' ) # change back if exists
+                    globals.extras[ pairs[ 0]] = pairs[ 1].replace('##', '|') # change back if exists
                 elif len( pairs ) == 1:
-                    globals.extras[ pairs[ 0 ] ] = None
+                    globals.extras[ pairs[ 0]] = None
                 else:
                     continue
-            
-            globals.logger.info( 'Base command: [' + command + '] and extras: ' + pformat( globals.extras ) )
-                    
+
+            globals.logger.info('Base command: [' + command + '] and extras: ' + pformat(globals.extras))
+
             # it's not own command. Does the user want to possibly exit???
-            if search( '^' + utilities.regexpgenerator( 'QUIt' ),   command, IGNORECASE ) or \
-               search( '^' + utilities.regexpgenerator( 'LOGOut' ), command, IGNORECASE ) or \
-               search( '^' + utilities.regexpgenerator( 'Exit' ),   command, IGNORECASE ) or \
-               search( '^' + utilities.regexpgenerator( 'BYe' ),    command, IGNORECASE ):
-            
-                globals.logger.debug( utilities.consolefilledline( '<<< INPUT LOOP END ' ) )
-                
+            if search( '^' + utilities.regexpgenerator('QUIt'), command, IGNORECASE) or \
+               search( '^' + utilities.regexpgenerator('LOGOut'), command, IGNORECASE) or \
+               search( '^' + utilities.regexpgenerator('Exit'), command, IGNORECASE) or \
+               search( '^' + utilities.regexpgenerator('BYe'), command, IGNORECASE):
+
+                globals.logger.debug(utilities.consolefilledline('<<< INPUT LOOP END '))
+
                 # exit code override if exists
                 exitcode = 0
                 match    = search( '^\w+\s+(\d+)', command, IGNORECASE )
                 if match:
                     exitcode = int( match[ 1 ] )
-                
+
                 # End of the prg
                 prgend = time()
-                utilities.consoleline( '-' )
+                utilities.consoleline('-')
                 exetime = datetime.timedelta( seconds = prgend - prgstart )
                 print ( 'Program execution time:', colored( exetime, 'green' ) )
-                globals.logger.info( 'Program execution time: ' + str( exetime ) + 's' )
-                utilities.consoleline( '-' )
-                
+                globals.logger.info('Program execution time: ' + str(exetime) + 's')
+                utilities.consoleline('-')
+
                 print ( 'Background dsmadmc processes cleaning...' )
-                globals.logger.info( 'Background dsmadmc processes cleaning...' )    
+                globals.logger.info('Background dsmadmc processes cleaning...')
                 globals.tsm.quit()
-                
-                globals.logger.info( utilities.consolefilledline( 'END' ) )
-                globals.logger.info( utilities.consolefilledline( 'END' ) )
-                globals.logger.info( utilities.consolefilledline( 'END' ) )
-                
+
+                globals.logger.info(utilities.consolefilledline('END'))
+                globals.logger.info(utilities.consolefilledline('END'))
+                globals.logger.info(utilities.consolefilledline('END'))
+
                 sys.exit( exitcode )
 
             # own command executor
             match = False
             # let's try to find maybe it's an own command
             for key in owncommands.spadmin_commands:
-                maincommandpart = search( '^' + utilities.regexpgenerator( key ) + '\s+', command + ' ', IGNORECASE ) 
+                maincommandpart = search( '^' + utilities.regexpgenerator(key) + '\s+', command + ' ', IGNORECASE)
                 if maincommandpart:
                     # just transfer the parameters
-                    globals.logger.info( 'Own command found: [' + command + '] and try to execute.' )
-                    owncommands.spadmin_commands[ key ]( owncommands, command.replace( maincommandpart[ 0 ].strip(), '' ).strip() )
+                    globals.logger.info('Own command found: [' + command + '] and try to execute.')
+                    owncommands.spadmin_commands[ key](owncommands, command.replace(maincommandpart[ 0].strip(), '').strip())
                     match = True
-                    break 
-            
+                    break
+
             # if it was own command then go to the next command
             if match:
                 line   = ''
                 globals.extras = {}
                 continue
-            
+
             # No own command, no exit then let dsmadmc run the command!
-            globals.logger.info( 'Pass it on to dsmadmc: [' + command + '].' )
-            for textline in globals.tsm.send_command_normal(  command ):
+            globals.logger.info('Pass it on to dsmadmc: [' + command + '].')
+            for textline in globals.tsm.send_command_normal(command):
                 if textline != '':
                     print( textline )
             line   = ''

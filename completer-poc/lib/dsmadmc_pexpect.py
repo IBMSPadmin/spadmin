@@ -1,6 +1,6 @@
 from re import search, MULTILINE, split
 import pexpect
-import globals
+from . import globals
 
 
 class dsmadmc_pexpect:
@@ -107,7 +107,7 @@ class dsmadmc_pexpect:
 
         tsm2 = self.get_tsm_normal()
 
-        globals.logger.debug( 'DSMADMC normal pid: [' + str( tsm2.pid ) + ']' )
+        globals.logger.debug('DSMADMC normal pid: [' + str(tsm2.pid) + ']')
 
         try:
             tsm2.sendline(command)
@@ -166,7 +166,7 @@ class dsmadmc_pexpect:
 
 
     def quit(self):
-        globals.logger.debug( 'DSMADMC normal quit.' )
+        globals.logger.debug('DSMADMC normal quit.')
         self.send_command_normal('quit')
-        globals.logger.debug( 'DSMADMC tabdel quit.' )
+        globals.logger.debug('DSMADMC tabdel quit.')
         self.send_command_tabdel('quit')

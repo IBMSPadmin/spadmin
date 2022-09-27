@@ -1,10 +1,12 @@
-import globals
-import utilities
+import sys
+sys.path.append("..")
+import lib.globals as globals
+import lib.utilities as utilities
 import logging
-import columnar
+import lib.columnar as columnar
 import os
 import sys
-import humanbytes
+import lib.humanbytes as humanbytes
 from pprint import pprint
 from re import search, IGNORECASE
 from termcolor import colored
@@ -89,7 +91,7 @@ dynruleinjector( 'SPadmin SHow CAche' )
 
 def history(self, parameters):
     data = []
-    rlhistfile = os.path.join( "./", globals.config.getconfiguration()['SPADMIN'][ 'historyfile' ] )
+    rlhistfile = os.path.join("../", globals.config.getconfiguration()['SPADMIN']['historyfile'])
     if os.path.exists(rlhistfile):
         f = open(rlhistfile, "r")
         count = 0

@@ -2,7 +2,7 @@ import shutil
 import re
 import io
 import operator
-import globals
+from . import globals
 from click import style
 
 from operator import itemgetter
@@ -20,7 +20,7 @@ from typing import (
 from termcolor import colored
 from toolz import frequencies
 from wcwidth import wcwidth, wcswidth
-import utilities
+from . import utilities
 
 # Types
 NonWrappedCell = str
