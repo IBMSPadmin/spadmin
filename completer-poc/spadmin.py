@@ -39,8 +39,8 @@ import sys
 
 from dsmadmc_pexpect import dsmadmc_pexpect
 
-import columnar
-columnar = columnar.Columnar()
+import columnar2
+columnar = columnar2.Columnar()
 
 from configuration import Configuration
 from IBMSPrlCompleter import IBMSPrlCompleter
