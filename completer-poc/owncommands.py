@@ -1,16 +1,12 @@
 import globals
 import utilities
 import logging
-<<<<<<< HEAD
+
 
 from termcolor import colored
 
 import columnar2
-columnar = columnar2.Columnar()
 
-=======
-import columnar
->>>>>>> 3650cf7013514d7679a7868b2dfb8a32d9506f74
 import os
 import sys
 import humanbytes
@@ -18,7 +14,7 @@ from pprint import pprint
 from re import search, IGNORECASE
 from termcolor import colored
 
-columnar = columnar.Columnar() # columnar: table creator/formatter utility
+columnar = columnar2.Columnar() # columnar: table creator/formatter utility
 spadmin_commands      = {}  # dictionary for the spadmin commands
 disabled_words        = ['DEFAULT', 'ALIAS', 'SPADMIN']  # disabled words: used in the configuration .ini file
 lastdsmcommandtype    = '?'  # last command type: used by "kill", "on", "off", etc. commands
@@ -433,11 +429,7 @@ def show_sessions( self, parameters ):
                 
         data2.append( [ index + 1,  row[ 0 ], row[ 1 ], wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
 
-<<<<<<< HEAD
     utilities.printer( columnar( data2, headers = [ 
-=======
-    utilities.printer( columnar( data2, headers = [
->>>>>>> 3650cf7013514d7679a7868b2dfb8a32d9506f74
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
         justify=[ 'r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'r' ] ) )
     
