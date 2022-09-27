@@ -485,7 +485,8 @@ def show_sessions( self, parameters ):
         mediaaccess = ''.join( row[ 8:14 ] )
                 
         data2.append( [ index + 1,  row[ 0 ], row[ 1 ], wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
-    
+
+    print(data2)
     utilities.printer( columnar( data2, headers = [ 
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
         justify=[ 'r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'l' ] ) )
