@@ -76,12 +76,12 @@ class Columnar:
         # Rows
         for row in data:  # sorok kiíratása
             for i, cell in enumerate(row):  # cellák kiíratása
-                lenght_of_row = sum((lambda x: [len(i) for i in x])(row)) + len(self.column_length) - 1
-                if (i + 1) == len(row) and globals.columns < lenght_of_row:
-                    cut = lenght_of_row - globals.columns
-                    out.write(self.get_justified_cell_text(i, cell)[:-cut])
-                else:
-                    out.write(self.get_justified_cell_text(i, cell) + " ")
+                # lenght_of_row = sum((lambda x: [len(str(a)) for a in x])(row)) + len(self.column_length) - 1
+                # if (i + 1) == len(row) and globals.columns < lenght_of_row:
+                #     cut = lenght_of_row - globals.columns
+                #     out.write(self.get_justified_cell_text(i, cell)[:globals.columns])
+                # else:
+                out.write(self.get_justified_cell_text(i, cell) + " ")
             out.write("\n")
         return out.getvalue()[:-1]
 
