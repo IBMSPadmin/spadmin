@@ -215,7 +215,7 @@ def show_actlog ( self, parameters ):
     if len(data) == 0:
         return
 
-    table = columnar(data, headers=['Date/Time', 'Message'])
+    table = columnar(data, headers=['Date/Time', 'Message'],  justify=[ 'l', 'l',])
     utilities.printer( table )
 #
 spadmin_commands[ 'SHow ACTlog' ] = show_actlog
