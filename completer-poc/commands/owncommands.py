@@ -198,7 +198,7 @@ def spadmin_show_commands( self, parameters ):
 
     utilities.printer( columnar( sorted( data ), headers=[ 
         colored( 'Command name', 'white', attrs=['bold'] ) ], 
-        justify = [ 'l' ], max_column_width = 120 ) )
+        justify = [ 'l' ]) )
 #
 spadmin_commands[ 'SPadmin SHow COMmands' ] = spadmin_show_commands
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
@@ -441,12 +441,11 @@ def show_processes( self, parameters ):
     
     data = globals.tsm.send_command_array_array_tabdel( 'select PROCESS_NUM, PROCESS, FILES_PROCESSED, BYTES_PROCESSED, STATUS from processes order by 1' )
 
-    if globals.last_error[ 'rc' ] != '0': 
-        print ( colored( globals.last_error["message"], 'red', attrs=[ 'bold' ] ) )
+    if globals.last_error[ 'rc' ] != '0':
         self.lastdsmcommandtype = 'PROCESSES'
         self.lastdsmcommandresults = []
         return
-    
+
     data2 = []
     for index, row in enumerate( data ):
                
@@ -558,7 +557,7 @@ class ShowEvents(SpadminCommand):
 
             data2.append([row[3], row[4], row[5], row[0], row[1], row[2], row[6], row[7]])
 
-            table = (columnar(data2, headers=['StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC'], justify=['r', 'c', 'l', 'l', 'l', 'l', 'l', 'l', 'r']))
+            table = (columnar(data2, headers=['StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC'], justify=['r', 'c', 'l', 'l', 'l', 'l', 'l', 'r']))
         return table
 
 

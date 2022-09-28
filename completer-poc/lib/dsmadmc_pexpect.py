@@ -1,5 +1,7 @@
 from re import search, MULTILINE, split
 import pexpect
+from termcolor import colored
+
 from . import globals
 
 
@@ -81,8 +83,8 @@ class dsmadmc_pexpect:
         list = self.send_command_tabdel(command).splitlines()
         ar = []
         if globals.last_error['rc'] != "0":
-            print(globals.last_error['message'])
-            print("ANS8001I Return code: ", globals.last_error['rc'])
+            print(colored(globals.last_error['message'], 'red', attrs=[ 'bold' ]))
+            # print("ANS8001I Return code: ", globals.last_error['rc'])
             return ar
         if len(list) > 0:
             list.pop(0)  # delete the first line which is the command itself
