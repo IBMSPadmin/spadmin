@@ -415,9 +415,9 @@ def show_sessions( self, parameters ):
     for index, row in enumerate( data ):
                
         if int( row[ 2 ] ) > 60:
-            wait = colored( row[ 2 ], 'red', attrs = [ 'bold' ] )            
+            wait = colored( humanbytes.HumanBytes.format( int( row[ 2 ] ), unit="TIME_LABELS", precision = 0 ), 'red', attrs = [ 'bold' ] )            
         else: 
-            wait = row[ 2 ]            
+            wait = humanbytes.HumanBytes.format( int( row[ 2 ] ), unit="TIME_LABELS", precision = 0 )            
         
         bytes_sent     = humanbytes.HumanBytes.format( int( row[ 3 ] ), unit="BINARY_LABELS", precision = 0 )
         bytes_received = humanbytes.HumanBytes.format( int( row[ 4 ] ), unit="BINARY_LABELS", precision = 0 )
