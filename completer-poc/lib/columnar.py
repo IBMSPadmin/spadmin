@@ -10,7 +10,7 @@ from typing import (
 )
 
 
-def clen(text):
+def clen( text ):
     length = 0
     kikapcs = False
 
@@ -30,6 +30,42 @@ def clen(text):
         length += 1
 
     return length
+    
+def colorcutter( text, width, textfiller ):
+    
+    lastcolor = ''
+    savedlastcolor = ''
+    counter = 1
+    ret = ''
+    for char in text:
+
+        ret += char
+
+        # collect and save the last color sequence
+        if char == '\x1b' or lastcolor != '':
+            if char == 'm':
+                if lastcolor == '\x1b[0':
+                    savedlastcolor = ''
+                else:
+                    savedlastcolor += lastcolor + 'm'
+                lastcolor = ''
+            else:
+                lastcolor += char
+            continue
+
+        # reach the width
+        if counter == width:
+            ret += '\x1b[0m' + textfiller
+            counter = 0
+            if savedlastcolor != '':
+                ret += savedlastcolor
+                counter = counter
+
+        counter += 1
+
+    return ret
+
+
 
 
 def get_column_length(headers, data):
@@ -78,63 +114,31 @@ class Columnar:
             for i, cell in enumerate(row):  # cellák kiíratása
 
                 # lenght_of_row = sum((lambda x: [len(i) for i in x])(row)) + len(self.column_length) - 1
-                lenght_of_row = sum(self.column_length) + len(self.column_length) - 1
+                lenght_of_row = sum( self.column_length ) + clen( self.column_length ) - 1
                 if (i + 1) == len(row) and globals.columns < lenght_of_row:
                     # cut = lenght_of_row - globals.columns
                     # out.write(self.get_justified_cell_text(i, cell)[:-cut])
                     # 
-                    # break
-                    restlength = globals.columns - sum( self.column_length[ :-1 ] ) - 1
-                    out.write( self.colorcutter( cell, restlength, '\n' + ' ' * ( sum( self.column_length[ :-1 ] ) + 1 ) ) )
+                    # cutting capability only the last column
+                    restlength = globals.columns - ( sum( self.column_length[ :-1 ] ) + clen( self.column_length ) - 1 ) 
+                    out.write( colorcutter( cell, restlength, '\n' + ' ' * ( sum( self.column_length[ :-1 ] ) + clen( self.column_length ) - 1 ) ) )
                                         
                 else:
-                    out.write(self.get_justified_cell_text(i, cell) + " ")
+                    out.write(self.get_justified_cell_text( i, cell ) + " ")
 
             out.write("\n")
         return out.getvalue()[:-1]
-
-    def colorcutter( self, text, width, textfiller ):
-
-        lastcolor = ''
-        savedlastcolor = ''
-        counter = 1
-        ret = ''
-        for char in text:
-
-            ret += char
-
-            # collect and save the last color sequence
-            if char == '\x1b' or lastcolor != '':
-                if char == 'm':
-                    if lastcolor == '\x1b[0':
-                        savedlastcolor = ''
-                    else:
-                        savedlastcolor += lastcolor + 'm'
-                    lastcolor = ''
-                else:
-                    lastcolor += char
-                continue
-
-            # reach the width
-            if counter == width:
-                ret += '\x1b[0m' + textfiller
-                counter = 0
-                if savedlastcolor != '':
-                    ret += savedlastcolor
-                    counter = counter
-
-            counter += 1
-
-        return ret
-
-    def get_justified_cell_text(self, i, cell):
-
+        
+        
+    def get_justified_cell_text( self, i, cell ):
+    
         spacer = ' ' * (self.column_length[i] - clen(str(cell)))
         left, right = spacer[:len(spacer) // 2], spacer[len(spacer) // 2:]
-
+        
         if self.justify[i] and self.justify[i] == 'l':
             return str(cell) + spacer
         elif self.justify[i] and self.justify[i] == 'c':
             return left + str(cell) + right
         else:
             return spacer + str(cell)
+

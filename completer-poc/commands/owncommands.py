@@ -4,7 +4,7 @@ import logging
 import os
 import sys
 from pprint import pprint
-from re import search, IGNORECASE
+from re import search, sub, IGNORECASE
 from termcolor import colored
 import lib.globals as globals
 import lib.utilities as utilities
@@ -214,9 +214,22 @@ def show_actlog ( self, parameters ):
 
     if len(data) == 0:
         return
-
-    table = columnar(data, headers=['Date/Time', 'Message'],  justify=[ 'l', 'l',])
-    utilities.printer( table )
+        
+    data2 = []
+    for index, row in enumerate( data ):
+                          
+        if search( '^ANR\d{4}E', row[ 1 ] ):
+            message = colored ( row[ 1 ], 'red', attrs = [ 'bold' ])
+        elif search( '^ANR\d{4}W', row[ 1 ] ):
+            message = colored ( row[ 1 ], 'yellow', attrs = [ 'bold' ])
+        else:
+            message = row[ 1 ]
+        
+        data2.append( [ row[ 0 ], message ] )
+        
+    utilities.printer( columnar( data2, 
+        headers=[ 'Date/Time', 'Message' ], 
+        justify=[ 'l', 'l' ] ) )
 #
 spadmin_commands[ 'SHow ACTlog' ] = show_actlog
 # globals.myIBMSPrlCompleter.dynrules['SHow'].append('ACTlog')
@@ -451,11 +464,21 @@ def show_processes( self, parameters ):
                
         bytes_prcessed = humanbytes.HumanBytes.format( int( row[ 3 ] ), unit="BINARY_LABELS", precision = 0 )
               
-        data2.append( [ index + 1,  row[ 0 ], row[ 1 ], row[ 2 ], bytes_prcessed, row[ 4 ] ] )
+        # Current input volume: MKP056M8. Current output volume(s): MKP074M8.
+        status = row[ 4 ]
+        status = sub( 'Current input volume: ([\w]+)\.', 
+            lambda m: colored( m.group(1), 'green', attrs=[ 'bold' ] ), status )
+        status = sub( 'Current output volume(s): ([\w]+)\.', 
+            lambda m: colored( m.group(1), 'green', attrs=[ 'bold' ] ), status )
+        status = sub( 'Waiting for mount of input volume ([\w]+) \(', 
+        lambda m: colored( m.group(1), 'green', attrs=[ 'bold' ] ), status )
+
+
+        data2.append( [ index + 1,  row[ 0 ], row[ 1 ], row[ 2 ], bytes_prcessed, status ] )
     
-    utilities.printer( columnar( data2, headers = [ 
-        '#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status' ],
-        justify=[ 'r', 'l', 'l', 'r', 'r', 'l' ] ) )
+    utilities.printer( columnar( data2, 
+        headers = [ '#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status' ],
+        justify = [ 'r', 'l', 'l', 'r', 'r', 'l' ] ) )
     
     self.lastdsmcommandtype    = 'PROCESSES'
     self.lastdsmcommandresults = data2
