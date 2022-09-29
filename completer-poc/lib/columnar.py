@@ -1,5 +1,4 @@
 import io
-import os
 from . import globals
 
 from typing import (
@@ -10,7 +9,7 @@ from typing import (
 )
 
 
-def clen( text ):
+def clen(text):
     length = 0
     kikapcs = False
 
@@ -30,9 +29,9 @@ def clen( text ):
         length += 1
 
     return length
-    
-def colorcutter( text, width, textfiller ):
-    
+
+
+def colorcutter(text, width, textfiller):
     lastcolor = ''
     savedlastcolor = ''
     counter = 1
@@ -66,8 +65,6 @@ def colorcutter( text, width, textfiller ):
     return ret
 
 
-
-
 def get_column_length(headers, data):
     column_length = []
     for cell in headers:
@@ -94,51 +91,51 @@ class Columnar:
         out = io.StringIO()
 
         self.column_length = get_column_length(headers, data)
-        # Header 1st decorator line --------
+        header_decorator = ""
         for i, cell in enumerate(headers):
-            out.write(self.header_decorator * self.column_length[i] + self.column_separator)
-        out.write("\n")
+            header_decorator += self.header_decorator * self.column_length[i] + self.column_separator
+
+        # Header 1st decorator line --------
+        out.write(header_decorator[:globals.columns] + "\n")
 
         # Header
+        header_line = ""
         for i, cell in enumerate(headers):
-            out.write(self.get_justified_cell_text(i, cell) + self.column_separator)
-        out.write("\n")
+            header_line += self.get_justified_cell_text(i, cell) + self.column_separator
+        out.write(header_line[:globals.columns] + "\n")
 
         # Header 2nd decorator line --------
-        for i, cell in enumerate(headers):
-            out.write(self.header_decorator * self.column_length[i] + self.column_separator)
-        out.write("\n")
+        out.write(header_decorator[:globals.columns] + "\n")
 
         # Rows
         for row in data:  # sorok kiíratása
             for i, cell in enumerate(row):  # cellák kiíratása
 
                 # lenght_of_row = sum((lambda x: [len(i) for i in x])(row)) + len(self.column_length) - 1
-                lenght_of_row = sum( self.column_length ) + clen( self.column_length ) - 1
+                lenght_of_row = sum(self.column_length) + clen(self.column_length) - 1
                 if (i + 1) == len(row) and globals.columns < lenght_of_row:
                     # cut = lenght_of_row - globals.columns
                     # out.write(self.get_justified_cell_text(i, cell)[:-cut])
                     # 
                     # cutting capability only the last column
-                    restlength = globals.columns - ( sum( self.column_length[ :-1 ] ) + clen( self.column_length ) - 1 ) 
-                    out.write( colorcutter( cell, restlength, '\n' + ' ' * ( sum( self.column_length[ :-1 ] ) + clen( self.column_length ) - 1 ) ) )
-                                        
+                    restlength = globals.columns - (sum(self.column_length[:-1]) + clen(self.column_length) - 1)
+                    out.write(colorcutter(cell, restlength,
+                                          '\n' + ' ' * (sum(self.column_length[:-1]) + clen(self.column_length) - 1)))
+
                 else:
-                    out.write(self.get_justified_cell_text( i, cell ) + " ")
+                    out.write(self.get_justified_cell_text(i, cell) + " ")
 
             out.write("\n")
         return out.getvalue()[:-1]
-        
-        
-    def get_justified_cell_text( self, i, cell ):
-    
+
+    def get_justified_cell_text(self, i, cell):
+
         spacer = ' ' * (self.column_length[i] - clen(str(cell)))
         left, right = spacer[:len(spacer) // 2], spacer[len(spacer) // 2:]
-        
+
         if self.justify[i] and self.justify[i] == 'l':
             return str(cell) + spacer
         elif self.justify[i] and self.justify[i] == 'c':
             return left + str(cell) + right
         else:
             return spacer + str(cell)
-
