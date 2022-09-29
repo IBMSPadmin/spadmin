@@ -262,12 +262,12 @@ if __name__ == '__main__':
     globals.logger.debug(utilities.consolefilledline('>>> INPUT LOOP START '))
     while True:
 
-        # refresh the terminal size
-        utilities.refreshrowscolumns()
-
         try:
             if line == '':
                 line = input(globals.myIBMSPrlCompleter.prompt())
+                # refresh the terminal size
+                utilities.refreshrowscolumns()
+
                 globals.logger.info('COMMAND line received: [' + line + '].')
 
             # Skip the empty command

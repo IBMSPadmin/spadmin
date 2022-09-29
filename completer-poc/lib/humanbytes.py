@@ -41,7 +41,6 @@ class HumanBytes:
 			i = 1;
 			for unit in unit_labels:
 				if num < HumanBytes.TIME_UNIT[i]:
-					print("num:" , num)
 					break
 				if unit != last_label:
 					num /= HumanBytes.TIME_UNIT[i]
