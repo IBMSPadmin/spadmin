@@ -148,8 +148,8 @@ class Columnar:
         # Header
         header_line = ""
         for i, cell in enumerate(headers):
-            header_line += self.get_justified_cell_text(i, cell) + self.column_separator
-        out.write( colored( header_line[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
+            header_line += self.get_justified_cell_text( i, cell ) + self.column_separator
+        out.write( header_line[:globals.columns] + "\n")
 
         # Header 2nd decorator line --------
         out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
