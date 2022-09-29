@@ -18,6 +18,8 @@ Volume MKP056M8 (storage pool SQL_B_T), Target Pool SQL_B_T, Moved Files: 9, Mov
 TYPE=FULL in progress. Bytes backed up: 10 bytes. Current output volume(s): .
 TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP060M8.
 
+ANR8330I LTO volume 000049L4 is mounted R/W in drive LTO4_1 (/dev/lin_tape/by-id/lin_tape_DRIVE1), status: IN USE.
+
 @_flex
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
 ~~- alias kezelő parancsok~~
