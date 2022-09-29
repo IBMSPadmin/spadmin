@@ -102,7 +102,7 @@ def grep(data):
                     found = True
                     for find in finds:
                         # data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
-                        data[i][c] = colorize( cell, grep, 'white', [ 'bold' ] )
+                        data[i][c] = colorize( cell, find, 'white', [ 'bold' ] )
             if found is True:
                 grep_data.append(row)
     else:
