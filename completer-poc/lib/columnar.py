@@ -8,6 +8,7 @@ from typing import (
     List,
     Any,
 )
+from termcolor import colored
 
 
 def clen(text):
@@ -66,6 +67,22 @@ def colorcutter(text, width, textfiller):
     return ret
 
 
+def colorize( text: str, regexp: str, color: str ):
+        match = re.search(regexp, text)
+        print(match)
+        if match:
+            before = text[0:match.start()]
+            # print(repr(before))
+            # last_colors = re.findall("(\x1b\[.+?m)", before)
+            last_colors = re.findall( "(\x1b\[.+?m|\x1b\[1m\x1b\[.+?m)", before )
+            found_last_color = ''
+            if last_colors:
+                found_last_color = last_colors[-1]
+            return text.replace(match[0], colored(match[0], color) + found_last_color)
+        else:
+            return text
+    
+
 def grep(data):
     grep = globals.extras['grep'] if 'grep' in globals.extras else ''
     grep_data = []
@@ -77,7 +94,8 @@ def grep(data):
                 if len(finds) > 0:
                     found = True
                     for find in finds:
-                        data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
+                        # data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
+                        data[i][c] = colorize( cell, grep, 'green' )
             if found is True:
                 grep_data.append(row)
     else:
