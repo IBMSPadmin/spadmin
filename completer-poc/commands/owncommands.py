@@ -426,7 +426,12 @@ def show_sessions( self, parameters ):
     
     data2 = []
     for index, row in enumerate( data ):
-               
+        
+        if row[ 1 ] == 'Run':
+            state = colored( row[ 1 ], 'green', attrs = [ 'bold' ] )            
+        else: 
+            state = row[ 1 ]       
+        
         if int( row[ 2 ] ) > 60:
             wait = colored( humanbytes.HumanBytes.format( int( row[ 2 ] ), unit="TIME_LABELS", precision = 0 ), 'red', attrs = [ 'bold' ] )            
         else: 
@@ -437,7 +442,7 @@ def show_sessions( self, parameters ):
         
         mediaaccess = ''.join( row[ 8:14 ] )
                 
-        data2.append( [ index + 1,  row[ 0 ], row[ 1 ], wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
+        data2.append( [ index + 1,  row[ 0 ], state, wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
 
     utilities.printer( columnar( data2, headers = [
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
