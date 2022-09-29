@@ -266,7 +266,7 @@ if __name__ == '__main__':
             if line == '':
                 line = input(globals.myIBMSPrlCompleter.prompt())
                 # refresh the terminal size
-                # utilities.refreshrowscolumns() MOVED to utilities.refreshrowscolumns()
+                utilities.refreshrowscolumns() # MOVED to utilities.refreshrowscolumns()
 
                 globals.logger.info('COMMAND line received: [' + line + '].')
 

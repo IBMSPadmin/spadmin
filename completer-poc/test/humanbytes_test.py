@@ -37,14 +37,18 @@ class Testing(unittest.TestCase):
         self.assertEqual("1 Y", self.hbc.format(int(1 * 60 * 60 * 24 * 7 * 30 * 12), unit="TIME_LABELS", precision=0))
         self.assertEqual("3 Y", self.hbc.format(int(1 * 60 * 60 * 24 * 7 * 30 * 36), unit="TIME_LABELS", precision=0))
 
-    def test_boolean(self):
+    def test_binary_labels(self):
         self.assertEqual("-1 B", self.hbc.format(int(-1), unit="BINARY_LABELS", precision=0))
         self.assertEqual("0 B", self.hbc.format(int(0), unit="BINARY_LABELS", precision=0))
         self.assertEqual("1 B", self.hbc.format(int(1), unit="BINARY_LABELS", precision=0))
+        self.assertEqual("1023 B", self.hbc.format(int(1023), unit="BINARY_LABELS", precision=0))
         self.assertEqual("1 KiB", self.hbc.format(int(1 * 1024), unit="BINARY_LABELS", precision=0))
-        self.assertEqual("1 MiB", self.hbc.format(int(1 * 1024 * 1024), unit="BINARY_LABELS", precision=0))
-        self.assertEqual("1 GiB", self.hbc.format(int(1 * 1024 * 1024 * 1024), unit="BINARY_LABELS", precision=0))
-        self.assertEqual("1 TiB", self.hbc.format(int(1 * 1024 * 1024 * 1024 * 1024), unit="BINARY_LABELS", precision=0))
+        self.assertEqual("1 MiB", self.hbc.format(int(1 * 1024 ** 2), unit="BINARY_LABELS", precision=0))
+        self.assertEqual("1 GiB", self.hbc.format(int(1 * 1024 ** 3), unit="BINARY_LABELS", precision=0))
+        self.assertEqual("1 TiB", self.hbc.format(int(1 * 1024 ** 4), unit="BINARY_LABELS", precision=0))
+        self.assertEqual("1 PiB", self.hbc.format(int(1 * 1024 ** 5), unit="BINARY_LABELS", precision=0))
+        self.assertEqual("1 EiB", self.hbc.format(int(1 * 1024 ** 6), unit="BINARY_LABELS", precision=0))
+        self.assertEqual("1 ZiB", self.hbc.format(int(1 * 1024 ** 7), unit="BINARY_LABELS", precision=0))
 
 
 if __name__ == '__main__':

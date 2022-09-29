@@ -10,32 +10,34 @@ from termcolor import colored
 from typing import (
     Sequence,
 )
+
 ansi_color_pattern = re.compile(r"\x1b\[.+?m")
 
 
 def refreshrowscolumns():
-    row, column = os.popen( 'stty size', 'r' ).read().split()
-    globals.rows    = int(row)
+    row, column = os.popen('stty size', 'r').read().split()
+    globals.rows = int(row)
     globals.columns = int(column)
 
 
-def progressbar( count, total, leadtext = '' ):
+def progressbar(count, total, leadtext=''):
     barlength = globals.columns - 2 - len(leadtext)  # [...]
     filledlength = int(round((barlength) * count / float(total)))
 
     percent = round(100.0 * count / float(total), 1)
     barline = '=' * filledlength + colored('-', 'grey', attrs=['bold']) * (barlength - filledlength)
 
-    sys.stdout.write( leadtext + '[%s]\r' % (barline))
-    sys.stdout.write( leadtext + '[%s%s\r' % (colored(percent, 'grey', 'on_white'), colored('%', 'grey', 'on_white')))
+    sys.stdout.write(leadtext + '[%s]\r' % (barline))
+    sys.stdout.write(leadtext + '[%s%s\r' % (colored(percent, 'grey', 'on_white'), colored('%', 'grey', 'on_white')))
     sys.stdout.flush()
+
 
 def add_remove_color(color, string):
     color_pattern = r"\x1b\[.+?m"
     color_reset = "\x1b[0m"
     ret = string
     matches = re.findall(color_pattern, string)
-    ret = ret.replace(color_reset,color)
+    ret = ret.replace(color_reset, color)
     return color + ret + color_reset
 
 
@@ -47,16 +49,16 @@ def printer(string):
 
     for line in s:
         i += 1
-      #  print(repr(line), sep="\n")
         print(line, sep="")
         if 'more' in globals.extras and i > globals.rows - 2:
-            sys.stdout.write( "more...   (<ENTER> to continue, 'C' to cancel)" )
+            sys.stdout.write("more...   (<ENTER> to continue, 'C' to cancel)")
             sys.stdout.flush()
             key = readchar.readkey()
             if str(key).lower() == "c":
                 print(*s[i + globals.rows - 2:], sep="\n")
                 break
             i = 0
+
 
 def check_connection(server: str, id: str, password: str) -> bool:
     if id == '' or password == '':
@@ -117,21 +119,21 @@ def getmac():
     ret = ':'.join(re.findall('../..', '%012x' % uuid.getnode()))
     return ret
 
-def consoleline( char='-'):
+
+def consoleline(char='-'):
     print(char * globals.columns)
 
 
-def consolefilledline(left = '', pattern = '-', right = '', width = 120):
+def consolefilledline(left='', pattern='-', right='', width=120):
     patternwith = width - len(left) - len(right) - 2
     return left + ' ' + pattern * patternwith + ' ' + right
 
 
 def regexpgenerator(regexp):
-
     savelastchar = ''
-    if regexp[ -1 ] == '=':
-        savelastchar = regexp[ -1 ] + '(?!.*\w+\s)'
-        regexp = regexp[ : -1 ]
+    if regexp[-1] == '=':
+        savelastchar = regexp[-1] + '(?!.*\w+\s)'
+        regexp = regexp[: -1]
     # # save v2 with regexp pattern
     # match = search( '(=.*)$', regexp )
     # if match:
@@ -141,14 +143,14 @@ def regexpgenerator(regexp):
     result = ''
     for part in regexp.split():
 
-        if part[ 0 ].isupper():
+        if part[0].isupper():
 
             tmpregexp = part
             tmpstring = part
             for x in part:
-                if tmpstring[ -1 ].isupper():
+                if tmpstring[-1].isupper():
                     break
-                tmpstring = part[ 0:len( tmpstring ) - 1 ]
+                tmpstring = part[0:len(tmpstring) - 1]
                 tmpregexp += '|' + tmpstring
 
             result += '(' + tmpregexp + ')'
@@ -158,14 +160,14 @@ def regexpgenerator(regexp):
 
         result += '\s+'
 
-    return result[ :-3 ] + savelastchar
+    return result[:-3] + savelastchar
 
 
-def dictmerger( destination, source ):
+def dictmerger(destination, source):
     for key in source:
         if key not in destination:
-             destination[ key ] = []
-        destination[ key ].extend( source [ key ] )
+            destination[key] = []
+        destination[key].extend(source[key])
 
 
 def green(match_obj):
@@ -199,6 +201,6 @@ def szinezo(text: str, regexp: str, color: Sequence[str]):
                  ret[m.start() + len(m.group()):]])
         else:
             ret = ''.join([text[0:m.start()], ''.join(color), text[m.start():(m.start() + len(m.group()))], text[
-                                                                                                     m.start() + len(
-                                                                                                         m.group()):]])
+                                                                                                            m.start() + len(
+                                                                                                                m.group()):]])
     return ret
