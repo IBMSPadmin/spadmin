@@ -1,6 +1,7 @@
 import io
+import re
 from . import globals
-
+from colorama import Fore, Back, Style
 from typing import (
     Union,
     Sequence,
@@ -65,6 +66,26 @@ def colorcutter(text, width, textfiller):
     return ret
 
 
+def grep(data):
+    grep = globals.extras['grep'] if 'grep' in globals.extras else ''
+    grep_data = []
+    if grep != '' and grep is not None:
+        for i, row in enumerate(data):
+            found = False
+            for c, cell in enumerate(row):
+                finds = re.findall(grep, str(cell))
+                if len(finds) > 0:
+                    found = True
+                    for find in finds:
+                        data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
+            if found is True:
+                grep_data.append(row)
+    else:
+        grep_data = data
+
+    return grep_data
+
+
 def get_column_length(headers, data):
     column_length = []
     for cell in headers:
@@ -90,6 +111,9 @@ class Columnar:
         self.header_decorator = "-"  # lenght of decorator should be 1 char.
         out = io.StringIO()
 
+        # Grep
+        data = grep(data)
+
         self.column_length = get_column_length(headers, data)
         header_decorator = ""
         for i, cell in enumerate(headers):
@@ -111,20 +135,13 @@ class Columnar:
         for row in data:  # sorok kiíratása
             for i, cell in enumerate(row):  # cellák kiíratása
 
-                # lenght_of_row = sum((lambda x: [len(i) for i in x])(row)) + len(self.column_length) - 1
                 lenght_of_row = sum(self.column_length) + clen(self.column_length) - 1
                 if (i + 1) == len(row) and globals.columns < lenght_of_row:
-                    # cut = lenght_of_row - globals.columns
-                    # out.write(self.get_justified_cell_text(i, cell)[:-cut])
-                    # 
-                    # cutting capability only the last column
                     restlength = globals.columns - (sum(self.column_length[:-1]) + clen(self.column_length) - 1)
                     out.write(colorcutter(cell, restlength,
                                           '\n' + ' ' * (sum(self.column_length[:-1]) + clen(self.column_length) - 1)))
-
                 else:
                     out.write(self.get_justified_cell_text(i, cell) + " ")
-
             out.write("\n")
         return out.getvalue()[:-1]
 
