@@ -67,9 +67,11 @@ def colorcutter(text, width, textfiller):
     return ret
 
 
-def colorize( text: str, regexp: str, color: str ):
-        match = re.search(regexp, text)
-        print(match)
+def colorize( text: str, regexp: str, color: str, attrs=[] ):
+    
+        text = str( text ) # FIX: "TypeError: expected string or bytes-like object"
+        match = re.search( regexp, text )
+        
         if match:
             before = text[0:match.start()]
             # print(repr(before))
@@ -77,8 +79,11 @@ def colorize( text: str, regexp: str, color: str ):
             last_colors = re.findall( "(\x1b\[.+?m|\x1b\[1m\x1b\[.+?m)", before )
             found_last_color = ''
             if last_colors:
-                found_last_color = last_colors[-1]
-            return text.replace(match[0], colored(match[0], color) + found_last_color)
+                if len( last_colors ) > 1  and last_colors[ -2 ] == '\x1b[1m':
+                    found_last_color = last_colors[ -2 ] + last_colors[ -1 ]
+                else:
+                     found_last_color = last_colors[ -1 ]
+            return text.replace(match[0], colored(match[0], color, attrs=attrs ) + found_last_color)
         else:
             return text
     
@@ -95,7 +100,7 @@ def grep(data):
                     found = True
                     for find in finds:
                         # data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
-                        data[i][c] = colorize( cell, grep, 'green' )
+                        data[i][c] = colorize( cell, grep, 'white', [ 'bold' ] )
             if found is True:
                 grep_data.append(row)
     else:
@@ -138,16 +143,16 @@ class Columnar:
             header_decorator += self.header_decorator * self.column_length[i] + self.column_separator
 
         # Header 1st decorator line --------
-        out.write(header_decorator[:globals.columns] + "\n")
+        out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
 
         # Header
         header_line = ""
         for i, cell in enumerate(headers):
             header_line += self.get_justified_cell_text(i, cell) + self.column_separator
-        out.write(header_line[:globals.columns] + "\n")
+        out.write( colored( header_line[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
 
         # Header 2nd decorator line --------
-        out.write(header_decorator[:globals.columns] + "\n")
+        out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
 
         # Rows
         for row in data:  # sorok kiíratása

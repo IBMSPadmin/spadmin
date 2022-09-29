@@ -43,12 +43,15 @@ def printer(string):
     s = str(string).split("\n")
     i = 0
 
+    refreshrowscolumns()
+
     for line in s:
         i += 1
       #  print(repr(line), sep="\n")
         print(line, sep="")
-        if 'more' in globals.extras and i > globals.rows - 3:
-            print("more...   (<ENTER> to continue, 'C' to cancel)")
+        if 'more' in globals.extras and i > globals.rows - 2:
+            sys.stdout.write( "more...   (<ENTER> to continue, 'C' to cancel)" )
+            sys.stdout.flush()
             key = readchar.readkey()
             if str(key).lower() == "c":
                 print(*s[i + globals.rows - 2:], sep="\n")
