@@ -466,13 +466,16 @@ def show_processes( self, parameters ):
               
         # Current input volume: MKP056M8. Current output volume(s): MKP074M8.
         status = row[ 4 ]
-        status = sub( 'Current input volume: ([\w]+)\.', 
-            lambda m: colored( m.group(1), 'green', attrs=[ 'bold' ] ), status )
-        status = sub( 'Current output volume(s): ([\w]+)\.', 
-            lambda m: colored( m.group(1), 'green', attrs=[ 'bold' ] ), status )
-        status = sub( 'Waiting for mount of input volume ([\w]+) \(', 
-        lambda m: colored( m.group(1), 'green', attrs=[ 'bold' ] ), status )
-
+        status = sub( '(Current input volume: )([\w]+)(\.)', 
+            lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
+        status = sub( '(Current output volume\(' + 's\): )([\w]+)(\.)', 
+            lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
+        status = sub( '(Waiting for mount of input volume )([\w]+)( \()', 
+            lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
+        status = sub( '(Waiting for mount of output volume )([\w]+)( \()', 
+          lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
+        status = sub( '(Volume )([\w]+)( \()', 
+            lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
 
         data2.append( [ index + 1,  row[ 0 ], row[ 1 ], row[ 2 ], bytes_prcessed, status ] )
     
