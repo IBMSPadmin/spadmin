@@ -473,7 +473,7 @@ def show_processes( self, parameters ):
         status = sub( '(Waiting for mount of input volume )([\w]+)( \()', 
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
         status = sub( '(Waiting for mount of output volume )([\w]+)( \()', 
-          lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
+            lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
         status = sub( '(Volume )([\w]+)( \()', 
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
 
