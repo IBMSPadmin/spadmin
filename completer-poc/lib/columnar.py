@@ -67,7 +67,7 @@ def colorcutter(text, width, textfiller):
     return ret
 
 
-def colorize( text: str, regexp: str, color: str ):
+def colorize( text: str, regexp: str, color: str, attrs=[] ):
         match = re.search(regexp, text)
         print(match)
         if match:
@@ -77,8 +77,11 @@ def colorize( text: str, regexp: str, color: str ):
             last_colors = re.findall( "(\x1b\[.+?m|\x1b\[1m\x1b\[.+?m)", before )
             found_last_color = ''
             if last_colors:
-                found_last_color = last_colors[-1]
-            return text.replace(match[0], colored(match[0], color) + found_last_color)
+                if len( last_colors ) > 1  and last_colors[ -2 ] == '\x1b[1m':
+                    found_last_color = last_colors[ -2 ] + last_colors[ -1 ]
+                else:
+                     found_last_color = last_colors[ -1 ]
+            return text.replace(match[0], colored(match[0], color, attrs=attrs ) + found_last_color)
         else:
             return text
     
@@ -95,7 +98,7 @@ def grep(data):
                     found = True
                     for find in finds:
                         # data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
-                        data[i][c] = colorize( cell, grep, 'green' )
+                        data[i][c] = colorize( cell, grep, 'white', [ 'bold' ] )
             if found is True:
                 grep_data.append(row)
     else:
