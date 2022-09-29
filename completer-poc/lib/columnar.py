@@ -68,8 +68,10 @@ def colorcutter(text, width, textfiller):
 
 
 def colorize( text: str, regexp: str, color: str, attrs=[] ):
-        match = re.search(regexp, text)
-        print(match)
+    
+        text = str( text ) # FIX: "TypeError: expected string or bytes-like object"
+        match = re.search( regexp, text )
+        
         if match:
             before = text[0:match.start()]
             # print(repr(before))
@@ -141,16 +143,16 @@ class Columnar:
             header_decorator += self.header_decorator * self.column_length[i] + self.column_separator
 
         # Header 1st decorator line --------
-        out.write(header_decorator[:globals.columns] + "\n")
+        out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
 
         # Header
         header_line = ""
         for i, cell in enumerate(headers):
             header_line += self.get_justified_cell_text(i, cell) + self.column_separator
-        out.write(header_line[:globals.columns] + "\n")
+        out.write( colored( header_line[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
 
         # Header 2nd decorator line --------
-        out.write(header_decorator[:globals.columns] + "\n")
+        out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
 
         # Rows
         for row in data:  # sorok kiíratása
