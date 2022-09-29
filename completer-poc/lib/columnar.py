@@ -1,5 +1,7 @@
 import io
 import re
+from operator import itemgetter
+
 from . import globals
 from colorama import Fore, Back, Style
 from typing import (
@@ -133,6 +135,12 @@ class Columnar:
         self.column_separator = " "  # lenght of separator should be 1 char.
         self.header_decorator = "-"  # lenght of decorator should be 1 char.
         out = io.StringIO()
+
+        orderby = globals.extras['orderby'] if 'orderby' in globals.extras else ''
+        if orderby != '' and orderby is not None and orderby.isnumeric() and int(orderby) < len(data[0]):
+            data = sorted(data, key=itemgetter(int(orderby)), reverse=False)
+#            headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ])
+            headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ]) + Fore.WHITE + Style.BRIGHT
 
         # Grep
         data = grep(data)
