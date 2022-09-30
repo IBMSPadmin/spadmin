@@ -1,20 +1,19 @@
 # spadmin.py
 
-Maradhat ez a név. Amivel megvagyunk:
-
 ### prerequisites
 
-- macOS, Linux, Linux konténer, Microst Windows WSL
+- macOS, Linux, Linux konténer, Micrsoft Windows WSL
 - python3
 - pyton modulok
-	- pip install pexpect termcolor readline click toolz wcwidth
-- dsmamdc v8.1.15
+	- pip install termcolor readline pexpect readchar (ellenőrizni kell! a nem szükséges modulokat ki kell vezetni, termcolor vs. colorama)
+- dsmamdc v8.1.15 
+- dsmserv v8.1.14
 
 ## dsmadmc kezelés pexpect modullal
 
 ## readline
 
-Még nem tiszta 100%-ban, hogy mi a különbség a readline és a gnureadline között, de valami van. Marcellnél GNU van, nálam sztem nem az. A Linux-okon valószínűleg GNU.
+Még nem tiszta 100%-ban, hogy mi a különbség a readline és a gnureadline között, de valami különbség biztosan van. Marcellnél GNU van, nálam sztem nem az. A Linux-okon valószínűleg GNU.
 
 ## Működő funkciók
 
@@ -22,29 +21,33 @@ Még nem tiszta 100%-ban, hogy mi a különbség a readline és a gnureadline k�
 
 ```
 $ ./spadmin.py -h
-usage: spadmin.py [-h] [--consoleonly] [-c [COMMANDS]] [-d] [-i [INIFILENAME]] [-l [LOGFILENAME]] [-m] [-n] [-p] [-r [RULEFILENAME]] [-s] [-t [TEXTCOLOR]] [-v]
+usage: spadmin.py [-h] [--consoleonly] [-c COMMANDS] [-d] [-i INIFILENAME] [-l LOGFILENAME] [-m] [-n] [-p] [-r RULEFILENAME] [-s]
+                               [-t TEXTCOLOR] [-u] [-v] [-w]
 
 Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.
 
 options:
   -h, --help            show this help message and exit
   --consoleonly         run console only mode!
-  -c [COMMANDS], --commands [COMMANDS]
+  -c COMMANDS, --commands COMMANDS
                         autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;
   -d, --debug           debug messages into log file
-  -i [INIFILENAME], --inifilename [INIFILENAME]
+  -i INIFILENAME, --inifilename INIFILENAME
                         ini filename
-  -l [LOGFILENAME], --logfilename [LOGFILENAME]
+  -l LOGFILENAME, --logfilename LOGFILENAME
                         log filename
   -m, --norlsqlcache    no cache for sql queries in reradline
   -n, --norlsqlhelpepr  no sql queries in reradline
   -p, --prereqcheck     prerequisite check
-  -r [RULEFILENAME], --rulefilename [RULEFILENAME]
+  -r RULEFILENAME, --rulefilename RULEFILENAME
                         custom rule filename
   -s, --disablerl       disable readline functionality
-  -t [TEXTCOLOR], --textcolor [TEXTCOLOR]
+  -t TEXTCOLOR, --textcolor TEXTCOLOR
                         specify the text color [default: "white"]
+  -u, --nohumanreadable
+                        no human readable conversions
   -v, --version         show version information
+  -w, --nowelcome       no welcome messages
 
 Thank you very much for downloading and starting to use it!
 ```
@@ -104,7 +107,7 @@ $
 
 ### 1-es szint:
 
-Ez a legegszerűbb, mert egyelőre ezeket a parncsrészleteket külön kezeljük. A leírásuk így nézni ki:
+Ez a legegyszerűbb, mert egyelőre ezeket a parancsrészleteket külön kezeljük. A leírásuk így nézni ki:
 
 ```
 $->ACCept
@@ -221,10 +224,10 @@ SPadmin
 	- RULes - kiírja a szabályokat, amit a readline használ   
 	- VERsion - kiírja az spadin verzióját
 		  
-- UNSET DEBUG - kikpcsolja a debog szintű log-olást
+- UNSET DEBUG - kikapcsolja a debug szintű log-olást
 
 - UPDate ???   
 
-- VERsion !!!ez nem kell+
+- VERsion !!!ez nem kell!!!
 
 ##

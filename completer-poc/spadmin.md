@@ -2,32 +2,48 @@
 
 Global spadmin.py development progress status: 
 
-![spadmin progress](https://progress-bar.dev/40/)
+![spadmin progress](https://progress-bar.dev/50/)
 
 # aktuális toDo-k
 
-ANR8805I Labeling volumes in library DELLML3; 5 volume(s) labeled.
-ANR8805I Labeling volumes in library DELLML3; 20 volume(s) labeled.\
+- színező modulok egységesítése (én a colored-re/termcolor szavazok)
 
-Volume MKP048M8 (storage pool VMW_B_T), Target Pool VMW_B_T, Moved Files: 0, Moved Bytes: 0 bytes, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 128 MB Waiting for mount of output volume MKP058M8 (26 seconds).
+Színezendő üzenetek:
 
-Volume MKP048M8 (storage pool VMW_B_T), Target Pool VMW_B_T, Moved Files: 0, Moved Bytes: 0 bytes, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 128 MB Current output volume(s): MKP058M8.
+## q proc
+- ANR8805I Labeling volumes in library DELLML3; 5 volume(s) labeled.
+- ANR8805I Labeling volumes in library DELLML3; 20 volume(s) labeled.\
 
-Volume MKP056M8 (storage pool SQL_B_T), Target Pool SQL_B_T, Moved Files: 9, Moved Bytes: 90,012 MB, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 10,001 MB Current input volume: MKP056M8. Current output volume(s): MKP074M8.
+- Volume MKP048M8 (storage pool VMW_B_T), Target Pool VMW_B_T, Moved Files: 0, Moved Bytes: 0 bytes, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 128 MB Waiting for mount of output volume MKP058M8 (26 seconds).
 
-TYPE=FULL in progress. Bytes backed up: 10 bytes. Current output volume(s): .
-TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP060M8.
+- Volume MKP048M8 (storage pool VMW_B_T), Target Pool VMW_B_T, Moved Files: 0, Moved Bytes: 0 bytes, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 128 MB Current output volume(s): MKP058M8.
 
-ANR8330I LTO volume 000049L4 is mounted R/W in drive LTO4_1 (/dev/lin_tape/by-id/lin_tape_DRIVE1), status: IN USE.
+- Volume MKP056M8 (storage pool SQL_B_T), Target Pool SQL_B_T, Moved Files: 9, Moved Bytes: 90,012 MB, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 10,001 MB Current input volume: MKP056M8. Current output volume(s): MKP074M8.
 
-@_flex
+- TYPE=FULL in progress. Bytes backed up: 10 bytes. Current output volume(s): .
+- TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP060M8.
+
+## q mount
+- ANR8330I LTO volume 000049L4 is mounted R/W in drive LTO4_1 (/dev/lin_tape/by-id/lin_tape_DRIVE1), status: IN USE.
+
+## consolemode
+- színezést rendbe tenni
+- külön ablak (macOS, WSL)
+
+## @_flex
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
-~~- alias kezelő parancsok~~
-~~- "intelligens" rule dictionary betöltő function és akkor nem kell az a sok kavarás az owncommand-ban~~
 - Ha az opciók végén = jel van, akkor az még az előzőhöz tartozik!
-~~- Kell egy másodperc humán kiíró m, H, d~~
 - kisbetű nagybetű alias, grep (az alias-oknál kikapcsoltam)
 - alias regexp generator: SESs+, DISKs+
+
+## inifile / program paraméterek
+- össze kell őket fésülni
+
+## induláskor prereq check
+- os, python
+- modulok
+- fájlok
+
 
 -- -------- -------------------------
  # Commands
@@ -189,22 +205,7 @@ ANR8330I LTO volume 000049L4 is mounted R/W in drive LTO4_1 (/dev/lin_tape/by-id
 	- TSM riport q node, q sched, q vol acc reado, unava, q lic
 - HTML email?
 - CSV
-- > filename
-
-Színezés szekvenciája:
-
-!!! még a színezések előtt meg kell tudni a méretét, hogy lássuk melyik a leghosszabb sor, mert a fejléc arra fog elkészülni és a többi sor is azzal lesz finomhangolva !!! 
-- Ha van grep akkor azt ki kellene emelni (Mi van ha pont ott törik meg???)
-- Ugyenez igaz ha valami mintát emelünk ki. A grep kiemelése nem annyira fontos, de a minta kiemelés az nem maradha ki.
-- Ha a mintára megcsináljuk, akkor maradhat a grep-nél is: tehát meg kell csinálni
-- Engedjük el a teljes sor kiszínezését, mert úgy könnyebb
-
-{RED, ANR8592I} Session 136369 connection is using protocol TLSV12, cipher specification {RED, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384}, certificate TSM Self-Signed Certificate.  (SESSION: 136369)
-Ha sortöréskor volt elkezdett szín, akkor azzal kell az újat is elkezdeni.
-
-- Kell-e törni a sort, ha nem kész.
-- Kell: van-e épp olyan szín, aminél törik a sor? Ha igen, akkor azzal kell majd kezdeni a következő sort!
-- 
+- > filename vagy outfile <filename>
 
 # Start console 
 
