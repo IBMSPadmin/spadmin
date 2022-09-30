@@ -771,5 +771,70 @@ spadmin_commands[ 'SHow SCRatches' ] = show_scratches
 dynruleinjector(  'SHow SCRatches' )
 
 
+def show_copygroups( self, parameters ):
+    
+    data = globals.tsm.send_command_array_array_tabdel( "select bu.DOMAIN_NAME, bu.SET_NAME, bu.CLASS_NAME, (select DEFAULTMC from MGMTCLASSES where bu.DOMAIN_NAME = DOMAIN_NAME and bu.SET_NAME = SET_NAME and bu.CLASS_NAME = CLASS_NAME ), bu.VEREXISTS, bu.VERDELETED, bu.RETEXTRA, bu.RETONLY, bu.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where bu.DESTINATION = stgp.STGPOOL_NAME) from BU_COPYGROUPS bu" )
+
+    # data = globals.tsm.send_command_array_array_tabdel( "select bu.DOMAIN_NAME, bu.SET_NAME, bu.CLASS_NAME, (select DEFAULTMC from MGMTCLASSES where bu.DOMAIN_NAME = DOMAIN_NAME and bu.SET_NAME = SET_NAME and bu.CLASS_NAME = CLASS_NAME ), bu.VEREXISTS, bu.VERDELETED, bu.RETEXTRA, bu.RETONLY, bu.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where bu.DESTINATION = stgp.STGPOOL_NAME), ar.RETVER, ar.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where ar.DESTINATION = stgp.STGPOOL_NAME) from BU_COPYGROUPS bu, AR_COPYGROUPS ar" )
+
+    if globals.last_error[ 'rc' ] != '0':
+        self.lastdsmcommandtype    = 'COPYGROUPS'
+        self.lastdsmcommandresults = []
+        return
+
+    data2 = []
+    for index, row in enumerate( data ):
+        
+        if row[ 3 ] == 'Yes':
+            default = colored( 'y', 'green', attrs=[ 'bold' ] )
+        else:
+            default = ''
+            
+        budest = '' 
+        if row[ 9 ] != '':
+            budest += '-> ' + row[ 9 ]
+                           
+        data2.append( [  row[ 0 ], row[ 1 ], row[ 2 ], default,
+            row[ 4 ].rstrip() + ', ' + row[ 5 ].rstrip() + ', ' + row[ 6 ].rstrip() + ', ' + row[ 7 ].rstrip(), row[ 8 ], budest ] )
+            # '(' + row[ 10 ].rstrip() + ')', 
+            # ardest ] )
+    
+    utilities.printer( columnar( data2, 
+        headers = [ 'Domain', 'PolicySet', 'MgmtClass', 'd', 'BACopy (ve, vd, re, ro)', 'BADest', 'Next' ],
+        justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] ) )
+
+    data = globals.tsm.send_command_array_array_tabdel( "select ar.DOMAIN_NAME, ar.SET_NAME, ar.CLASS_NAME, (select DEFAULTMC from MGMTCLASSES where ar.DOMAIN_NAME = DOMAIN_NAME and ar.SET_NAME = SET_NAME and ar.CLASS_NAME = CLASS_NAME ), ar.RETVER, ar.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where ar.DESTINATION = stgp.STGPOOL_NAME) from AR_COPYGROUPS ar" )
+    
+    if globals.last_error[ 'rc' ] != '0':
+        self.lastdsmcommandtype    = 'COPYGROUPS'
+        self.lastdsmcommandresults = []
+        return
+    
+    data2 = []
+    for index, row in enumerate( data ):
+        
+        if row[ 3 ] == 'Yes':
+            default = colored( 'y', 'green', attrs=[ 'bold' ] )
+        else:
+            default = ''
+            
+        ardest = '' 
+        if row[ 6 ] != '':
+            ardest += '-> ' + row[ 6 ]
+                           
+        data2.append( [  row[ 0 ], row[ 1 ], row[ 2 ], default,
+            row[ 4 ], row[ 5 ], ardest ] )
+    
+    utilities.printer( columnar( data2, 
+        headers = [ 'Domain', 'PolicySet', 'MgmtClass', 'd', 'ARCopy (d)', 'ARDest', 'Next' ],
+        justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] ) )
+    
+    self.lastdsmcommandtype    = 'COPYGROUPS'
+    self.lastdsmcommandresults = data2
+    
+spadmin_commands[ 'SHow COPYGroups' ] = show_copygroups
+dynruleinjector(  'SHow COPYGroups' )
+
+
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
