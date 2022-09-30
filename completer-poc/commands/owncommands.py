@@ -180,11 +180,9 @@ def spadmin_show_rules( self, parameters ):
             if rulelength >= min and rulelength <= max:
                 data.append( [ key, rulelength, globals.myIBMSPrlCompleter.rules[ key ] ] )
 
-    utilities.printer( columnar( sorted( data, key = lambda x: x[ 1 ] ), headers=[
-        colored( 'Regexp', 'white', attrs=['bold'] ),
-        colored( 'LVL',    'white', attrs=['bold'] ),
-        colored( 'Value',  'white', attrs=['bold'] ) ],
-        justify = [ 'l', 'c', 'l' ], max_column_width = 120 ) )
+    utilities.printer( columnar( sorted( data, key = lambda x: x[ 1 ] ), 
+        headers = [ 'Regexp', 'LVL', 'Value' ],
+        justify = [ 'l', 'c', 'l' ] ) )
 #
 spadmin_commands[ 'SPadmin SHow RULes' ] = spadmin_show_rules
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
