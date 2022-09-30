@@ -5,7 +5,7 @@
 - macOS, Linux, Linux konténer, Micrsoft Windows WSL
 - python3
 - pyton modulok
-	- pip install termcolor readline pexpect readchar (ellenőrizni kell! a nem szükséges modulokat ki kell vezetni, termcolor vs. colorama)
+	- pip install termcolor readline pexpect readchar
 - dsmamdc v8.1.15 
 - dsmserv v8.1.14
 

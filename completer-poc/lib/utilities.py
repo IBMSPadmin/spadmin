@@ -5,10 +5,10 @@ from . import globals
 import readchar
 import uuid
 import subprocess
-from colorama import Fore, Style
+
 from termcolor import colored
 from typing import (
-    Sequence,
+    Sequence
 )
 
 ansi_color_pattern = re.compile(r"\x1b\[.+?m")
@@ -95,25 +95,38 @@ def start_console(server: str, id: str, password: str) -> bool:
             dsmadmc = subprocess.Popen(
                 ['dsmadmc', '-id=%s' % id, '-pa=%s' % password, '-console'], stdout=subprocess.PIPE)
         print("Console mode started.")
+        
         while True:
             line = dsmadmc.stdout.readline().decode("utf-8")
             if not line:
                 break
-            if re.search("ANR....W", line):
-                line = coloring(Fore.YELLOW, line)
-            if re.search("ANR....E", line):
-                line = coloring(Fore.RED, line)
-            if re.search("ANR....D", line):
-                line = coloring(Fore.CYAN, line)
-            if re.search("AN.....S", line):
-                line = coloring(Fore.CYAN, line)
+            line = colorize_line( line )
             print(line, end='')
+            
         print("Console mode ended.")
+    
         return True
+    
     except subprocess.CalledProcessError as exc:
         print(exc.output, "\nAn error occured during the console mode, Return code:", exc.returncode, "\n")
         return False
+        
+    except KeyboardInterrupt:
+        print( '\nQuit...' )
+        return False
+        
 
+def colorize_line( line ):
+    if re.search( '^ANR\d{4}E', line ):
+        return colored( line, 'red', attrs = [ 'bold' ])
+    elif re.search( '^ANR\d{4}W', line ):
+        return colored( line, 'yellow', attrs = [ 'bold' ])
+    elif re.search( '^ANR\d{4}D', line ):
+        return colored( line, 'cyan', attrs = [ 'bold' ])
+    elif re.search( '^AN\d{5}S', line ):
+        return colored( line, 'red', attrs = [ 'bold' ])
+    else:
+        return line
 
 def getmac():
     ret = ':'.join(re.findall('../..', '%012x' % uuid.getnode()))
@@ -168,39 +181,3 @@ def dictmerger(destination, source):
         if key not in destination:
             destination[key] = []
         destination[key].extend(source[key])
-
-
-def green(match_obj):
-    for g in match_obj.groups():
-        if g is not None:
-            return Fore.GREEN + match_obj.group() + Style.RESET_ALL
-
-
-def yellow(match_obj):
-    for g in match_obj.groups():
-        if g is not None:
-            return Fore.YELLOW + match_obj.group() + Style.RESET_ALL
-
-
-def coloring(color, line) -> str:
-    for match in ansi_color_pattern.finditer(line):
-        if match.group() == Style.RESET_ALL:
-            line = line.replace(match.group(), Style.RESET_ALL + color)
-        else:
-            line = line.replace(match.group(), ''.join([Style.RESET_ALL, match.group()]))
-    return "".join([color, line, Style.RESET_ALL])
-
-
-def szinezo(text: str, regexp: str, color: Sequence[str]):
-    ret = text
-    for m in reversed(list(re.finditer(regexp, text))):
-        last_colors = re.findall("(\x1b\[1m\x1b\[.+?m)|(\x1b\[.+?m)", text[0:m.start()])
-        if last_colors:
-            ret = ''.join(
-                [ret[0:m.start()], ''.join(color), ret[m.start():(m.start() + len(m.group()))], last_colors[-1],
-                 ret[m.start() + len(m.group()):]])
-        else:
-            ret = ''.join([text[0:m.start()], ''.join(color), text[m.start():(m.start() + len(m.group()))], text[
-                                                                                                            m.start() + len(
-                                                                                                                m.group()):]])
-    return ret

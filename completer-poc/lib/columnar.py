@@ -3,7 +3,7 @@ import re
 from operator import itemgetter
 
 from . import globals
-from colorama import Fore, Back, Style
+
 from typing import (
     Union,
     Sequence,
@@ -70,9 +70,10 @@ def colorcutter(text, width, textfiller):
 
 
 def colorize( text: str, regexp: str, color: str, attrs=[] ):
-    
-        text = str( text ) # FIX: "TypeError: expected string or bytes-like object"
-        match = re.search( regexp, text )
+            
+        text    = str( text )                    # FIX: "TypeError: expected string or bytes-like object"
+        regexp  = regexp.replace( '[', '\[' ) # FIX: regexp vs. ANSI sequence
+        match   = re.search( regexp, text )
         
         if match:
             before = text[0:match.start()]
@@ -140,7 +141,9 @@ class Columnar:
         if orderby != '' and orderby is not None and orderby.isnumeric() and int(orderby) < len(data[0]):
             data = sorted(data, key=itemgetter(int(orderby)), reverse=False)
 #            headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ])
-            headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ]) + Fore.WHITE + Style.BRIGHT
+
+            # headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ]) + Fore.WHITE + Style.BRIGHT
+            headers[ int(orderby)] = colorize( headers[int(orderby)], headers[int(orderby)], "green", [ 'bold' ] )
 
         # Grep
         data = grep(data)
@@ -154,10 +157,12 @@ class Columnar:
         out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
 
         # Header
-        header_line = ""
+        header_line   = ""
         for i, cell in enumerate(headers):
-            header_line += self.get_justified_cell_text( i, cell ) + self.column_separator
-        out.write( header_line[:globals.columns] + "\n")
+            
+            header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, 'white', attrs=[ 'bold' ] )  
+            
+        out.write( header_line[ :globals.columns + len( header_line ) - clen( header_line ) ] + "\n")
 
         # Header 2nd decorator line --------
         out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")

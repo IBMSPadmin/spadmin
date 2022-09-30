@@ -254,9 +254,6 @@ if __name__ == '__main__':
  #   globals.aliases[ 'rul' ]   = 'SPadmin SHow RULes'
  #   globals.aliases[ 'deb' ]   = 'SPadmin SET DEBUG'
 
-    # ???
-    IBMSPrlCompleter.start.append( 'SESs' )
-    IBMSPrlCompleter.start.append( 'DISKs' )
 
     # Infinite loop
     globals.logger.debug(utilities.consolefilledline('>>> INPUT LOOP START '))

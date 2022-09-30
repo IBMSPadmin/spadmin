@@ -218,13 +218,8 @@ def show_actlog ( self, parameters ):
     data2 = []
     for index, row in enumerate( data ):
                           
-        if search( '^ANR\d{4}E', row[ 1 ] ):
-            message = colored ( row[ 1 ], 'red', attrs = [ 'bold' ])
-        elif search( '^ANR\d{4}W', row[ 1 ] ):
-            message = colored ( row[ 1 ], 'yellow', attrs = [ 'bold' ])
-        else:
-            message = row[ 1 ]
-        
+        message = utilities.colorize_line( row[ 1 ] )
+                
         data2.append( [ row[ 0 ], message ] )
         
     utilities.printer( columnar( data2, 
@@ -587,7 +582,7 @@ class ShowEvents(SpadminCommand):
             data2.append([row[3], row[4], row[5], row[0], row[1], row[2], row[6], row[7]])
 
             table = (columnar(data2, 
-                headers=[ 'StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC'], 
+                headers=[ 'StartTime '+ colored( '>', 'red') , 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC'], 
                 justify=[ 'r', 'c', 'l', 'l', 'l', 'l', 'l', 'r' ] ) )
        
         return table

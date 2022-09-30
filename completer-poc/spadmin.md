@@ -6,35 +6,23 @@ Global spadmin.py development progress status:
 
 # aktuális toDo-k
 
-- színező modulok egységesítése (én a colored-re/termcolor szavazok)
-
 Színezendő üzenetek:
 
 ## q proc
 - ANR8805I Labeling volumes in library DELLML3; 5 volume(s) labeled.
 - ANR8805I Labeling volumes in library DELLML3; 20 volume(s) labeled.\
 
-- Volume MKP048M8 (storage pool VMW_B_T), Target Pool VMW_B_T, Moved Files: 0, Moved Bytes: 0 bytes, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 128 MB Waiting for mount of output volume MKP058M8 (26 seconds).
-
-- Volume MKP048M8 (storage pool VMW_B_T), Target Pool VMW_B_T, Moved Files: 0, Moved Bytes: 0 bytes, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 128 MB Current output volume(s): MKP058M8.
-
-- Volume MKP056M8 (storage pool SQL_B_T), Target Pool SQL_B_T, Moved Files: 9, Moved Bytes: 90,012 MB, Deduplicated Bytes: 0 bytes, Unreadable Files: 0, Unreadable Bytes: 0 bytes. Current Physical File (bytes): 10,001 MB Current input volume: MKP056M8. Current output volume(s): MKP074M8.
-
-- TYPE=FULL in progress. Bytes backed up: 10 bytes. Current output volume(s): .
-- TYPE=FULL in progress. Bytes backed up: 1,978 MB. Current output volume(s): MKP060M8.
-
-## q mount
-- ANR8330I LTO volume 000049L4 is mounted R/W in drive LTO4_1 (/dev/lin_tape/by-id/lin_tape_DRIVE1), status: IN USE.
-
 ## consolemode
-- színezést rendbe tenni
-- külön ablak (macOS, WSL)
+- külön ablak:
+   - macOS -> open -a iTerm ./spadmin.py
+   - WSL 
 
 ## @_flex
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
-- Ha az opciók végén = jel van, akkor az még az előzőhöz tartozik!
+- Ha az opciók végén = jel van, akkor az még az előzőhöz tartozik! ...
 - kisbetű nagybetű alias, grep (az alias-oknál kikapcsoltam)
 - alias regexp generator: SESs+, DISKs+
+- header színes vágó megoldás
 
 ## inifile / program paraméterek
 - össze kell őket fésülni

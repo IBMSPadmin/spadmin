@@ -173,6 +173,11 @@ class IBMSPrlCompleter:
         rulefile.close()
         print()
 
+        # Add alias rules        
+        for alias in globals.config.getconfiguration()['ALIAS']:
+            globals.logger.debug( 'Alias added to start: ' + pformat(alias))
+            IBMSPrlCompleter.start.append( alias )
+
         #utilities.consoleline('#')
         #print(colored(' Imported LEVEL 0 starters', 'green', attrs=['bold']) + ' from this file:\t[' + colored(rulefilename, 'green') + ']')
         # pprint( self.start )
