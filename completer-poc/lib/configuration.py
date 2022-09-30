@@ -40,6 +40,7 @@ class Configuration:
             configfile = 'spadmin.ini'
         self.configfile = configfile
         self.configparser = configparser.ConfigParser()
+        self.configparser.optionxform = str
         self.configparser.read(configfile)
 
         # check existence of DEFAULTS
