@@ -218,12 +218,17 @@ def show_actlog ( self, parameters ):
     data2 = []
     for index, row in enumerate( data ):
                           
-        message = utilities.colorize_line( row[ 1 ] )
-                
+        if search( '^ANR\d{4}E', row[ 1 ] ):
+            message = colored ( row[ 1 ], 'red', attrs = [ 'bold' ])
+        elif search( '^ANR\d{4}W', row[ 1 ] ):
+            message = colored ( row[ 1 ], 'yellow', attrs = [ 'bold' ])
+        else:
+            message = row[ 1 ]
+
         data2.append( [ row[ 0 ], message ] )
-        
-    utilities.printer( columnar( data2, 
-        headers=[ 'Date/Time', 'Message' ], 
+
+    utilities.printer( columnar( data2,
+        headers=[ 'Date/Time', 'Message' ],
         justify=[ 'l', 'l' ] ) )
 #
 spadmin_commands[ 'SHow ACTlog' ] = show_actlog
@@ -400,58 +405,58 @@ dynruleinjector( 'SHow LASTerror' )
 def spadmin_show_extras( self, parameters ):
     print( 'CLI extra pipe parameter tester' )
     pprint( globals.extras )
-#    
+#
 spadmin_commands[ 'SPadmin SHow EXtras' ] = spadmin_show_extras
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'EXtras' )
 dynruleinjector( 'SPadmin SHow EXtras' )
 
 def echo( self, parameters ):
     print( parameters )
-#    
+#
 spadmin_commands[ 'PRint' ] = echo
 
 
 def show_sessions( self, parameters ):
-    
+
     data = globals.tsm.send_command_array_array_tabdel( 'select SESSION_ID, STATE, WAIT_SECONDS, BYTES_SENT, BYTES_RECEIVED, SESSION_TYPE, CLIENT_PLATFORM, CLIENT_NAME,MOUNT_POINT_WAIT, INPUT_MOUNT_WAIT, INPUT_VOL_WAIT, INPUT_VOL_ACCESS, OUTPUT_MOUNT_WAIT, OUTPUT_VOL_WAIT, OUTPUT_VOL_ACCESS, LAST_VERB, VERB_STATE from sessions order by 1' )
-    
-    if globals.last_error[ 'rc' ] != '0': 
+
+    if globals.last_error[ 'rc' ] != '0':
         print ( colored( globals.last_error["message"], 'red', attrs=[ 'bold' ] ) )
         return
-    
+
     data2 = []
     for index, row in enumerate( data ):
-        
+
         if row[ 1 ] == 'Run':
-            state = colored( row[ 1 ], 'green', attrs = [ 'bold' ] )            
-        else: 
-            state = row[ 1 ]       
-        
+            state = colored( row[ 1 ], 'green', attrs = [ 'bold' ] )
+        else:
+            state = row[ 1 ]
+
         if int( row[ 2 ] ) > 60:
-            wait = colored( humanbytes.HumanBytes.format( int( row[ 2 ] ), unit="TIME_LABELS", precision = 0 ), 'red', attrs = [ 'bold' ] )            
-        else: 
-            wait = humanbytes.HumanBytes.format( int( row[ 2 ] ), unit="TIME_LABELS", precision = 0 )            
-        
+            wait = colored( humanbytes.HumanBytes.format( int( row[ 2 ] ), unit="TIME_LABELS", precision = 0 ), 'red', attrs = [ 'bold' ] )
+        else:
+            wait = humanbytes.HumanBytes.format( int( row[ 2 ] ), unit="TIME_LABELS", precision = 0 )
+
         bytes_sent     = humanbytes.HumanBytes.format( int( row[ 3 ] ), unit="BINARY_LABELS", precision = 0 )
         bytes_received = humanbytes.HumanBytes.format( int( row[ 4 ] ), unit="BINARY_LABELS", precision = 0 )
-        
+
         mediaaccess = ''.join( row[ 8:14 ] )
-                
+
         data2.append( [ index + 1,  row[ 0 ], state, wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
 
     utilities.printer( columnar( data2, headers = [
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
         justify=[ 'r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'l' ] ) )
-    
+
     self.lastdsmcommandtype    = 'SESSIONS'
     self.lastdsmcommandresults = data2
-    
+
 spadmin_commands[ 'SHow SESsions' ] = show_sessions
 dynruleinjector(  'SHow SESsions' )
 
 
 def show_processes( self, parameters ):
-    
+
     data = globals.tsm.send_command_array_array_tabdel( 'select PROCESS_NUM, PROCESS, FILES_PROCESSED, BYTES_PROCESSED, STATUS from processes order by 1' )
 
     if globals.last_error[ 'rc' ] != '0':
@@ -461,31 +466,31 @@ def show_processes( self, parameters ):
 
     data2 = []
     for index, row in enumerate( data ):
-               
+
         bytes_prcessed = humanbytes.HumanBytes.format( int( row[ 3 ] ), unit="BINARY_LABELS", precision = 0 )
-              
+
         # Current input volume: MKP056M8. Current output volume(s): MKP074M8.
         status = row[ 4 ]
-        status = sub( '(Current input volume: )([\w]+)(\.)', 
+        status = sub( '(Current input volume: )([\w]+)(\.)',
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
-        status = sub( '(Current output volume\(' + 's\): )([\w]+)(\.)', 
+        status = sub( '(Current output volume\(' + 's\): )([\w]+)(\.)',
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
-        status = sub( '(Waiting for mount of input volume )([\w]+)( \()', 
+        status = sub( '(Waiting for mount of input volume )([\w]+)( \()',
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
-        status = sub( '(Waiting for mount of output volume )([\w]+)( \()', 
+        status = sub( '(Waiting for mount of output volume )([\w]+)( \()',
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
-        status = sub( '(Volume )([\w]+)( \()', 
+        status = sub( '(Volume )([\w]+)( \()',
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
 
         data2.append( [ index + 1,  row[ 0 ], row[ 1 ], row[ 2 ], bytes_prcessed, status ] )
-    
-    utilities.printer( columnar( data2, 
+
+    utilities.printer( columnar( data2,
         headers = [ '#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status' ],
         justify = [ 'r', 'l', 'l', 'r', 'r', 'l' ] ) )
-    
+
     self.lastdsmcommandtype    = 'PROCESSES'
     self.lastdsmcommandresults = data2
-    
+
 spadmin_commands[ 'SHow PRocesses' ] = show_processes
 dynruleinjector(  'SHow PRocesses' )
 
@@ -499,17 +504,17 @@ def spadmin_locallog( self, parameters ):
     logfile.close()
 
     for line in lines[ -30: ]:
-        
+
         match = search( '^(\d{8})\s(\d{6})\s(\w+)\s(.*)$', line.rstrip() )
         if match:
             data.append( [ match[ 1 ],  match[ 2 ], match[ 3 ], match[ 4 ] ] )
-        else:    
+        else:
             data.append( [ '',  '', '', line ] )
-                             
-    utilities.printer( columnar( data, 
+
+    utilities.printer( columnar( data,
         headers = [ 'Date', 'Time', 'Level', 'Text' ],
         justify = [ 'l', 'l', 'l', 'l' ] ) )
-    
+
 spadmin_commands[ 'SPadmin SHow LOCALLOG' ] = spadmin_locallog
 dynruleinjector(  'SPadmin SHow LOCALLOG' )
 
@@ -529,7 +534,7 @@ def kill( self, parameters ):
         print(colored("Last command should be SHow SESSions or SHow PRocesses!", 'red', attrs=[ 'bold' ] ))
         print(lastdsmcommandtype)
         pprint(lastdsmcommandresults)
-    
+
 spadmin_commands[ 'KILL' ] = kill
 
 
@@ -581,8 +586,8 @@ class ShowEvents(SpadminCommand):
 
             data2.append([row[3], row[4], row[5], row[0], row[1], row[2], row[6], row[7]])
 
-            table = (columnar(data2, 
-                headers=[ 'StartTime '+ colored( '>', 'red') , 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC'], 
+            table = (columnar(data2,
+                headers=[ 'StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC'],
                 justify=[ 'r', 'c', 'l', 'l', 'l', 'l', 'l', 'r' ] ) )
        
         return table
@@ -701,6 +706,39 @@ class Ruler(SpadminCommand):
         globals.logger.debug("Last command type set to: " + lastdsmcommandtype + ".")
 
 define_command(Ruler())
+
+class ShowPath(SpadminCommand):
+    def __init__(self):
+        self.command_string = "SHow PAth"
+        self.command_type   = "PATH"
+        self.command_index  = 0
+
+    def short_help(self) -> str:
+        return 'SHow PAth: display information about library and drive pathes'
+
+    def help(self) -> dict:
+        return """Display the following information about pathes in the following order and format:
+"""
+
+    def _execute(self, parameters: str) -> str:
+        library = globals.tsm.send_command_array_array_tabdel(
+            "select SOURCE_NAME,DESTINATION_NAME,'SRCT='||SOURCE_TYPE,'DESTT='||DESTINATION_TYPE,LIBRARY_NAME,'DEVI='||DEVICE,'ONL='||ONLINE from paths where LIBRARY_NAME is null")
+        drive = globals.tsm.send_command_array_array_tabdel(
+            "select SOURCE_NAME,DESTINATION_NAME,'SRCT='||SOURCE_TYPE,'DESTT='||DESTINATION_TYPE,'LIBR='||LIBRARY_NAME,'DEVI='||DEVICE,'ONL='||ONLINE from paths where LIBRARY_NAME is not null")
+
+        for i, row in enumerate(drive):
+            library.append(row)
+        data = []
+
+        for i, row in enumerate(library):
+            data.append([i+1, row[0], row[1], row[2], row[3], row[4], row[5], row[6]])
+
+        table = columnar(data,
+            headers=['#', 'SourceName', 'DestiName', 'SourceType', 'DestinationType', 'LibraryName', 'Device', 'Online'],
+            justify=['r', 'l', 'l', 'l', 'l', 'l', 'l', 'l'])
+        return table
+
+define_command(ShowPath())
 
 
 def show_scratches( self, parameters ):

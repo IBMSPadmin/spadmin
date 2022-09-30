@@ -10,7 +10,7 @@ class Configuration:
         'cache_age': 60,  # cache entry age (seconds)
         'cache_disable': False,  # disable the dynamic SQL queries for readline
         'cache_prefetch': True,  # prefetch cache data when the program starts
-        'rulefile': 'spadmin.rules',  # rule file name
+        'rulefile': 'lib/spadmin.rules',  # rule file name
         'historyfile': '.spadmin_history',  # history file name
         'dsmadmc_path': 'dsmadmc',  # the path of dsmadmc
         'dsmadmc_id': 'admin',  # username for dsmadmc
