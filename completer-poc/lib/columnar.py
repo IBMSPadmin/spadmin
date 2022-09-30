@@ -35,11 +35,14 @@ def clen(text):
     return length
 
 
-def colorcutter(text, width, textfiller):
-    lastcolor = ''
+def colorcutter( text, width, textfiller ):
+    lastcolor      = ''
     savedlastcolor = ''
-    counter = 1
-    ret = ''
+    counter        = 1
+    ret            = ''
+    
+    text = str( text ) # 
+    
     for char in text:
 
         ret += char
@@ -71,7 +74,7 @@ def colorcutter(text, width, textfiller):
 
 def colorize( text: str, regexp: str, color: str, attrs=[] ):
             
-        text    = str( text )                    # FIX: "TypeError: expected string or bytes-like object"
+        text    = str( text )                 # FIX: "TypeError: expected string or bytes-like object"
         regexp  = regexp.replace( '[', '\[' ) # FIX: regexp vs. ANSI sequence
         match   = re.search( regexp, text )
         
@@ -173,9 +176,8 @@ class Columnar:
 
                 lenght_of_row = sum(self.column_length) + clen(self.column_length) - 1
                 if (i + 1) == len(row) and globals.columns < lenght_of_row:
-                    restlength = globals.columns - (sum(self.column_length[:-1]) + clen(self.column_length) - 1)
-                    out.write(colorcutter(cell, restlength,
-                                          '\n' + ' ' * (sum(self.column_length[:-1]) + clen(self.column_length) - 1)))
+                    restlength = globals.columns - (sum(self.column_length[:-1]) + len(self.column_length) - 1)
+                    out.write(colorcutter(cell, restlength, '\n' + ' ' * (sum(self.column_length[:-1]) + len(self.column_length) - 1) ) )                                
                 else:
                     out.write(self.get_justified_cell_text(i, cell) + " ")
             out.write("\n")
