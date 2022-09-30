@@ -37,47 +37,36 @@
 
 import sys
 
-from lib import dsmadmc_pexpect as dsmadmc_pexpect
-
-import lib.columnar
-columnar = lib.columnar.Columnar()
-
+from lib import dsmadmc_pexpect
 from lib.configuration import Configuration
-from lib.IBMSPrlCompleter import IBMSPrlCompleter as IBMSPrlCompleter
+from lib.IBMSPrlCompleter import IBMSPrlCompleter
+import lib.utilities as utilities
+import lib.columnar
+import lib.globals as globals
 
-from time import time
-prgstart = time()
 
 import datetime
+import os
+import platform
+import logging
+import atexit
+import argparse
+
+from time import time
+from termcolor import colored
+from pprint import pformat
+from re import search, IGNORECASE
+
+columnar = lib.columnar.Columnar()
+prgstart = time()
 
 try:
     import gnureadline as readline
 except ImportError:
     import readline
 
-import os
-
-import platform
-
-from termcolor import colored
 if platform.system() == 'Windows':
     os.system('color')
-
-from pprint import pformat
-
-from re import search, IGNORECASE
-
-import logging
-
-import atexit
-
-import argparse
-
-
-#############
-# Functions # ####################################################################
-#############
-import lib.utilities as utilities
 
 ########## ###############################################################################################################
 # main() #  Let's dance
@@ -105,7 +94,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # create a namespace for global variables
-    import lib.globals as globals
+
 
     # SPadmin global settings
     if args.inifilename:
@@ -224,13 +213,10 @@ if __name__ == '__main__':
   Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
   Use: "REload" to reload the rule file! and
   Use: "SPadmin SHow LOG" or "SPadmin SHow LOCALLOG" to reach the local log file!''' )
-
-        #utilities.ruler( utilities, '' )
         print()
 
     globals.logger.debug('Import own commands.')
     import commands.owncommands as owncommands
-
     # -----------------------------------------
 
     # push the autoexec command(s)
@@ -245,15 +231,8 @@ if __name__ == '__main__':
     if globals.config.getconfiguration().has_section('ALIAS'):
         for key in globals.config.getconfiguration()['ALIAS'].keys():
             globals.aliases[key] = globals.config.getconfiguration()['ALIAS'][key]
-
- #   globals.aliases[ 'shrlr' ] = 'SHow Ruler'
- #   globals.aliases[ 'shtim' ] = 'SHow TIME'
- #   globals.aliases[ 'shtgp' ] = 'SHow STGp'
- #   globals.aliases[ 'shcac' ] = 'SPadmin SHow CAche'
- #   globals.aliases[ 'ver' ]   = 'SPadmin SHow VERsion'
- #   globals.aliases[ 'rul' ]   = 'SPadmin SHow RULes'
- #   globals.aliases[ 'deb' ]   = 'SPadmin SET DEBUG'
-
+            globals.logger.debug( 'Alias added at start: ' + pformat(key))
+            IBMSPrlCompleter.start.append( key )
 
     # Infinite loop
     globals.logger.debug(utilities.consolefilledline('>>> INPUT LOOP START '))
