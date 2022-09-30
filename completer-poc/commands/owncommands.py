@@ -101,7 +101,7 @@ def history(self, parameters):
     utilities.printer( columnar( data, headers=[ colored( '#', 'white', attrs=[ 'bold' ] ), colored( 'Command', 'white', attrs=[ 'bold' ] ) ], justify=[ 'r', 'l'] ) )
 #
 spadmin_commands[ 'HISTory' ] = history
-dynruleinjector( 'HISTory' )
+dynruleinjector(  'HISTory' )
 
 def spadmin_show_config( self, parameters ):
     data  = []
@@ -500,7 +500,7 @@ def spadmin_locallog( self, parameters ):
     data = []
 
     logfile = open( globals.logfilename, 'r' )
-    lines = logfile.readlines()
+    lines   = logfile.readlines()
     logfile.close()
 
     for line in lines[ -30: ]:
@@ -510,11 +510,10 @@ def spadmin_locallog( self, parameters ):
             data.append( [ match[ 1 ],  match[ 2 ], match[ 3 ], match[ 4 ] ] )
         else:    
             data.append( [ '',  '', '', line ] )
-                         
-    
-    utilities.printer( columnar( data, headers = [ 
-        'Date', 'Time', 'Level', 'Text' ],
-        justify=[ 'l', 'l', 'l', 'l' ] ) )
+                             
+    utilities.printer( columnar( data, 
+        headers = [ 'Date', 'Time', 'Level', 'Text' ],
+        justify = [ 'l', 'l', 'l', 'l' ] ) )
     
 spadmin_commands[ 'SPadmin SHow LOCALLOG' ] = spadmin_locallog
 dynruleinjector(  'SPadmin SHow LOCALLOG' )
@@ -542,22 +541,21 @@ spadmin_commands[ 'KILL' ] = kill
 class ShowEvents(SpadminCommand):
     def __init__(self):
         self.command_string = "SHow EVents"
-        self.command_type = "EVENT"
-        self.command_index = 0
+        self.command_type   = "EVENT"
+        self.command_index  = 0
 
     def short_help(self) -> str:
         return 'SHow EVents: display information about Events'
 
     def help(self) -> dict:
         return """Display the following information about events in the following order and format:
-------------------- ------------------- ------------------- ------ ------------ ------------------- --------- --
-        StartTime >     ActualStart     < Completed         Domain ScheduleName NodeName            Result    RC
-------------------- ------------------- ------------------- ------ ------------ ------------------- --------- --
-09/27/2022 13:00:00                                14:00:00 FILES  INC_1300     SERVER_A            Missed
-09/27/2022 13:00:00            13:05:35            13:13:54 FILES  INC_1300     SERVER_B            Completed 0
-09/27/2022 13:00:00            13:02:46            13:09:20 FILES  INC_1300     SERVER_C            Completed 8
-09/27/2022 13:00:00                                14:00:00 FILES  INC_1300     SERVER_D            Missed
-        """
+    ------------------- ------------------- ------------------- ------ ------------ ------------------- --------- --
+            StartTime >     ActualStart     < Completed         Domain ScheduleName NodeName            Result    RC
+    ------------------- ------------------- ------------------- ------ ------------ ------------------- --------- --
+    09/27/2022 13:00:00                                14:00:00 FILES  INC_1300     SERVER_A            Missed
+    09/27/2022 13:00:00            13:05:35            13:13:54 FILES  INC_1300     SERVER_B            Completed 0
+    09/27/2022 13:00:00            13:02:46            13:09:20 FILES  INC_1300     SERVER_C            Completed 8
+    09/27/2022 13:00:00                                14:00:00 FILES  INC_1300     SERVER_D            Missed"""
 
     def _execute(self, parameters: str) -> str:
         data = globals.tsm.send_command_array_array_tabdel('q event * * endd=today f=d' + ' ' + parameters)
@@ -594,12 +592,14 @@ class ShowEvents(SpadminCommand):
        
         return table
 
+define_command(ShowEvents())
+
 
 class ShowStgp(SpadminCommand):
     def __init__(self):
         self.command_string = "SHow STGpools"
-        self.command_type = "STGP"
-        self.command_index = 0
+        self.command_type   = "STGP"
+        self.command_index  = 0
 
     def short_help(self) -> str:
         return 'SHow STGpools: display information about storage pools'
@@ -615,8 +615,7 @@ class ShowStgp(SpadminCommand):
  - High Migration threshold 
  - Low Migration threshold 
  - Reclamation
- - Next Storage Pool name
-        """
+ - Next Storage Pool name"""
 
     def _execute(self, parameters: str) -> str:
         data = globals.tsm.send_command_array_array_tabdel(
@@ -629,27 +628,28 @@ class ShowStgp(SpadminCommand):
                 # data[index][3] = round((float(d)/1024),1)
                 data[index][3] = humanbytes.HumanBytes.format(float(d) * 1024 * 1024, unit="BINARY_LABELS", precision=0)
 
-        table = columnar(data, headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig',
-                                        'LowMig', 'Recl', 'Next'],
-                         justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
+        table = columnar(data, 
+            headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig', 'LowMig', 'Recl', 'Next'],
+            justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
         return table
+
+define_command(ShowStgp())
 
 
 class Ruler(SpadminCommand):
     def __init__(self):
         self.command_string = "SHow RULer"
-        self.command_type = "RULER"
-        self.command_index = 0
+        self.command_type   = "RULER"
+        self.command_index  = 0
 
     def short_help(self) -> str:
         return 'SHow RULer: This command will print a simple text ruler.'
 
     def help(self) -> dict:
         return """This command will print a simple text ruler.
-
-            SHow RULer Help!    - print this help message
-            SHow RULer          - print simple ruler
-            SHow RULer INVerse  - print simple inverse ruler"""
+    SHow RULer Help!    - print this help message
+    SHow RULer          - print simple ruler
+    SHow RULer INVerse  - print simple inverse ruler"""
 
     def _execute(self, parameters: str) -> str:
         if len(parameters) > 0:
@@ -705,10 +705,40 @@ class Ruler(SpadminCommand):
         globals.logger.debug("Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
         globals.logger.debug("Last command type set to: " + lastdsmcommandtype + ".")
 
-
-define_command(ShowStgp())
-define_command(ShowEvents())
 define_command(Ruler())
+
+
+def show_scratches( self, parameters ):
+    
+    data = globals.tsm.send_command_array_array_tabdel( "select LIBRARY_NAME, MEDIATYPE, count(*) from libvolumes where upper(status)='SCRATCH' group by LIBRARY_NAME,MEDIATYPE" )
+
+    if globals.last_error[ 'rc' ] != '0':
+        self.lastdsmcommandtype    = 'SCRATCHES'
+        self.lastdsmcommandresults = []
+        return
+
+    data2 = []
+    for index, row in enumerate( data ):
+             
+        if int( row[ 2 ] ) < 5:
+            scratches = colored( row[ 2 ], 'yellow', attrs=[ 'bold' ] )
+        elif int( row[ 2 ] ) < 3:          
+            scratches = colored( row[ 2 ], 'red', attrs=[ 'bold' ] )
+        else:
+            scratches = row[ 2 ]
+              
+        data2.append( [  row[ 0 ], row[ 1 ], scratches ] )
+    
+    utilities.printer( columnar( data2, 
+        headers = [ 'LibraryName', 'Type', '#Scratch' ],
+        justify = [ 'l', 'l', 'r' ] ) )
+    
+    self.lastdsmcommandtype    = 'SCRATCHES'
+    self.lastdsmcommandresults = data2
+    
+spadmin_commands[ 'SHow SCRatches' ] = show_scratches
+dynruleinjector(  'SHow SCRatches' )
+
 
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
