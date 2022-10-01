@@ -192,11 +192,14 @@ dynruleinjector( 'SPadmin SHow RULes' )
 def spadmin_show_commands( self, parameters ):
     data  = []
     for key in spadmin_commands:
-            data.append( [ key ] )
+        desc = ""
+        if key in command_help:
+            desc = command_help[key][0]
+        data.append( [ key, desc ] )
 
     utilities.printer( columnar( sorted( data ), headers=[ 
-        colored( 'Command name', 'white', attrs=['bold'] ) ], 
-        justify = [ 'l' ]) )
+        colored( 'Command name', 'white', attrs=['bold'] ), colored( 'Sort Description', 'white', attrs=['bold'] ) ],
+        justify = [ 'l','l' ]) )
 #
 spadmin_commands[ 'SPadmin SHow COMmands' ] = spadmin_show_commands
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'RULes' )
@@ -737,6 +740,32 @@ class ShowPath(SpadminCommand):
         return table
 
 define_command(ShowPath())
+
+class ShowColumns(SpadminCommand):
+    def __init__(self):
+        self.command_string = "SHow COLumns"
+        self.command_type   = "columns"
+        self.command_index  = 0
+
+    def short_help(self) -> str:
+        return 'SHow COLumns: display Spectrum Protect database columns'
+
+    def help(self) -> dict:
+        return """Display the Spectrum Protect internal DB2-SQL database columns by tables  
+This information can be usefull, when you are trying to deep dive into ISP internal world.
+This table can be very long, so it recommended to use `|grep ` or `|more` or both. 
+"""
+
+    def _execute(self, parameters: str) -> str:
+        data = globals.tsm.send_command_array_array_tabdel(
+            "select tabname, colname from columns")
+
+        table = columnar(data,
+            headers=['Table name', 'Column Name'],
+            justify=['l', 'l'])
+        return table
+
+define_command(ShowColumns())
 
 
 def show_scratches( self, parameters ):

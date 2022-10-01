@@ -58,6 +58,7 @@ def printer(string):
                 print(*s[i + globals.rows - 2:], sep="\n")
                 break
             i = 0
+            print('\n')
 
 
 def check_connection(server: str, id: str, password: str) -> bool:
