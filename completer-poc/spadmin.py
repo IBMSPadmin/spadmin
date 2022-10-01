@@ -349,8 +349,8 @@ if __name__ == '__main__':
             line   = ''
             globals.extras = {}
             # not nice, but this is now what we have
-            owncommands.lastdsmcommandtype = 'DSMADMC'
-            owncommands.lastdsmcommandresults.clear()
+            globals.lastdsmcommandtype = 'DSMADMC'
+            globals.lastdsmcommandresults.clear()
             # continue
             
     # ---------------------------------------------------------------------------------

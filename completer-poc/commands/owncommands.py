@@ -14,8 +14,8 @@ import lib.columnar as columnar
 columnar = columnar.Columnar() # columnar: table creator/formatter utility
 spadmin_commands      = {}  # dictionary for the spadmin commands
 disabled_words        = ['DEFAULT', 'ALIAS', 'SPADMIN']  # disabled words: used in the configuration .ini file
-lastdsmcommandtype    = '?'  # last command type: used by "kill", "on", "off", etc. commands
-lastdsmcommandresults = []  # last command result: used by "kill", "on", "off", etc. commands
+globals.lastdsmcommandtype    = '?'  # last command type: used by "kill", "on", "off", etc. commands
+globals.lastdsmcommandresults = ['']  # last command result: used by "kill", "on", "off", etc. commands
 
 
 class SpadminCommand:
@@ -51,9 +51,9 @@ class SpadminCommand:
             print(self.help())
         else:
             utilities.printer(self._execute(parameters))
-        lastdsmcommandtype = self.get_command_type()
+        globals.lastdsmcommandtype = self.get_command_type()
         globals.logger.debug("Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
-        globals.logger.debug("Last command type set to: " + lastdsmcommandtype + ".")
+        globals.logger.debug("Last command type set to: " + globals.lastdsmcommandtype + ".")
 
 
 def dynruleinjector( command ):
@@ -449,8 +449,8 @@ def show_sessions( self, parameters ):
         '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb' ],
         justify=[ 'r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'l' ] ) )
 
-    self.lastdsmcommandtype    = 'SESSIONS'
-    self.lastdsmcommandresults = data2
+    globals.lastdsmcommandtype    = 'SESSIONS'
+    globals.lastdsmcommandresults = data2
 
 spadmin_commands[ 'SHow SESsions' ] = show_sessions
 dynruleinjector(  'SHow SESsions' )
@@ -461,8 +461,8 @@ def show_processes( self, parameters ):
     data = globals.tsm.send_command_array_array_tabdel( 'select PROCESS_NUM, PROCESS, FILES_PROCESSED, BYTES_PROCESSED, STATUS from processes order by 1' )
 
     if globals.last_error[ 'rc' ] != '0':
-        self.lastdsmcommandtype = 'PROCESSES'
-        self.lastdsmcommandresults = []
+        globals.lastdsmcommandtype = 'PROCESSES'
+        globals.lastdsmcommandresults = []
         return
 
     data2 = []
@@ -493,8 +493,8 @@ def show_processes( self, parameters ):
         headers = [ '#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status' ],
         justify = [ 'r', 'l', 'l', 'r', 'r', 'l' ] ) )
 
-    self.lastdsmcommandtype    = 'PROCESSES'
-    self.lastdsmcommandresults = data2
+    globals.lastdsmcommandtype    = 'PROCESSES'
+    globals.lastdsmcommandresults = data2
 
 spadmin_commands[ 'SHow PRocesses' ] = show_processes
 dynruleinjector(  'SHow PRocesses' )
@@ -525,11 +525,10 @@ dynruleinjector(  'SPadmin SHow LOCALLOG' )
 
 def kill( self, parameters ):
 
-    if lastdsmcommandtype == "PROCESSES" or lastdsmcommandtype == "SESSIONS":
+    if globals.lastdsmcommandtype == "PROCESSES" or globals.lastdsmcommandtype == "SESSIONS":
         if parameters.strip().isnumeric():
-            if len(lastdsmcommandresults) >= int(parameters) > 0:
-                print("cancel session", lastdsmcommandresults[int(parameters)-1][1])
-                for line in (globals.tsm.send_command_array_tabdel("cancel session " + lastdsmcommandresults[int(parameters)-1][1])):
+            if len(globals.lastdsmcommandresults) >= int(parameters) > 0:
+                for line in (globals.tsm.send_command_array_tabdel("cancel session " + globals.lastdsmcommandresults[int(parameters)-1][1])):
                     print(line)
             else:
                 print(colored("The given number is not found!", 'red', attrs=['bold']))
@@ -537,8 +536,8 @@ def kill( self, parameters ):
             print(colored("The given parameter should be a number!", 'red', attrs=['bold']))
     else:
         print(colored("Last command should be SHow SESSions or SHow PRocesses!", 'red', attrs=[ 'bold' ] ))
-        print(lastdsmcommandtype)
-        pprint(lastdsmcommandresults)
+        globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
+
 
 spadmin_commands[ 'KILL' ] = kill
 
@@ -706,11 +705,97 @@ class Ruler(SpadminCommand):
             print(self.help())
         else:
             self._execute(parameters)
-        lastdsmcommandtype = self.get_command_type()
+        globals.lastdsmcommandtype = self.get_command_type()
         globals.logger.debug("Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
-        globals.logger.debug("Last command type set to: " + lastdsmcommandtype + ".")
+        globals.logger.debug("Last command type set to: " + globals.lastdsmcommandtype + ".")
 
 define_command(Ruler())
+
+class Online(SpadminCommand):
+    def __init__(self):
+        self.command_string = "ONline"
+        self.command_type   = globals.lastdsmcommandtype
+        self.command_index  = 0
+        self.online = "ONLINE=YES"
+
+    def short_help(self) -> str:
+        return 'ONline or OFFline: switch drives/pathes into on-line/off-line state'
+
+    def help(self) -> dict:
+        return """ONline or Offline: switch drives/pathes into on-line/off-line state"""
+
+    def _execute(self, parameters: str) -> str:
+        if globals.lastdsmcommandtype == "DRIVE" or globals.lastdsmcommandtype == "PATH":
+            if parameters.strip().isnumeric():
+                if len(globals.lastdsmcommandresults) >= int(parameters) > 0:
+                    if globals.lastdsmcommandtype == "DRIVE":
+                        line = globals.lastdsmcommandresults[int(parameters) - 1]
+                        cmd = "UPDATE DRIVE" + " " + line[1] + " " + line[2] + " " + self.online
+                    else:
+                        line = globals.lastdsmcommandresults[int(parameters) - 1]
+                        cmd  = "UPDATE PATH" + " " + line[1] + " " + line[2] + " " + line[3] + " " + line[4] + " " + line[5] + " " + self.online
+                    for l in globals.tsm.send_command_array_tabdel(cmd):
+                        print(l)
+                else:
+                    print(colored("The given number is not found!", 'red', attrs=['bold']))
+            else:
+                print(colored("The given parameter should be a number!", 'red', attrs=['bold']))
+        else:
+            print(colored("Last command should be SHow DRives or SHow PAth!", 'red', attrs=['bold']))
+            globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
+        return ""
+
+    def execute(self, dummy, parameters):
+        globals.logger.debug(
+            "Execution STARTED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
+        if parameters == "help":
+            print(self.help())
+        else:
+            self._execute(parameters)
+        globals.logger.debug(
+            "Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
+        globals.logger.debug("Last command type set to: " + globals.lastdsmcommandtype + ".")
+
+
+define_command(Online())
+
+class Offline(Online):
+    def __init__(self):
+        self.command_string = "OFFline"
+        self.command_type   = globals.lastdsmcommandtype
+        self.command_index  = 0
+        self.online = "ONLINE=NO"
+
+define_command(Offline())
+
+
+class ShowDrives(SpadminCommand):
+    def __init__(self):
+        self.command_string = "SHow DRives"
+        self.command_type   = "DRIVE"
+        self.command_index  = 0
+
+    def short_help(self) -> str:
+        return 'SHow DRives: display information about drives'
+
+    def help(self) -> dict:
+        return """"""
+
+    def _execute(self, parameters: str) -> str:
+        drives = globals.tsm.send_command_array_array_tabdel(
+            "select LIBRARY_NAME,DRIVE_NAME,'ONL='||ONLINE,ELEMENT,DRIVE_STATE,DRIVE_SERIAL,VOLUME_NAME,ALLOCATED_TO from drives order by 1,2")
+
+        data = []
+        for i, row in enumerate(drives):
+            data.append([i+1, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[6]])
+
+        table = columnar(data,
+            headers=['#', 'Library name', 'Drive Name', 'Online', 'Element', 'State', 'Serial', 'Volume Name', 'Allocated to'],
+            justify=['r', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l'])
+        globals.lastdsmcommandresults = data
+        return table
+
+define_command(ShowDrives())
 
 class ShowPath(SpadminCommand):
     def __init__(self):
@@ -741,6 +826,7 @@ class ShowPath(SpadminCommand):
         table = columnar(data,
             headers=['#', 'SourceName', 'DestiName', 'SourceType', 'DestinationType', 'LibraryName', 'Device', 'Online'],
             justify=['r', 'l', 'l', 'l', 'l', 'l', 'l', 'l'])
+        globals.lastdsmcommandresults = data
         return table
 
 define_command(ShowPath())
@@ -777,8 +863,8 @@ def show_scratches( self, parameters ):
     data = globals.tsm.send_command_array_array_tabdel( "select LIBRARY_NAME, MEDIATYPE, count(*) from libvolumes where upper(status)='SCRATCH' group by LIBRARY_NAME,MEDIATYPE" )
 
     if globals.last_error[ 'rc' ] != '0':
-        self.lastdsmcommandtype    = 'SCRATCHES'
-        self.lastdsmcommandresults = []
+        globals.lastdsmcommandtype    = 'SCRATCHES'
+        globals.lastdsmcommandresults = []
         return
 
     data2 = []
@@ -797,8 +883,8 @@ def show_scratches( self, parameters ):
         headers = [ 'LibraryName', 'Type', '#Scratch' ],
         justify = [ 'l', 'l', 'r' ] ) )
     
-    self.lastdsmcommandtype    = 'SCRATCHES'
-    self.lastdsmcommandresults = data2
+    globals.lastdsmcommandtype    = 'SCRATCHES'
+    globals.lastdsmcommandresults = data2
     
 spadmin_commands[ 'SHow SCRatches' ] = show_scratches
 dynruleinjector(  'SHow SCRatches' )
@@ -811,8 +897,8 @@ def show_copygroups( self, parameters ):
     # data = globals.tsm.send_command_array_array_tabdel( "select bu.DOMAIN_NAME, bu.SET_NAME, bu.CLASS_NAME, (select DEFAULTMC from MGMTCLASSES where bu.DOMAIN_NAME = DOMAIN_NAME and bu.SET_NAME = SET_NAME and bu.CLASS_NAME = CLASS_NAME ), bu.VEREXISTS, bu.VERDELETED, bu.RETEXTRA, bu.RETONLY, bu.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where bu.DESTINATION = stgp.STGPOOL_NAME), ar.RETVER, ar.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where ar.DESTINATION = stgp.STGPOOL_NAME) from BU_COPYGROUPS bu, AR_COPYGROUPS ar" )
 
     if globals.last_error[ 'rc' ] != '0':
-        self.lastdsmcommandtype    = 'COPYGROUPS'
-        self.lastdsmcommandresults = []
+        globals.lastdsmcommandtype    = 'COPYGROUPS'
+        globals.lastdsmcommandresults = []
         return
 
     unique = {}
@@ -836,8 +922,8 @@ def show_copygroups( self, parameters ):
     data = globals.tsm.send_command_array_array_tabdel( "select ar.DOMAIN_NAME, ar.SET_NAME, ar.CLASS_NAME, (select DEFAULTMC from MGMTCLASSES where ar.DOMAIN_NAME = DOMAIN_NAME and ar.SET_NAME = SET_NAME and ar.CLASS_NAME = CLASS_NAME ), ar.RETVER, ar.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where ar.DESTINATION = stgp.STGPOOL_NAME) from AR_COPYGROUPS ar" )
     
     if globals.last_error[ 'rc' ] != '0':
-        self.lastdsmcommandtype    = 'COPYGROUPS'
-        self.lastdsmcommandresults = []
+        globals.lastdsmcommandtype    = 'COPYGROUPS'
+        globals.lastdsmcommandresults = []
         return
     
     ar = {}
@@ -875,8 +961,8 @@ def show_copygroups( self, parameters ):
     #     headers = [ 'Domain', 'PolicySet', 'MgmtClass', 'd', 'ARCopy (d)', 'ARDest', 'Next' ],
     #     justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] ) )
     
-    self.lastdsmcommandtype    = 'COPYGROUPS'
-    self.lastdsmcommandresults = data2
+    globals.lastdsmcommandtype    = 'COPYGROUPS'
+    globals.lastdsmcommandresults = data2
     
 spadmin_commands[ 'SHow COPYGroups' ] = show_copygroups
 dynruleinjector(  'SHow COPYGroups' )
