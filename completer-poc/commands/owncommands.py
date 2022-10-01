@@ -815,7 +815,9 @@ def show_copygroups( self, parameters ):
         self.lastdsmcommandresults = []
         return
 
-    data2 = []
+    unique = {}
+    bu     = {}
+
     for index, row in enumerate( data ):
         
         if row[ 3 ] == 'Yes':
@@ -823,19 +825,14 @@ def show_copygroups( self, parameters ):
         else:
             default = ''
             
-        budest = '' 
+        bunextdest = '' 
         if row[ 9 ] != '':
-            budest += '-> ' + row[ 9 ]
+            bunextdest += '-> ' + row[ 9 ]
                            
-        data2.append( [  row[ 0 ], row[ 1 ], row[ 2 ], default,
-            row[ 4 ].rstrip() + ', ' + row[ 5 ].rstrip() + ', ' + row[ 6 ].rstrip() + ', ' + row[ 7 ].rstrip(), row[ 8 ], budest ] )
-            # '(' + row[ 10 ].rstrip() + ')', 
-            # ardest ] )
-    
-    utilities.printer( columnar( data2, 
-        headers = [ 'Domain', 'PolicySet', 'MgmtClass', 'd', 'BACopy (ve, vd, re, ro)', 'BADest', 'Next' ],
-        justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] ) )
+        bu[ row[ 0 ] + row[ 1 ] + row[ 2 ] + default ] = [ row[ 4 ].rstrip() + ', ' + row[ 5 ].rstrip() + ', ' + row[ 6 ].rstrip() + ', ' + row[ 7 ].rstrip(), row[ 8 ], bunextdest ]
 
+        unique[ row[ 0 ] + row[ 1 ] + row[ 2 ] + default ] = [ row[ 0 ], row[ 1 ], row[ 2 ], default ]
+    
     data = globals.tsm.send_command_array_array_tabdel( "select ar.DOMAIN_NAME, ar.SET_NAME, ar.CLASS_NAME, (select DEFAULTMC from MGMTCLASSES where ar.DOMAIN_NAME = DOMAIN_NAME and ar.SET_NAME = SET_NAME and ar.CLASS_NAME = CLASS_NAME ), ar.RETVER, ar.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where ar.DESTINATION = stgp.STGPOOL_NAME) from AR_COPYGROUPS ar" )
     
     if globals.last_error[ 'rc' ] != '0':
@@ -843,7 +840,8 @@ def show_copygroups( self, parameters ):
         self.lastdsmcommandresults = []
         return
     
-    data2 = []
+    ar = {}
+    
     for index, row in enumerate( data ):
         
         if row[ 3 ] == 'Yes':
@@ -851,16 +849,31 @@ def show_copygroups( self, parameters ):
         else:
             default = ''
             
-        ardest = '' 
+        arnextdest = '' 
         if row[ 6 ] != '':
-            ardest += '-> ' + row[ 6 ]
+            arnextdest += '-> ' + row[ 6 ]
                            
-        data2.append( [  row[ 0 ], row[ 1 ], row[ 2 ], default,
-            row[ 4 ], row[ 5 ], ardest ] )
-    
+        ar[ row[ 0 ] + row[ 1 ] + row[ 2 ] + default ] = [ row[ 4 ].rstrip(), row[ 5 ], arnextdest ]
+
+        unique[ row[ 0 ] + row[ 1 ] + row[ 2 ] + default ] = [ row[ 0 ], row[ 1 ], row[ 2 ], default ]
+
+    data2 = []
+    for key in unique:
+        
+        if key in bu and key in ar:
+            data2.append( unique[ key ] + bu[ key ] + ar[ key ] )
+        elif key in bu:
+            data2.append( unique[ key ] + bu[ key ] + [ '', '', '' ] )
+        elif key in ar:
+            data2.append( unique[ key ] + [ '', '', '' ] + ar[ key ] )
+
     utilities.printer( columnar( data2, 
-        headers = [ 'Domain', 'PolicySet', 'MgmtClass', 'd', 'ARCopy (d)', 'ARDest', 'Next' ],
-        justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] ) )
+            headers = [ 'Domain', 'PolicySet', 'MgmtClass', 'd', 'BACopy(ve,vd,re,ro)', 'BADest', 'Next', 'ARCopy(d)', 'ARDest', 'Next' ],
+            justify = [ 'l', 'l', 'l', 'l', 'c', 'l', 'l', 'c', 'l', 'l' ] ) )
+    
+    # utilities.printer( columnar( data2, 
+    #     headers = [ 'Domain', 'PolicySet', 'MgmtClass', 'd', 'ARCopy (d)', 'ARDest', 'Next' ],
+    #     justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] ) )
     
     self.lastdsmcommandtype    = 'COPYGROUPS'
     self.lastdsmcommandresults = data2
