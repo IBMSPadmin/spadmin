@@ -35,6 +35,34 @@ def clen(text):
     return length
 
 
+def colorleft( text, width ):
+    ansiseq = False
+    counter = 1
+    ret     = ''
+    
+    text = str( text ) # 
+    
+    for char in text:
+    
+        ret += char
+        
+        if char == '\x1b':
+            ansiseq = True
+          
+        if ansiseq and char == 'm':
+            ansiseq = False
+            continue
+        
+        if ansiseq:
+            continue
+    
+        if counter == width:
+            break
+    
+        counter += 1
+        
+    return ret
+
 def colorcutter( text, width, textfiller ):
     lastcolor      = ''
     savedlastcolor = ''
@@ -165,7 +193,8 @@ class Columnar:
             
             header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, 'white', attrs=[ 'bold' ] )  
             
-        out.write( header_line[ :globals.columns + len( header_line ) - clen( header_line ) ] + "\n")
+        # out.write( header_line[ :globals.columns + len( header_line ) - clen( header_line ) ] + "\n")
+        out.write( colorleft( header_line, globals.columns ) + "\n" )
 
         # Header 2nd decorator line --------
         out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
