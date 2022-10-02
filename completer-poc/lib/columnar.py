@@ -57,6 +57,8 @@ def colorleft( text, width ):
             continue
     
         if counter == width:
+            ret = ret[ :-1 ] + '>'
+            ret += '\x1b[0m'
             break
     
         counter += 1
@@ -188,7 +190,7 @@ class Columnar:
         out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
 
         # Header
-        header_line   = ""
+        header_line = ''
         for i, cell in enumerate(headers):
             
             header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, 'white', attrs=[ 'bold' ] )  
@@ -201,16 +203,21 @@ class Columnar:
 
         # Rows
         for row in data:  # sorok kiíratása
+            
+            line = ''
             for i, cell in enumerate(row):  # cellák kiíratása
-
                 lenght_of_row = sum(self.column_length) + clen(self.column_length) - 1
                 if (i + 1) == len(row) and globals.columns < lenght_of_row:
                     restlength = globals.columns - (sum(self.column_length[:-1]) + len(self.column_length) - 1)
-                    out.write(colorcutter(cell, restlength, '\n' + ' ' * (sum(self.column_length[:-1]) + len(self.column_length) - 1) ) )                                
+                    line += colorcutter(cell, restlength, '\n' + ' ' * (sum(self.column_length[:-1]) + len(self.column_length) - 1) )                               
                 else:
-                    out.write(self.get_justified_cell_text(i, cell) + " ")
-            out.write("\n")
-        return out.getvalue()[:-1]
+                    line += self.get_justified_cell_text(i, cell) + " "
+            if globals.columns - (sum(self.column_length[:-1]) + len(self.column_length) - 1) < 0:
+                out.write( colorleft( line, globals.columns ) + '\n' )
+            else:
+                out.write( line + '\n' )
+            
+        return out.getvalue()[ :-1 ]
 
     def get_justified_cell_text(self, i, cell):
 
