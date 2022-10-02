@@ -4,6 +4,30 @@
 # from typing import Sequence
 # from typing.re import Match
 #
+
+from re import search, compile, findall
+
+data = [ ["ANR8331I LTO volume SBO566L6 is mounted R/W in drive DRV1 (/dev/lin_tape/by-id/1068005803), status: DISMOUNTING."],
+         ["ANR8330I LTO volume SBO376L6 is mounted R/W in drive DRV2 (/dev/lin_tape/by-id/1068006258), status: IN USE."],
+        ["ANR8330I LTO volume SBO566L6 is mounted R/W in drive DRV1 (/dev/lin_tape/by-id/1068005803), status: IN USE."],
+        ["ANR8330I LTO volume SBO376L6 is mounted R/W in drive DRV2 (/dev/lin_tape/by-id/1068006258), status: IN USE."],
+        ["ANR8379I Mount point in device class DCLTO_02 is waiting for the volume mount to complete, status: WAITING FOR VOLUME."],
+         ["ANR8329I LTO volume SBO376L6 is mounted R/W in drive DRV2 (/dev/lin_tape/by-id/1068006258), status: IDLE."]
+       ]
+
+for l in data:
+    if search("ANR83(29|30|31|32|33)I.*", l[0]):
+        print (l[0])
+        for vol, rw_ro, drive, path, status in findall(compile(r'.* volume (.*) is mounted (.*) in drive (.*) \((.*)\), status: (.*)..*'), l[0]):
+            print("Match: ", vol, rw_ro, drive, path, status)
+    elif search("ANR8379I", l[0]):
+        print(l[0])
+        for devc, status in findall(compile(".* device class (.*) is waiting .*, status: (.*)..*"), l[0]):
+            print("Match: ", devc, status)
+
+
+
+quit(0)
 # from colorama import Fore, Back, Style
 # from termcolor import colored
 # import humanbytes

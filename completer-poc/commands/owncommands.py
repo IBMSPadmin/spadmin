@@ -1,3 +1,4 @@
+import re
 import sys
 sys.path.append("..")
 import logging
@@ -528,7 +529,7 @@ def kill( self, parameters ):
     if globals.lastdsmcommandtype == "PROCESSES" or globals.lastdsmcommandtype == "SESSIONS":
         if parameters.strip().isnumeric():
             if len(globals.lastdsmcommandresults) >= int(parameters) > 0:
-                for line in (globals.tsm.send_command_array_tabdel("cancel session " + globals.lastdsmcommandresults[int(parameters)-1][1])):
+                for line in (globals.tsm.send_command_array_tabdel("CANCEL SESSION " + globals.lastdsmcommandresults[int(parameters)-1][1])):
                     print(line)
             else:
                 print(colored("The given number is not found!", 'red', attrs=['bold']))
@@ -639,6 +640,111 @@ class ShowStgp(SpadminCommand):
 
 define_command(ShowStgp())
 
+class ShowMount(SpadminCommand):
+    def __init__(self):
+        self.command_string = "SHow MOUnt"
+        self.command_type   = "MOUNT"
+        self.command_index  = 0
+
+    def short_help(self) -> str:
+        return 'SHow MOUnt: display volume mount'
+
+    def help(self) -> dict:
+        return """SHow MOUnt: display volume mount in the following format and order:
+- ----------- ------ ----- ------------------------------ ------------------
+# Volume Name Access Drive Path                           Status
+- ----------- ------ ----- ------------------------------ ------------------
+1 SBO566L6    R/W    DRV1  /dev/lin_tape/by-id/1068005803 DISMOUNTING
+2 SBO376L6    R/W    DRV2  /dev/lin_tape/by-id/1068006258 IN USE
+3 SBO566L6    R/W    DRV1  /dev/lin_tape/by-id/1068005803 IN USE
+4 SBO376L6    R/W    DRV2  /dev/lin_tape/by-id/1068006258 IN USE
+5 N/A         N/A    N/A   Device Class: DCLTO_02         WAITING FOR VOLUME
+6 SBO376L6    R/W    DRV2  /dev/lin_tape/by-id/1068006258 IDLE"""
+
+    def _execute(self, parameters: str) -> str:
+        data = globals.tsm.send_command_array_array_tabdel(
+            "Query MOunt")
+        """data = [[
+                    "ANR8331I LTO volume SBO566L6 is mounted R/W in drive DRV1 (/dev/lin_tape/by-id/1068005803), status: DISMOUNTING."],
+                [
+                    "ANR8330I LTO volume SBO376L6 is mounted R/W in drive DRV2 (/dev/lin_tape/by-id/1068006258), status: IN USE."],
+                [
+                    "ANR8330I LTO volume SBO566L6 is mounted R/W in drive DRV1 (/dev/lin_tape/by-id/1068005803), status: IN USE."],
+                [
+                    "ANR8330I LTO volume SBO376L6 is mounted R/W in drive DRV2 (/dev/lin_tape/by-id/1068006258), status: IN USE."],
+                [
+                    "ANR8379I Mount point in device class DCLTO_02 is waiting for the volume mount to complete, status: WAITING FOR VOLUME."],
+                [
+                    "ANR8329I LTO volume SBO376L6 is mounted R/W in drive DRV2 (/dev/lin_tape/by-id/1068006258), status: IDLE."]
+                ]"""
+
+        data2 = []
+        index = 1
+        for l in data:
+            if search("ANR83(29|30|31|32|33)I.*", l[0]):
+                for vol, rw_ro, drive, path, status in re.findall(
+                        re.compile(r'.* volume (.*) is mounted (.*) in drive (.*) \((.*)\), status: (.*)..*'), l[0]):
+                    data2.append([index, vol, rw_ro, drive, path, status])
+                    index += 1
+            elif search("ANR8379I", l[0]):
+                for devc, status in re.findall(re.compile(".* device class (.*) is waiting .*, status: (.*)..*"), l[0]):
+                    data2.append([index, "N/A", "N/A",  "N/A", "Device Class: " + devc, status])
+                    index += 1
+
+        globals.lastdsmcommandresults = data2
+        table = columnar(data2,
+            headers=['#', 'Volume Name', 'Access', 'Drive', 'Path', 'Status'],
+            justify=['r', 'l', 'l', 'l', 'l', 'l',])
+        return table
+
+define_command(ShowMount())
+
+class DISMount(SpadminCommand):
+    def __init__(self):
+        self.command_string = "DISMount"
+        self.command_type   = globals.lastdsmcommandtype
+        self.command_index  = 0
+
+    def short_help(self) -> str:
+        return 'DISMount: Dismount volume from drives (last command should be `SHow MOUnt` or `show DRive`)'
+
+    def help(self) -> dict:
+        return """Dismount volume from drives (last command should be`SHow MOUnt` or `SHow DRive`)"""
+
+    def _execute(self, parameters: str) -> str:
+        if globals.lastdsmcommandtype == "DRIVE" or globals.lastdsmcommandtype == "MOUNT":
+            if parameters.strip().isnumeric():
+                if len(globals.lastdsmcommandresults) >= int(parameters) > 0:
+                    if globals.lastdsmcommandtype == "DRIVE":
+                        line = globals.lastdsmcommandresults[int(parameters) - 1]
+                        cmd = "DISMount Volume" + " " + line[7]
+                    else: # Mount
+                        line = globals.lastdsmcommandresults[int(parameters) - 1]
+                        cmd  = "DISMount Volume" + " " + line[1]
+                    for l in globals.tsm.send_command_array_tabdel(cmd):
+                        print(l)
+                else:
+                    print(colored("The given number is not found!", 'red', attrs=['bold']))
+            else:
+                print(colored("The given parameter should be a number!", 'red', attrs=['bold']))
+        else:
+            print(colored("Last command should be `SHow MOUnt` or `show DRive`!", 'red', attrs=['bold']))
+            globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
+        return ""
+
+    def execute(self, dummy, parameters):
+        globals.logger.debug(
+            "Execution STARTED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
+        if parameters == "help":
+            print(self.help())
+        else:
+            self._execute(parameters)
+        globals.logger.debug(
+            "Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
+        globals.logger.debug("Last command type set to: " + globals.lastdsmcommandtype + ".")
+
+
+define_command(DISMount())
 
 class Ruler(SpadminCommand):
     def __init__(self):
