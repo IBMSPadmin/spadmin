@@ -12,6 +12,8 @@ Színezendő üzenetek:
 - ANR8805I Labeling volumes in library DELLML3; 5 volume(s) labeled.
 - ANR8805I Labeling volumes in library DELLML3; 20 volume(s) labeled.\
 
+- Keresni kell a többit!
+
 ## consolemode
 - külön ablak:
    - macOS -> open -a iTerm ./spadmin.py
@@ -22,14 +24,16 @@ Színezendő üzenetek:
 - sh drive: érdemes lenne az összes funkciót átvinni a régiből (sessiosn, process adatok)
 
 ## rl sql max row
-- fetch first 100 rows only bevezetése és opciók + .ini 
+- fetch first 100 rows only bevezetése és opciók + .ini
+- cache_prefetch megírása
+- rlwordseparation van ez még? meg lehetne tartani
 
 ## @_flex
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
 - Ha az opciók végén = jel van, akkor az még az előzőhöz tartozik! ...
 - kisbetű nagybetű alias, grep (az alias-oknál kikapcsoltam)
 - alias regexp generator: SESs+, DISKs+
-- header színes vágó megoldás (ez átkerült a data kiíróba is, ha az utolsó előtti oszlop nem férne ki)
+- header színes vágó megoldás (ez átkerült a data kiíróba is, ha az utolsó előtti oszlop nem férne ki) tesztelni kell, hoyg stabil-e
 
 ## inifile / program paraméterek
 - össze kell őket fésülni
