@@ -17,12 +17,19 @@ Színezendő üzenetek:
    - macOS -> open -a iTerm ./spadmin.py
    - WSL 
 
+## library manager opció bevezetése
+- @Marcell:, ha van ilyen akkor a sh drive-nak ott kell futnia és azt ki kellene szoláglnia pexpect-nek
+- sh drive: érdemes lenne az összes funkciót átvinni a régiből (sessiosn, process adatok)
+
+## rl sql max row
+- fetch first 100 rows only bevezetése és opciók + .ini 
+
 ## @_flex
 - WSL doksi és dsmadmc-s teszt Microsoft Windows-on
 - Ha az opciók végén = jel van, akkor az még az előzőhöz tartozik! ...
 - kisbetű nagybetű alias, grep (az alias-oknál kikapcsoltam)
 - alias regexp generator: SESs+, DISKs+
-- header színes vágó megoldás
+- header színes vágó megoldás (ez átkerült a data kiíróba is, ha az utolsó előtti oszlop nem férne ki)
 
 ## inifile / program paraméterek
 - össze kell őket fésülni
