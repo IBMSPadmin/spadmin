@@ -101,6 +101,9 @@ class IBMSPrlCompleter:
 
         # logging.info( ' CACHE: [' + pformat( cache ) + '].' )
 
+        if globals.config.getconfiguration()['SPADMIN']['dynamic_readline_toprows']:
+            select += ' fetch first ' + globals.config.getconfiguration()['SPADMIN']['dynamic_readline_toprows'] + ' rows only'
+
         # cache engine
         if select in self.cache.keys():
             self.cache_hitratio[ 'hit' ] += 1
