@@ -700,7 +700,7 @@ class ShowMount(SpadminCommand):
 
         globals.lastdsmcommandresults = data2
         table = columnar(data2,
-            headers=['#', 'Volume Name', 'Access', 'Drive', 'Path', 'Status'],
+            headers=['#', 'Volume', 'Access', 'Drive', 'Path', 'Status'],
             justify=['r', 'l', 'l', 'l', 'l', 'l',])
         return table
 
@@ -903,8 +903,8 @@ class ShowDrives(SpadminCommand):
             data.append([i+1, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[6]])
 
         table = columnar(data,
-            headers=['#', 'Library name', 'Drive Name', 'Online', 'Element', 'State', 'Serial', 'Volume Name', 'Allocated to'],
-            justify=['r', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l'])
+            headers=['#', 'Library', 'Drive', 'Online', 'Element', 'State', 'Serial', 'Volume', 'Allocated'],
+            justify=['r', 'l', 'l', 'l', 'c', 'l', 'l', 'l', 'l'])
         globals.lastdsmcommandresults = data
         return table
 
