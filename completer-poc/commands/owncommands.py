@@ -442,7 +442,8 @@ def show_sessions( self, parameters ):
         bytes_sent     = humanbytes.HumanBytes.format( int( row[ 3 ] ), unit="BINARY_LABELS", precision = 0 )
         bytes_received = humanbytes.HumanBytes.format( int( row[ 4 ] ), unit="BINARY_LABELS", precision = 0 )
 
-        mediaaccess = ''.join( row[ 8:14 ] )
+        # mediaaccess = ''.join( row[ 8:14 ] )
+        mediaaccess = row[ 8 ] + row[ 9 ] + row[ 10 ] + row[ 11 ] + row[ 12 ] + row[ 13 ] + row[ 14 ]
 
         data2.append( [ index + 1,  row[ 0 ], state, wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
 
@@ -632,6 +633,12 @@ class ShowStgp(SpadminCommand):
             else:
                 # data[index][3] = round((float(d)/1024),1)
                 data[index][3] = humanbytes.HumanBytes.format(float(d) * 1024 * 1024, unit="BINARY_LABELS", precision=0)
+                
+            if row[ 1 ] == 'DISK':
+                if float( row[ 5 ] ) > 85:
+                    row[ 5 ] = colored( row[ 5 ], 'red', attrs=[ 'bold' ] ) 
+                elif float( row[ 5 ] ) > 70: 
+                    row[ 5 ] = colored( row[ 5 ], 'yellow', attrs=[ 'bold' ] ) 
 
         table = columnar(data, 
             headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig', 'LowMig', 'Recl', 'Next'],

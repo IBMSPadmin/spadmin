@@ -32,7 +32,7 @@ class dsmadmc_pexpect:
         if self.tsm_tabdel is None or not self.tsm_tabdel.isalive:
             # debug purposes only:
             # print ("Spawn: ", self.STARTCOMMAND)
-            self.tsm_tabdel = pexpect.spawn('%s' % self.STARTCOMMAND_TABDEL, encoding='utf-8', echo=False)
+            self.tsm_tabdel = pexpect.spawn( '%s' % self.STARTCOMMAND_TABDEL, encoding='utf-8', echo=False, codec_errors='ignore', timeout=360 )
             self.tsm_tabdel.setwinsize(65534, 65534)
             rc = self.tsm_tabdel.expect(self.EXPECTATIONS)
             self.check_rc(self.tsm_tabdel, rc)
@@ -147,7 +147,7 @@ class dsmadmc_pexpect:
         if rc == 6:
             print('Timeout occured.')
             print('Please check the connection parameters and restart spadmin')
-            print(tsm.before)
+            print( tsm.before[ :50 ] )
             quit(1)
         elif rc == 7:
             print('TCP/IP connection failure.')
