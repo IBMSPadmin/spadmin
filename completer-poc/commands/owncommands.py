@@ -443,6 +443,14 @@ def show_sessions( self, parameters ):
         bytes_received = humanbytes.HumanBytes.format( int( row[ 4 ] ), unit="BINARY_LABELS", precision = 0 )
 
         # mediaaccess = ''.join( row[ 8:14 ] )
+        match = search( '(\w+),(.+),(\d+)', row[ 11 ] )
+        if match:
+            row[ 11 ] = 'Read: ' + colored( match[ 2 ], 'green', attrs=[ 'bold' ] ) + ', ' + match[ 1 ] + ', ' + humanbytes.HumanBytes.format( int( match[ 3 ] ), unit="TIME_LABELS", precision = 0 )
+        
+        match = search( '(\w+),(.+),(\d+)', row[ 14 ] )
+        if match:
+            row[ 14 ] = 'Write: ' + colored( match[ 2 ], 'green', attrs=[ 'bold' ] ) + ', ' + match[ 1 ] + ', ' + humanbytes.HumanBytes.format( int( match[ 3 ] ), unit="TIME_LABELS", precision = 0 )
+        
         mediaaccess = row[ 8 ] + row[ 9 ] + row[ 10 ] + row[ 11 ] + row[ 12 ] + row[ 13 ] + row[ 14 ]
 
         data2.append( [ index + 1,  row[ 0 ], state, wait, bytes_sent, bytes_received, row[ 5 ], row[ 6 ], row[ 7 ], mediaaccess, row[ 16 ] + row[ 15 ] ] )
@@ -691,6 +699,7 @@ class ShowMount(SpadminCommand):
             if search("ANR83(29|30|31|32|33)I.*", l[0]):
                 for vol, rw_ro, drive, path, status in re.findall(
                         re.compile(r'.* volume (.*) is mounted (.*) in drive (.*) \((.*)\), status: (.*)..*'), l[0]):
+                    vol = colored( vol, 'green', attrs=[ 'bold' ] )
                     data2.append([index, vol, rw_ro, drive, path, status])
                     index += 1
             elif search("ANR8379I", l[0]):
@@ -900,7 +909,8 @@ class ShowDrives(SpadminCommand):
 
         data = []
         for i, row in enumerate(drives):
-            data.append([i+1, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[6]])
+            row[ 6 ] = colored( row[ 6 ], 'green', attrs=[ 'bold' ] )
+            data.append([i+1, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
 
         table = columnar(data,
             headers=['#', 'Library', 'Drive', 'Online', 'Element', 'State', 'Serial', 'Volume', 'Allocated'],
