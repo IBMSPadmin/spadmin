@@ -217,9 +217,10 @@ if __name__ == '__main__':
 
     if args.fetch or globals.config.getconfiguration()[ 'SPADMIN' ][ 'cache_prefetch' ] == 'True':
         globals.logger.info( 'SQL prefetch for readline queries.' )
-        globals.myIBMSPrlCompleter.spsqlengine( 'select node_name from nodes', [ 'prefetch' ] )
+        globals.myIBMSPrlCompleter.spsqlengine( 'select node_name from nodes',       [ 'prefetch' ] )
+        globals.myIBMSPrlCompleter.spsqlengine( 'select domain_name from domains',   [ 'prefetch' ] )
         globals.myIBMSPrlCompleter.spsqlengine( 'select stgpool_name from stgpools', [ 'prefetch' ] )
-
+        
     globals.logger.debug('Import own commands.')
     import commands.owncommands as owncommands
     # -----------------------------------------
