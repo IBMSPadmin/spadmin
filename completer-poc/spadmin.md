@@ -6,6 +6,9 @@ Global spadmin.py development progress status:
 
 # aktuális toDo-k
 
+## beszíneztem a mount és drive parancsokat
+- ehhez rendbe kell majd tenni az umount részt. Elnézést. 
+
 Színezendő üzenetek:
 
 ## q proc
