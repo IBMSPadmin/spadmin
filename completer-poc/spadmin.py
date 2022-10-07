@@ -79,10 +79,11 @@ if __name__ == '__main__':
     parser.add_argument( '--consoleonly',          action = 'store_const', const = True,          help = 'run console only mode!' )
     parser.add_argument( '-c', '--commands',       type=str,                                      help = 'autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;' )
     parser.add_argument( '-d', '--debug',           action = 'store_const', const = True,          help = 'debug messages into log file' )
+    parser.add_argument( '-f', '--fetch',           action = 'store_const', const = True,          help = 'enable SQL prefetch queries' )
     parser.add_argument( '-i', '--inifilename',     type=str,                                      help = 'ini filename' )
     parser.add_argument( '-l', '--logfilename',     type=str,                                      help = 'log filename' )
-    parser.add_argument( '-m', '--norlsqlcache',    action = 'store_const', const = True,          help = 'no cache for sql queries in reradline' )
-    parser.add_argument( '-n', '--norlsqlhelpepr',  action = 'store_const', const = True,          help = 'no sql queries in reradline' )
+    parser.add_argument( '-m', '--norlsqlcache',    action = 'store_const', const = True,          help = 'no cache for SQL queries in reradline' )
+    parser.add_argument( '-n', '--norlsqlhelpepr',  action = 'store_const', const = True,          help = 'no SQL queries in reradline' )
     parser.add_argument( '-p', '--prereqcheck',     action = 'store_const', const = True,          help = 'prerequisite check' )
     parser.add_argument( '-r', '--rulefilename',    type=str,                                      help = 'custom rule filename' )
     parser.add_argument( '-s', '--disablerl',       action = 'store_const', const = True,          help = 'disable readline functionality' )
@@ -94,7 +95,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # create a namespace for global variables
-
 
     # SPadmin global settings
     if args.inifilename:
@@ -214,6 +214,11 @@ if __name__ == '__main__':
   Use: "REload" to reload the rule file! and
   Use: "SPadmin SHow LOG" or "SPadmin SHow LOCALLOG" to reach the local log file!''' )
         print()
+
+    if args.fetch or globals.config.getconfiguration()[ 'SPADMIN' ][ 'cache_prefetch' ] == 'True':
+        globals.logger.info( 'SQL prefetch for readline queries.' )
+        globals.myIBMSPrlCompleter.spsqlengine( 'select node_name from nodes', [ 'prefetch' ] )
+        globals.myIBMSPrlCompleter.spsqlengine( 'select stgpool_name from stgpools', [ 'prefetch' ] )
 
     globals.logger.debug('Import own commands.')
     import commands.owncommands as owncommands
