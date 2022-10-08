@@ -298,10 +298,11 @@ if __name__ == '__main__':
             globals.logger.info('Base command: [' + command + '] and extras: ' + pformat(globals.extras))
 
             # it's not own command. Does the user want to possibly exit???
-            if search( '^' + utilities.regexpgenerator('QUIt'), command, IGNORECASE) or \
-               search( '^' + utilities.regexpgenerator('LOGOut'), command, IGNORECASE) or \
-               search( '^' + utilities.regexpgenerator('Exit'), command, IGNORECASE) or \
-               search( '^' + utilities.regexpgenerator('BYe'), command, IGNORECASE):
+            if search( '^' + utilities.regexpgenerator( 'QUIt' ) + '(?!.*\w+)',   command, IGNORECASE) or \
+               search( '^' + utilities.regexpgenerator( 'LOGOut' ) + '(?!.*\w+)', command, IGNORECASE) or \
+               search( '^' + utilities.regexpgenerator( 'Exit' ) + '(?!.*\w+)',   command, IGNORECASE) or \
+               search( '^' + utilities.regexpgenerator( 'Exit' ) + '\s+\d+',      command, IGNORECASE) or \
+               search( '^' + utilities.regexpgenerator( 'BYe' ) + '(?!.*\w+)',    command, IGNORECASE):
 
                 globals.logger.debug(utilities.consolefilledline('<<< INPUT LOOP END '))
 
