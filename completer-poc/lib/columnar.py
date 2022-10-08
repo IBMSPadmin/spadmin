@@ -137,12 +137,30 @@ def grep(data):
                     for find in finds:
                         # data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
                         data[i][c] = colorize( cell, find, 'white', [ 'bold' ] )
-            if found is True:
+            if found == True:
                 grep_data.append(row)
     else:
         grep_data = data
 
     return grep_data
+
+
+def invgrep( data ):
+    invgrep = globals.extras[ 'invgrep' ] if 'invgrep' in globals.extras else ''
+    invgrep_data = []
+    if invgrep != '' and invgrep is not None:
+        for i, row in enumerate( data ):
+            found = False
+            for c, cell in enumerate( row ):
+                founds = re.findall( invgrep, str( cell ) )
+                if len( founds ) > 0:
+                    found = True
+            if found == False:
+                invgrep_data.append( row )
+    else:
+        invgrep_data = data
+    
+    return invgrep_data
 
 
 def get_column_length(headers, data):
@@ -179,7 +197,7 @@ class Columnar:
             headers[ int(orderby)] = colorize( headers[int(orderby)], headers[int(orderby)], "green", [ 'bold' ] )
 
         # Grep
-        data = grep(data)
+        data = invgrep( grep( data ) )
 
         self.column_length = get_column_length(headers, data)
         header_decorator = ""
