@@ -16,7 +16,7 @@ $ -> Exit
 # !!!QUIt, Query collision problem!!!
 $ -> QUIt
 $ -> BYe
-$ -> Logout
+$ -> LOGOut
 $ -> REload
 $->Help!
 $->KILL
