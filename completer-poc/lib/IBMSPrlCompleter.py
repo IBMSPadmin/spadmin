@@ -101,8 +101,8 @@ class IBMSPrlCompleter:
 
         # logging.info( ' CACHE: [' + pformat( cache ) + '].' )
 
-        if globals.config.getconfiguration()['SPADMIN']['dynamic_readline_toprows']:
-            select += ' fetch first ' + globals.config.getconfiguration()['SPADMIN']['dynamic_readline_toprows'] + ' rows only'
+        # if globals.config.getconfiguration()['SPADMIN']['dynamic_readline_toprows']:
+        #     select += ' fetch first ' + globals.config.getconfiguration()['SPADMIN']['dynamic_readline_toprows'] + ' rows only'
 
         # cache engine
         if select in self.cache.keys():
@@ -131,7 +131,7 @@ class IBMSPrlCompleter:
             if search( '^' + tokens[ -1 ], x, IGNORECASE ):
                 ret.append( x + ' ' )
 
-        return ret
+        return ret[ :int(globals.config.getconfiguration()['SPADMIN']['dynamic_readline_toprows']) ]
 
 
     start    = []  # 1. level list
