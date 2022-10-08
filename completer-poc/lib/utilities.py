@@ -55,10 +55,11 @@ def printer(string):
             sys.stdout.flush()
             key = readchar.readkey()
             if str(key).lower() == "c":
-                print(*s[i + globals.rows - 2:], sep="\n")
+                #print(*s[i + globals.rows - 2:], sep="\n")
+                print()
                 break
             i = 0
-            print('\n')
+            #print('\n')
 
 
 def check_connection(server: str, id: str, password: str) -> bool:
