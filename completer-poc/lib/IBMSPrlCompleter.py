@@ -131,7 +131,7 @@ class IBMSPrlCompleter:
             if search( '^' + tokens[ -1 ], x, IGNORECASE ):
                 ret.append( x + ' ' )
 
-        return ret[ :int(globals.config.getconfiguration()['SPADMIN']['dynamic_readline_toprows']) ]
+        return ret[ :int( globals.config.getconfiguration()['SPADMIN']['dynamic_readline_toprows'] ) ]
 
 
     start    = []  # 1. level list
