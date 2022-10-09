@@ -263,7 +263,7 @@ if __name__ == '__main__':
             continue
 
         # protect the || as ##
-        line = line.replace( '||', '##' )
+        # line = line.replace( '||', '##' )
         # simple command runner engine
         for command in line.split( ';' ):
             command      = command.strip()
@@ -279,6 +279,9 @@ if __name__ == '__main__':
                 if aliasmatch:
                     command = command.replace( aliasmatch[ 1 ], globals.aliases[ alias ] )
                     break
+
+            # protect the || as ##
+            command = command.replace( '||', '##' )
 
             # disassembly it first
             commandparts = command.split( '|' )

@@ -325,7 +325,7 @@ Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Client
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=NAS
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Server
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Any
-Query Node [\w\*]*\s*(\w+=\w*\s*)* DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Format=         -> Format=Standard
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Format=         -> Format=Detailed
 Query Node [\w\*]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LOcal
