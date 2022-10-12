@@ -332,6 +332,8 @@ Query Node [\w\*]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LOcal
 Query Node [\w\*]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LDap
 
 # de ez már az 5. szint
+Query Node (\w+) (\w+=.*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+
 #Query Node \w+ (\w+=\w*\s+){1,} -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
 #Query Node \w+ (\w+=\w*\s+){1,} -> DOmainx=
 
