@@ -6,8 +6,15 @@
 - python3
 - pyton modulok
 	- pip install termcolor readline pexpect readchar
+    - Marcell - új mac-jén teszt: 
+      - pip3 install pexpect 
+      - pip3 install termcolor 
+      - pip3 install readchar
+      - pip3 install gnureadline
 - dsmamdc v8.1.15 
 - dsmserv v8.1.14
+
+
 
 ## dsmadmc kezelés pexpect modullal
 
