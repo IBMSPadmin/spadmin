@@ -87,7 +87,7 @@ def spadmin_show_cache( self, parameters ):
 
 #
 spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
-dynruleinjector( 'SPadmin SHow CAche' )
+dynruleinjector(  'SPadmin SHow CAche' )
 
 
 def history(self, parameters):

@@ -341,7 +341,7 @@ if __name__ == '__main__':
                 if maincommandpart:
                     # just transfer the parameters
                     globals.logger.info('Own command found: [' + command + '] and try to execute.')
-                    owncommands.spadmin_commands[ key](owncommands, command.replace(maincommandpart[ 0].strip(), '').strip())
+                    owncommands.spadmin_commands[ key ](owncommands, command.replace(maincommandpart[ 0].strip(), '').strip())
                     match = True
                     break
 
