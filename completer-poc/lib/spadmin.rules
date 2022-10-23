@@ -174,6 +174,27 @@ DELete -> STGpool
 ##################
 # Query commands #
 ##################
+# https://www.ibm.com/docs/en/tsm/7.1.1?topic=commands-query-path-display-path-definition
+#2
+Query                                       -> PATH
+#3
+Query PATH                                  -> select SERVER_NAME from status union (select SERVER_NAME from servers)
+#4
+Query PATH (.*)                             -> select LIBRARY_NAME from libraries union (select DRIVE_NAME from drives)
+#5
+Query PATH (.*) (.*)                        -> SRCType=
+Query PATH (.*) (.*)                        -> DESTType=
+Query PATH (.*) (.*)                        -> Format=
+#6
+Query PATH (.*) (.*) SRCType=               -> SRCType=ANY
+Query PATH (.*) (.*) SRCType=               -> SRCType=DATAMover
+Query PATH (.*) (.*) SRCType=               -> SRCType=SERVer
+Query PATH (.*) (.*) DESTType=              -> DESTType=ANY
+Query PATH (.*) (.*) DESTType=              -> DESTType=DRIVE
+Query PATH (.*) (.*) DESTType=              -> DESTType=LIBRary
+Query PATH (.*) (.*) Format=                -> Format=Standard
+Query PATH (.*) (.*) Format=                -> Format=Detailed
+
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-actlog-query-activity-log
 Query                         -> ACtlog
      
