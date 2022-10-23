@@ -194,6 +194,9 @@ Query PATH (.*) (.*) DESTType=              -> DESTType=DRIVE
 Query PATH (.*) (.*) DESTType=              -> DESTType=LIBRary
 Query PATH (.*) (.*) Format=                -> Format=Standard
 Query PATH (.*) (.*) Format=                -> Format=Detailed
+#7
+#Query PATH (.*) (.*) DESTType=DRIVE              -> LIBRary=
+#Query PATH (.*) (.*) DESTType=DRIVE LIBRary=             ->  select LIBRARY_NAME from libraries
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-actlog-query-activity-log
 Query                         -> ACtlog
