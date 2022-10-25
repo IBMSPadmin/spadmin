@@ -965,7 +965,7 @@ class ShowColumns(SpadminCommand):
 
     def help(self) -> dict:
         return """Display the Spectrum Protect internal DB2-SQL database columns by tables  
-This information can be usefull, when you are trying to deep dive into ISP internal world.
+This information can be useful, when you are trying to deep dive into ISP internal world.
 This table can be very long, so it recommended to use `|grep ` or `|more` or both. 
 """
 
