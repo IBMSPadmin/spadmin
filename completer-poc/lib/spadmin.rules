@@ -10,6 +10,7 @@ $->DELete
 $->Query
 $->REMove
 $->SHow
+$->DECommission
 
 # Own commands:
 $ -> Exit
@@ -429,5 +430,15 @@ SHow -> TIME
 
 SHow       -> SLOTS
 SHow SLOTS -> select library_name from libraries
+
+##################
+# Other commands #
+##################
+DECommission                    -> Node
+DECommission Node               -> select node_name from nodes
+DECommission Node (.*)          -> Wait=
+DECommission Node (.*) Wait=    -> Wait=Yes
+DECommission Node (.*) Wait=    -> Wait=No
+
 
 ###############################################################

@@ -273,7 +273,7 @@ dynruleinjector( 'SPadmin Add ALIas' )
 def spadmin_show_processinfo( self, parameters ):
     data = [["Normal", globals.tsm.get_tsm_normal().pid], ["Tabdelimited", globals.tsm.get_tsm_tabdel().pid]]
     table = columnar(data,
-                     headers=['dsmadmc','PID'])
+                     headers=['dsmadmc','PID'], justify=[ 'l', 'cl'])
     utilities.printer(table)
 spadmin_commands[ 'SPadmin SHow PRocessinfo' ] = spadmin_show_processinfo
 dynruleinjector(  'SPadmin SHow PRocessinfo' )
