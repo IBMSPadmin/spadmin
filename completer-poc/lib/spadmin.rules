@@ -13,6 +13,7 @@ $->SHow
 $->DECommission
 $->RECommission
 $->SETOPT
+$->SET
 
 # Own commands:
 $ -> Exit
@@ -590,3 +591,22 @@ SETOPT 		->	 UNIQUETECEVENTS
 SETOPT 		->	 USEREXIT
 SETOPT 		->	 VERBCHECK
 SETOPT 		->	 VOLUMEHISTORY
+
+###############################################################
+Set             ->  ACCounting
+Set ACCounting  ->  On
+Set ACCounting  ->  Off
+Set                                     ->  ACTlogretention
+Set ACTlogretention                     -> number
+Set ACTlogretention (\d.*)              -> Mgmtstyle=
+Set ACTlogretention (\d.*) Mgmtstyle=   -> Mgmtstyle=Date
+Set ACTlogretention (\d.*) Mgmtstyle=   -> Mgmtstyle=Size
+Set                     ->  ALERTACtiveduration
+Set ALERTACtiveduration ->  number_mins
+Set                     ->  ALERTCLosedduration
+Set ALERTCLosedduration ->  number_mins
+Set             ->  ALERTEMail
+Set ALERTEMail  ->  On
+Set ALERTEMail  ->  Off
+Set                     ->  ALERTEMAILFRomaddr
+Set ALERTEMAILFRomaddr  ->  email_address
