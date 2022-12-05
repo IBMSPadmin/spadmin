@@ -412,8 +412,8 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 #if search( '^' + utilities.regexpgenerator( key ), tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
                 if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -5] + ' ' + tokens[ -4] + ' ' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str(keylength) + '].')
-                    globals.logger.debug(str(tokenlength) + " let\'s continue searching with this item(s) [" + pformat(self.rules[key], width=180) + ']')
+                    globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -5] + ' ' + tokens[ -4] + ' ' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 5th LEVEL dictionary item: [' + key + '] [' + str(keylength) + '].')
+                    globals.logger.debug(str(tokenlength) + " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']')
                       
                     ret += self.SPunversaltokenresolver( key, tokens )
                                                           
