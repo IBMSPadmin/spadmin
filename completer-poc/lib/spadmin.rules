@@ -286,6 +286,8 @@ Query Node Type=                   -> Type=Client
 Query Node Type=                   -> Type=NAS
 Query Node Type=                   -> Type=Server
 Query Node Type=                   -> Type=Any 
+Query Node Type=                   -> Type=OBJECTClient
+Query Node Type=                   -> Type=OSSMClient
 Query Node DOmain=                 -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
 Query Node Format=                 -> Format=Standard
 Query Node Format=                 -> Format=Detailed
@@ -300,6 +302,8 @@ Query Node [\w\*]+ Type=           -> Type=Client
 Query Node [\w\*]+ Type=           -> Type=NAS
 Query Node [\w\*]+ Type=           -> Type=Server
 Query Node [\w\*]+ Type=           -> Type=Any
+Query Node [\w\*]+ Type=           -> Type=OBJECTClient
+Query Node [\w\*]+ Type=           -> Type=OSSMClient
 Query Node [\w\*]+ DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
 Query Node [\w\*]+ Format=         -> Format=Standard
 Query Node [\w\*]+ Format=         -> Format=Detailed
@@ -310,6 +314,8 @@ Query Node (\w+=\w*\s*){1,} Type= -> Type=Client
 Query Node (\w+=\w*\s*){1,} Type= -> Type=NAS
 Query Node (\w+=\w*\s*){1,} Type= -> Type=Server
 Query Node (\w+=\w*\s*){1,} Type= -> Type=Any
+Query Node (\w+=\w*\s*){1,} Type= -> Type=OBJECTClient
+Query Node (\w+=\w*\s*){1,} Type= -> Type=OSSMClient
 Query Node (\w+=\w*\s*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
 Query Node (\w+=\w*\s*){1,} Format= -> Format=Standard
 Query Node (\w+=\w*\s*){1,} Format= -> Format=Detailed
@@ -320,6 +326,8 @@ Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Client
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=NAS
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Server
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Any
+Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=OBJECTClient
+Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=OSSMClient
 Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Format=         -> Format=Standard
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Format=         -> Format=Detailed
@@ -327,8 +335,24 @@ Query Node [\w\*]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LOcal
 Query Node [\w\*]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LDap
 
 # de ez már az 5. szint
-Query Node (\w+) (\w+=.*){1,}         -> DOmain=
-Query Node (\w+) (\w+=.*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node [\w\*]+ (\w+=.*){1,}         -> Type=
+Query Node [\w\*]+ (\w+=.*){1,}         -> DOmain=
+Query Node [\w\*]+ (\w+=.*){1,}         -> Format=
+Query Node [\w\*]+ (\w+=.*){1,}         -> AUTHentication=
+Query Node [\w\*]+ (\w+=.*){1,} Type=        -> Type=Client
+Query Node [\w\*]+ (\w+=.*){1,} Type=        -> Type=NAS
+Query Node [\w\*]+ (\w+=.*){1,} Type=        -> Type=Server
+Query Node [\w\*]+ (\w+=.*){1,} Type=        -> Type=Any
+Query Node [\w\*]+ (\w+=.*){1,} Type=        -> Type=OBJECTClient
+Query Node [\w\*]+ (\w+=.*){1,} Type=        -> Type=OSSMClient
+Query Node [\w\*]+ (\w+=.*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node [\w\*]+ (\w+=.*){1,} Format=        -> Format=Standard
+Query Node [\w\*]+ (\w+=.*){1,} Format=        -> Format=Detailed
+Query Node [\w\*]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LOcal
+Query Node [\w\*]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LDap
+
+
+
 
 Query             -> SEssion
 Query SEssion     -> select session_id from sessions
@@ -405,20 +429,21 @@ SHow SLOTS -> select library_name from libraries
 ##################
 # Other commands #
 ##################
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-decommission-node-decommission-application-system#r_cmd_node_decommission
 DECommission                    -> Node
 DECommission Node               -> select node_name from nodes
-DECommission Node (.*)          -> Wait=
-DECommission Node (.*) Wait=    -> Wait=Yes
-DECommission Node (.*) Wait=    -> Wait=No
+DECommission Node [\w\*]+          -> Wait=
+DECommission Node [\w\*]+ Wait=    -> Wait=Yes
+DECommission Node [\w\*]+ Wait=    -> Wait=No
 
-DECommission                            -> VM
-DECommission VM                         -> select distinct(VM_OWNER) from TSMGUI_ALLCLI_GRID where VM_OWNER <> ''
-DECommission VM (.*)                    -> select NAME from TSMGUI_ALLCLI_GRID where VM_OWNER='%PREFIX%' {Prefix: -1}
-DECommission VM (.*) (.*)               -> Wait=
-DECommission VM (.*) (.*)               -> NAMEType=
-DECommission VM (.*) (.*) NAMEType=     -> NAMEType=FSID
-DECommission VM (.*) (.*) Wait=         -> Wait=Yes
-DECommission VM (.*) (.*) Wait=         -> Wait=No
+DECommission                               -> VM
+DECommission VM                            -> select distinct(VM_OWNER) from TSMGUI_ALLCLI_GRID where VM_OWNER <> ''
+DECommission VM [\w\*]+                    -> select NAME from TSMGUI_ALLCLI_GRID where VM_OWNER=upper( '-2' )
+DECommission VM [\w\*]+ [\w\*]+            -> Wait=
+DECommission VM [\w\*]+ [\w\*]+            -> NAMEType=
+DECommission VM [\w\*]+ [\w\*]+ NAMEType=  -> NAMEType=FSID
+DECommission VM [\w\*]+ [\w\*]+ Wait=      -> Wait=Yes
+DECommission VM [\w\*]+ [\w\*]+ Wait=      -> Wait=No
 
 RECommission                    -> Node
 RECommission Node               -> select node_name from nodes
