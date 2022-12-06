@@ -332,7 +332,6 @@ class Spadmin(object):
             print(colored('= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=['bold']))
             print(colored('= Terminal properties: [', 'grey', attrs=['bold']) + colored(str(globals.columns), 'white', attrs=['bold']) + colored('x', 'grey', attrs=[ 'bold']) + colored(
                 str(globals.rows), 'white', attrs=['bold']) + colored(']', 'grey', attrs=['bold']))
-            print()
             # Short text help
             print()
             print(' ' + colored('Short HELP:', 'cyan', attrs=['bold', 'underline']))
