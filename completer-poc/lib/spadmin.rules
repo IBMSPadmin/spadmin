@@ -268,19 +268,6 @@ Query ACtlog (\w+=.*) (\w+=.*){1,} -> SESsnum={Mustexist: ORiginator=CLient}
 # 
 Query ACtlog (\w+=.*) (\w+=.*){1,} DOmainname= -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}{Mustexist: ORiginator=CLient}
 
-
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINTime|begintim|beginti|begint)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ENDDate|enddat|endda|endd)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ENDTime|endtim|endti|endt)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(Search|searc|sear|sea|se|s)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(NODEname|nodenam|nodena|noden|node)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ORiginator|originato|originat|origina|origin|origi|orig|ori|or)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(OWNERname|ownernam|ownerna|ownern|owner)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SCHedname|schednam|schedna|schedn|sched|sche|sch)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(DOmainname|domainnam|domainna|domainn|domain|domai|doma|dom|do)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SESsnum|sessnu|sessn|sess|ses)=
-
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-license-display-license-information
 Query -> LICense
 # =========================================================================================================================
@@ -319,16 +306,6 @@ Query Node [\w\*]+ Format=         -> Format=Detailed
 Query Node [\w\*]+ AUTHentication= -> AUTHentication=LOcal
 Query Node [\w\*]+ AUTHentication= -> AUTHentication=LDap
 
-#Query Node [\w\*=\s]{1,} Type= -> Type=Client
-#Query Node [\w\*=\s]{1,} Type= -> Type=NAS
-#Query Node [\w\*=\s]{1,} Type= -> Type=Server
-#Query Node [\w\*=\s]{1,} Type= -> Type=Any
-#Query Node [\w\*=\s]{1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
-#Query Node [\w\*=\s]{1,} Format= -> Format=Standard
-#Query Node [\w\*=\s]{1,} Format= -> Format=Detailed
-#Query Node [\w\*=\s]{1,} AUTHentication= -> AUTHentication=LOcal
-#Query Node [\w\*=\s]{1,} AUTHentication= -> AUTHentication=LDap
-
 Query Node (\w+=\w*\s*){1,} Type= -> Type=Client
 Query Node (\w+=\w*\s*){1,} Type= -> Type=NAS
 Query Node (\w+=\w*\s*){1,} Type= -> Type=Server
@@ -338,16 +315,6 @@ Query Node (\w+=\w*\s*){1,} Format= -> Format=Standard
 Query Node (\w+=\w*\s*){1,} Format= -> Format=Detailed
 Query Node (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LOcal
 Query Node (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LDap
-
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=Client
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=NAS
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=Server
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=Any
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Format=         -> Format=Standard
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Format=         -> Format=Detailed
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LOcal
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LDap
 
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Client
 Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=NAS
@@ -362,9 +329,6 @@ Query Node [\w\*]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LDap
 # de ez már az 5. szint
 Query Node (\w+) (\w+=.*){1,}         -> DOmain=
 Query Node (\w+) (\w+=.*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
-
-#Query Node \w+ (\w+=\w*\s+){1,} -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
-#Query Node \w+ (\w+=\w*\s+){1,} -> DOmainx=
 
 Query             -> SEssion
 Query SEssion     -> select session_id from sessions
