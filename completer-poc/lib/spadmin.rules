@@ -195,6 +195,19 @@ Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ CODEType= -> CODEType=UNIcode
 Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ CODEType= -> CODEType=NONUNIcode
 Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ CODEType= -> CODEType=BOTH
 
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} -> Format=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} -> NAMEType=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} -> CODEType=
+#
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} Format= -> Format=Standard
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} Format= -> Format=Detailed
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} NAMEType= -> NAMEType=SERVER 
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} NAMEType= -> NAMEType=UNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} NAMEType= -> NAMEType=FSID
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} CODEType= -> CODEType=UNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} CODEType= -> CODEType=NONUNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/]+ (\w+=.*){1,} CODEType= -> CODEType=BOTH
+
 # https://www.ibm.com/docs/en/tsm/7.1.1?topic=commands-query-path-display-path-definition
 #2
 Query                                       -> PATH
