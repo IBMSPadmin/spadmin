@@ -457,7 +457,7 @@ class IBMSPrlCompleter:
                 
                 keylength = len( key.split() )
                 
-                if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength == 5 and key[ -1 ] == '=' ):
+                if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength >= 5 and key[ -1 ] == '=' ):
                     continue
                 elif key.startswith( 'select' ):  # ???????????????????????????????
                     continue
