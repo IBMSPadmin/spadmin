@@ -5,7 +5,7 @@ import logging
 
 from termcolor import colored
 from pprint import pformat
-from re import search, IGNORECASE
+from re import search, IGNORECASE, escape
 from time import time
 
 try:
@@ -572,7 +572,7 @@ class IBMSPrlCompleter:
     def SPunversaltokenresolver( self, key = '', tokens = [] ):
         
         ret = []
-        
+                
         for x in self.rules[ key ]:
         
             # {Mustexist: .+} feature test
