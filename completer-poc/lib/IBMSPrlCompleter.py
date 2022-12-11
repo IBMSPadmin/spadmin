@@ -128,7 +128,7 @@ class IBMSPrlCompleter:
 
         # Filter the sqlresults with the last word if possible
         for x in sqlresults:
-            if search( '^' + tokens[ -1 ], x, IGNORECASE ):
+            if search( '^' + escape( tokens[ -1 ] ), x, IGNORECASE ):
                 ret.append( x + ' ' )
 
         # return ret[ :int( globals.config.getconfiguration()['SPADMIN']['dynamic_readline_toprows'] ) ]
