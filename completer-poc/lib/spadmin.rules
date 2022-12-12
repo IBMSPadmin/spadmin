@@ -172,41 +172,42 @@ DEFine DEVclass \w+ (\w+=.*){1,} LBProtect= -> LBProtect=No{Mustexist: DEVType=L
 # DELete commands #
 ###################
 
-DELete -> STGpool
+DELete         -> STGpool
+DELete STGpool -> select stgpool_name from stgpools
 # =========================================================================================================================
 
 ##################
 # Query commands #
 ##################
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.17?topic=commands-query-filespace-query-one-more-file-spaces#r_cmd_filespace_query
-Query                                             -> FIlespace
-Query FIlespace                                   -> select node_name from nodes
-Query FIlespace [\w\*\-\.]+                       -> select filespace_name from filespaces where node_name like upper( '-2' )
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+           -> Format=
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+           -> NAMEType=
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+           -> CODEType=
+Query                                                                -> FIlespace
+Query FIlespace                                                      -> select node_name from nodes
+Query FIlespace [\w\*\-\.]+                                          -> select filespace_name from filespaces where node_name like upper( '-2' )
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+                        -> Format=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+                        -> NAMEType=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+                        -> CODEType=
 
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ Format=   -> Format=Standard
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ Format=   -> Format=Detailed
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ NAMEType= -> NAMEType=SERVER 
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ NAMEType= -> NAMEType=UNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ NAMEType= -> NAMEType=FSID
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ CODEType= -> CODEType=UNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ CODEType= -> CODEType=NONUNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ CODEType= -> CODEType=BOTH
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ Format=                -> Format=Standard
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ Format=                -> Format=Detailed
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=SERVER 
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=UNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=FSID
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=UNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=NONUNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=BOTH
 
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} -> Format=
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} -> NAMEType=
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} -> CODEType=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> Format=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> NAMEType=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> CODEType=
 #
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} Format= -> Format=Standard
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} Format= -> Format=Detailed
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} NAMEType= -> NAMEType=SERVER 
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} NAMEType= -> NAMEType=UNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} NAMEType= -> NAMEType=FSID
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} CODEType= -> CODEType=UNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} CODEType= -> CODEType=NONUNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\]+ (\w+=.*){1,} CODEType= -> CODEType=BOTH
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=   -> Format=Standard
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=   -> Format=Detailed
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=SERVER 
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=UNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=FSID
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=UNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=NONUNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=BOTH
 
 # https://www.ibm.com/docs/en/tsm/7.1.1?topic=commands-query-path-display-path-definition
 #2
@@ -380,9 +381,6 @@ Query Node [\w\*\-\.]+ (\w+=.*){1,} Format=        -> Format=Standard
 Query Node [\w\*\-\.]+ (\w+=.*){1,} Format=        -> Format=Detailed
 Query Node [\w\*\-\.]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LOcal
 Query Node [\w\*\-\.]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LDap
-
-
-
 
 Query             -> SEssion
 Query SEssion     -> select session_id from sessions
