@@ -10,6 +10,10 @@ $->DELete
 $->Query
 $->REMove
 $->SHow
+$->DECommission
+$->RECommission
+$->SETOPT
+#$->SET
 
 # Own commands:
 $ -> Exit
@@ -168,12 +172,67 @@ DEFine DEVclass \w+ (\w+=.*){1,} LBProtect= -> LBProtect=No{Mustexist: DEVType=L
 # DELete commands #
 ###################
 
-DELete -> STGpool
+DELete         -> STGpool
+DELete STGpool -> select stgpool_name from stgpools
 # =========================================================================================================================
 
 ##################
 # Query commands #
 ##################
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.17?topic=commands-query-filespace-query-one-more-file-spaces#r_cmd_filespace_query
+Query                                                                -> FIlespace
+Query FIlespace                                                      -> select node_name from nodes
+Query FIlespace [\w\*\-\.]+                                          -> select filespace_name from filespaces where node_name like upper( '-2' )
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+                        -> Format=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+                        -> NAMEType=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+                        -> CODEType=
+
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ Format=                -> Format=Standard
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ Format=                -> Format=Detailed
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=SERVER 
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=UNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=FSID
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=UNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=NONUNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=BOTH
+
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> Format=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> NAMEType=
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> CODEType=
+#
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=   -> Format=Standard
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=   -> Format=Detailed
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=SERVER 
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=UNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=FSID
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=UNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=NONUNIcode
+Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=BOTH
+
+# https://www.ibm.com/docs/en/tsm/7.1.1?topic=commands-query-path-display-path-definition
+#2
+Query                                       -> PATH
+#3
+Query PATH                                  -> select SERVER_NAME from status union (select SERVER_NAME from servers)
+#4
+Query PATH (.*)                             -> select LIBRARY_NAME from libraries union (select DRIVE_NAME from drives)
+#5
+Query PATH (.*) (.*)                        -> SRCType=
+Query PATH (.*) (.*)                        -> DESTType=
+Query PATH (.*) (.*)                        -> Format=
+#6
+Query PATH (.*) (.*) SRCType=               -> SRCType=ANY
+Query PATH (.*) (.*) SRCType=               -> SRCType=DATAMover
+Query PATH (.*) (.*) SRCType=               -> SRCType=SERVer
+Query PATH (.*) (.*) DESTType=              -> DESTType=ANY
+Query PATH (.*) (.*) DESTType=              -> DESTType=DRIVE
+Query PATH (.*) (.*) DESTType=              -> DESTType=LIBRary
+Query PATH (.*) (.*) Format=                -> Format=Standard
+Query PATH (.*) (.*) Format=                -> Format=Detailed
+#7
+#Query PATH (.*) (.*) DESTType=DRIVE              -> LIBRary=
+#Query PATH (.*) (.*) DESTType=DRIVE LIBRary=             ->  select LIBRARY_NAME from libraries
+
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-actlog-query-activity-log
 Query                         -> ACtlog
      
@@ -240,19 +299,6 @@ Query ACtlog (\w+=.*) (\w+=.*){1,} -> SESsnum={Mustexist: ORiginator=CLient}
 # 
 Query ACtlog (\w+=.*) (\w+=.*){1,} DOmainname= -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}{Mustexist: ORiginator=CLient}
 
-
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINDate|begindat|begindabegind)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(BEGINTime|begintim|beginti|begint)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ENDDate|enddat|endda|endd)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ENDTime|endtim|endti|endt)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(Search|searc|sear|sea|se|s)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(NODEname|nodenam|nodena|noden|node)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(ORiginator|originato|originat|origina|origin|origi|orig|ori|or)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(OWNERname|ownernam|ownerna|ownern|owner)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SCHedname|schednam|schedna|schedn|sched|sche|sch)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(DOmainname|domainnam|domainna|domainn|domain|domai|doma|dom|do)=
-#^(Query|quer|que|qu|q)\s+(ACtlog|actlo|actl|act|ac)->(SESsnum|sessnu|sessn|sess|ses)=
-
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-license-display-license-information
 Query -> LICense
 # =========================================================================================================================
@@ -271,69 +317,70 @@ Query Node Type=                   -> Type=Client
 Query Node Type=                   -> Type=NAS
 Query Node Type=                   -> Type=Server
 Query Node Type=                   -> Type=Any 
+Query Node Type=                   -> Type=OBJECTClient
+Query Node Type=                   -> Type=OSSMClient
 Query Node DOmain=                 -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
 Query Node Format=                 -> Format=Standard
 Query Node Format=                 -> Format=Detailed
 Query Node AUTHentication=         -> AUTHentication=LOcal
 Query Node AUTHentication=         -> AUTHentication=LDap
 
-Query Node [\w\*]+                 -> Type=
-Query Node [\w\*]+                 -> DOmain=
-Query Node [\w\*]+                 -> Format=
-Query Node [\w\*]+                 -> AUTHentication=
-Query Node [\w\*]+ Type=           -> Type=Client
-Query Node [\w\*]+ Type=           -> Type=NAS
-Query Node [\w\*]+ Type=           -> Type=Server
-Query Node [\w\*]+ Type=           -> Type=Any
-Query Node [\w\*]+ DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
-Query Node [\w\*]+ Format=         -> Format=Standard
-Query Node [\w\*]+ Format=         -> Format=Detailed
-Query Node [\w\*]+ AUTHentication= -> AUTHentication=LOcal
-Query Node [\w\*]+ AUTHentication= -> AUTHentication=LDap
-
-#Query Node [\w\*=\s]{1,} Type= -> Type=Client
-#Query Node [\w\*=\s]{1,} Type= -> Type=NAS
-#Query Node [\w\*=\s]{1,} Type= -> Type=Server
-#Query Node [\w\*=\s]{1,} Type= -> Type=Any
-#Query Node [\w\*=\s]{1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
-#Query Node [\w\*=\s]{1,} Format= -> Format=Standard
-#Query Node [\w\*=\s]{1,} Format= -> Format=Detailed
-#Query Node [\w\*=\s]{1,} AUTHentication= -> AUTHentication=LOcal
-#Query Node [\w\*=\s]{1,} AUTHentication= -> AUTHentication=LDap
+Query Node [\w\*\-\.]+                 -> Type=
+Query Node [\w\*\-\.]+                 -> DOmain=
+Query Node [\w\*\-\.]+                 -> Format=
+Query Node [\w\*\-\.]+                 -> AUTHentication=
+Query Node [\w\*\-\.]+ Type=           -> Type=Client
+Query Node [\w\*\-\.]+ Type=           -> Type=NAS
+Query Node [\w\*\-\.]+ Type=           -> Type=Server
+Query Node [\w\*\-\.]+ Type=           -> Type=Any
+Query Node [\w\*\-\.]+ Type=           -> Type=OBJECTClient
+Query Node [\w\*\-\.]+ Type=           -> Type=OSSMClient
+Query Node [\w\*\-\.]+ DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node [\w\*\-\.]+ Format=         -> Format=Standard
+Query Node [\w\*\-\.]+ Format=         -> Format=Detailed
+Query Node [\w\*\-\.]+ AUTHentication= -> AUTHentication=LOcal
+Query Node [\w\*\-\.]+ AUTHentication= -> AUTHentication=LDap
 
 Query Node (\w+=\w*\s*){1,} Type= -> Type=Client
 Query Node (\w+=\w*\s*){1,} Type= -> Type=NAS
 Query Node (\w+=\w*\s*){1,} Type= -> Type=Server
 Query Node (\w+=\w*\s*){1,} Type= -> Type=Any
+Query Node (\w+=\w*\s*){1,} Type= -> Type=OBJECTClient
+Query Node (\w+=\w*\s*){1,} Type= -> Type=OSSMClient
 Query Node (\w+=\w*\s*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
 Query Node (\w+=\w*\s*){1,} Format= -> Format=Standard
 Query Node (\w+=\w*\s*){1,} Format= -> Format=Detailed
 Query Node (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LOcal
 Query Node (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LDap
 
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=Client
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=NAS
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=Server
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Type=           -> Type=Any
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Format=         -> Format=Standard
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} Format=         -> Format=Detailed
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LOcal
-#Query Node [\w\*]+ (\w+=\w*\s*){1,} AUTHentication= -> AUTHentication=LDap
-
-Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Client
-Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=NAS
-Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Server
-Query Node [\w\*]*\s*(\w+=\w*\s*)* Type=           -> Type=Any
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* Type=           -> Type=Client
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* Type=           -> Type=NAS
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* Type=           -> Type=Server
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* Type=           -> Type=Any
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* Type=           -> Type=OBJECTClient
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* Type=           -> Type=OSSMClient
 Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
-Query Node [\w\*]*\s*(\w+=\w*\s*)* Format=         -> Format=Standard
-Query Node [\w\*]*\s*(\w+=\w*\s*)* Format=         -> Format=Detailed
-Query Node [\w\*]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LOcal
-Query Node [\w\*]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LDap
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* Format=         -> Format=Standard
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* Format=         -> Format=Detailed
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LOcal
+Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LDap
 
 # de ez már az 5. szint
-#Query Node \w+ (\w+=\w*\s+){1,} -> select concat( '%PREFIX%', domain_name) from domains {Prefix: DOmain=}
-#Query Node \w+ (\w+=\w*\s+){1,} -> DOmainx=
+Query Node [\w\*\-\.]+ (\w+=.*){1,}         -> Type=
+Query Node [\w\*\-\.]+ (\w+=.*){1,}         -> DOmain=
+Query Node [\w\*\-\.]+ (\w+=.*){1,}         -> Format=
+Query Node [\w\*\-\.]+ (\w+=.*){1,}         -> AUTHentication=
+Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=Client
+Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=NAS
+Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=Server
+Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=Any
+Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=OBJECTClient
+Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=OSSMClient
+Query Node [\w\*\-\.]+ (\w+=.*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node [\w\*\-\.]+ (\w+=.*){1,} Format=        -> Format=Standard
+Query Node [\w\*\-\.]+ (\w+=.*){1,} Format=        -> Format=Detailed
+Query Node [\w\*\-\.]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LOcal
+Query Node [\w\*\-\.]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LDap
 
 Query             -> SEssion
 Query SEssion     -> select session_id from sessions
@@ -390,6 +437,9 @@ Query PRocess \d+ -> STATus=
 Query PRocess \d+ (\w+=.*){1,} -> DESCription=
 Query PRocess \d+ (\w+=.*){1,} -> STATus=
 
+Query           ->  OPTion
+Query OPTion    ->  '*'
+
 ##################
 # REMove command #
 ##################
@@ -404,4 +454,177 @@ SHow -> TIME
 SHow       -> SLOTS
 SHow SLOTS -> select library_name from libraries
 
+##################
+# Other commands #
+##################
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-decommission-node-decommission-application-system#r_cmd_node_decommission
+DECommission                    -> Node
+DECommission Node               -> select node_name from nodes
+DECommission Node [\w\*\-\.]+          -> Wait=
+DECommission Node [\w\*\-\.]+ Wait=    -> Wait=Yes
+DECommission Node [\w\*\-\.]+ Wait=    -> Wait=No
+
+DECommission                               -> VM
+DECommission VM                            -> select distinct(VM_OWNER) from TSMGUI_ALLCLI_GRID where VM_OWNER <> ''
+DECommission VM [\w\*\-\.]+                    -> select NAME from TSMGUI_ALLCLI_GRID where VM_OWNER=upper( '-2' )
+DECommission VM [\w\*\-\.]+ [\w\*\-\.]+            -> Wait=
+DECommission VM [\w\*\-\.]+ [\w\*\-\.]+            -> NAMEType=
+DECommission VM [\w\*\-\.]+ [\w\*\-\.]+ NAMEType=  -> NAMEType=FSID
+DECommission VM [\w\*\-\.]+ [\w\*\-\.]+ Wait=      -> Wait=Yes
+DECommission VM [\w\*\-\.]+ [\w\*\-\.]+ Wait=      -> Wait=No
+
+RECommission                    -> Node
+RECommission Node               -> select node_name from nodes
+
+RECommission                            -> VM
+RECommission VM                         -> select distinct(VM_OWNER) from TSMGUI_ALLCLI_GRID where VM_OWNER <> ''
+RECommission VM (.*)                    -> select NAME from TSMGUI_ALLCLI_GRID
+RECommission VM (.*) (.*)               -> NAMEType=
+RECommission VM (.*) (.*) NAMEType=     -> NAMEType=FSID
 ###############################################################
+
+SETOPT 		->	 3494SHARED
+SETOPT 		->	 ACSACCESSID
+SETOPT 		->	 ACSLOCKDRIVE
+SETOPT 		->	 ACSQUICKINIT
+SETOPT 		->	 ACSTIMEOUTX
+SETOPT 		->	 ACTIVELOGDIRECTORY
+SETOPT 		->	 ACTIVELOGSIZE
+SETOPT 		->	 ADMINCOMMTIMEOUT
+SETOPT 		->	 ADMINIDLETIMEOUT
+SETOPT 		->	 ADMINONCLIENTPORT
+SETOPT 		->	 ALIASHALT
+SETOPT 		->	 ALLOWDESAUTH
+SETOPT 		->	 ALLOWREORGINDEX
+SETOPT 		->	 ALLOWREORGTABLE
+SETOPT 		->	 ARCHFAILOVERLOGDIRECTORY
+SETOPT 		->	 ARCHLOGCOMPRESS
+SETOPT 		->	 ARCHLOGDIRECTORY
+SETOPT 		->	 ARCHLOGUSEDTHRESHOLD
+SETOPT 		->	 ASSISTVCRRECOVERY
+SETOPT 		->	 AUDITSTORAGE
+SETOPT 		->	 BACKUPINITIATIONROOT
+SETOPT 		->	 CHECKTAPEPOS
+SETOPT 		->	 CLIENTDEDUPTXNLIMIT
+SETOPT 		->	 CLIENTDEPLOYCATALOGURL
+SETOPT 		->	 CLIENTDEPLOYUSELOCALCATALOG
+SETOPT 		->	 CLOUDRECLAMATIONDELAY
+SETOPT 		->	 CLOUDREADCACHERETENTIONTIME
+SETOPT 		->	 CLOUDREADCACHEMAXUSAGE
+SETOPT 		->	 COMMMETHOD
+SETOPT 		->	 COMMTIMEOUT
+SETOPT 		->	 CONTAINERRESOURCETIMEOUT
+SETOPT 		->	 DBDIAGLOGSIZE
+SETOPT 		->	 DBDIAGPATHFSTHRESHOLD
+SETOPT 		->	 DBMEMPERCENT
+SETOPT 		->	 DBMTCPPORT
+SETOPT 		->	 DEDUPREQUIRESBACKUP
+SETOPT 		->	 DEDUPTIER2FILESIZE
+SETOPT 		->	 DEDUPTIER3FILESIZE
+SETOPT 		->	 DEVCONFIG
+SETOPT 		->	 DISABLEREORGTABLE
+SETOPT 		->	 DISABLESCHEDS
+SETOPT 		->	 DISPLAYLFINFO
+SETOPT 		->	 DNSLOOKUP
+SETOPT 		->	 DRIVEACQUIRERETRY
+SETOPT 		->	 ENABLENASDEDUP
+SETOPT 		->	 EVENTSERVER
+SETOPT 		->	 EXPINTERVAL
+SETOPT 		->	 EXPQUIET
+SETOPT 		->	 FASPBEGPORT
+SETOPT 		->	 FASPENDPORT
+SETOPT 		->	 FASPTARGETRATE
+SETOPT 		->	 FFDCLOGLEVEL
+SETOPT 		->	 FFDCLOGNAME
+SETOPT 		->	 FFDCMAXLOGSIZE
+SETOPT 		->	 FFDCNUMLOGS
+SETOPT 		->	 FILEEXIT
+SETOPT 		->	 FILETEXTEXIT
+SETOPT 		->	 FIPSMODE
+SETOPT 		->	 FSUSEDTHRESHOLD
+SETOPT 		->	 IDLETIMEOUT
+SETOPT 		->	 JOBRETENTION
+SETOPT 		->	 KEEPALIVE
+SETOPT 		->	 KEEPALIVETIME
+SETOPT 		->	 KEEPALIVEINTERVAL
+SETOPT 		->	 LANGUAGE
+SETOPT 		->	 LDAPCACHEDURATION
+SETOPT 		->	 LDAPURL
+SETOPT 		->	 MAXSESSIONS
+SETOPT 		->	 MESSAGEFORMAT
+SETOPT 		->	 MIRRORLOGDIRECTORY
+SETOPT 		->	 MOVEBATCHSIZE
+SETOPT 		->	 MOVESIZETHRESH
+SETOPT 		->	 MSGINTERVAL
+SETOPT 		->	 NDMPCONNECTIONTIMEOUT
+SETOPT 		->	 NDMPCONTROLPORT
+SETOPT 		->	 NDMPENABLEKEEPALIVE
+SETOPT 		->	 NDMPKEEPIDLEMINUTES
+SETOPT 		->	 NDMPPORTRANGE
+SETOPT 		->	 NDMPPREFDATAINTERFACE
+SETOPT 		->	 NOPREEMPT
+SETOPT 		->	 NORETRIEVEDATE
+SETOPT 		->	 NUMOPENVOLSALLOWED
+SETOPT 		->	 PREALLOCREDUCTIONRATE
+SETOPT 		->	 PROTRECONCILEBATCHCOUNT
+SETOPT 		->	 PUSHSTATUS
+SETOPT 		->	 QUERYAUTH
+SETOPT 		->	 RECLAIMDELAY
+SETOPT 		->	 RECLAIMPERIOD
+SETOPT 		->	 REORGBEGINTIME
+SETOPT 		->	 REORGDURATION
+SETOPT 		->	 REPORTRETRIEVE
+SETOPT 		->	 REPLBATCHSIZE
+SETOPT 		->	 REPLSIZETHRESH
+SETOPT 		->	 REQSYSAUTHOUTFILE
+SETOPT 		->	 RESOURCETIMEOUT
+SETOPT 		->	 RESTHTTPSPORT
+SETOPT 		->	 RESTOREINTERVAL
+SETOPT 		->	 RETENTIONEXTENSION
+SETOPT 		->	 SANDISCOVERY
+SETOPT 		->	 SANDISCOVERYTIMEOUT
+SETOPT 		->	 SANREFRESHTIME
+SETOPT 		->	 SEARCHMPQUEUE
+SETOPT 		->	 SERVERDEDUPTXNLIMIT
+SETOPT 		->	 SHMPORT
+SETOPT 		->	 SHREDDING
+SETOPT 		->	 SSLFIPSMODE
+SETOPT 		->	 SSLINITTIMEOUT
+SETOPT 		->	 SSLTCPADMINPORT
+SETOPT 		->	 SSLTCPPORT
+SETOPT 		->	 TCPADMINPORT
+SETOPT 		->	 TCPBUFSIZE
+SETOPT 		->	 TCPNODELAY
+SETOPT 		->	 TCPPORT
+SETOPT 		->	 TCPWINDOWSIZE
+SETOPT 		->	 TECBEGINEVENTLOGGING
+SETOPT 		->	 TECHOST
+SETOPT 		->	 TECPORT
+SETOPT 		->	 TECUTF8EVENT
+SETOPT 		->	 THROUGHPUTDATATHRESHOLD
+SETOPT 		->	 THROUGHPUTTIMETHRESHOLD
+SETOPT 		->	 TXNGROUPMAX
+SETOPT 		->	 UNIQUETDPTECEVENTS
+SETOPT 		->	 UNIQUETECEVENTS
+SETOPT 		->	 USEREXIT
+SETOPT 		->	 VERBCHECK
+SETOPT 		->	 VOLUMEHISTORY
+
+###############################################################
+Set             ->  ACCounting
+Set ACCounting  ->  On
+Set ACCounting  ->  Off
+Set                                     ->  ACTlogretention
+Set ACTlogretention                     -> number
+Set ACTlogretention (\d.*)              -> Mgmtstyle=
+Set ACTlogretention (\d.*) Mgmtstyle=   -> Mgmtstyle=Date
+Set ACTlogretention (\d.*) Mgmtstyle=   -> Mgmtstyle=Size
+Set                     ->  ALERTACtiveduration
+Set ALERTACtiveduration ->  number_mins
+Set                     ->  ALERTCLosedduration
+Set ALERTCLosedduration ->  number_mins
+Set             ->  ALERTEMail
+Set ALERTEMail  ->  On
+Set ALERTEMail  ->  Off
+Set                     ->  ALERTEMAILFRomaddr
+Set ALERTEMAILFRomaddr  ->  email_address
