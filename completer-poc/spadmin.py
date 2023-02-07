@@ -55,7 +55,7 @@ import argparse
 from time import time
 from termcolor import colored
 from pprint import pformat
-from re import search, IGNORECASE
+from re import search, IGNORECASE, split
 
 columnar = lib.columnar.Columnar()
 prgstart = time()
@@ -205,9 +205,14 @@ class Spadmin(object):
 
                 # No own command, no exit then let dsmadmc run the command!
                 globals.logger.info('Pass it on to dsmadmc: [' + command + '].')
-                for textline in globals.tsm.send_command_normal(command):
+                data = []
+                for line in globals.tsm.send_command_normal(command):
+                    data.append(split(r'\n', line))
+
+                # print(data)
+                for textline in lib.columnar.invgrep(lib.columnar.grep(data)):
                     if textline != '':
-                        print(textline)
+                        print(textline[0])
                 line = ''
                 globals.extras = {}
                 # not nice, but this is now what we have
