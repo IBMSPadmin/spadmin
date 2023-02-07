@@ -919,13 +919,20 @@ class ShowDrives(SpadminCommand):
 
         data = []
         for i, row in enumerate(drives):
-            row[ 6 ] = colored( row[ 6 ], 'green', attrs=[ 'bold' ] )
+            # row[ 6 ] = colored( row[ 6 ], 'green', attrs=[ 'bold' ] )
             data.append([i+1, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
+            
+        globals.lastdsmcommandresults = data
+            
+        ## for coloring purposes. (dismount)
+        data2 = []
+        for i, row in enumerate(drives):
+            row[ 6 ] = colored( row[ 6 ], 'green', attrs=[ 'bold' ] )
+            data2.append([i+1, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
 
-        table = columnar(data,
+        table = columnar(data2,
             headers=['#', 'Library', 'Drive', 'Online', 'Element', 'State', 'Serial', 'Volume', 'Allocated'],
             justify=['r', 'l', 'l', 'l', 'c', 'l', 'l', 'l', 'l'])
-        globals.lastdsmcommandresults = data
         return table
 
 define_command(ShowDrives())
