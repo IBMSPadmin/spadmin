@@ -699,7 +699,7 @@ class ShowMount(SpadminCommand):
             if search("ANR83(29|30|31|32|33)I.*", l[0]):
                 for vol, rw_ro, drive, path, status in re.findall(
                         re.compile(r'.* volume (.*) is mounted (.*) in drive (.*) \((.*)\), status: (.*)..*'), l[0]):
-                    vol = colored( vol, 'green', attrs=[ 'bold' ] )
+                    # vol = colored( vol, 'green', attrs=[ 'bold' ] )
                     data2.append([index, vol, rw_ro, drive, path, status])
                     index += 1
             elif search("ANR8379I", l[0]):
@@ -708,9 +708,19 @@ class ShowMount(SpadminCommand):
                     index += 1
 
         globals.lastdsmcommandresults = data2
-        table = columnar(data2,
+        index = 1
+
+        ## for coloring purposes. (dismount)
+        data3 = []
+        for index, vol, rw_ro, drive, path, status in data2:
+            vol = colored( vol, 'green', attrs=[ 'bold' ] )
+            data3.append([index, vol, rw_ro, drive, path, status])
+            index += 1
+
+        table = columnar(data3,
             headers=['#', 'Volume', 'Access', 'Drive', 'Path', 'Status'],
             justify=['r', 'l', 'l', 'l', 'l', 'l',])
+
         return table
 
 define_command(ShowMount())
