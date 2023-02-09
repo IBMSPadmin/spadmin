@@ -11,6 +11,7 @@ $->Query
 $->REMove
 $->SHow
 $->DECommission
+$->DISMount
 $->RECommission
 $->SETOPT
 #$->SET

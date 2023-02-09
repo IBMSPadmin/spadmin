@@ -57,8 +57,7 @@ class SpadminCommand:
         globals.logger.debug("Last command type set to: " + globals.lastdsmcommandtype + ".")
 
 
-def dynruleinjector( command ):
-            
+def dynruleinjector( command ): # it works only for commands which longer than 2 words!! on 1 word command needs to be added to the rules file.
             commandpartcollected = ''
             for commandpart in command.split()[ :-1 ]:
                 commandpartcollected += commandpart
