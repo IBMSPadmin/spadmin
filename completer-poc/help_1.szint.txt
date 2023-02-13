@@ -1,0 +1,1050 @@
+3.0 Administrative commands
+ 3.1 ACCEPT DATE (Accepts the current system date)
+ 3.2 ACTIVATE POLICYSET (Activate a new policy set)
+ 3.3 APPROVE PENDINGCMD (Approve commands that are pending
+ approval)
+ 3.4 ASSIGN DEFMGMTCLASS (Assign a default management class)
+ 3.5 AUDIT
+ 3.5.1 AUDIT CONTAINER
+ 3.5.1.1 AUDIT CONTAINER (Verify the consistency of database
+ information for a cloud container)
+ 3.5.1.2 AUDIT CONTAINER (Verify the consistency of database
+ information for a directory container)
+ 3.5.2 AUDIT LDAPDIRECTORY (Audit an LDAP directory server)
+ 3.5.3 AUDIT LIBRARY (Audit volume inventories in an automated
+ library)
+ 3.5.4 AUDIT LIBVOLUME (Verify database information for a tape
+ volume)
+ 3.5.5 AUDIT LICENSES (Audit server storage usage)
+ 3.5.6 AUDIT VOLUME (Verify database information for a storage
+ pool volume)
+ 3.6 BACKUP
+ 3.6.1 BACKUP DB (Back up the database)
+ 3.6.2 BACKUP DEVCONFIG (Create backup copies of device
+ configuration information)
+ 3.6.3 BACKUP NODE (Back up a NAS node)
+ 3.6.4 BACKUP STGPOOL (Back up primary storage pool data to a
+ copy storage pool)
+ 3.6.5 BACKUP VOLHISTORY (Save sequential volume history
+ information)
+ 3.7 BEGIN EVENTLOGGING (Begin logging events)
+ 3.8 CANCEL
+ 3.8.1 CANCEL EXPIRATION (Cancel an expiration process)
+ 3.8.2 CANCEL EXPORT (Delete a suspended export operation)
+ 3.8.3 CANCEL PROCESS (Cancel an administrative process)
+ 3.8.4 CANCEL REPLICATION (Cancel node replication processes)
+ 3.8.5 CANCEL REQUEST (Cancel one or more mount requests)
+ 3.8.6 CANCEL RESTORE (Cancel a restartable restore session)
+ 3.8.7 CANCEL SESSION (Cancel one or more client sessions)
+ 3.9 CHECKIN LIBVOLUME (Check a storage volume into a library)
+ 3.10 CHECKOUT LIBVOLUME (Check a storage volume out of a
+ library)
+ 3.11 CLEAN DRIVE (Clean a drive)
+ 3.12 COMMIT (Control committing of commands in a macro)
+ 3.13 CONVERT STGPOOL (Convert a storage pool to a container
+ storage pool)
+ 3.14 COPY
+ 3.14.1 COPY ACTIVEDATA (Copy active backup data from a
+ primary storage pool to an active-data pool)
+ 3.14.2 COPY CLOPTSET (Copy a client option set)
+ 3.14.3 COPY DOMAIN (Copy a policy domain)
+ 3.14.4 COPY MGMTCLASS (Copy a management class)
+ 3.14.5 COPY POLICYSET (Copy a policy set)
+ 3.14.6 COPY PROFILE (Copy a profile)
+ 3.14.7 COPY SCHEDULE (Copy a client or an administrative
+ command schedule)
+ 3.14.7.1 COPY SCHEDULE (Create a copy of a schedule for
+ client operations)
+ 3.14.7.2 COPY SCHEDULE (Create a copy of a schedule for
+ administrative operations)
+ 3.14.8 COPY SCRIPT (Copy an IBM Spectrum Protect script)
+ 3.14.9 COPY SERVERGROUP (Copy a server group)
+ 3.15 DEACTIVATE DATA (Deactivate data for a client node)
+ 3.16 DECOMMISSION
+ 3.16.1 DECOMMISSION NODE (Decommission an application or
+ system)
+ 3.16.2 DECOMMISSION VM (Decommission a virtual machine)
+ 3.17 DEFINE
+ 3.17.1 DEFINE ALERTTRIGGER (Define an alert trigger)
+ 3.17.2 DEFINE ASSOCIATION (Associate client nodes with a
+ schedule)
+ 3.17.3 DEFINE BACKUPSET (Define a backup set)
+ 3.17.4 DEFINE CLIENTACTION (Define a one-time client action)
+ 3.17.5 DEFINE CLIENTOPT (Define an option to an option set)
+ 3.17.6 DEFINE CLOPTSET (Define a client option set name)
+ 3.17.7 DEFINE COLLOCGROUP (Define a collocation group)
+ 3.17.8 DEFINE COLLOCMEMBER (Define collocation group member)
+ 3.17.9 DEFINE CONNECTION (Define a cloud connection)
+ 3.17.10 DEFINE COPYGROUP (Define a copy group)
+ 3.17.10.1 DEFINE COPYGROUP (Define a backup copy group)
+ 3.17.10.2 DEFINE COPYGROUP (Define an archive copy group)
+ 3.17.11 DEFINE DATAMOVER (Define a data mover)
+ 3.17.12 DEFINE DEVCLASS (Define a device class)
+ 3.17.12.1 DEFINE DEVCLASS (Define a 3590 device class)
+ 3.17.12.2 DEFINE DEVCLASS (Define a 3592 device class)
+ 3.17.12.3 DEFINE DEVCLASS (Define a 4MM device class)
+ 3.17.12.4 DEFINE DEVCLASS (Define an 8MM device class)
+ 3.17.12.5 DEFINE DEVCLASS (Define a CENTERA device class)
+ 3.17.12.6 DEFINE DEVCLASS (Define a CLOUD device class)
+ 3.17.12.7 DEFINE DEVCLASS (Define a DLT device class)
+ 3.17.12.8 DEFINE DEVCLASS (Define an ECARTRIDGE device
+ class)
+ 3.17.12.9 DEFINE DEVCLASS (Define a FILE device class)
+ 3.17.12.10 DEFINE DEVCLASS (Define an LTO device class)
+ 3.17.12.11 DEFINE DEVCLASS (Define a NAS device class)
+ 3.17.12.12 DEFINE DEVCLASS (Define a REMOVABLEFILE device
+ class)
+ 3.17.12.13 DEFINE DEVCLASS (Define a SERVER device class)
+ 3.17.12.14 DEFINE DEVCLASS (Define a VOLSAFE device class)
+ 3.17.13 DEFINE DEVCLASS - z/OS media server (Define device
+ class for z/OS media server)
+ 3.17.13.1 DEFINE DEVCLASS (Define a 3590 device class for
+ z/OS media server)
+ 3.17.13.2 DEFINE DEVCLASS (Define a 3592 device class for
+ z/OS media server)
+ 3.17.13.3 DEFINE DEVCLASS (Define an ECARTRIDGE device
+ class for z/OS media server)
+ 3.17.13.4 DEFINE DEVCLASS (Define a FILE device class for
+ z/OS media server)
+ 3.17.14 DEFINE DOMAIN (Define a new policy domain)
+ 3.17.15 DEFINE DRIVE (Define a drive to a library)
+ 3.17.16 DEFINE EVENTSERVER (Define a server as the event
+ server)
+ 3.17.17 DEFINE GRPMEMBER (Add a server to a server group)
+ 3.17.18 DEFINE HOLD (Define a hold for retention set data)
+ 3.17.19 DEFINE LIBRARY (Define a library)
+ 3.17.19.1 DEFINE LIBRARY (Define a 349X library)
+ 3.17.19.2 DEFINE LIBRARY (Define an ACSLS library)
+ 3.17.19.3 DEFINE LIBRARY (Define an External library)
+ 3.17.19.4 DEFINE LIBRARY (Define a FILE library)
+ 3.17.19.5 DEFINE LIBRARY (Define a manual library)
+ 3.17.19.6 DEFINE LIBRARY (Define a SCSI library)
+ 3.17.19.7 DEFINE LIBRARY (Define a shared library)
+ 3.17.19.8 DEFINE LIBRARY (Define a VTL library)
+ 3.17.19.9 DEFINE LIBRARY (Define a ZOSMEDIA library type)
+ 3.17.20 DEFINE MACHINE (Define machine information for
+ disaster recovery)
+ 3.17.21 DEFINE MACHNODEASSOCIATION (Associate a node with a
+ machine)
+ 3.17.22 DEFINE MGMTCLASS (Define a management class)
+ 3.17.23 DEFINE NODEGROUP (Define a node group)
+ 3.17.24 DEFINE NODEGROUPMEMBER (Define node group member)
+ 3.17.25 DEFINE OBJECTDOMAIN (Define a policy domain for
+ object clients)
+ 3.17.26 DEFINE PATH (Define a path)
+ 3.17.26.1 DEFINE PATH (Define a path when the destination
+ is a drive)
+ 3.17.26.2 DEFINE PATH (Define a path when the destination
+ is a library)
+ 3.17.26.3 DEFINE PATH (Define a path when the destination
+ is a ZOSMEDIA library)
+ 3.17.27 DEFINE POLICYSET (Define a policy set)
+ 3.17.28 DEFINE PROFASSOCIATION (Define a profile association)
+ 3.17.29 DEFINE PROFILE (Define a profile)
+ 3.17.30 DEFINE RECMEDMACHASSOCIATION (Associate recovery
+ media with a machine)
+ 3.17.31 DEFINE RECOVERYMEDIA (Define recovery media)
+ 3.17.32 DEFINE RETRULE (Define a retention rule)
+ 3.17.33 DEFINE SCHEDULE (Define a client or an administrative
+ command schedule)
+ 3.17.33.1 DEFINE SCHEDULE (Define a client schedule)
+ 3.17.33.2 DEFINE SCHEDULE (Define a schedule for an
+ administrative command)
+ 3.17.34 DEFINE SCRATCHPADENTRY (Define a scratch pad entry)
+ 3.17.35 DEFINE SCRIPT (Define an IBM Spectrum Protect script)
+ 3.17.36 DEFINE SERVER (Define a server for server-to-server
+ communications)
+ 3.17.37 DEFINE SERVERGROUP (Define a server group)
+ 3.17.38 DEFINE SPACETRIGGER (Define the space trigger)
+ 3.17.39 DEFINE STATUSTHRESHOLD (Define a status monitoring
+ threshold)
+ 3.17.40 DEFINE STGPOOL (Define a storage pool)
+ 3.17.40.1 DEFINE STGPOOL (Define a cloud-container storage
+ pool)
+ 3.17.40.2 DEFINE STGPOOL (Define a directory-container
+ storage pool)
+ 3.17.40.3 DEFINE STGPOOL (Define a container-copy storage
+ pool)
+ 3.17.40.4 DEFINE STGPOOL (Define a primary storage pool
+ assigned to random access devices)
+ 3.17.40.5 DEFINE STGPOOL (Define a primary storage pool
+ assigned to sequential access devices)
+ 3.17.40.6 DEFINE STGPOOL (Define a primary storage pool for
+ copying data to tape)
+ 3.17.40.7 DEFINE STGPOOL (Define a copy storage pool
+ assigned to sequential access devices)
+ 3.17.40.8 DEFINE STGPOOL (Define an active-data pool
+ assigned to sequential-access devices)
+ 3.17.40.9 DEFINE STGPOOL (Define a retention storage pool)
+ 3.17.41 DEFINE STGPOOLDIRECTORY (Define a storage pool
+ directory)
+ 3.17.42 DEFINE STGRULE (Define a storage rule)
+ 3.17.42.1 DEFINE STGRULE (Define a rule for auditing
+ storage pools)
+ 3.17.42.2 DEFINE STGRULE (Define a storage rule for copying
+ data)
+ 3.17.42.3 DEFINE STGRULE (Define a rule for generating data
+ deduplication statistics)
+ 3.17.42.4 DEFINE STGRULE (Define a rule for reclaiming
+ cloud containers)
+ 3.17.42.5 DEFINE STGRULE (Define a storage rule for
+ replicating data)
+ 3.17.42.6 DEFINE STGRULE (Define a storage rule for
+ tiering)
+ 3.17.43 DEFINE SUBRULE (Define a subrule)
+ 3.17.43.1 DEFINE SUBRULE (Define an exception to a copy
+ storage rule)
+ 3.17.43.2 DEFINE SUBRULE (Define an exception to a
+ replication storage rule)
+ 3.17.43.3 DEFINE SUBRULE (Define an exception to a tiering
+ storage rule)
+ 3.17.44 DEFINE SUBSCRIPTION (Define a profile subscription)
+ 3.17.45 DEFINE VIRTUALFSMAPPING (Define a virtual file space
+ mapping)
+ 3.17.46 DEFINE VOLUME (Define a volume in a storage pool)
+ 3.18 DELETE
+ 3.18.1 DELETE ALERTTRIGGER (Remove a message from an alert
+ trigger)
+ 3.18.2 DELETE ASSOCIATION (Delete the node association to a
+ schedule)
+ 3.18.3 DELETE BACKUPSET (Delete a backup set)
+ 3.18.4 DELETE CLIENTOPT (Delete an option in an option set)
+ 3.18.5 DELETE CLOPTSET (Delete a client option set)
+ 3.18.6 DELETE COLLOCGROUP (Delete a collocation group)
+ 3.18.7 DELETE COLLOCMEMBER (Delete collocation group member)
+ 3.18.8 DELETE CONNECTION (Delete a cloud connection)
+ 3.18.9 DELETE COPYGROUP (Delete a backup or archive copy
+ group)
+ 3.18.10 DELETE DATAMOVER (Delete a data mover)
+ 3.18.11 DELETE DEDUPSTATS (Delete data deduplication
+ statistics)
+ 3.18.12 DELETE DEVCLASS (Delete a device class)
+ 3.18.13 DELETE DOMAIN (Delete a policy domain)
+ 3.18.14 DELETE DRIVE (Delete a drive from a library)
+ 3.18.15 DELETE EVENT (Delete event records)
+ 3.18.16 DELETE EVENTSERVER (Delete the definition of the
+ event server)
+ 3.18.17 DELETE FILESPACE (Delete client node data from the
+ server)
+ 3.18.18 DELETE GRPMEMBER (Delete a server from a server
+ group)
+ 3.18.19 DELETE LIBRARY (Delete a library)
+ 3.18.20 DELETE MACHINE (Delete machine information)
+ 3.18.21 DELETE MACHNODEASSOCIATION (Delete association
+ between a machine and a node)
+ 3.18.22 DELETE MGMTCLASS (Delete a management class)
+ 3.18.23 DELETE NODEGROUP (Delete a node group)
+ 3.18.24 DELETE NODEGROUPMEMBER (Delete node group member)
+ 3.18.25 DELETE PATH (Delete a path)
+ 3.18.26 DELETE POLICYSET (Delete a policy set)
+ 3.18.27 DELETE PROFASSOCIATION (Delete a profile association)
+ 3.18.28 DELETE PROFILE (Delete a profile)
+ 3.18.29 DELETE RECMEDMACHASSOCIATION (Delete recovery media
+ and machine association)
+ 3.18.30 DELETE RECOVERYMEDIA (Delete recovery media)
+ 3.18.31 DELETE RETRULE (Delete a retention rule)
+ 3.18.32 DELETE RETSET (Delete a retention set)
+ 3.18.33 DELETE SCHEDULE (Delete a client or an administrative
+ command schedule)
+ 3.18.33.1 DELETE SCHEDULE (Delete a client schedule)
+ 3.18.33.2 DELETE SCHEDULE (Delete an administrative
+ schedule)
+ 3.18.34 DELETE SCRATCHPADENTRY (Delete a scratch pad entry)
+ 3.18.35 DELETE SCRIPT (Delete command lines from a script or
+ delete the entire script)
+ 3.18.36 DELETE SERVER (Delete a server definition)
+ 3.18.37 DELETE SERVERGROUP (Delete a server group)
+ 3.18.38 DELETE SPACETRIGGER (Delete the storage pool space
+ triggers)
+ 3.18.39 DELETE STATUSTHRESHOLD (Delete a status monitoring
+ threshold)
+ 3.18.40 DELETE STGPOOL (Delete a storage pool)
+ 3.18.41 DELETE STGPOOLDIRECTORY (Deleting a storage pool
+ directory)
+ 3.18.42 DELETE STGRULE (Delete storage rules for storage
+ pools)
+ 3.18.43 DELETE SUBRULE (Delete a subrule)
+ 3.18.44 DELETE SUBSCRIBER (Delete subscriptions from a
+ configuration manager database)
+ 3.18.45 DELETE SUBSCRIPTION (Delete a profile subscription)
+ 3.18.46 DELETE VIRTUALFSMAPPING (Delete a virtual file space
+ mapping)
+ 3.18.47 DELETE VOLHISTORY (Delete sequential volume history
+ information)
+ 3.18.48 DELETE VOLUME (Delete a storage pool volume)
+ 3.19 DISABLE
+ 3.19.1 DISABLE EVENTS (Disable events for event logging)
+ 3.19.2 DISABLE REPLICATION (Prevent outbound replication
+ processing on a server)
+ 3.19.3 DISABLE SESSIONS (Prevent new sessions from accessing
+ IBM Spectrum Protect)
+ 3.20 DISMOUNT
+ 3.20.1 DISMOUNT VOLUME (Dismount a volume by volume name)
+ 3.21 DISPLAY OBJNAME (Display a full object name)
+ 3.22 ENABLE
+ 3.22.1 ENABLE EVENTS (Enable server or client events for
+ logging)
+ 3.22.2 ENABLE REPLICATION (Allow outbound replication
+ processing on a server)
+ 3.22.3 ENABLE SESSIONS (Resume user activity on the server)
+ 3.23 ENCRYPT STGPOOL (Encrypt data in a storage pool)
+ 3.24 END EVENTLOGGING (Stop logging events)
+ 3.25 EXPIRE INVENTORY (Manually start inventory expiration
+ processing)
+ 3.26 EXPORT
+ 3.26.1 EXPORT ADMIN (Export administrator information)
+ 3.26.1.1 EXPORT ADMIN (Export administrator definitions to
+ sequential media)
+ 3.26.1.2 EXPORT ADMIN (Export administrator information
+ directly to another server)
+ 3.26.2 EXPORT NODE (Export client node information)
+ 3.26.2.1 EXPORT NODE (Export node definitions to sequential
+ media)
+ 3.26.2.2 EXPORT NODE (Export node definitions or file data
+ directly to another server)
+ 3.26.3 EXPORT POLICY (Export policy information)
+ 3.26.3.1 EXPORT POLICY (Export policy information to
+ sequential media)
+ 3.26.3.2 EXPORT POLICY (Export a policy directly to another
+ server)
+ 3.26.4 EXPORT SERVER (Export server information)
+ 3.26.4.1 EXPORT SERVER (Export a server to sequential
+ media)
+ 3.26.4.2 EXPORT SERVER (Export server control information
+ and client file data to another server)
+ 3.27 EXTEND DBSPACE (Increase space for the database)
+ 3.28 GENERATE
+ 3.28.1 GENERATE BACKUPSET (Generate a backup set of
+ Backup-Archive Client data)
+ 3.28.2 GENERATE BACKUPSETTOC (Generate a table of contents
+ for a backup set)
+ 3.28.3 GENERATE DEDUPSTATS (Generate data deduplication
+ statistics)
+ 3.28.4 GENERATE SECRET (Generate a shared secret for
+ multifactor authentication)
+ 3.29 GRANT
+ 3.29.1 GRANT AUTHORITY (Add administrator authority)
+ 3.29.2 GRANT PROXYNODE (Grant proxy authority to a client
+ node)
+ 3.30 HALT (Shut down the server)
+ 3.31 HELP (Get help on commands and error messages)
+ 3.32 HOLD RETSET (Place a hold on a retention set)
+ 3.33 IDENTIFY DUPLICATES (Identify duplicate data in a storage
+ pool)
+ 3.34 IMPORT
+ 3.34.1 IMPORT ADMIN (Import administrator information)
+ 3.34.2 IMPORT NODE (Import client node information)
+ 3.34.3 IMPORT POLICY (Import policy information)
+ 3.34.4 IMPORT SERVER (Import server information)
+ 3.35 INSERT MACHINE (Insert machine characteristics information
+ or recovery instructions)
+ 3.36 INTERRUPT JOB (Interrupt a job for copying a retention set
+ to tape)
+ 3.37 ISSUE MESSAGE (Issue a message from a server script)
+ 3.38 LABEL LIBVOLUME (Label a library volume)
+ 3.39 LOAD DEFALERTTRIGGERS (Load the default set of alert
+ triggers)
+ 3.40 LOCK
+ 3.40.1 LOCK ADMIN (Lock out an administrator)
+ 3.40.2 LOCK NODE (Lock out a client node)
+ 3.40.3 LOCK PROFILE (Lock a profile)
+ 3.41 MACRO (Invoke a macro)
+ 3.42 MIGRATE STGPOOL (Migrate storage pool to next storage
+ pool)
+ 3.43 MOVE
+ 3.43.1 MOVE CONTAINER (Move a container)
+ 3.43.2 MOVE DATA (Move files on a storage pool volume)
+ 3.43.3 MOVE DRMEDIA (Move disaster recovery media offsite and
+ back onsite)
+ 3.43.4 MOVE GRPMEMBER (Move a server group member)
+ 3.43.5 MOVE MEDIA (Move sequential-access storage pool media)
+ 3.43.6 MOVE NODEDATA (Move data by node in a
+ sequential-access storage pool)
+ 3.43.6.1 MOVE NODEDATA (Move data in file spaces for one or
+ more nodes or a collocation group)
+ 3.43.6.2 MOVE NODEDATA (Move data from selected file spaces
+ of a single node)
+ 3.43.7 MOVE RETMEDIA (Track the onsite and offsite movement
+ of tape retention storage pool volumes)
+ 3.44 NOTIFY SUBSCRIBERS (Notify managed servers to update
+ profiles)
+ 3.45 PERFORM LIBACTION (Define or delete all drives and paths
+ for a library)
+ 3.46 PING SERVER (Test the connection between servers)
+ 3.47 PREPARE (Create a recovery plan file)
+ 3.48 PROTECT STGPOOL (Protect data that belongs to a storage
+ pool)
+ 3.49 QUERY
+ 3.49.1 QUERY ACTLOG (Query the activity log)
+ 3.49.2 QUERY ADMIN (Display administrator information)
+ 3.49.3 QUERY ALERTTRIGGER (Query the list of defined alert
+ triggers)
+ 3.49.4 QUERY ALERTSTATUS (Query the status of an alert)
+ 3.49.5 QUERY ASSOCIATION (Query client node associations with
+ a schedule)
+ 3.49.6 QUERY AUDITOCCUPANCY (Query client node storage
+ utilization)
+ 3.49.7 QUERY BACKUPSET (Query a backup set)
+ 3.49.8 QUERY BACKUPSETCONTENTS (Query contents of a backup
+ set)
+ 3.49.9 QUERY CLEANUP (Query the cleanup that is required in a
+ source storage pool)
+ 3.49.10 QUERY CLOPTSET (Query a client option set)
+ 3.49.11 QUERY CLOUDREADCACHE (Query a cloud read cache)
+ 3.49.12 QUERY COLLOCGROUP (Query a collocation group)
+ 3.49.13 QUERY CONNECTION (Query a cloud connection)
+ 3.49.14 QUERY CONTAINER (Query a container)
+ 3.49.15 QUERY CONTENT (Query the contents of a storage pool
+ volume)
+ 3.49.16 QUERY CONVERSION (Query conversion status of a
+ storage pool)
+ 3.49.17 QUERY COPYGROUP (Query copy groups)
+ 3.49.18 QUERY DAMAGED (Query damaged data in a
+ directory-container or cloud-container storage pool)
+ 3.49.19 QUERY DATAMOVER (Display data mover definitions)
+ 3.49.20 QUERY DB (Display database information)
+ 3.49.21 QUERY DBSPACE (Display database storage space)
+ 3.49.22 QUERY DEDUPSTATS (Query data deduplication
+ statistics)
+ 3.49.23 QUERY DEVCLASS (Display information on one or more
+ device classes)
+ 3.49.24 QUERY DIRSPACE (Query storage utilization of FILE
+ directories)
+ 3.49.25 QUERY DOMAIN (Query a policy domain)
+ 3.49.26 QUERY DRIVE (Query information about a drive)
+ 3.49.27 QUERY DRMEDIA (Query disaster recovery media)
+ 3.49.28 QUERY DRMSTATUS (Query disaster recovery manager
+ system parameters)
+ 3.49.29 QUERY ENABLED (Query enabled events)
+ 3.49.30 QUERY EVENT (Query scheduled and completed events)
+ 3.49.30.1 QUERY EVENT (Display client schedules)
+ 3.49.30.2 QUERY EVENT (Display administrative event
+ schedules)
+ 3.49.31 QUERY EVENTRULES (Query rules for server or client
+ events)
+ 3.49.32 QUERY EVENTSERVER (Query the event server)
+ 3.49.33 QUERY EXPORT (Query for active or suspended export
+ operations)
+ 3.49.34 QUERY EXTENTUPDATES (Query updated data extents)
+ 3.49.35 QUERY FILESPACE (Query one or more file spaces)
+ 3.49.36 QUERY FSCOUNTS (Query number of objects)
+ 3.49.37 QUERY JOB (Query a job)
+ 3.49.38 QUERY HOLD (Query a retention hold)
+ 3.49.39 QUERY HOLDLOG (Query the retention set hold log)
+ 3.49.40 QUERY LIBRARY (Query a library)
+ 3.49.41 QUERY LIBVOLUME (Query a library volume)
+ 3.49.42 QUERY LICENSE (Display license information)
+ 3.49.43 QUERY LOG (Display information about the recovery
+ log)
+ 3.49.44 QUERY MACHINE (Query machine information)
+ 3.49.45 QUERY MEDIA (Query sequential-access storage pool
+ media)
+ 3.49.46 QUERY MGMTCLASS (Query a management class)
+ 3.49.47 QUERY MONITORSETTINGS (Query the configuration
+ settings for monitoring alerts and server status)
+ 3.49.48 QUERY MONITORSTATUS (Query the monitoring status)
+ 3.49.49 QUERY MOUNT (Display information on mounted
+ sequential access volumes)
+ 3.49.50 QUERY NASBACKUP (Query NAS backup images)
+ 3.49.51 QUERY NODE (Query nodes)
+ 3.49.52 QUERY NODEDATA (Query client data in volumes)
+ 3.49.53 QUERY NODEGROUP (Query a node group)
+ 3.49.54 QUERY OCCUPANCY (Query client file spaces in storage
+ pools)
+ 3.49.55 QUERY OPTION (Query server options)
+ 3.49.56 QUERY PATH (Display a path definition)
+ 3.49.57 QUERY PENDINGCMD (Display a list of commands that are
+ pending approval)
+ 3.49.58 QUERY POLICYSET (Query a policy set)
+ 3.49.59 QUERY PROCESS (Query one or more server processes)
+ 3.49.60 QUERY PROFILE (Query a profile)
+ 3.49.61 QUERY PROTECTSTATUS (Query the status of storage pool
+ protection)
+ 3.49.62 QUERY PROXYNODE (Query proxy authority for a client
+ node)
+ 3.49.63 QUERY PVUESTIMATE (Display processor value unit
+ estimate)
+ 3.49.64 QUERY RECOVERYMEDIA (Query recovery media)
+ 3.49.65 QUERY REPLFAILURES (Query data about replication
+ failures)
+ 3.49.66 QUERY REPLICATION (Query node replication processes)
+ 3.49.67 QUERY REPLNODE (Display information about replication
+ status for a client node)
+ 3.49.68 QUERY REPLRULE (Query replication rules)
+ 3.49.69 QUERY REPLSERVER (Query a replication server)
+ 3.49.70 QUERY REQUEST (Query one or more pending mount
+ requests)
+ 3.49.71 QUERY RESTORE (Query restartable restore sessions)
+ 3.49.72 QUERY RETMEDIA (Query tape retention storage pool
+ media)
+ 3.49.73 QUERY RETRULE (Query a retention rule)
+ 3.49.74 QUERY RETSET (Query a retention set)
+ 3.49.75 QUERY RETSETCONTENTS (Query the contents of a
+ retention set)
+ 3.49.76 QUERY RPFCONTENT (Query recovery plan file contents
+ stored on a target server)
+ 3.49.77 QUERY RPFILE (Query recovery plan file information
+ stored on a target server)
+ 3.49.78 QUERY SAN (Query the devices on the SAN)
+ 3.49.79 QUERY SCHEDULE (Query schedules)
+ 3.49.79.1 QUERY SCHEDULE (Query client schedules)
+ 3.49.79.2 QUERY SCHEDULE (Query an administrative schedule)
+ 3.49.80 QUERY SCRATCHPADENTRY (Query a scratch pad entry)
+ 3.49.81 QUERY SCRIPT (Query IBM Spectrum Protect scripts)
+ 3.49.82 QUERY SERVER (Query a server)
+ 3.49.83 QUERY SERVERGROUP (Query a server group)
+ 3.49.84 QUERY SESSION (Query client sessions)
+ 3.49.85 QUERY SHREDSTATUS (Query shredding status )
+ 3.49.86 QUERY SPACETRIGGER (Query the space triggers)
+ 3.49.87 QUERY STATUS (Query system parameters)
+ 3.49.88 QUERY STATUSTHRESHOLD (Query status monitoring
+ thresholds)
+ 3.49.89 QUERY STGPOOL (Query storage pools)
+ 3.49.90 QUERY STGPOOLDIRECTORY (Query a storage pool
+ directory)
+ 3.49.91 QUERY STGRULE (Display storage rule information)
+ 3.49.92 QUERY SUBRULE (Display subrule rule information)
+ 3.49.93 QUERY SUBSCRIBER (Display subscriber information)
+ 3.49.94 QUERY SUBSCRIPTION (Display subscription information)
+ 3.49.95 QUERY SYSTEM (Query the system configuration and
+ capacity)
+ 3.49.96 QUERY TAPEALERTMSG (Display status of SET
+ TAPEALERTMSG command)
+ 3.49.97 QUERY TOC (Display table of contents for a backup
+ image)
+ 3.49.98 QUERY VIRTUALFSMAPPING (Query a virtual file space
+ mapping)
+ 3.49.99 QUERY VOLHISTORY (Display sequential volume history
+ information)
+ 3.49.100 QUERY VOLUME (Query storage pool volumes)
+ 3.50 QUIT (End the interactive mode of the administrative
+ client)
+ 3.51 RECLAIM STGPOOL (Reclaim volumes in a sequential-access
+ storage pool)
+ 3.52 RECOMMISSION
+ 3.52.1 RECOMMISSION NODE (Recommission a decommissioned
+ application or system client node)
+ 3.52.2 RECOMMISSION VM (Recommission a virtual machine)
+ 3.53 RECONCILE VOLUMES (Reconcile differences in the virtual
+ volume definitions)
+ 3.54 REGISTER
+ 3.54.1 REGISTER ADMIN (Register an administrator ID)
+ 3.54.2 REGISTER LICENSE (Register a new license)
+ 3.54.3 REGISTER NODE (Register a node)
+ 3.55 REJECT PENDINGCMD (Reject commands that are pending
+ approval)
+ 3.56 RELEASE RETSET (Release a retention set from a retention
+ hold)
+ 3.57 REMOVE
+ 3.57.1 REMOVE ADMIN (Delete an administrative user ID)
+ 3.57.2 REMOVE DAMAGED (Remove damaged data from a source
+ storage pool)
+ 3.57.3 REMOVE NODE (Delete a node or an associated machine
+ node)
+ 3.57.4 REMOVE REPLNODE (Remove a client node from
+ replication)
+ 3.57.5 REMOVE REPLSERVER (Remove a replication server)
+ 3.57.6 REMOVE STGPROTECTION (Remove storage pool protection)
+ 3.58 RENAME
+ 3.58.1 RENAME ADMIN (Rename an administrator)
+ 3.58.2 RENAME FILESPACE (Rename a client file space on the
+ server)
+ 3.58.3 RENAME HOLD (Rename a retention hold)
+ 3.58.4 RENAME NODE (Rename a node)
+ 3.58.5 RENAME RETRULE (Rename a retention rule)
+ 3.58.6 RENAME SCRIPT (Rename an IBM Spectrum Protect script)
+ 3.58.7 RENAME SERVERGROUP (Rename a server group)
+ 3.58.8 RENAME STGPOOL (Change the name of a storage pool)
+ 3.59 REPAIR STGPOOL (Repair a directory-container storage pool)
+ 3.60 REPLICATE NODE (Replicate data in file spaces that belong
+ to a client node)
+ 3.61 REPLY (Allow a request to continue processing)
+ 3.62 RESET PASSEXP (Reset password expiration)
+ 3.63 RESTART EXPORT (Restart a suspended export operation)
+ 3.64 RESTORE
+ 3.64.1 RESTORE NODE (Restore a NAS node)
+ 3.64.2 RESTORE STGPOOL (Restore storage pool data from a copy
+ pool or an active-data pool)
+ 3.64.3 RESTORE VOLUME (Restore primary volume data from a
+ copy pool or an active-data pool)
+ 3.65 RESUME JOB (Resume a job for copying a retention set to
+ tape)
+ 3.66 REVOKE
+ 3.66.1 REVOKE AUTHORITY (Remove administrator authority)
+ 3.66.2 REVOKE PROXYNODE (Revoke proxy authority for a client
+ node)
+ 3.67 ROLLBACK (Rollback uncommitted changes in a macro)
+ 3.68 RUN (Run an IBM Spectrum Protect script)
+ 3.69 SELECT (Perform an SQL query of the IBM Spectrum Protect
+ database)
+ 3.70 SET
+ 3.70.1 SET ACCOUNTING (Set accounting records on or off)
+ 3.70.2 SET ACTLOGRETENTION (Set the retention period or the
+ size of the activity log)
+ 3.70.3 SET ALERTACTIVEDURATION (Set the duration of an active
+ alert)
+ 3.70.4 SET ALERTCLOSEDDURATION (Set the duration of a closed
+ alert)
+ 3.70.5 SET ALERTEMAIL (Set the alert monitor to email alerts
+ to administrators)
+ 3.70.6 SET ALERTEMAILFROMADDR (Set the email address of the
+ sender)
+ 3.70.7 SET ALERTEMAILSMTPHOST (Set the SMTP mail server host
+ name)
+ 3.70.8 SET ALERTEMAILSMTPPORT (Set the SMTP mail server host
+ port)
+ 3.70.9 SET ALERTSUMMARYTOADMINS (Set the list of
+ administrators to receive alert summaries by email )
+ 3.70.10 SET ALERTINACTIVEDURATION (Set the duration of an
+ inactive alert)
+ 3.70.11 SET ALERTMONITOR (Set the alert monitor to on or off)
+ 3.70.12 SET ALERTUPDATEINTERVAL (Set how often the alert
+ monitor updates and prunes alerts)
+ 3.70.13 SET APPROVERSREQUIREAPPROVAL (Specifies whether
+ approval administrators require approval)
+ 3.70.14 SET ARCHIVERETENTIONPROTECTION (Activate data
+ retention protection)
+ 3.70.15 SET ARREPLRULEDEFAULT (Set the server replication
+ rule for archive data)
+ 3.70.16 SET BKREPLRULEDEFAULT (Set the server replication
+ rule for backup data)
+ 3.70.17 SET CLIENTACTDURATION (Set the duration period for
+ the client action)
+ 3.70.18 SET COMMANDAPPROVAL (Specifies whether command
+ approval is required)
+ 3.70.19 SET CONFIGMANAGER (Specify a configuration manager)
+ 3.70.20 SET CONFIGREFRESH (Set managed server configuration
+ refresh)
+ 3.70.21 SET CONTEXTMESSAGING (Set message context reporting
+ on or off)
+ 3.70.22 SET CPUINFOREFRESH (Refresh interval for the client
+ workstation information scan)
+ 3.70.23 SET CROSSDEFINE (Specifies whether to cross-define
+ servers)
+ 3.70.24 SET DBRECOVERY (Set the device class for automatic
+ backups)
+ 3.70.25 SET DEDUPVERIFICATIONLEVEL (Set the percentage of
+ extents to verify)
+ 3.70.26 SET DEFAULTAUTHENTICATION (Set the default
+ authentication method for REGISTER NODE and REGISTER ADMIN
+ commands)
+ 3.70.27 SET DEPLOYPKGMGR (Enable the deployment package
+ manager)
+ 3.70.28 SET DEPLOYREPOSITORY (Set the download path for
+ client deployment packages)
+ 3.70.29 SET DEPLOYMAXPKGS (Set the maximum number of client
+ deployment packages to store)
+ 3.70.30 SET DISSIMILARPOLICIES (Enable the policies on the
+ target replication server to manage replicated data)
+ 3.70.31 SET DRMACTIVEDATASTGPOOL (Specify the active-data
+ pools to be managed by DRM)
+ 3.70.32 SET DRMCHECKLABEL (Specify label checking)
+ 3.70.33 SET DRMCMDFILENAME (Specify the name of a file to
+ contain commands)
+ 3.70.34 SET DRMCOPYCONTAINERSTGPOOL (Specify the
+ container-copy storage pools to be processed by DRM commands)
+ 3.70.35 SET DRMCOPYSTGPOOL (Specify the copy storage pools to
+ be managed by DRM)
+ 3.70.36 SET DRMCOURIERNAME (Specify the courier name)
+ 3.70.37 SET DRMDBBACKUPEXPIREDAYS (Specify DB backup series
+ expiration)
+ 3.70.38 SET DRMFILEPROCESS (Specify file processing)
+ 3.70.39 SET DRMINSTRPREFIX (Specify the prefix for recovery
+ instructions file names)
+ 3.70.40 SET DRMNOTMOUNTABLENAME (Specify the not mountable
+ location name)
+ 3.70.41 SET DRMPLANPREFIX (Specify a prefix for recovery plan
+ file names)
+ 3.70.42 SET DRMPLANVPOSTFIX (Specify replacement volume
+ names)
+ 3.70.43 SET DRMPRIMSTGPOOL (Specify the primary storage pools
+ to be managed by DRM)
+ 3.70.44 SET DRMRETENTIONSTGPOOL (Specify the tape retention
+ storage pools to be processed by MOVE RETMEDIA and QUERY
+ RETMEDIA commands)
+ 3.70.45 SET DRMRPFEXPIREDAYS (Set criteria for recovery plan
+ file expiration)
+ 3.70.46 SET DRMVAULTNAME (Specify the vault name)
+ 3.70.47 SET EVENTRETENTION (Set the retention period for
+ event records)
+ 3.70.48 SET FAILOVERHLADDRESS (Set a failover high level
+ address)
+ 3.70.49 SET INVALIDPWLIMIT (Set the number of invalid logon
+ attempts)
+ 3.70.50 SET LDAPPASSWORD (Set the LDAP password for the
+ server)
+ 3.70.51 SET LDAPUSER (Specify an ID for an LDAP directory
+ server)
+ 3.70.52 SET LICENSEAUDITPERIOD (Set license audit period)
+ 3.70.53 SET MAXCMDRETRIES (Set the maximum number of command
+ retries)
+ 3.70.54 SET MAXSCHEDSESSIONS (Set maximum scheduled sessions)
+ 3.70.55 SET MINPWCHARALPHABETIC (Set minimum number of
+ alphabetic characters in administrator passwords)
+ 3.70.56 SET MINPWCHARLOWER (Set minimum number of lower-case
+ alphabetic characters in administrator passwords)
+ 3.70.57 SET MINPWCHARNUMERIC (Set minimum number of numeric
+ characters in administrator passwords)
+ 3.70.58 SET MINPWCHARSPECIAL (Set minimum number of special
+ characters in administrator passwords)
+ 3.70.59 SET MINPWCHARUPPER (Set minimum number of upper-case
+ alphabetic characters in administrator passwords)
+ 3.70.60 SET MINPWLENGTH (Set minimum password length)
+ 3.70.61 SET MONITOREDSERVERGROUP (Set the group of monitored
+ servers)
+ 3.70.62 SET MONITORINGADMIN (Set the name of the monitoring
+ administrator)
+ 3.70.63 SET NODEATRISKINTERVAL (Specifies at-risk mode for an
+ individual node)
+ 3.70.64 SET PASSEXP (Set password expiration date)
+ 3.70.65 SET PRODUCTOFFERING (Set the product offering that is
+ licensed to your enterprise)
+ 3.70.66 SET PWREUSELIMIT (Set password reuse limit)
+ 3.70.67 SET QUERYSCHEDPERIOD (Set query period for polling
+ client nodes)
+ 3.70.68 SET RANDOMIZE (Set randomization of scheduled start
+ times)
+ 3.70.69 SET REPLRECOVERDAMAGED (Specify whether damaged files
+ are recovered from a replication server)
+ 3.70.70 SET REPLRETENTION (Set the retention period for
+ replication records)
+ 3.70.71 SET REPLSERVER (Set the target replication server)
+ 3.70.72 SET RETRYPERIOD (Set time between retry attempts)
+ 3.70.73 SET SCHEDMODES (Select a central scheduling mode)
+ 3.70.74 SET SCRATCHPADRETENTION (Set scratch pad retention
+ time)
+ 3.70.75 SET SECURITYNOTIF (Set security notifications to on
+ or off)
+ 3.70.76 SET SERVERHLADDRESS (Set the high-level address of a
+ server)
+ 3.70.77 SET SERVERLLADDRESS (Set the low-level address of a
+ server)
+ 3.70.78 SET SERVERNAME (Specify the server name)
+ 3.70.79 SET SERVERPASSWORD (Set password for server)
+ 3.70.80 SET SPREPLRULEDEFAULT (Set the server replication
+ rule for space-managed data)
+ 3.70.81 SET STATUSATRISKINTERVAL (Specifies the backup
+ activity interval for client at-risk evaluation)
+ 3.70.82 SET STATUSMONITOR (Specifies whether to enable status
+ monitoring)
+ 3.70.83 SET STATUSREFRESHINTERVAL (Set refresh interval for
+ status monitoring)
+ 3.70.84 SET STATUSSKIPASFAILURE (Specifies whether to use
+ client at-risk skipped files as failure evaluation)
+ 3.70.85 SET SUBFILE (Set subfile backup for client nodes)
+ 3.70.86 SET SUMMARYRETENTION (Set number of days to keep data
+ in activity summary table)
+ 3.70.87 SET TAPEALERTMSG (Set tape alert messages on or off)
+ 3.70.88 SET TOCLOADRETENTION (Set load retention period for
+ table of contents)
+ 3.70.89 SET VMATRISKINTERVAL (Specifies the at-risk mode for
+ an individual VM filespace)
+ 3.71 SETOPT (Set a server option for dynamic update)
+ 3.72 SHRED DATA (Shred data)
+ 3.73 STAGE VOLUME (Stage a cloud volume or cloud retention set
+ in standard storage)
+ 3.74 START STGRULE (Start a storage rule)
+ 3.74.1 START STGRULE (Start a copy rule)
+ 3.74.2 START STGRULE (Start a reclamation rule)
+ 3.74.3 START STGRULE (Start a replication rule)
+ 3.74.4 START STGRULE (Start a retention rule)
+ 3.74.5 START STGRULE (Start a tiering rule)
+ 3.75 SUSPEND EXPORT (Suspend a currently running export
+ operation)
+ 3.76 TERMINATE JOB (Terminate a job for copying a retention set
+ to tape)
+ 3.77 UNLOCK
+ 3.77.1 UNLOCK ADMIN (Unlock an administrator)
+ 3.77.2 UNLOCK NODE (Unlock a client node)
+ 3.77.3 UNLOCK PROFILE (Unlock a profile)
+ 3.78 UPDATE
+ 3.78.1 UPDATE ADMIN (Update an administrator)
+ 3.78.2 UPDATE ALERTTRIGGER (Update a defined alert trigger)
+ 3.78.3 UPDATE ALERTSTATUS (Update the status of an alert)
+ 3.78.4 UPDATE BACKUPSET (Update a retention value assigned to
+ a backup set)
+ 3.78.5 UPDATE CLIENTOPT (Update a client option sequence
+ number)
+ 3.78.6 UPDATE CLOPTSET (Update a client option set
+ description)
+ 3.78.7 UPDATE COLLOCGROUP (Update a collocation group)
+ 3.78.8 UPDATE CONNECTION (Update a cloud connection)
+ 3.78.9 UPDATE COPYGROUP (Update a copy group)
+ 3.78.9.1 UPDATE COPYGROUP (Update a backup copy group)
+ 3.78.9.2 UPDATE COPYGROUP (Update a defined archive copy
+ group)
+ 3.78.10 UPDATE DATAMOVER (Update a data mover)
+ 3.78.11 UPDATE DEVCLASS (Update the attributes of a device
+ class)
+ 3.78.11.1 UPDATE DEVCLASS (Update a 3590 device class)
+ 3.78.11.2 UPDATE DEVCLASS (Update a 3592 device class)
+ 3.78.11.3 UPDATE DEVCLASS (Update a 4MM device class)
+ 3.78.11.4 UPDATE DEVCLASS (Update an 8MM device class)
+ 3.78.11.5 UPDATE DEVCLASS (Update a CENTERA device class)
+ 3.78.11.6 UPDATE DEVCLASS (Update a CLOUD device class)
+ 3.78.11.7 UPDATE DEVCLASS (Update a DLT device class)
+ 3.78.11.8 UPDATE DEVCLASS (Update an ECARTRIDGE device
+ class)
+ 3.78.11.9 UPDATE DEVCLASS (Update a FILE device class)
+ 3.78.11.10 UPDATE DEVCLASS (Update an LTO device class)
+ 3.78.11.11 UPDATE DEVCLASS (Update a NAS device class)
+ 3.78.11.12 UPDATE DEVCLASS (Update a REMOVABLEFILE device
+ class)
+ 3.78.11.13 UPDATE DEVCLASS (Update a SERVER device class)
+ 3.78.11.14 UPDATE DEVCLASS (Update a VOLSAFE device class)
+ 3.78.12 UPDATE DEVCLASS - z/OS media server (Update device
+ class for z/OS media server)
+ 3.78.12.1 UPDATE DEVCLASS (Update a 3590 device class for
+ z/OS media server)
+ 3.78.12.2 UPDATE DEVCLASS (Update a 3592 device class for
+ z/OS media server)
+ 3.78.12.3 UPDATE DEVCLASS (Update an ECARTRIDGE device
+ class for z/OS media server)
+ 3.78.12.4 UPDATE DEVCLASS (Update a FILE device class for
+ z/OS media server)
+ 3.78.13 UPDATE DOMAIN (Update a policy domain)
+ 3.78.14 UPDATE DRIVE (Update a drive)
+ 3.78.15 UPDATE FILESPACE (Update file-space node-replication
+ rules)
+ 3.78.16 UPDATE HOLD (Update a retention hold)
+ 3.78.17 UPDATE LIBRARY (Update a library)
+ 3.78.17.1 UPDATE LIBRARY (Update a 349X library)
+ 3.78.17.2 UPDATE LIBRARY (Update an ACSLS library)
+ 3.78.17.3 UPDATE LIBRARY (Update an EXTERNAL library)
+ 3.78.17.4 UPDATE LIBRARY (Update a FILE library)
+ 3.78.17.5 UPDATE LIBRARY (Update a manual library)
+ 3.78.17.6 UPDATE LIBRARY (Update a SCSI library)
+ 3.78.17.7 UPDATE LIBRARY (Update a shared library)
+ 3.78.17.8 UPDATE LIBRARY (Update a VTL library)
+ 3.78.18 UPDATE LIBVOLUME (Change the status of a storage
+ volume)
+ 3.78.19 UPDATE MACHINE (Update machine information)
+ 3.78.20 UPDATE MGMTCLASS (Update a management class)
+ 3.78.21 UPDATE NODE (Update node attributes)
+ 3.78.22 UPDATE NODEGROUP (Update a node group)
+ 3.78.23 UPDATE OBJECTDOMAIN (Update a policy domain for
+ object clients)
+ 3.78.24 UPDATE PATH (Change a path)
+ 3.78.24.1 UPDATE PATH (Change a path when the destination
+ is a drive)
+ 3.78.24.2 UPDATE PATH (Change a path when the destination
+ is a library)
+ 3.78.24.3 UPDATE PATH (Update a path when the destination
+ is a ZOSMEDIA library)
+ 3.78.25 UPDATE POLICYSET (Update a policy set description)
+ 3.78.26 UPDATE PROFILE (Update a profile description)
+ 3.78.27 UPDATE RECOVERYMEDIA (Update recovery media)
+ 3.78.28 UPDATE REPLRULE (Update replication rules)
+ 3.78.29 UPDATE RETRULE (Update a retention rule)
+ 3.78.30 UPDATE RETSET (Update attributes of a retention set)
+ 3.78.31 UPDATE SCHEDULE (Update a schedule)
+ 3.78.31.1 UPDATE SCHEDULE (Update a client schedule)
+ 3.78.31.2 UPDATE SCHEDULE (Update an administrative
+ schedule)
+ 3.78.32 UPDATE SCRATCHPADENTRY (Update a scratch pad entry)
+ 3.78.33 UPDATE SCRIPT (Update an IBM Spectrum Protect script)
+ 3.78.34 UPDATE SERVER (Update a server defined for
+ server-to-server communications)
+ 3.78.35 UPDATE SERVERGROUP (Update a server group
+ description)
+ 3.78.36 UPDATE SPACETRIGGER (Update the space triggers)
+ 3.78.37 UPDATE STATUSTHRESHOLD (Update a status monitoring
+ threshold)
+ 3.78.38 UPDATE STGPOOL (Update a storage pool)
+ 3.78.38.1 UPDATE STGPOOL (Update a cloud-container storage
+ pool)
+ 3.78.38.2 UPDATE STGPOOL (Update a directory-container
+ storage pool)
+ 3.78.38.3 UPDATE STGPOOL (Update a container-copy storage
+ pool)
+ 3.78.38.4 UPDATE STGPOOL (Update a primary random access
+ storage pool)
+ 3.78.38.5 UPDATE STGPOOL (Update a primary sequential
+ access pool)
+ 3.78.38.6 UPDATE STGPOOL (Update a primary storage pool for
+ copying data to tape)
+ 3.78.38.7 UPDATE STGPOOL (Update a copy sequential access
+ storage pool)
+ 3.78.38.8 UPDATE STGPOOL (Update an active-data sequential
+ access)
+ 3.78.38.9 UPDATE STGPOOL (Update a retention storage pool)
+ 3.78.39 UPDATE STGPOOLDIRECTORY (Update a storage pool
+ directory)
+ 3.78.40 UPDATE STGRULE (Update a storage rule)
+ 3.78.40.1 UPDATE STGRULE (Update a rule for auditing a
+ storage pool)
+ 3.78.40.2 UPDATE STGRULE (Update a storage rule for copying
+ data)
+ 3.78.40.3 UPDATE STGRULE (Update a storage rule for copying
+ retained data)
+ 3.78.40.4 UPDATE STGRULE (Update a storage rule for
+ generating data deduplication statistics)
+ 3.78.40.5 UPDATE STGRULE (Update a storage rule for
+ reclaiming cloud containers)
+ 3.78.40.6 UPDATE STGRULE (Update a storage rule for
+ replicating data)
+ 3.78.40.7 UPDATE STGRULE (Update a storage rule for
+ tiering)
+ 3.78.41 UPDATE SUBRULE (Update a subrule)
+ 3.78.41.1 UPDATE SUBRULE (Update a subrule for copying
+ data)
+ 3.78.41.2 UPDATE SUBRULE (Update a subrule for replicating
+ data)
+ 3.78.41.3 UPDATE SUBRULE (Update a tiering subrule)
+ 3.78.42 UPDATE VIRTUALFSMAPPING (Update a virtual file space
+ mapping)
+ 3.78.43 UPDATE VOLHISTORY (Update sequential volume history
+ information)
+ 3.78.44 UPDATE VOLUME (Change a storage pool volume)
+ 3.79 VALIDATE
+ 3.79.1 VALIDATE ASPERA (Validate an Aspera FASP
+ configuration)
+ 3.79.2 VALIDATE CLOUD (Validate cloud credentials)
+ 3.79.3 VALIDATE LANFREE (Validate LAN-Free paths)
+ 3.79.4 VALIDATE POLICYSET (Verify a policy set)
+ 3.79.5 VALIDATE REPLICATION (Validate replication for a
+ client node)
+ 3.79.6 VALIDATE REPLPOLICY (Verify the policies on the target
+ replication server)
+ 3.80 VARY (Bring a random access volume online or offline)
+ 3.81 WITHDRAW PENDINGCMD (Withdraw commands that are pending
+ approval)
+4.0 Server options
+ 4.1 Modifying server options
+ 4.2 Types of server options
+ 4.2.1 Server communication options
+ 4.2.2 Server storage options
+ 4.2.3 Client-server options
+ 4.2.4 Date, number, time, and language options
+ 4.2.5 Database options
+ 4.2.6 Data transfer options
+ 4.2.7 Message options
+ 4.2.8 Event logging options
+ 4.2.9 Security options and licensing options
+ 4.2.10 Miscellaneous options
+ 4.3 3494SHARED
+ 4.4 ACSACCESSID
+ 4.5 ACSLOCKDRIVE
+ 4.6 ACSQUICKINIT
+ 4.7 ACSTIMEOUTX
+ 4.8 ACTIVELOGDIRECTORY
+ 4.9 ACTIVELOGSIZE
+ 4.10 ADMINCOMMTIMEOUT
+ 4.11 ADMINIDLETIMEOUT
+ 4.12 ADMINONCLIENTPORT
+ 4.13 ALIASHALT
+ 4.14 ALLOWDESAUTH
+ 4.15 ALLOWREORGINDEX
+ 4.16 ALLOWREORGTABLE
+ 4.17 ARCHFAILOVERLOGDIRECTORY
+ 4.18 ARCHLOGCOMPRESS
+ 4.19 ARCHLOGDIRECTORY
+ 4.20 ARCHLOGUSEDTHRESHOLD
+ 4.21 ASSISTVCRRECOVERY
+ 4.22 AUDITSTORAGE
+ 4.23 BACKUPINITIATIONROOT
+ 4.24 CHECKTAPEPOS
+ 4.25 CLIENTDEDUPTXNLIMIT
+ 4.26 CLIENTDEPLOYCATALOGURL
+ 4.27 CLIENTDEPLOYUSELOCALCATALOG
+ 4.28 CLOUDRECLAMATIONDELAY
+ 4.29 CLOUDREADCACHERETENTIONTIME
+ 4.30 CLOUDREADCACHEMAXUSAGE
+ 4.31 COMMMETHOD
+ 4.32 COMMTIMEOUT
+ 4.33 CONTAINERRESOURCETIMEOUT
+ 4.34 DBDIAGLOGSIZE
+ 4.35 DBDIAGPATHFSTHRESHOLD
+ 4.36 DBMEMPERCENT
+ 4.37 DBMTCPPORT
+ 4.38 DEDUPREQUIRESBACKUP
+ 4.39 DEDUPTIER2FILESIZE
+ 4.40 DEDUPTIER3FILESIZE
+ 4.41 DEVCONFIG
+ 4.42 DISABLEREORGTABLE
+ 4.43 DISABLESCHEDS
+ 4.44 DISPLAYLFINFO
+ 4.45 DNSLOOKUP
+ 4.46 DRIVEACQUIRERETRY
+ 4.47 ENABLENASDEDUP
+ 4.48 EVENTSERVER
+ 4.49 EXPINTERVAL
+ 4.50 EXPQUIET
+ 4.51 FASPBEGPORT
+ 4.52 FASPENDPORT
+ 4.53 FASPTARGETRATE
+ 4.54 FFDCLOGLEVEL
+ 4.55 FFDCLOGNAME
+ 4.56 FFDCMAXLOGSIZE
+ 4.57 FFDCNUMLOGS
+ 4.58 FILEEXIT
+ 4.59 FILETEXTEXIT
+ 4.60 FIPSMODE
+ 4.61 FSUSEDTHRESHOLD
+ 4.62 IDLETIMEOUT
+ 4.63 JOBRETENTION
+ 4.64 KEEPALIVE
+ 4.65 KEEPALIVETIME
+ 4.66 KEEPALIVEINTERVAL
+ 4.67 LANGUAGE
+ 4.68 LDAPCACHEDURATION
+ 4.69 LDAPURL
+ 4.70 MAXSESSIONS
+ 4.71 MESSAGEFORMAT
+ 4.72 MIRRORLOGDIRECTORY
+ 4.73 MOVEBATCHSIZE
+ 4.74 MOVESIZETHRESH
+ 4.75 MSGINTERVAL
+ 4.76 NDMPCONNECTIONTIMEOUT
+ 4.77 NDMPCONTROLPORT
+ 4.78 NDMPENABLEKEEPALIVE
+ 4.79 NDMPKEEPIDLEMINUTES
+ 4.80 NDMPPORTRANGE
+ 4.81 NDMPPREFDATAINTERFACE
+ 4.82 NOPREEMPT
+ 4.83 NORETRIEVEDATE
+ 4.84 NUMOPENVOLSALLOWED
+ 4.85 PREALLOCREDUCTIONRATE
+ 4.86 PROTRECONCILEBATCHCOUNT
+ 4.87 PUSHSTATUS
+ 4.88 QUERYAUTH
+ 4.89 RECLAIMDELAY
+ 4.90 RECLAIMPERIOD
+ 4.91 REORGBEGINTIME
+ 4.92 REORGDURATION
+ 4.93 REPORTRETRIEVE
+ 4.94 REPLBATCHSIZE
+ 4.95 REPLSIZETHRESH
+ 4.96 REQSYSAUTHOUTFILE
+ 4.97 RESOURCETIMEOUT
+ 4.98 RESTHTTPSPORT
+ 4.99 RESTOREINTERVAL
+ 4.100 RETENTIONEXTENSION
+ 4.101 SANDISCOVERY
+ 4.102 SANDISCOVERYTIMEOUT
+ 4.103 SANREFRESHTIME
+ 4.104 SEARCHMPQUEUE
+ 4.105 SERVERDEDUPTXNLIMIT
+ 4.106 SHMPORT
+ 4.107 SHREDDING
+ 4.108 SSLFIPSMODE
+ 4.109 SSLINITTIMEOUT
+ 4.110 SSLTCPADMINPORT
+ 4.111 SSLTCPPORT
+ 4.112 TCPADMINPORT
+ 4.113 TCPBUFSIZE
+ 4.114 TCPNODELAY
+ 4.115 TCPPORT
+ 4.116 TCPWINDOWSIZE
+ 4.117 TECBEGINEVENTLOGGING
+ 4.118 TECHOST
+ 4.119 TECPORT
+ 4.120 TECUTF8EVENT
+ 4.121 THROUGHPUTDATATHRESHOLD
+ 4.122 THROUGHPUTTIMETHRESHOLD
+ 4.123 TXNGROUPMAX
+ 4.124 UNIQUETDPTECEVENTS
+ 4.125 UNIQUETECEVENTS
+ 4.126 USEREXIT
+ 4.127 VERBCHECK
+ 4.128 VOLUMEHISTORY
