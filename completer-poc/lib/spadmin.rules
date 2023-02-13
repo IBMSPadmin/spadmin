@@ -227,8 +227,10 @@ Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DESTType=              -> DESTType=LI
 Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ Format=                -> Format=Standard
 Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ Format=                -> Format=Detailed
 #7
-#Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,}           -> LIBRary=
-#Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DESTType=DRIVE LIBRary=             ->  select LIBRARY_NAME from libraries
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,}           -> LIBRary={Mustexist: DESTType=DRIVE}
+#8
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DESTType=DRIVE LIBRary=        ->  select LIBRARY_NAME from libraries
+
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-actlog-query-activity-log
 Query                         -> ACtlog
      
