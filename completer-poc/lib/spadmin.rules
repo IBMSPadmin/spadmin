@@ -23,8 +23,8 @@ $ -> QUIt
 $ -> BYe
 $ -> LOGOut
 $ -> REload
-$->Help!
-$->KILL
+$ -> Help!
+$ -> KILL
 
 $ -> deb
 $ -> ver
@@ -45,19 +45,19 @@ ACCept -> Date
 # =========================================================================================================================
 
 # ACTivate POlicyset domain_name policy_set_name
-ACTivate               -> POlicyset
-ACTivate POlicyset     -> select domain_name from domains
-ACTivate POlicyset \w+ -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
+ACTivate                           -> POlicyset
+ACTivate POlicyset                 -> select domain_name from domains
+ACTivate POlicyset [\w\*\-\.\+\&]+ -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
 # =========================================================================================================================
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-assign-defmgmtclass-assign-default-management-class
 # ASsign DEFMGmtclass domain_name policy_set_name class_name
-ASsign                      -> DEFMGmtclass
-ASsign DEFMGmtclass         -> select domain_name from domains
-ASsign DEFMGmtclass \w+     -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
+ASsign                                              -> DEFMGmtclass
+ASsign DEFMGmtclass                                 -> select domain_name from domains
+ASsign DEFMGmtclass [\w\*\-\.\+\&]+                 -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
 
 # lehet itt két opció kezelését is bele kellene venni a buliba?! azaz több tokent-t is lehessen megadni
-ASsign DEFMGmtclass \w+ \w+ -> select class_name from mgmtclasses where domain_name = upper( '-3' )
+ASsign DEFMGmtclass [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ -> select class_name from mgmtclasses where domain_name = upper( '-3' )
 # =========================================================================================================================
 
 ###################
@@ -140,33 +140,29 @@ BAckup VOLHistory  -> Filenames=
 
 DEFine                     -> ASSOCiation
 DEFine ASSOCiation         -> select domain_name from domains
-DEFine ASSOCiation \w+     -> select schedule_name from client_schedules where domain_name like upper( '-2' )
-DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like upper( '-3' )
+DEFine ASSOCiation [\w\*\-\.\+\&]+     -> select schedule_name from client_schedules where domain_name like upper( '-2' )
+DEFine ASSOCiation [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ -> select node_name from nodes where domain_name like upper( '-3' )
 # =========================================================================================================================
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-define-devclass-define-device-class
 # DEFine DEVclass device_class_name LIBRary=library_name DEVType=3590
-DEFine                                        -> DEVclass
-DEFine DEVclass                               -> <GIVE_a_valid_device_class_name>
-DEFine DEVclass \w+                         -> DEVType=
-DEFine DEVclass \w+ DEVType=                -> DEVType=3590
-DEFine DEVclass \w+ DEVType=                -> DEVType=LTO
-DEFine DEVclass \w+                         -> LIBRary=
-DEFine DEVclass \w+ LIBRary=                -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
-#DEFine DEVclass \w+                         -> LBProtect={Mustexist: DEVType=LTO}
-#DEFine DEVclass \w+ LBProtect=              -> LBProtect=READWrite{Mustexist: DEVType=LTO} 
-#DEFine DEVclass \w+ LBProtect=              -> LBProtect=WRITEOnly{Mustexist: DEVType=LTO}
-#DEFine DEVclass \w+ LBProtect=              -> LBProtect=No{Mustexist: DEVType=LTO}
+DEFine                                                  -> DEVclass
+DEFine DEVclass                                         -> <GIVE_a_valid_device_class_name>
+DEFine DEVclass [\w\*\-\.\+\&]+                         -> DEVType=
+DEFine DEVclass [\w\*\-\.\+\&]+ DEVType=                -> DEVType=3590
+DEFine DEVclass [\w\*\-\.\+\&]+ DEVType=                -> DEVType=LTO
+DEFine DEVclass [\w\*\-\.\+\&]+                         -> LIBRary=
+DEFine DEVclass [\w\*\-\.\+\&]+ LIBRary=                -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
 
-DEFine DEVclass \w+ (\w+=.*){1,}            -> DEVType=
-DEFine DEVclass \w+ (\w+=.*){1,} DEVType=   -> DEVType=3590
-DEFine DEVclass \w+ (\w+=.*){1,} DEVType=   -> DEVType=LTO
-DEFine DEVclass \w+ (\w+=.*){1,}            -> LIBRary=
-DEFine DEVclass \w+ (\w+=.*){1,} LIBRary=   -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
-DEFine DEVclass \w+ (\w+=.*){1,}            -> LBProtect={Mustexist: DEVType=LTO}
-DEFine DEVclass \w+ (\w+=.*){1,} LBProtect= -> LBProtect=READWrite{Mustexist: DEVType=LTO} 
-DEFine DEVclass \w+ (\w+=.*){1,} LBProtect= -> LBProtect=WRITEOnly{Mustexist: DEVType=LTO}
-DEFine DEVclass \w+ (\w+=.*){1,} LBProtect= -> LBProtect=No{Mustexist: DEVType=LTO}
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,}            -> DEVType=
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} DEVType=   -> DEVType=3590
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} DEVType=   -> DEVType=LTO
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,}            -> LIBRary=
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LIBRary=   -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,}            -> LBProtect={Mustexist: DEVType=LTO}
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LBProtect= -> LBProtect=READWrite{Mustexist: DEVType=LTO}
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LBProtect= -> LBProtect=WRITEOnly{Mustexist: DEVType=LTO}
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LBProtect= -> LBProtect=No{Mustexist: DEVType=LTO}
 # =========================================================================================================================
 
 ###################
@@ -181,59 +177,58 @@ DELete STGpool -> select stgpool_name from stgpools
 # Query commands #
 ##################
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.17?topic=commands-query-filespace-query-one-more-file-spaces#r_cmd_filespace_query
-Query                                                                -> FIlespace
-Query FIlespace                                                      -> select node_name from nodes
-Query FIlespace [\w\*\-\.]+                                          -> select filespace_name from filespaces where node_name like upper( '-2' )
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+                        -> Format=
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+                        -> NAMEType=
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+                        -> CODEType=
+Query                                                                      -> FIlespace
+Query FIlespace                                                            -> select node_name from nodes
+Query FIlespace [\w\*\-\.\+\&\@]+                                          -> select filespace_name from filespaces where node_name like upper( '-2' )
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+                        -> Format=
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+                        -> NAMEType=
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+                        -> CODEType=
 
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ Format=                -> Format=Standard
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ Format=                -> Format=Detailed
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=SERVER 
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=UNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=FSID
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=UNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=NONUNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=BOTH
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ Format=                -> Format=Standard
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ Format=                -> Format=Detailed
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=SERVER 
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=UNIcode
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ NAMEType=              -> NAMEType=FSID
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=UNIcode
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=NONUNIcode
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=BOTH
 
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> Format=
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> NAMEType=
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> CODEType=
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> Format=
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> NAMEType=
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> CODEType=
 #
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=   -> Format=Standard
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=   -> Format=Detailed
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=SERVER 
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=UNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=FSID
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=UNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=NONUNIcode
-Query FIlespace [\w\*\-\.]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=BOTH
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=   -> Format=Standard
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=   -> Format=Detailed
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=SERVER 
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=UNIcode
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=FSID
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=UNIcode
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=NONUNIcode
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=BOTH
 
 # https://www.ibm.com/docs/en/tsm/7.1.1?topic=commands-query-path-display-path-definition
 #2
-Query                                       -> PATH
+Query                                                             -> PATH
 #3
-Query PATH                                  -> select SERVER_NAME from status union (select SERVER_NAME from servers)
+Query PATH                                                        -> select SERVER_NAME from status union (select SERVER_NAME from servers)
 #4
-Query PATH (.*)                             -> select LIBRARY_NAME from libraries union (select DRIVE_NAME from drives)
+Query PATH [\w\*\-\.\+\&]+                                        -> select LIBRARY_NAME from libraries union (select DRIVE_NAME from drives)
 #5
-Query PATH (.*) (.*)                        -> SRCType=
-Query PATH (.*) (.*)                        -> DESTType=
-Query PATH (.*) (.*)                        -> Format=
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+                        -> SRCType=
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+                        -> DESTType=
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+                        -> Format=
 #6
-Query PATH (.*) (.*) SRCType=               -> SRCType=ANY
-Query PATH (.*) (.*) SRCType=               -> SRCType=DATAMover
-Query PATH (.*) (.*) SRCType=               -> SRCType=SERVer
-Query PATH (.*) (.*) DESTType=              -> DESTType=ANY
-Query PATH (.*) (.*) DESTType=              -> DESTType=DRIVE
-Query PATH (.*) (.*) DESTType=              -> DESTType=LIBRary
-Query PATH (.*) (.*) Format=                -> Format=Standard
-Query PATH (.*) (.*) Format=                -> Format=Detailed
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ SRCType=               -> SRCType=ANY
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ SRCType=               -> SRCType=DATAMover
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ SRCType=               -> SRCType=SERVer
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DESTType=              -> DESTType=ANY
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DESTType=              -> DESTType=DRIVE
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DESTType=              -> DESTType=LIBRary
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ Format=                -> Format=Standard
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ Format=                -> Format=Detailed
 #7
-#Query PATH (.*) (.*) DESTType=DRIVE              -> LIBRary=
-#Query PATH (.*) (.*) DESTType=DRIVE LIBRary=             ->  select LIBRARY_NAME from libraries
-
+#Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,}           -> LIBRary=
+#Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DESTType=DRIVE LIBRary=             ->  select LIBRARY_NAME from libraries
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-actlog-query-activity-log
 Query                         -> ACtlog
      
@@ -326,21 +321,21 @@ Query Node Format=                 -> Format=Detailed
 Query Node AUTHentication=         -> AUTHentication=LOcal
 Query Node AUTHentication=         -> AUTHentication=LDap
 
-Query Node [\w\*\-\.]+                 -> Type=
-Query Node [\w\*\-\.]+                 -> DOmain=
-Query Node [\w\*\-\.]+                 -> Format=
-Query Node [\w\*\-\.]+                 -> AUTHentication=
-Query Node [\w\*\-\.]+ Type=           -> Type=Client
-Query Node [\w\*\-\.]+ Type=           -> Type=NAS
-Query Node [\w\*\-\.]+ Type=           -> Type=Server
-Query Node [\w\*\-\.]+ Type=           -> Type=Any
-Query Node [\w\*\-\.]+ Type=           -> Type=OBJECTClient
-Query Node [\w\*\-\.]+ Type=           -> Type=OSSMClient
-Query Node [\w\*\-\.]+ DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
-Query Node [\w\*\-\.]+ Format=         -> Format=Standard
-Query Node [\w\*\-\.]+ Format=         -> Format=Detailed
-Query Node [\w\*\-\.]+ AUTHentication= -> AUTHentication=LOcal
-Query Node [\w\*\-\.]+ AUTHentication= -> AUTHentication=LDap
+Query Node [\w\*\-\.\+\&\@]+                 -> Type=
+Query Node [\w\*\-\.\+\&\@]+                 -> DOmain=
+Query Node [\w\*\-\.\+\&\@]+                 -> Format=
+Query Node [\w\*\-\.\+\&\@]+                 -> AUTHentication=
+Query Node [\w\*\-\.\+\&\@]+ Type=           -> Type=Client
+Query Node [\w\*\-\.\+\&\@]+ Type=           -> Type=NAS
+Query Node [\w\*\-\.\+\&\@]+ Type=           -> Type=Server
+Query Node [\w\*\-\.\+\&\@]+ Type=           -> Type=Any
+Query Node [\w\*\-\.\+\&\@]+ Type=           -> Type=OBJECTClient
+Query Node [\w\*\-\.\+\&\@]+ Type=           -> Type=OSSMClient
+Query Node [\w\*\-\.\+\&\@]+ DOmain=         -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node [\w\*\-\.\+\&\@]+ Format=         -> Format=Standard
+Query Node [\w\*\-\.\+\&\@]+ Format=         -> Format=Detailed
+Query Node [\w\*\-\.\+\&\@]+ AUTHentication= -> AUTHentication=LOcal
+Query Node [\w\*\-\.\+\&\@]+ AUTHentication= -> AUTHentication=LDap
 
 Query Node (\w+=\w*\s*){1,} Type= -> Type=Client
 Query Node (\w+=\w*\s*){1,} Type= -> Type=NAS
@@ -367,21 +362,21 @@ Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LOcal
 Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LDap
 
 # de ez már az 5. szint
-Query Node [\w\*\-\.]+ (\w+=.*){1,}         -> Type=
-Query Node [\w\*\-\.]+ (\w+=.*){1,}         -> DOmain=
-Query Node [\w\*\-\.]+ (\w+=.*){1,}         -> Format=
-Query Node [\w\*\-\.]+ (\w+=.*){1,}         -> AUTHentication=
-Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=Client
-Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=NAS
-Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=Server
-Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=Any
-Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=OBJECTClient
-Query Node [\w\*\-\.]+ (\w+=.*){1,} Type=        -> Type=OSSMClient
-Query Node [\w\*\-\.]+ (\w+=.*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
-Query Node [\w\*\-\.]+ (\w+=.*){1,} Format=        -> Format=Standard
-Query Node [\w\*\-\.]+ (\w+=.*){1,} Format=        -> Format=Detailed
-Query Node [\w\*\-\.]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LOcal
-Query Node [\w\*\-\.]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LDap
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> Type=
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> DOmain=
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> Format=
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> AUTHentication=
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=Client
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=NAS
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=Server
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=Any
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=OBJECTClient
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=OSSMClient
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format=        -> Format=Standard
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format=        -> Format=Detailed
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LOcal
+Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LDap
 
 Query             -> SEssion
 Query SEssion     -> select session_id from sessions
@@ -459,29 +454,29 @@ SHow SLOTS -> select library_name from libraries
 # Other commands #
 ##################
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-decommission-node-decommission-application-system#r_cmd_node_decommission
-DECommission                    -> Node
-DECommission Node               -> select node_name from nodes
-DECommission Node [\w\*\-\.]+          -> Wait=
-DECommission Node [\w\*\-\.]+ Wait=    -> Wait=Yes
-DECommission Node [\w\*\-\.]+ Wait=    -> Wait=No
+DECommission                                 -> Node
+DECommission Node                            -> select node_name from nodes
+DECommission Node [\w\*\-\.\+\&\@]+          -> Wait=
+DECommission Node [\w\*\-\.\+\&\@]+ Wait=    -> Wait=Yes
+DECommission Node [\w\*\-\.\+\&\@]+ Wait=    -> Wait=No
 
 DECommission                               -> VM
 DECommission VM                            -> select distinct(VM_OWNER) from TSMGUI_ALLCLI_GRID where VM_OWNER <> ''
-DECommission VM [\w\*\-\.]+                    -> select NAME from TSMGUI_ALLCLI_GRID where VM_OWNER=upper( '-2' )
-DECommission VM [\w\*\-\.]+ [\w\*\-\.]+            -> Wait=
-DECommission VM [\w\*\-\.]+ [\w\*\-\.]+            -> NAMEType=
-DECommission VM [\w\*\-\.]+ [\w\*\-\.]+ NAMEType=  -> NAMEType=FSID
-DECommission VM [\w\*\-\.]+ [\w\*\-\.]+ Wait=      -> Wait=Yes
-DECommission VM [\w\*\-\.]+ [\w\*\-\.]+ Wait=      -> Wait=No
+DECommission VM [\w\*\-\.\+\&\@]+                    -> select NAME from TSMGUI_ALLCLI_GRID where VM_OWNER=upper( '-2' )
+DECommission VM [\w\*\-\.\+\&\@]+ [\w\*\-\.\+\&\@]+            -> Wait=
+DECommission VM [\w\*\-\.\+\&\@]+ [\w\*\-\.\+\&\@]+            -> NAMEType=
+DECommission VM [\w\*\-\.\+\&\@]+ [\w\*\-\.\+\&\@]+ NAMEType=  -> NAMEType=FSID
+DECommission VM [\w\*\-\.\+\&\@]+ [\w\*\-\.\+\&\@]+ Wait=      -> Wait=Yes
+DECommission VM [\w\*\-\.\+\&\@]+ [\w\*\-\.\+\&\@]+ Wait=      -> Wait=No
 
 RECommission                    -> Node
 RECommission Node               -> select node_name from nodes
 
-RECommission                            -> VM
-RECommission VM                         -> select distinct(VM_OWNER) from TSMGUI_ALLCLI_GRID where VM_OWNER <> ''
-RECommission VM (.*)                    -> select NAME from TSMGUI_ALLCLI_GRID
-RECommission VM (.*) (.*)               -> NAMEType=
-RECommission VM (.*) (.*) NAMEType=     -> NAMEType=FSID
+RECommission                                                      -> VM
+RECommission VM                                                   -> select distinct(VM_OWNER) from TSMGUI_ALLCLI_GRID where VM_OWNER <> ''
+RECommission VM [\w\*\-\.\+\&\@]+                                 -> select NAME from TSMGUI_ALLCLI_GRID
+RECommission VM [\w\*\-\.\+\&\@]+ [\w\*\-\.\+\&\@]+               -> NAMEType=
+RECommission VM [\w\*\-\.\+\&\@]+ [\w\*\-\.\+\&\@]+ NAMEType=     -> NAMEType=FSID
 ###############################################################
 
 SETOPT 		->	 3494SHARED
