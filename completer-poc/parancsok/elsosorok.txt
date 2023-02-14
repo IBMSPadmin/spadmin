@@ -1,0 +1,724 @@
+OUTPUT: >>-ACCept Date------------------------------------------------->< -
+OUTPUT: >>-ACTivate POlicyset--domain_name--policy_set_name------------>< -
+OUTPUT: >>-APPRove PEndingcmd--pending_request_id-----------------------> -
+OUTPUT: >>-ASsign DEFMGmtclass--domain_name--policy_set_name--class_name->< -
+OUTPUT: >>-AUDit CONTainer--+-container_name---------------------------------------------+--> -
+OUTPUT: >>-AUDit CONTainer--+-container_name---------------------------------------------+--> -
+OUTPUT: >>-AUDIT LDAPdirectory--+-----------------+---------------------> -
+OUTPUT: >>-AUDIT LIBRary--library_name----------------------------------> -
+OUTPUT: >>-AUDit LIBVolume--library_name--volume_name-------------------> -
+OUTPUT: >>-AUDit LICenses---------------------------------------------->< -
+OUTPUT: >>-AUDit Volume--+-volume_name-+--+-----------------+-----------> -
+OUTPUT: >>-BAckup DB--DEVclass--=--device_class_name--------------------> -
+OUTPUT: >>-BAckup DEVCONFig--+--------------------------------+-------->< -
+OUTPUT: >>-BAckup Node--node_name--+--------------------------+---------> -
+OUTPUT: >>-BAckup STGpool--primary_pool_name--copy_pool_name------------> -
+OUTPUT: >>-BAckup VOLHistory--+---------------------------------+------>< -
+OUTPUT: >>-BEGin EVentlogging--+-----------------------+--------------->< -
+OUTPUT: >>-CANcel EXPIration------------------------------------------->< -
+OUTPUT: >>-CANcel EXPort --+-----------------------+------------------->< -
+OUTPUT: >>-CANcel PRocess--process_number------------------------------>< -
+OUTPUT: >>-CANcel REPLication------------------------------------------>< -
+OUTPUT: >>-CANcel REQuest--+-request_number-+--+-----------+----------->< -
+OUTPUT: >>-CANcel--RESTore--+-session_number-+------------------------->< -
+OUTPUT: >>-CANcel SEssion--+-session_number-+-------------------------->< -
+OUTPUT: >>-CHECKIn LIBVolume--library_name------------------------------> -
+OUTPUT: >>-CHECKIn LIBVolume--library_name------------------------------> -
+OUTPUT: >>-CHECKIn LIBVolume--library_name------------------------------> -
+OUTPUT: >>-CHECKOut LIBVolume--library_name----+-volume_name-+----------> -
+OUTPUT: >>-CHECKOut LIBVolume--library_name----+-volume_name-+----------> -
+OUTPUT: >>-CHECKOut LIBVolume--library_name----+-volume_name-+----------> -
+OUTPUT: >>-CLEAN DRIVE--library_name--drive_name----------------------->< -
+OUTPUT: >>-COMMIT------------------------------------------------------>< -
+OUTPUT: >>-CONvert STGpool--source_stgpool--target_stgpool--------------> -
+OUTPUT: >>-COPY ACTIVEdata--primary_pool_name--active-data_pool_name----> -
+OUTPUT: >>-COPy CLOptset--current_option_set_name--new_option_set_name->< -
+OUTPUT: >>-COPy DOmain--current_domain_name--new_domain_name----------->< -
+OUTPUT: >>-COPy MGmtclass--domain_name--policy_set_name-----------------> -
+OUTPUT: >>-COPy POlicyset--domain_name--current_set_name--new_set_name->< -
+OUTPUT: >>-COPy PROFIle--current_profile_name--new_profile_name-------->< -
+OUTPUT: >>-COPy SCHedule--current_domain_name--current_sched_name-------> -
+OUTPUT: >>-COPy SCHedule--current_sched_name--new_sched_name------------> -
+OUTPUT: >>-COPy SCRipt--current_script_name--new_script_name----------->< -
+OUTPUT: >>-COPy SERVERGroup--current_group_name--new_group_name-------->< -
+OUTPUT: >>-DEACtivate DAta--node_name--TODate--=--date------------------> -
+OUTPUT: >>-DECommission Node--node_name--+------------------+---------->< -
+OUTPUT: >>-DECommission VM--node_name--vm_name--------------------------> -
+OUTPUT: >>-DEfine ALERTTrigger----+--message_number-+-------------------> -
+OUTPUT: >>-DEFine ASSOCiation--domain_name--schedule_name---------------> -
+OUTPUT: >>-DEFine BACKUPSET----+-node_name-------+-+--------------------> -
+OUTPUT: >>- DEFine CLIENTAction------node_name-+------------------------> -
+OUTPUT: >>-DEFine CLIENTOpt--option_set_name--option_name--option_value--> -
+OUTPUT: >>-DEFine CLOptset--option_set_name-----------------------------> -
+OUTPUT: >>-DEFine COLLOCGroup--group_name-------------------------------> -
+OUTPUT: >>-DEFine COLLOCMember--group_name----node_name-+-------------->< -
+OUTPUT: >>-DEFine COLLOCMember--group_name--node_name-------------------> -
+OUTPUT: >>-DEFine CONNection--connection_name---------------------------> -
+OUTPUT: >>-DEFine COpygroup--domain_name--policy_set_name--class_name---> -
+OUTPUT: >>-DEFine COpygroup--domain_name--policy_set_name--class_name---> -
+OUTPUT: >>-DEFine DATAMover--data_mover_name----------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name--DEVType--=--CENTERA------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name--DEVType--=--CLOUD--------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name--DEVType--=--FILE---------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name--DEVType--=--NAS----------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name--DEVType--=--SERVER-------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-DEFine DEVclass--device_class_name--DEVType--=--FILE---------> -
+OUTPUT: >>-DEFine DOmain--domain_name-----------------------------------> -
+OUTPUT: >>-DEFine DRive--library_name--drive_name-----------------------> -
+OUTPUT: >>-DEFine EVENTSERVer--server_name----------------------------->< -
+OUTPUT: >>-DEFine GRPMEMber--group_name----member_name-+--------------->< -
+OUTPUT: >>-DEFine HOLD----hold_name-------------------------------------> -
+OUTPUT: >>-DEFine LIBRary--library_name--LIBType--=--349X---------------> -
+OUTPUT: >>-DEFine LIBRary--library_name--LIBType--=--ACSLS--------------> -
+OUTPUT: >>-DEFine LIBRary--library_name--LIBType--=--EXTernal-----------> -
+OUTPUT: >>-DEFine LIBRary--library_name--LIBType--=--FILE---------------> -
+OUTPUT: >>-DEFine LIBRary--library_name--LIBType--=--MANUAL-------------> -
+OUTPUT: >>-DEFine LIBRary--library_name--LIBType--=--SCSI---------------> -
+OUTPUT: >>-DEFine LIBRary--library_name--LIBType--=--SHAREd-------------> -
+OUTPUT: >>-DEFine LIBRary--library_name--LIBType--=--VTL----------------> -
+OUTPUT: >>-DEFine LIBRary--library_name--LIBType--=--ZOSMEDIA---------->< -
+OUTPUT: >>-DEFine MACHine--machine_name---------------------------------> -
+OUTPUT: >>-DEFine MACHNODEAssociation--machine_name----node_name-+----->< -
+OUTPUT: >>-DEFine MGmtclass--domain_name--policy_set_name--class_name---> -
+OUTPUT: >>-DEFine NODEGroup--group_name---------------------------------> -
+OUTPUT: >>-DEFine NODEGROUPMember--group_name----node_name-+----------->< -
+OUTPUT: >>-DEFine OBJECTDomain--domain_name-----------------------------> -
+OUTPUT: >>-DEFine PATH--source_name--destination_name-------------------> -
+OUTPUT: >>-DEFine PATH--source_name--destination_name-------------------> -
+OUTPUT: >>-DEFine PATH--source_name--destination_name-------------------> -
+OUTPUT: >>-DEFine POlicyset--domain_name--policy_set_name---------------> -
+OUTPUT: >>-DEFine PROFASSOCiation--profile_name-------------------------> -
+OUTPUT: >>-DEFine PROFIle--profile_name---------------------------------> -
+OUTPUT: >>-DEFine RECMEDMACHAssociation--media_name----machine_name-+-->< -
+OUTPUT: >>-DEFine RECOVERYMedia--media_name-----------------------------> -
+OUTPUT: >>-DEFine RETRule--retrule_name----+-node_name-------+-+--------> -
+OUTPUT: >>-| classic schedule |--+------------------------+-------------> -
+OUTPUT: >>-DEFine SCHedule--domain_name--schedule_name------------------> -
+OUTPUT: >>-DEFine SCHedule--domain_name--schedule_name------------------> -
+OUTPUT: >>-DEFine SCHedule--schedule_name-------------------------------> -
+OUTPUT: >>-DEFine SCHedule--schedule_name-------------------------------> -
+OUTPUT: >>-DEFine SCRATCHPadentry--major_category--minor_category-------> -
+OUTPUT: >>-DEFine SCRipt--script_name-----------------------------------> -
+OUTPUT: >>-DEFine--SERver--server_name--HLAddress--=--ip_address--------> -
+OUTPUT: >>-DEFine--SERver--server_name--SERVERPAssword--=--password-----> -
+OUTPUT: >>-DEFine--SERver--server_name--PAssword--=--password-----------> -
+OUTPUT: >>-DEFine--SERver--server_name--HLAddress--=--ip_address--------> -
+OUTPUT: >>-DEFine SERVERGroup--group_name-------------------------------> -
+OUTPUT: >>-DEFine SPACETrigger----STG----+---------------------+--------> -
+OUTPUT: >>-DEFine STAtusthreshold--threshold_name--activity-------------> -
+OUTPUT: >>-DEFine STGpool--pool_name--STGType--=--CLoud-----------------> -
+OUTPUT: >>-DEFine STGpool--pool_name--STGType--=--DIrectory-------------> -
+OUTPUT: >>-DEFine STGpool--pool_name--device_class_name-----------------> -
+OUTPUT: >>-DEFine STGpool--pool_name--DISK--+----------------------+----> -
+OUTPUT: >>-DEFine STGpool--pool_name--device_class_name-----------------> -
+OUTPUT: >>-+-------------------------------+--+---------------------+---> -
+OUTPUT: >>-DEFine STGpool--pool_name----STGType--=--COLDDATACache-------> -
+OUTPUT: >>-DEFine STGpool--pool_name--device_class_name-----------------> -
+OUTPUT: >>-DEFine STGpool--pool_name--device_class_name-----------------> -
+OUTPUT: >>-DEFine STGpool--pool_name--device_class_name-----------------> -
+OUTPUT: >>-DEFine STGPOOLDIRectory--pool_name------directory_name-+---->< -
+OUTPUT: >>-DEFine STGRULE--rule_name--storage_pool----------------------> -
+OUTPUT: >>-DEFine STGRULE--rule_name--target_stgpool--------------------> -
+OUTPUT: >>-DEFine STGRULE--rule_name--target_stgpool--------------------> -
+OUTPUT: >>-DEFine STGRULE--rule_name--pool_name-------------------------> -
+OUTPUT: >>-DEFine STGRULE--rule_name--target_server---------------------> -
+OUTPUT: >>-DEFine STGRULE--rule_name--target_stgpool--------------------> -
+OUTPUT: >>-DEFine SUBRule--parent_rule_name--subrule_name---------------> -
+OUTPUT: >>-DEFine SUBRule--parent_rule_name--subrule_name---------------> -
+OUTPUT: >>-DEFine SUBRule--parent_rule_name--subrule_name---------------> -
+OUTPUT: >>-DEFine SUBSCRIPtion--profile_name----------------------------> -
+OUTPUT: >>-DEFine VIRTUALFSmapping  --node_name-------------------------> -
+OUTPUT: >>-DEFine Volume--pool_name--volume_name------------------------> -
+OUTPUT: >>-DELete ALERTTrigger----+--message_number-+------------------>< -
+OUTPUT: >>-DELete ASSOCiation--domain_name--schedule_name---------------> -
+OUTPUT: >>-DELete BACKUPSET----+-node_name-------+-+--------------------> -
+OUTPUT: >>-DELete CLIENTOpt--option_set_name--option_name---------------> -
+OUTPUT: >>-DELete CLOptset--option_set_name---------------------------->< -
+OUTPUT: >>-DELete COLLOCGroup--group_name------------------------------>< -
+OUTPUT: >>-DELete COLLOCMember--group_name----node_name-+-------------->< -
+OUTPUT: >>-DELete COLLOCMember--group_name--node_name-------------------> -
+OUTPUT: >>-DELete CONNection--connection_name-------------------------->< -
+OUTPUT: >>-DELete COpygroup--domain_name--policy_set_name--class_name---> -
+OUTPUT: >>-DELete DATAMover--data_mover_name--------------------------->< -
+OUTPUT: >>-DELete DEDUPSTats--pool_name--+-----------+------------------> -
+OUTPUT: >>-DELete DEVclass--device_class_name-------------------------->< -
+OUTPUT: >>-DELete DOmain--domain_name---------------------------------->< -
+OUTPUT: >>-DELete DRive--library_name--drive_name---------------------->< -
+OUTPUT: >>-DELete EVent--date--+-------+--------------------------------> -
+OUTPUT: >>-DELete EVENTSERVer------------------------------------------>< -
+OUTPUT: >>-DELete FIlespace--node_name--file_space_name-----------------> -
+OUTPUT: >>-DELete GRPMEMber--group_name----member_name-+--------------->< -
+OUTPUT: >>-DELete LIBRary--library_name-------------------------------->< -
+OUTPUT: >>-DELete MACHine--machine_name---------------------------------> -
+OUTPUT: >>-DELete MACHNODEAssociation--machine_name----node_name-+----->< -
+OUTPUT: >>-DELete MGmtclass--domain_name--policy_set_name--class_name-->< -
+OUTPUT: >>-DELete NODEGroup--group_name-------------------------------->< -
+OUTPUT: >>-DELete NODEGROUPMember--group_name----node_name-+----------->< -
+OUTPUT: >>-DELete PATH--source_name--destination_name-------------------> -
+OUTPUT: >>-DELete POlicyset--domain_name--policy_set_name-------------->< -
+OUTPUT: >>-DELete PROFASSOCiation--profile_name-------------------------> -
+OUTPUT: >>-DELete PROFIle--profile_name--+-------------------+--------->< -
+OUTPUT: >>-DELete RECMEDMACHAssociation--media_name----machine_name-+-->< -
+OUTPUT: >>-DELete RECOVERYMedia--media_name---------------------------->< -
+OUTPUT: >>-DELete RETRule--retrule_name-------------------------------->< -
+OUTPUT: >>-DELete RETSet-retset_id--------------------------------------> -
+OUTPUT: >>-DELete SCHedule--domain_name--schedule_name------------------> -
+OUTPUT: >>-DELete SCHedule--schedule_name--Type--=--Administrative----->< -
+OUTPUT: >>-DELete SCRATCHPadentry--major_category--minor_category-------> -
+OUTPUT: >>-DELete SCRipt--script_name--+-----------------+------------->< -
+OUTPUT: >>-DELete--SERver--server_name--------------------------------->< -
+OUTPUT: >>-DELete SERVERGroup--group_name------------------------------>< -
+OUTPUT: >>-DELete SPACETrigger--STG-------------------------------------> -
+OUTPUT: >>-DELete STAtusthreshold--threshold_name---------------------->< -
+OUTPUT: >>-DELete STGpool--pool_name----------------------------------->< -
+OUTPUT: >>-DELete STGPOOLDIRectory--pool_name--directory--------------->< -
+OUTPUT: >>-DELete STGRULE--rule_name----------------------------------->< -
+OUTPUT: >>-DELete SUBRULE--parent_rule_name--subrule_name-------------->< -
+OUTPUT: >>-DELete SUBSCRIBer--server_name------------------------------>< -
+OUTPUT: >>-DELete SUBSCRIPtion--profile_name----------------------------> -
+OUTPUT: >>-DELete VIRTUALFSmapping  --node_name-------------------------> -
+OUTPUT: >>-DELete VOLHistory--TODate--=--date---------------------------> -
+OUTPUT: >>-DELete Volume--volume_name--+-------------------------+------> -
+OUTPUT: >>-DISAble EVents----+-receivers---+-+----+-event_name-+-+------> -
+OUTPUT: >>-DISAble REPLication----------------------------------------->< -
+OUTPUT: >>-DISAble SESSions---------------------------------------------> -
+OUTPUT: >>-DISMount Volume--volume_name-------------------------------->< -
+OUTPUT: >>-DISplay OBJname--token_ID----------------------------------->< -
+OUTPUT: >>-ENable--EVents----+-ALL---------+-+----+-event_name-+-+------> -
+OUTPUT: >>-ENable REPLication------------------------------------------>< -
+OUTPUT: >>-ENable SESSions----------------------------------------------> -
+OUTPUT: >>-ENCrypt STGpool--pool_name--+-----------------------+--------> -
+OUTPUT: >>-END--EVentlogging--+---------------------+------------------>< -
+OUTPUT: >>-EXPIre Inventory--+-------------------+----------------------> -
+OUTPUT: >>-EXPort Admin--+----------------+-----------------------------> -
+OUTPUT: >>-EXPort Admin--+----------------+-----------------------------> -
+OUTPUT: >>-EXPort Node--+---------------+-------------------------------> -
+OUTPUT: >>-EXPort Node--+-----------+-----------------------------------> -
+OUTPUT: >>-EXPort Policy--+-----------------+---------------------------> -
+OUTPUT: >>-EXPort Policy--+-----------------+---------------------------> -
+OUTPUT: >>-EXPort Server--+-------------------------------+-------------> -
+OUTPUT: >>-EXPort Server--+-------------------------------+-------------> -
+OUTPUT: >>-EXTend DBSpace----db_directory-+-----------------------------> -
+OUTPUT: >>-GENerate BACKUPSET----+-node__name------+-+------------------> -
+OUTPUT: >>-GENerate BACKUPSETTOC--node_name--backup_set_name------------> -
+OUTPUT: >>-GENerate DEDUPSTats--pool_name-------------------------------> -
+OUTPUT: >>-GENerate SECRET--------------------------------------------->< -
+OUTPUT: >>-GRant AUTHority--admin_name----------------------------------> -
+OUTPUT: >>-GRant PROXynode TArget--=--target_node_name------------------> -
+OUTPUT: >>-HALT-------------------------------------------------------->< -
+OUTPUT: >>-Help--+---------------------------------------+------------->< -
+OUTPUT: >>-HOld RETSet--hold_name--retset_id--REASon--=--text---------->< -
+OUTPUT: >>-IDentify DUPlicates--stgpool_name----------------------------> -
+OUTPUT: >>-IMport Admin--+----------------+--+---------------------+----> -
+OUTPUT: >>-IMport Node--+---------------+-------------------------------> -
+OUTPUT: >>-IMport Policy--+-----------------+---------------------------> -
+OUTPUT: >>-IMport Server--+-------------------------------+-------------> -
+OUTPUT: >>-INsert MAchine--machine_name--sequence_number----------------> -
+OUTPUT: >>-INTERRupt JOb----job_id------------------------------------->< -
+OUTPUT: >>-ISSUE MESSAGE--message_severity--message_text--------------->< -
+OUTPUT: >>-LABEl LIBVolume--library_name------volume_name---------------> -
+OUTPUT: >>-LABEl LIBVolume--library_name--------------------------------> -
+OUTPUT: >>-LABEl LIBVolume--library_name--------------------------------> -
+OUTPUT: >>-LABEl LIBVolume--library_name--------------------------------> -
+OUTPUT: >>-LOad DEFALerttriggers--+-------------------+---------------->< -
+OUTPUT: >>-LOCK Admin--+-*----------+--+------------------------------+->< -
+OUTPUT: >>-LOCK Node--+-*---------+--+------------------------------+-->< -
+OUTPUT: >>-LOCK PROFIle--profile_name--+---------+--------------------->< -
+OUTPUT: >>-MACRO--macro_name--+------------------------+--------------->< -
+OUTPUT: >>-MIGrate STGpool--pool_name--+-------------------+------------> -
+OUTPUT: >>-MOVe CONTainer--container_name--+--------------------+-------> -
+OUTPUT: >>-MOVe Data--volume_name--+-----------------------+------------> -
+OUTPUT: >>-MOVe DRMedia--volume_name------------------------------------> -
+OUTPUT: >>-MOVe GRPMEMber--member_name--from_group--to_group----------->< -
+OUTPUT: >>-MOVe MEDia--volume_name--STGpool--=--pool_name---------------> -
+OUTPUT: >>-MOVe NODEdata--+---node_name-+--------------+----------------> -
+OUTPUT: >>-MOVe NODEdata--node_name-------------------------------------> -
+OUTPUT: >>-MOVe RETMedia--volume_name-----------------------------------> -
+OUTPUT: >>-NOTIfy SUBSCRIBers--+------------------------------+-------->< -
+OUTPUT: >>-PERForm LIBACTion--library_name------------------------------> -
+OUTPUT: >>-PING SERVER--server_name------------------------------------>< -
+OUTPUT: >>-Prepare--+---------------------------+-----------------------> -
+OUTPUT: >>-PROTect STGPool--source_stgpool--+---------------------+-----> -
+OUTPUT: >>-PROTect STGPool--source_stgpool--Type--=--Local--------------> -
+OUTPUT: >>-Query ACtlog--+----------------------------+-----------------> -
+OUTPUT: >>-Query ADmin--+------------+----------------------------------> -
+OUTPUT: >>-Query ALERTTrigger--+--------------------+------------------>< -
+OUTPUT: >>-Query ALERTSTatus--+-----------------------------+-----------> -
+OUTPUT: >>-Query ASSOCiation--+--------------------------------+------->< -
+OUTPUT: >>-Query AUDITOccupancy--+---------------+----------------------> -
+OUTPUT: >>-Query BACKUPSET--+-------------------------+-----------------> -
+OUTPUT: >>-Query BACKUPSETCONTENTS--node_name--backup_set_name----------> -
+OUTPUT: >>-Query CLeanup--pool_name------------------------------------>< -
+OUTPUT: >>-Query CLOptset--+-----------------+--------------------------> -
+OUTPUT: >>-Query CLOUDReadcache--+---------------+--------------------->< -
+OUTPUT: >>-Query COLLOCGroup--+------------+----------------------------> -
+OUTPUT: >>-Query CONNection--+-----------------+------------------------> -
+OUTPUT: >>-Query CONTAINER--+----------------+--------------------------> -
+OUTPUT: >>-Query CONtent--volume_name--+--------------------+-----------> -
+OUTPUT: >>-Query CONVERSion--+-----------+------------------------------> -
+OUTPUT: >>-Query COpygroup----------------------------------------------> -
+OUTPUT: >>-Query DAMaged--pool_name-------------------------------------> -
+OUTPUT: >>-Query DATAMover--+-----------------+-------------------------> -
+OUTPUT: >>-Query DB--+-------------------------+----------------------->< -
+OUTPUT: >>-QUERY DBSpace----------------------------------------------->< -
+OUTPUT: >>-Query DEDUPSTats--+-----------+------------------------------> -
+OUTPUT: >>-Query DEVclass--+-------------------+------------------------> -
+OUTPUT: >>-Query DIRSPace--+-------------------+----------------------->< -
+OUTPUT: >>-Query DOmain--+-------------+--+-------------------------+-->< -
+OUTPUT: >>-Query DRive--+------------------------------+----------------> -
+OUTPUT: >>-Query DRMedia--+-------------+-------------------------------> -
+OUTPUT: >>-Query DRMSTatus--------------------------------------------->< -
+OUTPUT: >>-Query--ENabled--+-CONSOLE-----+------------------------------> -
+OUTPUT: >>-Query EVent--domain_name--schedule_name----------------------> -
+OUTPUT: >>-Query EVent--schedule_name--Type--=--Administrative----------> -
+OUTPUT: >>-Query--EVENTRUles--+----------------------------+----------->< -
+OUTPUT: >>-Query EVENTSERVer------------------------------------------->< -
+OUTPUT: >>-Query EXPort--+-----------------------+----------------------> -
+OUTPUT: >>-Query EXTENTUPDates--pool_name------------------------------>< -
+OUTPUT: >>-Query FIlespace--+-------------------------------+-----------> -
+OUTPUT: >>-Query FSCounts--+-node_name--+-----------------+-+-----------> -
+OUTPUT: >>-Query JOB--+--------+--+--------------------+----------------> -
+OUTPUT: >>-Query HOLD--+-----------+--+-------------------------+-------> -
+OUTPUT: >>-Query HOLDlog--+--------------------------+------------------> -
+OUTPUT: >>-Query LIBRary--+--------------+------------------------------> -
+OUTPUT: >>-Query LIBVolume--+--------------+--+-------------+-----------> -
+OUTPUT: >>-Query LICense----------------------------------------------->< -
+OUTPUT: >>-Query LOG--+-------------------------+---------------------->< -
+OUTPUT: >>-Query MACHine--+--------------+--+-----------------------+---> -
+OUTPUT: >>-Query MEDia--+-------------+--STGpool--=--pool_name----------> -
+OUTPUT: >>-Query MGmtclass----------------------------------------------> -
+OUTPUT: >>-Query MONITORSEttings--------------------------------------->< -
+OUTPUT: >>-Query MONITORSTatus--+-------------------------+-------------> -
+OUTPUT: >>-Query MOunt--+-------------+--+-------------------------+--->< -
+OUTPUT: >>-Query NASBAckup--node_name--filespace_name-------------------> -
+OUTPUT: >>-Query Node--+-----------+--+----------------------------+----> -
+OUTPUT: >>-Query NODEData--+---node_name-+----------------+-------------> -
+OUTPUT: >>-Query NODEGroup--+------------+------------------------------> -
+OUTPUT: >>-Query OCCupancy--+--------------------------------+----------> -
+OUTPUT: >>-Query OPTion--+------------+-------------------------------->< -
+OUTPUT: >>-Query PATH--+-----------------------------------+------------> -
+OUTPUT: >>-Query PEndingcmd---------------------------------------------> -
+OUTPUT: >>-Query POlicyset--+----------------------------------+--------> -
+OUTPUT: >>-Query PRocess--+----------------+----------------------------> -
+OUTPUT: >>-Query PROFIle--+--------------+------------------------------> -
+OUTPUT: >>-Query PROTECTStatus--+-----------+---------------------------> -
+OUTPUT: >>-Query PROXynode----TArget--=--+------------------+---------->< -
+OUTPUT: >>-Query PVUESTIMate--+-------------------------+-------------->< -
+OUTPUT: >>-Query RECOVERYMedia--+------------+--------------------------> -
+OUTPUT: >>-Query REPLFAILures----+---------------------+-+--------------> -
+OUTPUT: >>-Query REPLIcation--node_name---------------------------------> -
+OUTPUT: >>-Query REPLNode----+---*-----------+-+------------------------> -
+OUTPUT: >>-Query REPLRule--+-------------------------------+----------->< -
+OUTPUT: >>-Query REPLServer--+-------------+--------------------------->< -
+OUTPUT: >>-Query REQuest--+----------------+--------------------------->< -
+OUTPUT: >>-Query--RESTore--+-----------+--+-----------------+-----------> -
+OUTPUT: >>-Query RETMedia--+-------------+------------------------------> -
+OUTPUT: >>-Query RETRule--+--------------+------------------------------> -
+OUTPUT: >>-Query RETSet--+-----------+----------------------------------> -
+OUTPUT: >>---Query RETSETContents--+-----------+------------------------> -
+OUTPUT: >>-Query RPFContent--plan_file_name-----------------------------> -
+OUTPUT: >>-Query RPFile--+-DEVclass--=--device_class_name-+-------------> -
+OUTPUT: >>-Query SAN--+----------------------+--------------------------> -
+OUTPUT: >>-Query SCHedule--+--------------------------------+-----------> -
+OUTPUT: >>-Query SCHedule--+---------------+--Type--=--Administrative---> -
+OUTPUT: >>-Query SCRATCHPadentry----------------------------------------> -
+OUTPUT: >>-Query SCRipt--+-------------+--------------------------------> -
+OUTPUT: >>-Query SERver--+-------------+--+-------------------------+-->< -
+OUTPUT: >>-QUERY SERVERGroup--+------------+--------------------------->< -
+OUTPUT: >>-Query SEssion--+---------+-----------------------------------> -
+OUTPUT: >>-QUERY SHREDstatus--+-------------------------+-------------->< -
+OUTPUT: >>-Query SPACETrigger--STG--+--------------------------+--------> -
+OUTPUT: >>-Query STatus------------------------------------------------>< -
+OUTPUT: >>-Query STAtusthreshold--+----------------+--------------------> -
+OUTPUT: >>-Query STGpool--+-----------+--+-------------------------+----> -
+OUTPUT: >>-Query STGPOOLDIRectory--+-----------+------------------------> -
+OUTPUT: >>-Query STGRULE--+-----------+--+-------------------------+----> -
+OUTPUT: >>-Query SUBRULE------------------------------------------------> -
+OUTPUT: >>-Query SUBSCRIBer--+-------------+----------------------------> -
+OUTPUT: >>-Query SUBSCRIPtion--+--------------+------------------------>< -
+OUTPUT: >>-Query SYStem------------------------------------------------>< -
+OUTPUT: >>-Query TAPEAlertmsg------------------------------------------>< -
+OUTPUT: >>-Query TOC--node_name--filespace_name-------------------------> -
+OUTPUT: >>-Query VIRTUALFSmapping  -------------------------------------> -
+OUTPUT: >>-Query VOLHistory--+-----------------------------+------------> -
+OUTPUT: >>-Query Volume--+-------------+--------------------------------> -
+OUTPUT: >>-QUIT-------------------------------------------------------->< -
+OUTPUT: >>-RECLaim STGpool--pool_name--+----------------------+---------> -
+OUTPUT: >>-RECommission Node--node_name-------------------------------->< -
+OUTPUT: >>-RECommission VM--node_name--vm_name--------------------------> -
+OUTPUT: >>-REConcile Volumes--+-------------------+---------------------> -
+OUTPUT: >>-REGister Admin--admin_name--+----------+---------------------> -
+OUTPUT: >>-REGister LICense--FILE--=--+-tsmbasic.lic-+----------------->< -
+OUTPUT: >>-REGister Node--node_name--+----------+-----------------------> -
+OUTPUT: >>-REGister Node--node_name--Type--=--OBJECTClient--------------> -
+OUTPUT: >>-REJect PEndingcmd--pending_request_id------------------------> -
+OUTPUT: >>-RELease RETSet--hold_name--retset_id--REASon--=--text------->< -
+OUTPUT: >>-REMove Admin--admin_name--+----------------------------+---->< -
+OUTPUT: >>-REMove DAMaged--pool_name--+---------------+-----------------> -
+OUTPUT: >>-REMove Node--node_name--+----------------------------+------>< -
+OUTPUT: >>-REMove REPLNode------+-node_name-------+---+-----------------> -
+OUTPUT: >>-REMove REPLServer--GUID------------------------------------->< -
+OUTPUT: >>-REMove STGProtection--LOCALSTGpool--=--pool_name-------------> -
+OUTPUT: >>-REName Admin--current_admin_name--new_admin_name-------------> -
+OUTPUT: >>-REName FIlespace--node_name----------------------------------> -
+OUTPUT: >>-REName HOLD--current_hold_name--new_hold_name--------------->< -
+OUTPUT: >>-REName Node--current_node_name--new_node_name----------------> -
+OUTPUT: >>-REName RETRule--current_retrule_name--new_retrule_name------>< -
+OUTPUT: >>-REName SCRipt--current_script_name--new_script_name--------->< -
+OUTPUT: >>-REName SERVERGroup--current_group_name--new_group_name------>< -
+OUTPUT: >>-REName STGpool--current_pool_name--new_pool_name------------>< -
+OUTPUT: >>-REPAir STGPool--pool_name--+--------------------+------------> -
+OUTPUT: >>-REPAir STGPool--pool_name------------------------------------> -
+OUTPUT: >>-REPLicate Node------+-node_name-------+---+------------------> -
+OUTPUT: >>-REPly--request_number--+------------------------+----------->< -
+OUTPUT: >>-RESet PASSExp--+------------------------+--------------------> -
+OUTPUT: >>-RESTART EXPORT --+-----------------------+------------------>< -
+OUTPUT: >>-RESTORE Node--node_name--source_file_system------------------> -
+OUTPUT: >>-RESTORE STGpool--primary_pool_name---------------------------> -
+OUTPUT: >>-RESTORE Volume----volume_name-+------------------------------> -
+OUTPUT: >>-RESUme JOb----job_id---------------------------------------->< -
+OUTPUT: >>-REVoke AUTHority--admin_name---------------------------------> -
+OUTPUT: >>-REVoke PROXynode TArget--=--target_node_name-----------------> -
+OUTPUT: >>-ROLLBACK---------------------------------------------------->< -
+OUTPUT: >>-RUn--script_name--+------------------------+-----------------> -
+OUTPUT: >>-Set ACCounting--+-ON--+------------------------------------->< -
+OUTPUT: >>-Set ACTlogretention--number--+------------------------+----->< -
+OUTPUT: >>-Set ALERTACtiveduration --number_mins----------------------->< -
+OUTPUT: >>-Set ALERTCLosedduration --number_mins----------------------->< -
+OUTPUT: >>-Set ALERTEMail--+-ON--+------------------------------------->< -
+OUTPUT: >>-Set ALERTEMAILFRomaddr --email_address---------------------->< -
+OUTPUT: >>-Set ALERTEMAILSMTPHost--host_name--------------------------->< -
+OUTPUT: >>-Set ALERTEMAILSMTPPort--tcp_port---------------------------->< -
+OUTPUT: >>-Set ALERTSUMMARYToadmins--+-admin_name-+-------------------->< -
+OUTPUT: >>-Set ALERTINactiveduration --number_mins--------------------->< -
+OUTPUT: >>-Set ALERTMONITOR --+-ON--+---------------------------------->< -
+OUTPUT: >>-Set ALERTUPDateinterval --number_mins----------------------->< -
+OUTPUT: >>-+---------------------------------------+------------------->< -
+OUTPUT: >>-Set ARCHIVERETENTIONPROTECTion --+-OFf-+-------------------->< -
+OUTPUT: >>-Set ARREPLRuledefault--+-ALL_DATA---------------+----------->< -
+OUTPUT: >>-Set BKREPLRuledefault--+-ALL_DATA------------------+-------->< -
+OUTPUT: >>-SET CLIENTACTDuration--days--------------------------------->< -
+OUTPUT: >>-+------------------------------+---------------------------->< -
+OUTPUT: >>-Set CONFIGManager--+-----+---------------------------------->< -
+OUTPUT: >>-Set CONFIGRefresh--minutes---------------------------------->< -
+OUTPUT: >>-Set CONTEXTmessaging--+-ON--+------------------------------->< -
+OUTPUT: >>-Set CPUINFOREFRESH--days------------------------------------>< -
+OUTPUT: >>-Set CROSSDefine--+-ON--+------------------------------------>< -
+OUTPUT: >>-SET DBRECOVery--device_class_name----------------------------> -
+OUTPUT: >>-Set DEDUPVERificationlevel--+---------------+--------------->< -
+OUTPUT: >>-SET DEFAULTAUTHentication--+-LOcal-+------------------------>< -
+OUTPUT: >>-SET DEPLOYPKGMgr--+-OFf-+----------------------------------->< -
+OUTPUT: >>-SET DEPLOYREPository--path_name----------------------------->< -
+OUTPUT: >>-SET DEPLOYMAXPkgs--number----------------------------------->< -
+OUTPUT: >>-Set DISSIMILARPolicies--target_server_name--+-----+--------->< -
+OUTPUT: >>-Set DRMACTIVEDatastgpool----active-data_pool_name-+--------->< -
+OUTPUT: >>-Set DRMCHECKLabel--+-----+---------------------------------->< -
+OUTPUT: >>-Set DRMCMDFilename--file_name------------------------------->< -
+OUTPUT: >>-Set DRMCOPYCONtainerstgpool----pool_name-+------------------>< -
+OUTPUT: >>-Set DRMCOPYstgpool----copy_pool_name-+---------------------->< -
+OUTPUT: >>-Set DRMCOUriername--courier_name---------------------------->< -
+OUTPUT: >>-Set DRMDBBackupexpiredays--days----------------------------->< -
+OUTPUT: >>-Set DRMFILEProcess--+-----+--------------------------------->< -
+OUTPUT: >>-Set DRMINSTRPrefix--prefix---------------------------------->< -
+OUTPUT: >>-Set DRMNOTMOuntablename--location--------------------------->< -
+OUTPUT: >>-Set DRMPLANPrefix--prefix----------------------------------->< -
+OUTPUT: >>-Set DRMPLANVpostfix--character------------------------------>< -
+OUTPUT: >>-Set DRMPRIMstgpool----primary_pool_name-+------------------->< -
+OUTPUT: >>-Set DRMRETentionstgpool----retention_pool_name-+------------>< -
+OUTPUT: >>-Set DRMRPFEXpiredays--days---------------------------------->< -
+OUTPUT: >>-SET DRMVAultname--vault_name-------------------------------->< -
+OUTPUT: >>-Set EVentretention--days------------------------------------>< -
+OUTPUT: >>-SET FAILOVERHladdress--high_level_address------------------->< -
+OUTPUT: >>-Set--INVALIDPwlimit--number--------------------------------->< -
+OUTPUT: >>-Set LDAPPassword--ldap_user_password------------------------>< -
+OUTPUT: >>-Set LDAPUser--ldap_user_dn---------------------------------->< -
+OUTPUT: >>-Set--LICenseauditperiod--+------+--------------------------->< -
+OUTPUT: >>-Set MAXCMDRetries--+--------+------------------------------->< -
+OUTPUT: >>-Set MAXSCHedsessions--percent------------------------------->< -
+OUTPUT: >>-Set--MINPWCHARAlphabetic--+--------+------------------------>< -
+OUTPUT: >>-Set--MINPWCHARLower--+--------+----------------------------->< -
+OUTPUT: >>-Set--MINPWCHARNumeric--+--------+--------------------------->< -
+OUTPUT: >>-Set--MINPWCHARSpecial--+--------+--------------------------->< -
+OUTPUT: >>-Set--MINPWCHARUpper--+--------+----------------------------->< -
+OUTPUT: >>-Set--MINPwlength--+--------+-------------------------------->< -
+OUTPUT: >>-Set MONITOREDSERVERGroup--+------------+-------------------->< -
+OUTPUT: >>-Set MONITORINGADMIN--+------------+------------------------->< -
+OUTPUT: >>---Set NODEATRISKINTERVAL--node_name--------------------------> -
+OUTPUT: >>-Set PASSExp--days--+------------------------+----------------> -
+OUTPUT: >>-SET PRODUCTOFFERING--product_offering----------------------->< -
+OUTPUT: >>-Set PWREUselimit--number------------------------------------>< -
+OUTPUT: >>-Set QUERYSCHedperiod--+-------+----------------------------->< -
+OUTPUT: >>-Set RANDomize--percent-------------------------------------->< -
+OUTPUT: >>-+------------------------------------+---------------------->< -
+OUTPUT: >>-Set REPLRETention--+----------------+----------------------->< -
+OUTPUT: >>-Set REPLSERVer--+--------------------+---------------------->< -
+OUTPUT: >>-Set RETRYPeriod--+---------+-------------------------------->< -
+OUTPUT: >>-Set SCHEDMODes--+-ANY------+-------------------------------->< -
+OUTPUT: >>-SET SCRATCHPADRETENTION--days------------------------------->< -
+OUTPUT: >>-Set SECURITYNotif--+-OFf-+---------------------------------->< -
+OUTPUT: >>-Set SERVERHladdress--ip_address----------------------------->< -
+OUTPUT: >>-Set SERVERLladdress--tcp_port------------------------------->< -
+OUTPUT: >>-Set SERVername--server_name--------------------------------->< -
+OUTPUT: >>-Set SERVERPAssword--password-------------------------------->< -
+OUTPUT: >>-Set SPREPLRuledefault--+-ALL_DATA---------------+----------->< -
+OUTPUT: >>---Set STATUSATRISKINTERVAL--TYPE--=----+-ALl----------+------> -
+OUTPUT: >>-+-------------------------------+--------------------------->< -
+OUTPUT: >>-Set STATUSREFreshinterval--minutes-------------------------->< -
+OUTPUT: >>-Set STATUSSKIPASFAILURE--+-Yes-+-----------------------------> -
+OUTPUT: >>-Set SUBFILE--+-Client-+------------------------------------->< -
+OUTPUT: >>-Set SUMmaryretention--+------+------------------------------>< -
+OUTPUT: >>-Set TAPEAlertmsg--+-ON--+----------------------------------->< -
+OUTPUT: >>-Set TOCLOADRetention--minutes------------------------------->< -
+OUTPUT: >>---Set VMATRISKINTERVAL--node_name--fsid----------------------> -
+OUTPUT: >>-SETOPT--option_name--option_value--------------------------->< -
+OUTPUT: >>-SHRED DATA--+----------------------+--+------------------+---> -
+OUTPUT: >>-STAGE VOLume----volume_name----------------------------------> -
+OUTPUT: >>-STAGE VOLume----RETSet--=--retset_id-------------------------> -
+OUTPUT: >>-STArt STGRule--storage_rule_name-----------------------------> -
+OUTPUT: >>-STArt STGRule--storage_rule_name-----------------------------> -
+OUTPUT: >>-STArt STGRule--storage_rule_name-----------------------------> -
+OUTPUT: >>-STArt STGRule--storage_rule_name--+------------------+------>< -
+OUTPUT: >>-STArt STGRule--storage_rule_name-----------------------------> -
+OUTPUT: >>-STArt STGRule--storage_rule_name--+------------------+------>< -
+OUTPUT: >>-STArt STGRule--storage_rule_name-----------------------------> -
+OUTPUT: >>-SUSPend EXPOrt --+-----------------------+------------------>< -
+OUTPUT: >>-TERMinate JOb----job_id------------------------------------->< -
+OUTPUT: >>-UNLOCK Admin--+-*----------+--+------------------------------+->< -
+OUTPUT: >>-UNLOCK Node--+-*---------+--+------------------------------+->< -
+OUTPUT: >>-UNLOCK PROFIle--profile_name-------------------------------->< -
+OUTPUT: >>-UPDate Admin-------admin_name-------+----------+-------------> -
+OUTPUT: >>-UPDate ALERTTrigger----+--message_number-+-------------------> -
+OUTPUT: >>-UPDate ALERTSTatus----+--alert_id-+--------------------------> -
+OUTPUT: >>-UPDate BACKUPSET----+-node__name------+-+--------------------> -
+OUTPUT: >>-UPDate CLIENTOpt--option_set_name--option_name---------------> -
+OUTPUT: >>-UPDate CLOptset--option_set_name-----------------------------> -
+OUTPUT: >>-UPDate COLLOCGroup--group_name-------------------------------> -
+OUTPUT: >>-UPDate CONNection--connection_name---------------------------> -
+OUTPUT: >>-UPDate COpygroup--domain_name--policy_set_name--class_name---> -
+OUTPUT: >>-UPDate COpygroup--domain_name--policy_set_name--class_name---> -
+OUTPUT: >>-UPDate DATAMover--data_mover_name----------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDdate DEVclass--device_class_name--------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DEVclass--device_class_name---------------------------> -
+OUTPUT: >>-UPDate DOmain--domain_name-----------------------------------> -
+OUTPUT: >>-UPDate DRive--library_name--drive_name-----------------------> -
+OUTPUT: >>-UPDate FIlespace--node_name--file_space_name-----------------> -
+OUTPUT: >>-UPDate HOLD--hold_name--+-----------------------------+------> -
+OUTPUT: >>-UPDate LIBRary--library_name--+--------------------+---------> -
+OUTPUT: >>-UPDate LIBRary--library_name--+--------------------+---------> -
+OUTPUT: >>-UPDate LIBRary--library_name---------------------------------> -
+OUTPUT: >>-UPDate LIBRary--library_name--+--------------------+-------->< -
+OUTPUT: >>-UPDate LIBRary--library_name--+-------------------------+----> -
+OUTPUT: >>-UPDate LIBRary--library_name----LIBType--=--+-SCSI-+---------> -
+OUTPUT: >>-UPDate LIBRary--library_name---------------------------------> -
+OUTPUT: >>-UPDate LIBRary--library_name----LIBType--=--+-VTL--+---------> -
+OUTPUT: >>-UPDate LIBVolume--library_name--volume_name--STATus--=--+-PRIvate-+--> -
+OUTPUT: >>-UPDate MACHine--machine_name---------------------------------> -
+OUTPUT: >>-UPDate MGmtclass--domain_name--policy_set_name--class_name---> -
+OUTPUT: >>-UPDate Node-------node_name----------------------------------> -
+OUTPUT: >>-UPDate NODEGroup--group_name--DESCription--=--description--->< -
+OUTPUT: >>-UPDate OBJECTDomain--domain_name-----------------------------> -
+OUTPUT: >>-UPDate PATH--source_name--destination_name-------------------> -
+OUTPUT: >>-UPDate PATH--source_name--destination_name-------------------> -
+OUTPUT: >>-UPDate PATH--source_name--destination_name-------------------> -
+OUTPUT: >>-UPDate POlicyset--domain_name--policy_set_name---------------> -
+OUTPUT: >>-UPDate PROFIle--profile_name--DESCription--=--description--->< -
+OUTPUT: >>-UPDate RECOVERYMedia--media_name-----------------------------> -
+OUTPUT: >>-UPDate REPLRule--rule_name----STate--=--+-ENabled--+-------->< -
+OUTPUT: >>-UPDate RETRule--retrule_name--+-| add_client |----+--------->< -
+OUTPUT: >>-UPDate RETSet--retset_id--+-----------------------------+----> -
+OUTPUT: >>-UPDate SCHedule---------domain_name--schedule_name-----------> -
+OUTPUT: >>-UPDate SCHedule---------domain_name--schedule_name-----------> -
+OUTPUT: >>-UPDate SCHedule---------schedule_name------------------------> -
+OUTPUT: >>-UPDate SCHedule---------schedule_name------------------------> -
+OUTPUT: >>-UPDate SCRATCHPadentry--major_category--minor_category-------> -
+OUTPUT: >>-UPDate SCRipt--script_name-----------------------------------> -
+OUTPUT: >>-UPDate--SERver--server_name----------------------------------> -
+OUTPUT: >>-UPDate--SERver--server_name--+-----------------------+-------> -
+OUTPUT: >>-UPDate--SERver--server_name--+--------------------------+----> -
+OUTPUT: >>-UPDate SERVERGroup--group_name-------------------------------> -
+OUTPUT: >>-UPDate SPACETrigger--STG--+---------------------+------------> -
+OUTPUT: >>-UPDate STAtusthreshold--threshold_name--+----------------------------+--> -
+OUTPUT: >>-UPDate STGpool--pool_name------------------------------------> -
+OUTPUT: >>-UPDate STGpool--pool_name--+-----------------------------+---> -
+OUTPUT: >>-UPDate STGpool--pool_name--+-----------------------+---------> -
+OUTPUT: >>-UPDate STGpool--pool_name--+-----------------------------+---> -
+OUTPUT: >>-UPDate STGpool--pool_name--+-----------------------------+---> -
+OUTPUT: >>-UPDate STGpool--pool_name--+-----------------------------+---> -
+OUTPUT: >>-UPDate STGpool--pool_name--+-----------------------------+---> -
+OUTPUT: >>-UPDate STGpool--pool_name--+-----------------------------+---> -
+OUTPUT: >>-UPDate STGpooL--pool_name--+-----------------------------+---> -
+OUTPUT: >>-UPDate STGPOOLDIRectory--pool_name--directory----------------> -
+OUTPUT: >>-UPDate STGRULE--rule_name--+-----------------+---------------> -
+OUTPUT: >>-UPDate STGRULE--rule_name------------------------------------> -
+OUTPUT: >>-UPDate STGRULE--rule_name--+--------------------+------------> -
+OUTPUT: >>-UPDate STGRULE--rule_name--+-----------------+---------------> -
+OUTPUT: >>-UPDate STGRULE--rule_name--+--------------------------+------> -
+OUTPUT: >>-UPDate STGRULE--rule_name--+--------------------+------------> -
+OUTPUT: >>-UPDate STGRULE--rule_name------------------------------------> -
+OUTPUT: >>-UPDate SUBRULE--parent_rule_name--subrule_name---------------> -
+OUTPUT: >>-UPDate SUBRULE--parent_rule_name--subrule_name---------------> -
+OUTPUT: >>-UPDate SUBRULE--parent_rule_name--subrule_name---------------> -
+OUTPUT: >>-UPDate VIRTUALFSMapping--node_name--virtual_filespace_name---> -
+OUTPUT: >>-UPDate VOLHistory--volume_name-------------------------------> -
+OUTPUT: >>-UPDate Volume-------volume_name------------------------------> -
+OUTPUT: >>-VALidate ASPera--+------------------------+------------------> -
+OUTPUT: >>-VALidate CLOud--+-------------------------------------+------> -
+OUTPUT: >>-VALidate LAnfree--node_name--stgagent_name------------------>< -
+OUTPUT: >>-VALidate POlicyset--domain_name--policy_set_name------------>< -
+OUTPUT: >>-VALidate REPLication------node_name---+----------------------> -
+OUTPUT: >>-VALidate REPLPolicy--+-------------+------------------------>< -
+OUTPUT: >>-VARy--+-ONline--+--volume_name--+------------------+-------->< -
+OUTPUT: >>-Withdraw PEndingcmd--pending_request_id----------------------> -
+OUTPUT: >>-3494SHARED--+-Yes-+----------------------------------------->< -
+OUTPUT: >>-ACSACCESSID--name------------------------------------------->< -
+OUTPUT: >>-ACSLOCKDRIVE--+-Yes-+--------------------------------------->< -
+OUTPUT: >>-ACSQUICKINIT--+-Yes-+--------------------------------------->< -
+OUTPUT: >>-ACSTIMEOUTX--value------------------------------------------>< -
+OUTPUT: >>-ACTIVELOGDirectory--dir_name-------------------------------->< -
+OUTPUT: >>-ACTIVELOGSize--+-megabytes-+-------------------------------->< -
+OUTPUT: >>-ADMINCOMMTimeout--+-seconds-+------------------------------->< -
+OUTPUT: >>-ADMINIDLETIMEOUT--+-minutes-+------------------------------->< -
+OUTPUT: >>-ADMINONCLIENTPORT--+-YES-+---------------------------------->< -
+OUTPUT: >>-ALIASHALT--newname------------------------------------------>< -
+OUTPUT: >>-+-----------------------+----------------------------------->< -
+OUTPUT: >>-ALLOWREORGINDEX--+-Yes-+------------------------------------>< -
+OUTPUT: >>-ALLOWREORGTABLE--+-Yes-+------------------------------------>< -
+OUTPUT: >>-ARCHFailoverlogdirectory--dir_name-------------------------->< -
+OUTPUT: >>-ARCHLOGCOMPress--+-----+------------------------------------>< -
+OUTPUT: >>-ARCHLOGDirectory--dir_name---------------------------------->< -
+OUTPUT: >>-ARCHLOGUSEDTHRESHOLD--+-value-+----------------------------->< -
+OUTPUT: >>-ASSISTVCRRECovery--+-Yes-+---------------------------------->< -
+OUTPUT: >>-AUDITSTorage--+-Yes-+--------------------------------------->< -
+OUTPUT: >>-BACKUPINITIATIONROOT--+-ON--+------------------------------->< -
+OUTPUT: >>-CHECKTAPEPOS--+-Yes-------+--------------------------------->< -
+OUTPUT: >>-CLIENTDEDUPTXNlimit--+-gigabytes-+-------------------------->< -
+OUTPUT: >>-CLIENTDEPLOYCATalogurl---------------------------------------> -
+OUTPUT: >>-CLIENTDEPLOYUSELOCALcatalog--+-Yes-+------------------------>< -
+OUTPUT: >>-CLOUDRECLAMATIONDelay--+-days-+----------------------------->< -
+OUTPUT: >>- CLOUDREADCACHERETENtiontime--data_retention_time----------->< -
+OUTPUT: >>- CLOUDREADCACHEMAXUSAGE--percentage------------------------->< -
+OUTPUT: >>-COMMMethod--+-NONE------+----------------------------------->< -
+OUTPUT: >>-COMMTimeout--+-seconds-+------------------------------------>< -
+OUTPUT: >>-CONTAINERRESOURCETimeout--+-minutes-+----------------------->< -
+OUTPUT: >>-DBDIAGLOGSize--+-megabytes-+-------------------------------->< -
+OUTPUT: >>-DBDIAGPATHFSTHreshold--percent------------------------------>< -
+OUTPUT: >>-DBMEMPERCENT--+-percent-+----------------------------------->< -
+OUTPUT: >>-DBMTCPPort--port_number------------------------------------->< -
+OUTPUT: >>-DEDUPREQUIRESBACKUP--+-Yes-+-------------------------------->< -
+OUTPUT: >>-DEDUPTIER2FILESIZE--nnn------------------------------------->< -
+OUTPUT: >>-DEDUPTIER3FILESIZE--nnn------------------------------------->< -
+OUTPUT: >>-DEVCONFig--file_name---------------------------------------->< -
+OUTPUT: >>-DISABLEREORGTable----tablelist------------------------------>< -
+OUTPUT: >>-DISABLESCheds--+-Yes-+-------------------------------------->< -
+OUTPUT: >>-DISPLAYLFINFO--+-Yes-+-------------------------------------->< -
+OUTPUT: >>-DNSLOOKUP--+-Yes-+------------------------------------------>< -
+OUTPUT: >>-DRIVEACQuireretry--+-Forever-----------+-------------------->< -
+OUTPUT: >>-ENABLENASDEDUP--+-No--+------------------------------------->< -
+OUTPUT: >>-EVENTSERVer--+-Yes-+---------------------------------------->< -
+OUTPUT: >>-EXPINterval--+-hours-+-------------------------------------->< -
+OUTPUT: >>-EXPQUiet--+-No--+------------------------------------------->< -
+OUTPUT: >>-FASPBEGPort--+-starting_port_number-+----------------------->< -
+OUTPUT: >>-FASPENDPort--+-ending_port_number-+------------------------->< -
+OUTPUT: >>-FaspTargetRate--+-target_rate-+----------------------------->< -
+OUTPUT: >>-+-FFDCLOGLevel--=--+-ALL---+-+------------------------------>< -
+OUTPUT: >>-FFDCLOGNAME--+-file_name---+-------------------------------->< -
+OUTPUT: >>-FFDCMAXLOGSIZE--+-kilobytes-+------------------------------->< -
+OUTPUT: >>-FFDCNUMLOGS--+-value-+-------------------------------------->< -
+OUTPUT: >>-FILEEXIT--+-No--+--file_name--+-REPLACE--+------------------>< -
+OUTPUT: >>-FILETEXTEXIT--+-No--+--file_name--+-REPLACE--+-------------->< -
+OUTPUT: >>-+----------------------+------------------------------------>< -
+OUTPUT: >>-FSUSEDTHreshold--percent------------------------------------>< -
+OUTPUT: >>-IDLETimeout--+-minutes-+------------------------------------>< -
+OUTPUT: >>-JOBRETention--+-------------+------------------------------->< -
+OUTPUT: >>-KEEPALIVE--+-No--+------------------------------------------>< -
+OUTPUT: >>-KEEPALIVETIME--+-seconds-+---------------------------------->< -
+OUTPUT: >>-KEEPALIVEINTERVAL--+-seconds-+------------------------------>< -
+OUTPUT: >>-LANGuage--+-AMENG--+---------------------------------------->< -
+OUTPUT: >>-LDAPCACHEDURATION--minutes---------------------------------->< -
+OUTPUT: >>-LDAPURL--ldap_url_value------------------------------------->< -
+OUTPUT: >>-MAXSessions--+-number_of_sessions-+------------------------->< -
+OUTPUT: >>-MESsageformat--number--------------------------------------->< -
+OUTPUT: >>-MIRRorlogdirectory--dir_name-------------------------------->< -
+OUTPUT: >>-MOVEBatchsize--+-number_of_files-+-------------------------->< -
+OUTPUT: >>-MOVESizethresh--+-megabytes-+------------------------------->< -
+OUTPUT: >>-MSGINTerval--+-minutes-+------------------------------------>< -
+OUTPUT: >>-NDMPCONNECTIONTIMEOUT--+-hours-+---------------------------->< -
+OUTPUT: >>-NDMPControlport--+-port_number-+---------------------------->< -
+OUTPUT: >>-NDMPENABLEKEEPALIVES--+-NO--+------------------------------->< -
+OUTPUT: >>-NDMPKEEPIDLEMINUTES--+-minutes-+---------------------------->< -
+OUTPUT: >>-NDMPPortrange--port_number_low-+-------------------+-------->< -
+OUTPUT: >>-NDMPPREFDATAINTERFACE--ip_address--------------------------->< -
+OUTPUT: >>-NOPREEMPT--------------------------------------------------->< -
+OUTPUT: >>-NORETRIEVEDATE---------------------------------------------->< -
+OUTPUT: >>-NUMOPENVOLSallowed--number_of_open_volumes------------------>< -
+OUTPUT: >>-PREALLOCREDUCTionrate--data_reduction_ratio----------------->< -
+OUTPUT: >>-PROTRECONCILEBATCHCOUNT--+-number_of_sessions-+------------->< -
+OUTPUT: >>-QUERYAuth--+-NOne-----+------------------------------------->< -
+OUTPUT: >>-RECLAIMDELAY--+-number_of_days-+---------------------------->< -
+OUTPUT: >>-RECLAIMPERIOD--+-number_of_days-+--------------------------->< -
+OUTPUT: >>-REORGBEGINTime--hh:mm--------------------------------------->< -
+OUTPUT: >>-REORGDURation--nn------------------------------------------->< -
+OUTPUT: >>-REPORTRETRIEVE--+-YES-+------------------------------------->< -
+OUTPUT: >>-REPLBatchsize--+-number_of_files-+-------------------------->< -
+OUTPUT: >>-REPLSizethresh--+-megabytes-+------------------------------->< -
+OUTPUT: >>-REQSYSauthoutfile--+-Yes-+---------------------------------->< -
+OUTPUT: >>-RESOURCETimeout--+-minutes-+-------------------------------->< -
+OUTPUT: >>-RESTHTTPSport--+-secure_port-+------------------------------>< -
+OUTPUT: >>-RESTOREINTERVAL--+-minutes-+-------------------------------->< -
+OUTPUT: >>-RETENTIONEXTENSION--number_of_days-------------------------->< -
+OUTPUT: >>-+---------------------------------------+------------------->< -
+OUTPUT: >>-SANDISCOVERYTIMEOUT--value---------------------------------->< -
+OUTPUT: >>-SANREFRESHTIME--+-time-+------------------------------------>< -
+OUTPUT: >>-SEARCHMPQUEUE----------------------------------------------->< -
+OUTPUT: >>-SERVERDEDUPTXNlimit--+-gigabytes-+-------------------------->< -
+OUTPUT: >>-SHMPort--port_number---------------------------------------->< -
+OUTPUT: >>-SHREDding--+-AUTOmatic-+------------------------------------>< -
+OUTPUT: >>-+-------------------------+--------------------------------->< -
+OUTPUT: >>-SSLINITTIMEout--+-minutes-+--------------------------------->< -
+OUTPUT: >>-SSLTCPADMINPort--port_number-------------------------------->< -
+OUTPUT: >>-SSLTCPPort--port_number------------------------------------->< -
+OUTPUT: >>-TCPADMINPort--port_number----------------------------------->< -
+OUTPUT: >>-TCPBufsize--kilobytes--------------------------------------->< -
+OUTPUT: >>-TCPNodelay--+-Yes-+----------------------------------------->< -
+OUTPUT: >>-TCPPort--port_number---------------------------------------->< -
+OUTPUT: >>-TCPWindowsize--kilobytes------------------------------------>< -
+OUTPUT: >>-TECBegineventlogging--+-Yes-+------------------------------->< -
+OUTPUT: >>-TECHost--host_name------------------------------------------>< -
+OUTPUT: >>-TECPort--port_number---------------------------------------->< -
+OUTPUT: >>-TECUTF8event--+-Yes-+--------------------------------------->< -
+OUTPUT: >>-THROUGHPUTDatathreshold--kilobytes_per_second--------------->< -
+OUTPUT: >>-THROUGHPUTTimethreshold--minutes---------------------------->< -
+OUTPUT: >>-TXNGroupmax--number_of_objects------------------------------>< -
+OUTPUT: >>-UNIQUETDPtecevents--+-Yes-+--------------------------------->< -
+OUTPUT: >>-UNIQUETECevents--+-Yes-+------------------------------------>< -
+OUTPUT: >>-USEREXIT--+-Yes-+--module_name------------------------------>< -
+OUTPUT: >>-VERBCHECK--------------------------------------------------->< -
+OUTPUT: >>-VOLUMEHistory--file_name------------------------------------>< -
