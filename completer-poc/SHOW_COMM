@@ -11,7 +11,7 @@ F 8  history
 KÉSZ: F 9     kill
 10     load script
 11    login
-F 12   moveit
+KÉSZ: F 12   moveit
 KÉSZ: F 13  offline
 KÉSZ: F 14   online
 15    reach
@@ -41,7 +41,7 @@ F 33     show dbbackup
 39     show estgpools
 F 40     show events
 41     show expiration
-F 42     show fillings
+KÉSZ: F 42     show fillings
 43     show lasterror
 KÉSZ: F 44     show libvolume
 45     show maxscratch

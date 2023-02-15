@@ -1057,6 +1057,48 @@ class ShowFilling(SpadminCommand):
 
 define_command(ShowFilling())
 
+class Move(SpadminCommand):
+    def __init__(self):
+        self.command_string = "MOve"
+        self.command_type   = globals.lastdsmcommandtype
+        self.command_index  = 0
+
+    def short_help(self) -> str:
+        return 'Move data '
+
+    def help(self) -> dict:
+        return """Move data """
+
+    def _execute(self, parameters: str) -> str:
+        if globals.lastdsmcommandtype == "VOLUMES":
+            if parameters.strip().isnumeric():
+                if len(globals.lastdsmcommandresults) >= int(parameters) > 0:
+                        line = globals.lastdsmcommandresults[int(parameters) - 1]
+                        cmd = "MOVE DATA" + " " + line[1]
+                        for l in globals.tsm.send_command_normal(cmd):
+                            print(l)
+                else:
+                    print(colored("The given number is not found!", 'red', attrs=['bold']))
+            else:
+                print(colored("The given parameter should be a number!", 'red', attrs=['bold']))
+        else:
+            print(colored("Last command should be SHow Filling!", 'red', attrs=['bold']))
+            globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
+        return ""
+
+    def execute(self, dummy, parameters):
+        globals.logger.debug(
+            "Execution STARTED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
+        if parameters == "help":
+            print(self.help())
+        else:
+            self._execute(parameters)
+        globals.logger.debug(
+            "Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
+        globals.logger.debug("Last command type set to: " + globals.lastdsmcommandtype + ".")
+
+
+define_command(Move())
 
 
 def show_scratches( self, parameters ):
