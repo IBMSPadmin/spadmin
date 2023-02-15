@@ -8,12 +8,12 @@
  6     edit script
  7   fooooo
 F 8  history
-F 9     kill
+KÉSZ: F 9     kill
 10     load script
 11    login
 F 12   moveit
-F 13  offline
-F 14   online
+KÉSZ: F 13  offline
+KÉSZ: F 14   online
 15    reach
 16   reload
 17     save script
@@ -21,7 +21,7 @@ F 14   online
 19     show LICences
 20     show _backup
 21     show activity
-F 22     show actlog
+KÉSZ: F 22     show actlog
 23     show adminevents
 24     show association
 F 25     show backupperformance
@@ -29,7 +29,7 @@ F 26     show clientarchiveperformance
 F 27     show clientbackupperformance
 F 28     show clientrestoreperformance
 F 29     show clientretrieveperformance
-F 30     show columns
+KÉSZ: F 30     show columns
 31     show commands
 32     show copydifference
 F 33     show dbbackup
@@ -51,15 +51,15 @@ F 47     show moveable
 F 49     show nodeoccuopancy
 50     show nodes
 51     show paths
-F 52     show processes
+KÉSZ: F 52     show processes
 53     show reclaim
 54     show reclamationperformance
 55     show ruler
 56     show schedules
-F 57     show scratches
+KÉSZ: F 57     show scratches
 58     show scripts
 59     show servers
-F 60     show sessions
+KÉSZ: F 60     show sessions
 61     show status
 62     show stgpools
 63     show summary
