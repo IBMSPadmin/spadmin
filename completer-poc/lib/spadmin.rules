@@ -306,10 +306,10 @@ CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CLEanings=  -> CLEanings=<give_n
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.3?topic=commands-checkout-libvolume-check-storage-volume-out-library
 CHECKOut                                                   -> LIBVolume
 CHECKOut LIBVolume                                         -> select library_name from libraries
-CHECKOut LIBVolume [\w\-\.\+\&]+                           -> <give_a_volumename_here>
+CHECKOut LIBVolume [\w\-\.\+\&]+                          -> <give_a_volumename_here>
 ####### HOGY veszi ki az előtte lévő LIBrary-t? #####################
 #CHECKOut LIBVolume [\w\-\.\+\&]+                          -> select volume_name from libvolumes where library_name= {Prefix: -1}
-CHECKOut LIBVolume [\w\-\.\+\&]+                           -> select volume_name from libvolumes where library_name='MHVTL1'
+CHECKOut LIBVolume [\w\-\.\+\&]+                          -> select volume_name from libvolumes where library_name like upper( '-2' )
 #######
 CHECKOut LIBVolume [\w\-\.\+\&]+ .*                        -> REMove=
 CHECKOut LIBVolume [\w\-\.\+\&]+ .*                        -> CHECKLabel=
