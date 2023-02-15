@@ -1013,12 +1013,10 @@ class ShowLIBVolumes(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         library = globals.tsm.send_command_array_array_tabdel(
             "select vol.volume_name, vol.stgpool_name, libv.library_name from volumes as vol left join libvolumes as libv on vol.volume_name=libv.volume_name where vol.devclass_name != 'DISK' AND vol.devclass_name not in (select devclass_name from devclasses where DEVTYPE = 'FILE' ) order by 1")
-
         data = []
 
         for i, row in enumerate(library):
             if not row[2]:
-                colored(row[2], 'yellow', attrs=['bold'])
                 row[2]= colored("MISSING", 'yellow', attrs=['bold'])
             data.append([i+1, row[0], row[1], row[2]])
 
@@ -1029,6 +1027,37 @@ class ShowLIBVolumes(SpadminCommand):
         return table
 
 define_command(ShowLIBVolumes())
+
+class ShowFilling(SpadminCommand):
+    def __init__(self):
+        self.command_string = "SHow FILLings"
+        self.command_type   = "VOLUMES"
+        self.command_index  = 0
+
+    def short_help(self) -> str:
+        return 'SHow Filling: display information about fillings volumes'
+
+    def help(self) -> dict:
+        return """Display the following information about library volumes in the following order and format:
+"""
+
+    def _execute(self, parameters: str) -> str:
+        library = globals.tsm.send_command_array_array_tabdel(
+            "select VOLUME_NAME, STGPOOL_NAME, PCT_UTILIZED from volumes where STATUS='FILLING' and ACCESS='READWRITE' order by PCT_UTILIZED")
+        data = []
+
+        for i, row in enumerate(library):
+            data.append([i+1, row[0], row[1], row[2]])
+
+        table = columnar(data,
+            headers=['#', 'Volume name', 'Stgpool name', 'Pct utilized'],
+            justify=['r', 'l', 'l', 'l'])
+        globals.lastdsmcommandresults = data
+        return table
+
+define_command(ShowFilling())
+
+
 
 def show_scratches( self, parameters ):
     
