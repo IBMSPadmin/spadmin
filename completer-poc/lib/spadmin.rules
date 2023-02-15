@@ -102,6 +102,8 @@ $ -> mailto
 $ -> SPadmin
 $ -> PRint
 
+
+
 ################################
 # and the rest LEVEL 2, 3, ... #
 ################################
@@ -298,6 +300,68 @@ CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} SWAP=       -> SWAP=Yes
 CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} SWAP=       -> SWAP=No
 CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} WAITTime=   -> WAITTime=<give_minutes>
 CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CLEanings=  -> CLEanings=<give_number>
+
+# Pogyo 20230215 =========================================================================================================================
+# CHECKOut LIBVolume
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.3?topic=commands-checkout-libvolume-check-storage-volume-out-library
+CHECKOut                                                   -> LIBVolume
+CHECKOut LIBVolume                                         -> select library_name from libraries
+CHECKOut LIBVolume [\w\-\.\+\&]+                           -> <give_a_volumename_here>
+####### HOGY veszi ki az előtte lévő LIBrary-t? #####################
+#CHECKOut LIBVolume [\w\-\.\+\&]+                          -> select volume_name from libvolumes where library_name= {Prefix: -1}
+CHECKOut LIBVolume [\w\-\.\+\&]+                           -> select volume_name from libvolumes where library_name='MHVTL1'
+#######
+CHECKOut LIBVolume [\w\-\.\+\&]+ .*                        -> REMove=
+CHECKOut LIBVolume [\w\-\.\+\&]+ .*                        -> CHECKLabel=
+CHECKOut LIBVolume [\w\-\.\+\&]+ .*                        -> FORCE=
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .*                       -> VOLRange={Mustexist: SEARCH=Yes}
+
+CHECKOut LIBVolume [\w\-\.\+\&]+ .* REMove=                -> REMove=Bulk
+CHECKOut LIBVolume [\w\-\.\+\&]+ .* REMove=                -> REMove=Yes
+CHECKOut LIBVolume [\w\-\.\+\&]+ .* REMove=                -> REMove=No
+
+CHECKOut LIBVolume [\w\-\.\+\&]+ .* CHECKLabel=            -> CHECKLabel=Yes
+CHECKOut LIBVolume [\w\-\.\+\&]+ .* CHECKLabel=            -> CHECKLabel=No
+
+CHECKOut LIBVolume [\w\-\.\+\&]+ .* FORCE=                 -> FORCE=Yes
+CHECKOut LIBVolume [\w\-\.\+\&]+ .* FORCE=                 -> FORCE=No
+
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* OWNer=                   -> select concat( '%PREFIX%', server_name ) from servers {Prefix: -1}
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* CHECKLabel=              -> CHECKLabel=Yes
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* CHECKLabel=              -> CHECKLabel=No
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* CHECKLabel=              -> CHECKLabel=Barcode
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* SWAP=                    -> SWAP=Yes
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* SWAP=                    -> SWAP=No
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* WAITTime=                -> WAITTime=<give_minutes>
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* CLEanings=               -> CLEanings=<give_number>
+#
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> SEARCH=
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> STATus=
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> OWNer=
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> CHECKLabel=
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> SWAP=
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> WAITTime=
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> CLEanings=
+#
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> VOLRange={Mustexist: SEARCH=Yes}
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> VOLRange={Mustexist: SEARCH=Bulk}
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> VOLList={Mustexist: SEARCH=Yes}
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> VOLList={Mustexist: SEARCH=Bulk}
+#
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} SEARCH=     -> SEARCH=No
+#CHECKOut LIBVolume [\w\-\.\+\&]+    (\w+=.*){1,} SEARCH=     -> SEARCH=Yes
+#CHECKOut LIBVolume [\w\-\.\+\&]+    (\w+=.*){1,} SEARCH=     -> SEARCH=Bulk
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} STATus=     -> STATus=PRIvate
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} STATus=     -> STATus=SCRatch
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} STATus=     -> STATus=CLEaner
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} OWNer=      -> select concat( '%PREFIX%', server_name ) from servers {Prefix: -1}
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Yes
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CHECKLabel= -> CHECKLabel=No
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Barcode
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} SWAP=       -> SWAP=Yes
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} SWAP=       -> SWAP=No
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} WAITTime=   -> WAITTime=<give_minutes>
+#CHECKOut LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CLEanings=  -> CLEanings=<give_number>
 
 ###################
 # DEFine commands #
