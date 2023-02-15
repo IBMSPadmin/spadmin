@@ -7,13 +7,13 @@
  5   delete associations
  6     edit script
  7   fooooo
- 8  history
- 9     kill
+F 8  history
+F 9     kill
 10     load script
 11    login
-12   moveit
-13  offline
-14   online
+F 12   moveit
+F 13  offline
+F 14   online
 15    reach
 16   reload
 17     save script
@@ -21,49 +21,49 @@
 19     show LICences
 20     show _backup
 21     show activity
-22     show actlog
+F 22     show actlog
 23     show adminevents
 24     show association
-25     show backupperformance
-26     show clientarchiveperformance
-27     show clientbackupperformance
-28     show clientrestoreperformance
-29     show clientretrieveperformance
-30     show columns
+F 25     show backupperformance
+F 26     show clientarchiveperformance
+F 27     show clientbackupperformance
+F 28     show clientrestoreperformance
+F 29     show clientretrieveperformance
+F 30     show columns
 31     show commands
 32     show copydifference
-33     show dbbackup
+F 33     show dbbackup
 34     show deduppending
 35     show defassociation
 36     show disks
 37     show drives
 38     show environment
 39     show estgpools
-40     show events
+F 40     show events
 41     show expiration
-42     show fillings
+F 42     show fillings
 43     show lasterror
-44     show libvolume
+F 44     show libvolume
 45     show maxscratch
 46     show migrationperformance
-47     show moveable
+F 47     show moveable
 48     show movedataperformance
-49     show nodeoccuopancy
+F 49     show nodeoccuopancy
 50     show nodes
 51     show paths
-52     show processes
+F 52     show processes
 53     show reclaim
 54     show reclamationperformance
 55     show ruler
 56     show schedules
-57     show scratches
+F 57     show scratches
 58     show scripts
 59     show servers
-60     show sessions
+F 60     show sessions
 61     show status
 62     show stgpools
 63     show summary
-64     show timing
+F 64     show timing
 65     show transferrate
 66     show version
 67     show volumeusage
