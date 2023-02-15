@@ -936,6 +936,7 @@ class ShowDrives(SpadminCommand):
 
 define_command(ShowDrives())
 
+
 class ShowPath(SpadminCommand):
     def __init__(self):
         self.command_string = "SHow PAth"
@@ -996,6 +997,35 @@ This table can be very long, so it recommended to use `|grep ` or `|more` or bot
 
 define_command(ShowColumns())
 
+class ShowLIBVolumes(SpadminCommand):
+    def __init__(self):
+        self.command_string = "SHow LIBVolumes"
+        self.command_type   = "LIBVOLUMES"
+        self.command_index  = 0
+
+    def short_help(self) -> str:
+        return 'SHow Filling: display information about library volumes'
+
+    def help(self) -> dict:
+        return """Display the following information about library volumes in the following order and format:
+"""
+
+    def _execute(self, parameters: str) -> str:
+        library = globals.tsm.send_command_array_array_tabdel(
+            "select vol.volume_name, vol.stgpool_name, libv.library_name from volumes as vol left join libvolumes as libv on vol.volume_name=libv.volume_name where vol.devclass_name != 'DISK' order by 1")
+
+        data = []
+
+        for i, row in enumerate(library):
+            data.append([i+1, row[0], row[1], row[2]])
+
+        table = columnar(data,
+            headers=['#', 'Volume name', 'Stgpool name', 'Library name'],
+            justify=['r', 'l', 'l', 'l'])
+        globals.lastdsmcommandresults = data
+        return table
+
+define_command(ShowLIBVolumes())
 
 def show_scratches( self, parameters ):
     

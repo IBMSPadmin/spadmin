@@ -43,7 +43,7 @@ F 40     show events
 41     show expiration
 F 42     show fillings
 43     show lasterror
-F 44     show libvolume
+KÉSZ: F 44     show libvolume
 45     show maxscratch
 46     show migrationperformance
 F 47     show moveable
