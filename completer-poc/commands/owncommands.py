@@ -1060,7 +1060,7 @@ define_command(ShowFilling())
 class Move(SpadminCommand):
     def __init__(self):
         self.command_string = "MOve"
-        self.command_type   = globals.lastdsmcommandtype
+        self.command_type   = "MOVE"
         self.command_index  = 0
 
     def short_help(self) -> str:
