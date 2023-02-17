@@ -1013,17 +1013,20 @@ class ShowLIBVolumes(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         library = globals.tsm.send_command_array_array_tabdel(
             "select vol.volume_name, vol.stgpool_name, libv.library_name from volumes as vol left join libvolumes as libv on vol.volume_name=libv.volume_name where vol.devclass_name != 'DISK' AND vol.devclass_name not in (select devclass_name from devclasses where DEVTYPE = 'FILE' ) order by 1")
-        data = []
+        data  = []
+        data2 = []
 
         for i, row in enumerate(library):
+            data.append([i+1, row[0], row[1], row[2]])
             if not row[2]:
                 row[2]= colored("MISSING", 'yellow', attrs=['bold'])
-            data.append([i+1, row[0], row[1], row[2]])
-
-        table = columnar(data,
-            headers=['#', 'Volume name', 'Stgpool name', 'Library name'],
-            justify=['r', 'l', 'l', 'l'])
+            data2.append([i+1, colored(row[0], 'green', attrs=['bold']), row[1], row[2]])
         globals.lastdsmcommandresults = data
+        
+        table = columnar(data2,
+            headers=['#', 'VolName', 'PoolName', 'LibName'],
+            justify=['r', 'l', 'l', 'l'])
+        
         return table
 
 define_command(ShowLIBVolumes())
@@ -1044,15 +1047,18 @@ class ShowFilling(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         library = globals.tsm.send_command_array_array_tabdel(
             "select VOLUME_NAME, STGPOOL_NAME, PCT_UTILIZED from volumes where STATUS='FILLING' and ACCESS='READWRITE' order by PCT_UTILIZED")
-        data = []
-
+        data  = []
+        data2 = []
+        
         for i, row in enumerate(library):
             data.append([i+1, row[0], row[1], row[2]])
-
-        table = columnar(data,
-            headers=['#', 'Volume name', 'Stgpool name', 'Pct utilized'],
-            justify=['r', 'l', 'l', 'l'])
+            data2.append([i+1, colored(row[0], 'green', attrs=['bold']), row[1], row[2]])
         globals.lastdsmcommandresults = data
+
+        table = columnar(data2,
+            headers=['#', 'VolName', 'PoolName', 'PctUtil'],
+            justify=['r', 'l', 'l', 'r'])
+        
         return table
 
 define_command(ShowFilling())

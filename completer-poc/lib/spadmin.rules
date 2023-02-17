@@ -69,7 +69,8 @@ $-> RESUme
 $-> REVoke
 $-> ROLLBACK
 $-> RUn
-$-> Set
+# $-> Set hack
+$-> SET
 $-> SETOPT
 $-> SHow
 $-> SHRED
