@@ -1,8 +1,8 @@
 > spadmin.log
 
-git pull
-
 while :; do
+
+ git pull
 
  ./spadmin.py
 
