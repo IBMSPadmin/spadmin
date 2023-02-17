@@ -102,8 +102,6 @@ $ -> mailto
 $ -> SPadmin
 $ -> PRint
 
-
-
 ################################
 # and the rest LEVEL 2, 3, ... #
 ################################
@@ -209,7 +207,7 @@ BAckup                                                                    -> STG
 
 BAckup STGpool                                                            -> select stgpool_name from stgpools where pooltype='PRIMARY'
 
-BAckup STGpool [\w\-\.\+\&]+                                              -> select stgpool_name from stgpools where pooltype='COPY' 
+BAckup STGpool [\w\-\.\+\&]+                                              -> select stgpool_name from stgpools where pooltype='COPY'
 
 BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+                              -> MAXPRocess=
 BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+                              -> Preview=
@@ -300,28 +298,6 @@ CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} SWAP=       -> SWAP=Yes
 CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} SWAP=       -> SWAP=No
 CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} WAITTime=   -> WAITTime=<give_minutes>
 CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CLEanings=  -> CLEanings=<give_number>
-
-# =========================================================================================================================
-# CHECKOut LIBVolume
-# https://www.ibm.com/docs/en/spectrum-protect/8.1.3?topic=commands-checkout-libvolume-check-storage-volume-out-library
-CHECKOut                                                   -> LIBVolume
-CHECKOut LIBVolume                                         -> select library_name from libraries
-CHECKOut LIBVolume [\w\-\.\+\&]+                          -> <give_a_volumename_here>
-CHECKOut LIBVolume [\w\-\.\+\&]+                          -> select volume_name from libvolumes where library_name like upper( '-2' )
-CHECKOut LIBVolume [\w\-\.\+\&]+ .*                        -> REMove=
-CHECKOut LIBVolume [\w\-\.\+\&]+ .*                        -> CHECKLabel=
-CHECKOut LIBVolume [\w\-\.\+\&]+ .*                        -> FORCE=
-
-CHECKOut LIBVolume [\w\-\.\+\&]+ .* REMove=                -> REMove=Bulk
-CHECKOut LIBVolume [\w\-\.\+\&]+ .* REMove=                -> REMove=Yes
-CHECKOut LIBVolume [\w\-\.\+\&]+ .* REMove=                -> REMove=No
-
-CHECKOut LIBVolume [\w\-\.\+\&]+ .* CHECKLabel=            -> CHECKLabel=Yes
-CHECKOut LIBVolume [\w\-\.\+\&]+ .* CHECKLabel=            -> CHECKLabel=No
-
-CHECKOut LIBVolume [\w\-\.\+\&]+ .* FORCE=                 -> FORCE=Yes
-CHECKOut LIBVolume [\w\-\.\+\&]+ .* FORCE=                 -> FORCE=No
-
 
 ###################
 # DEFine commands #

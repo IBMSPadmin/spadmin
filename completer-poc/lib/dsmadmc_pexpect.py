@@ -47,14 +47,14 @@ class dsmadmc_pexpect:
         try:
             globals.logger.info("Command will be sent to dsmadmc: " + command)
             tsm.sendline(command)
+            rc = self.tsm_tabdel.expect(self.EXPECTATIONS)
+            self.check_rc(tsm, rc)
         except:
             print('An error occurred during a dsmadmc execution:')
             print(tsm.before)
             print('Please check the connection parameters and restart spadmin')
             quit(1)
 
-        rc = self.tsm_tabdel.expect(self.EXPECTATIONS)
-        self.check_rc(tsm, rc)
         return tsm.before
 
     def send_command_array_tabdel(self, command):
@@ -113,14 +113,15 @@ class dsmadmc_pexpect:
 
         try:
             tsm2.sendline(command)
+            rc = self.tsm_normal.expect(self.EXPECTATIONS)
+            self.check_rc(tsm2, rc)
         except:
             print('An error occurred during a dsmadmc execution:')
             print(tsm2.before)
             print('Please check the connection parameters and restart spadmin')
             quit(1)
 
-        rc = self.tsm_normal.expect(self.EXPECTATIONS)
-        self.check_rc(tsm2, rc)
+
 
         # Session established with server CLOUDTSM1: Linux/x86_64
         # Server Version 8, Release 1, Level 7.000
