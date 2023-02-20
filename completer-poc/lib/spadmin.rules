@@ -1265,12 +1265,13 @@ VALidate POlicyset [\w\*\-\.\+\&]+ -> select set_name from policysets where set_
 
 VALidate -> REPLication
 VALidate -> REPLPolicy
-VARy -> OFfline
 
+VARy -> OFfline
 VARy OFfline                         -> select volume_name from volumes where stgpool_name in (select stgpool_name from stgpools where DEVCLASS='DISK')
 VARy OFfline [\w\*\-\.\/\\\$]+       -> Wait=
 VARy OFfline [\w\*\-\.\/\\\$]+ Wait= -> Wait=Yes
 VARy OFfline [\w\*\-\.\/\\\$]+ Wait= -> Wait=No
+
 VARy -> ONline
 VARy ONline                         -> select volume_name from volumes where stgpool_name in (select stgpool_name from stgpools where DEVCLASS='DISK')
 VARy ONline [\w\*\-\.\/\\\$]+       -> Wait=
