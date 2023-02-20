@@ -5,7 +5,7 @@ env:
   LINUX: ubuntu
 jobs:
   build:
-    runs-on: ${{LINUX}}-latest
+    runs-on: ${{env.LINUX}}-latest
     strategy:
       matrix:
 #        python-version: ["3.7", "3.8", "3.9", "3.10"]
@@ -35,18 +35,18 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - run: echo "🖥️  The workflow is now setting up the build environment on the runner."
       - name: PyInstaller Linux
-        run: pyinstaller --distpath completer-poc/bin -p completer-poc --onefile --name spadmin_${{LINUX}}_${{ steps.date.outputs.date }} completer-poc/spadmin.py
+        run: pyinstaller --distpath completer-poc/bin -p completer-poc --onefile --name spadmin_${{env.LINUX}}_${{ steps.date.outputs.date }} completer-poc/spadmin.py
       - uses: actions/upload-artifact@v3
         with:
-          name: ${{LINUX}} build
-          path: completer-poc/bin/spadmin_${{LINUX}}_${{ steps.date.outputs.date }}
+          name: ${{env.LINUX}} build
+          path: completer-poc/bin/spadmin_${{env.LINUX}}_${{ steps.date.outputs.date }}
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
           author_name: Github Auto Builder
           author_email: marcell.szabo@gmail.com
-          message: ${{LINUX}} build - ${{ steps.date.outputs.date }}
-          add: 'completer-poc/bin/spadmin_${{LINUX}}_${{ steps.date.outputs.date }}'
+          message: ${{env.LINUX}} build - ${{ steps.date.outputs.date }}
+          add: 'completer-poc/bin/spadmin_${{env.LINUX}}_${{ steps.date.outputs.date }}'
 #      - name: Lint with flake8
 #        run: |
 #          # stop the build if there are Python syntax errors or undefined names
