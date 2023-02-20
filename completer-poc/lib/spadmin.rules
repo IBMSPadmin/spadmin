@@ -1083,18 +1083,52 @@ RESTORE -> Volume
 RESUme -> JOb
 REVoke -> AUTHority
 REVoke -> PROXynode
+
 Set -> ALERTEMAILSMTPHost
+Set ALERTEMAILSMTPHost    -> <give_a_host_name_here>
+
 Set -> ALERTEMAILSMTPPort
+Set ALERTEMAILSMTPPort    -> <give_a_tcp_port_here>
+
 Set -> ALERTINactiveduration
+Set ALERTINactiveduration -> <give_a_number_in_mins_here>
+
 Set -> ALERTMONITOR
+Set ALERTMONITOR -> OFf
+Set ALERTMONITOR -> ON
+
 Set -> ALERTSUMMARYToadmins
+Set ALERTSUMMARYToadmins -> <give_one_or_more_admin_name_here_separated_by_commas>
+
 Set -> ALERTUPDateinterval
+Set ALERTUPDateinterval -> <give_a_number_in_mins_here>
+
 Set -> ARCHIVERETENTIONPROTECTion
+Set ARCHIVERETENTIONPROTECTion -> OFf
+Set ARCHIVERETENTIONPROTECTion -> ON
+
 Set -> ARREPLRuledefault
+Set ARREPLRuledefault -> ALL_DATA
+Set ARREPLRuledefault -> ALL_DATA_HIGH_PRIORITY
+Set ARREPLRuledefault -> NONE
+
 Set -> BKREPLRuledefault
+Set BKREPLRuledefault -> ALL_DATA
+Set BKREPLRuledefault -> ACTIVE_DATA
+Set BKREPLRuledefault -> ALL_DATA_HIGH_PRIORITY
+Set BKREPLRuledefault -> ACTIVE_DATA_HIGH_PRIORITY
+Set BKREPLRuledefault -> NONE
+
 SET -> CLIENTACTDuration
+Set CLIENTACTDuration -> <give_a_number_in_days_here>
+
 Set -> CONFIGManager
+Set CONFIGManager -> OFf
+Set CONFIGManager -> ON
+
 Set -> CONFIGRefresh
+Set CONFIGRefresh -> <give_a_number_in_mins_here>
+
 Set -> CONTEXTmessaging
 Set -> CPUINFOREFRESH
 Set -> CROSSDefine
@@ -1224,8 +1258,21 @@ UPDate -> Volume
 VALidate -> ASPera
 VALidate -> CLOud
 VALidate -> LAnfree
-VALidate -> POlicyset
+
+VALidate                           -> POlicyset
+VALidate POlicyset                 -> select domain_name from domains
+VALidate POlicyset [\w\*\-\.\+\&]+ -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
+
 VALidate -> REPLication
 VALidate -> REPLPolicy
 VARy -> OFfline
+
+VARy OFfline                         -> select volume_name from volumes where stgpool_name in (select stgpool_name from stgpools where DEVCLASS='DISK')
+VARy OFfline [\w\*\-\.\/\\\$]+       -> Wait=
+VARy OFfline [\w\*\-\.\/\\\$]+ Wait= -> Wait=Yes
+VARy OFfline [\w\*\-\.\/\\\$]+ Wait= -> Wait=No
 VARy -> ONline
+VARy ONline                         -> select volume_name from volumes where stgpool_name in (select stgpool_name from stgpools where DEVCLASS='DISK')
+VARy ONline [\w\*\-\.\/\\\$]+       -> Wait=
+VARy ONline [\w\*\-\.\/\\\$]+ Wait= -> Wait=Yes
+VARy ONline [\w\*\-\.\/\\\$]+ Wait= -> Wait=No
