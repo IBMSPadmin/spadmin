@@ -28,7 +28,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - run: echo "🖥️   The workflow is now setting up the build environment on the runner."
       - name: PyInstaller Linux
-        run: pyinstaller --distpath completer-poc/bin -p completer-poc completer-poc/spadmin.py
+        run: pyinstaller --distpath completer-poc/bin -p completer-poc --onefile completer-poc/spadmin.py
       - uses: actions/upload-artifact@v3
         with:
           name: name-of-artifact
