@@ -923,7 +923,18 @@ DISMount -> Volume
 DISplay -> OBJname
 ENable -> EVents
 ENable -> REPLication
+
 ENable -> SESSions
+ENable SESSions     -> CLIent
+ENable SESSions     -> ALL
+ENable SESSions     -> ADMin
+ENable SESSions     -> SERVer
+ENable SESSions SERVer   -> <give_server_name_here>
+ENable SESSions SERVer [\w\*\-\.\+\&]+   -> DIRection=
+ENable SESSions SERVer [\w\*\-\.\+\&]+ DIRection= -> DIRection=Both
+ENable SESSions SERVer [\w\*\-\.\+\&]+ DIRection= -> DIRection=INbound
+ENable SESSions SERVer [\w\*\-\.\+\&]+ DIRection= -> DIRection=OUTbound
+
 ENCrypt -> STGpool
 END -> EVentlogging
 EXPIre -> Inventory
