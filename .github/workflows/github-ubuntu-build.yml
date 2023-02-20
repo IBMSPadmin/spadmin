@@ -1,15 +1,16 @@
-name: Python package builder for Ubuntu
+name: Python package builder for Linux
 run-name: ${{ github.actor }} is pushed some changes and now building spadmin 🚀
 on: [push]
+env:
+  LINUX: ubuntu
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{LINUX}}-latest
     strategy:
       matrix:
 #        python-version: ["3.7", "3.8", "3.9", "3.10"]
         python-version: ["3.9"]
-    env:
-      LINUX: ubuntu
+
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -34,18 +35,18 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - run: echo "🖥️  The workflow is now setting up the build environment on the runner."
       - name: PyInstaller Linux
-        run: pyinstaller --distpath completer-poc/bin -p completer-poc --onefile --name spadmin_$LINUX_${{ steps.date.outputs.date }} completer-poc/spadmin.py
+        run: pyinstaller --distpath completer-poc/bin -p completer-poc --onefile --name spadmin_${{LINUX}}_${{ steps.date.outputs.date }} completer-poc/spadmin.py
       - uses: actions/upload-artifact@v3
         with:
-          name: $LINUX build
-          path: completer-poc/bin/spadmin_$LINUX_${{ steps.date.outputs.date }}
+          name: ${{LINUX}} build
+          path: completer-poc/bin/spadmin_${{LINUX}}_${{ steps.date.outputs.date }}
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
           author_name: Github Auto Builder
           author_email: marcell.szabo@gmail.com
-          message: $LINUX build - ${{ steps.date.outputs.date }}
-          add: 'completer-poc/bin/spadmin_$LINUX_${{ steps.date.outputs.date }}'
+          message: ${{LINUX}} build - ${{ steps.date.outputs.date }}
+          add: 'completer-poc/bin/spadmin_${{LINUX}}_${{ steps.date.outputs.date }}'
 #      - name: Lint with flake8
 #        run: |
 #          # stop the build if there are Python syntax errors or undefined names
