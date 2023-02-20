@@ -1,9 +1,11 @@
-name: Python package builder for Redhat
+name: Python package builder
 run-name: ${{ github.actor }} is pushed some changes and now building spadmin 🚀
 on: [push]
+env:
+  OS: macos-latest
 jobs:
   build:
-    runs-on: redhat-latest
+    runs-on: macos-latest
     strategy:
       matrix:
 #        python-version: ["3.7", "3.8", "3.9", "3.10"]
@@ -31,13 +33,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest termcolor readline pexpect readchar pexpect termcolor readchar gnureadline pyinstaller
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - run: echo "🖥️   The workflow is now setting up the build environment on the runner."
+      - run: echo "🖥️  The workflow is now setting up the build environment on the runner."
       - name: PyInstaller Linux
-        run: pyinstaller --distpath completer-poc/bin -p completer-poc --onefile --name spadmin_redhat_${{ steps.date.outputs.date }} completer-poc/spadmin.py
+        run: pyinstaller --distpath completer-poc/bin -p completer-poc --onefile --name spadmin_${{env.OS}}_${{ steps.date.outputs.date }} completer-poc/spadmin.py
       - uses: actions/upload-artifact@v3
         with:
-          name: name-of-artifact
-          path: completer-poc/bin
+          name: ${{env.OS}} build
+          path: completer-poc/bin/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: Github Auto Builder
+          author_email: marcell.szabo@gmail.com
+          message: ${{env.OS}} build - ${{ steps.date.outputs.date }}
+          add: 'completer-poc/bin/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}'
 #      - name: Lint with flake8
 #        run: |
 #          # stop the build if there are Python syntax errors or undefined names
