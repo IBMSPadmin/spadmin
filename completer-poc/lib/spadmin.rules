@@ -954,7 +954,59 @@ LOCK -> Node
 LOCK -> PROFIle
 MIGrate -> STGpool
 MOVe -> CONTainer
+
+
+
+###############################################################################################################
+### https://www.ibm.com/docs/en/spectrum-protect/8.1.17?topic=commands-move-data-move-files-storage-pool-volume
+###############################################################################################################
+
 MOVe -> Data
+MOVe Data                            -> <give_a_volume_name_here>
+MOVe Data [\w\*\-\.\/\\\$]+          -> STGpool=
+MOVe Data [\w\*\-\.\/\\\$]+          -> SHREDTONOshred=
+MOVe Data [\w\*\-\.\/\\\$]+          -> RECONStruct=
+MOVe Data [\w\*\-\.\/\\\$]+          -> Wait=
+MOVe Data [\w\*\-\.\/\\\$]+          -> ENCrypt=
+MOVe Data [\w\*\-\.\/\\\$]+ STGpool=  -> select concat( '%PREFIX%', stgpool_name ) from stgpools {Prefix: -1}
+MOVe Data [\w\*\-\.\/\\\$]+ SHREDTONOshred=    -> SHREDTONOshred=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ SHREDTONOshred=    -> SHREDTONOshred=No
+MOVe Data [\w\*\-\.\/\\\$]+ RECONStruct=    -> RECONStruct=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ RECONStruct=    -> RECONStruct=No
+MOVe Data [\w\*\-\.\/\\\$]+ Wait=    -> Wait=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ Wait=    -> Wait=No
+MOVe Data [\w\*\-\.\/\\\$]+ ENCrypt=    -> ENCrypt=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ ENCrypt=    -> ENCrypt=No
+
+MOVe Data [\w\*\-\.\/\\\$]+          -> STGpool=
+MOVe Data [\w\*\-\.\/\\\$]+          -> SHREDTONOshred=
+MOVe Data [\w\*\-\.\/\\\$]+          -> RECONStruct=
+MOVe Data [\w\*\-\.\/\\\$]+          -> Wait=
+MOVe Data [\w\*\-\.\/\\\$]+          -> ENCrypt=
+MOVe Data [\w\*\-\.\/\\\$]+ STGpool=  -> select concat( '%PREFIX%', stgpool_name ) from stgpools {Prefix: -1}
+MOVe Data [\w\*\-\.\/\\\$]+ SHREDTONOshred=    -> SHREDTONOshred=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ SHREDTONOshred=    -> SHREDTONOshred=No
+MOVe Data [\w\*\-\.\/\\\$]+ RECONStruct=    -> RECONStruct=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ RECONStruct=    -> RECONStruct=No
+MOVe Data [\w\*\-\.\/\\\$]+ Wait=    -> Wait=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ Wait=    -> Wait=No
+MOVe Data [\w\*\-\.\/\\\$]+ ENCrypt=    -> ENCrypt=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ ENCrypt=    -> ENCrypt=No
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> STGpool=
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> SHREDTONOshred=
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> RECONStruct=
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> Wait=
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> ENCrypt=
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STGpool=  -> select concat( '%PREFIX%', stgpool_name ) from stgpools {Prefix: -1}
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SHREDTONOshred=    -> SHREDTONOshred=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SHREDTONOshred=    -> SHREDTONOshred=No
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} RECONStruct=    -> RECONStruct=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} RECONStruct=    -> RECONStruct=No
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Wait=    -> Wait=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Wait=    -> Wait=No
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} ENCrypt=    -> ENCrypt=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} ENCrypt=    -> ENCrypt=No
+
 MOVe -> DRMedia
 MOVe -> GRPMEMber
 MOVe -> MEDia
