@@ -31,13 +31,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 pytest termcolor readline pexpect readchar pexpect termcolor readchar gnureadline pyinstaller
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - run: echo "🖥️   The workflow is now setting up the build environment on the runner."
+      - run: echo "🖥️  The workflow is now setting up the build environment on the runner."
       - name: PyInstaller Linux
         run: pyinstaller --distpath completer-poc/bin -p completer-poc --onefile --name spadmin_ubuntu_${{ steps.date.outputs.date }} completer-poc/spadmin.py
       - uses: actions/upload-artifact@v3
         with:
-          name: name-of-artifact
-          path: completer-poc/bin
+          name: ubuntu build
+          path: completer-poc/bin/spadmin_ubuntu_${{ steps.date.outputs.date }}
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: Github Auto Builder
+          author_email: marcell.szabo@gmail.com
+          message: Ubuntu build - ${{ steps.date.outputs.date }}
+          add: 'completer-poc/bin/spadmin_ubuntu_${{ steps.date.outputs.date }}'
 #      - name: Lint with flake8
 #        run: |
 #          # stop the build if there are Python syntax errors or undefined names
