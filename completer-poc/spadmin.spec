@@ -5,8 +5,8 @@ block_cipher = None
 
 
 a = Analysis(
-    ['completer-poc/spadmin.py'],
-    pathex=['completer-poc'],
+    ['spadmin.py'],
+    pathex=[],
     binaries=[],
     datas=[],
     hiddenimports=[],
