@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest termcolor readline pexpect readchar pexpect termcolor readchar gnureadline pyinstaller"
+          pip install flake8 pytest termcolor readline pexpect readchar pexpect termcolor readchar gnureadline pyinstaller
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - run: echo "🖥️   The workflow is now setting up the build environment on the runner."
       - name: PyInstaller Linux
