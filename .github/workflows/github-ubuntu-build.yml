@@ -31,10 +31,10 @@ jobs:
         uses: JackMcKew/pyinstaller-action-linux@main
         with:
           path: completer-poc
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: name-of-artifact
-          path: completer-poc/bin/linux
+          path: completer-poc/bin
 #      - name: Lint with flake8
 #        run: |
 #          # stop the build if there are Python syntax errors or undefined names
