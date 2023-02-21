@@ -26,3 +26,5 @@ completer-poc/commands/__pycache__/
 *.pyc
 *.pyc
 completer-poc.tar
+src/spadmin.log
+src/spadmin.ini
