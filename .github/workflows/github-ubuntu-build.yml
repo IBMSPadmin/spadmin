@@ -35,18 +35,18 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - run: echo "🖥️  The workflow is now setting up the build environment on the runner."
       - name: PyInstaller Linux
-        run: pyinstaller --distpath completer-poc/bin -p completer-poc --onefile --name spadmin_${{env.OS}}_${{ steps.date.outputs.date }} completer-poc/spadmin.py
+        run: pyinstaller --distpath build/ -p src --onefile --name spadmin_${{env.OS}}_${{ steps.date.outputs.date }} src/spadmin.py
       - uses: actions/upload-artifact@v3
         with:
           name: ${{env.OS}} build
-          path: completer-poc/bin/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
+          path: build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
       - name: Commit changes
         uses: EndBug/add-and-commit@v9
         with:
           author_name: Github Auto Builder
           author_email: marcell.szabo@gmail.com
           message: ${{env.OS}} build - ${{ steps.date.outputs.date }}
-          add: 'completer-poc/bin/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}'
+          add: 'build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}'
 #      - name: Lint with flake8
 #        run: |
 #          # stop the build if there are Python syntax errors or undefined names
