@@ -5,7 +5,7 @@ import logging
 
 from termcolor import colored
 from pprint import pformat
-from re import search, IGNORECASE, escape
+from re import search, IGNORECASE, escape, findall
 from time import time
 
 try:
@@ -85,9 +85,14 @@ class IBMSPrlCompleter:
         # select preparation
         if search( '\'(-\d)\'', select ):
             # extra index
-            index = search( '\'(-\d)\'', select )[ 1 ]
-            select = select.replace( str( index ), tokens[ int( index ) ])
-            globals.logger.debug('  SP SQL Engine select index preparation result: [' + select + '].')
+            globals.logger.debug('  Extra select has found: [' + select + '].')
+            for element in findall('\'(-\d)\'', select):
+                select = select.replace(str(element), tokens[int(element)])
+                globals.logger.debug('  SP SQL Engine select index preparation result: [' + select + '].')
+
+            #index = search( '\'(-\d)\'', select )[ 1 ]
+            #select = select.replace( str( index ), tokens[ int( index ) ])
+            #globals.logger.debug('  SP SQL Engine select index preparation result: [' + select + '].')
 
         if search( '{Prefix: (.+)}', select ):
             # extra prefix

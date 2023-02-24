@@ -834,7 +834,15 @@ DEFine -> CLOptset
 DEFine -> COLLOCGroup
 DEFine -> COLLOCMember
 DEFine -> CONNection
+
+#############
+### https://www.ibm.com/docs/en/spectrum-protect/8.1.17?topic=group-define-copygroup-define-backup-copy
+#############
 DEFine -> COpygroup
+DEFine COpygroup -> select domain_name from domains
+DEFine COpygroup [\w\*\-\.\+\&]+ -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ -> select CLASS_NAME from MGMTCLASSES where set_name like upper( '-2' ) and domain_name like upper( '-3' )
+
 DEFine -> DATAMover
 DEFine -> DOmain
 DEFine -> DRive
@@ -973,7 +981,7 @@ MOVe -> CONTainer
 ###############################################################################################################
 
 MOVe -> Data
-MOVe Data                            -> <give_a_volume_name_here>
+MOVe Data                            -> select volume_name from volumes
 MOVe Data [\w\*\-\.\/\\\$]+          -> STGpool=
 MOVe Data [\w\*\-\.\/\\\$]+          -> SHREDTONOshred=
 MOVe Data [\w\*\-\.\/\\\$]+          -> RECONStruct=
