@@ -49,7 +49,7 @@ jobs:
           message: ${{env.OS}} build - ${{ steps.date.outputs.date }}
           add: 'build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}'
 
-  build:
+  build-mac:
     runs-on: macos-12 #macos-12, macos-11,
     env:
       OS: macos-12
