@@ -91,8 +91,10 @@ dynruleinjector(  'SPadmin SHow CAche' )
 
 def history(self, parameters):
     data = []
-    rlhistfile = os.path.join("../", globals.config.getconfiguration()['SPADMIN']['historyfile'])
+    rlhistfile = os.path.join("./", globals.config.getconfiguration()['SPADMIN']['historyfile'])
+    globals.logger.debug('history file open: [' + rlhistfile + ']')
     if os.path.exists(rlhistfile):
+        globals.logger.debug('history file open: [' + rlhistfile + ']')
         f = open(rlhistfile, "r")
         count = 0
         for line in f.readlines():
