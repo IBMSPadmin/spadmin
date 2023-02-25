@@ -5,7 +5,7 @@ run-name: ${{ github.actor }} is pushed some changes and now building spadmin ğŸ
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
