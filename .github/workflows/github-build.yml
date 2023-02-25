@@ -1,9 +1,15 @@
 name: Python package builder
 run-name: ${{ github.actor }} is pushed some changes and now building spadmin 🚀
-on: [push]
+#on: [push]
+
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
+    if: "contains(github.event.head_commit.message, '[ubuntu]')"
     runs-on: ubuntu-22.04 #ubuntu-22.04, ubuntu-20.04,
     env:
       OS: ubuntu-22.04
@@ -50,6 +56,7 @@ jobs:
           add: 'build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}'
 
   build-mac:
+    if: "contains(github.event.head_commit.message, '[mac]')"
     runs-on: macos-12 #macos-12, macos-11,
     env:
       OS: macos-12
