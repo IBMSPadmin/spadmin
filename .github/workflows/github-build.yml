@@ -54,7 +54,7 @@ jobs:
           author_email: marcell.szabo@gmail.com
           message: ${{env.OS}} build - ${{ steps.date.outputs.date }}
           add: 'build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}'
-
+        
   build-mac:
     if: "contains(github.event.head_commit.message, '[mac]')"
     runs-on: macos-12 #macos-12, macos-11,
@@ -90,14 +90,20 @@ jobs:
       - run: echo "🖥️  The workflow is now setting up the build environment on the runner."
       - name: PyInstaller Linux
         run: pyinstaller --workpath tmp --distpath build/ --paths src/ --onefile --name spadmin_${{env.OS}}_${{ steps.date.outputs.date }} src/spadmin.py
-      - uses: actions/upload-artifact@v3
+ 
+      - uses: ncipollo/release-action@v1
         with:
-          name: ${{env.OS}} build
-          path: build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          author_name: Github Auto Builder
-          author_email: marcell.szabo@gmail.com
-          message: ${{env.OS}} build - ${{ steps.date.outputs.date }}
-          add: 'build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}'
+          artifacts: build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
+          omitBody: true
+        
+#        - uses: actions/upload-artifact@v3
+#        with:
+#          name: ${{env.OS}} build
+#          path: build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
+#      - name: Commit changes
+#        uses: EndBug/add-and-commit@v9
+#        with:
+#          author_name: Github Auto Builder
+#          author_email: marcell.szabo@gmail.com
+#          message: ${{env.OS}} build - ${{ steps.date.outputs.date }}
+#          add: 'build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}'
