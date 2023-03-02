@@ -234,7 +234,7 @@ class IBMSPrlCompleter:
                 
                 globals.logger.debug(str(tokenlength) + ' and searching for regexp pattern [' + key + ']')
                 globals.logger.debug(str(tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator(key) + ']')
-                if search( '^' + utilities.regexpgenerator( key ), tokens[ -2 ], IGNORECASE ):
+                if search( '^' + utilities.regexpgenerator( key ) + ' ', tokens[ -2 ] + ' ', IGNORECASE ):
                     globals.logger.debug(str(tokenlength) + ' Found this part [' + tokens[ -2] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].')
                     globals.logger.debug(str(tokenlength) + " Let's continue searching with this pattern [" + pformat(self.rules[ key], width=180) + ']')
                     for x in self.rules[ key ]:
