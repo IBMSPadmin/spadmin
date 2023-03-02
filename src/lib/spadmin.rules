@@ -93,6 +93,8 @@ $ -> REload
 $ -> Help!
 $ -> KILL
 
+$ -> HISTory
+
 $ -> deb
 $ -> ver
 
