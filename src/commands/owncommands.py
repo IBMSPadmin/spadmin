@@ -105,6 +105,7 @@ def history(self, parameters):
 spadmin_commands[ 'HISTory' ] = history
 dynruleinjector(  'HISTory' )
 
+
 def spadmin_show_config( self, parameters ):
     data  = []
 
