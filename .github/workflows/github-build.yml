@@ -95,6 +95,7 @@ jobs:
         with:
           artifacts: build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
           omitBody: true
+          tag: "RLS"
         
 #        - uses: actions/upload-artifact@v3
 #        with:
