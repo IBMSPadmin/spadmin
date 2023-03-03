@@ -219,6 +219,15 @@ class IBMSPrlCompleter:
             for x in self.start:
                 if search('^' + tokens[ -1 ], x, IGNORECASE):
                     globals.logger.debug(str(tokenlength) + ' found this part [' + tokens[ -1] + '] of the command in the 1st LEVEL list items: [' + x + '].')
+            
+                    # similar commands CASE BUG fix v1.0 part I. test 1 ######################################
+                    index = len( tokens[ -1] ) - 1
+                    # override the problematic letter
+                    # x[index] = tokens[ -1][index]
+                    if index > 1:
+                        x = x[:index] + tokens[ -1][index] + x[index+1:]
+                    ##########################################################################################
+            
                     ret.append( x + ' ' )
 
         elif tokenlength == 2:
