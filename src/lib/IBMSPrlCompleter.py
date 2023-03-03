@@ -661,7 +661,7 @@ class IBMSPrlCompleter:
             ppp = ppp.ljust( maxlength )
             
             # colorize the result
-            match = search( '^[A-Z]+', ppp )
+            match = search( '^[A-Z0-9]+', ppp )
             if match:
                 ppp = ppp.replace( match[ 0 ], colored( match[ 0 ], 'green', attrs=[ 'bold' ] ) )
                         
