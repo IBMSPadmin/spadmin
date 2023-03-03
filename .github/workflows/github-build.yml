@@ -49,7 +49,7 @@ jobs:
           artifacts: build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
           omitBody:     true
           allowUpdates: true
-          tag: "Ubuntu release v1.0"
+          tag: "RLS"
 
       # - uses: actions/upload-artifact@v3
       #   with:
@@ -104,7 +104,7 @@ jobs:
           artifacts: build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
           omitBody:     true
           allowUpdates: true
-          tag: "macOS release v1.0"
+          tag: "RLS"
         
       # - uses: actions/upload-artifact@v3
       #  with:
