@@ -140,7 +140,6 @@ class IBMSPrlCompleter:
         # This return only needed when truncating the resultset.
         return ret
 
-
     start    = []  # 1. level list
     rules    = {}  # >2. level dictionary
     dynrules = {}  # >2. level dynamic dictionary
