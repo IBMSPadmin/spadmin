@@ -143,6 +143,8 @@ class IBMSPrlCompleter:
     start    = []  # 1. level list
     rules    = {}  # >2. level dictionary
     dynrules = {}  # >2. level dynamic dictionary
+    
+    retfixed = []
 
     def loadrules( self, rulefilename ):
         rulefile = open( rulefilename, 'r' )
@@ -206,6 +208,8 @@ class IBMSPrlCompleter:
         # Reset the results dictionary
         ret         = []
         tokenlength = len( tokens )
+        
+        self.retfixed = []
 
         if tokenlength == 0:
             # Never happen this
@@ -220,12 +224,16 @@ class IBMSPrlCompleter:
                 if search('^' + tokens[ -1 ], x, IGNORECASE):
                     globals.logger.debug(str(tokenlength) + ' found this part [' + tokens[ -1] + '] of the command in the 1st LEVEL list items: [' + x + '].')
             
-                    # similar commands CASE BUG fix v1.0 part I. test 1 ######################################
-                    index = len( tokens[ -1] ) - 1
+                    # similar commands CASE BUG fix v1.0 part I. test 2 ######################################
+            
+                    self.retfixed.append( x + ' ' )
+            
+                    index = len( tokens[ -1] )
                     # override the problematic letter
                     # x[index] = tokens[ -1][index]
                     if index > 1:
-                        x = x[:index] + tokens[ -1][index] + x[index+1:]
+                        #x = x[:index] + tokens[ -1][index] + x[index+1:]
+                        x = tokens[ -1][:index] + x[index:]
                     ##########################################################################################
             
                     ret.append( x + ' ' )
@@ -645,6 +653,9 @@ class IBMSPrlCompleter:
         word       = 1
         maxlength  = 0
         tmpmatches = []
+        
+        #print( pformat( self.retfixed ) )
+        matches = self.retfixed
 
         sys.stdout.write( '\n' )
         for match in matches:
