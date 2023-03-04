@@ -235,6 +235,8 @@ class IBMSPrlCompleter:
                         #x = x[:index] + tokens[ -1][index] + x[index+1:]
                         x = tokens[ -1][:index] + x[index:]
                     ##########################################################################################
+                    
+                    # here it could be improved a bit, if they all start with token[-1], they can be capitalized???
             
                     ret.append( x + ' ' )
 
@@ -654,6 +656,7 @@ class IBMSPrlCompleter:
         maxlength  = 0
         tmpmatches = []
         
+        # similar commands CASE BUG fix v1.0 part II. test 2 ######################################
         #print( pformat( self.retfixed ) )
         matches = self.retfixed
 
