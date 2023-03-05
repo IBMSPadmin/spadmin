@@ -658,7 +658,8 @@ class IBMSPrlCompleter:
         
         # similar commands CASE BUG fix v1.0 part II. test 2 ######################################
         #print( pformat( self.retfixed ) )
-        matches = self.retfixed
+        if self.retfixed != []:
+            matches = self.retfixed
 
         sys.stdout.write( '\n' )
         for match in matches:
