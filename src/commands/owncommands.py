@@ -247,7 +247,12 @@ spadmin_commands[ 'REload' ] = reload
 
 
 def spadmin_show_log( self, parameters ):
-    os.system( 'open ./' + globals.config.getconfiguration()['SPADMIN']['logfile'] )
+    
+    if sys.platform == "linux" or sys.platform == "linux2":
+        os.system( '/mnt/c/Windows/notepad.exe ./' + globals.config.getconfiguration()['SPADMIN']['logfile'] )
+    elif sys.platform == "darwin":
+        os.system( 'open ./' + globals.config.getconfiguration()['SPADMIN']['logfile'] )
+    
 #
 spadmin_commands[ 'SPadmin SHow LOG' ] = spadmin_show_log
 # globals.myIBMSPrlCompleter.dynrules[ 'SPadmin SHow' ].append( 'Log' )
