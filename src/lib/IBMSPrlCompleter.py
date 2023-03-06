@@ -258,7 +258,24 @@ class IBMSPrlCompleter:
                     for x in self.rules[ key ]:
                         if search( '^' + tokens[ -1 ], x, IGNORECASE ):
                             globals.logger.debug(str(tokenlength) + ' as (regexp) starts with [' + tokens[ -1] + ' > ' + x + ']')
+                            #ret.append( x + ' ' )
+                            
+                            # similar commands CASE BUG fix v1.0 part I. test 2 ######################################
+                            
+                            self.retfixed.append( x + ' ' )
+                            
+                            index = len( tokens[ -1] )
+                            # override the problematic letter
+                            # x[index] = tokens[ -1][index]
+                            if index > 1:
+                                #x = x[:index] + tokens[ -1][index] + x[index+1:]
+                                x = tokens[ -1][:index] + x[index:]
+                            ##########################################################################################
+                            
+                            # here it could be improved a bit, if they all start with token[-1], they can be capitalized???
+                            
                             ret.append( x + ' ' )
+                                                    
                             continue
 
         elif tokenlength == 3:

@@ -1115,7 +1115,7 @@ QUERY -> SHREDstatus
 Query -> SPACETrigger
 Query -> STatus
 Query -> STAtusthreshold
-Query -> STGPOOLDIRectory
+#Query -> STGPOOLDIRectory
 Query -> STGRULE
 Query -> SUBRULE
 Query -> SUBSCRIBer
