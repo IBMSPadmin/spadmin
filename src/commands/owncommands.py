@@ -489,10 +489,13 @@ def show_processes( self, parameters ):
 
         # Current input volume: MKP056M8. Current output volume(s): MKP074M8.
         status = row[ 4 ]
-        status = sub( '(Current input volume: )([\w\/]+)(\.])',
+        status = sub( '(Current input volume: )([\w\/]+)(\.)',
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
         status = sub( '(Current input volumes: )([\w\/,]+)(\()',
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
+        status = sub( '(Current input volumes: )([\w\/,]+)(\([\w ]+\))([\w\/,]+)(\()',
+            # Current input volumes: MKP002M8,(33772 Seconds)MKP049M8,(15618 Seconds)
+            lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ) + colored( m.group( 4 ), 'green', attrs=[ 'bold' ] ) + m.group( 5 ) , status )
         status = sub( '(Current output volume\(' + 's\): )([\w\/]+)(\.)',
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
         status = sub( '(Current output volumes: )([\w\/,]+)(\()',
@@ -500,6 +503,7 @@ def show_processes( self, parameters ):
         status = sub( '(Waiting for mount of input volume )([\w\/]+)( \()',
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
         status = sub( '(Waiting for mount of output volume )([\w\/,]+)( \()',
+            # Waiting for mount of input volume 000006L4 (3 seconds)
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )
         status = sub( '(Volume )([\w\/]+)( \()',
             lambda m: m.group( 1 ) + colored( m.group( 2 ), 'green', attrs=[ 'bold' ] ) + m.group( 3 ), status )

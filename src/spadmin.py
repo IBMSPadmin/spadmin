@@ -44,13 +44,13 @@ import lib.utilities as utilities
 import lib.columnar
 import lib.globals as globals
 
-
 import datetime
 import os
 import platform
 import logging
 import atexit
 import argparse
+import readchar
 
 from time import time
 from termcolor import colored
@@ -67,8 +67,9 @@ except ImportError:
 
 
 class Spadmin(object):
+    
     def run(self):
-        print("Hello, world!")
+        
         args = self.getargs()
         self.setglobals(args)
         globals.logger.debug('Import own commands.')
@@ -210,10 +211,27 @@ class Spadmin(object):
                     data.append(split(r'\n', line))
 
                 # print(data)
+                
+                i = 0
+                utilities.refreshrowscolumns()
+                
                 for textline in lib.columnar.invgrep(lib.columnar.grep(data)):
+                    i += 1
                     if textline != '':
-                        print(textline[0])
-                line = ''
+                        print(textline[0], sep="")
+                    if 'more' in globals.extras and i > globals.rows - 2:
+                        sys.stdout.write("more...   (<ENTER> to continue, 'C' to cancel)")
+                        sys.stdout.flush()
+                        key = readchar.readkey()
+                        print()
+                        if str(key).lower() == "c":
+                            #print(*s[i + globals.rows - 2:], sep="\n")
+                            # print()
+                            break
+    
+                        i = 0
+                                  
+                line           = ''
                 globals.extras = {}
                 # not nice, but this is now what we have
                 globals.lastdsmcommandtype = 'DSMADMC'

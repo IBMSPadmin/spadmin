@@ -1,3 +1,15 @@
+# Follow this rule when using node_name, ...
+#
+# node_name      [\w\*\-\.\+\&\@]+
+# server_name    [\w\*\-\.\+\&]+
+# domain_name    [\w\*\-\.\+\&]+
+# mgmtclass_name [\w\*\-\.\+\&]+
+# sched_name     [\w\*\-\.\+\&]+
+# devclass_name  [\w\*\-\.\+\&]+
+# filespace_name [\w\*\-\.\/\\\$]+
+# volume_name    [\w\*\-\.\/\\\$]+ for parameters (\w+=.*)
+# 
+
 ########################
 # Starter part LEVEL 1 #
 ########################

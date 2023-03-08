@@ -54,9 +54,10 @@ def printer(string):
             sys.stdout.write("more...   (<ENTER> to continue, 'C' to cancel)")
             sys.stdout.flush()
             key = readchar.readkey()
+            print()
             if str(key).lower() == "c":
                 #print(*s[i + globals.rows - 2:], sep="\n")
-                print()
+                # print()
                 break
             i = 0
             #print('\n')
