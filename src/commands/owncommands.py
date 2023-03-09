@@ -12,6 +12,8 @@ import lib.utilities as utilities
 import lib.humanbytes as humanbytes
 import lib.columnar as columnar
 
+from time import time
+
 columnar = columnar.Columnar() # columnar: table creator/formatter utility
 spadmin_commands      = {}  # dictionary for the spadmin commands
 disabled_words        = ['DEFAULT', 'ALIAS', 'SPADMIN']  # disabled words: used in the configuration .ini file
@@ -81,8 +83,8 @@ def spadmin_show_cache( self, parameters ):
 
     data.clear()
     for key in globals.myIBMSPrlCompleter.cache:
-        data.append( [ key.strip(), globals.myIBMSPrlCompleter.cache[ key ] ] )
-    utilities.printer( columnar( data, headers=[ colored( 'Query', 'white', attrs=[ 'bold' ] ), colored( 'Result', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'l' ] ) )
+        data.append( [ key.strip(), int( globals.config.getconfiguration()['SPADMIN']['cache_age'] ) - int( time() - globals.myIBMSPrlCompleter.cache_timestamp[ key ] ), globals.myIBMSPrlCompleter.cache[ key ] ] )
+    utilities.printer( columnar( data, headers=[ colored( 'Query', 'white', attrs=[ 'bold' ] ), colored( 'Time', 'white', attrs=[ 'bold' ] ), colored( 'Result', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'c', 'l' ] ) )
 
 #
 spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
