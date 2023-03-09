@@ -83,7 +83,14 @@ def spadmin_show_cache( self, parameters ):
 
     data.clear()
     for key in globals.myIBMSPrlCompleter.cache:
-        data.append( [ key.strip(), int( globals.config.getconfiguration()['SPADMIN']['cache_age'] ) - int( time() - globals.myIBMSPrlCompleter.cache_timestamp[ key ] ), globals.myIBMSPrlCompleter.cache[ key ] ] )
+        
+        timediff = int( globals.config.getconfiguration()['SPADMIN']['cache_age'] ) - int( time() - globals.myIBMSPrlCompleter.cache_timestamp[ key ] )
+        if timediff > 0:
+           timediff = colored( timediff, 'green', attrs=[ 'bold' ] )  
+        else:
+            timediff = colored( timediff, 'red', attrs=[ 'bold' ] )
+        
+        data.append( [ key.strip(), timediff, globals.myIBMSPrlCompleter.cache[ key ] ] )
     utilities.printer( columnar( data, headers=[ colored( 'Query', 'white', attrs=[ 'bold' ] ), colored( 'Time', 'white', attrs=[ 'bold' ] ), colored( 'Result', 'white', attrs=[ 'bold' ] ) ], justify=[ 'l', 'c', 'l' ] ) )
 
 #
