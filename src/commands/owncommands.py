@@ -183,7 +183,7 @@ def spadmin_show_rules( self, parameters ):
     else:
         match = search ( '(\d+)', parameters )
         if match:
-            min = int( match[ 1 ] )    
+            min = int( match[ 1 ] )
     
     data  = []
     for key in globals.myIBMSPrlCompleter.rules:
@@ -538,7 +538,12 @@ def spadmin_locallog( self, parameters ):
     lines   = logfile.readlines()
     logfile.close()
 
-    for line in lines[ -30: ]:
+    min = -30
+    match = search ( '(\d+)', parameters )
+    if match:
+        min = int( match[ 1 ] ) * -1    
+
+    for line in lines[ min: ]:
 
         match = search( '^(\d{8})\s(\d{6})\s(\w+)\s(.*)$', line.rstrip() )
         if match:
