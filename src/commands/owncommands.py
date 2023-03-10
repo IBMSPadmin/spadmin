@@ -210,7 +210,7 @@ def spadmin_show_commands( self, parameters ):
         data.append( [ key, desc ] )
 
     utilities.printer( columnar( sorted( data ), headers=[ 
-        colored( 'Command name', 'white', attrs=['bold'] ), colored( 'Sort Description', 'white', attrs=['bold'] ) ],
+        colored( 'Command name', 'white', attrs=['bold'] ), colored( 'Short Description', 'white', attrs=['bold'] ) ],
         justify = [ 'l','l' ]) )
 #
 spadmin_commands[ 'SPadmin SHow COMmands' ] = spadmin_show_commands
