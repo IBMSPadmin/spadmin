@@ -7,7 +7,8 @@
 # sched_name     [\w\*\-\.\+\&]+
 # devclass_name  [\w\*\-\.\+\&]+
 # filespace_name [\w\*\-\.\/\\\$]+
-# volume_name    [\w\*\-\.\/\\\$]+ for parameters (\w+=.*)
+# volume_name    [\w\*\-\.\/\\\$]+
+# for parameters (\w+=.*)
 # 
 
 ########################
@@ -1137,7 +1138,16 @@ Query -> TAPEAlertmsg
 Query -> TOC
 Query -> VIRTUALFSmapping
 Query -> VOLHistory
-Query -> Volume
+
+Query        -> Volume
+Query Volume -> select volume_name from volumes
+Query Volume -> Format=
+
+Query Volume Format=                 -> Format=Standard
+Query Volume Format=                 -> Format=Detailed
+
+Query Volume STGpool=                -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
+
 RECLaim -> STGpool
 REConcile -> Volumes
 REGister -> Admin
