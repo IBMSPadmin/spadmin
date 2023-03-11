@@ -318,7 +318,8 @@ class Spadmin(object):
             readline.set_completion_display_matches_hook(globals.myIBMSPrlCompleter.match_display_hook)
 
         if args.fetch or globals.config.getconfiguration()['SPADMIN']['cache_prefetch'] == 'True':
-            globals.logger.info('SQL prefetch for readline queries.')
+            globals.logger.info('SQL prefetch for faster readline queries.')
+            print('SQL prefetch for faster readline queries...')
             globals.myIBMSPrlCompleter.spsqlengine('select node_name from nodes', ['prefetch'])
             globals.myIBMSPrlCompleter.spsqlengine('select domain_name from domains', ['prefetch'])
             globals.myIBMSPrlCompleter.spsqlengine('select stgpool_name from stgpools', ['prefetch'])
@@ -366,7 +367,7 @@ class Spadmin(object):
 
     def getargs(self):
         # https://docs.python.org/3/library/argparse.html
-        parser = argparse.ArgumentParser(prog=colored('spadmin_old.py', 'white', attrs=['bold']),
+        parser = argparse.ArgumentParser(prog=colored('spadmin.py', 'white', attrs=['bold']),
                                          description='Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.',
                                          epilog=colored('Thank you very much for downloading and starting to use it!',
                                                         'white', attrs=['bold']))
