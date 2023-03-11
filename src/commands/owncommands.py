@@ -613,14 +613,20 @@ class ShowEvents(SpadminCommand):
 
             if row[6] == 'Missed':
                 row[6] = colored(row[6], 'yellow', attrs=['bold'])
-            if row[6] == 'Failed':
-                row[6] = colored(row[6], 'red', attrs=['bold'])
-                row[7] = colored(row[7], 'red', attrs=['bold'])
-            if row[6] == 'Pending':
-                row[6] = colored(row[6], 'cyan')
-            if row[6] == 'Started':
+            elif row[6] == 'Failed' or row[6] == 'Failed - no restart':
+                row[6] = colored(row[6], 'red', attrs=['bold'])     
+            elif row[6] == 'Pending':
+                row[6] = colored(row[6], 'yellow')
+            elif row[6] == 'Started':
+                row[6] = colored(row[6], 'yellow', attrs=['bold'])
+            elif row[6] == 'Completed':
                 row[6] = colored(row[6], 'green', attrs=['bold'])
-            if row[6] == 'Completed' and row[7] != '0':
+            
+            if row[7] == '0':
+                row[7] = colored(row[7], 'green', attrs=['bold'])
+            elif row[7] == '4' or row[7] == '8':
+                row[7] = colored(row[7], 'yellow', attrs=['bold'])    
+            else:
                 row[7] = colored(row[7], 'red', attrs=['bold'])
 
             data2.append([row[3], row[4], row[5], row[0], row[1], row[2], row[6], row[7]])
