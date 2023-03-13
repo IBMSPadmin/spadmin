@@ -103,7 +103,7 @@ $ -> QUIt
 $ -> BYe
 $ -> LOGOut
 $ -> REload
-$ -> Help!
+#$ -> Help!
 $ -> KILL
 
 $ -> HISTory
