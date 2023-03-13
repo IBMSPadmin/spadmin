@@ -679,7 +679,7 @@ class IBMSPrlCompleter:
             matches = self.retfixed
 
         sys.stdout.write( '\n' )
-        for match in matches:
+        for match in sorted( matches, key = lambda s: s.casefold() ):
 
             # cleanup for PARAMETER= values
             if search( '^\w+=(\w+)', match ):
@@ -694,7 +694,7 @@ class IBMSPrlCompleter:
             tmpmatches.append( ppp )
 
         maxlength += 3
-        separation = (globals.columns // maxlength) - 1
+        separation = ( globals.columns // maxlength ) - 1
         
         for ppp in tmpmatches:
             
