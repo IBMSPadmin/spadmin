@@ -7,7 +7,7 @@
  5   delete associations
  6     edit script
  7   fooooo
-F 8  history
+KÉSZ: 8  history
 KÉSZ: F 9     kill
 10     load script
 11    login
@@ -60,7 +60,7 @@ KÉSZ: F 57     show scratches
 58     show scripts
 59     show servers
 KÉSZ: F 60     show sessions
-61     show status
+F 61     show status
 62     show stgpools
 63     show summary
 F 64     show timing
