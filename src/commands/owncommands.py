@@ -604,7 +604,7 @@ class ShowEvents(SpadminCommand):
             return
 
         data2 = []
-        for index, row in enumerate(data):
+        for index, row in enumerate( data ):
 
             if row[4][0:10] == row[3][0:10]:
                 row[4] = '          ' + row[4][10:]
@@ -631,9 +631,9 @@ class ShowEvents(SpadminCommand):
 
             data2.append([row[3], row[4], row[5], row[0], row[1], row[2], row[6], row[7]])
 
-            table = (columnar(data2,
-                headers=[ 'StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC'],
-                justify=[ 'r', 'c', 'l', 'l', 'l', 'l', 'l', 'r' ] ) )
+        table = ( columnar( data2,
+                headers = [ 'StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName', 'Result', 'RC'],
+                justify = [ 'r', 'c', 'l', 'l', 'l', 'l', 'l', 'r' ] ) )
        
         return table
 
