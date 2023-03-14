@@ -1248,24 +1248,6 @@ def show_copygroups( self, parameters ):
 spadmin_commands[ 'SHow COPYGroups' ] = show_copygroups
 dynruleinjector(  'SHow COPYGroups' )
 
-class ShowMIGRATIONPERFormance( SpadminCommand ):
-
-    def __init__(self):
-        self.command_string = "Show MIGRATIONPERFormance"
-        self.command_type   = "PERFROMANCE"
-        self.command_index  = 0
-
-    def short_help( self ) -> str:
-        return ''
-
-    def help( self ) -> dict:
-        return """ 
-        """
-
-    def _execute( self, parameters: str ) -> str:
-        return basicPerformanceFromSummary ( self, "MIGRATION" )
-
-define_command( ShowMIGRATIONPERFormance() )
 
 class ShowCLIENTBACKUPPERFormance( SpadminCommand ):
 
@@ -1287,12 +1269,52 @@ class ShowCLIENTBACKUPPERFormance( SpadminCommand ):
 define_command( ShowCLIENTBACKUPPERFormance() )
 
 
+class ShowDBBACKUPPERFormance( SpadminCommand ):
+
+    def __init__(self):
+        self.command_string = "Show DBBACKUPPERFormance"
+        self.command_type   = "PERFROMANCE"
+        self.command_index  = 0
+
+    def short_help( self ) -> str:
+        return ''
+
+    def help( self ) -> dict:
+        return """ 
+        """
+
+    def _execute( self, parameters: str ) -> str:
+        return basicPerformanceFromSummary ( self, "FULL_DBBACKUP" )
+
+define_command( ShowDBBACKUPPERFormance() )
+
+
+class ShowMIGRATIONPERFormance( SpadminCommand ):
+
+    def __init__(self):
+        self.command_string = "Show MIGRATIONPERFormance"
+        self.command_type   = "PERFROMANCE"
+        self.command_index  = 0
+
+    def short_help( self ) -> str:
+        return ''
+
+    def help( self ) -> dict:
+        return """ 
+        """
+
+    def _execute( self, parameters: str ) -> str:
+        return basicPerformanceFromSummary ( self, "MIGRATION" )
+
+define_command( ShowMIGRATIONPERFormance() )
+
+
 def basicPerformanceFromSummary ( self, activity, fromdate = '0', todate = '1'  ):
 
     # ARCHIVE           
     # BACKUP            Ok
     # EXPIRATION
-    # FULL_DBBACKUP
+    # FULL_DBBACKUP     Ok
     # INCR_DBBACKUP
     # MIGRATION         Ok
     # MOVE DATA         
