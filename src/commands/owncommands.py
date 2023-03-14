@@ -98,7 +98,7 @@ spadmin_commands[ 'SPadmin SHow CAche' ] = spadmin_show_cache
 dynruleinjector(  'SPadmin SHow CAche' )
 
 
-def history(self, parameters):
+def history( self, parameters ):
     data = []
     rlhistfile = os.path.join("./", globals.config.getconfiguration()['SPADMIN']['historyfile'])
     globals.logger.debug('history file open: [' + rlhistfile + ']')
@@ -1248,6 +1248,92 @@ def show_copygroups( self, parameters ):
 spadmin_commands[ 'SHow COPYGroups' ] = show_copygroups
 dynruleinjector(  'SHow COPYGroups' )
 
+class ShowMIGRATIONPERFormance( SpadminCommand ):
+
+    def __init__(self):
+        self.command_string = "Show MIGRATIONPERFormance"
+        self.command_type   = "PERFROMANCE"
+        self.command_index  = 0
+
+    def short_help( self ) -> str:
+        return ''
+
+    def help( self ) -> dict:
+        return """ 
+        """
+
+    def _execute( self, parameters: str ) -> str:
+        return basicPerformanceFromSummary ( self, "MIGRATION" )
+
+define_command( ShowMIGRATIONPERFormance() )
+
+class ShowCLIENTBACKUPPERFormance( SpadminCommand ):
+
+    def __init__(self):
+        self.command_string = "Show CLIENTBACKUPPERFormance"
+        self.command_type   = "PERFROMANCE"
+        self.command_index  = 0
+
+    def short_help( self ) -> str:
+        return ''
+
+    def help( self ) -> dict:
+        return """ 
+        """
+
+    def _execute( self, parameters: str ) -> str:
+        return basicPerformanceFromSummary ( self, "BACKUP" )
+
+define_command( ShowCLIENTBACKUPPERFormance() )
+
+
+def basicPerformanceFromSummary ( self, activity, fromdate = '0', todate = '1'  ):
+
+    # ARCHIVE           
+    # BACKUP            Ok
+    # EXPIRATION
+    # FULL_DBBACKUP
+    # INCR_DBBACKUP
+    # MIGRATION         Ok
+    # MOVE DATA         
+    # RECLAMATION       
+    # RESTORE           
+    # RETRIEVE          
+    # STGPOOL BACKUP    
+    # TAPE MOUNT
+ 
+    data = globals.tsm.send_command_array_array_tabdel( "select date(START_TIME),time(START_TIME),date(END_TIME),time(END_TIME),NUMBER,ENTITY,SCHEDULE_NAME,EXAMINED,AFFECTED,FAILED,BYTES,IDLE,MEDIAW,PROCESSES,SUCCESSFUL,timestampdiff(2,char((END_TIME-START_TIME))) from summary where ACTIVITY='" + activity + "' and (start_time >= current_timestamp - " + todate + " day) and (end_time <= current_timestamp - " + fromdate + " day) order by 1" )
+
+    if globals.last_error[ 'rc' ] != '0':	
+        print( colored( globals.last_error[ "message" ], 'red', attrs=[ 'bold' ] ) )
+        return
+    
+    data2 = []
+    for index, row in enumerate( data ):
+        
+        if int( row[15] ) > 0:
+            speed = str( int( int( row[10] ) / 1024 / 1024 / int( row[15] ) ) ) 
+        else:
+            speed = "n/a";
+        
+        if int( row[9] ) > 0:
+            failed = colored( row[9], 'red', attrs=[ 'bold' ] )
+        else:
+            failed = row[9]
+        
+        if row[14] == 'NO':
+            success = colored( row[14], 'red', attrs=[ 'bold' ] ) 
+        else: 
+            success = row[14]
+    
+        columntmp = ''                      
+                      
+        data2.append( [row[0] + ' ' + row[1], row[2] + ' ' + row[3], row[4], row[5], row[6], row[7] + '/' + row[8] + '/' + failed, humanbytes.HumanBytes.format( int( row[ 10 ] ), unit="BINARY_LABELS", precision = 0 ), humanbytes.HumanBytes.format( int( row[ 15 ] ), unit="TIME_LABELS", precision = 0 ), speed + ' MB/s', humanbytes.HumanBytes.format( int( row[ 11 ] ), unit="TIME_LABELS", precision = 0 ), humanbytes.HumanBytes.format( int( row[ 12 ] ), unit="TIME_LABELS", precision = 0 ), row[13], success] )
+    
+    return columnar( data2, 
+        headers = [ 'StartTime >', '< EndTime', '#Proc', columntmp, 'SchedName', '#E/A/F', '#Bytes', 'Time', 'Speed', 'Idle', 'MedW', 'P', 'Suc' ],
+        justify = [ 'r', 'l', 'c', 'l', 'l', 'c', 'r', 'r', 'r', 'r', 'r', 'r', 'l' ] )
+    
 
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
