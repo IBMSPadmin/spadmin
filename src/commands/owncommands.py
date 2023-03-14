@@ -1326,13 +1326,15 @@ def basicPerformanceFromSummary ( self, activity, fromdate = '0', todate = '1'  
         else: 
             success = row[14]
     
-        columntmp = ''                      
-                      
+        columntmp = 'Pool'
+        if activity == "BACKUP" or activity == "RESTORE" or activity == "ARCHIVE" or activity == "RETRIEVE":
+            columntmp = "Node"         
+                                
         data2.append( [row[0] + ' ' + row[1], row[2] + ' ' + row[3], row[4], row[5], row[6], row[7] + '/' + row[8] + '/' + failed, humanbytes.HumanBytes.format( int( row[ 10 ] ), unit="BINARY_LABELS", precision = 0 ), humanbytes.HumanBytes.format( int( row[ 15 ] ), unit="TIME_LABELS", precision = 0 ), speed + ' MB/s', humanbytes.HumanBytes.format( int( row[ 11 ] ), unit="TIME_LABELS", precision = 0 ), humanbytes.HumanBytes.format( int( row[ 12 ] ), unit="TIME_LABELS", precision = 0 ), row[13], success] )
     
     return columnar( data2, 
         headers = [ 'StartTime >', '< EndTime', '#Proc', columntmp, 'SchedName', '#E/A/F', '#Bytes', 'Time', 'Speed', 'Idle', 'MedW', 'P', 'Suc' ],
-        justify = [ 'r', 'l', 'c', 'l', 'l', 'c', 'r', 'r', 'r', 'r', 'r', 'r', 'l' ] )
+        justify = [ 'r', 'l', 'c', 'c', 'l', 'c', 'r', 'r', 'r', 'r', 'r', 'r', 'l' ] )
     
 
 # merge these commands to the global rules
