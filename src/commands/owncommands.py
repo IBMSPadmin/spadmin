@@ -69,10 +69,10 @@ def dynruleinjector( command ): # it works only for commands which longer than 2
             
             commandpartcollected = command.split()        
             for commandpart in command.split()[ :-1 ]:                      
-                    rightpart = commandpartcollected.pop( -1 )
-                    leftpart  = ' '.join( commandpartcollected )
-                    if rightpart not in globals.myIBMSPrlCompleter.dynrules[ leftpart ]:
-                        globals.myIBMSPrlCompleter.dynrules[ leftpart ].append( rightpart )
+                rightpart = commandpartcollected.pop( -1 )
+                leftpart  = ' '.join( commandpartcollected )
+                if rightpart not in globals.myIBMSPrlCompleter.dynrules[ leftpart ]:
+                    globals.myIBMSPrlCompleter.dynrules[ leftpart ].append( rightpart )
 
 
 def spadmin_show_cache( self, parameters ):
