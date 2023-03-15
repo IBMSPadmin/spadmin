@@ -11,11 +11,12 @@ class dsmadmc_pexpect:
     MORE1 = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
     MORE2 = 'The character \'#\' stands for any decimal integer.'  # meg itt
     MORE3 = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt
+    CONT = 'cont>'
     PROMPT1 = 'Protect: .*'
     PROMPT2 = 'tsm: .*'
     EXPECTATIONS = [PROMPT1, PROMPT2, MORE1, MORE2, MORE3, pexpect.EOF, pexpect.TIMEOUT,
                  'ANS8023E',
-                 'Enter your password:', 'ANS1051I']
+                 'Enter your password:', 'ANS1051I', CONT]
     tsm_tabdel = None
     tsm_normal = None
 
@@ -160,6 +161,9 @@ class dsmadmc_pexpect:
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
             quit(1)
+        elif rc == 10:
+            print("Continue, please: ")
+
 
         groups = search("ANS8001I Return code (\d+).", tsm.before, MULTILINE )
         if groups:
