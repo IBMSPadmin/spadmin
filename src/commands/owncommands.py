@@ -1323,7 +1323,7 @@ def basicPerformanceFromSummary ( self, activity, fromdate = '0', todate = '1'  
     # RETRIEVE          
     # STGPOOL BACKUP    
     # TAPE MOUNT
- 
+    
     data = globals.tsm.send_command_array_array_tabdel( "select date(START_TIME),time(START_TIME),date(END_TIME),time(END_TIME),NUMBER,ENTITY,SCHEDULE_NAME,EXAMINED,AFFECTED,FAILED,BYTES,IDLE,MEDIAW,PROCESSES,SUCCESSFUL,timestampdiff(2,char((END_TIME-START_TIME))) from summary where ACTIVITY='" + activity + "' and (start_time >= current_timestamp - " + todate + " day) and (end_time <= current_timestamp - " + fromdate + " day) order by 1" )
 
     if globals.last_error[ 'rc' ] != '0':	
