@@ -34,6 +34,7 @@ class SpadminCommand:
         self.command_string = ""
         self.command_type = ""
         self.command_index = 0
+        self.command = "FREE" # Can be "FREE", "INTERNAL" or "PAY"
 
     def get_command_string(self):
         return self.command_string
@@ -95,6 +96,8 @@ def define_own_command(command_string, function_address, command_type, index, sh
 
 
 def define_command(clazz: SpadminCommand):
+    if clazz.command == "PAY" and globals.licensed == False:
+        return
     define_own_command(clazz.get_command_string(), clazz.execute, clazz.get_command_type(), clazz.get_command_index(),
                        clazz.short_help(), clazz.help())
 
@@ -105,6 +108,7 @@ class SPadminAddALIas(SpadminCommand):
         self.command_string = "SPadmin Add ALIas"
         self.command_type = "ALIAS"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Creates an alias'
@@ -138,6 +142,7 @@ class SPadminAddSErver(SpadminCommand):
         self.command_string = "SPadmin Add SErver"
         self.command_type = "SERVER"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Add new Spectrum Protect server connection'
@@ -178,6 +183,7 @@ class SPadminDELeteSErver(SpadminCommand):
         self.command_string = "SPadmin DELete SErver"
         self.command_type = "SERVER"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Removes Spectrum Protect connection'
@@ -215,6 +221,7 @@ class SPadminSWitchSErver(SpadminCommand):
         self.command_string = "SPadmin SWitch SErver"
         self.command_type = "SERVER"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Switches between Spectrum Protect servers'
@@ -249,6 +256,7 @@ class SPadminSHowCONFig(SpadminCommand):
         self.command_string = "SPadmin SHow CONFig"
         self.command_type = "CONFIG"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows spadmin settings'
@@ -279,6 +287,7 @@ class SPadminSHowALIases(SpadminCommand):
         self.command_string = "SPadmin SHow ALIases"
         self.command_type = "ALIAS"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows spadmin aliases'
@@ -304,6 +313,7 @@ class SPadminSHowVERsion(SpadminCommand):
         self.command_string = "SPadmin SHow VERsion"
         self.command_type = "VERSION"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows spadmin version'
@@ -326,6 +336,7 @@ class SPadminSETDEBUG(SpadminCommand):
         self.command_string = "SPadmin SET DEBUG"
         self.command_type = "DEBUG"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Turn DEBUG level logging on'
@@ -350,6 +361,7 @@ class SPadminUNSETDEBUG(SpadminCommand):
         self.command_string = "SPadmin UNSET DEBUG"
         self.command_type = "DEBUG"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Turn DEBUG level logging off'
@@ -374,6 +386,7 @@ class SPadminSHowRULes(SpadminCommand):
         self.command_string = "SPadmin SHow RULes"
         self.command_type = "RULES"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows spadmin rules'
@@ -416,6 +429,7 @@ class SPadminSHowLOG(SpadminCommand):
         self.command_string = "SPadmin SHow LOG"
         self.command_type = "LOGFILE"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows spadmin logfile'
@@ -442,6 +456,7 @@ class SPadminSHowPRocessinfo(SpadminCommand):
         self.command_string = "SPadmin SHow PRocessinfo"
         self.command_type = "PROCESSINFO"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows spadmin\'s dsmadmc processes'
@@ -466,6 +481,7 @@ class SPadminDELeteALIas(SpadminCommand):
         self.command_string = "SPadmin DELete ALIas"
         self.command_type = "ALIAS"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Semoves spadmin alias'
@@ -498,6 +514,7 @@ class SPadminSHowSErver(SpadminCommand):
         self.command_string = "SPadmin SHow SErver"
         self.command_type = "SERVERS"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows Spectrum Protect connections'
@@ -521,6 +538,7 @@ class SPadminSHowCOMmands(SpadminCommand):
         self.command_string = "SPadmin SHow COMmands"
         self.command_type = "COMMANDS"
         self.command_index = 0
+        self.command = "FREE"
 
     def short_help(self) -> str:
         return 'Shows spadmin commands'
@@ -551,6 +569,7 @@ class SHowACTlog(SpadminCommand):
         self.command_string = "SHow ACTlog"
         self.command_type = "ACTLOG"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows the activity log'
@@ -595,6 +614,7 @@ class REload(SpadminCommand):
         self.command_string = "REload"
         self.command_type = "RELOAD"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Reload spadmin rule file'
@@ -617,6 +637,7 @@ class HISTory(SpadminCommand):
         self.command_string = "HISTory"
         self.command_type = "HISTORY"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows command line history'
@@ -650,6 +671,7 @@ class SpadminShowCache(SpadminCommand):
         self.command_string = "SPadmin SHow CAche"
         self.command_type = "CACHE"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows spadmin SQL cache'
@@ -692,6 +714,7 @@ class SHowLASTerror(SpadminCommand):
         self.command_string = "SHow LASTerror"
         self.command_type = "CACHE"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows the last error message and error code by dsmadmc'
@@ -714,6 +737,7 @@ class SPadminSHowEXtras(SpadminCommand):
         self.command_string = "SPadmin SHow EXtras"
         self.command_type = "EXTRAS"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Print given line'
@@ -737,6 +761,7 @@ class PRint(SpadminCommand):
         self.command_string = "PRint"
         self.command_type = "PRINT"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Print given line'
@@ -759,6 +784,7 @@ class SHowSESsions(SpadminCommand):
         self.command_string = "SHow SESsions"
         self.command_type = "SESSIONS"
         self.command_index = 0
+        self.command = "FREE"
 
     def short_help(self) -> str:
         return 'Shows session informations like Query SEssions'
@@ -824,6 +850,7 @@ class SHowPRocesses(SpadminCommand):
         self.command_string = "SHow PRocesses"
         self.command_type = "PROCESSES"
         self.command_index = 0
+        self.command = "FREE"
 
     def short_help(self) -> str:
         return 'Show process informations, like Query PRocess'
@@ -885,6 +912,7 @@ class SPadminSHowLOCALLOG(SpadminCommand):
         self.command_string = "SPadmin SHow LOCALLOG"
         self.command_type = "LOCALLOG"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'shows local logfile'
@@ -928,6 +956,7 @@ class kill(SpadminCommand):
         self.command_string = "Kill"
         self.command_type = "KILL"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Cancels sessions or processes'
@@ -961,6 +990,7 @@ class ShowEvents(SpadminCommand):
         self.command_string = "SHow EVents"
         self.command_type = "EVENT"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'SHow EVents: display information about Events'
@@ -1026,6 +1056,7 @@ class ShowStgp(SpadminCommand):
         self.command_string = "SHow STGpools"
         self.command_type = "STGP"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'SHow STGpools: display information about storage pools'
@@ -1075,6 +1106,7 @@ class ShowMount(SpadminCommand):
         self.command_string = "SHow MOUnt"
         self.command_type = "MOUNT"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'SHow MOUnt: display volume mount'
@@ -1147,6 +1179,7 @@ class DISMount(SpadminCommand):
         self.command_string = "DISMount"
         self.command_type = globals.lastdsmcommandtype
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'DISMount: Dismount volume from drives (last command should be `SHow MOUnt` or `show DRive`)'
@@ -1195,6 +1228,7 @@ class Ruler(SpadminCommand):
         self.command_string = "SHow RULer"
         self.command_type = "RULER"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'SHow RULer: This command will print a simple text ruler.'
@@ -1270,6 +1304,7 @@ class Online(SpadminCommand):
         self.command_string = "ONline"
         self.command_type = globals.lastdsmcommandtype
         self.command_index = 0
+        self.command = "PAY"
         self.online = "ONLINE=YES"
 
     def short_help(self) -> str:
@@ -1320,6 +1355,7 @@ class Offline(Online):
         self.command_string = "OFFline"
         self.command_type = globals.lastdsmcommandtype
         self.command_index = 0
+        self.command = "PAY"
         self.online = "ONLINE=NO"
 
 
@@ -1331,6 +1367,7 @@ class ShowDrives(SpadminCommand):
         self.command_string = "SHow DRives"
         self.command_type = "DRIVE"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'SHow DRives: display information about drives'
@@ -1370,6 +1407,7 @@ class ShowPath(SpadminCommand):
         self.command_string = "SHow PAth"
         self.command_type = "PATH"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'SHow PAth: display information about library and drive pathes'
@@ -1407,6 +1445,7 @@ class ShowColumns(SpadminCommand):
         self.command_string = "SHow COLumns"
         self.command_type = "columns"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'SHow COLumns: display Spectrum Protect database columns'
@@ -1435,6 +1474,7 @@ class ShowLIBVolumes(SpadminCommand):
         self.command_string = "SHow LIBVolumes"
         self.command_type = "LIBVOLUMES"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Display information about library volumes'
@@ -1471,6 +1511,7 @@ class ShowFilling(SpadminCommand):
         self.command_string = "SHow FILLings"
         self.command_type = "VOLUMES"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'SHow Filling: display information about fillings volumes'
@@ -1505,6 +1546,7 @@ class Move(SpadminCommand):
         self.command_string = "MOve"
         self.command_type = "MOVE"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Move data '
@@ -1550,6 +1592,7 @@ class SHowSCRatches(SpadminCommand):
         self.command_string = "SHow SCRatches"
         self.command_type = "SRATCHES"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Show Scratch volumes'
@@ -1594,6 +1637,7 @@ class SHowCOPYGroups(SpadminCommand):
         self.command_string = "SHow COPYGroups"
         self.command_type = "COPYGROUP"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows copygroup information in one table'
@@ -1687,6 +1731,7 @@ class ShowCLIENTBACKUPPERFormance(SpadminCommand):
         self.command_string = "SHow CLIENTBACKUPPERFormance"
         self.command_type = "PERFROMANCE"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Show client backup performanc data'
@@ -1708,6 +1753,7 @@ class ShowDBBACKUPPERFormance(SpadminCommand):
         self.command_string = "SHow DBBACKUPPERFormance"
         self.command_type = "PERFROMANCE"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows db backup performance data'
@@ -1729,6 +1775,7 @@ class ShowMIGRATIONPERFormance(SpadminCommand):
         self.command_string = "SHow MIGRATIONPERFormance"
         self.command_type = "PERFROMANCE"
         self.command_index = 0
+        self.command = "PAY"
 
     def short_help(self) -> str:
         return 'Shows migrations performance data'

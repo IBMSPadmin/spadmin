@@ -19,6 +19,7 @@ class dsmadmc_pexpect:
                  'Enter your password:', 'ANS1051I', CONT]
     tsm_tabdel = None
     tsm_normal = None
+    nrOfRetry = 3
 
     def __init__(self, server, id, pa):
         if not server:
@@ -50,9 +51,10 @@ class dsmadmc_pexpect:
             tsm.sendline(command)
             rc = self.tsm_tabdel.expect(self.EXPECTATIONS)
             self.check_rc(tsm, rc)
-        except:
+        except Exception as e:
             print('An error occurred during a dsmadmc execution:')
             print(tsm.before)
+            print(str(e))
             print('Please check the connection parameters and restart spadmin')
             quit(1)
 
@@ -110,15 +112,16 @@ class dsmadmc_pexpect:
 
         tsm2 = self.get_tsm_normal()
 
-        globals.logger.debug('DSMADMC normal pid: [' + str(tsm2.pid) + ']')
+        # globals.logger.debug('DSMADMC normal pid: [' + str(tsm2.pid) + ']')
 
         try:
             tsm2.sendline(command)
             rc = self.tsm_normal.expect(self.EXPECTATIONS)
             self.check_rc(tsm2, rc)
-        except:
+        except Exception as e:
             print('An error occurred during a dsmadmc execution:')
             print(tsm2.before)
+            print(str(e))
             print('Please check the connection parameters and restart spadmin')
             quit(1)
 
