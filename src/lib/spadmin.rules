@@ -628,10 +628,63 @@ REMove          -> Node
 ################
 # SHow command #
 ################
-SHow -> TIME
+SHow                    -> TIME
+SHow                    -> SLOTS
+SHow SLOTS              -> select library_name from libraries
 
-SHow       -> SLOTS
-SHow SLOTS -> select library_name from libraries
+SHow                    -> ASQueued
+SHow                    -> ASVol
+SHow                    -> BFObject
+SHow  BFObject          -> <give_an_objectID>
+# Crash may be
+SHow                    -> DEDUPDELETEINFO
+# Format display
+SHow                    -> CONFIGuration
+# unknown command
+SHow                    -> DB2CONnections
+# unknown command
+SHow                    -> DB2TABles
+# unknown command
+SHow                    -> DBVars
+Show                    -> DEDUPObject
+SHow DEDUPObject        -> <give_an_objectID>
+SHow                    -> DEVCLass
+SHow                    -> GROUPLeaders
+SHow GROUPLeaders       -> <objID-high objID-low>
+SHow                    -> GROUPMembers
+SHow GROUPMembers       -> <objID-high objID-low>
+SHow                    -> INVObject
+SHow INVObject          -> <objID-high objID-low>
+SHow                    -> LIBINVentory
+SHow LIBINVentory       -> select library_name from libraries
+SHow                    -> LIBRary
+SHow LIBRary            -> select library_name from libraries
+SHow                    -> LOCK
+SHow                    -> MEMTREnd
+SHow                    -> MP
+SHow                    -> NASDev
+SHow                    -> NASFs
+# unknown command
+SHow                    -> NASInformation
+# unknown command
+SHow                    -> NASWorkload
+SHow                    -> REPLICATION
+SHow                    -> RESQueue
+# Duplicated ?
+SHow                    -> SESSions
+SHow                    -> SSPool
+# Dangerous !
+SHow                    -> THReads
+# Parameters ?
+SHow                    -> TOCSets
+SHow                    -> TOCVars
+SHow                    -> TXNTable
+SHow                    -> Versions
+SHow Versions           -> <give_an_objectID>
+SHow                                -> VOLINUSE
+SHow VOLINUSE                       -> select volume_name from volumes
+SHow VOLINUSE [\w\*\-\.\+\&]+       -> Remove=YES
+
 
 ##################
 # Other commands #
@@ -816,7 +869,7 @@ APPRove -> PEndingcmd
 AUDit -> CONTainer
 AUDIT -> LDAPdirectory
 AUDIT -> LIBRary
-AUDit -> LIBVolume
+AUDit -> LIBVolum
 AUDit -> LICenses
 AUDit -> Volume
 BAckup -> Node
@@ -1352,7 +1405,11 @@ UPDate -> VOLHistory
 UPDate -> Volume
 VALidate -> ASPera
 VALidate -> CLOud
-VALidate -> LAnfree
+VALidate                            -> LAnfree
+VALidate LAnfree                    -> select node_name from nodes
+VALidate LAnfree [\w\*\-\.\+\&]+    -> select server_name from servers
+
+
 
 VALidate                           -> POlicyset
 VALidate POlicyset                 -> select domain_name from domains
