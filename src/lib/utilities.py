@@ -132,8 +132,20 @@ def colorize_line( line ):
         return line
 
 def getmac():
-    ret = ':'.join(re.findall('../..', '%012x' % uuid.getnode()))
+    #ret = ':'.join(re.findall('../..', '%012x' % uuid.getnode()))
+    mac_address = uuid.getnode()
+    # print(mac_address)
+    ret = ':'.join(['{:02x}'.format((mac_address >> elements) & 0xff) for elements in range(0,8*6,8)][::-1])
     return ret
+
+def validate_license():
+    if getmac() and getmac() == '7e:17:4c:06:06:e7':
+        print(colored( "Your license is valid for 2023.02.03.!", 'green', attrs = [ 'bold' ]))
+        globals.licensed = True
+    else:
+        print(colored( "Your License key has expired", 'red', attrs = [ 'bold' ]))
+        globals.licensed = True
+
 
 
 def consoleline(char='-'):

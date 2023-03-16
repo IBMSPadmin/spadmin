@@ -285,6 +285,9 @@ class Spadmin(object):
         globals.logger.info(utilities.consolefilledline('START'))
 
         globals.logger.debug('ARGS: ' + pformat(args))
+        globals.color_cyan = 'cyan'
+        globals.color_attrs_bold= 'bold'
+        globals.color_attrs_underline = 'underline'
 
         # get the screen size and store it as a global variable
         utilities.refreshrowscolumns()
@@ -356,9 +359,10 @@ class Spadmin(object):
             print(colored('= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=['bold']))
             print(colored('= Terminal properties: [', 'grey', attrs=['bold']) + colored(str(globals.columns), 'white', attrs=['bold']) + colored('x', 'grey', attrs=[ 'bold']) + colored(
                 str(globals.rows), 'white', attrs=['bold']) + colored(']', 'grey', attrs=['bold']))
+            utilities.validate_license()
             # Short text help
             print()
-            print(' ' + colored('Short HELP:', 'cyan', attrs=['bold', 'underline']))
+            print(' ' + colored('Short HELP:', globals.color_cyan, attrs=[globals.color_attrs_bold, globals.color_attrs_underline]))
             print('''
             Use: "QUIt", "BYe", "LOGOut" or "Exit" commands to leave the program or
             Use: "REload" to reload the rule file! and

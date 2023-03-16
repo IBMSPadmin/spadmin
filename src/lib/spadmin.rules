@@ -63,6 +63,7 @@ $-> PING
 $-> Prepare
 $-> PROTect
 $-> Query
+# !!!QUIt, Query collision problem!!!
 $-> QUIT
 $-> RECLaim
 $-> RECommission
@@ -98,12 +99,10 @@ $-> VARy
 
 # Own commands:
 $ -> Exit
-# !!!QUIt, Query collision problem!!!
-$ -> QUIt
 $ -> BYe
 $ -> LOGOut
 $ -> REload
-$ -> Help!
+#$ -> Help!
 $ -> KILL
 
 $ -> HISTory
