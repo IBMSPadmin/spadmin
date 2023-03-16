@@ -866,7 +866,10 @@ class SHowPRocesses(SpadminCommand):
                          lambda m: m.group(1) + colored(m.group(2), 'green', attrs=['bold']) + m.group(3), status)
             status = sub('(Volume )([\w\/]+)( \()',
                          lambda m: m.group(1) + colored(m.group(2), 'green', attrs=['bold']) + m.group(3), status)
-
+            status = sub('(Waiting for mount point in device class [\w\/,]+)( \()',
+                        # Waiting for mount point in device class DC_TS3200_LTO4_05 (596 seconds).
+                        lambda m: colored(m.group(1), 'yellow', attrs=['bold']) + m.group(2), status)
+                        
             data2.append([index + 1, row[0], row[1], row[2], bytes_prcessed, status])
 
         globals.lastdsmcommandresults = data2
@@ -874,9 +877,7 @@ class SHowPRocesses(SpadminCommand):
                         headers=['#', 'Proc#', 'Process', 'Files', 'Bytes', 'Status'],
                         justify=['r', 'l', 'l', 'r', 'r', 'l'])
 
-
 define_command(SHowPRocesses())
-
 
 
 class SPadminSHowLOCALLOG(SpadminCommand):
