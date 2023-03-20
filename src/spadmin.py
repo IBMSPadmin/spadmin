@@ -250,10 +250,10 @@ class Spadmin(object):
         else:
             globals.logfilename = globals.config.getconfiguration()['SPADMIN']['logfile']
 
-        if args.rulefilename:
-            globals.rulefilename = args.rulefilename
-        else:
-            globals.rulefilename = globals.config.getconfiguration()['SPADMIN']['rulefile']
+        #if args.rulefilename:
+        #    globals.rulefilename = args.rulefilename
+        #else:
+        #    globals.rulefilename = globals.config.getconfiguration()['SPADMIN']['rulefile']
         # Logger settings
         logging.basicConfig(filename=globals.logfilename,
                             filemode='a',
@@ -388,7 +388,7 @@ class Spadmin(object):
         parser.add_argument('-n', '--norlsqlhelpepr', action='store_const', const=True,
                             help='no SQL queries in reradline')
         parser.add_argument('-p', '--prereqcheck', action='store_const', const=True, help='prerequisite check')
-        parser.add_argument('-r', '--rulefilename', type=str, help='custom rule filename')
+        # parser.add_argument('-r', '--rulefilename', type=str, help='custom rule filename')
         parser.add_argument('-s', '--disablerl', action='store_const', const=True,
                             help='disable readline functionality')
         parser.add_argument('-t', '--textcolor', type=str, help='specify the text color [default: "white"]')

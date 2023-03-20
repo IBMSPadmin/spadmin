@@ -147,7 +147,6 @@ def validate_license():
         globals.licensed = True
 
 
-
 def consoleline(char='-'):
     print(char * globals.columns)
 

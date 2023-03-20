@@ -630,7 +630,6 @@ REMove          -> Node
 SHow                    -> TIME
 SHow                    -> SLOTS
 SHow SLOTS              -> select library_name from libraries
-
 SHow                    -> ASQueued
 SHow                    -> ASVol
 SHow                    -> BFObject
@@ -679,10 +678,10 @@ SHow                    -> TOCSets
 SHow                    -> TOCVars
 SHow                    -> TXNTable
 SHow                    -> Versions
-SHow Versions           -> <give_an_objectID>
+SHow VErsions           -> <give_an_objectID>
 SHow                                -> VOLINUSE
 SHow VOLINUSE                       -> select volume_name from volumes
-SHow VOLINUSE [\w\*\-\.\+\&]+       -> Remove=YES
+SHow VOLINUSE [\w\*\-\.\/\\\$]+     -> Remove=YES
 
 
 ##################

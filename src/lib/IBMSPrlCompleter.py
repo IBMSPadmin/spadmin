@@ -2,6 +2,7 @@ import sys
 from . import utilities
 from . import globals
 import logging
+import os
 
 from termcolor import colored
 from pprint import pformat
@@ -59,7 +60,7 @@ class IBMSPrlCompleter:
         # self.spprompt   = spprompt
 
         # print(' and loading rules: ')        
-        self.loadrules(globals.rulefilename)
+        self.loadrules()
 
     def prompt(self):
         prompt = globals.config.getconfiguration()['SPADMIN']['prompt'].strip('"')
@@ -146,7 +147,12 @@ class IBMSPrlCompleter:
     
     retfixed = []
 
-    def loadrules( self, rulefilename ):
+    def loadrules( self ):
+        if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+            os.chdir(sys._MEIPASS)
+            rulefilename = 'spadmin.rules'
+        else:
+            rulefilename = 'lib/spadmin.rules'
         rulefile = open( rulefilename, 'r' )
         rulefilelines = rulefile.readlines()
         #self.start = []  # 1. level list
