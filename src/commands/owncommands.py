@@ -1472,7 +1472,7 @@ define_command(ShowColumns())
 
 class ShowLIBVolumes(SpadminCommand):
     def __init__(self):
-        self.command_string = "SHow LIBVolumes"
+        self.command_string = "SHow MIssinglibvolumes"
         self.command_type = "LIBVOLUMES"
         self.command_index = 0
         self.command = "PAY"
