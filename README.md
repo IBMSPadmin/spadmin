@@ -2,6 +2,8 @@
 
 ![spadmin](spadmin.png)
 
+## Contributors
+
 <table>
 <tr>
     <td align="center">
