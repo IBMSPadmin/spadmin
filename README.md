@@ -2,7 +2,7 @@
 
 ![spadmin](spadmin.png)
 
-## Contributors
+## Collaborators
 
 <table>
 <tr>
@@ -36,3 +36,5 @@
     </td>
  </tr>
  </table>
+
+## Contributors
