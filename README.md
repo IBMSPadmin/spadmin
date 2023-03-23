@@ -1,6 +1,6 @@
 # spadmin.py project
 
-![spadmin](spadmin.png){: style="border: 1px solid red"}
+![spadmin](spadmin.png)
 
 ## Collaborators
 
