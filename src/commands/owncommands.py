@@ -566,7 +566,7 @@ define_command(SPadminSHowCOMmands())
 class SHowACTlog(SpadminCommand):
 
     def __init__(self):
-        self.command_string = "SHow ACTlog"
+        self.command_string = globals.basecommandname + "ACTlog"
         self.command_type = "ACTLOG"
         self.command_index = 0
         self.command = "PAY"
@@ -711,7 +711,7 @@ define_command(SpadminShowCache())
 class SHowLASTerror(SpadminCommand):
 
     def __init__(self):
-        self.command_string = "SHow LASTerror"
+        self.command_string = globals.basecommandname + "LASTerror"
         self.command_type = "CACHE"
         self.command_index = 0
         self.command = "PAY"
@@ -781,7 +781,7 @@ define_command(PRint())
 class SHowSESsions(SpadminCommand):
 
     def __init__(self):
-        self.command_string = "SHow SESsions"
+        self.command_string = globals.basecommandname + "SESsions"
         self.command_type = "SESSIONS"
         self.command_index = 0
         self.command = "FREE"
@@ -847,7 +847,7 @@ define_command(SHowSESsions())
 class SHowPRocesses(SpadminCommand):
 
     def __init__(self):
-        self.command_string = "SHow PRocesses"
+        self.command_string = globals.basecommandname + "PRocesses"
         self.command_type = "PROCESSES"
         self.command_index = 0
         self.command = "FREE"
@@ -988,7 +988,7 @@ define_command(kill())
 
 class ShowEvents(SpadminCommand):
     def __init__(self):
-        self.command_string = "SHow EVents"
+        self.command_string = globals.basecommandname + "EVents"
         self.command_type = "EVENT"
         self.command_index = 0
         self.command = "PAY"
@@ -1054,7 +1054,7 @@ define_command(ShowEvents())
 
 class ShowStgp(SpadminCommand):
     def __init__(self):
-        self.command_string = "SHow STGpools"
+        self.command_string = globals.basecommandname + "STGpools"
         self.command_type = "STGP"
         self.command_index = 0
         self.command = "PAY"
@@ -1104,7 +1104,7 @@ define_command(ShowStgp())
 
 class ShowMount(SpadminCommand):
     def __init__(self):
-        self.command_string = "SHow MOUnt"
+        self.command_string = globals.basecommandname + "MOUnt"
         self.command_type = "MOUNT"
         self.command_index = 0
         self.command = "PAY"
@@ -1226,7 +1226,7 @@ define_command(DISMount())
 
 class Ruler(SpadminCommand):
     def __init__(self):
-        self.command_string = "SHow RULer"
+        self.command_string = globals.basecommandname + "RULer"
         self.command_type = "RULER"
         self.command_index = 0
         self.command = "PAY"
@@ -1365,7 +1365,7 @@ define_command(Offline())
 
 class ShowDrives(SpadminCommand):
     def __init__(self):
-        self.command_string = "SHow DRives"
+        self.command_string = globals.basecommandname + "DRives"
         self.command_type = "DRIVE"
         self.command_index = 0
         self.command = "PAY"
@@ -1405,7 +1405,7 @@ define_command(ShowDrives())
 
 class ShowPath(SpadminCommand):
     def __init__(self):
-        self.command_string = "SHow PAth"
+        self.command_string = globals.basecommandname + "PAth"
         self.command_type = "PATH"
         self.command_index = 0
         self.command = "PAY"
@@ -1443,7 +1443,7 @@ define_command(ShowPath())
 
 class ShowColumns(SpadminCommand):
     def __init__(self):
-        self.command_string = "SHow COLumns"
+        self.command_string = globals.basecommandname + "COLumns"
         self.command_type = "columns"
         self.command_index = 0
         self.command = "PAY"
@@ -1472,7 +1472,7 @@ define_command(ShowColumns())
 
 class ShowLIBVolumes(SpadminCommand):
     def __init__(self):
-        self.command_string = "SHow MIssinglibvolumes"
+        self.command_string = globals.basecommandname + "MIssinglibvolumes"
         self.command_type = "LIBVOLUMES"
         self.command_index = 0
         self.command = "PAY"
@@ -1509,7 +1509,7 @@ define_command(ShowLIBVolumes())
 
 class ShowFilling(SpadminCommand):
     def __init__(self):
-        self.command_string = "SHow FILLings"
+        self.command_string = globals.basecommandname + "FILLings"
         self.command_type = "VOLUMES"
         self.command_index = 0
         self.command = "PAY"
@@ -1590,7 +1590,7 @@ define_command(Move())
 class SHowSCRatches(SpadminCommand):
 
     def __init__(self):
-        self.command_string = "SHow SCRatches"
+        self.command_string = globals.basecommandname + "SCRatches"
         self.command_type = "SRATCHES"
         self.command_index = 0
         self.command = "PAY"
@@ -1635,7 +1635,7 @@ define_command(SHowSCRatches())
 class SHowCOPYGroups(SpadminCommand):
 
     def __init__(self):
-        self.command_string = "SHow COPYGroups"
+        self.command_string = globals.basecommandname + "COPYGroups"
         self.command_type = "COPYGROUP"
         self.command_index = 0
         self.command = "PAY"
@@ -1729,7 +1729,7 @@ define_command(SHowCOPYGroups())
 class ShowCLIENTBACKUPPERFormance(SpadminCommand):
 
     def __init__(self):
-        self.command_string = "SHow CLIENTBACKUPPERFormance"
+        self.command_string = globals.basecommandname + "CLIENTBACKUPPERFormance"
         self.command_type = "PERFROMANCE"
         self.command_index = 0
         self.command = "PAY"
@@ -1751,7 +1751,7 @@ define_command(ShowCLIENTBACKUPPERFormance())
 class ShowDBBACKUPPERFormance(SpadminCommand):
 
     def __init__(self):
-        self.command_string = "SHow DBBACKUPPERFormance"
+        self.command_string = globals.basecommandname + "DBBACKUPPERFormance"
         self.command_type = "PERFROMANCE"
         self.command_index = 0
         self.command = "PAY"
@@ -1773,7 +1773,7 @@ define_command(ShowDBBACKUPPERFormance())
 class ShowMIGRATIONPERFormance(SpadminCommand):
 
     def __init__(self):
-        self.command_string = "SHow MIGRATIONPERFormance"
+        self.command_string = globals.basecommandname + "MIGRATIONPERFormance"
         self.command_type = "PERFROMANCE"
         self.command_index = 0
         self.command = "PAY"

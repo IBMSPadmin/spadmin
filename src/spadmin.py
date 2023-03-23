@@ -261,7 +261,7 @@ class Spadmin(object):
                             datefmt='%Y%m%d %H%M%S',
                             level=logging.INFO)
         # and a global object
-        globals.logger = logging.getLogger('spadmin_old.py logger')
+        globals.logger = logging.getLogger('spadmin.py logger')
 
         # override config with the cli parameters
         if args.debug:
@@ -271,9 +271,16 @@ class Spadmin(object):
         if args.prereqcheck:
             globals.config.getconfiguration()['SPADMIN']['prereqcheck'] = 'True'
 
-        if args.commands:
-            globals.config.getconfiguration()['SPADMIN']['autoexec'] = args.commands
-
+        if args.autoexec:
+            globals.config.getconfiguration()['SPADMIN']['autoexec'] = args.autoexec
+            
+        globals.basecommandname = "SHow"    
+        if args.basecommandname:
+            globals.basecommandname = args.basecommandname
+        elif globals.config.getconfiguration()['SPADMIN'].get( 'basecommandname' ) is not None:
+            globals.basecommandname = globals.config.getconfiguration()['SPADMIN']['basecommandname']
+        globals.basecommandname += ' '
+        
         if args.consoleonly:
             print("\nConsole mode...")
             utilities.start_console('', globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'],
@@ -375,10 +382,10 @@ class Spadmin(object):
                                          description='Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.',
                                          epilog=colored('Thank you very much for downloading and starting to use it!',
                                                         'white', attrs=['bold']))
-
-        parser.add_argument('--consoleonly', action='store_const', const=True, help='run console only mode!')
-        parser.add_argument('-c', '--commands', type=str,
-                            help='autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;')
+        parser.add_argument('-a', '--autoexec', type=str,
+                             help='autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;')
+        parser.add_argument('-c', '--consoleonly', action='store_const', const=True, help='run console only mode!')
+        parser.add_argument('-b', '--basecommandname', type=str, help='custom base command name, default: SHow')
         parser.add_argument('-d', '--debug', action='store_const', const=True, help='debug messages into log file')
         parser.add_argument('-f', '--fetch', action='store_const', const=True, help='enable SQL prefetch queries')
         parser.add_argument('-i', '--inifilename', type=str, help='ini filename')
@@ -401,8 +408,6 @@ class Spadmin(object):
 
 if __name__ == '__main__':
     Spadmin().run()
-
-
 
 # ---------------------------------------------------------------------------------
 #

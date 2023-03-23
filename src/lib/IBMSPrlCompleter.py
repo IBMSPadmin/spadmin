@@ -39,7 +39,7 @@ class IBMSPrlCompleter:
 
     def __init__( self ):
         
-        sys.stdout.write("Let's try to get the name of the server...")
+        sys.stdout.write("Let's try to get the name of the server... ")
         sys.stdout.flush()
         globals.spprompt = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
         sys.stdout.write( '\r' )
