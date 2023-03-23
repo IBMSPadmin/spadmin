@@ -1,6 +1,6 @@
-# spadmin
+# spadmin.py project
 
-![spadmin](spadmin.png)
+![spadmin](spadmin.png) {: style="-webkit-box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.84); -moz-box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.84); box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.84);"}
 
 ## Collaborators
 
