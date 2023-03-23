@@ -38,3 +38,5 @@
  </table>
 
 ## Contributors
+
+<iframe src="https://github.com/sponsors/FleXoft/button" title="Sponsor FleXoft" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
