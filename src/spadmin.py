@@ -236,7 +236,7 @@ class Spadmin(object):
                 # not nice, but this is now what we have
                 globals.lastdsmcommandtype = 'DSMADMC'
                 globals.lastdsmcommandresults.clear()
-                
+
                 # continue
 
     def setglobals(self, args):
