@@ -176,7 +176,7 @@ class Spadmin(object):
                     prgend = time()
                     utilities.consoleline('-')
                     exetime = datetime.timedelta(seconds=prgend - prgstart)
-                    print('Program execution time:', colored(exetime, 'green'))
+                    print('Program execution time:', colored(exetime, globals.color_green))
                     globals.logger.info('Program execution time: ' + str(exetime) + 's')
                     utilities.consoleline('-')
 
@@ -246,6 +246,19 @@ class Spadmin(object):
 
     def setglobals(self, args):
         # SPadmin global settings
+
+        ## COLORS:
+        globals.color_cyan = 'cyan'
+        globals.color_white = 'white'
+        globals.color_green = 'green'
+        globals.color_red = 'red'
+        globals.color_yellow = 'yellow'
+        globals.color_on_blue = 'on_blue'
+        globals.color_on_white = 'on_white'
+        globals.color_grey = 'grey'
+        globals.color_attrs_bold= 'bold'
+        globals.color_attrs_underline = 'underline'
+
         if args.inifilename:
             globals.config = Configuration(args.inifilename)
         else:
@@ -298,9 +311,7 @@ class Spadmin(object):
         globals.logger.info(utilities.consolefilledline('START'))
 
         globals.logger.debug('ARGS: ' + pformat(args))
-        globals.color_cyan = 'cyan'
-        globals.color_attrs_bold= 'bold'
-        globals.color_attrs_underline = 'underline'
+
 
         # get the screen size and store it as a global variable
         utilities.refreshrowscolumns()
@@ -357,21 +368,21 @@ class Spadmin(object):
  ███████║ ██║      ██║  ██║ ██████╔╝ ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██╗ ██║         ██║   
  ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝'''))
             print()
-            print(colored(' Powerful CLI administration tool for ', 'white', attrs=['bold']) + colored('IBM', 'white',
-                                                                                                       'on_blue',
+            print(colored(' Powerful CLI administration tool for ', globals.color_white, attrs=[globals.color_attrs_bold]) + colored('IBM', globals.color_white,
+                                                                                                       globals.color_on_blue,
                                                                                                        attrs=[
-                                                                                                           'bold']) + colored(
-                ' Spectrum Protect aka Tivoli Storage Manager', 'white', attrs=['bold']))
+                                                                                                           globals.color_attrs_bold]) + colored(
+                ' Spectrum Protect aka Tivoli Storage Manager', globals.color_white, attrs=[globals.color_attrs_bold]))
 
             print()
-            print(colored("= Welcome! Enter any IBM Spectrum Protect commands and if you're lost type Help!", 'grey', attrs=['bold']))
-            print(colored("= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=['bold']))
-            print(colored('= ', 'grey', attrs=['bold']) + colored("Once you start to use it, you can't live without it!!!", 'grey', attrs=['bold', 'underline']) + ' 😀')
-            print(colored('= Python3 [' + sys.version + ']', 'grey', attrs=['bold']))
-            print(colored('= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=['bold']))
-            print(colored('= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=['bold']))
-            print(colored('= Terminal properties: [', 'grey', attrs=['bold']) + colored(str(globals.columns), 'white', attrs=['bold']) + colored('x', 'grey', attrs=[ 'bold']) + colored(
-                str(globals.rows), 'white', attrs=['bold']) + colored(']', 'grey', attrs=['bold']))
+            print(colored("= Welcome! Enter any IBM Spectrum Protect commands and if you're lost type Help!", 'grey', attrs=[globals.color_attrs_bold]))
+            print(colored("= We're trying to breathe new life into this old school character based management interface.", 'grey', attrs=[globals.color_attrs_bold]))
+            print(colored('= ', 'grey', attrs=[globals.color_attrs_bold]) + colored("Once you start to use it, you can't live without it!!!", 'grey', attrs=[globals.color_attrs_bold, 'underline']) + ' 😀')
+            print(colored('= Python3 [' + sys.version + ']', 'grey', attrs=[globals.color_attrs_bold]))
+            print(colored('= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[globals.color_attrs_bold]))
+            print(colored('= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=[globals.color_attrs_bold]))
+            print(colored('= Terminal properties: [', 'grey', attrs=[globals.color_attrs_bold]) + colored(str(globals.columns), globals.color_white, attrs=[globals.color_attrs_bold]) + colored('x', 'grey', attrs=[ globals.color_attrs_bold]) + colored(
+                str(globals.rows), globals.color_white, attrs=[globals.color_attrs_bold]) + colored(']', 'grey', attrs=[globals.color_attrs_bold]))
             utilities.validate_license()
             # Short text help
             print()

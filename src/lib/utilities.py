@@ -25,10 +25,10 @@ def progressbar(count, total, leadtext=''):
     filledlength = int(round((barlength) * count / float(total)))
 
     percent = round(100.0 * count / float(total), 1)
-    barline = '=' * filledlength + colored('-', 'grey', attrs=['bold']) * (barlength - filledlength)
+    barline = '=' * filledlength + colored('-', globals.color_grey, attrs=[globals.color_attrs_bold ]) * (barlength - filledlength)
 
     sys.stdout.write(leadtext + '[%s]\r' % (barline))
-    sys.stdout.write(leadtext + '[%s%s\r' % (colored(percent, 'grey', 'on_white'), colored('%', 'grey', 'on_white')))
+    sys.stdout.write(leadtext + '[%s%s\r' % (colored(percent, globals.color_grey, globals.color_on_white), colored('%', globals.color_grey, globals.color_on_white)))
     sys.stdout.flush()
 
 
@@ -123,13 +123,13 @@ def start_console(server: str, id: str, password: str) -> bool:
 
 def colorize_line( line ):
     if re.search( '^ANR\d{4}E', line ):
-        return colored( line, 'red', attrs = [ 'bold' ])
+        return colored( line, globals.color_red, attrs = [ globals.color_attrs_bold ])
     elif re.search( '^ANR\d{4}W', line ):
-        return colored( line, 'yellow', attrs = [ 'bold' ])
+        return colored( line, globals.color_yellow, attrs = [ globals.color_attrs_bold ])
     elif re.search( '^ANR\d{4}D', line ):
-        return colored( line, 'cyan', attrs = [ 'bold' ])
+        return colored( line, globals.color_cyan, attrs = [ globals.color_attrs_bold ])
     elif re.search( '^AN\d{5}S', line ):
-        return colored( line, 'red', attrs = [ 'bold' ])
+        return colored( line, globals.color_red, attrs = [ globals.color_attrs_bold ])
     else:
         return line
 
@@ -142,10 +142,10 @@ def getmac():
 
 def validate_license():
     if getmac() and getmac() == '7e:17:4c:06:06:e7':
-        print(colored( "Your license is valid for 2023.02.03.!", 'green', attrs = [ 'bold' ]))
+        print(colored( "Your license is valid for 2023.02.03.!", globals.color_green, attrs = [ globals.color_attrs_bold  ]))
         globals.licensed = True
     else:
-        print(colored( "Your License key has expired", 'red', attrs = [ 'bold' ]))
+        print(colored( "Your License key has expired", globals.color_red, attrs = [ globals.color_attrs_bold  ]))
         globals.licensed = True
 
 

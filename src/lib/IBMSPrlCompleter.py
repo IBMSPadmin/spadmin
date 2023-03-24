@@ -709,7 +709,7 @@ class IBMSPrlCompleter:
             # colorize the result
             match = search( '^[A-Z][A-Z0-9]*', ppp )
             if match:
-                ppp = ppp.replace( match[ 0 ], colored( match[ 0 ], 'green', attrs=[ 'bold' ] ) )
+                ppp = ppp.replace( match[ 0 ], colored( match[ 0 ], globals.color_green, attrs=[ globals.color_attrs_bold ] ) )
                         
             sys.stdout.write( ppp )
 

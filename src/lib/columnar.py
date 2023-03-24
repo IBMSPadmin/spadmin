@@ -196,7 +196,7 @@ class Columnar:
 #            headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ])
 
             # headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ]) + Fore.WHITE + Style.BRIGHT
-            headers[ int(orderby)] = colorize( headers[int(orderby)], headers[int(orderby)], "green", [ 'bold' ] )
+            headers[ int(orderby)] = colorize( headers[int(orderby)], headers[int(orderby)], globals.color_green, [ globals.color_attrs_bold ] )
 
         # Grep
         data = invgrep( grep( data ) )
@@ -207,19 +207,19 @@ class Columnar:
             header_decorator += self.header_decorator * self.column_length[i] + self.column_separator
 
         # Header 1st decorator line --------
-        out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
+        out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
 
         # Header
         header_line = ''
         for i, cell in enumerate(headers):
             
-            header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, 'white', attrs=[ 'bold' ] )  
+            header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white, attrs=[ globals.color_attrs_bold ] )
             
         # out.write( header_line[ :globals.columns + len( header_line ) - clen( header_line ) ] + "\n")
         out.write( colorleft( header_line, globals.columns ) + "\n" )
 
         # Header 2nd decorator line --------
-        out.write( colored( header_decorator[:globals.columns], 'white', attrs=[ 'bold' ] ) + "\n")
+        out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
 
         # Rows
         for row in data:  # sorok kiíratása
