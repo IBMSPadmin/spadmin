@@ -298,7 +298,6 @@ class Spadmin(object):
             globals.basecommandname = args.basecommandname
         elif globals.config.getconfiguration()['SPADMIN'].get( 'basecommandname' ) is not None:
             globals.basecommandname = globals.config.getconfiguration()['SPADMIN']['basecommandname']
-        globals.basecommandname += ' '
         
         if args.consoleonly:
             print("\nConsole mode...")

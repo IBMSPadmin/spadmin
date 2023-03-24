@@ -158,6 +158,10 @@ class IBMSPrlCompleter:
         #self.start = []  # 1. level list
         #self.rules = {}  # >2. level dictionary
         self.start.clear()
+        
+        IBMSPrlCompleter.start.append( globals.basecommandname )
+        globals.basecommandname += ' '
+        
         self.rules.clear()
         i = 0
         for line in rulefilelines:
