@@ -42,6 +42,8 @@ def add_remove_color(color, string):
 
 
 def printer(string):
+    if not string:
+        return
     s = str(string).split("\n")
     i = 0
 

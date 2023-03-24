@@ -113,6 +113,11 @@ class Spadmin(object):
                 print('\a')  # Bell
                 # print( 'Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ' )
                 continue
+            except EOFError:
+                # Suppress ctrl-d
+                print('\a')  # Bell
+                # print( 'Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program ' )
+                continue
 
             # protect the || as ##
             # line = line.replace( '||', '##' )
