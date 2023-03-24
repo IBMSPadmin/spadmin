@@ -42,7 +42,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - run: echo "🖥️  The workflow is now setting up the build environment on the runner."
       - name: PyInstaller Linux
-        run: pyinstaller --workpath tmp --distpath build/ --paths src --onefile --name spadmin_${{env.OS}}_${{ steps.date.outputs.date }} --add-data lib/spadmin.rules src/spadmin.py
+        run: pyinstaller --workpath tmp --distpath build/ --paths src --onefile --name spadmin_${{env.OS}}_${{ steps.date.outputs.date }} --add-data src/lib/spadmin.rules:. src/spadmin.py
       - uses: ncipollo/release-action@v1
         with:
           artifacts: build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
