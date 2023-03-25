@@ -408,7 +408,7 @@ class Spadmin(object):
         parser.add_argument('-l', '--logfilename', type=str, help='log filename')
         parser.add_argument('-m', '--norlsqlcache', action='store_const', const=True,
                             help='no cache for SQL queries in reradline')
-        parser.add_argument('-n', '--norlsqlhelpepr', action='store_const', const=True,
+        parser.add_argument('-n', '--norlsqlhelper', action='store_const', const=True,
                             help='no SQL queries in reradline')
         parser.add_argument('-p', '--prereqcheck', action='store_const', const=True, help='prerequisite check')
         # parser.add_argument('-r', '--rulefilename', type=str, help='custom rule filename')
