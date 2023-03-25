@@ -325,8 +325,8 @@ class Spadmin(object):
 
         globals.logger.debug('readline class instance')
         globals.myIBMSPrlCompleter = IBMSPrlCompleter()
-        rlhistfile = os.path.join("./", globals.config.getconfiguration()['SPADMIN']['historyfile'])
-        globals.logger.debug('readline history file: [' + rlhistfile + ']')
+        rlhistfile = os.path.join( os.path.expanduser( '~' ), globals.config.getconfiguration()['SPADMIN']['historyfile'] )
+        globals.logger.debug( 'readline history file: [' + rlhistfile + ']' )
         try:
             readline.read_history_file(rlhistfile)
             # default history len is -1 (infinite), which may grow unruly
@@ -334,7 +334,7 @@ class Spadmin(object):
         except FileNotFoundError:
             pass
         # Register history file as "autosaver"
-        atexit.register(readline.write_history_file, rlhistfile)
+        atexit.register( readline.write_history_file, rlhistfile )
 
         globals.logger.debug('Inject new readline handlers for compelter and display.')
 
@@ -408,7 +408,7 @@ class Spadmin(object):
         parser.add_argument('-l', '--logfilename', type=str, help='log filename')
         parser.add_argument('-m', '--norlsqlcache', action='store_const', const=True,
                             help='no cache for SQL queries in reradline')
-        parser.add_argument('-n', '--norlsqlhelpepr', action='store_const', const=True,
+        parser.add_argument('-n', '--norlsqlhelper', action='store_const', const=True,
                             help='no SQL queries in reradline')
         parser.add_argument('-p', '--prereqcheck', action='store_const', const=True, help='prerequisite check')
         # parser.add_argument('-r', '--rulefilename', type=str, help='custom rule filename')
