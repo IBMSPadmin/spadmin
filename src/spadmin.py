@@ -325,7 +325,6 @@ class Spadmin(object):
         globals.logger.debug('readline class instance')
         globals.myIBMSPrlCompleter = IBMSPrlCompleter()
         rlhistfile = os.path.join( os.path.expanduser( '~' ), globals.config.getconfiguration()['SPADMIN']['historyfile'] )
-        print (rlhistfile)
         globals.logger.debug( 'readline history file: [' + rlhistfile + ']' )
         try:
             readline.read_history_file(rlhistfile)
