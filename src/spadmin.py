@@ -324,8 +324,9 @@ class Spadmin(object):
 
         globals.logger.debug('readline class instance')
         globals.myIBMSPrlCompleter = IBMSPrlCompleter()
-        rlhistfile = os.path.join("./", globals.config.getconfiguration()['SPADMIN']['historyfile'])
-        globals.logger.debug('readline history file: [' + rlhistfile + ']')
+        rlhistfile = os.path.join( os.path.expanduser( '~' ), globals.config.getconfiguration()['SPADMIN']['historyfile'] )
+        print (rlhistfile)
+        globals.logger.debug( 'readline history file: [' + rlhistfile + ']' )
         try:
             readline.read_history_file(rlhistfile)
             # default history len is -1 (infinite), which may grow unruly
@@ -333,7 +334,7 @@ class Spadmin(object):
         except FileNotFoundError:
             pass
         # Register history file as "autosaver"
-        atexit.register(readline.write_history_file, rlhistfile)
+        atexit.register( readline.write_history_file, rlhistfile )
 
         globals.logger.debug('Inject new readline handlers for compelter and display.')
 
