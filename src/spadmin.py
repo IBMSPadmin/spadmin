@@ -317,6 +317,7 @@ class Spadmin(object):
 
         if not args.nowelcome:
             self.welcome()
+        utilities.validate_license()
 
         globals.logger.debug('Fork dsmadmc processes.')
         globals.tsm = dsmadmc_pexpect.dsmadmc_pexpect('', globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'],
@@ -382,7 +383,6 @@ class Spadmin(object):
             print(colored('= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=[globals.color_attrs_bold]))
             print(colored('= Terminal properties: [', 'grey', attrs=[globals.color_attrs_bold]) + colored(str(globals.columns), globals.color_white, attrs=[globals.color_attrs_bold]) + colored('x', 'grey', attrs=[ globals.color_attrs_bold]) + colored(
                 str(globals.rows), globals.color_white, attrs=[globals.color_attrs_bold]) + colored(']', 'grey', attrs=[globals.color_attrs_bold]))
-            utilities.validate_license()
             # Short text help
             print()
             print(' ' + colored('Short HELP:', globals.color_cyan, attrs=[globals.color_attrs_bold, globals.color_attrs_underline]))

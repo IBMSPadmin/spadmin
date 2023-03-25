@@ -231,7 +231,7 @@ class SPadminSWitchSErver(SpadminCommand):
         """
 
     def _execute(self, parameters: str) -> str:
-        print("SWITCH SERVER")
+        print("Switching Server...")
         if not parameters:
             print('Please use the following command format: \'SPadmin SWitch SErver servername\'')
             return
@@ -239,9 +239,12 @@ class SPadminSWitchSErver(SpadminCommand):
             server = str(parameters).upper()
             if globals.config.getconfiguration().has_section(server) and parameters not in disabled_words:
                 globals.tsm.quit()
-                from dsmadmc_pexpect import dsmadmc_pexpect
+                from lib.dsmadmc_pexpect import dsmadmc_pexpect
                 globals.tsm = dsmadmc_pexpect(server, globals.config.getconfiguration()[server]['dsmadmc_id'],
                                               globals.config.getconfiguration()[server]['dsmadmc_password'])
+                globals.spversion, globals.sprelease, globals.splevel, globals.spsublevel = \
+                globals.tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
+                globals.spprompt = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
 
             else:
                 print(f'The given server \'{server}\' not found')
