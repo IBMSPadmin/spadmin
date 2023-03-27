@@ -146,6 +146,7 @@ def validate_license():
         globals.licensed = True
     else:
         print(colored( "Your License key has expired", globals.color_red, attrs = [ globals.color_attrs_bold  ]))
+        print()
         globals.licensed = True
 
 

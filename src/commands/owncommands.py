@@ -785,9 +785,9 @@ class SHowSESsions(SpadminCommand):
 
     def __init__(self):
         self.command_string = globals.basecommandname + "SESsions"
-        self.command_type = "SESSIONS"
+        self.command_type  = "SESSIONS"
         self.command_index = 0
-        self.command = "FREE"
+        self.command       = "FREE"
 
     def short_help(self) -> str:
         return 'Shows session informations like Query SEssions'
@@ -803,6 +803,16 @@ class SHowSESsions(SpadminCommand):
         if globals.last_error['rc'] != '0':
             print(colored(globals.last_error["message"], globals.color_red, attrs=[globals.color_attrs_bold]))
             return
+            
+        # https://pynative.com/python-save-dictionary-to-file/
+        #import json
+        
+        #with open( 'session.json', 'w' ) as fp:
+        #    json.dump( data, fp )  # save into JSON like file
+        # read back
+        #with open( 'session.json', 'r' ) as fp:
+        #     # Load the dictionary from the file
+        #     data = json.load( fp )
 
         data2 = []
         for index, row in enumerate(data):
@@ -1128,8 +1138,11 @@ class ShowMount(SpadminCommand):
 6 SBO376L6    R/W    DRV2  /dev/lin_tape/by-id/1068006258 IDLE"""
 
     def _execute(self, parameters: str) -> str:
-        data = globals.tsm.send_command_array_array_tabdel(
-            "Query MOunt")
+        data = globals.tsm.send_command_array_array_tabdel( "Query MOunt" )
+        
+        if len( data ) == 0:
+            return
+        
         """data = [[
                     "ANR8331I LTO volume SBO566L6 is mounted R/W in drive DRV1 (/dev/lin_tape/by-id/1068005803), status: DISMOUNTING."],
                 [
@@ -1382,6 +1395,9 @@ class ShowDrives(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         drives = globals.tsm.send_command_array_array_tabdel(
             "select LIBRARY_NAME,DRIVE_NAME,'ONL='||ONLINE,ELEMENT,DRIVE_STATE,DRIVE_SERIAL,VOLUME_NAME,ALLOCATED_TO from drives order by 1,2")
+            
+        if len(drives) == 0:
+            return
 
         data = []
         for i, row in enumerate(drives):
@@ -1609,10 +1625,11 @@ class SHowSCRatches(SpadminCommand):
 
         data = globals.tsm.send_command_array_array_tabdel(
             "select LIBRARY_NAME, MEDIATYPE, count(*) from libvolumes where upper(status)='SCRATCH' group by LIBRARY_NAME,MEDIATYPE")
-
-        if globals.last_error['rc'] != '0':
-            globals.lastdsmcommandtype = 'SCRATCHES'
-            globals.lastdsmcommandresults = []
+            
+        if globals.last_error[ 'rc' ] == '0':
+            globals.lastdsmcommandtype    = 'SCRATCHES'
+            globals.lastdsmcommandresults = []            
+        else:
             return
 
         data2 = []
@@ -1656,9 +1673,10 @@ class SHowCOPYGroups(SpadminCommand):
 
         # data = globals.tsm.send_command_array_array_tabdel( "select bu.DOMAIN_NAME, bu.SET_NAME, bu.CLASS_NAME, (select DEFAULTMC from MGMTCLASSES where bu.DOMAIN_NAME = DOMAIN_NAME and bu.SET_NAME = SET_NAME and bu.CLASS_NAME = CLASS_NAME ), bu.VEREXISTS, bu.VERDELETED, bu.RETEXTRA, bu.RETONLY, bu.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where bu.DESTINATION = stgp.STGPOOL_NAME), ar.RETVER, ar.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where ar.DESTINATION = stgp.STGPOOL_NAME) from BU_COPYGROUPS bu, AR_COPYGROUPS ar" )
 
-        if globals.last_error['rc'] != '0':
-            globals.lastdsmcommandtype = 'COPYGROUPS'
+        if globals.last_error['rc'] == '0':
+            globals.lastdsmcommandtype    = 'COPYGROUPS'
             globals.lastdsmcommandresults = []
+        else:
             return
 
         unique = {}
