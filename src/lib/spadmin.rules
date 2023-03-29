@@ -672,7 +672,7 @@ SHow                    -> NASWorkload
 SHow                    -> REPLICATION
 SHow                    -> RESQueue
 # Duplicated ?
-SHow                    -> SESSions
+# SHow                    -> SESSions
 SHow                    -> SSPool
 # Dangerous !
 SHow                    -> THReads
