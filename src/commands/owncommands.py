@@ -627,7 +627,7 @@ class REload(SpadminCommand):
         """
 
     def _execute(self, parameters: str) -> str:
-        globals.myIBMSPrlCompleter.loadrules(globals.rulefilename)
+        globals.myIBMSPrlCompleter.loadrules()
         return ""
 
 
@@ -1193,7 +1193,7 @@ define_command(ShowMount())
 
 class DISMount(SpadminCommand):
     def __init__(self):
-        self.command_string = "DISMount"
+        self.command_string = "UMount"
         self.command_type = globals.lastdsmcommandtype
         self.command_index = 0
         self.command = "PAY"

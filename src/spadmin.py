@@ -259,10 +259,11 @@ class Spadmin(object):
         globals.color_attrs_bold= 'bold'
         globals.color_attrs_underline = 'underline'
 
+
         if args.inifilename:
             globals.config = Configuration(args.inifilename)
         else:
-            globals.config = Configuration('spadmin.ini')
+            globals.config = Configuration(None)
 
         if args.logfilename:
             globals.logfilename = args.logfilename
@@ -287,6 +288,16 @@ class Spadmin(object):
             globals.config.getconfiguration()['SPADMIN']['debug'] = 'True'
             globals.logger.setLevel(logging.DEBUG)
 
+        server = ''
+        userid = globals.config.getconfiguration()['SPADMIN']['dsmadmc_id']
+        password = globals.config.getconfiguration()['SPADMIN']['dsmadmc_password']
+
+        if args.SErveraddress:
+            server = str(args.SErveraddress).upper()
+            userid = globals.config.getconfiguration()[server]['dsmadmc_id']
+            password = globals.config.getconfiguration()[server]['dsmadmc_password']
+
+
         if args.prereqcheck:
             globals.config.getconfiguration()['SPADMIN']['prereqcheck'] = 'True'
 
@@ -301,8 +312,7 @@ class Spadmin(object):
         
         if args.consoleonly:
             print("\nConsole mode...")
-            utilities.start_console('', globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'],
-                                    globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'])
+            utilities.start_console(server, userid,  password)
             quit(0)
 
         globals.logger.info(utilities.consolefilledline('START'))
@@ -320,8 +330,7 @@ class Spadmin(object):
         utilities.validate_license()
 
         globals.logger.debug('Fork dsmadmc processes.')
-        globals.tsm = dsmadmc_pexpect.dsmadmc_pexpect('', globals.config.getconfiguration()['SPADMIN']['dsmadmc_id'],
-                                                      globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'])
+        globals.tsm = dsmadmc_pexpect.dsmadmc_pexpect(server, userid, password )
 
         globals.logger.debug('readline class instance')
         globals.myIBMSPrlCompleter = IBMSPrlCompleter()
@@ -414,6 +423,9 @@ class Spadmin(object):
         # parser.add_argument('-r', '--rulefilename', type=str, help='custom rule filename')
         parser.add_argument('-s', '--disablerl', action='store_const', const=True,
                             help='disable readline functionality')
+        parser.add_argument('-se', '--SErveraddress', type=str,
+                            help='spadmin uses the server stanza to determine the server to connects to')
+
         parser.add_argument('-t', '--textcolor', type=str, help='specify the text color [default: "white"]')
         parser.add_argument('-u', '--nohumanreadable', action='version', version='%(prog)s v1.0',
                             help='no human readable conversions')

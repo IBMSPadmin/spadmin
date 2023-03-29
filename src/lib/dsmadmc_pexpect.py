@@ -22,6 +22,7 @@ class dsmadmc_pexpect:
     nrOfRetry = 3
 
     def __init__(self, server, id, pa):
+        globals.logger.debug('starting dsmadmc: [' + server + ' ' +id + ' ' + pa + ']')
         if not server:
             self.STARTCOMMAND_TABDEL = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
             self.STARTCOMMAND = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -NOConfirm' + ' -id=' + id + ' -pa=' + pa
