@@ -147,10 +147,10 @@ class Spadmin(object):
                 command = commandparts.pop(0).strip()
 
                 for extracommand in commandparts:
-                    pairs = extracommand.split()
-                    if len(pairs) > 1:
-                        globals.extras[pairs[0]] = pairs[1].replace('##', '|')  # change back if exists
-                    elif len(pairs) == 1:
+                    pairs = extracommand.split( None, maxsplit = 1 )
+                    if len( pairs ) > 1:
+                        globals.extras[pairs[0]] = pairs[1].replace( '##', '|' ).strip()  # change back if exists
+                    elif len( pairs ) == 1:
                         globals.extras[pairs[0]] = None
                     else:
                         continue
