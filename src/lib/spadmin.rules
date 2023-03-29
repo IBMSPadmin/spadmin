@@ -644,6 +644,8 @@ SHow                    -> DB2CONnections
 # unknown command
 SHow                    -> DB2TABles
 # unknown command
+SHow                    -> DAMaged
+SHow DAMaged            -> select stgpool_name from stgpools
 SHow                    -> DBVars
 Show                    -> DEDUPObject
 SHow DEDUPObject        -> <give_an_objectID>
