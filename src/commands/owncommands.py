@@ -14,6 +14,10 @@ import lib.humanbytes as humanbytes
 import lib.columnar as columnar
 from operator import itemgetter
 
+import datetime
+import glob
+import json
+
 from time import time
 
 columnar = columnar.Columnar()  # columnar: table creator/formatter utility
@@ -797,23 +801,40 @@ class SHowSESsions(SpadminCommand):
         """
 
     def _execute(self, parameters: str) -> str:
-        data = globals.tsm.send_command_array_array_tabdel(
-            'select SESSION_ID, STATE, WAIT_SECONDS, BYTES_SENT, BYTES_RECEIVED, SESSION_TYPE, CLIENT_PLATFORM, CLIENT_NAME,MOUNT_POINT_WAIT, INPUT_MOUNT_WAIT, INPUT_VOL_WAIT, INPUT_VOL_ACCESS, OUTPUT_MOUNT_WAIT, OUTPUT_VOL_WAIT, OUTPUT_VOL_ACCESS, LAST_VERB, VERB_STATE from sessions order by 1')
-
-        if globals.last_error['rc'] != '0':
-            print(colored(globals.last_error["message"], globals.color_red, attrs=[globals.color_attrs_bold]))
-            return
-            
-        # https://pynative.com/python-save-dictionary-to-file/
-        #import json
         
-        #with open( 'session.json', 'w' ) as fp:
-        #    json.dump( data, fp )  # save into JSON like file
-        # read back
-        #with open( 'session.json', 'r' ) as fp:
-        #     # Load the dictionary from the file
-        #     data = json.load( fp )
+        tm = globals.extras[ 'timemachine' ] if 'timemachine' in globals.extras else ''
+        
+        if tm == '':
+        
+            data = globals.tsm.send_command_array_array_tabdel(
+                'select SESSION_ID, STATE, WAIT_SECONDS, BYTES_SENT, BYTES_RECEIVED, SESSION_TYPE, CLIENT_PLATFORM, CLIENT_NAME,MOUNT_POINT_WAIT, INPUT_MOUNT_WAIT, INPUT_VOL_WAIT, INPUT_VOL_ACCESS, OUTPUT_MOUNT_WAIT, OUTPUT_VOL_WAIT, OUTPUT_VOL_ACCESS, LAST_VERB, VERB_STATE from sessions order by 1')
+    
+            if globals.last_error[ 'rc' ] != '0':
+                #print(colored(globals.last_error["message"], globals.color_red, attrs=[globals.color_attrs_bold]))
+                return
 
+            with open( os.path.join( globals.spadmin_tmpath, datetime.datetime.now().strftime( self.command_type + '_%Y%m%d_%H%M%S.json' ) ), 'w' ) as fp:
+                json.dump( data, fp )  # save into JSON file
+       
+        else:
+            
+            print( 'The built-in Time Machine feature was invoked...' )
+            
+            files = glob.glob( globals.spadmin_tmpath + '/' +  self.command_type + '*.json' )
+            
+            if len( files ) == 0:
+                print( 'No Time Machine data exists for: ' + self.command_type + ' queries!' )
+                return
+                
+            for file in files:
+                print( file )
+            
+            with open( files[0], 'r' ) as fp:
+                 # Load the dictionary from the file
+                 data = json.load( fp )
+            
+            # https://pynative.com/python-save-dictionary-to-file/
+        
         data2 = []
         for index, row in enumerate(data):
 
