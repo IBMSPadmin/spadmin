@@ -63,7 +63,10 @@ class IBMSPrlCompleter:
         self.loadrules()
 
     def prompt(self):
-        prompt = globals.config.getconfiguration()['SPADMIN']['prompt'].strip('"')
+        if globals.config.getconfiguration().has_section(globals.server) and globals.config.getconfiguration()[globals.server]['prompt']:
+            prompt = globals.config.getconfiguration()[globals.server]['prompt'].strip('"')
+        else:
+            prompt = globals.config.getconfiguration()['SPADMIN']['prompt'].strip('"')
 
         # versions
         prompt = prompt.replace('%SPVERSION%', globals.spversion)

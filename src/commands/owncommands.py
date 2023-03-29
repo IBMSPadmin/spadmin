@@ -22,7 +22,7 @@ from time import time
 
 columnar = columnar.Columnar()  # columnar: table creator/formatter utility
 spadmin_commands = {}  # dictionary for the spadmin commands
-disabled_words = ['DEFAULT', 'ALIAS', 'SPADMIN']  # disabled words: used in the configuration .ini file
+disabled_words = ['DEFAULT', 'ALIAS', 'SPADMIN', 'BACK']  # disabled words: used in the configuration .ini file
 globals.lastdsmcommandtype = '?'  # last command type: used by "kill", "on", "off", etc. commands
 globals.lastdsmcommandresults = ['']  # last command result: used by "kill", "on", "off", etc. commands
 command_type_and_index = {}
@@ -235,17 +235,28 @@ class SPadminSWitchSErver(SpadminCommand):
         """
 
     def _execute(self, parameters: str) -> str:
-        print("Switching Server...")
-        if not parameters:
-            print('Please use the following command format: \'SPadmin SWitch SErver servername\'')
-            return
+        if not parameters or str(parameters).upper() == 'BACK':
+            print('Switch back to the default server...')
+            globals.server = ''
+            globals.tsm.quit()
+            from lib.dsmadmc_pexpect import dsmadmc_pexpect
+            globals.userid = globals.config.getconfiguration()['SPADMIN']['dsmadmc_id']
+            globals.password = globals.config.getconfiguration()['SPADMIN']['dsmadmc_password']
+            globals.tsm = dsmadmc_pexpect('', globals.userid, globals.password)
+            globals.spversion, globals.sprelease, globals.splevel, globals.spsublevel = \
+                globals.tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
+            globals.spprompt = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
+            return ""
         else:
+            print("Switching Server...")
             server = str(parameters).upper()
-            if globals.config.getconfiguration().has_section(server) and parameters not in disabled_words:
+            if globals.config.getconfiguration().has_section(server) and str(parameters).upper() not in disabled_words:
                 globals.tsm.quit()
                 from lib.dsmadmc_pexpect import dsmadmc_pexpect
-                globals.tsm = dsmadmc_pexpect(server, globals.config.getconfiguration()[server]['dsmadmc_id'],
-                                              globals.config.getconfiguration()[server]['dsmadmc_password'])
+                globals.server = server
+                globals.userid = globals.config.getconfiguration()[server]['dsmadmc_id']
+                globals.password = globals.config.getconfiguration()[server]['dsmadmc_password']
+                globals.tsm = dsmadmc_pexpect(server, globals.userid, globals.password)
                 globals.spversion, globals.sprelease, globals.splevel, globals.spsublevel = \
                 globals.tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
                 globals.spprompt = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]

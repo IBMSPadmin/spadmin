@@ -305,14 +305,14 @@ class Spadmin(object):
             globals.config.getconfiguration()['SPADMIN']['debug'] = 'True'
             globals.logger.setLevel(logging.DEBUG)
 
-        server = ''
-        userid = globals.config.getconfiguration()['SPADMIN']['dsmadmc_id']
-        password = globals.config.getconfiguration()['SPADMIN']['dsmadmc_password']
+        globals.server = ''
+        globals.userid = globals.config.getconfiguration()['SPADMIN']['dsmadmc_id']
+        globals.password = globals.config.getconfiguration()['SPADMIN']['dsmadmc_password']
 
         if args.SErveraddress:
-            server = str(args.SErveraddress).upper()
-            userid = globals.config.getconfiguration()[server]['dsmadmc_id']
-            password = globals.config.getconfiguration()[server]['dsmadmc_password']
+            globals.server = str(args.SErveraddress).upper()
+            globals.userid = globals.config.getconfiguration()[globals.server]['dsmadmc_id']
+            globals.password = globals.config.getconfiguration()[globals.server]['dsmadmc_password']
 
 
         if args.prereqcheck:
@@ -329,7 +329,7 @@ class Spadmin(object):
         
         if args.consoleonly:
             print("\nConsole mode...")
-            utilities.start_console(server, userid,  password)
+            utilities.start_console(globals.server, globals.userid,  globals.password)
             quit(0)
 
         globals.logger.info(utilities.consolefilledline('START'))
@@ -347,7 +347,7 @@ class Spadmin(object):
         utilities.validate_license()
         
         globals.logger.debug('Fork dsmadmc processes.')
-        globals.tsm = dsmadmc_pexpect.dsmadmc_pexpect(server, userid, password )
+        globals.tsm = dsmadmc_pexpect.dsmadmc_pexpect(globals.server, globals.userid, globals.password )
 
         globals.logger.debug('readline class instance')
         globals.myIBMSPrlCompleter = IBMSPrlCompleter()
