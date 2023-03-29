@@ -588,7 +588,7 @@ class SHowACTlog(SpadminCommand):
         else:
             data = globals.tsm.send_command_array_array_tabdel(str(''.join(["q actlog ", " ".join([parameters])])))
 
-        if len(data) == 0:
+        if globals.last_error[ 'rc' ] != '0':
             return
 
         data2 = []
@@ -1396,7 +1396,7 @@ class ShowDrives(SpadminCommand):
         drives = globals.tsm.send_command_array_array_tabdel(
             "select LIBRARY_NAME,DRIVE_NAME,'ONL='||ONLINE,ELEMENT,DRIVE_STATE,DRIVE_SERIAL,VOLUME_NAME,ALLOCATED_TO from drives order by 1,2")
             
-        if len(drives) == 0:
+        if globals.last_error[ 'rc' ] != '0':
             return
 
         data = []
@@ -1439,8 +1439,15 @@ class ShowPath(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         library = globals.tsm.send_command_array_array_tabdel(
             "select SOURCE_NAME,DESTINATION_NAME,'SRCT='||SOURCE_TYPE,'DESTT='||DESTINATION_TYPE,LIBRARY_NAME,'DEVI='||DEVICE,'ONL='||ONLINE from paths where LIBRARY_NAME is null")
+ 
+        if globals.last_error[ 'rc' ] != '0':
+            return
+            
         drive = globals.tsm.send_command_array_array_tabdel(
             "select SOURCE_NAME,DESTINATION_NAME,'SRCT='||SOURCE_TYPE,'DESTT='||DESTINATION_TYPE,'LIBR='||LIBRARY_NAME,'DEVI='||DEVICE,'ONL='||ONLINE from paths where LIBRARY_NAME is not null")
+
+        if globals.last_error[ 'rc' ] != '0':
+            return
 
         for i, row in enumerate(drive):
             library.append(row)
@@ -1506,6 +1513,10 @@ class ShowLIBVolumes(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         library = globals.tsm.send_command_array_array_tabdel(
             "select vol.volume_name, vol.stgpool_name, libv.library_name from volumes as vol left join libvolumes as libv on vol.volume_name=libv.volume_name where vol.devclass_name != 'DISK' AND vol.devclass_name not in (select devclass_name from devclasses where DEVTYPE = 'FILE' ) order by 1")
+        
+        if globals.last_error[ 'rc' ] != '0':
+            return
+    
         data = []
         data2 = []
 
@@ -1543,6 +1554,10 @@ class ShowFilling(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         library = globals.tsm.send_command_array_array_tabdel(
             "select VOLUME_NAME, STGPOOL_NAME, PCT_UTILIZED from volumes where STATUS='FILLING' and ACCESS='READWRITE' order by PCT_UTILIZED")
+        
+        if globals.last_error[ 'rc' ] != '0':
+            return
+        
         data = []
         data2 = []
 
@@ -1626,12 +1641,11 @@ class SHowSCRatches(SpadminCommand):
         data = globals.tsm.send_command_array_array_tabdel(
             "select LIBRARY_NAME, MEDIATYPE, count(*) from libvolumes where upper(status)='SCRATCH' group by LIBRARY_NAME,MEDIATYPE")
             
-        if globals.last_error[ 'rc' ] == '0':
-            globals.lastdsmcommandtype    = 'SCRATCHES'
-            globals.lastdsmcommandresults = []            
-        else:
+        if globals.last_error[ 'rc' ] != '0':
             return
-
+      
+        globals.lastdsmcommandresults = []            
+        
         data2 = []
         for index, row in enumerate(data):
 
@@ -1673,12 +1687,11 @@ class SHowCOPYGroups(SpadminCommand):
 
         # data = globals.tsm.send_command_array_array_tabdel( "select bu.DOMAIN_NAME, bu.SET_NAME, bu.CLASS_NAME, (select DEFAULTMC from MGMTCLASSES where bu.DOMAIN_NAME = DOMAIN_NAME and bu.SET_NAME = SET_NAME and bu.CLASS_NAME = CLASS_NAME ), bu.VEREXISTS, bu.VERDELETED, bu.RETEXTRA, bu.RETONLY, bu.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where bu.DESTINATION = stgp.STGPOOL_NAME), ar.RETVER, ar.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where ar.DESTINATION = stgp.STGPOOL_NAME) from BU_COPYGROUPS bu, AR_COPYGROUPS ar" )
 
-        if globals.last_error['rc'] == '0':
-            globals.lastdsmcommandtype    = 'COPYGROUPS'
-            globals.lastdsmcommandresults = []
-        else:
+        if globals.last_error[ 'rc' ] != '0':
             return
 
+        globals.lastdsmcommandresults = []
+        
         unique = {}
         bu = {}
 
@@ -1702,9 +1715,7 @@ class SHowCOPYGroups(SpadminCommand):
         data = globals.tsm.send_command_array_array_tabdel(
             "select ar.DOMAIN_NAME, ar.SET_NAME, ar.CLASS_NAME, (select DEFAULTMC from MGMTCLASSES where ar.DOMAIN_NAME = DOMAIN_NAME and ar.SET_NAME = SET_NAME and ar.CLASS_NAME = CLASS_NAME ), ar.RETVER, ar.DESTINATION, (select NEXTSTGPOOL from STGPOOLS stgp where ar.DESTINATION = stgp.STGPOOL_NAME) from AR_COPYGROUPS ar")
 
-        if globals.last_error['rc'] != '0':
-            globals.lastdsmcommandtype = 'COPYGROUPS'
-            globals.lastdsmcommandresults = []
+        if globals.last_error[ 'rc' ] != '0':
             return
 
         ar = {}
