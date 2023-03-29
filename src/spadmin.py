@@ -330,7 +330,7 @@ class Spadmin(object):
         utilities.validate_license()
         
         # prereq check
-        globals.spadmin_path = os.path.expanduser( '~/spadmin/')
+        globals.spadmin_path = os.path.expanduser( '~/spadmin/' )
         if not os.path.exists( globals.spadmin_path ):
             os.makedirs( globals.spadmin_path )
             print( globals.spadmin_path + ' directory created.' )
