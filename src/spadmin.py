@@ -259,6 +259,21 @@ class Spadmin(object):
         globals.color_attrs_bold= 'bold'
         globals.color_attrs_underline = 'underline'
 
+        # prereq check
+        globals.spadmin_path = os.path.expanduser( '~/spadmin/' )
+        if not os.path.exists( globals.spadmin_path ):
+            os.makedirs( globals.spadmin_path )
+            print( globals.spadmin_path + ' directory created.' )
+        
+        globals.spadmin_logpath = os.path.join( globals.spadmin_path, 'log' )
+        if not os.path.exists( globals.spadmin_logpath ):
+            os.makedirs( globals.spadmin_logpath )
+            print( globals.spadmin_logpath + ' directory created.' )
+        
+        globals.spadmin_tmpath = os.path.join( globals.spadmin_path, 'TMQueries' )
+        if not os.path.exists( globals.spadmin_tmpath ):
+            os.makedirs( globals.spadmin_tmpath )
+            print( globals.spadmin_tmpath + ' directory created.' )
 
         if args.inifilename:
             globals.config = Configuration(args.inifilename)
@@ -269,6 +284,8 @@ class Spadmin(object):
             globals.logfilename = args.logfilename
         else:
             globals.logfilename = globals.config.getconfiguration()['SPADMIN']['logfile']
+
+        globals.logfilename = os.path.join( globals.spadmin_logpath, globals.logfilename )
 
         #if args.rulefilename:
         #    globals.rulefilename = args.rulefilename
@@ -328,22 +345,6 @@ class Spadmin(object):
         if not args.nowelcome:
             self.welcome()
         utilities.validate_license()
-        
-        # prereq check
-        globals.spadmin_path = os.path.expanduser( '~/spadmin/' )
-        if not os.path.exists( globals.spadmin_path ):
-            os.makedirs( globals.spadmin_path )
-            print( globals.spadmin_path + ' directory created.' )
-
-        globals.spadmin_logpath = os.path.join( globals.spadmin_path, 'log' )
-        if not os.path.exists( globals.spadmin_logpath ):
-            os.makedirs( globals.spadmin_logpath )
-            print( globals.spadmin_logpath + ' directory created.' )
-
-        globals.spadmin_tmpath = os.path.join( globals.spadmin_path, 'TMQueries' )
-        if not os.path.exists( globals.spadmin_tmpath ):
-            os.makedirs( globals.spadmin_tmpath )
-            print( globals.spadmin_tmpath + ' directory created.' )
         
         globals.logger.debug('Fork dsmadmc processes.')
         globals.tsm = dsmadmc_pexpect.dsmadmc_pexpect(server, userid, password )
