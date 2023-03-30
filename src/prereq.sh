@@ -1,3 +1,3 @@
 #
 
-pip3 install pexpect termcolor readchar gnureadline
+pip3 install pexpect termcolor readchar gnureadline json
