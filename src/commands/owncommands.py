@@ -127,7 +127,7 @@ def timemachine_query( command_type, query ):
         
         print( 'The built-in Time Machine feature was invoked...' )
         
-        files = glob.glob( globals.spadmin_tmpath + '/' +  command_type + '*.json' )
+        files = glob.glob( globals.spadmin_tmpath + '/' + globals.spprompt + '_' +  command_type + '*.json' )
         
         if len( files ) == 0:
             print( colored( 'No Time Machine data exists for: ' + command_type + ' queries!', globals.color_red, attrs=[globals.color_attrs_bold] ) )
