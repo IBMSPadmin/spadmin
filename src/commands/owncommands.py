@@ -118,7 +118,7 @@ def timemachine_query( command_type, query ):
             #print(colored(globals.last_error["message"], globals.color_red, attrs=[globals.color_attrs_bold]))
             return
     
-        with open( os.path.join( globals.spadmin_tmpath, datetime.datetime.now().strftime( command_type + '_%Y%m%d_%H%M%S.json' ) ), 'w' ) as fp:
+        with open( os.path.join( globals.spadmin_tmpath, datetime.datetime.now().strftime( globals.spprompt + '_' + command_type + '_%Y%m%d_%H%M%S.json' ) ), 'w' ) as fp:
             json.dump( data, fp )  # save into JSON file
     
         return data
@@ -142,7 +142,7 @@ def timemachine_query( command_type, query ):
         # browser 
         index     = 0
         lastindex = len( files ) - 1
-        pathlen   = len( globals.spadmin_tmpath + '/' +  command_type ) + 1
+        pathlen   = len( globals.spadmin_tmpath + '/' + globals.spprompt + '_' + command_type ) + 1
         
         while True:
             sys.stdout.write( '<jJ o Kk> [' + files[index][ pathlen:-5 ] + ']\r' )
