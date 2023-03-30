@@ -17,6 +17,7 @@ from operator import itemgetter
 import datetime
 import glob
 import json
+import readchar
 
 from time import time
 
@@ -104,6 +105,78 @@ def define_command(clazz: SpadminCommand):
         return
     define_own_command(clazz.get_command_string(), clazz.execute, clazz.get_command_type(), clazz.get_command_index(),
                        clazz.short_help(), clazz.help())
+
+def timemachine_query( command_type, query ):
+    
+    tm = globals.extras[ 'timemachine' ] if 'timemachine' in globals.extras else ''
+    
+    if tm == '':
+    
+        data = globals.tsm.send_command_array_array_tabdel( query )
+    
+        if globals.last_error[ 'rc' ] != '0':
+            #print(colored(globals.last_error["message"], globals.color_red, attrs=[globals.color_attrs_bold]))
+            return
+    
+        with open( os.path.join( globals.spadmin_tmpath, datetime.datetime.now().strftime( command_type + '_%Y%m%d_%H%M%S.json' ) ), 'w' ) as fp:
+            json.dump( data, fp )  # save into JSON file
+    
+        return data
+    
+    else:
+        
+        print( 'The built-in Time Machine feature was invoked...' )
+        
+        files = glob.glob( globals.spadmin_tmpath + '/' +  command_type + '*.json' )
+        
+        if len( files ) == 0:
+            print( colored( 'No Time Machine data exists for: ' + command_type + ' queries!', globals.color_red, attrs=[globals.color_attrs_bold] ) )
+            return []
+            
+            # 27, 91, 65 66 68< 67>
+            # esc 27
+            # 106j 74J
+            # 107k 75K
+            # 111o 
+            
+        # browser 
+        index     = 0
+        lastindex = len( files ) - 1
+        pathlen   = len( globals.spadmin_tmpath + '/' +  command_type ) + 1
+        
+        while True:
+            sys.stdout.write( '<jJ o Kk> [' + files[index][ pathlen:-5 ] + ']\r' )
+            sys.stdout.flush()
+            key = readchar.readkey() 
+            if len( key ) == 3:
+                if ord( key[0] ) == 27 and ord( key[1] ) == 91 and ord( key[2] ) == 68:
+                    if index > 0:
+                        index -= 1
+                elif ord( key[0] ) == 27 and ord( key[1] ) == 91 and ord( key[2] ) == 67:
+                    if index < lastindex:
+                        index += 1
+            if len ( key ) == 2:
+                if ord( key[0] ) == 27 and ord( key[0] ) == 27:
+                    break
+            if len ( key ) == 1:
+                if ord( key[0] ) == 106 or ord( key[0] ) == 74:
+                    if index > 0:
+                        index -= 1
+                elif ord( key[0] ) == 107 or ord( key[0] ) == 75:
+                    if index < lastindex:
+                        index += 1
+                elif ord( key[0] ) == 111 or ord( key[0] ) == 10:
+                    break
+        
+        with open( files[index], 'r' ) as fp:
+             # Load the dictionary from the file
+             data = json.load( fp )
+        
+        globals.last_error[ 'rc' ] = '0'
+        
+        return data
+        
+        # https://pynative.com/python-save-dictionary-to-file/
 
 
 class SPadminAddALIas(SpadminCommand):
@@ -813,38 +886,10 @@ class SHowSESsions(SpadminCommand):
 
     def _execute(self, parameters: str) -> str:
         
-        tm = globals.extras[ 'timemachine' ] if 'timemachine' in globals.extras else ''
+        data = timemachine_query( self.command_type, 'select SESSION_ID, STATE, WAIT_SECONDS, BYTES_SENT, BYTES_RECEIVED, SESSION_TYPE, CLIENT_PLATFORM, CLIENT_NAME,MOUNT_POINT_WAIT, INPUT_MOUNT_WAIT, INPUT_VOL_WAIT, INPUT_VOL_ACCESS, OUTPUT_MOUNT_WAIT, OUTPUT_VOL_WAIT, OUTPUT_VOL_ACCESS, LAST_VERB, VERB_STATE from sessions order by 1')
         
-        if tm == '':
-        
-            data = globals.tsm.send_command_array_array_tabdel(
-                'select SESSION_ID, STATE, WAIT_SECONDS, BYTES_SENT, BYTES_RECEIVED, SESSION_TYPE, CLIENT_PLATFORM, CLIENT_NAME,MOUNT_POINT_WAIT, INPUT_MOUNT_WAIT, INPUT_VOL_WAIT, INPUT_VOL_ACCESS, OUTPUT_MOUNT_WAIT, OUTPUT_VOL_WAIT, OUTPUT_VOL_ACCESS, LAST_VERB, VERB_STATE from sessions order by 1')
-    
-            if globals.last_error[ 'rc' ] != '0':
-                #print(colored(globals.last_error["message"], globals.color_red, attrs=[globals.color_attrs_bold]))
-                return
-
-            with open( os.path.join( globals.spadmin_tmpath, datetime.datetime.now().strftime( self.command_type + '_%Y%m%d_%H%M%S.json' ) ), 'w' ) as fp:
-                json.dump( data, fp )  # save into JSON file
-       
-        else:
-            
-            print( 'The built-in Time Machine feature was invoked...' )
-            
-            files = glob.glob( globals.spadmin_tmpath + '/' +  self.command_type + '*.json' )
-            
-            if len( files ) == 0:
-                print( 'No Time Machine data exists for: ' + self.command_type + ' queries!' )
-                return
-                
-            for file in files:
-                print( file )
-            
-            with open( files[0], 'r' ) as fp:
-                 # Load the dictionary from the file
-                 data = json.load( fp )
-            
-            # https://pynative.com/python-save-dictionary-to-file/
+        if globals.last_error[ 'rc' ] != '0':
+            return
         
         data2 = []
         for index, row in enumerate(data):
@@ -1657,7 +1702,7 @@ class SHowSCRatches(SpadminCommand):
 
     def __init__(self):
         self.command_string = globals.basecommandname + "SCRatches"
-        self.command_type = "SRATCHES"
+        self.command_type = "SCRATCHES"
         self.command_index = 0
         self.command = "PAY"
 
@@ -1670,8 +1715,8 @@ class SHowSCRatches(SpadminCommand):
 
     def _execute(self, parameters: str) -> str:
 
-        data = globals.tsm.send_command_array_array_tabdel(
-            "select LIBRARY_NAME, MEDIATYPE, count(*) from libvolumes where upper(status)='SCRATCH' group by LIBRARY_NAME,MEDIATYPE")
+
+        data = timemachine_query( self.command_type, "select LIBRARY_NAME, MEDIATYPE, count(*) from libvolumes where upper(status)='SCRATCH' group by LIBRARY_NAME,MEDIATYPE" )
             
         if globals.last_error[ 'rc' ] != '0':
             return
