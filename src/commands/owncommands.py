@@ -149,10 +149,10 @@ def timemachine_query( command_type, query ):
             sys.stdout.flush()
             key = readchar.readkey() 
             if len( key ) == 3:
-                if ord( key[0] ) == 27 and ord( key[1] ) == 91 and ord( key[2] ) == 68:
+                if ord( key[0] ) == 27 and ( ord( key[1] ) == 91 or ord( key[1] ) == 79 ) and ord( key[2] ) == 68:
                     if index > 0:
                         index -= 1
-                elif ord( key[0] ) == 27 and ord( key[1] ) == 91 and ord( key[2] ) == 67:
+                elif ord( key[0] ) == 27 and ( ord( key[1] ) == 91 or ord( key[1] ) == 79 ) and ord( key[2] ) == 67:
                     if index < lastindex:
                         index += 1
             if len ( key ) == 2:
