@@ -157,6 +157,15 @@ class Spadmin(object):
 
                 globals.logger.info('Base command: [' + command + '] and extras: ' + pformat(globals.extras))
 
+                # system command 
+                systemcommand = search( '^!(.+)', command )
+                if systemcommand:                    
+                    os.system( systemcommand[1] )
+ 
+                    # next command               
+                    line = ''
+                    break
+                      
                 # it's not own command. Does the user want to possibly exit???
                 if search('^' + utilities.regexpgenerator('QUIt') + '(?!.*\w+)', command, IGNORECASE) or \
                         search('^' + utilities.regexpgenerator('LOGOut') + '(?!.*\w+)', command, IGNORECASE) or \
