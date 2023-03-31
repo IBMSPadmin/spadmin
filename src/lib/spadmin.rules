@@ -116,8 +116,10 @@ $ -> invgrep
 $ -> count
 $ -> mailto
 $ -> SPadmin
-$ -> PRint
+$ -> print
 $ -> timemachine
+$ -> file
+$ -> fileappend
 
 ################################
 # and the rest LEVEL 2, 3, ... #

@@ -159,9 +159,8 @@ class Spadmin(object):
 
                 # system command 
                 systemcommand = search( '^!(.+)', command )
-                if systemcommand:                    
+                if systemcommand:
                     os.system( systemcommand[1] )
- 
                     # next command               
                     line = ''
                     break

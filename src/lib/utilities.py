@@ -44,6 +44,23 @@ def add_remove_color(color, string):
 def printer(string):
     if not string:
         return
+
+    filename = globals.extras[ 'file' ] if 'file' in globals.extras else ''
+    
+    if filename != '':
+        with open( filename, 'w' ) as f:
+            f.writelines( string )
+            f.writelines( '\n' )
+        return
+
+    filename = globals.extras[ 'fileappend' ] if 'fileappend' in globals.extras else ''
+    
+    if filename != '':
+        with open( filename, 'a' ) as f:
+            f.writelines( string )
+            f.writelines( '\n' )
+        return
+
     s = str(string).split("\n")
     i = 0
 
