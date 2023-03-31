@@ -283,7 +283,7 @@ class Spadmin(object):
         if not os.path.exists( globals.spadmin_tmpath ):
             os.makedirs( globals.spadmin_tmpath )
             print( globals.spadmin_tmpath + ' directory created.' )
-
+            
         if args.inifilename:
             globals.config = Configuration(args.inifilename)
         else:

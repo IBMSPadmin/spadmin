@@ -29,7 +29,6 @@ globals.lastdsmcommandresults = ['']  # last command result: used by "kill", "on
 command_type_and_index = {}
 command_help = {}
 
-
 class SpadminCommand:
     """
     This is the interface class for every Spadmin Command
@@ -87,6 +86,12 @@ def dynruleinjector(
         leftpart = ' '.join(commandpartcollected)
         if rightpart not in globals.myIBMSPrlCompleter.dynrules[leftpart]:
             globals.myIBMSPrlCompleter.dynrules[leftpart].append(rightpart)
+
+# Fill up with the servernames
+for section in globals.config.getconfiguration().sections():
+    if section not in disabled_words:
+        dynruleinjector( 'SPadmin DELete SErver ' + section )
+        dynruleinjector( 'SPadmin SWitch SErver ' + section )
 
 
 def help(command_name):
