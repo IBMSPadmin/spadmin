@@ -422,8 +422,7 @@ class Spadmin(object):
             print(' ' + colored('Short HELP:', globals.color_cyan, attrs=[globals.color_attrs_bold, globals.color_attrs_underline]))
             print('''
             Use: "QUIt", "BYe", "LOGOut" or "Exit" commands to leave the program or
-            Use: "REload" to reload the rule file! and
-            Use: "SPadmin SHow LOG" or "SPadmin SHow LOCALLOG" to reach the local log file!''')
+            Use: "SPadmin SHow LOG" or "SPadmin SHow LOCALLOG" to load the log file!''')
             print()
 
     def getargs(self):
