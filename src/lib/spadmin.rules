@@ -117,6 +117,7 @@ $ -> count
 $ -> mailto
 $ -> SPadmin
 $ -> PRint
+$ -> timemachine
 
 ################################
 # and the rest LEVEL 2, 3, ... #

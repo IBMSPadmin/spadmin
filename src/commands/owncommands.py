@@ -125,9 +125,10 @@ def timemachine_query( command_type, query ):
     
     else:
         
-        print( 'The built-in Time Machine feature was invoked...' )
+        print( 'Built-in Time Machine feature was invoked...' )
         
         files = glob.glob( globals.spadmin_tmpath + '/' + globals.spprompt + '_' +  command_type + '*.json' )
+        files.sort( reverse=True )
         
         if len( files ) == 0:
             print( colored( 'No Time Machine data exists for: ' + command_type + ' queries!', globals.color_red, attrs=[globals.color_attrs_bold] ) )
@@ -167,6 +168,8 @@ def timemachine_query( command_type, query ):
                         index += 1
                 elif ord( key[0] ) == 111 or ord( key[0] ) == 10:
                     break
+        
+        print( 'Selected date: [' + colored( files[index][ pathlen:-5 ], globals.color_white, attrs=[globals.color_attrs_bold] ) + '].' )
         
         with open( files[index], 'r' ) as fp:
              # Load the dictionary from the file

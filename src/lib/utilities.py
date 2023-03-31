@@ -63,6 +63,11 @@ def printer(string):
                 break
             i = 0
             #print('\n')
+            
+    count = globals.extras[ 'count' ] if 'count' in globals.extras else ''
+    
+    if count != '':
+        print( 'Line count = ' + colored( str( len( s ) - 3 ), globals.color_white, attrs=[globals.color_attrs_bold] ) )
 
 
 def check_connection(server: str, id: str, password: str) -> bool:
