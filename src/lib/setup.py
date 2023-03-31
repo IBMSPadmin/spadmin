@@ -34,10 +34,12 @@ class Setup:
         # Checking USERID and PASSWORD
         allowed = False
         while not allowed:
-            self.parameters['dsmadmc_id'] = input("Enter your Spectrum Protect userid (eg. admin): ")
-            self.parameters['dsmadmc_password'] = getpass.getpass(
-                "Enter your password for user \'%s\' : " % self.parameters['dsmadmc_id'])
-            allowed = utilities.check_connection('', self.parameters['dsmadmc_id'], self.parameters['dsmadmc_password'])
-
+            try:
+                self.parameters['dsmadmc_id'] = input("Enter your Spectrum Protect userid (eg. admin): ")
+                self.parameters['dsmadmc_password'] = getpass.getpass(
+                    "Enter your password for user \'%s\' : " % self.parameters['dsmadmc_id'])
+                allowed = utilities.check_connection('', self.parameters['dsmadmc_id'], self.parameters['dsmadmc_password'])
+            except (Exception, KeyboardInterrupt, EOFError) as exc:
+                quit(1)
     def get_parameters(self):
         return self.parameters
