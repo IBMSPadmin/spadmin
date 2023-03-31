@@ -88,8 +88,8 @@ def check_connection(server: str, id: str, password: str) -> bool:
                 universal_newlines=True)
         print("We have successfully connected to: ", result.strip())
         return True
-    except subprocess.CalledProcessError as exc:
-        print(exc.output, "\nReturn code:", exc.returncode, "\n")
+    except Except as exc:
+        print(exc.output, "\n")
         return False
 
 
@@ -117,8 +117,8 @@ def start_console(server: str, id: str, password: str) -> bool:
     
         return True
     
-    except subprocess.CalledProcessError as exc:
-        print(exc.output, "\nAn error occured during the console mode, Return code:", exc.returncode, "\n")
+    except Except as exc:
+        print(exc.output, "\nAn error occured during the console mode\n")
         return False
         
     except KeyboardInterrupt:
