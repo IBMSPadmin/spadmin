@@ -1,0 +1,8 @@
+[1m[97m- ---- ----- ---- ----- -------- ----- -------- ------- ----------- ---------- [0m
+[1m[97m# [0m[1m[97m Id  [0m[1m[97mState [0m[1m[97mWait [0m[1m[97m Sent [0m[1m[97mReceived [0m[1m[97m Type [0m[1m[97mPlatform [0m[1m[97mName    [0m[1m[97mMediaAccess [0m[1m[97mVerb       [0m
+[1m[97m- ---- ----- ---- ----- -------- ----- -------- ------- ----------- ---------- [0m
+1 1990  [1m[32mRun[0m   0 s 510 B    732 B Admin   Mac    SUPPORT             RecvAdmCmd 
+[1m[97m- ---- ----- ---- ----- -------- ----- -------- ------- ----------- ---------- [0m
+[1m[97m# [0m[1m[97m Id  [0m[1m[97mState [0m[1m[97mWait [0m[1m[97m Sent [0m[1m[97mReceived [0m[1m[97m Type [0m[1m[97mPlatform [0m[1m[97mName    [0m[1m[97mMediaAccess [0m[1m[97mVerb       [0m
+[1m[97m- ---- ----- ---- ----- -------- ----- -------- ------- ----------- ---------- [0m
+1 1990  [1m[32mRun[0m   0 s 981 B    1 KiB Admin   Mac    SUPPORT             RecvAdmCmd 
