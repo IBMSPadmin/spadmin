@@ -30,6 +30,26 @@ def grep(data):
                 grep_data.append(row)
     else:
         grep_data = data
+        
+    # grepp test
+    data = grep_data    
+
+    grep = globals.extras['grepp'] if 'grepp' in globals.extras else ''
+    grep_data = []
+    if grep != '' and grep is not None:
+        for i, row in enumerate(data):
+            found = False
+            for c, cell in enumerate(row):
+                finds = re.findall(grep, str(cell))
+                if len(finds) > 0:
+                    found = True
+                    for find in finds:
+                        # data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
+                        data[i][c] = colorize(cell, find, 'white', ['bold'])
+            if found == True:
+                grep_data.append(row)
+    else:
+        grep_data = data        
 
     return grep_data
 
@@ -162,8 +182,6 @@ def colorize( text: str, regexp: str, color: str, attrs=[] ):
         else:
             return text
     
-
-
 
 def get_column_length(headers, data):
     column_length = []
