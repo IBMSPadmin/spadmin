@@ -123,7 +123,7 @@ def timemachine_query( command_type, query ):
             #print(colored(globals.last_error["message"], globals.color_red, attrs=[globals.color_attrs_bold]))
             return
     
-        with open( os.path.join( globals.spadmin_tmpath, datetime.datetime.now().strftime( globals.spprompt + '_' + command_type + '_%Y%m%d_%H%M%S.json' ) ), 'w' ) as fp:
+        with open( os.path.join( globals.spadmin_tmpath, datetime.datetime.now().strftime( globals.spservername + '_' + command_type + '_%Y%m%d_%H%M%S.json' ) ), 'w' ) as fp:
             json.dump( data, fp )  # save into JSON file
     
         return data
@@ -132,7 +132,7 @@ def timemachine_query( command_type, query ):
         
         print( 'Built-in Time Machine feature was invoked...' )
         
-        files = glob.glob( globals.spadmin_tmpath + '/' + globals.spprompt + '_' +  command_type + '*.json' )
+        files = glob.glob( globals.spadmin_tmpath + '/' + globals.spservername + '_' +  command_type + '*.json' )
         files.sort( reverse=True )
         
         if len( files ) == 0:
@@ -148,7 +148,7 @@ def timemachine_query( command_type, query ):
         # browser 
         index     = 0
         lastindex = len( files ) - 1
-        pathlen   = len( globals.spadmin_tmpath + '/' + globals.spprompt + '_' + command_type ) + 1
+        pathlen   = len( globals.spadmin_tmpath + '/' + globals.spservername + '_' + command_type ) + 1
         
         while True:
             sys.stdout.write( '<jJ o Kk> [' + files[index][ pathlen:-5 ] + ']\r' )
@@ -326,7 +326,7 @@ class SPadminSWitchSErver(SpadminCommand):
             globals.tsm = dsmadmc_pexpect('', globals.userid, globals.password)
             globals.spversion, globals.sprelease, globals.splevel, globals.spsublevel = \
                 globals.tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
-            globals.spprompt = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
+            globals.spservername = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
             return ""
         else:
             print("Switching Server...")
@@ -340,7 +340,7 @@ class SPadminSWitchSErver(SpadminCommand):
                 globals.tsm = dsmadmc_pexpect(server, globals.userid, globals.password)
                 globals.spversion, globals.sprelease, globals.splevel, globals.spsublevel = \
                 globals.tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
-                globals.spprompt = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
+                globals.spservername = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
 
             else:
                 print(f'The given server \'{server}\' not found')

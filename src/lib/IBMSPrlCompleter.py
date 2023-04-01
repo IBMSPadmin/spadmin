@@ -41,7 +41,7 @@ class IBMSPrlCompleter:
         
         sys.stdout.write("Let's try to get the name of the server... ")
         sys.stdout.flush()
-        globals.spprompt = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
+        globals.spservername = globals.tsm.send_command_array_tabdel('select SERVER_NAME from STATUS')[0]
         sys.stdout.write( '\r' )
         
         sys.stdout.write("and get the version of the IBM SP server...")
@@ -75,7 +75,7 @@ class IBMSPrlCompleter:
         prompt = prompt.replace('%SPSUBLEVEL%', globals.spsublevel)
 
         # prompt
-        return prompt.replace('%SPSERVERNAME%', globals.spprompt)
+        return prompt.replace('%SPSERVERNAME%', globals.spservername)
 
     def spsqlengine( self, select, tokens = [] ):
         
