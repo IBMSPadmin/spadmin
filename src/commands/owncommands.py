@@ -747,7 +747,7 @@ class HISTory(SpadminCommand):
 
     def _execute(self, parameters: str) -> str:
         data = []
-        rlhistfile = os.path.join("./", globals.config.getconfiguration()['SPADMIN']['historyfile'])
+        rlhistfile = os.path.join( os.path.expanduser( '~' ), globals.config.getconfiguration()['SPADMIN']['historyfile'])
         globals.logger.debug('history file open: [' + rlhistfile + ']')
         if os.path.exists(rlhistfile):
             globals.logger.debug('history file open: [' + rlhistfile + ']')
