@@ -64,7 +64,7 @@ $-> Prepare
 $-> PROTect
 $-> Query
 # !!!QUIt, Query collision problem!!!
-$-> QUIT
+$-> QUIt
 $-> RECLaim
 $-> RECommission
 $-> REConcile
