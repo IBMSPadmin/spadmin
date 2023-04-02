@@ -1,4 +1,4 @@
-> spadmin.log
+> ~/spadmin/log/spadmin.log 
 
 while :; do
 
