@@ -683,7 +683,8 @@ SHow                    -> THReads
 SHow                    -> TOCSets
 SHow                    -> TOCVars
 SHow                    -> TXNTable
-SHow                    -> Versions
+SHow                    -> VErsions
+SHow                    -> VERSIONHISTory
 SHow VErsions           -> <give_an_objectID>
 SHow                                -> VOLINUSE
 SHow VOLINUSE                       -> select volume_name from volumes
