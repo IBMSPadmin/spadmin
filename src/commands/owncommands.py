@@ -1108,7 +1108,6 @@ class ShowEvents(SpadminCommand):
         data = globals.tsm.send_command_array_array_tabdel('q event * * endd=today f=d' + ' ' + parameters)
 
         if globals.last_error['rc'] != '0':
-            print(colored(globals.last_error["message"], globals.color_red, attrs=[globals.color_attrs_bold]))
             return
 
         data2 = []
