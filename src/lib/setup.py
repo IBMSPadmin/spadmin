@@ -41,5 +41,6 @@ class Setup:
                 allowed = utilities.check_connection('', self.parameters['dsmadmc_id'], self.parameters['dsmadmc_password'])
             except (Exception, KeyboardInterrupt, EOFError) as exc:
                 quit(1)
+                
     def get_parameters(self):
         return self.parameters
