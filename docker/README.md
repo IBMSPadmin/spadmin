@@ -17,5 +17,6 @@ Change connection information in `spadmin_runtime/dsm.sys` file.
 #### 3.2 Set authorized users in
 Add public key of authorized user's in `spadmin_runtime/authorized_keys` file to enable ssh connection to container.
 #### Start container in and test it
-
+`docker compose up`
+Use `ctrl + c` to stop container.
 ## 4. Start container as daemon
