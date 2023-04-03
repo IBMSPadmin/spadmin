@@ -87,6 +87,7 @@ def dynruleinjector(
         if rightpart not in globals.myIBMSPrlCompleter.dynrules[leftpart]:
             globals.myIBMSPrlCompleter.dynrules[leftpart].append(rightpart)
 
+
 # Fill up with the servernames
 for section in globals.config.getconfiguration().sections():
     if section not in disabled_words:
@@ -475,7 +476,6 @@ class SPadminUNSETDEBUG(SpadminCommand):
         globals.logger.setLevel(logging.INFO)
         return ""
 
-
 define_command(SPadminUNSETDEBUG())
 
 
@@ -604,8 +604,8 @@ class SPadminDELeteALIas(SpadminCommand):
                 print(f'The given alias \'{parameters}\' not found')
         return ""
 
-
 define_command(SPadminDELeteALIas())
+
 
 class SPadminSHowSErver(SpadminCommand):
 
@@ -658,7 +658,6 @@ class SPadminSHowCOMmands(SpadminCommand):
             colored('Command name', globals.color_white, attrs=[globals.color_attrs_bold]), colored('Short Description', globals.color_white, attrs=[globals.color_attrs_bold])],
                         justify=['l', 'l'])
 
-
 define_command(SPadminSHowCOMmands())
 
 
@@ -703,7 +702,6 @@ class SHowACTlog(SpadminCommand):
                         headers=['Date/Time', 'Message'],
                         justify=['l', 'l'])
 
-
 define_command(SHowACTlog())
 
 
@@ -725,7 +723,6 @@ class REload(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         globals.myIBMSPrlCompleter.loadrules()
         return ""
-
 
 define_command(REload())
 
@@ -759,7 +756,6 @@ class HISTory(SpadminCommand):
         return columnar(data,
                         headers=[colored('#', globals.color_white, attrs=[globals.color_attrs_bold]), colored('Command', globals.color_white, attrs=[globals.color_attrs_bold])],
                         justify=['r', 'l'])
-
 
 define_command(HISTory())
 
@@ -803,7 +799,6 @@ class SpadminShowCache(SpadminCommand):
                                        colored('Time', globals.color_white, attrs=[globals.color_attrs_bold]),
                                        colored('Result', globals.color_white, attrs=[globals.color_attrs_bold])], justify=['l', 'c', 'l'])
 
-
 define_command(SpadminShowCache())
 
 
@@ -827,8 +822,8 @@ class SHowLASTerror(SpadminCommand):
         print("Last return code: ", globals.last_error["rc"])
         return ""
 
-
 define_command(SHowLASTerror())
+
 
 class SPadminSHowEXtras(SpadminCommand):
 
@@ -849,7 +844,6 @@ class SPadminSHowEXtras(SpadminCommand):
         print('CLI extra pipe parameter tester')
         pprint(globals.extras)
         return ""
-
 
 define_command(SPadminSHowEXtras())
 
@@ -872,7 +866,6 @@ class PRint(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         print(parameters)
         return ""
-
 
 define_command(PRint())
 
@@ -958,7 +951,7 @@ class SHowPRocesses(SpadminCommand):
         """
 
     def _execute(self, parameters: str) -> str:
-        data = globals.tsm.send_command_array_array_tabdel(
+        data = timemachine_query( self.command_type,
             'select PROCESS_NUM, PROCESS, FILES_PROCESSED, BYTES_PROCESSED, STATUS from processes order by 1')
 
         if globals.last_error['rc'] != '0':
@@ -1044,9 +1037,7 @@ class SPadminSHowLOCALLOG(SpadminCommand):
                                    headers=['Date', 'Time', 'Level', 'Text'],
                                    justify=['l', 'l', 'l', 'l'])
 
-
 define_command(SPadminSHowLOCALLOG())
-
 
 
 class kill(SpadminCommand):
@@ -1080,7 +1071,6 @@ class kill(SpadminCommand):
             globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
         return ""
 
-
 define_command(kill())
 
 
@@ -1104,9 +1094,9 @@ class ShowEvents(SpadminCommand):
     09/27/2022 13:00:00            13:02:46            13:09:20 FILES  INC_1300     SERVER_C            Completed 8
     09/27/2022 13:00:00                                14:00:00 FILES  INC_1300     SERVER_D            Missed"""
 
-    def _execute(self, parameters: str) -> str:
-        data = globals.tsm.send_command_array_array_tabdel('q event * * endd=today f=d' + ' ' + parameters)
-
+    def _execute(self, parameters: str) -> str:       
+        data = timemachine_query( self.command_type, 'q event * * endd=today f=d' + ' ' + parameters)
+        
         if globals.last_error['rc'] != '0':
             return
 
@@ -1145,7 +1135,6 @@ class ShowEvents(SpadminCommand):
 
         return table
 
-
 define_command(ShowEvents())
 
 
@@ -1173,7 +1162,7 @@ class ShowStgp(SpadminCommand):
  - Next Storage Pool name"""
 
     def _execute(self, parameters: str) -> str:
-        data = globals.tsm.send_command_array_array_tabdel(
+        data = timemachine_query( self.command_type, 
             "select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
         for index, row in enumerate(data):
             (a, b, c, d, e, f, g, h, i, j) = row
@@ -1194,7 +1183,6 @@ class ShowStgp(SpadminCommand):
                                   'LowMig', 'Recl', 'Next'],
                          justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
         return table
-
 
 define_command(ShowStgp())
 
@@ -1222,7 +1210,7 @@ class ShowMount(SpadminCommand):
 6 SBO376L6    R/W    DRV2  /dev/lin_tape/by-id/1068006258 IDLE"""
 
     def _execute(self, parameters: str) -> str:
-        data = globals.tsm.send_command_array_array_tabdel( "Query MOunt" )
+        data = timemachine_query( self.command_type, "Query MOunt" )
         
         if len( data ) == 0:
             return
@@ -1270,7 +1258,6 @@ class ShowMount(SpadminCommand):
                          justify=['r', 'l', 'l', 'l', 'l', 'l', ])
 
         return table
-
 
 define_command(ShowMount())
 
@@ -1396,7 +1383,6 @@ class Ruler(SpadminCommand):
             "Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
         globals.logger.debug("Last command type set to: " + globals.lastdsmcommandtype + ".")
 
-
 define_command(Ruler())
 
 
@@ -1447,7 +1433,6 @@ class Online(SpadminCommand):
             "Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
         globals.logger.debug("Last command type set to: " + globals.lastdsmcommandtype + ".")
 
-
 define_command(Online())
 
 
@@ -1458,7 +1443,6 @@ class Offline(Online):
         self.command_index = 0
         self.command = "PAY"
         self.online = "ONLINE=NO"
-
 
 define_command(Offline())
 
@@ -1477,7 +1461,7 @@ class ShowDrives(SpadminCommand):
         return """"""
 
     def _execute(self, parameters: str) -> str:
-        drives = globals.tsm.send_command_array_array_tabdel(
+        data = timemachine_query( self.command_type,
             "select LIBRARY_NAME,DRIVE_NAME,'ONL='||ONLINE,ELEMENT,DRIVE_STATE,DRIVE_SERIAL,VOLUME_NAME,ALLOCATED_TO from drives order by 1,2")
             
         if globals.last_error[ 'rc' ] != '0':
@@ -1501,7 +1485,6 @@ class ShowDrives(SpadminCommand):
                                   'Allocated'],
                          justify=['r', 'l', 'l', 'l', 'c', 'l', 'l', 'l', 'l'])
         return table
-
 
 define_command(ShowDrives())
 
@@ -1547,7 +1530,6 @@ class ShowPath(SpadminCommand):
         globals.lastdsmcommandresults = data
         return table
 
-
 define_command(ShowPath())
 
 
@@ -1575,7 +1557,6 @@ This table can be very long, so it recommended to use `|grep ` or `|more` or bot
                          headers=['Table name', 'Column Name'],
                          justify=['l', 'l'])
         return table
-
 
 define_command(ShowColumns())
 
@@ -1617,7 +1598,6 @@ class ShowLIBVolumes(SpadminCommand):
 
         return table
 
-
 define_command(ShowLIBVolumes())
 
 
@@ -1655,7 +1635,6 @@ class ShowFilling(SpadminCommand):
                          justify=['r', 'l', 'l', 'r'])
 
         return table
-
 
 define_command(ShowFilling())
 
@@ -1701,7 +1680,6 @@ class Move(SpadminCommand):
             "Execution ENDED for command: " + self.get_command_string() + ". Parameters: " + parameters + ".")
         globals.logger.debug("Last command type set to: " + globals.lastdsmcommandtype + ".")
 
-
 define_command(Move())
 
 
@@ -1721,8 +1699,6 @@ class SHowSCRatches(SpadminCommand):
         """
 
     def _execute(self, parameters: str) -> str:
-
-
         data = timemachine_query( self.command_type, "select LIBRARY_NAME, MEDIATYPE, count(*) from libvolumes where upper(status)='SCRATCH' group by LIBRARY_NAME,MEDIATYPE" )
             
         if globals.last_error[ 'rc' ] != '0':
@@ -1745,7 +1721,6 @@ class SHowSCRatches(SpadminCommand):
         return columnar(data2,
                         headers=['LibraryName', 'Type', '#Scratch'],
                         justify=['l', 'l', 'r'])
-
 
 define_command(SHowSCRatches())
 
@@ -1838,7 +1813,6 @@ class SHowCOPYGroups(SpadminCommand):
         #     headers = [ 'Domain', 'PolicySet', 'MgmtClass', 'd', 'ARCopy (d)', 'ARDest', 'Next' ],
         #     justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] ) )
 
-
 define_command(SHowCOPYGroups())
 
 
@@ -1859,7 +1833,6 @@ class ShowCLIENTBACKUPPERFormance(SpadminCommand):
 
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "BACKUP")
-
 
 define_command(ShowCLIENTBACKUPPERFormance())
 
@@ -1882,7 +1855,6 @@ class ShowDBBACKUPPERFormance(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "FULL_DBBACKUP")
 
-
 define_command(ShowDBBACKUPPERFormance())
 
 
@@ -1903,7 +1875,6 @@ class ShowMIGRATIONPERFormance(SpadminCommand):
 
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "MIGRATION")
-
 
 define_command(ShowMIGRATIONPERFormance())
 
