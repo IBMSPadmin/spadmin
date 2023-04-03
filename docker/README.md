@@ -12,4 +12,10 @@ or here: https://www.upwork.com/resources/install-docker-engine
 `docker build --tag ubuntu/dsmc:20230401 --rm .`
 
 ## 3. Start container with Dcoker Composer
+#### 3.1 Change TSM - SP server connection data's by local needs
+Change connection information in `spadmin_runtime/dsm.sys` file.
+#### 3.2 Set authorized users in
+Add public key of authorized user's in `spadmin_runtime/authorized_keys` file.
+#### Start container in and test it
 
+## 4. Start container as daemon
