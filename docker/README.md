@@ -8,7 +8,7 @@ or here: https://www.upwork.com/resources/install-docker-engine
 #### 2.1 Create a local directory like `spadmin_build` and copy into the `spadmin_build` folder contents.
 #### 2.2 Change directory to newly created:
 `cd spadmin_build`
-#### 2.3 Run command:
+#### 2.3 Run command to build new image (internet connection required!):
 `docker build  --tag ubuntu/dsmc:20230401 --rm .`
 
 ## 3. Start container with Dcoker Composer
