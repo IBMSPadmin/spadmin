@@ -219,33 +219,34 @@ class Spadmin(object):
 
                 # No own command, no exit then let dsmadmc run the command!
                 globals.logger.info('Pass it on to dsmadmc: [' + command + '].')
-                data = []
-                for line in globals.tsm.send_command_normal(command):
-                    data.append(split(r'\n', line))
 
-                # print(data)
-                
-                i = 0
-                utilities.refreshrowscolumns()
-                
-                for textline in lib.columnar.invgrep( lib.columnar.grep( data ) ):
-                    i += 1
-                    if not search( '^\s*$', textline[ 0 ] ):
-                        print( textline[ 0 ], sep="" )
-                    if 'more' in globals.extras and i > globals.rows - 2:
-                        sys.stdout.write( "more...   (<ENTER> to continue, 'C' to cancel)" )
-                        sys.stdout.flush()
-                        key = readchar.readkey()
-                        print()
-                        if str( key ).lower() == "c":
-                            #print(*s[i + globals.rows - 2:], sep="\n")
-                            # print()
-                            break
-    
-                        i = 0
-                                  
+
+                ret = []
+                # Remove empty lines and other "technical/administartive' texts
+                for i in globals.tsm.send_command_normal(command).splitlines()[1:]:
+                    if search('^Session established with server \w+:', i):
+                        continue
+                    elif search('^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i):
+                        continue
+                    elif search('^\s\sServer date\/time\:', i):
+                        continue
+                    elif i is None or i == '':
+                        continue
+                    tmp = []
+                    tmp.append(i)
+                    ret.append(tmp)
+
+                # use grep and invgrep, which uses 'array in an array' as an input
+                data = []
+                for i in lib.columnar.invgrep(lib.columnar.grep(ret)):
+                    data.append(i[0])
+
+                # printer: handles more, count, etc. in a plain string
+                utilities.printer('\n'.join(data))
+
                 line           = ''
                 globals.extras = {}
+
                 # not nice, but this is now what we have
                 globals.lastdsmcommandtype = 'DSMADMC'
                 globals.lastdsmcommandresults.clear()
@@ -359,7 +360,7 @@ class Spadmin(object):
 
         globals.logger.debug('readline class instance')
         globals.myIBMSPrlCompleter = IBMSPrlCompleter()
-        rlhistfile = os.path.join( os.path.expanduser( '~' ), globals.config.getconfiguration()['SPADMIN']['historyfile'] )
+        rlhistfile = os.path.join(globals.spadmin_path, globals.config.getconfiguration()['SPADMIN']['historyfile'] )
         globals.logger.debug( 'readline history file: [' + rlhistfile + ']' )
         try:
             readline.read_history_file(rlhistfile)

@@ -14,6 +14,7 @@ from termcolor import colored
 
 
 def grep(data):
+    # print ("----------- ", data, "-------------")
     grep = globals.extras['grep'] if 'grep' in globals.extras else ''
     grep_data = []
     if grep != '' and grep is not None:

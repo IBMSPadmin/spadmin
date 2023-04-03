@@ -2,6 +2,8 @@ import configparser
 from termcolor import colored
 from . import setup
 import os
+from . import globals
+
 
 class Configuration:
     configparser = None
@@ -38,8 +40,8 @@ class Configuration:
     def __init__(self, configfile):
 
         if not configfile:
-            os.makedirs(os.path.join(os.path.expanduser('~/.config/spadmin/')), exist_ok=True)
-            configfile = os.path.join(os.path.expanduser('~/.config/spadmin/'), 'spadmin.ini')
+#            os.makedirs(os.path.join(os.path.expanduser('~/spadmin/')), exist_ok=True)
+            configfile = os.path.join(globals.spadmin_path, 'spadmin.ini')
         self.configfile = configfile
         self.configparser = configparser.ConfigParser()
         self.configparser.optionxform = str

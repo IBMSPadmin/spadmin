@@ -99,6 +99,7 @@ class dsmadmc_pexpect:
         return ar
 
 
+
     def get_tsm_normal(self):
 
         if self.tsm_normal is None or not self.tsm_normal.isalive:
@@ -126,28 +127,29 @@ class dsmadmc_pexpect:
             print('Please check the connection parameters and restart spadmin')
             quit(1)
 
-
+        return tsm2.before
 
         # Session established with server CLOUDTSM1: Linux/x86_64
         # Server Version 8, Release 1, Level 7.000
         # Server date/time: 08/20/2022 19:12:44  Last access: 08/20/2022 16:48:38
 
         # Let's dance
-        ret = []
         #if globals.last_error['rc'] == "11":
         #    return ret
 
-        for i in tsm2.before.splitlines()[1:]:
-            if search('^Session established with server \w+:', i):
-                continue
-            elif search('^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i):
-                continue
-            elif search('^\s\sServer date\/time\:', i):
-                continue
 
-            ret.append(i)
-
-        return ret
+        # ret = []
+        # for i in tsm2.before.splitlines()[1:]:
+        #     if search('^Session established with server \w+:', i):
+        #         continue
+        #     elif search('^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i):
+        #         continue
+        #     elif search('^\s\sServer date\/time\:', i):
+        #         continue
+        #
+        #     ret.append(i)
+        #
+        # return ret
 
     def check_rc(self, tsm, rc):
         if rc == 6:
@@ -166,7 +168,7 @@ class dsmadmc_pexpect:
             print(tsm.before)
             quit(1)
         elif rc == 10:
-            print("Continue, please: ")
+            print("Continue the command, please: ")
 
 
         groups = search("ANS8001I Return code (\d+).", tsm.before, MULTILINE )
