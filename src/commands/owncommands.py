@@ -250,10 +250,10 @@ class SPadminAddSErver(SpadminCommand):
                 if utilities.check_connection(server, userid, password):
                     globals.config.getconfiguration().add_section(server)
                     globals.config.getconfiguration()[server]['dsmadmc_id'] = userid
-                    globals.config.getconfiguration()[server]['dsmadmc_password'] = password
+                    globals.config.getconfiguration()[server]['dsmadmc_password'] = utilities.encode(password)
                     globals.config.writeconfig()
+                    dynruleinjector('SPadmin SWitch SErver ' + server)
                     dynruleinjector('SPadmin DELete SErver ' + server)
-                    globals.myIBMSPrlCompleter.dynrules['SPadmin DELete SErver'].append(server)
                 else:
                     print('Server parameters not saved!')
 
@@ -323,7 +323,7 @@ class SPadminSWitchSErver(SpadminCommand):
             globals.tsm.quit()
             from lib.dsmadmc_pexpect import dsmadmc_pexpect
             globals.userid = globals.config.getconfiguration()['SPADMIN']['dsmadmc_id']
-            globals.password = globals.config.getconfiguration()['SPADMIN']['dsmadmc_password']
+            globals.password = utilities.decode(globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'])
             globals.tsm = dsmadmc_pexpect('', globals.userid, globals.password)
             globals.spversion, globals.sprelease, globals.splevel, globals.spsublevel = \
                 globals.tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]
@@ -337,7 +337,7 @@ class SPadminSWitchSErver(SpadminCommand):
                 from lib.dsmadmc_pexpect import dsmadmc_pexpect
                 globals.server = server
                 globals.userid = globals.config.getconfiguration()[server]['dsmadmc_id']
-                globals.password = globals.config.getconfiguration()[server]['dsmadmc_password']
+                globals.password = utilities.decode(globals.config.getconfiguration()[server]['dsmadmc_password'])
                 globals.tsm = dsmadmc_pexpect(server, globals.userid, globals.password)
                 globals.spversion, globals.sprelease, globals.splevel, globals.spsublevel = \
                 globals.tsm.send_command_array_array_tabdel('select VERSION, RELEASE, LEVEL, SUBLEVEL from STATUS')[0]

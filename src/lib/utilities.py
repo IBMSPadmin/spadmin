@@ -5,6 +5,7 @@ from . import globals
 import readchar
 import uuid
 import subprocess
+import base64
 
 from termcolor import colored
 from typing import (
@@ -12,6 +13,22 @@ from typing import (
 )
 
 ansi_color_pattern = re.compile(r"\x1b\[.+?m")
+
+PASS = "PASS"
+def encode(password):
+    encoded_byte_list = [(ord(a) ^ ord(b)) for a, b in zip(password, getmac())]
+    b64_encoded_string = base64.b64encode(bytes(encoded_byte_list)).decode('ascii')
+    return PASS + b64_encoded_string
+
+def decode (b64_encoded):
+    if b64_encoded.startswith(PASS):
+        b64_decoded = list(base64.b64decode(b64_encoded[len(PASS):]))
+        decoded = [(ord(a) ^ ord(b)) for a, b in zip(''.join([chr(x) for x in b64_decoded]), getmac())]
+        decoded_string = ''.join([chr(x) for x in decoded])
+        return decoded_string
+    else:
+        return b64_encoded
+
 
 
 def refreshrowscolumns():
@@ -105,7 +122,7 @@ def check_connection(server: str, id: str, password: str) -> bool:
                 universal_newlines=True)
         print("We have successfully connected to: ", result.strip())
         return True
-    except Except as exc:
+    except Exception as exc:
         print(exc.output, "\n")
         return False
 
@@ -134,7 +151,7 @@ def start_console(server: str, id: str, password: str) -> bool:
     
         return True
     
-    except Except as exc:
+    except Exception as exc:
         print(exc.output, "\nAn error occured during the console mode\n")
         return False
         

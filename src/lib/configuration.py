@@ -3,6 +3,7 @@ from termcolor import colored
 from . import setup
 import os
 from . import globals
+from . import utilities
 
 
 class Configuration:
@@ -57,6 +58,8 @@ class Configuration:
             parameters = setup.Setup().get_parameters()
             for key in parameters:
                 self.configparser['SPADMIN'][key] = str(parameters[key])
+
+            self.configparser['SPADMIN']['dsmadmc_password'] = utilities.encode(str(parameters['dsmadmc_password']))
 
         # check default aliases
         if not self.configparser.has_section('ALIAS'):

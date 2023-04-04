@@ -316,12 +316,12 @@ class Spadmin(object):
 
         globals.server = ''
         globals.userid = globals.config.getconfiguration()['SPADMIN']['dsmadmc_id']
-        globals.password = globals.config.getconfiguration()['SPADMIN']['dsmadmc_password']
+        globals.password = utilities.decode(globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'])
 
         if args.SErveraddress:
             globals.server = str(args.SErveraddress).upper()
             globals.userid = globals.config.getconfiguration()[globals.server]['dsmadmc_id']
-            globals.password = globals.config.getconfiguration()[globals.server]['dsmadmc_password']
+            globals.password = utilities.decode(globals.config.getconfiguration()[globals.server]['dsmadmc_password'])
 
 
         if args.prereqcheck:
@@ -434,8 +434,8 @@ class Spadmin(object):
                                                         'white', attrs=['bold']))
         parser.add_argument('-a', '--autoexec', type=str,
                              help='autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;')
-        parser.add_argument('-c', '--consoleonly', action='store_const', const=True, help='run console only mode!')
         parser.add_argument('-b', '--basecommandname', type=str, help='custom base command name, default: SHow')
+        parser.add_argument('-c', '--consoleonly', action='store_const', const=True, help='run console only mode!')
         parser.add_argument('-d', '--debug', action='store_const', const=True, help='debug messages into log file')
         parser.add_argument('-f', '--fetch', action='store_const', const=True, help='enable SQL prefetch queries')
         parser.add_argument('-i', '--inifilename', type=str, help='ini filename')
