@@ -25,7 +25,10 @@ Use `ctrl + c` to stop container.
 
 ## 3. Start container as daemon
 If container connection tested, then with next command you can start it as daemon:
+
 `docker compose up -d`
+
+If the `systemctl status docker.service` is running and enabled, then after reboot will restart the daemonized containers.
 
 ## Commands reference
 `docker help` or https://docs.docker.com/reference/
