@@ -13,7 +13,7 @@ Change connection information in `dsm.sys` file.
 Add public key of authorized user's in `authorized_keys` file to enable ssh connection to container.
 
 #### 2.3 SPadmin setup
-Copy SPadmin file to `spadmin_runtime` folder as `spadmin_latest` and `chmod +x spadmin_latest`.
+Copy SPadmin binary file to `spadmin_runtime` folder as `spadmin_latest` file and `chmod +x spadmin_latest`.
 
 #### 2.4 Start container
 `docker compose up`
