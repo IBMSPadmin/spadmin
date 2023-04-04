@@ -1,0 +1,4 @@
+SErvername  server_a
+   COMMMethod         TCPip
+   TCPPort            1500
+   TCPServeraddress   <TSM SP server DNS name or IP>
