@@ -1461,7 +1461,7 @@ class ShowDrives(SpadminCommand):
         return """"""
 
     def _execute(self, parameters: str) -> str:
-        data = timemachine_query( self.command_type,
+        drives = timemachine_query( self.command_type,
             "select LIBRARY_NAME,DRIVE_NAME,'ONL='||ONLINE,ELEMENT,DRIVE_STATE,DRIVE_SERIAL,VOLUME_NAME,ALLOCATED_TO from drives order by 1,2")
             
         if globals.last_error[ 'rc' ] != '0':
