@@ -1,5 +1,0 @@
-
-SErvername  server_a
-   COMMMethod         TCPip
-   TCPPort            1500
-   TCPServeraddress   <tsm server name or IP>
