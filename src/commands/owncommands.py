@@ -1837,6 +1837,69 @@ class ShowCLIENTBACKUPPERFormance(SpadminCommand):
 define_command(ShowCLIENTBACKUPPERFormance())
 
 
+class ShowCLIENTRESTOREPERFormance(SpadminCommand):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "CLIENTRESTOREPERFormance"
+        self.command_type = "PERFROMANCE"
+        self.command_index = 0
+        self.command = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show client restore performance data'
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        return basicPerformanceFromSummary(self, "RESTORE")
+
+define_command(ShowCLIENTRESTOREPERFormance())
+
+
+class ShowCLIENTARCHIVEPERFormance(SpadminCommand):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "CLIENTARCHIVEPERFormance"
+        self.command_type = "PERFROMANCE"
+        self.command_index = 0
+        self.command = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show client archive performance data'
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        return basicPerformanceFromSummary(self, "ARCHIVE")
+
+define_command(ShowCLIENTARCHIVEPERFormance())
+
+
+class ShowCLIENTRETRIEVEPERFormance(SpadminCommand):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "CLIENTRETRIEVEPERFormance"
+        self.command_type = "PERFROMANCE"
+        self.command_index = 0
+        self.command = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show client retrieve performance data'
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        return basicPerformanceFromSummary(self, "RETRIEVE")
+
+define_command(ShowCLIENTRETRIEVEPERFormance())
+
+
 class ShowDBBACKUPPERFormance(SpadminCommand):
 
     def __init__(self):
@@ -1879,18 +1942,81 @@ class ShowMIGRATIONPERFormance(SpadminCommand):
 define_command(ShowMIGRATIONPERFormance())
 
 
+class ShowMOVEDATAPERFormance(SpadminCommand):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "MOVEDATAPERFormance"
+        self.command_type = "PERFROMANCE"
+        self.command_index = 0
+        self.command = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show move data performance data'
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        return basicPerformanceFromSummary(self, "MOVE DATA")
+
+define_command(ShowMOVEDATAPERFormance())
+
+
+class ShowRECLAMATIONPERFormance(SpadminCommand):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "RECLAMATIONPERFormance"
+        self.command_type = "PERFROMANCE"
+        self.command_index = 0
+        self.command = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show reclamation performance data'
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        return basicPerformanceFromSummary(self, "RECLAMATION")
+
+define_command(ShowRECLAMATIONPERFormance())
+
+
+class ShowSTGPOOLBACKUPPERFormance(SpadminCommand):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "STGPOOLBACKUPPERFormance"
+        self.command_type = "PERFROMANCE"
+        self.command_index = 0
+        self.command = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show storage poll backup performance data'
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        return basicPerformanceFromSummary(self, "STGPOOL BACKUP")
+
+define_command(ShowSTGPOOLBACKUPPERFormance())
+
+
 def basicPerformanceFromSummary(self, activity, fromdate='0', todate='1'):
-    # ARCHIVE
+    # ARCHIVE           Ok
     # BACKUP            Ok
     # EXPIRATION
     # FULL_DBBACKUP     Ok
     # INCR_DBBACKUP
     # MIGRATION         Ok
-    # MOVE DATA         
-    # RECLAMATION       
-    # RESTORE           
-    # RETRIEVE          
-    # STGPOOL BACKUP    
+    # MOVE DATA         Ok
+    # RECLAMATION       Ok
+    # RESTORE           Ok
+    # RETRIEVE          OK
+    # STGPOOL BACKUP    Ok
     # TAPE MOUNT
 
     data = globals.tsm.send_command_array_array_tabdel(
