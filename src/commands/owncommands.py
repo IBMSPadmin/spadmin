@@ -208,7 +208,7 @@ class SPadminAddALIas(SpadminCommand):
             print('Please use the following command format: \'SPadmin Add ALIas cmd:command\'')
             return
         else:
-            key, value = str(parameters).split(':', 1)
+            key, value = str(parameters).spli(':', 1)
             key = key.strip()
             value = value.strip()
             globals.aliases[key] = value

@@ -51,7 +51,7 @@ import logging
 import atexit
 import argparse
 import readchar
-
+import traceback
 from time import time
 from termcolor import colored
 from pprint import pformat
@@ -460,7 +460,11 @@ class Spadmin(object):
         return parser.parse_args()
 
 if __name__ == '__main__':
-    Spadmin().run()
+    try:
+        Spadmin().run()
+    except Exception as e:
+        print ("Strange things are always happens...")
+        print (traceback.format_exc())
 
 # ---------------------------------------------------------------------------------
 #
