@@ -3,7 +3,7 @@ services:
   spadmin:
     container_name: spadmin
     hostname: spadmin
-    #    restart: always
+    restart: unless-stopped
     image: doffy2023/dsmadmc:20230404
 
     stdin_open: true 
