@@ -1,0 +1,27 @@
+services:
+
+  spadmin:
+    container_name: spadmin
+    hostname: spadmin
+    #    restart: always
+    image: doffy2023/dsmadmc:20230404
+
+    stdin_open: true 
+    tty: true
+
+    ports:
+      - "2222:22"
+
+    environment:
+      - DEBUG=false
+
+    volumes:
+      - /root/spadmin_runtime/dsm.opt:/opt/tivoli/tsm/client/ba/bin/dsm.opt:ro
+      - /root/spadmin_runtime/dsm.sys:/opt/tivoli/tsm/client/ba/bin/dsm.sys:ro
+      - /root/spadmin_runtime/authorized_keys:/root/.ssh/authorized_keys:ro
+      - /root/spadmin_runtime/bash_login:/root/.bash_login:ro
+      - /root/spadmin_runtime/spadmin_latest:/usr/local/bin/spadmin:ro
+      - /root/spadmin/:/root/spadmin/
+
+    command: ["/usr/sbin/sshd", "-D"]
+
