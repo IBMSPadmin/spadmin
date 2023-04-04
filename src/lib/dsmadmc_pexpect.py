@@ -168,7 +168,7 @@ class dsmadmc_pexpect:
             print(tsm.before)
             quit(1)
         elif rc == 10:
-            print("Continue the command, please: ")
+            print("Continue the command in the next line, please: ")
 
 
         groups = search("ANS8001I Return code (\d+).", tsm.before, MULTILINE )
