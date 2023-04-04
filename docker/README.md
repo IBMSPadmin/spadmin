@@ -18,7 +18,7 @@ Copy SPadmin file to `spadmin_runtime` folder as `spadmin_latest` and `chmod +x 
 #### 2.3 Start container
 `docker compose up`
 
-#### 2.3 Test container connection
+#### 2.4 Test container connection
 `ssh -p 2222 root@<docker server DNS name or IP>`
 
 Use `ctrl + c` to stop container.
