@@ -15,10 +15,10 @@ Add public key of authorized user's in `authorized_keys` file to enable ssh conn
 #### 2.3 SPadmin setup
 Copy SPadmin file to `spadmin_runtime` folder as `spadmin_latest` and `chmod +x spadmin_latest`.
 
-#### 2.3 Start container
+#### 2.4 Start container
 `docker compose up`
 
-#### 2.4 Test container connection
+#### 2.5 Test container connection
 `ssh -p 2222 root@<docker server DNS name or IP>`
 
 Use `ctrl + c` to stop container.
