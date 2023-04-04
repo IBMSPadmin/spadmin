@@ -24,4 +24,8 @@ Copy SPadmin binary file to `spadmin_runtime` folder as `spadmin_latest` file an
 Use `ctrl + c` to stop container.
 
 ## 3. Start container as daemon
-...
+If container connection tested, then with next command you can start it as daemon:
+`docker compose up -d`
+
+## Commands reference
+`docker help` or https://docs.docker.com/reference/
