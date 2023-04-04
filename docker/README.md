@@ -7,7 +7,7 @@ or here: https://www.upwork.com/resources/install-docker-engine
 Clone `spadmin_runtime` folder to local disk and `cd spadmin_runtime`
 
 #### 2.1 Change TSM - SP server connection data's by local environment
-Change connection information in `spadmin_runtime/dsm.sys` file.
+Change connection information in `dsm.sys` file.
 
 #### 2.2 Set SSH login authorized keys
 Add public key of authorized user's in `authorized_keys` file to enable ssh connection to container.
