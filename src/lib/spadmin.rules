@@ -319,6 +319,34 @@ CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} WAITTime=   -> WAITTime=<give_mi
 CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CLEanings=  -> CLEanings=<give_number>
 
 ###################
+# CHECKOut LIBVolume
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.17?topic=commands-checkout-libvolume-check-storage-volume-out-library
+###################
+CHECKOut                                                     -> LIBVolume
+CHECKOut LIBVolume                                           -> select library_name from libraries
+CHECKOut LIBVolume [\w\-\.\+\&]+                             -> select volume_name from libvolumes {Prefix: -1}
+
+CHECKOut LIBVolume [\w\-\.\+\&]+ *.                          -> REMOVE=
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. REMOVE=                  -> REMOVE=BULK
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. REMOVE=                  -> REMOVE=YES
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. REMOVE=                  -> REMOVE=NO
+
+CHECKOut LIBVolume [\w\-\.\+\&]+                             -> CHECKLabel=
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. CHECKLabel=              -> CHECKLabel=Yes
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. CHECKLabel=              -> CHECKLabel=No
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. CHECKLabel=              -> CHECKLabel=Barcode
+
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,}             -> REMOVE=
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} REMOVE=     -> REMOVE=BULK
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} REMOVE=     -> REMOVE=NO
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} REMOVE=     -> REMOVE=YES
+
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,}             -> CHECKLabel=
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Yes 
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} CHECKLabel= -> CHECKLabel=No
+CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Barcode
+
+###################
 # DEFine commands #
 ###################
 
