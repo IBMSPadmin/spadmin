@@ -56,7 +56,9 @@ rm -f /etc/legal
 # ssh server
 /usr/bin/ssh-keygen -A
 sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/g' /etc/ssh/sshd_config
+sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i 's/#PrintLastLog yes/PrintLastLog no/g' /etc/ssh/sshd_config
 sed -i 's/#Banner none/Banner none/g' /etc/ssh/sshd_config
 mkdir /root/.ssh
+chmod 700 /root/.ssh
 mkdir /run/sshd
