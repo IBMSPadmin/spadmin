@@ -263,60 +263,60 @@ CHECKIn                                                   -> LIBVolume
 CHECKIn LIBVolume                                         -> select library_name from libraries
 CHECKIn LIBVolume [\w\-\.\+\&]+                           -> <give_a_volumename_here>
 CHECKIn LIBVolume [\w\-\.\+\&]+                           -> SEARCH=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> SEARCH=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> STATus=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> OWNer=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> CHECKLabel=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> SWAP=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> WAITTime=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> CLEanings=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> VOLRange={Mustexist: SEARCH=Yes}
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> VOLRange={Mustexist: SEARCH=Bulk}
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> VOLList={Mustexist: SEARCH=Yes}
-CHECKIn LIBVolume [\w\-\.\+\&]+ .*                        -> VOLList={Mustexist: SEARCH=Bulk}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> SEARCH=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> STATus=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> OWNer=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> CHECKLabel=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> SWAP=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> WAITTime=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> CLEanings=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> VOLRange={Mustexist: SEARCH=Yes}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> VOLRange={Mustexist: SEARCH=Bulk}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> VOLList={Mustexist: SEARCH=Yes}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> VOLList={Mustexist: SEARCH=Bulk}
 
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* SEARCH=                  -> SEARCH=No
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ SEARCH=                  -> SEARCH=No
 CHECKIn LIBVolume [\w\-\.\+\&]+  SEARCH=                    -> SEARCH=Yes
 CHECKIn LIBVolume [\w\-\.\+\&]+  SEARCH=                    -> SEARCH=Bulk
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* STATus=                  -> STATus=PRIvate
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* STATus=                  -> STATus=SCRatch
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* STATus=                  -> STATus=CLEaner
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* OWNer=                   -> select concat( '%PREFIX%', server_name ) from servers {Prefix: -1}
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* CHECKLabel=              -> CHECKLabel=Yes
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* CHECKLabel=              -> CHECKLabel=No
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* CHECKLabel=              -> CHECKLabel=Barcode
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* SWAP=                    -> SWAP=Yes
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* SWAP=                    -> SWAP=No
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* WAITTime=                -> WAITTime=<give_minutes>
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* CLEanings=               -> CLEanings=<give_number>
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ STATus=                  -> STATus=PRIvate
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ STATus=                  -> STATus=SCRatch
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ STATus=                  -> STATus=CLEaner
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ OWNer=                   -> select concat( '%PREFIX%', server_name ) from servers {Prefix: -1}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CHECKLabel=              -> CHECKLabel=Yes
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CHECKLabel=              -> CHECKLabel=No
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CHECKLabel=              -> CHECKLabel=Barcode
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ SWAP=                    -> SWAP=Yes
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ SWAP=                    -> SWAP=No
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ WAITTime=                -> WAITTime=<give_minutes>
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CLEanings=               -> CLEanings=<give_number>
 
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> SEARCH=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> STATus=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> OWNer=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> CHECKLabel=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> SWAP=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> WAITTime=
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> CLEanings=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> SEARCH=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> STATus=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> OWNer=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> CHECKLabel=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> SWAP=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> WAITTime=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> CLEanings=
 
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> VOLRange={Mustexist: SEARCH=Yes}
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> VOLRange={Mustexist: SEARCH=Bulk}
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> VOLList={Mustexist: SEARCH=Yes}
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,}             -> VOLList={Mustexist: SEARCH=Bulk}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> VOLRange={Mustexist: SEARCH=Yes}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> VOLRange={Mustexist: SEARCH=Bulk}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> VOLList={Mustexist: SEARCH=Yes}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> VOLList={Mustexist: SEARCH=Bulk}
 
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} SEARCH=     -> SEARCH=No
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SEARCH=     -> SEARCH=No
 CHECKIn LIBVolume [\w\-\.\+\&]+    (\w+=.*){1,} SEARCH=     -> SEARCH=Yes
 CHECKIn LIBVolume [\w\-\.\+\&]+    (\w+=.*){1,} SEARCH=     -> SEARCH=Bulk
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} STATus=     -> STATus=PRIvate
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} STATus=     -> STATus=SCRatch
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} STATus=     -> STATus=CLEaner
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} OWNer=      -> select concat( '%PREFIX%', server_name ) from servers {Prefix: -1}
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Yes
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CHECKLabel= -> CHECKLabel=No
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Barcode
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} SWAP=       -> SWAP=Yes
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} SWAP=       -> SWAP=No
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} WAITTime=   -> WAITTime=<give_minutes>
-CHECKIn LIBVolume [\w\-\.\+\&]+ .* (\w+=.*){1,} CLEanings=  -> CLEanings=<give_number>
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STATus=     -> STATus=PRIvate
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STATus=     -> STATus=SCRatch
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STATus=     -> STATus=CLEaner
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} OWNer=      -> select concat( '%PREFIX%', server_name ) from servers {Prefix: -1}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Yes
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=No
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Barcode
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SWAP=       -> SWAP=Yes
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SWAP=       -> SWAP=No
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} WAITTime=   -> WAITTime=<give_minutes>
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CLEanings=  -> CLEanings=<give_number>
 
 ###################
 # CHECKOut LIBVolume
@@ -326,25 +326,25 @@ CHECKOut                                                     -> LIBVolume
 CHECKOut LIBVolume                                           -> select library_name from libraries
 CHECKOut LIBVolume [\w\-\.\+\&]+                             -> select volume_name from libvolumes {Prefix: -1}
 
-CHECKOut LIBVolume [\w\-\.\+\&]+ *.                          -> REMOVE=
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. REMOVE=                  -> REMOVE=BULK
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. REMOVE=                  -> REMOVE=YES
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. REMOVE=                  -> REMOVE=NO
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                          -> REMOVE=
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ REMOVE=                  -> REMOVE=BULK
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ REMOVE=                  -> REMOVE=YES
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ REMOVE=                  -> REMOVE=NO
 
-CHECKOut LIBVolume [\w\-\.\+\&]+                             -> CHECKLabel=
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. CHECKLabel=              -> CHECKLabel=Yes
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. CHECKLabel=              -> CHECKLabel=No
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. CHECKLabel=              -> CHECKLabel=Barcode
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                          -> CHECKLabel=
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CHECKLabel=              -> CHECKLabel=Yes
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CHECKLabel=              -> CHECKLabel=No
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CHECKLabel=              -> CHECKLabel=Barcode
 
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,}             -> REMOVE=
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} REMOVE=     -> REMOVE=BULK
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} REMOVE=     -> REMOVE=NO
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} REMOVE=     -> REMOVE=YES
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> REMOVE=
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} REMOVE=     -> REMOVE=BULK
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} REMOVE=     -> REMOVE=NO
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} REMOVE=     -> REMOVE=YES
 
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,}             -> CHECKLabel=
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Yes 
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} CHECKLabel= -> CHECKLabel=No
-CHECKOut LIBVolume [\w\-\.\+\&]+ *. (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Barcode
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> CHECKLabel=
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Yes 
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=No
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Barcode
 
 ###################
 # DEFine commands #
