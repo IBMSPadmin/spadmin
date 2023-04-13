@@ -77,11 +77,9 @@ class Spadmin(object):
 
         # push the autoexec command(s)
         line = ''
-        if globals.config.getconfiguration()['SPADMIN']['autoexec']:
-            globals.logger.info(utilities.consolefilledline(
-                'Push autoexec commands into global config: [' + globals.config.getconfiguration()['SPADMIN'][
-                    'autoexec'] + ']'))
-            line = globals.config.getconfiguration()['SPADMIN']['autoexec']
+        if globals.autoexec:
+            globals.logger.info(utilities.consolefilledline( 'Push autoexec commands into global config: [' + globals.autoexec + ']' ) )
+            line = globals.autoexec
 
         globals.extras = {}
         globals.aliases = {}
@@ -324,12 +322,18 @@ class Spadmin(object):
             globals.userid   = globals.config.getconfiguration()[globals.server]['dsmadmc_id']
             globals.password = utilities.decode(globals.config.getconfiguration()[globals.server]['dsmadmc_password'])
 
+        globals.prereqcheck = 'False'
         if args.prereqcheck:
-            globals.config.getconfiguration()['SPADMIN']['prereqcheck'] = 'True'
+            globals.prereqcheck = args.prereqcheck
+        elif globals.config.getconfiguration()['SPADMIN'].get( 'prereqcheck' ) is not None:
+            globals.prereqcheck = globals.config.getconfiguration()['SPADMIN']['prereqcheck']
 
+        globals.autoexec = ''
         if args.autoexec:
-            globals.config.getconfiguration()['SPADMIN']['autoexec'] = args.autoexec
-            
+            globals.autoexec = args.autoexec
+        elif globals.config.getconfiguration()['SPADMIN'].get( 'autoexec' ) is not None:
+            globals.basecommandname = globals.config.getconfiguration()['SPADMIN']['autoexec']
+                
         globals.basecommandname = "SHow"    
         if args.basecommandname:
             globals.basecommandname = args.basecommandname
