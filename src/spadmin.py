@@ -222,7 +222,6 @@ class Spadmin(object):
                 # No own command, no exit then let dsmadmc run the command!
                 globals.logger.info('Pass it on to dsmadmc: [' + command + '].')
 
-
                 ret = []
                 # Remove empty lines and other "technical/administartive' texts
                 for i in globals.tsm.send_command_normal(command).splitlines()[1:]:
@@ -316,15 +315,14 @@ class Spadmin(object):
             globals.config.getconfiguration()['SPADMIN']['debug'] = 'True'
             globals.logger.setLevel(logging.DEBUG)
 
-        globals.server = ''
-        globals.userid = globals.config.getconfiguration()['SPADMIN']['dsmadmc_id']
+        globals.server   = ''
+        globals.userid   = globals.config.getconfiguration()['SPADMIN']['dsmadmc_id']
         globals.password = utilities.decode(globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'])
 
         if args.SErveraddress:
-            globals.server = str(args.SErveraddress).upper()
-            globals.userid = globals.config.getconfiguration()[globals.server]['dsmadmc_id']
+            globals.server   = str(args.SErveraddress).upper()
+            globals.userid   = globals.config.getconfiguration()[globals.server]['dsmadmc_id']
             globals.password = utilities.decode(globals.config.getconfiguration()[globals.server]['dsmadmc_password'])
-
 
         if args.prereqcheck:
             globals.config.getconfiguration()['SPADMIN']['prereqcheck'] = 'True'
@@ -349,12 +347,12 @@ class Spadmin(object):
 
         globals.logger.debug('ARGS: ' + pformat(args))
 
-
         # get the screen size and store it as a global variable
         utilities.refreshrowscolumns()
 
         if not args.nowelcome:
             self.welcome()
+            
         utilities.validate_license()
         
         globals.logger.debug('Fork dsmadmc processes.')
