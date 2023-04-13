@@ -84,7 +84,10 @@ class dsmadmc_pexpect:
         3. remove empty lines
         4. returns a list of list, outter list is separated line-by-line, inner list is tab separated
         """
-        list = self.send_command_tabdel(command).splitlines()
+        
+        onserver = '(' + globals.extras[ 'onserver' ] + ') ' if 'onserver' in globals.extras else ''
+        
+        list = self.send_command_tabdel( onserver + command ).splitlines()
         ar = []
         if globals.last_error['rc'] != "0":
             print(colored(globals.last_error['message'], globals.color_red, attrs=[ globals.color_attrs_bold ]))
@@ -97,7 +100,6 @@ class dsmadmc_pexpect:
         for i in list:
             ar.append(split(r'\t', i))
         return ar
-
 
 
     def get_tsm_normal(self):

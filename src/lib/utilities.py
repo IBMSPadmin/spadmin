@@ -99,7 +99,6 @@ def printer(string):
             #print('\n')
             
     count = globals.extras[ 'count' ] if 'count' in globals.extras else ''
-    
     if count != '':
         print( 'Line count = ' + colored( str( len( s ) ), globals.color_white, attrs=[globals.color_attrs_bold] ) )
 

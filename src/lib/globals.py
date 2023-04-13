@@ -9,3 +9,4 @@
     #columns = 80
     #rows    = 25
     #utilities.refreshrowscolumns()
+extras = {}
