@@ -85,12 +85,14 @@ class Spadmin(object):
 
         globals.extras = {}
         globals.aliases = {}
-        # test aliases
-        if globals.config.getconfiguration().has_section('ALIAS'):
-            for key in globals.config.getconfiguration()['ALIAS'].keys():
-                globals.aliases[key] = globals.config.getconfiguration()['ALIAS'][key]
-                globals.logger.debug('Alias added at start: ' + pformat(key))
-                IBMSPrlCompleter.start.append(key)
+        
+        # load aliases
+        if globals.config.getconfiguration().has_section( 'ALIAS' ):
+            for key in globals.config.getconfiguration()[ 'ALIAS' ].keys():
+                globals.aliases[key] = globals.config.getconfiguration()[ 'ALIAS' ][key]
+                globals.logger.debug( 'Alias added at start: ' + pformat( key ) )
+                IBMSPrlCompleter.start.append( key )
+                # owncommands.dynruleinjector( 'SPadmin DELete ALIas ' + key.replace( ' ', '_' ) ) # this line not working! move to owncommands INIT section... ???
 
         # Infinite loop
         globals.logger.debug(utilities.consolefilledline('>>> INPUT LOOP START '))

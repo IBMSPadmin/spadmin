@@ -71,8 +71,7 @@ class SpadminCommand:
         globals.logger.debug("Last command type set to: " + globals.lastdsmcommandtype + ".")
 
 
-def dynruleinjector(
-        command):  # it works only for commands which longer than 2 words!! on 1 word command needs to be added to the rules file.
+def dynruleinjector( command ):  # it works only for commands which longer than 2 words!! on 1 word command needs to be added to the rules file.
     commandpartcollected = ''
     for commandpart in command.split()[:-1]:
         commandpartcollected += commandpart
@@ -87,12 +86,18 @@ def dynruleinjector(
         if rightpart not in globals.myIBMSPrlCompleter.dynrules[leftpart]:
             globals.myIBMSPrlCompleter.dynrules[leftpart].append(rightpart)
 
-
+# INIT -------------------------------------------------------------------
 # Fill up with the servernames
 for section in globals.config.getconfiguration().sections():
     if section not in disabled_words:
         dynruleinjector( 'SPadmin DELete SErver ' + section )
         dynruleinjector( 'SPadmin SWitch SErver ' + section )
+        
+# # load aliases
+if globals.config.getconfiguration().has_section( 'ALIAS' ):
+    for key in globals.config.getconfiguration()[ 'ALIAS' ].keys():
+        dynruleinjector( 'SPadmin DELete ALIas ' + key.replace( ' ', '_' ) )
+# ------------------------------------------------------------------------
 
 
 def help(command_name):
@@ -208,14 +213,15 @@ class SPadminAddALIas(SpadminCommand):
             print('Please use the following command format: \'SPadmin Add ALIas cmd:command\'')
             return
         else:
-            key, value = str(parameters).spli(':', 1)
+            key, value = str(parameters).split(':', 1)
             key = key.strip()
             value = value.strip()
             globals.aliases[key] = value
             globals.config.getconfiguration()['ALIAS'][key] = value
             globals.config.writeconfig()
-            dynruleinjector('SPadmin Add ALIas ' + key)
-            globals.myIBMSPrlCompleter.dynrules['SPadmin Add ALIas'].append(key)
+            dynruleinjector( key )
+            dynruleinjector( 'SPadmin DELete ALIas ' + key )
+            #globals.myIBMSPrlCompleter.dynrules['SPadmin Add ALIas'].append(key)
         return ""
 
 
