@@ -9,4 +9,4 @@
     #columns = 80
     #rows    = 25
     #utilities.refreshrowscolumns()
-extras = {}
+extras = {}     # because of the onserver feature it must exist

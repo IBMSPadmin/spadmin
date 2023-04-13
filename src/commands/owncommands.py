@@ -927,7 +927,9 @@ class SHowSESsions(SpadminCommand):
                     1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
 
             mediaaccess = row[8] + row[9] + row[10] + row[11] + row[12] + row[13] + row[14]
-
+            mediaaccess = mediaaccess.lstrip( ',' )
+            mediaaccess = sub( '(\w+)\,(\d+)', lambda m: colored(m.group(1), 'green', attrs=[globals.color_attrs_bold]) + ' (' + humanbytes.HumanBytes.format( int( m.group(2) ), unit="TIME_LABELS", precision=0 ) + ')', mediaaccess)
+            
             data2.append(
                 [index + 1, row[0], state, wait, bytes_sent, bytes_received, row[5], row[6], row[7], mediaaccess,
                  row[16] + row[15]])
