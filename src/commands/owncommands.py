@@ -1838,7 +1838,6 @@ class ShowCLIENTBACKUPPERFormance(SpadminCommand):
     def help(self) -> dict:
         return """ 
         """
-
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "BACKUP")
 
@@ -1880,7 +1879,6 @@ class ShowCLIENTARCHIVEPERFormance(SpadminCommand):
     def help(self) -> dict:
         return """ 
         """
-
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "ARCHIVE")
 
@@ -1901,7 +1899,6 @@ class ShowCLIENTRETRIEVEPERFormance(SpadminCommand):
     def help(self) -> dict:
         return """ 
         """
-
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "RETRIEVE")
 
@@ -1922,7 +1919,6 @@ class ShowDBBACKUPPERFormance(SpadminCommand):
     def help(self) -> dict:
         return """ 
         """
-
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "FULL_DBBACKUP")
 
@@ -1943,7 +1939,6 @@ class ShowMIGRATIONPERFormance(SpadminCommand):
     def help(self) -> dict:
         return """ 
         """
-
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "MIGRATION")
 
@@ -1964,7 +1959,6 @@ class ShowMOVEDATAPERFormance(SpadminCommand):
     def help(self) -> dict:
         return """ 
         """
-
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "MOVE DATA")
 
@@ -1985,7 +1979,6 @@ class ShowRECLAMATIONPERFormance(SpadminCommand):
     def help(self) -> dict:
         return """ 
         """
-
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "RECLAMATION")
 
@@ -2006,7 +1999,6 @@ class ShowSTGPOOLBACKUPPERFormance(SpadminCommand):
     def help(self) -> dict:
         return """ 
         """
-
     def _execute(self, parameters: str) -> str:
         return basicPerformanceFromSummary(self, "STGPOOL BACKUP")
 
@@ -2063,10 +2055,46 @@ def basicPerformanceFromSummary(self, activity, fromdate='0', todate='1'):
              humanbytes.HumanBytes.format(int(row[12]), unit="TIME_LABELS", precision=0), row[13], success])
 
     return columnar(data2,
-                    headers=['StartTime >', '< EndTime', '#Proc', columntmp, 'SchedName', '#E/A/F', '#Bytes', 'Time',
-                             'Speed', 'Idle', 'MedW', 'P', 'Suc'],
+                    headers=['StartTime >', '< EndTime', '#Proc', columntmp, 'SchedName', '#E/A/F', '#Bytes', 'Time', 'Speed', 'Idle', 'MedW', 'P', 'Suc'],
                     justify=['r', 'l', 'c', 'c', 'l', 'c', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
 
+
+class ShowSTatus(SpadminCommand):
+                    
+    def __init__(self):
+        self.command_string = globals.basecommandname + "STatus"
+        self.command_type = "STATUS"
+        self.command_index = 0
+        self.command = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show general SP status'
+
+    def help(self) -> dict:
+        return """ 
+        """
+    def _execute(self, parameters: str) -> str:
+        
+        data = []
+        
+        data.append( [ 'DB' ] )
+        DBerrorcollector = 0
+        
+        dbFreeSpace, dbCacheHitPct, dbPkgHitPct, dbLastReorgHour, dbLastBackupHour = globals.tsm.send_command_array_array_tabdel( "select FREE_SPACE_MB, int(BUFF_HIT_RATIO), PKG_HIT_RATIO, hour(current_timestamp-LAST_REORG), hour(current_timestamp-LAST_BACKUP_DATE) from db" )[0]
+        
+        data.append( [ ' FreeSpace', humanbytes.HumanBytes.format(int( int( dbFreeSpace ) * 1024 * 1024 ), unit="BINARY_LABELS", precision=0) ] )
+        
+        dbstatus = '  Ok.'
+        if int( dbCacheHitPct ) < 90:
+            dbstatus = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            DBerrorcollector =+ 1
+        data.append( [ ' Cache Hit', dbCacheHitPct, dbstatus ] )            
+                
+        return columnar( data,
+        headers=[ 'Item', 'Value', 'Result' ],
+        justify=[ 'l', 'l', 'l' ] )
+
+define_command(ShowSTatus())
 
 # merge these commands to the global rules
 utilities.dictmerger(globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules)
