@@ -2075,6 +2075,10 @@ class ShowSTatus(SpadminCommand):
         """
     def _execute(self, parameters: str) -> str:
         
+        if int( globals.spversion ) <= 5:
+            print( 'This command not supported on SP version less than v6!' )
+            return
+        
         data = []
         
         data.append( [ 'DB' ] )
