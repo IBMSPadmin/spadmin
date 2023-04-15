@@ -2089,10 +2089,46 @@ class ShowSTatus(SpadminCommand):
             dbstatus = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
             DBerrorcollector =+ 1
         data.append( [ ' Cache Hit', dbCacheHitPct, dbstatus ] )            
+
+        data.append( [] )
+        data.append( [ 'LOG' ] )
+        LOGerrorcollector = 0
+
+        data.append( [] )
+        data.append( [ 'VOLs' ] )
+        LOGerrorcollector = 0
+
+        data.append( [] )
+        data.append( [ 'HW' ] )
+        LOGerrorcollector = 0
+
+        data.append( [] )
+        data.append( [ '<24H client events summary' ] )
+        LOGerrorcollector = 0
+
+        data.append( [] )
+        data.append( [ '<24H VM backups summary' ] )
+        LOGerrorcollector = 0
+
+        data.append( [] )
+        data.append( [ '<24H replication summary' ] )
+        LOGerrorcollector = 0
                 
+        data.append( [] )
+        data.append( [ '<24H admin events summary' ] )
+        LOGerrorcollector = 0
+
+        data.append( [] )
+        data.append( [ '<24H activity log summary' ] )
+        LOGerrorcollector = 0
+                
+        data.append( [] )
+        data.append( [ 'Global SP status summary' ] )
+        LOGerrorcollector = 0
+
         return columnar( data,
         headers=[ 'Item', 'Value', 'Result' ],
-        justify=[ 'l', 'l', 'l' ] )
+        justify=[ 'l', 'r', 'c' ] )
 
 define_command(ShowSTatus())
 
