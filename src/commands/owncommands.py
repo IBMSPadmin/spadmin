@@ -658,11 +658,11 @@ class SPadminSHowCOMmands(SpadminCommand):
             desc = ""
             if key in command_help:
                 desc = command_help[key][0]
-            data.append([key, desc])
+            data.append([key, '?', desc])
 
         return columnar(sorted(data, key=itemgetter(0)), headers=[
-            colored('Command name', globals.color_white, attrs=[globals.color_attrs_bold]), colored('Short Description', globals.color_white, attrs=[globals.color_attrs_bold])],
-                        justify=['l', 'l'])
+            colored('Command name', globals.color_white, attrs=[globals.color_attrs_bold]), 'Type', colored('Short Description', globals.color_white, attrs=[globals.color_attrs_bold])],
+                        justify=['l', 'c', 'l'])
 
 define_command(SPadminSHowCOMmands())
 
