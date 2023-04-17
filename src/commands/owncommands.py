@@ -2192,6 +2192,8 @@ class ShowSTatus(SpadminCommand):
         # VM part
         data.append( [ '<24H VM backups summary' ] )
         LOGerrorcollector = 0
+        
+        # select START_TIME,SUB_ENTITY,ACTIVITY_TYPE,SUCCESSFUL,COMPLETION_CODE from SUMMARY_EXTENDED where ACTIVITY_DETAILS='VMware' and SUB_ENTITY != 'Aggregate' and (start_time >= current_timestamp - 1 day) and SUCCESSFUL != 'YES' order by 1
 
         data.append( [] )
         
