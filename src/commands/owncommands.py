@@ -409,7 +409,6 @@ class SPadminSHowALIases(SpadminCommand):
         return columnar(data, headers=[colored('Alias', globals.color_white, attrs=[globals.color_attrs_bold]),
                                                   colored('Command', globals.color_white, attrs=[globals.color_attrs_bold])], justify=['l', 'l'])
 
-
 define_command(SPadminSHowALIases())
 
 
@@ -429,9 +428,10 @@ class SPadminSHowVERsion(SpadminCommand):
         """
 
     def _execute(self, parameters: str) -> str:
-        print('spadmin version: v1.0')
-
-        return ""
+        data = []
+        data.append( [ 'v1.0' ] )
+        
+        return columnar( data, headers=[ colored( 'spadmin.py version', globals.color_white, attrs=[globals.color_attrs_bold] ) ], justify=[ 'r' ] )
 
 define_command(SPadminSHowVERsion())
 
@@ -551,7 +551,6 @@ class SPadminSHowLOG(SpadminCommand):
 
         return ""
 
-
 define_command(SPadminSHowLOG())
 
 
@@ -575,7 +574,6 @@ class SPadminSHowPRocessinfo(SpadminCommand):
         table = columnar(data,
                          headers=['dsmadmc', 'PID'], justify=['l', 'cl'])
         return table
-
 
 define_command(SPadminSHowPRocessinfo())
 
@@ -616,7 +614,7 @@ define_command(SPadminDELeteALIas())
 class SPadminSHowSErver(SpadminCommand):
 
     def __init__(self):
-        self.command_string = "SPadmin SHow SErver"
+        self.command_string = "SPadmin SHow SErvers"
         self.command_type = "SERVERS"
         self.command_index = 0
         self.command = "PAY"
@@ -629,10 +627,13 @@ class SPadminSHowSErver(SpadminCommand):
         """
 
     def _execute(self, parameters: str) -> str:
+        data = []
+        
         for section in globals.config.getconfiguration().sections():
             if section not in disabled_words:
-                print(section)
-        return ""
+                data.append( [ section ] )
+
+        return columnar( data, headers=[ colored( 'Server(s)', globals.color_white, attrs=[globals.color_attrs_bold] ) ], justify=[ 'r' ] )
 
 define_command(SPadminSHowSErver())
 
