@@ -2059,7 +2059,7 @@ def basicPerformanceFromSummary(self, activity, fromdate='0', todate='1'):
                     justify=['r', 'l', 'c', 'c', 'l', 'c', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
 
 
-class ShowSTatus(SpadminCommand):
+class ShowSTatus( SpadminCommand ):
                     
     def __init__(self):
         self.command_string = globals.basecommandname + "STatus"
