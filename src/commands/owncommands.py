@@ -2089,7 +2089,11 @@ class ShowSTatus(SpadminCommand):
         
         dbFreeSpace, dbCacheHitPct, dbPkgHitPct, dbLastReorgHour, dbLastBackupHour = globals.tsm.send_command_array_array_tabdel( "select FREE_SPACE_MB, int(BUFF_HIT_RATIO), int(PKG_HIT_RATIO), hour(current_timestamp-LAST_REORG), hour(current_timestamp-LAST_BACKUP_DATE) from db" )[0]
         
-        data.append( [ ' FreeSpace', humanbytes.HumanBytes.format( int( dbFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0) ] )
+        status = '  Ok.'
+        if int( dbFreeSpace ) < 10000:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            DBerrorcollector =+ 1
+        data.append( [ ' FreeSpace', humanbytes.HumanBytes.format( int( dbFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0), status ] )
         
         status = '  Ok.'
         if int( dbCacheHitPct ) < 90:
@@ -2130,7 +2134,12 @@ class ShowSTatus(SpadminCommand):
             DBerrorcollector =+ 1
         data.append( [ ' Last Full', humanbytes.HumanBytes.format( int( dbLastFullBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
 
-        data.append( [ ' Last Full Volume', colored( DBLastFull, globals.color_green, attrs=[globals.color_attrs_bold] ) ] )
+        data.append( [ ' Last Full Volume', '[' + colored( DBLastFull, globals.color_green, attrs=[globals.color_attrs_bold] ) + ']' ] )
+        
+        status = '  Ok.'
+        if int( DBerrorcollector ) > 0:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+        data.append( [ 'DB overall STATUS', '->', status ] )
                         
         data.append( [] )
         
@@ -2139,14 +2148,28 @@ class ShowSTatus(SpadminCommand):
         LOGerrorcollector = 0
         
         logFreeSpace, logArchFreeSpace, logActLogDir, logArchLogDir, logMirrorDir, logArchFailLog = globals.tsm.send_command_array_array_tabdel( "select int(FREE_SPACE_MB), int(ARCHLOG_FREE_FS_MB), ACTIVE_LOG_DIR, ARCH_LOG_DIR, MIRROR_LOG_DIR, AFAILOVER_LOG_DIR from log" )[0]
-         
-        data.append( [ ' Active log FreeSpace', humanbytes.HumanBytes.format( int( logFreeSpace ) * 1024 * 1024,      unit="BINARY_LABELS", precision=0) ] )
-        data.append( [ ' Archive log FreeSpace', humanbytes.HumanBytes.format( int( logArchFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0) ] )
+        
+        status = '  Ok.'
+        if int( logFreeSpace ) < 10000:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            LOGerrorcollector =+ 1
+        data.append( [ ' Active log FreeSpace', humanbytes.HumanBytes.format( int( logFreeSpace ) * 1024 * 1024,      unit="BINARY_LABELS", precision=0), status ] )
+        
+        status = '  Ok.'
+        if int( logArchFreeSpace ) < 10000:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            LOGerrorcollector =+ 1
+        data.append( [ ' Archive log FreeSpace', humanbytes.HumanBytes.format( int( logArchFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0), status ] )
         
         data.append( [ ' Active log dir', logActLogDir ] )    
         data.append( [ ' Archive log dir', logArchLogDir ] )
         data.append( [ ' Active failover log dir', logArchFailLog ] )    
         data.append( [ ' Active mirror log dir', logMirrorDir ] )    
+        
+        status = '  Ok.'
+        if int( LOGerrorcollector ) > 0:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+        data.append( [ 'DB overall STATUS', '->', status ] )
         
         data.append( [] )
         
@@ -2163,6 +2186,11 @@ class ShowSTatus(SpadminCommand):
         data.append( [ ' Unavailable Vol(s)', unavaVols + ' / ' + sumVols ] ) 
         data.append( [ ' Suspicious Vol(s)',  rweVols   + ' / ' + sumVols ] )
 
+        status = '  Ok.'
+        if int( roVols ) + int( unavaVols ) + int( rweVols ) > 0:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+        data.append( [ 'VOLs overall STATUS', '->', status ] )
+
         data.append( [] )
         
         # HW part
@@ -2176,6 +2204,11 @@ class ShowSTatus(SpadminCommand):
 
         data.append( [ ' Offline drive(s)', offDrives + ' / ' + sumDrives ] )
         data.append( [ ' Offline path(s)',  offPaths  + ' / ' + sumPaths ] )
+
+        status = '  Ok.'
+        if int( offDrives ) + int( offPaths ) > 0:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+        data.append( [ 'HW overall STATUS', '->', status ] )
 
         data.append( [] )
        
