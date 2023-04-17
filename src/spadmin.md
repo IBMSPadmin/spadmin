@@ -1,5 +1,7 @@
 # Status
 
+Fast and friendly SP admin client. spadmin.py is getting better and better day after day and we are happy to share our results with you.
+
 Global spadmin.py development progress status: 
 
 ![spadmin progress](https://progress-bar.dev/50/)

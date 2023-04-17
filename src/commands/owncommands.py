@@ -2075,58 +2075,146 @@ class ShowSTatus(SpadminCommand):
         """
     def _execute(self, parameters: str) -> str:
         
+        # From: https://github.com/FleXoft/tsmadm.pl/blob/master/tsmadm.pl/plugins/v2_plugin.pl
+        
         if int( globals.spversion ) <= 5:
             print( 'This command not supported on SP version less than v6!' )
             return
         
         data = []
         
+        # DB part
         data.append( [ 'DB' ] )
         DBerrorcollector = 0
         
-        dbFreeSpace, dbCacheHitPct, dbPkgHitPct, dbLastReorgHour, dbLastBackupHour = globals.tsm.send_command_array_array_tabdel( "select FREE_SPACE_MB, int(BUFF_HIT_RATIO), PKG_HIT_RATIO, hour(current_timestamp-LAST_REORG), hour(current_timestamp-LAST_BACKUP_DATE) from db" )[0]
+        dbFreeSpace, dbCacheHitPct, dbPkgHitPct, dbLastReorgHour, dbLastBackupHour = globals.tsm.send_command_array_array_tabdel( "select FREE_SPACE_MB, int(BUFF_HIT_RATIO), int(PKG_HIT_RATIO), hour(current_timestamp-LAST_REORG), hour(current_timestamp-LAST_BACKUP_DATE) from db" )[0]
         
-        data.append( [ ' FreeSpace', humanbytes.HumanBytes.format(int( int( dbFreeSpace ) * 1024 * 1024 ), unit="BINARY_LABELS", precision=0) ] )
+        data.append( [ ' FreeSpace', humanbytes.HumanBytes.format( int( dbFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0) ] )
         
-        dbstatus = '  Ok.'
+        status = '  Ok.'
         if int( dbCacheHitPct ) < 90:
-            dbstatus = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
             DBerrorcollector =+ 1
-        data.append( [ ' Cache Hit', dbCacheHitPct, dbstatus ] )            
+        data.append( [ ' Cache Hit', dbCacheHitPct+ ' %', status ] )    
 
+        status = '  Ok.'
+        if int( dbPkgHitPct ) < 90:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            DBerrorcollector =+ 1
+        data.append( [ ' Pkg Hit', dbPkgHitPct + ' %', status ] )    
+
+        status = '  Ok.'
+        if dbLastBackupHour == '':
+            dbLastBackupHour = 0
+        if int( dbLastBackupHour ) < 19:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            DBerrorcollector =+ 1
+        data.append( [ ' Last DBBackup', humanbytes.HumanBytes.format( int( dbLastBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )    
+        
+        status = '  Ok.'
+        if int( dbLastReorgHour ) > 24:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            DBerrorcollector =+ 1
+        data.append( [ ' Last DB reorganization', humanbytes.HumanBytes.format( int( dbLastReorgHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
+        
+        tmpdata = globals.tsm.send_command_array_array_tabdel( "select VOLUME_NAME, BACKUP_SERIES, hour(current_timestamp-DATE_TIME) from volhistory where type='BACKUPFULL' order by BACKUP_SERIES desc" )
+        
+        if globals.last_error[ 'rc' ] != '0':
+            DBLastFull, dbLastSeq, dbLastFullBackupHour = '', '', '0'
+        else:
+            DBLastFull, dbLastSeq, dbLastFullBackupHour = tmpdata[0]
+        
+        status = '  Ok.'
+        if int( dbLastFullBackupHour ) > 19:
+            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            DBerrorcollector =+ 1
+        data.append( [ ' Last Full', humanbytes.HumanBytes.format( int( dbLastFullBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
+
+        data.append( [ ' Last Full Volume', DBLastFull ] )
+                        
         data.append( [] )
+        
+        # LOG part
         data.append( [ 'LOG' ] )
         LOGerrorcollector = 0
-
+        
+        logFreeSpace, logArchFreeSpace, logActLogDir, logArchLogDir, logMirrorDir, logArchFailLog = globals.tsm.send_command_array_array_tabdel( "select int(FREE_SPACE_MB), int(ARCHLOG_FREE_FS_MB), ACTIVE_LOG_DIR, ARCH_LOG_DIR, MIRROR_LOG_DIR, AFAILOVER_LOG_DIR from log" )[0]
+         
+        data.append( [ ' Active log FreeSpace', humanbytes.HumanBytes.format( int( logFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0) ] )
+        data.append( [ ' Archive log FreeSpace', humanbytes.HumanBytes.format( int( logArchFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0) ] )
+        
+        data.append( [ ' Active log dir', logActLogDir ] )    
+        data.append( [ ' Archive log dir', logArchLogDir ] )
+        data.append( [ ' Active failover log dir', logArchFailLog ] )    
+        data.append( [ ' Active mirror log dir', logMirrorDir ] )    
+        
         data.append( [] )
+        
+        # VOL part
         data.append( [ 'VOLs' ] )
         LOGerrorcollector = 0
 
+        sumVols   = globals.tsm.send_command_array_array_tabdel( "select count(*) from volumes" )[0][0]
+        roVols    = globals.tsm.send_command_array_array_tabdel( "select count(*) from volumes where access like '%READO%'" )[0][0]
+        unavaVols = globals.tsm.send_command_array_array_tabdel( "select count(*) from volumes where access like '%UNAVA%'" )[0][0]
+        rweVols   = globals.tsm.send_command_array_array_tabdel( "select count(*) from volumes where WRITE_ERRORS>0 or READ_ERRORS>0" )[0][0]
+
+        data.append( [ ' ReadOnly Vol(s)',    sumVols + '/' + roVols ] )
+        data.append( [ ' Unavailable Vol(s)', sumVols + '/' + unavaVols ] ) 
+        data.append( [ ' Suspicious Vol(s)',  sumVols + '/' + rweVols ] )
+
         data.append( [] )
+        
+        # HW part
         data.append( [ 'HW' ] )
         LOGerrorcollector = 0
 
+        # "select count(*) from drives"
+        # "select count(*) from drives where online='NO'"
+        # "select count(*) from paths where online='NO'"
+
         data.append( [] )
+       
+        # Client part
         data.append( [ '<24H client events summary' ] )
         LOGerrorcollector = 0
 
+        # "select result, count(1) from events where status='Completed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null group by result"
+        # "select count(1) from events where status='Missed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null"
+
         data.append( [] )
+        
+        # VM part
         data.append( [ '<24H VM backups summary' ] )
         LOGerrorcollector = 0
 
         data.append( [] )
+        
+        # REPL part
         data.append( [ '<24H replication summary' ] )
         LOGerrorcollector = 0
                 
         data.append( [] )
+        
+        # ADMIN part
         data.append( [ '<24H admin events summary' ] )
         LOGerrorcollector = 0
 
+        # "select result, count(1) from events where status='Completed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is null and NODE_NAME is null group by result"
+        # "select count(1) from events where status='Missed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is null and NODE_NAME is null"
+        # "select count(1) from events where status='Failed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is null and NODE_NAME is null"
+
         data.append( [] )
+        
+        # ACTLOG part
         data.append( [ '<24H activity log summary' ] )
         LOGerrorcollector = 0
+        
+        # "select severity,count(1) from actlog where (DATE_TIME>=current_timestamp-24 hour) and severity in ('E','W') and MSGNO not in (2034) group by severity"
                 
         data.append( [] )
+        
+        # GLOBAL SUM part
         data.append( [ 'Global SP status summary' ] )
         LOGerrorcollector = 0
 
