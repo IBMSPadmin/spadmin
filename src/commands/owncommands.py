@@ -431,7 +431,9 @@ class SPadminSHowVERsion(SpadminCommand):
         data = []
         data.append( [ 'v1.0' ] )
         
-        return columnar( data, headers=[ colored( 'spadmin.py version', globals.color_white, attrs=[globals.color_attrs_bold] ) ], justify=[ 'r' ] )
+        return columnar( data, 
+                         headers=[ colored( 'spadmin.py version', globals.color_white, attrs=[globals.color_attrs_bold] ) ], 
+                         justify=[ 'r' ] )
 
 define_command(SPadminSHowVERsion())
 
@@ -633,7 +635,9 @@ class SPadminSHowSErver(SpadminCommand):
             if section not in disabled_words:
                 data.append( [ section ] )
 
-        return columnar( data, headers=[ colored( 'Server(s)', globals.color_white, attrs=[globals.color_attrs_bold] ) ], justify=[ 'r' ] )
+        return columnar( data, 
+                         headers=[ colored( 'Server(s)', globals.color_white, attrs=[globals.color_attrs_bold] ) ], 
+                         justify=[ 'r' ] )
 
 define_command(SPadminSHowSErver())
 
@@ -1171,28 +1175,29 @@ class ShowStgp(SpadminCommand):
  - Next Storage Pool name"""
 
     def _execute(self, parameters: str) -> str:
+        data = []
         data = timemachine_query( self.command_type, 
             "select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
+        
         for index, row in enumerate(data):
             (a, b, c, d, e, f, g, h, i, j) = row
+            
             if d == '':
                 data[index][3] = 0
             else:
                 # data[index][3] = round((float(d)/1024),1)
-                data[index][3] = humanbytes.HumanBytes.format(float(d) * 1024 * 1024, unit="BINARY_LABELS", precision=0)
+                data[index][3] = humanbytes.HumanBytes.format(float( d ) * 1024 * 1024, unit="BINARY_LABELS", precision=0)
 
             if row[1] == 'DISK':
                 if float(row[5]) > 85:
                     row[5] = colored(row[5], globals.color_red, attrs=[globals.color_attrs_bold])
                 elif float(row[5]) > 70:
                     row[5] = colored(row[5], globals.color_yellow, attrs=[globals.color_attrs_bold])
-
-        table = columnar(data,
-                         headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig',
-                                  'LowMig', 'Recl', 'Next'],
+                    
+        return columnar( data,
+                         headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig', 'LowMig', 'Recl', 'Next'],
                          justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
-        return table
-
+        
 define_command(ShowStgp())
 
 
@@ -2088,22 +2093,22 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ 'DB' ] )
         DBerrorcollector = 0
         
-        dbFreeSpace, dbCacheHitPct, dbPkgHitPct, dbLastReorgHour, dbLastBackupHour = globals.tsm.send_command_array_array_tabdel( "select FREE_SPACE_MB, int(BUFF_HIT_RATIO), int(PKG_HIT_RATIO), hour(current_timestamp-LAST_REORG), hour(current_timestamp-LAST_BACKUP_DATE) from db" )[0]
+        dbFreeSpace, dbCacheHitPct, dbPkgHitPct, dbLastReorgHour, dbLastBackupHour = globals.tsm.send_command_array_array_tabdel( "select FREE_SPACE_MB, BUFF_HIT_RATIO, PKG_HIT_RATIO, hour(current_timestamp-LAST_REORG), hour(current_timestamp-LAST_BACKUP_DATE) from db" )[0]
         
         status = '  Ok.'
-        if int( dbFreeSpace ) < 10000:
+        if float( dbFreeSpace ) < 10000:
             status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
             DBerrorcollector =+ 1
-        data.append( [ ' FreeSpace', humanbytes.HumanBytes.format( int( dbFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0), status ] )
+        data.append( [ ' FreeSpace', humanbytes.HumanBytes.format( float( dbFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0), status ] )
         
         status = '  Ok.'
-        if int( dbCacheHitPct ) < 90:
+        if float( dbCacheHitPct ) < 90:
             status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
             DBerrorcollector =+ 1
-        data.append( [ ' Cache Hit', dbCacheHitPct+ ' %', status ] )    
+        data.append( [ ' Cache Hit', dbCacheHitPct + ' %', status ] )    
 
         status = '  Ok.'
-        if int( dbPkgHitPct ) < 90:
+        if float( dbPkgHitPct ) < 90:
             status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
             DBerrorcollector =+ 1
         data.append( [ ' Pkg Hit', dbPkgHitPct + ' %', status ] )    
@@ -2111,16 +2116,16 @@ class ShowSTatus( SpadminCommand ):
         status = '  Ok.'
         if dbLastBackupHour == '':
             dbLastBackupHour = 0
-        if int( dbLastBackupHour ) < 19:
+        if int( dbLastBackupHour ) > 19:
             status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
             DBerrorcollector =+ 1
         data.append( [ ' Last DBBackup', humanbytes.HumanBytes.format( int( dbLastBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )    
         
         status = '  Ok.'
-        if int( dbLastReorgHour ) > 24:
+        if float( dbLastReorgHour ) > 24:
             status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
             DBerrorcollector =+ 1
-        data.append( [ ' Last DB reorganization', humanbytes.HumanBytes.format( int( dbLastReorgHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
+        data.append( [ ' Last DB reorganization', humanbytes.HumanBytes.format( float( dbLastReorgHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
         
         tmpdata = globals.tsm.send_command_array_array_tabdel( "select VOLUME_NAME, BACKUP_SERIES, hour(current_timestamp-DATE_TIME) from volhistory where type='BACKUPFULL' order by BACKUP_SERIES desc" )
         
@@ -2130,10 +2135,10 @@ class ShowSTatus( SpadminCommand ):
             DBLastFull, dbLastSeq, dbLastFullBackupHour = tmpdata[0]
         
         status = '  Ok.'
-        if int( dbLastFullBackupHour ) > 19:
+        if float( dbLastFullBackupHour ) > 19:
             status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
             DBerrorcollector =+ 1
-        data.append( [ ' Last Full', humanbytes.HumanBytes.format( int( dbLastFullBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
+        data.append( [ ' Last Full', humanbytes.HumanBytes.format( float( dbLastFullBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
 
         data.append( [ ' Last Full Volume', '[' + colored( DBLastFull, globals.color_green, attrs=[globals.color_attrs_bold] ) + ']' ] )
         
@@ -2148,19 +2153,19 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ 'LOG' ] )
         LOGerrorcollector = 0
         
-        logFreeSpace, logArchFreeSpace, logActLogDir, logArchLogDir, logMirrorDir, logArchFailLog = globals.tsm.send_command_array_array_tabdel( "select int(FREE_SPACE_MB), int(ARCHLOG_FREE_FS_MB), ACTIVE_LOG_DIR, ARCH_LOG_DIR, MIRROR_LOG_DIR, AFAILOVER_LOG_DIR from log" )[0]
+        logFreeSpace, logArchFreeSpace, logActLogDir, logArchLogDir, logMirrorDir, logArchFailLog = globals.tsm.send_command_array_array_tabdel( "select FREE_SPACE_MB, ARCHLOG_FREE_FS_MB, ACTIVE_LOG_DIR, ARCH_LOG_DIR, MIRROR_LOG_DIR, AFAILOVER_LOG_DIR from log" )[0]
         
         status = '  Ok.'
-        if int( logFreeSpace ) < 10000:
+        if float( logFreeSpace ) < 10000:
             status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
             LOGerrorcollector =+ 1
-        data.append( [ ' Active log FreeSpace', humanbytes.HumanBytes.format( int( logFreeSpace ) * 1024 * 1024,      unit="BINARY_LABELS", precision=0), status ] )
+        data.append( [ ' Active log FreeSpace', humanbytes.HumanBytes.format( float( logFreeSpace ) * 1024 * 1024,      unit="BINARY_LABELS", precision=0), status ] )
         
         status = '  Ok.'
-        if int( logArchFreeSpace ) < 10000:
+        if float( logArchFreeSpace ) < 10000:
             status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
             LOGerrorcollector =+ 1
-        data.append( [ ' Archive log FreeSpace', humanbytes.HumanBytes.format( int( logArchFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0), status ] )
+        data.append( [ ' Archive log FreeSpace', humanbytes.HumanBytes.format( float( logArchFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0), status ] )
         
         data.append( [ ' Active log dir', logActLogDir ] )    
         data.append( [ ' Archive log dir', logArchLogDir ] )
