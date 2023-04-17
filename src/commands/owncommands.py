@@ -2265,4 +2265,4 @@ class ShowSTatus(SpadminCommand):
 define_command(ShowSTatus())
 
 # merge these commands to the global rules
-utilities.dictmerger(globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules)
+utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
