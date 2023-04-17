@@ -2069,9 +2069,9 @@ class ShowSTatus( SpadminCommand ):
                     
     def __init__(self):
         self.command_string = globals.basecommandname + "STatus"
-        self.command_type = "STATUS"
-        self.command_index = 0
-        self.command = "PAY"
+        self.command_type   = "STATUS"
+        self.command_index  = 0
+        self.command        = "PAY"
 
     def short_help(self) -> str:
         return 'Show general SP status'
