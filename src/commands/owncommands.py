@@ -2130,7 +2130,7 @@ class ShowSTatus(SpadminCommand):
             DBerrorcollector =+ 1
         data.append( [ ' Last Full', humanbytes.HumanBytes.format( int( dbLastFullBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
 
-        data.append( [ ' Last Full Volume', DBLastFull ] )
+        data.append( [ ' Last Full Volume', colored( DBLastFull, globals.color_green, attrs=[globals.color_attrs_bold] ) ] )
                         
         data.append( [] )
         
@@ -2140,7 +2140,7 @@ class ShowSTatus(SpadminCommand):
         
         logFreeSpace, logArchFreeSpace, logActLogDir, logArchLogDir, logMirrorDir, logArchFailLog = globals.tsm.send_command_array_array_tabdel( "select int(FREE_SPACE_MB), int(ARCHLOG_FREE_FS_MB), ACTIVE_LOG_DIR, ARCH_LOG_DIR, MIRROR_LOG_DIR, AFAILOVER_LOG_DIR from log" )[0]
          
-        data.append( [ ' Active log FreeSpace', humanbytes.HumanBytes.format( int( logFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0) ] )
+        data.append( [ ' Active log FreeSpace', humanbytes.HumanBytes.format( int( logFreeSpace ) * 1024 * 1024,      unit="BINARY_LABELS", precision=0) ] )
         data.append( [ ' Archive log FreeSpace', humanbytes.HumanBytes.format( int( logArchFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0) ] )
         
         data.append( [ ' Active log dir', logActLogDir ] )    
@@ -2152,35 +2152,40 @@ class ShowSTatus(SpadminCommand):
         
         # VOL part
         data.append( [ 'VOLs' ] )
-        LOGerrorcollector = 0
+        VOLerrorcollector = 0
 
         sumVols   = globals.tsm.send_command_array_array_tabdel( "select count(*) from volumes" )[0][0]
         roVols    = globals.tsm.send_command_array_array_tabdel( "select count(*) from volumes where access like '%READO%'" )[0][0]
         unavaVols = globals.tsm.send_command_array_array_tabdel( "select count(*) from volumes where access like '%UNAVA%'" )[0][0]
         rweVols   = globals.tsm.send_command_array_array_tabdel( "select count(*) from volumes where WRITE_ERRORS>0 or READ_ERRORS>0" )[0][0]
 
-        data.append( [ ' ReadOnly Vol(s)',    sumVols + '/' + roVols ] )
-        data.append( [ ' Unavailable Vol(s)', sumVols + '/' + unavaVols ] ) 
-        data.append( [ ' Suspicious Vol(s)',  sumVols + '/' + rweVols ] )
+        data.append( [ ' ReadOnly Vol(s)',    roVols    + ' / ' + sumVols ] )
+        data.append( [ ' Unavailable Vol(s)', unavaVols + ' / ' + sumVols ] ) 
+        data.append( [ ' Suspicious Vol(s)',  rweVols   + ' / ' + sumVols ] )
 
         data.append( [] )
         
         # HW part
         data.append( [ 'HW' ] )
-        LOGerrorcollector = 0
+        HWerrorcollector = 0
 
-        # "select count(*) from drives"
-        # "select count(*) from drives where online='NO'"
-        # "select count(*) from paths where online='NO'"
+        sumDrives = globals.tsm.send_command_array_array_tabdel( "select count(*) from drives" )[0][0]
+        offDrives = globals.tsm.send_command_array_array_tabdel( "select count(*) from drives where online='NO'" )[0][0]
+        sumPaths  = globals.tsm.send_command_array_array_tabdel( "select count(*) from paths" )[0][0]
+        offPaths  = globals.tsm.send_command_array_array_tabdel( "select count(*) from paths where online='NO'" )[0][0]
+
+        data.append( [ ' Offline drive(s)', offDrives + ' / ' + sumDrives ] )
+        data.append( [ ' Offline path(s)',  offPaths  + ' / ' + sumPaths ] )
 
         data.append( [] )
        
-        # Client part
+        # Client events part
         data.append( [ '<24H client events summary' ] )
-        LOGerrorcollector = 0
+        EVENTerrorcollector = 0
 
         # "select result, count(1) from events where status='Completed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null group by result"
         # "select count(1) from events where status='Missed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null"
+        # "select count(1) from events where status='Failed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null"
 
         data.append( [] )
         
