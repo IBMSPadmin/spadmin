@@ -378,32 +378,40 @@ DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LBProtect= -> LBProtect=No{Mustexis
 # =========================================================================================================================
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.18?topic=library-scsi
-DEFine                                      -> LIBRary
-DEFine LIBRary                              -> <GIVE_a_valid_library_name>
-DEFine LIBRary [\w\-\.\+\&]+                -> LIBType=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=       -> LIBType=SCSI
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=       -> LIBType=FILE
+DEFine                                                   -> LIBRary
+DEFine LIBRary                                           -> <GIVE_a_valid_library_name>
+DEFine LIBRary [\w\-\.\+\&]+                             -> LIBType=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=                    -> LIBType=SCSI
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=                    -> LIBType=FILE
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=                    -> LIBType=VTL
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=                    -> LIBType=349X
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=                    -> LIBType=ACSLS
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=                    -> LIBType=EXTernal
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=                    -> LIBType=MANUAL
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=                    -> LIBType=SHARED
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=                    -> LIBType=ZOSMEDIA
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI          -> SHAREd=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SHAREd=  -> SHAREd=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SHAREd=  -> SHAREd=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI                -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SHAREd=        -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SHAREd=        -> SHAREd=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI               -> RESETDrives=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI RESETDrives=  -> RESETDrives=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI RESETDrives=  -> RESETDrives=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI                -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI RESETDrives=   -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI RESETDrives=   -> RESETDrives=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI               -> AUTOLabel=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI AUTOLabel=  -> AUTOLabel=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI AUTOLabel=  -> AUTOLabel=No
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI AUTOLabel=  -> AUTOLabel=OVERWRITE
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI                -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI AUTOLabel=     -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI AUTOLabel=     -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI AUTOLabel=     -> AUTOLabel=OVERWRITE
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI               -> RELABELSCRatch=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI                  -> RELABELSCRatch=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI RELABELSCRatch=  -> RELABELSCRatch=Yes
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI RELABELSCRatch=  -> RELABELSCRatch=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI               -> SERial=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SERial=  -> SERial=AUTODetect
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SERial=  -> SERial=<GIVE_a_valid_serialnumber>
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI                 -> SERial=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SERial=         -> SERial=AUTODetect
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SERial=         -> SERial=<GIVE_a_valid_serialnumber>
+
 
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}          -> SHAREd=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
@@ -413,19 +421,178 @@ DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}               -> RESETDri
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}             -> AUTOLabel=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
 
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} -> RELABELSCRatch=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}                  -> RELABELSCRatch=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RELABELSCRatch=  -> RELABELSCRatch=Yes
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RELABELSCRatch=  -> RELABELSCRatch=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} -> SERial=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}         -> SERial=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SERial= -> SERial=AUTODetect
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SERial= -> SERial=<GIVE_a_valid_serialnumber>
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL SHAREd=  -> SHAREd=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL RESETDrives=  -> RESETDrives=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL              -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL  AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL  AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL  AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL                  -> RELABELSCRatch=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL RELABELSCRatch=  -> RELABELSCRatch=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL RELABELSCRatch=  -> RELABELSCRatch=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL          -> SERial=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL SERial=  -> SERial=AUTODetect
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL SERial=  -> SERial=<GIVE_a_valid_serialnumber>
+
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,}          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} SHAREd=  -> SHAREd=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,}               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,}                  -> RELABELSCRatch=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} RELABELSCRatch=  -> RELABELSCRatch=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} RELABELSCRatch=  -> RELABELSCRatch=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,}         -> SERial=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} SERial= -> SERial=AUTODetect
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} SERial= -> SERial=<GIVE_a_valid_serialnumber>
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X SHAREd=  -> SHAREd=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X RESETDrives=  -> RESETDrives=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X              -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X  AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X  AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X  AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X                   -> SCRATCHCATegory=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X SCRATCHCATegory=  -> SCRATCHCATegory=301
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X SCRATCHCATegory=  -> SCRATCHCATegory=<GIVE_a_valid_number>
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X                   -> PRIVATECATegory=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X PRIVATECATegory=  -> PRIVATECATegory=300
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X PRIVATECATegory=  -> PRIVATECATegory=<GIVE_a_valid_number>
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X                      -> WORMSCRatchcategory=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X WORMSCRatchcategory= -> WORMSCRatchcategory=<GIVE_a_valid_number>
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,}          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} SHAREd=  -> SHAREd=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,}               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,}                   -> SCRATCHCATegory=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} SCRATCHCATegory=  -> SCRATCHCATegory=301
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} SCRATCHCATegory=  -> SCRATCHCATegory=<GIVE_a_valid_number>
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,}                  -> PRIVATECATegory=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} PRIVATECATegory= -> PRIVATECATegory=300
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} PRIVATECATegory= -> PRIVATECATegory=<GIVE_a_valid_number>
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS SHAREd=  -> SHAREd=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS RESETDrives=  -> RESETDrives=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS               -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS  AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS  AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS  AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS               -> ACSID=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS ACSID=        -> ACSID=<GIVE_a_valid_number>
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,}          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} SHAREd=  -> SHAREd=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,}               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,}         -> ACSID=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} ACSID=  -> ACSID=<GIVE_a_valid_number>
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal              -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal  AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal  AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal  AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=.*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE           -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE  SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE  SHAREd=  -> SHAREd=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE (\w+=.*){1,}          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE (\w+=.*){1,} SHAREd=  -> SHAREd=No
+
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL                -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL  RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL  RESETDrives=  -> RESETDrives=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,}               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
 
 ###################
 # DELete commands #
@@ -1511,4 +1678,4 @@ VARy -> ONline
 VARy ONline                         -> select volume_name from volumes where stgpool_name in (select stgpool_name from stgpools where DEVCLASS='DISK')
 VARy ONline [\w\*\-\.\/\\\$]+       -> Wait=
 VARy ONline [\w\*\-\.\/\\\$]+ Wait= -> Wait=Yes
-VARy ONline [\w\*\-\.\/\\\$]+ Wait= -> Wait=No
+VARy ONline [\w\*\-\.\/\\\$]+ Wait= -> Wait=N
