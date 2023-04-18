@@ -377,6 +377,56 @@ DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LBProtect= -> LBProtect=WRITEOnly{M
 DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LBProtect= -> LBProtect=No{Mustexist: DEVType=LTO}
 # =========================================================================================================================
 
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.18?topic=library-scsi
+DEFine                                      -> LIBRary
+DEFine LIBRary                              -> <GIVE_a_valid_library_name>
+DEFine LIBRary [\w\-\.\+\&]+                -> LIBType=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=       -> LIBType=SCSI
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=       -> LIBType=FILE
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SHAREd=  -> SHAREd=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI RESETDrives=  -> RESETDrives=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI               -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI               -> RELABELSCRatch=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI RELABELSCRatch=  -> RELABELSCRatch=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI RELABELSCRatch=  -> RELABELSCRatch=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI               -> SERial=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SERial=  -> SERial=AUTODetect
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SERial=  -> SERial=<GIVE_a_valid_serialnumber>
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SHAREd=  -> SHAREd=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} -> RELABELSCRatch=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RELABELSCRatch=  -> RELABELSCRatch=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RELABELSCRatch=  -> RELABELSCRatch=No
+
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} -> SERial=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SERial= -> SERial=AUTODetect
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SERial= -> SERial=<GIVE_a_valid_serialnumber>
+
 ###################
 # DELete commands #
 ###################
