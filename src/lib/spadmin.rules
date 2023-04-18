@@ -324,7 +324,7 @@ CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CLEanings=  -> CL
 ###################
 CHECKOut                                                     -> LIBVolume
 CHECKOut LIBVolume                                           -> select library_name from libraries
-CHECKOut LIBVolume [\w\-\.\+\&]+                             -> select volume_name from libvolumes {Prefix: -1}
+CHECKOut LIBVolume [\w\-\.\+\&]+                             -> select volume_name from libvolumes where library_name like upper( '-2' )
 
 CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                          -> REMOVE=
 CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ REMOVE=                  -> REMOVE=BULK
