@@ -2235,7 +2235,8 @@ class ShowSTatus( SpadminCommand ):
 
         for completed in globals.tsm.send_command_array_array_tabdel( "select result, count(1) from events where status='Completed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null group by result" ):
             data.append( [ ' Completed (' + completed[0] + ')', completed[1] ] )
-            EVENTerrorcollector =+ 1
+            if completed[0] != '0':
+                EVENTerrorcollector =+ 1
                 
         missed = globals.tsm.send_command_array_array_tabdel( "select count(1) from events where status='Missed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null" )[0][0]
         data.append( [ ' Missed', missed ] )
