@@ -2306,10 +2306,81 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ 'Global SP STATUS', '->', status ] )
 
         return columnar( data,
-        headers=[ 'Item', 'Value', 'Result' ],
-        justify=[ 'l', 'r', 'c' ] )
+                         headers = [ 'Item', 'Value', 'Result' ],
+                         justify = [ 'l', 'r', 'c' ] )
 
-define_command(ShowSTatus())
+define_command( ShowSTatus() )
+
+
+class SHowDBBackups( SpadminCommand ):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "DBBackups"
+        self.command_type   = "DBBACKUP"
+        self.command_index  = 0
+        self.command        = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show SP DB full backups '
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        data = []
+        
+        data = timemachine_query( self.command_type, "select date(DATE_TIME),time(DATE_TIME),TYPE,BACKUP_SERIES,BACKUP_OPERATION,VOLUME_SEQ,DEVCLASS,VOLUME_NAME from volhistory where type='BACKUPFULL' or type='BACKUPINCR' order by BACKUP_SERIES" )
+            
+        if globals.last_error[ 'rc' ] != '0':
+            return
+        
+        data2 = []      
+        for row in data:
+            row[7] = utilities.color( row[7], 'green' )
+            data2.append(row)
+        
+        return columnar( data2,
+                         headers = [ 'Date', 'Time', 'Type', 'Serie', '#', 'Seq', 'DeviceClass', 'Volume' ],
+                         justify = [ 'l', 'l', 'l', 'c', 'l', 'l', 'c', 'l' ])
+
+define_command( SHowDBBackups() )
+
+
+class SHowDBSBackups( SpadminCommand ):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "DBSBackups"
+        self.command_type   = "DBBACKUP"
+        self.command_index  = 0
+        self.command        = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show SP DB full snapshot backups '
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        data = []
+        
+        data = timemachine_query( self.command_type, "select date(DATE_TIME),time(DATE_TIME),TYPE,BACKUP_SERIES,BACKUP_OPERATION,VOLUME_SEQ,DEVCLASS,VOLUME_NAME from volhistory where type='DBSNAPSHOT' order by BACKUP_SERIES" )
+            
+        if globals.last_error[ 'rc' ] != '0':
+            return
+        
+        data2 = []      
+        for row in data:
+            row[7] = utilities.color( row[7], 'green' )
+            data2.append(row)
+        
+        return columnar( data2,
+                         headers = [ 'Date', 'Time', 'Type', 'Serie', '#', 'Seq', 'DeviceClass', 'Volume' ],
+                         justify = [ 'l', 'l', 'l', 'c', 'l', 'l', 'c', 'l' ])
+
+define_command( SHowDBSBackups() )
+
 
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
