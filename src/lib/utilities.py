@@ -239,20 +239,20 @@ def dictmerger(destination, source):
         
 def color( text, color ):
     
-    htmlout = globals.extras[ 'htmlout' ] if 'htmlout' in globals.extras else ''
+    htmlout = True if 'htmlout' in globals.extras else False
     
     if htmlout:
         
         match color:
         
             case 'red':
-                 return text
+                 return '<span style="color:' + color + '">' + text + '</span>'
                  
             case 'green':
-                 return text
+                 return '<span style="color:' + color + '">' + text + '</span>'
                  
             case 'yellow':
-                 return text
+                 return '<span style="color:' + color + '">' + text + '</span>'
                  
             case _:
                 return text
