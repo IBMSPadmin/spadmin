@@ -2140,7 +2140,7 @@ class ShowSTatus( SpadminCommand ):
             DBerrorcollector =+ 1
         data.append( [ ' Last Full', humanbytes.HumanBytes.format( float( dbLastFullBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
 
-        data.append( [ ' Last Full Volume', '[' + colored( DBLastFull, globals.color_green, attrs=[globals.color_attrs_bold] ) + ']' ] )
+        data.append( [ ' Last Full Volume', '[' + utilities.color( DBLastFull, 'green' ) + ']' ] )
         
         status = '  Ok.✅'
         if int( DBerrorcollector ) > 0:

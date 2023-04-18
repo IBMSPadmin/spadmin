@@ -237,13 +237,13 @@ def dictmerger(destination, source):
             destination[key] = []
         destination[key].extend(source[key])
         
-def color( text ):
+def color( text, color ):
     
     htmlout = globals.extras[ 'htmlout' ] if 'htmlout' in globals.extras else ''
     
     if htmlout:
         
-        match term:
+        match color:
         
             case 'red':
                  return text
@@ -258,7 +258,7 @@ def color( text ):
                 return text
     else:
         
-        match term:
+        match color:
         
             case 'red':
                  return colored( text, globals.color_red,   attrs = [ globals.color_attrs_bold ] )
