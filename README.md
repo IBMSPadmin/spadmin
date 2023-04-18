@@ -1,6 +1,6 @@
 # spadmin.py project
 
-![spadmin](spadmin.png)
+![spadmin](res/spadmin.png)
 
 ## Collaborators
 

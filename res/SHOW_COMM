@@ -2,8 +2,8 @@
 -- -------- -------------------------
  1    alias
  2  console
- 3    debug
- 4    debug
+KÉSZ 3    debug
+KÉSZ 4    debug
  5   delete associations
  6     edit script
  7   fooooo
@@ -15,56 +15,70 @@ KÉSZ: F 12   moveit
 KÉSZ: F 13  offline
 KÉSZ: F 14   online
 15    reach
-16   reload
+KÉSZ 16   reload
 17     save script
-18      set server
+KÉSZ 18      set server
 19     show LICences
 20     show _backup
 21     show activity
 KÉSZ: F 22     show actlog
-23     show adminevents
+
+F 23     show adminevents
+
 24     show association
-F 25     show backupperformance
-F 26     show clientarchiveperformance
-F 27     show clientbackupperformance
-F 28     show clientrestoreperformance
-F 29     show clientretrieveperformance
+KÉSZ F 25     show backupperformance
+KÉSZ F 26     show clientarchiveperformance
+KÉSZ F 27     show clientbackupperformance
+KÉSZ F 28     show clientrestoreperformance
+KÉSZ F 29     show clientretrieveperformance
 KÉSZ: F 30     show columns
-31     show commands
+KÉSZ 31     show commands
+
 32     show copydifference
-F 33     show dbbackup
+
+KÉSZ F 33     show dbbackup
 34     show deduppending
 35     show defassociation
-36     show disks
-37     show drives
-38     show environment
+KÉSZ 36     show disks
+KÉSZ 37     show drives
+KÉSZ 38     show environment
 39     show estgpools
-F 40     show events
+KÉSZ F 40     show events
 41     show expiration
-KÉSZ: F 42     show fillings
-43     show lasterror
+KÉSZ50%: F 42     show fillings
+KÉSZ 43     show lasterror
 KÉSZ: F 44     show libvolume
-45     show maxscratch
-46     show migrationperformance
+
+F 45     show maxscratch
+
+KÉSZ 46     show migrationperformance
+
 F 47     show moveable
-48     show movedataperformance
+
+KÉSZ 48     show movedataperformance
+
 F 49     show nodeoccuopancy
+
 50     show nodes
-51     show paths
+KÉSZ 51     show paths
 KÉSZ: F 52     show processes
 53     show reclaim
-54     show reclamationperformance
-55     show ruler
+KÉSZ 54     show reclamationperformance
+KÉSZ 55     show ruler
+
 56     show schedules
+
 KÉSZ: F 57     show scratches
 58     show scripts
 59     show servers
-KÉSZ: F 60     show sessions
-F 61     show status
-62     show stgpools
+KÉSZ F 60     show sessions
+KÉSZ F 61     show status
+KÉSZ 62     show stgpools
 63     show summary
+
 F 64     show timing
+
 65     show transferrate
-66     show version
-67     show volumeusage
+KÉSZ 66     show version
+67    show volumeusage
 68    start dsmadmc
