@@ -1,8 +1,6 @@
 # spadmin.py project
 
-Global spadmin.py development progress status: 
-
-![spadmin progress](https://progress-bar.dev/75/)
+Global spadmin.py development progress status: ![spadmin progress](https://progress-bar.dev/75/)
 
 ![spadmin](res/spadmin.png)
 
