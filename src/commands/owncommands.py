@@ -2194,7 +2194,8 @@ class ShowSTatus( SpadminCommand ):
 
         status = '  Ok. ✅'
         if int( roVols ) + int( unavaVols ) + int( rweVols ) > 0:
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
+            VOLerrorcollector += 1                        
         data.append( [ 'VOLs overall STATUS', '->', status ] )
 
         data.append( [] )
@@ -2213,7 +2214,8 @@ class ShowSTatus( SpadminCommand ):
 
         status = '  Ok. ✅'
         if int( offDrives ) + int( offPaths ) > 0:
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
+            HWerrorcollector += 1                        
         data.append( [ 'HW overall STATUS', '->', status ] )
 
         data.append( [] )
@@ -2222,17 +2224,36 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ '<24H client events summary' ] )
         EVENTerrorcollector = 0
 
-        # "select result, count(1) from events where status='Completed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null group by result"
-        # "select count(1) from events where status='Missed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null"
-        # "select count(1) from events where status='Failed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null"
+        for completed in globals.tsm.send_command_array_array_tabdel( "select result, count(1) from events where status='Completed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null group by result" ):
+            data.append( [ ' Completed (' + completed[0] + ')', completed[1] ] )
+            EVENTerrorcollector =+ 1
+                
+        missed = globals.tsm.send_command_array_array_tabdel( "select count(1) from events where status='Missed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null" )[0][0]
+        data.append( [ ' Missed', missed ] )
+        
+        failed = globals.tsm.send_command_array_array_tabdel( "select count(1) from events where status='Failed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null" )[0][0]
+        data.append( [ ' Failed', failed ] )
+
+        status = '  Ok. ✅'
+        if int( EVENTerrorcollector ) + int( missed ) + int( failed ) > 0 :
+            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
+            EVENTerrorcollector += 1                        
+        data.append( [ 'EVENT overall STATUS', '->', status ] )
 
         data.append( [] )
         
         # VM part
         data.append( [ '<24H VM backups summary' ] )
-        LOGerrorcollector = 0
+        VMerrorcollector = 0
         
-        # select START_TIME,SUB_ENTITY,ACTIVITY_TYPE,SUCCESSFUL,COMPLETION_CODE from SUMMARY_EXTENDED where ACTIVITY_DETAILS='VMware' and SUB_ENTITY != 'Aggregate' and (start_time >= current_timestamp - 1 day) and SUCCESSFUL != 'YES' order by 1
+        failed = globals.tsm.send_command_array_array_tabdel( "select count(1) from SUMMARY_EXTENDED where ACTIVITY_DETAILS='VMware' and SUB_ENTITY != 'Aggregate' and (start_time >= current_timestamp - 1 day) and SUCCESSFUL != 'YES' order by 1" )[0][0]
+        data.append( [ ' Failed', failed ] )
+        
+        status = '  Ok. ✅'
+        if int( VMerrorcollector ) + int( failed ) > 0 :
+            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
+            VMerrorcollector += 1                        
+        data.append( [ 'VM overall STATUS', '->', status ] )
 
         data.append( [] )
         
@@ -2254,15 +2275,26 @@ class ShowSTatus( SpadminCommand ):
         
         # ACTLOG part
         data.append( [ '<24H activity log summary' ] )
-        LOGerrorcollector = 0
+        ACTLOGerrorcollector = 0
         
-        # "select severity,count(1) from actlog where (DATE_TIME>=current_timestamp-24 hour) and severity in ('E','W') and MSGNO not in (2034) group by severity"
+        for severity in globals.tsm.send_command_array_array_tabdel( "select severity, count(1) from actlog where (DATE_TIME>=current_timestamp-24 hour) and severity in ('E','W') and MSGNO not in (2034) group by severity" ):
+            data.append( [ ' Completed (' + severity[0] + ')', severity[1] ] )
+            ACTLOGerrorcollector =+ 1
+
+        status = '  Ok. ✅'
+        if int( ACTLOGerrorcollector ) + int( failed ) > 0 :
+            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+        data.append( [ 'ACTLOG overall STATUS', '->', status ] )
                 
         data.append( [] )
         
         # GLOBAL SUM part
         data.append( [ 'Global SP status summary' ] )
-        LOGerrorcollector = 0
+        
+        status = '  Ok. ✅'
+        if int( DBerrorcollector ) + int( LOGerrorcollector ) + + int( VOLerrorcollector ) + + int( HWerrorcollector ) + int( EVENTerrorcollector ) + int( VMerrorcollector ) + int( ACTLOGerrorcollector )  > 0 :
+            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+        data.append( [ 'Global SP STATUS', '->', status ] )
 
         return columnar( data,
         headers=[ 'Item', 'Value', 'Result' ],
