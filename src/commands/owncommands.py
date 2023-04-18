@@ -661,9 +661,11 @@ class SPadminSHowCOMmands(SpadminCommand):
         data = []
         for key in spadmin_commands:
             desc = ""
+            type = ""
             if key in command_help:
                 desc = command_help[key][0]
-            data.append([key, '?', desc])
+                type = command_type_and_index[key][0]
+            data.append([key, type, desc])
 
         return columnar(sorted(data, key=itemgetter(0)), headers=[
             colored('Command name', globals.color_white, attrs=[globals.color_attrs_bold]), 'Type', colored('Short Description', globals.color_white, attrs=[globals.color_attrs_bold])],
@@ -907,13 +909,15 @@ class SHowSESsions(SpadminCommand):
         for index, row in enumerate(data):
 
             if row[1] == 'Run':
-                state = colored(row[1], 'green', attrs=[globals.color_attrs_bold])
+                #state = colored(row[1], 'green', attrs=[globals.color_attrs_bold])
+                state = utilities.color(row[1], 'green')
             else:
                 state = row[1]
 
             if int(row[2]) > 60:
-                wait = colored(humanbytes.HumanBytes.format(int(row[2]), unit="TIME_LABELS", precision=0), globals.color_red,
-                               attrs=[globals.color_attrs_bold])
+                # wait = colored(humanbytes.HumanBytes.format(int(row[2]), unit="TIME_LABELS", precision=0), globals.color_red,
+                #               attrs=[globals.color_attrs_bold])
+                wait = utilities.color(humanbytes.HumanBytes.format(int(row[2]), unit="TIME_LABELS", precision=0), globals.color_red)
             else:
                 wait = humanbytes.HumanBytes.format(int(row[2]), unit="TIME_LABELS", precision=0)
 
@@ -923,18 +927,23 @@ class SHowSESsions(SpadminCommand):
             # mediaaccess = ''.join( row[ 8:14 ] )
             match = search('(\w+),(.+),(\d+)', row[11])
             if match:
-                row[11] = 'Read: ' + colored(match[2], 'green', attrs=[globals.color_attrs_bold]) + ', ' + match[
+                # row[11] = 'Read: ' + colored(match[2], 'green', attrs=[globals.color_attrs_bold]) + ', ' + match[
+                #    1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
+                row[11] = 'Read: ' + utilities.color(match[2], 'green') + ', ' + match[
                     1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
 
             match = search('(\w+),(.+),(\d+)', row[14])
             if match:
-                row[14] = 'Write: ' + colored(match[2], 'green', attrs=[globals.color_attrs_bold]) + ', ' + match[
+                # row[14] = 'Write: ' + colored(match[2], 'green', attrs=[globals.color_attrs_bold]) + ', ' + match[
+                #    1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
+                row[14] = 'Write: ' + utilities.color(match[2], 'green') + ', ' + match[
                     1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
 
             mediaaccess = row[8] + row[9] + row[10] + row[11] + row[12] + row[13] + row[14]
             mediaaccess = mediaaccess.lstrip( ',' )
-            mediaaccess = sub( '(\w+)\,(\d+)', lambda m: colored(m.group(1), 'green', attrs=[globals.color_attrs_bold]) + ' (' + humanbytes.HumanBytes.format( int( m.group(2) ), unit="TIME_LABELS", precision=0 ) + ')', mediaaccess)
-            
+            # mediaaccess = sub( '(\w+)\,(\d+)', lambda m: colored(m.group(1), 'green', attrs=[globals.color_attrs_bold]) + ' (' + humanbytes.HumanBytes.format( int( m.group(2) ), unit="TIME_LABELS", precision=0 ) + ')', mediaaccess)
+            mediaaccess = sub( '(\w+)\,(\d+)', lambda m: utilities.color(m.group(1), 'green') + ' (' + humanbytes.HumanBytes.format( int( m.group(2) ), unit="TIME_LABELS", precision=0 ) + ')', mediaaccess)
+
             data2.append(
                 [index + 1, row[0], state, wait, bytes_sent, bytes_received, row[5], row[6], row[7], mediaaccess,
                  row[16] + row[15]])

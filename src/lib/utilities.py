@@ -237,37 +237,40 @@ def dictmerger(destination, source):
             destination[key] = []
         destination[key].extend(source[key])
         
-def color( text, color ):
+def color( text, color: "" ):
     
     htmlout = True if 'htmlout' in globals.extras else False
     
     if htmlout:
-        
-        match color:
-        
-            case 'red':
-                 return '<span style="color:' + color + '">' + text + '</span>'
-                 
-            case 'green':
-                 return '<span style="color:' + color + '">' + text + '</span>'
-                 
-            case 'yellow':
-                 return '<span style="color:' + color + '">' + text + '</span>'
-                 
-            case _:
-                return text
+
+        if color == 'red':
+             return '<span style="color:' + color + '">' + text + '</span>'
+
+        elif color == 'green':
+             return '<span style="color:' + color + '">' + text + '</span>'
+
+        elif color == 'yellow':
+             return '<span style="color:' + color + '">' + text + '</span>'
+
+        elif color == 'white':
+             return '<span style="color:' + color + '">' + text + '</span>'
+
+
+        else:
+            return text
     else:
-        
-        match color:
-        
-            case 'red':
-                 return colored( text, globals.color_red,   attrs = [ globals.color_attrs_bold ] )
-            
-            case 'green':
-                 return colored( text, globals.color_green, attrs = [ globals.color_attrs_bold ] )
-            
-            case 'yellow':
-                 return colored( text, globals.color_yellow, attrs = [ globals.color_attrs_bold ] )
-            
-            case _:
-                return text
+
+        if color == 'red':
+             return colored( text, globals.color_red,   attrs = [ globals.color_attrs_bold ] )
+
+        elif color == 'green':
+             return colored( text, globals.color_green, attrs = [ globals.color_attrs_bold ] )
+
+        elif color == 'yellow':
+             return colored( text, globals.color_yellow, attrs = [ globals.color_attrs_bold ] )
+
+        elif color == 'white':
+             return colored( text, globals.color_white, attrs = [ globals.color_attrs_bold ] )
+
+        else:
+            return text

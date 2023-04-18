@@ -1,7 +1,7 @@
 import io
 import re
 from operator import itemgetter
-
+from . import utilities
 from . import globals
 
 from typing import (
@@ -10,7 +10,7 @@ from typing import (
     List,
     Any,
 )
-from termcolor import colored
+# from termcolor import colored
 
 
 def grep(data):
@@ -179,7 +179,8 @@ def colorize( text: str, regexp: str, color: str, attrs=[] ):
                     found_last_color = last_colors[ -2 ] + last_colors[ -1 ]
                 else:
                      found_last_color = last_colors[ -1 ]
-            return text.replace(match[0], colored(match[0], color, attrs=attrs ) + found_last_color)
+            # return text.replace(match[0], colored(match[0], color, attrs=attrs ) + found_last_color)
+            return text.replace(match[0], utilities.color(match[0], color ) + found_last_color)
         else:
             return text
     
@@ -226,19 +227,22 @@ class Columnar:
             header_decorator += self.header_decorator * self.column_length[i] + self.column_separator
 
         # Header 1st decorator line --------
-        out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
+        # out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
+        out.write( utilities.color( header_decorator[:globals.columns], globals.color_white) + "\n")
 
         # Header
         header_line = ''
         for i, cell in enumerate(headers):
             
-            header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white, attrs=[ globals.color_attrs_bold ] )
-            
+            # header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white, attrs=[ globals.color_attrs_bold ] )
+            header_line += utilities.color( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white )
+
         # out.write( header_line[ :globals.columns + len( header_line ) - clen( header_line ) ] + "\n")
         out.write( colorleft( header_line, globals.columns ) + "\n" )
 
         # Header 2nd decorator line --------
-        out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
+        # out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
+        out.write( utilities.color( header_decorator[:globals.columns], globals.color_white ) + "\n")
 
         # Rows
         for row in data:  # sorok kiíratása
