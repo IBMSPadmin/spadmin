@@ -2142,9 +2142,9 @@ class ShowSTatus( SpadminCommand ):
 
         data.append( [ ' Last Full Volume', '[' + colored( DBLastFull, globals.color_green, attrs=[globals.color_attrs_bold] ) + ']' ] )
         
-        status = '  Ok.'
+        status = '  Ok.✅'
         if int( DBerrorcollector ) > 0:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+            status = colored( '  Failed!❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
         data.append( [ 'DB overall STATUS', '->', status ] )
                         
         data.append( [] )
@@ -2172,10 +2172,10 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ ' Active failover log dir', logArchFailLog ] )    
         data.append( [ ' Active mirror log dir', logMirrorDir ] )    
         
-        status = '  Ok.'
+        status = '  Ok.✅'
         if int( LOGerrorcollector ) > 0:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )                        
-        data.append( [ 'DB overall STATUS', '->', status ] )
+            status = colored( '  Failed!❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+        data.append( [ 'LOG overall STATUS', '->', status ] )
         
         data.append( [] )
         
@@ -2192,9 +2192,9 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ ' Unavailable Vol(s)', unavaVols + ' / ' + sumVols ] ) 
         data.append( [ ' Suspicious Vol(s)',  rweVols   + ' / ' + sumVols ] )
 
-        status = '  Ok.'
+        status = '  Ok.✅'
         if int( roVols ) + int( unavaVols ) + int( rweVols ) > 0:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+            status = colored( '  Failed!❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
         data.append( [ 'VOLs overall STATUS', '->', status ] )
 
         data.append( [] )
@@ -2211,9 +2211,9 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ ' Offline drive(s)', offDrives + ' / ' + sumDrives ] )
         data.append( [ ' Offline path(s)',  offPaths  + ' / ' + sumPaths ] )
 
-        status = '  Ok.'
+        status = '  Ok.✅'
         if int( offDrives ) + int( offPaths ) > 0:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+            status = colored( '  Failed!❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
         data.append( [ 'HW overall STATUS', '->', status ] )
 
         data.append( [] )

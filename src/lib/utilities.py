@@ -236,3 +236,38 @@ def dictmerger(destination, source):
         if key not in destination:
             destination[key] = []
         destination[key].extend(source[key])
+        
+def color( text ):
+    
+    htmlout = globals.extras[ 'htmlout' ] if 'htmlout' in globals.extras else ''
+    
+    if htmlout:
+        
+        match term:
+        
+            case 'red':
+                 return text
+                 
+            case 'green':
+                 return text
+                 
+            case 'yellow':
+                 return text
+                 
+            case _:
+                return text
+    else:
+        
+        match term:
+        
+            case 'red':
+                 return colored( text, globals.color_red,   attrs = [ globals.color_attrs_bold ] )
+            
+            case 'green':
+                 return colored( text, globals.color_green, attrs = [ globals.color_attrs_bold ] )
+            
+            case 'yellow':
+                 return colored( text, globals.color_yellow, attrs = [ globals.color_attrs_bold ] )
+            
+            case _:
+                return text
