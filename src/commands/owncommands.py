@@ -2378,7 +2378,7 @@ class SHowDBSBackups( SpadminCommand ):
         
         return columnar( data2,
                          headers = [ 'Date', 'Time', 'Type', 'Serie', '#', 'Seq', 'DeviceClass', 'Volume' ],
-                         justify = [ 'l', 'l', 'l', 'c', 'l', 'l', 'c', 'l' ])
+                         justify = [ 'l', 'l', 'l', 'c', 'l', 'l', 'c', 'l' ] )
 
 define_command( SHowDBSBackups() )
 
