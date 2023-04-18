@@ -4,7 +4,7 @@ while :; do
 
  git pull
 
- ./spadmin.py
+ python3 ./spadmin.py
 
  if [ $? -ne 0 ] 
    then
