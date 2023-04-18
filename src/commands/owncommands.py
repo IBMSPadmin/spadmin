@@ -1641,6 +1641,9 @@ class ShowFilling(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         library = globals.tsm.send_command_array_array_tabdel(
             "select VOLUME_NAME, STGPOOL_NAME, PCT_UTILIZED from volumes where STATUS='FILLING' and ACCESS='READWRITE' order by PCT_UTILIZED")
+            
+        # select stgpool_name, count(*) from volumes where stgpool_name like upper\('%$stg%'\) and status='FILLING' and ACCESS='READWRITE' and devclass_name in (select devclass_name from devclasses where WORM='NO' and DEVCLASS_NAME !='DISK') group by STGPOOL_NAME order by 2 desc
+        # select VOLUME_NAME, PCT_UTILIZED from volumes where STGPOOL_NAME='$line[0]' and STATUS='FILLING' and ACCESS='READWRITE' order by PCT_UTILIZED
         
         if globals.last_error[ 'rc' ] != '0':
             return
@@ -2248,7 +2251,7 @@ class ShowSTatus( SpadminCommand ):
         if int( EVENTerrorcollector ) + int( missed ) + int( failed ) > 0 :
             status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
             EVENTerrorcollector += 1                        
-        data.append( [ 'EVENT overall STATUS', '->', status ] )
+        data.append( [ 'EVENTs overall STATUS', '->', status ] )
 
         data.append( [] )
         
@@ -2275,12 +2278,25 @@ class ShowSTatus( SpadminCommand ):
         
         # ADMIN part
         data.append( [ '<24H admin events summary' ] )
-        LOGerrorcollector = 0
+        ADMINerrorcollector = 0
 
-        # "select result, count(1) from events where status='Completed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is null and NODE_NAME is null group by result"
-        # "select count(1) from events where status='Missed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is null and NODE_NAME is null"
-        # "select count(1) from events where status='Failed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is null and NODE_NAME is null"
-
+        for completed in globals.tsm.send_command_array_array_tabdel( "select result, count(1) from events where status='Completed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is null and NODE_NAME is null group by result" ):
+            data.append( [ ' Completed (' + completed[0] + ')', completed[1] ] )
+            if completed[0] != '0':
+                EVENTerrorcollector =+ 1
+                
+        missed = globals.tsm.send_command_array_array_tabdel( "select count(1) from events where status='Missed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is null and NODE_NAME is null" )[0][0]
+        data.append( [ ' Missed', missed ] )
+        
+        failed = globals.tsm.send_command_array_array_tabdel( "select count(1) from events where status='Failed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is null and NODE_NAME is null" )[0][0]
+        data.append( [ ' Failed', failed ] )
+        
+        status = '  Ok. ✅'
+        if int( ADMINerrorcollector ) + int( missed ) + int( failed ) > 0 :
+            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
+            EVENTerrorcollector += 1                        
+        data.append( [ 'ADMIN EVENTs overall STATUS', '->', status ] )
+    
         data.append( [] )
         
         # ACTLOG part
@@ -2381,6 +2397,36 @@ class SHowDBSBackups( SpadminCommand ):
                          justify = [ 'l', 'l', 'l', 'c', 'l', 'l', 'c', 'l' ] )
 
 define_command( SHowDBSBackups() )
+
+
+class SHowINActives( SpadminCommand ):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "INActives"
+        self.command_type   = "INACTIVE"
+        self.command_index  = 0
+        self.command        = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show inactive nodes '
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        data = []
+        
+        data = timemachine_query( self.command_type, "select n.domain_name,n.node_name,locked,date(n.lastacc_time),TIMESTAMPDIFF(16,CHAR(current_timestamp-n.lastacc_time)),o.type,sum(logical_mb),sum(o.num_files) from nodes as n, occupancy as o where n.node_name=o.node_name and TIMESTAMPDIFF(16,CHAR(current_timestamp-n.lastacc_time))>=15 group by n.domain_name,n.node_name,n.locked,n.lastacc_time,o.type order by 7 desc" )
+            
+        if globals.last_error[ 'rc' ] != '0':
+            return
+               
+        return columnar( data,
+                         headers = [ 'DomainName', 'NodeName', 'Locked?', 'LastAccessTime', 'Days', 'Type', '#Data', 'Files' ],
+                         justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] )
+
+define_command( SHowINActives() )
 
 
 # merge these commands to the global rules
