@@ -2471,7 +2471,7 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
             
             if delta > 0:
                 delta = utilities.color( str ( delta ), 'yellow' )
-            elif delta = 0:
+            elif delta == 0:
                 delta = utilities.color( str ( delta ), 'green' )
             else:
                 delta = utilities.color( str ( delta ), 'red' )
