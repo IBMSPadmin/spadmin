@@ -2465,7 +2465,7 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
         for row in data:
             delta = int( row[5].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )     
                
-             data2.append(row + [ str( delta ) ] )  
+            data2.append(row + [ str( delta ) ] )  
                
         return columnar( data2,
                          headers = [ 'NodeName', 'Type', 'FilespaceName', 'FSID', 'FilesonS', 'FilesonR', 'ReplServer', 'delta'  ],
