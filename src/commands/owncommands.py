@@ -2429,5 +2429,50 @@ class SHowINActives( SpadminCommand ):
 define_command( SHowINActives() )
 
 
+class SHowREPLICATIONDifferences( SpadminCommand ):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "REPLICATIONDifferences"
+        self.command_type   = "REPLDIFF"
+        self.command_index  = 0
+        self.command        = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show replication differences nodes '
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        
+        # Node Name           Type     Filespace Name      FSID         Files on          Files on      Target Replica-
+        #                                                         Source            Target      tion Server
+        #                                                    Replication       Replication
+        #                                                          Server            Server
+        
+        if not parameters:
+            parameters = '*'
+            
+        data = []
+        
+        data = timemachine_query( self.command_type, "q replnode " + parameters )
+            
+        if globals.last_error[ 'rc' ] != '0':
+            return
+               
+        data2 = []
+        for row in data:
+            delta = int( row[5].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )     
+               
+             data2.append(row + [ str( delta ) ] )  
+               
+        return columnar( data2,
+                         headers = [ 'NodeName', 'Type', 'FilespaceName', 'FSID', 'FilesonS', 'FilesonR', 'ReplServer', 'delta'  ],
+                         justify = [ 'l', 'l', 'l', 'c', 'l', 'l', 'l' ] )
+
+define_command( SHowREPLICATIONDifferences() )
+
+
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
