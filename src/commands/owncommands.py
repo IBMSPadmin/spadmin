@@ -2480,7 +2480,7 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
                
         return columnar( data2,
                          headers = [ 'NodeName', 'Type', 'FilespaceName', 'FSID', 'FilesonS', 'FilesonR', 'ReplServer', 'delta'  ],
-                         justify = [ 'l', 'l', 'l', 'c', 'l', 'l', 'l', 'c' ] )
+                         justify = [ 'l', 'l', 'l', 'r', 'r', 'r', 'c', 'c' ] )
 
 define_command( SHowREPLICATIONDifferences() )
 
