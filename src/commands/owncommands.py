@@ -2467,8 +2467,16 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
                 row[5] = '0'
             if row[4] == '':
                 row[4] = '0'
-            delta =  int( row[5].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )      
-            data2.append(row + [ str( delta ) ] )  
+            delta =  int( row[5].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )
+            
+            if delta > 0:
+                delta = utilities.color( str ( delta ), 'yellow' )
+            elif delta = 0:
+                delta = utilities.color( str ( delta ), 'green' )
+            else:
+                delta = utilities.color( str ( delta ), 'red' )
+                  
+            data2.append(row + [ delta ] )  
                
         return columnar( data2,
                          headers = [ 'NodeName', 'Type', 'FilespaceName', 'FSID', 'FilesonS', 'FilesonR', 'ReplServer', 'delta'  ],
