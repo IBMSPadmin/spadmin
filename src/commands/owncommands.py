@@ -2303,7 +2303,7 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ '<24H activity log summary' ] )
         ACTLOGerrorcollector = 0
         
-        for severity in globals.tsm.send_command_array_array_tabdel( "select severity, count(1) from actlog where (DATE_TIME>=current_timestamp-24 hour) and severity in ('E','W') and MSGNO not in (2034) group by severity" ):
+        for severity in globals.tsm.send_command_array_array_tabdel( "select severity, count(1) from actlog where (DATE_TIME>=current_timestamp-24 hour) and severity in ('E','W') and MSGNO not in (2034, 0944) group by severity" ):
             data.append( [ ' Completed (' + severity[0] + ')', severity[1] ] )
             ACTLOGerrorcollector =+ 1
 
@@ -2368,7 +2368,7 @@ class SHowDBSBackups( SpadminCommand ):
 
     def __init__(self):
         self.command_string = globals.basecommandname + "DBSBackups"
-        self.command_type   = "DBBACKUP"
+        self.command_type   = "DBSBACKUP"
         self.command_index  = 0
         self.command        = "PAY"
 
