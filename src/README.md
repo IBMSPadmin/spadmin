@@ -14,8 +14,6 @@
 - dsmamdc v8.1.15 
 - dsmserv v8.1.14
 
-
-
 ## dsmadmc kezelés pexpect modullal
 
 ## readline
