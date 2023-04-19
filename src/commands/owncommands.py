@@ -2463,7 +2463,7 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
                
         data2 = []
         for row in data:
-            delta = int( row[5].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )     
+            delta =  row[5].replace( ',', '' ) +  row[4].replace( ',', '' )      
                
             data2.append(row + [ str( delta ) ] )  
                
