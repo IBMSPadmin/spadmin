@@ -2463,8 +2463,11 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
                
         data2 = []
         for row in data:
+            if row[5] == '':
+                row[5] = '0'
+            if row[4] == '':
+                row[4] = '0'
             delta =  int( row[5].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )      
-               
             data2.append(row + [ str( delta ) ] )  
                
         return columnar( data2,
