@@ -2446,11 +2446,6 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
 
     def _execute(self, parameters: str) -> str:
         
-        # Node Name           Type     Filespace Name      FSID         Files on          Files on      Target Replica-
-        #                                                         Source            Target      tion Server
-        #                                                    Replication       Replication
-        #                                                          Server            Server
-        
         if not parameters:
             parameters = '*'
             
