@@ -2424,7 +2424,7 @@ class SHowINActives( SpadminCommand ):
                
         return columnar( data,
                          headers = [ 'DomainName', 'NodeName', 'Locked?', 'LastAccessTime', 'Days', 'Type', '#Data', 'Files' ],
-                         justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] )
+                         justify = [ 'l', 'l', 'c', 'l', 'l', 'l', 'l', 'l' ] )
 
 define_command( SHowINActives() )
 

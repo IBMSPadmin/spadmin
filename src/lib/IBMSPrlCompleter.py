@@ -729,7 +729,7 @@ class IBMSPrlCompleter:
 
         sys.stdout.flush()
 
-        sys.stdout.write( '\n' + self.prompt() + '' + readline.get_line_buffer() )
+        sys.stdout.write( '\n' + self.prompt().replace( "\001", '').replace( "\002", '' ) + '' + readline.get_line_buffer() )
         sys.stdout.flush()
 
         #globals.logger.debug( '<<< Leave: match_display_hook.' )

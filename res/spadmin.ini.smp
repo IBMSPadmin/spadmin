@@ -41,7 +41,7 @@ spissues = !open https://github.com/IBMSPadmin/spadmin/issues
 newissue = !open https://github.com/IBMSPadmin/spadmin/issues/new
 github = !open https://github.com/IBMSPadmin/spadmin
 ini = !vi ~flex/spadmin/spadmin.ini
-actions = !ssh github@169.50.11.156
+actions = !ssh github@169.50.11.156 actions-runner/run.sh
 cls = !clear
 wini = !/mnt/c/WINDOWS/system32/notepad.exe ~/spadmin/spadmin.ini
 
