@@ -13,6 +13,7 @@ import lib.utilities as utilities
 import lib.humanbytes as humanbytes
 import lib.columnar as columnar
 from operator import itemgetter
+from lib.IBMSPrlCompleter import IBMSPrlCompleter
 
 import datetime
 import glob
@@ -85,6 +86,10 @@ def dynruleinjector( command ):  # it works only for commands which longer than 
         leftpart = ' '.join(commandpartcollected)
         if rightpart not in globals.myIBMSPrlCompleter.dynrules[leftpart]:
             globals.myIBMSPrlCompleter.dynrules[leftpart].append(rightpart)
+
+    if len(command.split()) == 1 and command not in IBMSPrlCompleter.start:
+        IBMSPrlCompleter.start.append(command)
+
 
 # INIT -------------------------------------------------------------------
 # Fill up with the servernames
