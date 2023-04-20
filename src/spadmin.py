@@ -131,9 +131,15 @@ class Spadmin(object):
                 #     command = command.replace( firstcmdpart,  globals.aliases[ firstcmdpart.lower() ] )
 
                 # handling aliases v2
+                aliasrest = ''
                 for alias in globals.aliases:
                     aliasmatch = search('^' + utilities.regexpgenerator(alias) + '\s+', command + ' ', IGNORECASE)
                     if aliasmatch:
+                        # keep the right side of the command 
+                        aliasrest = command.replace( aliasmatch[1], '' )
+                        # remove the rest part
+                        command = command.replace( aliasrest, '' )
+                        # replace alias                        
                         command = command.replace(aliasmatch[1], globals.aliases[alias])
                         break
 
@@ -145,6 +151,10 @@ class Spadmin(object):
 
                 # keep the first one as the main command
                 command = commandparts.pop(0).strip()
+                
+                # add right part of the alias if exists
+                if aliasrest != '':
+                    command += aliasrest
 
                 for extracommand in commandparts:
                     pairs = extracommand.split( None, maxsplit = 1 )

@@ -180,10 +180,10 @@ def getmac():
 
 def validate_license():
     if getmac() and getmac() == '7e:17:4c:06:06:e7':
-        print(colored( " Your license is valid for 2023.02.03.!", globals.color_green, attrs = [ globals.color_attrs_bold  ]))
+        print(colored( " Your license is valid for 2023.02.03.!", globals.color_green, attrs = [ globals.color_attrs_bold ]))
         globals.licensed = True
     else:
-        print(colored( " Your License key has expired!", globals.color_red, attrs = [ globals.color_attrs_bold  ]))
+        print(colored( " Your License key has expired!", globals.color_red, attrs = [ globals.color_attrs_bold ]))
         print()
         globals.licensed = True
 
