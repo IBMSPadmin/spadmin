@@ -2453,7 +2453,7 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
         
         data = timemachine_query( self.command_type, "q replnode " + parameters )
             
-        if globals.last_error[ 'rc' ] != '0':
+        if globals.last_error[ 'rc' ] != '0' or data[0] == ['ANR2726E QUERY REPLNODE: None of the specified nodes are configured for replication or they are part of an active replication process.']:
             return
                
         data2 = []

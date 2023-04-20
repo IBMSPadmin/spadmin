@@ -44,15 +44,18 @@ class dsmadmc_pexpect:
 
     def send_command_tabdel(self, command):
 
-        tsm = self.get_tsm_tabdel()
-
-        # globals.logger.debug( 'DSMADMC tabdel pid: [' + str( tsm.pid ) + ']' )
-
         try:
+            tsm = self.get_tsm_tabdel()
+
+            # globals.logger.debug( 'DSMADMC tabdel pid: [' + str( tsm.pid ) + ']' )
+
             globals.logger.info("Command will be sent to dsmadmc: " + command)
             tsm.sendline(command)
             rc = self.tsm_tabdel.expect(self.EXPECTATIONS)
             self.check_rc(tsm, rc)
+        except KeyboardInterrupt as e:
+            print("Itt volt egy ctrl+c")
+            quit(1)
         except Exception as e:
             print('An error occurred during a dsmadmc execution:')
             print(tsm.before)
@@ -115,14 +118,18 @@ class dsmadmc_pexpect:
 
     def send_command_normal(self, command):
 
-        tsm2 = self.get_tsm_normal()
-
-        # globals.logger.debug('DSMADMC normal pid: [' + str(tsm2.pid) + ']')
-
         try:
+            tsm2 = self.get_tsm_normal()
+
+            # globals.logger.debug('DSMADMC normal pid: [' + str(tsm2.pid) + ']')
+
             tsm2.sendline(command)
             rc = self.tsm_normal.expect(self.EXPECTATIONS)
             self.check_rc(tsm2, rc)
+        except KeyboardInterrupt as e:
+            print("Itt volt egy ctrl+c")
+            quit(1)
+
         except Exception as e:
             print('An error occurred during a dsmadmc execution:')
             print(tsm2.before)
