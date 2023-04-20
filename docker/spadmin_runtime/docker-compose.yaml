@@ -4,7 +4,7 @@ services:
     container_name: spadmin
     hostname: spadmin
     restart: unless-stopped
-    image: doffy2023/dsmadmc:20230406
+    image: doffy2023/dsmadmc:20230404
 
     stdin_open: true 
     tty: true
