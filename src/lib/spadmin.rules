@@ -114,6 +114,7 @@ $ -> HISTory
 $ -> grep
 $ -> invgrep
 $ -> count
+$ -> orderby
 $ -> mailto
 $ -> SPadmin
 $ -> print
