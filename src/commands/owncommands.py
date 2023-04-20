@@ -126,7 +126,7 @@ def timemachine_query( command_type, query ):
         data = globals.tsm.send_command_array_array_tabdel( query )
     
         if globals.last_error[ 'rc' ] != '0':
-            #print(colored(globals.last_error["message"], globals.color_red, attrs=[globals.color_attrs_bold]))
+            #print(utilities.color(globals.last_error["message"], 'red'))
             return
     
         with open( os.path.join( globals.spadmin_tmpath, datetime.datetime.now().strftime( globals.spservername + '_' + command_type + '_%Y%m%d_%H%M%S.json' ) ), 'w' ) as fp:
@@ -142,7 +142,7 @@ def timemachine_query( command_type, query ):
         files.sort( reverse=True )
         
         if len( files ) == 0:
-            print( colored( 'No Time Machine data exists for: ' + command_type + ' queries!', globals.color_red, attrs=[globals.color_attrs_bold] ) )
+            print( utilities.color( 'No Time Machine data exists for: ' + command_type + ' queries!', 'red' ) )
             return []
             
             # 27, 91, 65 66 68< 67>
@@ -180,7 +180,7 @@ def timemachine_query( command_type, query ):
                 elif ord( key[0] ) == 111 or ord( key[0] ) == 10:
                     break
         
-        print( 'Selected date: [' + colored( files[index][ pathlen:-5 ], globals.color_white, attrs=[globals.color_attrs_bold] ) + '].' )
+        print( 'Selected date: [' + utilities.color( files[index][ pathlen:-5 ], globals.color_white, attrs=[globals.color_attrs_bold] ) + '].' )
         
         with open( files[index], 'r' ) as fp:
              # Load the dictionary from the file
@@ -377,10 +377,10 @@ class SPadminSHowCONFig(SpadminCommand):
         for configclass in globals.config.getconfiguration():
             for variable in globals.config.getconfiguration()[configclass]:
                 data.append([configclass, variable, '=', globals.config.getconfiguration()[configclass][variable]])
-        return columnar(data, headers=[colored('Class', globals.color_white, attrs=[globals.color_attrs_bold]),
-                                                  colored('Variable', globals.color_white, attrs=[globals.color_attrs_bold]),
-                                                  colored('=', globals.color_white, attrs=[globals.color_attrs_bold]),
-                                                  colored('Value', globals.color_white, attrs=[globals.color_attrs_bold])],
+        return columnar(data, headers=[utilities.color('Class', globals.color_white, attrs=[globals.color_attrs_bold]),
+                                                  utilities.color('Variable', globals.color_white, attrs=[globals.color_attrs_bold]),
+                                                  utilities.color('=', globals.color_white, attrs=[globals.color_attrs_bold]),
+                                                  utilities.color('Value', globals.color_white, attrs=[globals.color_attrs_bold])],
                                    justify=['l', 'l', 'l', 'l'])
 
 
@@ -406,8 +406,8 @@ class SPadminSHowALIases(SpadminCommand):
         data = []
         for key in globals.aliases:
             data.append([key, globals.aliases[key]])
-        return columnar(data, headers=[colored('Alias', globals.color_white, attrs=[globals.color_attrs_bold]),
-                                                  colored('Command', globals.color_white, attrs=[globals.color_attrs_bold])], justify=['l', 'l'])
+        return columnar(data, headers=[utilities.color('Alias', globals.color_white, attrs=[globals.color_attrs_bold]),
+                                                  utilities.color('Command', globals.color_white, attrs=[globals.color_attrs_bold])], justify=['l', 'l'])
 
 define_command(SPadminSHowALIases())
 
@@ -432,7 +432,7 @@ class SPadminSHowVERsion(SpadminCommand):
         data.append( [ 'v1.0' ] )
         
         return columnar( data, 
-                         headers=[ colored( 'spadmin.py version', globals.color_white, attrs=[globals.color_attrs_bold] ) ], 
+                         headers=[ utilities.color( 'spadmin.py version', globals.color_white, attrs=[globals.color_attrs_bold] ) ], 
                          justify=[ 'r' ] )
 
 define_command(SPadminSHowVERsion())
@@ -636,7 +636,7 @@ class SPadminSHowSErver(SpadminCommand):
                 data.append( [ section ] )
 
         return columnar( data, 
-                         headers=[ colored( 'Server(s)', globals.color_white, attrs=[globals.color_attrs_bold] ) ], 
+                         headers=[ utilities.color( 'Server(s)', globals.color_white, attrs=[globals.color_attrs_bold] ) ], 
                          justify=[ 'r' ] )
 
 define_command(SPadminSHowSErver())
@@ -668,7 +668,7 @@ class SPadminSHowCOMmands(SpadminCommand):
             data.append([key, type, desc])
 
         return columnar(sorted(data, key=itemgetter(0)), headers=[
-            colored('Command name', globals.color_white, attrs=[globals.color_attrs_bold]), 'Type', colored('Short Description', globals.color_white, attrs=[globals.color_attrs_bold])],
+            utilities.color('Command name', globals.color_white, attrs=[globals.color_attrs_bold]), 'Type', utilities.color('Short Description', globals.color_white, attrs=[globals.color_attrs_bold])],
                         justify=['l', 'c', 'l'])
 
 define_command(SPadminSHowCOMmands())
@@ -703,9 +703,9 @@ class SHowACTlog(SpadminCommand):
         for index, row in enumerate(data):
 
             if search('^ANR\d{4}E', row[1]):
-                message = colored(row[1], globals.color_red, attrs=[globals.color_attrs_bold])
+                message = utilities.color(row[1], 'red')
             elif search('^ANR\d{4}W', row[1]):
-                message = colored(row[1], globals.color_yellow, attrs=[globals.color_attrs_bold])
+                message = utilities.color(row[1], 'yellow')
             else:
                 message = row[1]
 
@@ -767,7 +767,7 @@ class HISTory(SpadminCommand):
                 count += 1
                 data.append([count, line.strip()])
         return columnar(data,
-                        headers=[colored('#', globals.color_white, attrs=[globals.color_attrs_bold]), colored('Command', globals.color_white, attrs=[globals.color_attrs_bold])],
+                        headers=[utilities.color('#', globals.color_white, attrs=[globals.color_attrs_bold]), utilities.color('Command', globals.color_white, attrs=[globals.color_attrs_bold])],
                         justify=['r', 'l'])
 
 define_command(HISTory())
@@ -792,8 +792,8 @@ class SpadminShowCache(SpadminCommand):
         data = []
         for key in globals.myIBMSPrlCompleter.cache_hitratio:
             data.append([key, globals.myIBMSPrlCompleter.cache_hitratio[key]])
-        utilities.printer(columnar(data, headers=[colored('Name', globals.color_white, attrs=[globals.color_attrs_bold]),
-                                                  colored('Value', globals.color_white, attrs=[globals.color_attrs_bold])], justify=['l', 'c']))
+        utilities.printer(columnar(data, headers=[utilities.color('Name', globals.color_white, attrs=[globals.color_attrs_bold]),
+                                                  utilities.color('Value', globals.color_white, attrs=[globals.color_attrs_bold])], justify=['l', 'c']))
 
         data.clear()
         for key in globals.myIBMSPrlCompleter.cache:
@@ -801,16 +801,16 @@ class SpadminShowCache(SpadminCommand):
             timediff = int(globals.config.getconfiguration()['SPADMIN']['cache_age']) - int(
                 time() - globals.myIBMSPrlCompleter.cache_timestamp[key])
             if timediff > 0:
-                timediff = colored(humanbytes.HumanBytes.format(int(timediff), unit="TIME_LABELS", precision=0),
+                timediff = utilities.color(humanbytes.HumanBytes.format(int(timediff), unit="TIME_LABELS", precision=0),
                                    'green', attrs=[globals.color_attrs_bold])
             else:
-                timediff = colored(humanbytes.HumanBytes.format(int(timediff), unit="TIME_LABELS", precision=0), globals.color_red,
+                timediff = utilities.color(humanbytes.HumanBytes.format(int(timediff), unit="TIME_LABELS", precision=0), globals.color_red,
                                    attrs=[globals.color_attrs_bold])
 
             data.append([key.strip(), timediff, globals.myIBMSPrlCompleter.cache[key]])
-        return columnar(data, headers=[colored('Query', globals.color_white, attrs=[globals.color_attrs_bold]),
-                                       colored('Time', globals.color_white, attrs=[globals.color_attrs_bold]),
-                                       colored('Result', globals.color_white, attrs=[globals.color_attrs_bold])], justify=['l', 'c', 'l'])
+        return columnar(data, headers=[utilities.color('Query', globals.color_white, attrs=[globals.color_attrs_bold]),
+                                       utilities.color('Time', globals.color_white, attrs=[globals.color_attrs_bold]),
+                                       utilities.color('Result', globals.color_white, attrs=[globals.color_attrs_bold])], justify=['l', 'c', 'l'])
 
 define_command(SpadminShowCache())
 
@@ -909,13 +909,13 @@ class SHowSESsions(SpadminCommand):
         for index, row in enumerate(data):
 
             if row[1] == 'Run':
-                #state = colored(row[1], 'green', attrs=[globals.color_attrs_bold])
+                #state = utilities.color(row[1], 'green', attrs=[globals.color_attrs_bold])
                 state = utilities.color(row[1], 'green')
             else:
                 state = row[1]
 
             if int(row[2]) > 60:
-                # wait = colored(humanbytes.HumanBytes.format(int(row[2]), unit="TIME_LABELS", precision=0), globals.color_red,
+                # wait = utilities.color(humanbytes.HumanBytes.format(int(row[2]), unit="TIME_LABELS", precision=0), globals.color_red,
                 #               attrs=[globals.color_attrs_bold])
                 wait = utilities.color(humanbytes.HumanBytes.format(int(row[2]), unit="TIME_LABELS", precision=0), globals.color_red)
             else:
@@ -927,21 +927,21 @@ class SHowSESsions(SpadminCommand):
             # mediaaccess = ''.join( row[ 8:14 ] )
             match = search('(\w+),(.+),(\d+)', row[11])
             if match:
-                # row[11] = 'Read: ' + colored(match[2], 'green', attrs=[globals.color_attrs_bold]) + ', ' + match[
+                # row[11] = 'Read: ' + utilities.color(match[2], 'green', attrs=[globals.color_attrs_bold]) + ', ' + match[
                 #    1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
                 row[11] = 'Read: ' + utilities.color(match[2], 'green') + ', ' + match[
                     1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
 
             match = search('(\w+),(.+),(\d+)', row[14])
             if match:
-                # row[14] = 'Write: ' + colored(match[2], 'green', attrs=[globals.color_attrs_bold]) + ', ' + match[
+                # row[14] = 'Write: ' + utilities.color(match[2], 'green', attrs=[globals.color_attrs_bold]) + ', ' + match[
                 #    1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
                 row[14] = 'Write: ' + utilities.color(match[2], 'green') + ', ' + match[
                     1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
 
             mediaaccess = row[8] + row[9] + row[10] + row[11] + row[12] + row[13] + row[14]
             mediaaccess = mediaaccess.lstrip( ',' )
-            # mediaaccess = sub( '(\w+)\,(\d+)', lambda m: colored(m.group(1), 'green', attrs=[globals.color_attrs_bold]) + ' (' + humanbytes.HumanBytes.format( int( m.group(2) ), unit="TIME_LABELS", precision=0 ) + ')', mediaaccess)
+            # mediaaccess = sub( '(\w+)\,(\d+)', lambda m: utilities.color(m.group(1), 'green', attrs=[globals.color_attrs_bold]) + ' (' + humanbytes.HumanBytes.format( int( m.group(2) ), unit="TIME_LABELS", precision=0 ) + ')', mediaaccess)
             mediaaccess = sub( '(\w+)\,(\d+)', lambda m: utilities.color(m.group(1), 'green') + ' (' + humanbytes.HumanBytes.format( int( m.group(2) ), unit="TIME_LABELS", precision=0 ) + ')', mediaaccess)
 
             data2.append(
@@ -988,27 +988,27 @@ class SHowPRocesses(SpadminCommand):
             # Current input volume: MKP056M8. Current output volume(s): MKP074M8.
             status = row[4]
             status = sub('(Current input volume: )([\w\/\.]+)(\.)',
-                         lambda m: m.group(1) + colored(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
+                         lambda m: m.group(1) + utilities.color(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
             status = sub('(Current input volumes: )([\w\/,\.]+)(\()',
-                         lambda m: m.group(1) + colored(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
+                         lambda m: m.group(1) + utilities.color(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
             status = sub('(Current input volumes: )([\w\/,\.]+)(\([\w ]+\))([\w\/,\.]+)(\()',
                          # Current input volumes: MKP002M8,(33772 Seconds)MKP049M8,(15618 Seconds)
-                         lambda m: m.group(1) + colored(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3) + colored(
+                         lambda m: m.group(1) + utilities.color(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3) + utilities.color(
                              m.group(4), 'green', attrs=[globals.color_attrs_bold]) + m.group(5), status)
             status = sub('(Current output volume\(' + 's\): )([\w\/\.]+)(\.)',
-                         lambda m: m.group(1) + colored(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
+                         lambda m: m.group(1) + utilities.color(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
             status = sub('(Current output volumes: )([\w\/,\.]+)(\()',
-                         lambda m: m.group(1) + colored(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
+                         lambda m: m.group(1) + utilities.color(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
             status = sub('(Waiting for mount of input volume )([\w\/]+)( \()',
-                         lambda m: m.group(1) + colored(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
+                         lambda m: m.group(1) + utilities.color(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
             status = sub('(Waiting for mount of output volume )([\w\/,]+)( \()',
                          # Waiting for mount of input volume 000006L4 (3 seconds)
-                         lambda m: m.group(1) + colored(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
+                         lambda m: m.group(1) + utilities.color(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
             status = sub('(Volume )([\w\/]+)( \()',
-                         lambda m: m.group(1) + colored(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
+                         lambda m: m.group(1) + utilities.color(m.group(2), 'green', attrs=[globals.color_attrs_bold]) + m.group(3), status)
             status = sub('(Waiting for mount point in device class [\w\/,]+)( \()',
                         # Waiting for mount point in device class DC_TS3200_LTO4_05 (596 seconds).
-                        lambda m: colored(m.group(1), globals.color_yellow, attrs=[globals.color_attrs_bold]) + m.group(2), status)
+                        lambda m: utilities.color(m.group(1), 'yellow') + m.group(2), status)
                         
             data2.append([index + 1, row[0], row[1], row[2], bytes_prcessed, status])
 
@@ -1085,11 +1085,11 @@ class kill(SpadminCommand):
                             "CANCEL SESSION " + globals.lastdsmcommandresults[int(parameters) - 1][1])):
                         print(line)
                 else:
-                    print(colored("The given number is not found!", globals.color_red, attrs=[globals.color_attrs_bold]))
+                    print(utilities.color("The given number is not found!", 'red'))
             else:
-                print(colored("The given parameter should be a number!", globals.color_red, attrs=[globals.color_attrs_bold]))
+                print(utilities.color("The given parameter should be a number!", 'red'))
         else:
-            print(colored("Last command should be SHow SESSions or SHow PRocesses!", globals.color_red, attrs=[globals.color_attrs_bold]))
+            print(utilities.color("Last command should be SHow SESSions or SHow PRocesses!", 'red'))
             globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
         return ""
 
@@ -1131,22 +1131,22 @@ class ShowEvents(SpadminCommand):
                 row[5] = '          ' + row[5][10:]
 
             if row[6] == 'Missed':
-                row[6] = colored(row[6], globals.color_yellow, attrs=[globals.color_attrs_bold])
+                row[6] = utilities.color(row[6], 'yellow' )
             elif row[6] == 'Failed' or row[6] == 'Failed - no restart':
-                row[6] = colored(row[6], globals.color_red, attrs=[globals.color_attrs_bold])
+                row[6] = utilities.color(row[6], 'red')
             elif row[6] == 'Pending':
-                row[6] = colored(row[6], globals.color_yellow)
+                row[6] = utilities.color(row[6], 'yellow' )
             elif row[6] == 'Started':
-                row[6] = colored(row[6], globals.color_yellow, attrs=[globals.color_attrs_bold])
+                row[6] = utilities.color(row[6], 'yellow' )
             elif row[6] == 'Completed':
-                row[6] = colored(row[6], 'green', attrs=[globals.color_attrs_bold])
+                row[6] = utilities.color(row[6], 'green' )
 
             if row[7] == '0':
-                row[7] = colored(row[7], 'green', attrs=[globals.color_attrs_bold])
+                row[7] = utilities.color(row[7], 'green' )
             elif row[7] == '4' or row[7] == '8':
-                row[7] = colored(row[7], globals.color_yellow, attrs=[globals.color_attrs_bold])
+                row[7] = utilities.color(row[7], 'yellow')
             else:
-                row[7] = colored(row[7], globals.color_red, attrs=[globals.color_attrs_bold])
+                row[7] = utilities.color(row[7], 'red')
 
             data2.append([row[3], row[4], row[5], row[0], row[1], row[2], row[6], row[7]])
 
@@ -1199,9 +1199,9 @@ class ShowStgp(SpadminCommand):
 
             if row[1] == 'DISK':
                 if float(row[5]) > 85:
-                    row[5] = colored(row[5], globals.color_red, attrs=[globals.color_attrs_bold])
+                    row[5] = utilities.color(row[5], 'red')
                 elif float(row[5]) > 70:
-                    row[5] = colored(row[5], globals.color_yellow, attrs=[globals.color_attrs_bold])
+                    row[5] = utilities.color(row[5], 'yellow')
                     
         return columnar( data,
                          headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig', 'LowMig', 'Recl', 'Next'],
@@ -1258,7 +1258,7 @@ class ShowMount(SpadminCommand):
             if search("ANR83(29|30|31|32|33)I.*", l[0]):
                 for vol, rw_ro, drive, path, status in re.findall(
                         re.compile(r'.* volume (.*) is mounted (.*) in drive (.*) \((.*)\), status: (.*)..*'), l[0]):
-                    # vol = colored( vol, 'green', attrs=[ globals.color_attrs_bold ] )
+                    # vol = utilities.color( vol, 'green', attrs=[ globals.color_attrs_bold ] )
                     data2.append([index, vol, rw_ro, drive, path, status])
                     index += 1
             elif search("ANR8379I", l[0]):
@@ -1272,7 +1272,7 @@ class ShowMount(SpadminCommand):
         ## for coloring purposes. (dismount)
         data3 = []
         for index, vol, rw_ro, drive, path, status in data2:
-            vol = colored(vol, 'green', attrs=[globals.color_attrs_bold])
+            vol = utilities.color(vol, 'green', attrs=[globals.color_attrs_bold])
             data3.append([index, vol, rw_ro, drive, path, status])
             index += 1
 
@@ -1311,11 +1311,11 @@ class DISMount(SpadminCommand):
                     for l in globals.tsm.send_command_array_tabdel(cmd):
                         print(l)
                 else:
-                    print(colored("The given number is not found!", globals.color_red, attrs=[globals.color_attrs_bold]))
+                    print(utilities.color("The given number is not found!", 'red'))
             else:
-                print(colored("The given parameter should be a number!", globals.color_red, attrs=[globals.color_attrs_bold]))
+                print(utilities.color("The given parameter should be a number!", 'red'))
         else:
-            print(colored("Last command should be `SHow MOUnt` or `show DRive`!", globals.color_red, attrs=[globals.color_attrs_bold]))
+            print(utilities.color("Last command should be `SHow MOUnt` or `show DRive`!", 'red'))
             globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
         return ""
 
@@ -1357,7 +1357,7 @@ class Ruler(SpadminCommand):
                 self.ruler10()
                 self.ruler100()
             else:
-                print(colored('Wrong parameter(s)!', globals.color_red, attrs=[globals.color_attrs_bold]))
+                print(utilities.color('Wrong parameter(s)!', 'red'))
         else:
             self.ruler100()
             self.ruler10()
@@ -1370,7 +1370,7 @@ class Ruler(SpadminCommand):
             if i % 100:
                 sys.stdout.write(' ')
             else:
-                sys.stdout.write(colored(str(cc), 'green'))
+                sys.stdout.write(utilities.color(str(cc), 'green'))
                 cc += 1
                 cc = 0 if cc == 100 else cc
         print()
@@ -1381,7 +1381,7 @@ class Ruler(SpadminCommand):
             if i % 10:
                 sys.stdout.write(' ')
             else:
-                sys.stdout.write(colored(str(cc), 'green'))
+                sys.stdout.write(utilities.color(str(cc), 'green'))
                 cc += 1
                 cc = 0 if cc == 10 else cc
         print()
@@ -1392,7 +1392,7 @@ class Ruler(SpadminCommand):
             if c:
                 sys.stdout.write(str(c))
             else:
-                sys.stdout.write(colored(str(c), 'green'))
+                sys.stdout.write(utilities.color(str(c), 'green'))
 
     def execute(self, dummy, parameters):
         globals.logger.debug(
@@ -1437,11 +1437,11 @@ class Online(SpadminCommand):
                     for l in globals.tsm.send_command_array_tabdel(cmd):
                         print(l)
                 else:
-                    print(colored("The given number is not found!", globals.color_red, attrs=[globals.color_attrs_bold]))
+                    print(utilities.color("The given number is not found!", 'red'))
             else:
-                print(colored("The given parameter should be a number!", globals.color_red, attrs=[globals.color_attrs_bold]))
+                print(utilities.color("The given parameter should be a number!", 'red'))
         else:
-            print(colored("Last command should be SHow DRives or SHow PAth!", globals.color_red, attrs=[globals.color_attrs_bold]))
+            print(utilities.color("Last command should be SHow DRives or SHow PAth!", 'red'))
             globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
         return ""
 
@@ -1492,7 +1492,7 @@ class ShowDrives(SpadminCommand):
 
         data = []
         for i, row in enumerate(drives):
-            # row[ 6 ] = colored( row[ 6 ], 'green', attrs=[ globals.color_attrs_bold ] )
+            # row[ 6 ] = utilities.color( row[ 6 ], 'green', attrs=[ globals.color_attrs_bold ] )
             data.append([i + 1, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
 
         globals.lastdsmcommandresults = data
@@ -1500,7 +1500,7 @@ class ShowDrives(SpadminCommand):
         ## for coloring purposes. (dismount)
         data2 = []
         for i, row in enumerate(drives):
-            row[6] = colored(row[6], 'green', attrs=[globals.color_attrs_bold])
+            row[6] = utilities.color(row[6], 'green', attrs=[globals.color_attrs_bold])
             data2.append([i + 1, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
 
         table = columnar(data2,
@@ -1611,8 +1611,8 @@ class ShowLIBVolumes(SpadminCommand):
         for i, row in enumerate(library):
             data.append([i + 1, row[0], row[1], row[2]])
             if not row[2]:
-                row[2] = colored("MISSING", globals.color_yellow, attrs=[globals.color_attrs_bold])
-            data2.append([i + 1, colored(row[0], 'green', attrs=[globals.color_attrs_bold]), row[1], row[2]])
+                row[2] = utilities.color("MISSING", 'yellow')
+            data2.append([i + 1, utilities.color(row[0], 'green', attrs=[globals.color_attrs_bold]), row[1], row[2]])
         globals.lastdsmcommandresults = data
 
         table = columnar(data2,
@@ -1653,7 +1653,7 @@ class ShowFilling(SpadminCommand):
 
         for i, row in enumerate(library):
             data.append([i + 1, row[0], row[1], row[2]])
-            data2.append([i + 1, colored(row[0], 'green', attrs=[globals.color_attrs_bold]), row[1], row[2]])
+            data2.append([i + 1, utilities.color(row[0], 'green', attrs=[globals.color_attrs_bold]), row[1], row[2]])
         globals.lastdsmcommandresults = data
 
         table = columnar(data2,
@@ -1687,11 +1687,11 @@ class Move(SpadminCommand):
                     for l in globals.tsm.send_command_normal(cmd):
                         print(l)
                 else:
-                    print(colored("The given number is not found!", globals.color_red, attrs=[globals.color_attrs_bold]))
+                    print(utilities.color("The given number is not found!", 'red'))
             else:
-                print(colored("The given parameter should be a number!", globals.color_red, attrs=[globals.color_attrs_bold]))
+                print(utilities.color("The given parameter should be a number!", 'red'))
         else:
-            print(colored("Last command should be SHow Filling!", globals.color_red, attrs=[globals.color_attrs_bold]))
+            print(utilities.color("Last command should be SHow Filling!", 'red'))
             globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
         return ""
 
@@ -1736,9 +1736,9 @@ class SHowSCRatches(SpadminCommand):
         for index, row in enumerate(data):
 
             if int(row[2]) < 5:
-                scratches = colored(row[2], globals.color_yellow, attrs=[globals.color_attrs_bold])
+                scratches = utilities.color(row[2], 'yellow')
             elif int(row[2]) < 3:
-                scratches = colored(row[2], globals.color_red, attrs=[globals.color_attrs_bold])
+                scratches = utilities.color(row[2], 'red')
             else:
                 scratches = row[2]
 
@@ -1783,7 +1783,7 @@ class SHowCOPYGroups(SpadminCommand):
         for index, row in enumerate(data):
 
             if row[3] == 'Yes':
-                default = colored('y', 'green', attrs=[globals.color_attrs_bold])
+                default = utilities.color('y', 'green', attrs=[globals.color_attrs_bold])
             else:
                 default = ''
 
@@ -1808,7 +1808,7 @@ class SHowCOPYGroups(SpadminCommand):
         for index, row in enumerate(data):
 
             if row[3] == 'Yes':
-                default = colored('y', 'green', attrs=[globals.color_attrs_bold])
+                default = utilities.color('y', 'green', attrs=[globals.color_attrs_bold])
             else:
                 default = ''
 
@@ -2052,12 +2052,12 @@ def basicPerformanceFromSummary(self, activity, fromdate='0', todate='1'):
             speed = "n/a";
 
         if int(row[9]) > 0:
-            failed = colored(row[9], globals.color_red, attrs=[globals.color_attrs_bold])
+            failed = utilities.color(row[9], 'red')
         else:
             failed = row[9]
 
         if row[14] == 'NO':
-            success = colored(row[14], globals.color_red, attrs=[globals.color_attrs_bold])
+            success = utilities.color(row[14], 'red')
         else:
             success = row[14]
 
@@ -2109,19 +2109,19 @@ class ShowSTatus( SpadminCommand ):
         
         status = '  Ok.'
         if float( dbFreeSpace ) < 10000:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed!', 'red' )
             DBerrorcollector =+ 1
         data.append( [ ' FreeSpace', humanbytes.HumanBytes.format( float( dbFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0), status ] )
         
         status = '  Ok.'
         if float( dbCacheHitPct ) < 90:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed!', 'red' )
             DBerrorcollector =+ 1
         data.append( [ ' Cache Hit', dbCacheHitPct + ' %', status ] )    
 
         status = '  Ok.'
         if float( dbPkgHitPct ) < 90:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed!', 'red' )
             DBerrorcollector =+ 1
         data.append( [ ' Pkg Hit', dbPkgHitPct + ' %', status ] )    
 
@@ -2129,13 +2129,13 @@ class ShowSTatus( SpadminCommand ):
         if dbLastBackupHour == '':
             dbLastBackupHour = 0
         if int( dbLastBackupHour ) > 19:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed!', 'red' )
             DBerrorcollector =+ 1
         data.append( [ ' Last DBBackup', humanbytes.HumanBytes.format( int( dbLastBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )    
         
         status = '  Ok.'
         if float( dbLastReorgHour ) > 24:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed!', 'red' )
             DBerrorcollector =+ 1
         data.append( [ ' Last DB reorganization', humanbytes.HumanBytes.format( float( dbLastReorgHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
         
@@ -2148,7 +2148,7 @@ class ShowSTatus( SpadminCommand ):
         
         status = '  Ok.'
         if float( dbLastFullBackupHour ) > 19:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed!', 'red' )
             DBerrorcollector =+ 1
         data.append( [ ' Last Full', humanbytes.HumanBytes.format( float( dbLastFullBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
 
@@ -2156,7 +2156,7 @@ class ShowSTatus( SpadminCommand ):
         
         status = '  Ok. ✅'
         if int( DBerrorcollector ) > 0:
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+            status = utilities.color( '  Failed! ❌', 'red' )                        
         data.append( [ 'DB overall STATUS', '->', status ] )
                         
         data.append( [] )
@@ -2169,13 +2169,13 @@ class ShowSTatus( SpadminCommand ):
         
         status = '  Ok.'
         if float( logFreeSpace ) < 10000:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed!', 'red' )
             LOGerrorcollector =+ 1
         data.append( [ ' Active log FreeSpace', humanbytes.HumanBytes.format( float( logFreeSpace ) * 1024 * 1024,      unit="BINARY_LABELS", precision=0), status ] )
         
         status = '  Ok.'
         if float( logArchFreeSpace ) < 10000:
-            status = colored( '  Failed!', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed!', 'red' )
             LOGerrorcollector =+ 1
         data.append( [ ' Archive log FreeSpace', humanbytes.HumanBytes.format( float( logArchFreeSpace ) * 1024 * 1024, unit="BINARY_LABELS", precision=0), status ] )
         
@@ -2186,7 +2186,7 @@ class ShowSTatus( SpadminCommand ):
         
         status = '  Ok. ✅'
         if int( LOGerrorcollector ) > 0:
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+            status = utilities.color( '  Failed! ❌', 'red' )                        
         data.append( [ 'LOG overall STATUS', '->', status ] )
         
         data.append( [] )
@@ -2206,7 +2206,7 @@ class ShowSTatus( SpadminCommand ):
 
         status = '  Ok. ✅'
         if int( roVols ) + int( unavaVols ) + int( rweVols ) > 0:
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed! ❌', 'red' )
             VOLerrorcollector += 1                        
         data.append( [ 'VOLs overall STATUS', '->', status ] )
 
@@ -2226,7 +2226,7 @@ class ShowSTatus( SpadminCommand ):
 
         status = '  Ok. ✅'
         if int( offDrives ) + int( offPaths ) > 0:
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed! ❌', 'red' )
             HWerrorcollector += 1                        
         data.append( [ 'HW overall STATUS', '->', status ] )
 
@@ -2249,7 +2249,7 @@ class ShowSTatus( SpadminCommand ):
 
         status = '  Ok. ✅'
         if int( EVENTerrorcollector ) + int( missed ) + int( failed ) > 0 :
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed! ❌', 'red' )
             EVENTerrorcollector += 1                        
         data.append( [ 'EVENTs overall STATUS', '->', status ] )
 
@@ -2264,7 +2264,7 @@ class ShowSTatus( SpadminCommand ):
         
         status = '  Ok. ✅'
         if int( VMerrorcollector ) + int( failed ) > 0 :
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed! ❌', 'red' )
             VMerrorcollector += 1                        
         data.append( [ 'VM overall STATUS', '->', status ] )
 
@@ -2293,7 +2293,7 @@ class ShowSTatus( SpadminCommand ):
         
         status = '  Ok. ✅'
         if int( ADMINerrorcollector ) + int( missed ) + int( failed ) > 0 :
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )
+            status = utilities.color( '  Failed! ❌', 'red' )
             EVENTerrorcollector += 1                        
         data.append( [ 'ADMIN EVENTs overall STATUS', '->', status ] )
     
@@ -2309,7 +2309,7 @@ class ShowSTatus( SpadminCommand ):
 
         status = '  Ok. ✅'
         if int( ACTLOGerrorcollector ) + int( failed ) > 0 :
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+            status = utilities.color( '  Failed! ❌', 'red' )                        
         data.append( [ 'ACTLOG overall STATUS', '->', status ] )
                 
         data.append( [] )
@@ -2319,7 +2319,7 @@ class ShowSTatus( SpadminCommand ):
         
         status = '  Ok. ✅'
         if int( DBerrorcollector ) + int( LOGerrorcollector ) + + int( VOLerrorcollector ) + + int( HWerrorcollector ) + int( EVENTerrorcollector ) + int( VMerrorcollector ) + int( ACTLOGerrorcollector )  > 0 :
-            status = colored( '  Failed! ❌', globals.color_red, attrs=[globals.color_attrs_bold] )                        
+            status = utilities.color( '  Failed! ❌', 'red' )                        
         data.append( [ 'Global SP STATUS', '->', status ] )
 
         return columnar( data,
