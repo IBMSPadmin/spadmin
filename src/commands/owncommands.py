@@ -552,9 +552,9 @@ class SPadminSHowLOG(SpadminCommand):
 
     def _execute(self, parameters: str) -> str:
         if sys.platform == "linux" or sys.platform == "linux2":
-            os.system('/mnt/c/Windows/notepad.exe ./' + globals.config.getconfiguration()['SPADMIN']['logfile'])
+            os.system( '/mnt/c/Windows/notepad.exe ' + globals.logfilename )
         elif sys.platform == "darwin":
-            os.system('open ./' + globals.config.getconfiguration()['SPADMIN']['logfile'])
+            os.system( 'open ' + globals.logfilename )
 
         return ""
 
