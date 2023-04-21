@@ -2459,15 +2459,28 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
         data = timemachine_query( self.command_type, "q replnode " + parameters )
             
         if globals.last_error[ 'rc' ] != '0' or data[0] == ['ANR2726E QUERY REPLNODE: None of the specified nodes are configured for replication or they are part of an active replication process.']:
+            print( 'No data!' )
             return
                
         data2 = []
         for row in data:
-            if row[5] == '':
-                row[5] = '0'
-            if row[4] == '':
-                row[4] = '0'
-            delta =  int( row[5].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )
+            
+            # > 8.1.13
+            globals.sprelease 
+            if if int( globals.spversion ) > 8 or ( int( globals.spversion ) == 8 and int( globals.sprelease ) >= 1 and and int( globals.splevel ) >= 13 ) :
+                if row[5] == '':
+                    row[5] = '0'
+                if row[4] == '':
+                    row[4] = '0'
+                delta =  int( row[5].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )
+                hh = [ 'NodeName', 'Type', 'FilespaceName', 'FSID', 'FilesonS', 'FilesonR', 'ReplServer', 'delta' ]
+            else:
+                if row[6] == '':
+                    row[6] = '0'
+                if row[4] == '':
+                    row[4] = '0'
+                delta =  int( row[6].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )
+                hh = [ 'NodeName', 'Type', 'FilespaceName', 'FSID', 'FilesonS', 'ReplServer', 'FilesonR', 'delta' ]
             
             if delta > 0:
                 delta = utilities.color( str ( delta ), 'yellow' )
@@ -2476,11 +2489,11 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
             else:
                 delta = utilities.color( str ( delta ), 'red' )
                   
-            data2.append(row + [ delta ] )  
+            data2.append( row + [ delta ] )  
                
         return columnar( data2,
-                         headers = [ 'NodeName', 'Type', 'FilespaceName', 'FSID', 'FilesonS', 'FilesonR', 'ReplServer', 'delta'  ],
-                         justify = [ 'l', 'l', 'l', 'r', 'r', 'r', 'c', 'c' ] )
+                         headers = hh,
+                         justify = [ 'l', 'l', 'l', 'r', 'c', 'c', 'c', 'c' ] )
 
 define_command( SHowREPLICATIONDifferences() )
 
