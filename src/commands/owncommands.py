@@ -2465,9 +2465,8 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
         data2 = []
         for row in data:
             
-            # > 8.1.13
-            globals.sprelease 
-            if if int( globals.spversion ) > 8 or ( int( globals.spversion ) == 8 and int( globals.sprelease ) >= 1 and and int( globals.splevel ) >= 13 ) :
+            # > 8.1.13 
+            if int( globals.spversion ) > 8 or ( int( globals.spversion ) == 8 and int( globals.sprelease ) >= 1 and int( globals.splevel ) >= 13 ) :
                 if row[5] == '':
                     row[5] = '0'
                 if row[4] == '':
