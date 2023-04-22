@@ -814,8 +814,8 @@ class SpadminShowCache(SpadminCommand):
             data.append( [ key.strip(), timediff, globals.myIBMSPrlCompleter.cache[key] ] )
         
         return columnar( data, 
-                         headers=[utilities.color( 'Query', "white" ), utilities.color( 'Time',  "white" ), utilities.color( 'Result', "white" ) ], 
-                         justify=['l', 'c', 'l'])
+                         headers=[ utilities.color( 'Query', "white" ), utilities.color( 'Time',  "white" ), utilities.color( 'Result', "white" ) ], 
+                         justify=[ 'l', 'c', 'l' ] )
 
 define_command(SpadminShowCache())
 
