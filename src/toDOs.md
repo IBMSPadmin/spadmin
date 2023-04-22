@@ -8,3 +8,6 @@
 - show commands
 - Your License key has expired!
 - issues
+- columnar átnézés
+- pytho lamda
+- 
