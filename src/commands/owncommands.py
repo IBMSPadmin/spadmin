@@ -2446,8 +2446,13 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
         return 'Show replication differences nodes '
 
     def help(self) -> dict:
-        return """ 
-        """
+        return """SHow REPLICATIONDifferences command will show the replication differences in the following format:
+        
+---
+
+* It expects one single parameter, which is a node name. 
+
+* If nothing is specified, it will show the replication differences of all SP nodes."""
 
     def _execute(self, parameters: str) -> str:
         
