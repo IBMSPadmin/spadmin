@@ -797,8 +797,9 @@ class SpadminShowCache(SpadminCommand):
         data = []
         for key in globals.myIBMSPrlCompleter.cache_hitratio:
             data.append([key, globals.myIBMSPrlCompleter.cache_hitratio[key]])
-        utilities.printer(columnar(data, headers=[utilities.color('Name', "white"),
-                                                  utilities.color('Value', "white")], justify=['l', 'c']))
+        utilities.printer(columnar( data, 
+                                    headers=[ utilities.color( 'Name', "white" ), utilities.color( 'Value', "white" ) ], 
+                                    justify=[ 'l', 'c' ] ) )
 
         data.clear()
         for key in globals.myIBMSPrlCompleter.cache:
@@ -806,16 +807,15 @@ class SpadminShowCache(SpadminCommand):
             timediff = int(globals.config.getconfiguration()['SPADMIN']['cache_age']) - int(
                 time() - globals.myIBMSPrlCompleter.cache_timestamp[key])
             if timediff > 0:
-                timediff = utilities.color(humanbytes.HumanBytes.format(int(timediff), unit="TIME_LABELS", precision=0),
-                                   'green')
+                timediff = utilities.color(humanbytes.HumanBytes.format(int(timediff), unit="TIME_LABELS", precision=0), 'green' )
             else:
-                timediff = utilities.color(humanbytes.HumanBytes.format(int(timediff), unit="TIME_LABELS", precision=0), globals.color_red,
-                                   attrs=[globals.color_attrs_bold])
+                timediff = utilities.color(humanbytes.HumanBytes.format(int(timediff), unit="TIME_LABELS", precision=0), 'red' )
 
-            data.append([key.strip(), timediff, globals.myIBMSPrlCompleter.cache[key]])
-        return columnar(data, headers=[utilities.color('Query', "white"),
-                                       utilities.color('Time', "white"),
-                                       utilities.color('Result', "white")], justify=['l', 'c', 'l'])
+            data.append( [ key.strip(), timediff, globals.myIBMSPrlCompleter.cache[key] ] )
+        
+        return columnar( data, 
+                         headers=[utilities.color( 'Query', "white" ), utilities.color( 'Time',  "white" ), utilities.color( 'Result', "white" ) ], 
+                         justify=['l', 'c', 'l'])
 
 define_command(SpadminShowCache())
 
