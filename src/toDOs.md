@@ -10,3 +10,4 @@
 - issues
 - columnar átnézés
 - pytho lamda
+- 
