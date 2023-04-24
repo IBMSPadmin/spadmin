@@ -31,3 +31,8 @@ src/spadmin.ini
 src/.spadmin_history
 src/.spadmin_history
 .idea/workspace.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/spadmin.iml
+.idea/vcs.xml
