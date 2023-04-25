@@ -254,7 +254,11 @@ class Columnar:
                     restlength = globals.columns - (sum(self.column_length[:-1]) + len(self.column_length) - 1)
                     line += colorcutter(cell, restlength, '\n' + ' ' * (sum(self.column_length[:-1]) + len(self.column_length) - 1) )                               
                 else:
-                    line += self.get_justified_cell_text(i, cell) + " "
+                    if (i + 1) != len(row):
+                        line += self.get_justified_cell_text(i, cell) + ' '
+                    else:
+                        line += self.get_justified_cell_text(i, cell)
+                    
             if globals.columns - (sum(self.column_length[:-1]) + len(self.column_length) - 1) < 0:
                 out.write( colorleft( line, globals.columns ) + '\n' )
             else:

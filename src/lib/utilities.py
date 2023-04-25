@@ -7,6 +7,8 @@ import uuid
 import subprocess
 import base64
 
+import lib.columnar as columnar
+
 from termcolor import colored
 from typing import (
     Sequence
@@ -28,7 +30,6 @@ def decode (b64_encoded):
         return decoded_string
     else:
         return b64_encoded
-
 
 
 def refreshrowscolumns():
@@ -85,7 +86,9 @@ def printer(string):
 
     for line in s:
         i += 1
-        print(line, sep="")
+        
+        print( line, sep='' )
+
         if 'more' in globals.extras and i > globals.rows - 2:
             sys.stdout.write("more...   (<ENTER> to continue, 'C' to cancel)")
             sys.stdout.flush()
