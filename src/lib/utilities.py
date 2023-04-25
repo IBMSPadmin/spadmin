@@ -88,6 +88,7 @@ def printer(string):
         i += 1
         
         # print( '['+line+']', sep='' )
+        print( line, sep='' )
 
         if 'more' in globals.extras and i > globals.rows - 2:
             sys.stdout.write("more...   (<ENTER> to continue, 'C' to cancel)")
