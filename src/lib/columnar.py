@@ -72,8 +72,9 @@ def invgrep(data):
 
     return invgrep_data
 
-
 def clen(text):
+    """ text length without ANSI color sequences """
+
     length = 0
     kikapcs = False
 
@@ -96,6 +97,7 @@ def clen(text):
 
 
 def colorleft( text, width ):
+    """ return colored line width size without escape sequences and correct the ANSI sequence at the end """
     ansiseq = False
     counter = 1
     ret     = ''
@@ -254,10 +256,10 @@ class Columnar:
                 lenght_of_row = sum(self.column_length) + clen(self.column_length) - 1
                 if (i + 1) == len(row) and globals.columns < lenght_of_row:
                     restlength = globals.columns - (sum(self.column_length[:-1]) + len(self.column_length) - 1)
-                    line += colorcutter(cell, restlength, '\n' + ' ' * (sum(self.column_length[:-1]) + len(self.column_length) - 1) )                               
+                    line += colorcutter(cell, restlength, '\n' + self.column_separator * (sum(self.column_length[:-1]) + len(self.column_length) - 1) )                               
                 else:
                     if (i + 1) != len(row):
-                        line += self.get_justified_cell_text(i, cell) + ' '
+                        line += self.get_justified_cell_text(i, cell) + self.column_separator
                     else:
                         line += self.get_justified_cell_text(i, cell)
                 
