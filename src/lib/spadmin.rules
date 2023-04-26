@@ -8,7 +8,7 @@
 # devclass_name  [\w\*\-\.\+\&]+
 # filespace_name [\w\*\-\.\/\\\$]+
 # volume_name    [\w\*\-\.\/\\\$]+
-# for parameters (\w+=.*)
+# for parameters (\w+=.*){1,}
 # 
 
 ########################
@@ -1147,7 +1147,66 @@ COPy -> SERVERGroup
 DEACtivate -> DAta
 DEfine -> ALERTTrigger
 DEFine -> BACKUPSET
+
+######################
+### https://www.ibm.com/docs/en/spectrum-protect/8.1.18?topic=commands-define-clientaction-define-one-time-client-action
+######################
 DEFine -> CLIENTAction
+DEFine CLIENTAction -> select node_name from nodes
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+             -> DOmain=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ DOmain=     -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+             -> ACTion=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+             -> OPTions=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+             -> OBJects=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+             -> Wait=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ ACTion=     -> ACTion=Incremental
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ ACTion=     -> ACTion=Selective
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ ACTion=     -> ACTion=Archive
+
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ ACTion=     -> ACTion=Backup
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ ACTion=     -> ACTion=REStore
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ ACTion=     -> ACTion=RETrieve
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ ACTion=     -> ACTion=IMAGEBACkup
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ ACTion=     -> ACTion=IMAGEREStore
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ ACTion=     -> ACTion=Command
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ ACTion=     -> ACTion=Macro
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ OPTions=    -> OPTions=<give_an_option_string_here>
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ OBJects=    -> OBJects=<give_an_object_string_here>
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ Wait=       -> Wait=Yes
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ Wait=       -> Wait=No
+
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> SUBACTion={Mustexist: ACTion=Archive}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=FASTBack{Mustexist: ACTion=Archive}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=SYSTEMSTate{Mustexist: ACTion=Archive}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=VM{Mustexist: ACTion=Archive}
+
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> SUBACTion={Mustexist: ACTion=Backup}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=FASTBack{Mustexist: ACTion=Backup}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=SYSTEMSTate{Mustexist: ACTion=Backup}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=VM{Mustexist: ACTion=Backup}
+
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> DOmain=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} DOmain=    -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> ACTion=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> OPTions=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> OBJects=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> Wait=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Incremental
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Selective
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Archive
+
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Backup
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=REStore
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=RETrieve
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=IMAGEBACkup
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=IMAGEREStore
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Command
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Macro
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} OPTions=   -> OPTions=<give_an_option_string_here>
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} OBJects=   -> OBJects=<give_an_object_string_here>
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Wait=      -> Wait=Yes
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Wait=      -> Wait=No
+
 DEFine -> CLIENTOpt
 DEFine -> CLOptset
 DEFine -> COLLOCGroup
