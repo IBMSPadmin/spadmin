@@ -156,10 +156,6 @@ class Spadmin(object):
                 # keep the first one as the main command
                 command = commandparts.pop(0).strip()
                 
-
-                print (command)
-                print (commandparts)
-
                 for extracommand in commandparts:
                     pairs = extracommand.split( None, maxsplit = 1 )
                     if len( pairs ) > 1:
