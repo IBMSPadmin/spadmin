@@ -122,7 +122,7 @@ jobs:
     if: "contains(github.event.head_commit.message, '[centos]')"
     runs-on: self-hosted
     env:
-      OS: CentOSLinuxrelease79
+      OS: CentOS
     strategy:
       matrix:
 #        python-version: ["3.7", "3.8", "3.9", "3.10"]
@@ -152,13 +152,13 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - run: echo "🖥️  The workflow is now setting up the build environment on the runner."
       - name: PyInstaller Linux
-        run: pyinstaller --workpath tmp --distpath build/ --paths src --onefile --name spadmin_${{env.OS}}_${{ steps.date.outputs.date }} --add-data src/lib/spadmin.rules:. src/spadmin.py
+        run: pyinstaller --workpath tmp --distpath build/ --paths src --onefile --name spadmin_${{env.OS}} --add-data src/lib/spadmin.rules:. src/spadmin.py
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: build/spadmin_${{ env.OS }}_${{ steps.date.outputs.date }}
-          name: spadmin_${{ env.OS }}
-          omitBody:     true
-          allowUpdates: true
+          artifacts: build/spadmin_${{ env.OS }}
+          omitBody:          true
+          allowUpdates:      true
+          replacesArtifacts: true
           tag: "RLS"
       
       
