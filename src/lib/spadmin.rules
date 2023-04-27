@@ -747,7 +747,7 @@ Query Node Type=                   -> Type=Server
 Query Node Type=                   -> Type=Any 
 Query Node Type=                   -> Type=OBJECTClient
 Query Node Type=                   -> Type=OSSMClient
-Query Node DOmain=                 -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node DOmain=                 -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}
 Query Node Format=                 -> Format=Standard
 Query Node Format=                 -> Format=Detailed
 Query Node AUTHentication=         -> AUTHentication=LOcal

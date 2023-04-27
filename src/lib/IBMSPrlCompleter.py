@@ -307,7 +307,10 @@ class IBMSPrlCompleter:
                 #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 #globals.logger.debug( str( tokenlength) + ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
                 #if search( '^' + utilities.regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
-                if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
+                
+                # for safer handling commands that start same (q node, q nodeg, q noded), but only if not an option (doamin=)
+                extradelimiter = '' if search( '=', key ) else ' ' 
+                if search( '^' + utilities.regexpgenerator( key ) + extradelimiter, ' '.join( tokens ) + extradelimiter, IGNORECASE):
                     globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 3rd LEVEL dictionary item: [' + key + '].')
                     globals.logger.debug(str(tokenlength) + " let's continue searching with this item(s) [" + pformat(self.rules[ key], width=180) + ']')
                 
