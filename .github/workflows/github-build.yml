@@ -155,7 +155,8 @@ jobs:
         run: pyinstaller --workpath tmp --distpath build/ --paths src --onefile --name spadmin_${{env.OS}}_${{ steps.date.outputs.date }} --add-data src/lib/spadmin.rules:. src/spadmin.py
       - uses: ncipollo/release-action@v1
         with:
-          artifacts: build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}
+          artifacts: build/spadmin_${{ env.OS }}_${{ steps.date.outputs.date }}
+          name: spadmin_${{ env.OS }}
           omitBody:     true
           allowUpdates: true
           tag: "RLS"
