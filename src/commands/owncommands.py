@@ -123,7 +123,7 @@ def define_command(clazz: SpadminCommand):
                        clazz.short_help(), clazz.help())
 
 def timemachine_query( command_type, query ):
-    
+        
     tm = globals.extras[ 'timemachine' ] if 'timemachine' in globals.extras else ''
     
     if tm == '':
