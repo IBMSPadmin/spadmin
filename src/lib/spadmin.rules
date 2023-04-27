@@ -1237,7 +1237,11 @@ DEFine -> MACHine
 DEFine -> MACHNODEAssociation
 DEFine -> MGmtclass
 DEFine -> NODEGroup
-DEFine -> NODEGROUPMember
+
+DEFine                                   -> NODEGROUPMember
+DEFine NODEGROUPMember                   -> select nodegroup_name from nodegroup
+DEFine NODEGROUPMember [\w\*\-\.\+\&\@]+ -> select node_name from nodes                         
+
 DEFine -> OBJECTDomain
 DEFine -> PATH
 DEFine -> POlicyset
@@ -1694,7 +1698,10 @@ UPDate -> LIBRary
 UPDate -> LIBVolume
 UPDate -> MACHine
 UPDate -> MGmtclass
+
 UPDate -> Node
+UPDate Node -> select node_name from nodes
+
 UPDate -> NODEGroup
 UPDate -> OBJECTDomain
 UPDate -> PATH
@@ -1706,7 +1713,10 @@ UPDate -> RETRule
 UPDate -> RETSet
 UPDate -> SCHedule
 UPDate -> SCRATCHPadentry
+
 UPDate -> SCRipt
+UPDate SCRipt -> select name from scripts
+
 UPDate -> SERver
 UPDate -> SERVERGroup
 UPDate -> SPACETrigger
