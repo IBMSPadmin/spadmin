@@ -2343,7 +2343,7 @@ class SHowDBBackups( SpadminCommand ):
         self.command        = "PAY"
 
     def short_help(self) -> str:
-        return 'Show SP DB full backups '
+        return 'Show SP DB full backups'
 
     def help(self) -> dict:
         return """ 
@@ -2378,7 +2378,7 @@ class SHowDBSBackups( SpadminCommand ):
         self.command        = "PAY"
 
     def short_help(self) -> str:
-        return 'Show SP DB full snapshot backups '
+        return 'Show SP DB full snapshot backups'
 
     def help(self) -> dict:
         return """ 
@@ -2413,7 +2413,7 @@ class SHowINActives( SpadminCommand ):
         self.command        = "PAY"
 
     def short_help(self) -> str:
-        return 'Show inactive nodes '
+        return 'Show inactive nodes'
 
     def help(self) -> dict:
         return """ 
@@ -2443,7 +2443,7 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
         self.command        = "PAY"
 
     def short_help(self) -> str:
-        return 'Show replication differences nodes '
+        return 'Show replication differences nodes'
 
     def help(self) -> dict:
         return """SHow REPLICATIONDifferences command will show the replication differences in the following format:
@@ -2501,6 +2501,35 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
 
 define_command( SHowREPLICATIONDifferences() )
 
+
+class SHowNODEOccuopancy( SpadminCommand ):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "NODEOccuopancy"
+        self.command_type   = "NODEOCCU"
+        self.command_index  = 0
+        self.command        = "PAY"
+
+    def short_help(self) -> str:
+        return 'Show node occuopancy'
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        data = []
+        
+        data = timemachine_query( self.command_type, "select node_name, type, sum(logical_mb), sum(num_files) from occupancy where node_name like upper('" + parameters  + "%') group by node_name,type order by 1,2 desc" )
+            
+        if globals.last_error[ 'rc' ] != '0':
+            return
+               
+        return columnar( data,
+                         headers = [ 'NodeName', 'BData', 'BFile', 'AData', 'AFile#', 'SumData', 'SumFile#' ],
+                         justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] )
+
+define_command( SHowNODEOccuopancy() )
 
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )

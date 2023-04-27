@@ -84,6 +84,7 @@ $-> REVoke
 $-> ROLLBACK
 $-> RUn
 # $-> Set hack
+$-> SELECT
 $-> Set
 $-> SETOPT
 $-> SHow
@@ -1147,6 +1148,10 @@ COPy -> SERVERGroup
 DEACtivate -> DAta
 DEfine -> ALERTTrigger
 DEFine -> BACKUPSET
+
+# SELECT
+SELECT .* from            -> select tabname from tables
+SELECT .* from (\w+,){1,} -> select tabname from tables
 
 ######################
 ### https://www.ibm.com/docs/en/spectrum-protect/8.1.18?topic=commands-define-clientaction-define-one-time-client-action
