@@ -251,7 +251,7 @@ class IBMSPrlCompleter:
                     
                     # here it could be improved a bit, if they all start with token[-1], they can be capitalized???
             
-                    ret.append( x + ' ' )
+                    ret.append( x.lower() + ' ' )
 
         elif tokenlength == 2:
             # LEVEL 2
@@ -287,7 +287,7 @@ class IBMSPrlCompleter:
                             
                             # here it could be improved a bit, if they all start with token[-1], they can be capitalized???
                             
-                            ret.append( x + ' ' )
+                            ret.append( x.lower() + ' ' )
                                                     
                             continue
 
