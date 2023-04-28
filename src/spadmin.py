@@ -144,8 +144,12 @@ class Spadmin(object):
                         break
 
                 # add right part of the alias if exists
+                aliasrestparts = []
+                aliasparam = ''
                 if aliasrest != '':
-                    command += aliasrest
+                    aliasrest      = aliasrest.replace('||', '##')
+                    aliasrestparts = aliasrest.split('|')
+                    aliasparam     = aliasrestparts.pop(0).strip()
 
                 # protect the || as ##
                 command = command.replace('||', '##')
@@ -155,8 +159,10 @@ class Spadmin(object):
 
                 # keep the first one as the main command
                 command = commandparts.pop(0).strip()
+                if aliasparam != '':
+                    command += ' ' + aliasparam
                 
-                for extracommand in commandparts:
+                for extracommand in commandparts + aliasrestparts:
                     pairs = extracommand.split( None, maxsplit = 1 )
                     if len( pairs ) > 1:
                         globals.extras[pairs[0].lower()] = pairs[1].replace( '##', '|' ).strip()  # change back if exists
