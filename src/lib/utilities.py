@@ -63,7 +63,7 @@ def printer(string):
     if not string:
         return
 
-    filename = globals.extras[ 'file' ] if 'file' in globals.extras else ''
+    filename = globals.extras[ 'file' ][-1] if 'file' in globals.extras else ''
     
     if filename != '':
         with open( filename, 'w' ) as f:
@@ -71,7 +71,7 @@ def printer(string):
             f.writelines( '\n' )
         return
 
-    filename = globals.extras[ 'fileappend' ] if 'fileappend' in globals.extras else ''
+    filename = globals.extras[ 'fileappend' ][-1] if 'fileappend' in globals.extras else ''
     
     if filename != '':
         with open( filename, 'a' ) as f:

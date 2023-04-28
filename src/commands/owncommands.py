@@ -955,7 +955,7 @@ class SHowSESsions(SpadminCommand):
 
         globals.lastdsmcommandresults = data2
         return columnar(data2, headers=[
-            '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAccess', 'Verb'],
+            '#', 'Id', 'State', 'Wait', 'Sent', 'Received', 'Type', 'Platform', 'Name', 'MediaAcc', 'Verb'],
                         justify=['r', 'c', 'c', 'r', 'r', 'r', 'r', 'c', 'l', 'l', 'l'])
 
 

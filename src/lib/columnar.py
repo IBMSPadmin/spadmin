@@ -215,12 +215,12 @@ class Columnar:
         out = io.StringIO()
 
         orderby = globals.extras['orderby'] if 'orderby' in globals.extras else ''
-        if orderby != '' and orderby is not None and orderby.isnumeric() and int(orderby) < len(data[0]):
-            data = sorted(data, key=itemgetter(int(orderby)), reverse=False)
+        if orderby != '' and orderby is not None and orderby[-1].isnumeric() and int(orderby[-1]) < len(data[0]):
+            data = sorted(data, key=itemgetter(int(orderby[-1])), reverse=False)
 #            headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ])
 
             # headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ]) + Fore.WHITE + Style.BRIGHT
-            headers[ int(orderby)] = colorize( headers[int(orderby)], headers[int(orderby)], globals.color_green, [ globals.color_attrs_bold ] )
+            headers[ int(orderby[-1])] = colorize( headers[int(orderby[-1])], headers[int(orderby[-1])], globals.color_green, [ globals.color_attrs_bold ] )
 
         # Grep
         data = invgrep( grep( data ) )
