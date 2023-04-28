@@ -3,7 +3,6 @@
 Fast and friendly SP admin client. spadmin.py is getting better and better day after day and we are happy to share our results with you.
 
 
-
 # aktuális toDo-k
 
 ## beszíneztem a mount és drive parancsokat
