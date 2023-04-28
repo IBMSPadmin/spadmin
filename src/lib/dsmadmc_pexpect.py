@@ -89,7 +89,7 @@ class dsmadmc_pexpect:
         4. returns a list of list, outter list is separated line-by-line, inner list is tab separated
         """
         
-        onserver = '(' + globals.extras[ 'onserver' ] + ') ' if 'onserver' in globals.extras else ''
+        onserver = '(' + globals.extras[ 'onserver' ][-1] + ') ' if 'onserver' in globals.extras else ''
         
         list = self.send_command_tabdel( onserver + command ).splitlines()
         ar = []
