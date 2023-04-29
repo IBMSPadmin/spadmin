@@ -16,9 +16,13 @@ from typing import (
 def grep(data):
     # print ("----------- ", data, "-------------")
     grep = globals.extras['grep'] if 'grep' in globals.extras else ''
-    grep_data = []
+    
     if grep != '' and grep is not None:
+        
         for g in grep:
+    
+            grep_data = []
+            
             for i, row in enumerate(data):
                 found = False
                 for c, cell in enumerate(row):
@@ -30,6 +34,11 @@ def grep(data):
                             data[i][c] = colorize(cell, find, 'white', ['bold'])
                 if found == True:
                     grep_data.append(row)
+            # ???
+            data = []
+            for i in grep_data:
+                data.append(i)
+            
     else:
         grep_data = data
         
@@ -58,9 +67,13 @@ def grep(data):
 
 def invgrep(data):
     invgrep = globals.extras['invgrep'] if 'invgrep' in globals.extras else ''
-    invgrep_data = []
+    
     if invgrep != '' and invgrep is not None:
+    
         for invg in invgrep:
+    
+            invgrep_data = []
+    
             for i, row in enumerate(data):
                 found = False
                 for c, cell in enumerate(row):
@@ -69,6 +82,12 @@ def invgrep(data):
                         found = True
                 if found == False:
                     invgrep_data.append(row)
+            
+                # ???        
+                data = []
+                for i in invgrep_data:
+                    data.append(i)
+                    
     else:
         invgrep_data = data
 
