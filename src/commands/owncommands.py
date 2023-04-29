@@ -202,7 +202,7 @@ class SPadminAddALIas(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin Add ALIas"
-        self.command_type = "ALIAS"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -237,7 +237,7 @@ class SPadminAddSErver(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin Add SErver"
-        self.command_type = "SERVER"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -278,7 +278,7 @@ class SPadminDELeteSErver(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin DELete SErver"
-        self.command_type = "SERVER"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -316,7 +316,7 @@ class SPadminSWitchSErver(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SWitch SErver"
-        self.command_type = "SERVER"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -365,7 +365,7 @@ class SPadminSHowCONFig(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow CONFig"
-        self.command_type = "CONFIG"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -396,7 +396,7 @@ class SPadminSHowALIases(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow ALIases"
-        self.command_type = "ALIAS"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -421,7 +421,7 @@ class SPadminSHowVERsion(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow VERsion"
-        self.command_type = "VERSION"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -447,7 +447,7 @@ class SPadminSETDEBUG(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SET DEBUG"
-        self.command_type = "DEBUG"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -472,7 +472,7 @@ class SPadminUNSETDEBUG(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin UNSET DEBUG"
-        self.command_type = "DEBUG"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -496,7 +496,7 @@ class SPadminSHowRULes(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow RULes"
-        self.command_type = "RULES"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -539,7 +539,7 @@ class SPadminSHowLOG(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow LOG"
-        self.command_type = "LOGFILE"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -565,7 +565,7 @@ class SPadminSHowPRocessinfo(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow PRocessinfo"
-        self.command_type = "PROCESSINFO"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -589,7 +589,7 @@ class SPadminDELeteALIas(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin DELete ALIas"
-        self.command_type = "ALIAS"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -622,7 +622,7 @@ class SPadminSHowSErver(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow SErvers"
-        self.command_type = "SERVERS"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -651,7 +651,7 @@ class SPadminSHowCOMmands(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow COMmands"
-        self.command_type = "COMMANDS"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "FREE"
 
@@ -727,7 +727,7 @@ class REload(SpadminCommand):
 
     def __init__(self):
         self.command_string = "REload"
-        self.command_type = "RELOAD"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -782,7 +782,7 @@ class SpadminShowCache(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow CAche"
-        self.command_type = "CACHE"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -823,8 +823,8 @@ define_command(SpadminShowCache())
 class SHowLASTerror(SpadminCommand):
 
     def __init__(self):
-        self.command_string = globals.basecommandname + "LASTerror"
-        self.command_type = "CACHE"
+        self.command_string = "SPadmin SHow LASTerror"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -847,7 +847,7 @@ class SPadminSHowEXtras(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow EXtras"
-        self.command_type = "EXTRAS"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -870,7 +870,7 @@ class PRint(SpadminCommand):
 
     def __init__(self):
         self.command_string = "PRint"
-        self.command_type = "PRINT"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -1029,7 +1029,7 @@ class SPadminSHowLOCALLOG(SpadminCommand):
 
     def __init__(self):
         self.command_string = "SPadmin SHow LOCALLOG"
-        self.command_type = "LOCALLOG"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -1342,7 +1342,7 @@ define_command(DISMount())
 class Ruler(SpadminCommand):
     def __init__(self):
         self.command_string = globals.basecommandname + "RULer"
-        self.command_type = "RULER"
+        self.command_type = "SPADMIN"
         self.command_index = 0
         self.command = "PAY"
 
@@ -1564,7 +1564,7 @@ define_command(ShowPath())
 class ShowColumns(SpadminCommand):
     def __init__(self):
         self.command_string = globals.basecommandname + "COLumns"
-        self.command_type = "columns"
+        self.command_type = "COLUMNS"
         self.command_index = 0
         self.command = "PAY"
 
