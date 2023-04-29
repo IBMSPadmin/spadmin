@@ -26,7 +26,7 @@ def grep(data):
             for i, row in enumerate(data):
                 found = False
                 for c, cell in enumerate(row):
-                    finds = re.findall(g, str(cell))
+                    finds = re.findall(g, str(cell), re.IGNORECASE )
                     if len(finds) > 0:
                         found = True
                         for find in finds:
@@ -42,26 +42,36 @@ def grep(data):
     else:
         grep_data = data
         
-    # grepp test
+    # crepp test
     data = grep_data    
 
-    grep = globals.extras['grepp'] if 'grepp' in globals.extras else ''
-    grep_data = []
+    grep = globals.extras['cgrep'] if 'cgrep' in globals.extras else ''
+    
     if grep != '' and grep is not None:
-        for i, row in enumerate(data):
-            found = False
-            for c, cell in enumerate(row):
-                finds = re.findall(grep, str(cell))
-                if len(finds) > 0:
-                    found = True
-                    for find in finds:
-                        # data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
-                        data[i][c] = colorize(cell, find, 'white', ['bold'])
-            if found == True:
-                grep_data.append(row)
+        
+        for g in grep:
+    
+            grep_data = []
+            
+            for i, row in enumerate(data):
+                found = False
+                for c, cell in enumerate(row):
+                    finds = re.findall(g, str(cell) )
+                    if len(finds) > 0:
+                        found = True
+                        for find in finds:
+                            # data[i][c] = str(cell).replace(find, Fore.GREEN + find + Style.RESET_ALL)
+                            data[i][c] = colorize(cell, find, 'white', ['bold'])
+                if found == True:
+                    grep_data.append(row)
+            # ???
+            data = []
+            for i in grep_data:
+                data.append(i)
+            
     else:
-        grep_data = data        
-
+        grep_data = data
+        
     return grep_data
 
 
