@@ -42,7 +42,7 @@ def grep(data):
     else:
         grep_data = data
         
-    # crepp test
+    # cgrep test
     data = grep_data    
 
     grep = globals.extras['cgrep'] if 'cgrep' in globals.extras else ''
