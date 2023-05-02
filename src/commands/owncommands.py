@@ -1122,7 +1122,7 @@ class ShowEvents(SpadminCommand):
     09/27/2022 13:00:00                                14:00:00 FILES  INC_1300     SERVER_D            Missed"""
 
     def _execute(self, parameters: str) -> str:       
-        data = timemachine_query( self.command_type, 'q event * * endd=today f=d' + ' ' + parameters)
+        data = timemachine_query( self.command_type, 'q event * * endd=today endt=now+1 f=d' + ' ' + parameters)
         
         if globals.last_error['rc'] != '0':
             return
@@ -1158,11 +1158,68 @@ class ShowEvents(SpadminCommand):
         table = (columnar(data2,
                           headers=['StartTime >', 'ActualStart', '< Completed', 'Domain', 'ScheduleName', 'NodeName',
                                    'Result', 'RC'],
-                          justify=['r', 'c', 'l', 'l', 'l', 'l', 'l', 'r']))
+                          justify=['r', 'c', 'l', 'c', 'l', 'l', 'l', 'r']))
 
         return table
 
 define_command(ShowEvents())
+
+
+class ShowADMINEVents( SpadminCommand ):
+    def __init__(self):
+        self.command_string = globals.basecommandname + "ADMINEVents"
+        self.command_type = "EVENT"
+        self.command_index = 0
+        self.command = "PAY"
+
+    def short_help(self) -> str:
+        return 'SHow ADMINEVents: display information about Events'
+
+    def help(self) -> dict:
+        return """Display the following information about admin events in the following order and format:
+    """
+
+    def _execute(self, parameters: str) -> str:       
+        data = timemachine_query( self.command_type, 'q event * endd=today endt=now+8 t=a f=d' + ' ' + parameters)
+        
+        if globals.last_error['rc'] != '0':
+            return
+
+        data2 = []
+        for index, row in enumerate(data):
+
+            if row[2][0:10] == row[1][0:10]:
+                row[2] = '          ' + row[2][10:]
+            if row[3][0:10] == row[1][0:10]:
+                row[3] = '          ' + row[3][10:]
+
+            if row[4] == 'Missed':
+                row[4] = utilities.color(row[4], 'yellow' )
+            elif row[4] == 'Failed' or row[4] == 'Failed - no restart':
+                row[4] = utilities.color(row[4], 'red')
+            elif row[4] == 'Pending':
+                row[4] = utilities.color(row[4], 'yellow' )
+            elif row[4] == 'Started':
+                row[4] = utilities.color(row[4], 'yellow' )
+            elif row[4] == 'Completed':
+                row[4] = utilities.color(row[4], 'green' )
+
+            if row[5] == '0':
+                row[5] = utilities.color(row[5], 'green' )
+            elif row[5] == '4' or row[5] == '8':
+                row[5] = utilities.color(row[5], 'yellow')
+            else:
+                row[5] = utilities.color(row[5], 'red')
+
+            data2.append( [ row[1], row[2], row[3], row[0], row[4], row[5] ] )
+
+        table = ( columnar( data2,
+                          headers=[ 'StartTime >', 'ActualStart', '< Completed', 'ScheduleName', 'Result', 'RC' ],
+                          justify=[ 'r', 'c', 'l', 'l', 'l', 'r' ] ) )
+
+        return table
+
+define_command(ShowADMINEVents())
 
 
 class ShowStgp(SpadminCommand):
