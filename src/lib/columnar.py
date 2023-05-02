@@ -238,71 +238,106 @@ class Columnar:
             headers: Union[None, Sequence[Any]] = None,
             justify: Union[str, List[str]] = "l",
     ) -> str:
-        self.justify = justify
-        self.column_separator = " "  # lenght of separator should be 1 char.
-        self.header_decorator = "-"  # lenght of decorator should be 1 char.
+        
         out = io.StringIO()
-
-        orderby = globals.extras['orderby'] if 'orderby' in globals.extras else ''
-        if orderby != '' and orderby is not None and orderby[-1].isnumeric() and int(orderby[-1]) < len(data[0]):
-            data = sorted(data, key=itemgetter(int(orderby[-1])), reverse=False)
-#            headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ])
-            ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
-            headers[int(orderby[-1])] = ansi_escape.sub('', headers[int(orderby[-1])])
-            # headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ]) + Fore.WHITE + Style.BRIGHT
-            headers[ int(orderby[-1])] = colorize( headers[int(orderby[-1])], headers[int(orderby[-1])], globals.color_green, [ globals.color_attrs_bold ] )
-
-        # Grep
-        data = invgrep( grep( data ) )
-
-        self.column_length = get_column_length(headers, data)
-        header_decorator = ""
-        for i, cell in enumerate(headers):
-            header_decorator += self.header_decorator * self.column_length[i] + self.column_separator
-
-        # Header 1st decorator line --------
-        # out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
-        out.write( utilities.color( header_decorator[:globals.columns].rstrip(), globals.color_white) + "\n")
-
-        # Header
-        header_line = ''
-        for i, cell in enumerate(headers):
+        
+        htmlout = True if 'htmlout' in globals.extras else False
+        
+        if htmlout:
             
-            # header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white, attrs=[ globals.color_attrs_bold ] )
-            header_line += utilities.color( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white )
-
-        # out.write( header_line[ :globals.columns + len( header_line ) - clen( header_line ) ] + "\n")
-        out.write( colorleft( header_line, globals.columns ) + "\n" )
-
-        # Header 2nd decorator line --------
-        # out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
-        out.write( utilities.color( header_decorator[:globals.columns].rstrip(), globals.color_white ) + "\n")
-
-        # Rows
-        for row in data:  # sorok kiíratása
+            out.write( '<table border="1">\n' )
+            out.write( '<tr>\n' )
+                                         
+            for i, cell in enumerate(headers):
+                out.write( '<th>' + cell + '</th>' )
+               
+            out.write( '\n</tr>\n' )
             
-            line = ''
-                        
-            for i, cell in enumerate(row):  # cellák kiíratása
+            # Rows
+            for row in data:  # sorok kiíratása
+            
+                out.write( '<tr>\n' )
+            
+                for cell in row:
+                    out.write( '<td>' + str(cell) + '</td>' )       
+            
+                out.write( '\n</tr>\n' )
+
+            out.write( '</table>' )
+
+            return out.getvalue() 
+            
+        else:
+        
+            self.justify = justify
+            self.column_separator = " "  # lenght of separator should be 1 char.
+            self.header_decorator = "-"  # lenght of decorator should be 1 char.
+            
+            # override the screen width
+            maxwidth = globals.extras[ 'maxwidth' ] if 'maxwidth' in globals.extras else ''
+            if maxwidth:
+                globals.columns = int( maxwidth[-1] )
+    
+            orderby = globals.extras['orderby'] if 'orderby' in globals.extras else ''
+            if orderby != '' and orderby is not None and orderby[-1].isnumeric() and int(orderby[-1]) < len(data[0]):
+                data = sorted(data, key=itemgetter(int(orderby[-1])), reverse=False)
+    #            headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ])
+                ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+                headers[int(orderby[-1])] = ansi_escape.sub('', headers[int(orderby[-1])])
+                # headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ]) + Fore.WHITE + Style.BRIGHT
+                headers[ int(orderby[-1])] = colorize( headers[int(orderby[-1])], headers[int(orderby[-1])], globals.color_green, [ globals.color_attrs_bold ] )
+    
+            # Grep
+            data = invgrep( grep( data ) )
+    
+            self.column_length = get_column_length(headers, data)
+            header_decorator = ""
+            for i, cell in enumerate(headers):
+                header_decorator += self.header_decorator * self.column_length[i] + self.column_separator
+    
+            # Header 1st decorator line --------
+            # out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
+            out.write( utilities.color( header_decorator[:globals.columns].rstrip(), globals.color_white) + "\n")
+    
+            # Header
+            header_line = ''
+            for i, cell in enumerate(headers):
                 
-                lenght_of_row = sum(self.column_length) + clen(self.column_length) - 1
-                if (i + 1) == len(row) and globals.columns < lenght_of_row:
-                    restlength = globals.columns - (sum(self.column_length[:-1]) + len(self.column_length) - 1)
-                    line += colorcutter(cell, restlength, '\n' + self.column_separator * (sum(self.column_length[:-1]) + len(self.column_length) - 1) )                               
-                else:
-                    if (i + 1) != len(row):
-                        line += self.get_justified_cell_text(i, cell) + self.column_separator
-                    else:
-                        line += self.get_justified_cell_text(i, cell)
+                # header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white, attrs=[ globals.color_attrs_bold ] )
+                header_line += utilities.color( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white )
+    
+            # out.write( header_line[ :globals.columns + len( header_line ) - clen( header_line ) ] + "\n")
+            out.write( colorleft( header_line, globals.columns ) + "\n" )
+    
+            # Header 2nd decorator line --------
+            # out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
+            out.write( utilities.color( header_decorator[:globals.columns].rstrip(), globals.color_white ) + "\n")
+    
+            # Rows
+            for row in data:  # sorok kiíratása
                 
-            line = line.rstrip()
+                line = ''
+                            
+                for i, cell in enumerate(row):  # cellák kiíratása
                     
-            if globals.columns - (sum(self.column_length[:-1]) + len(self.column_length) - 1) < 0:
-                out.write( colorleft( line, globals.columns ) + '\n' )
-            else:
-                out.write( line + '\n' )
-            
-        return out.getvalue()[ :-1 ]
+                    lenght_of_row = sum(self.column_length) + clen(self.column_length) - 1
+                    if (i + 1) == len(row) and globals.columns < lenght_of_row:
+                        restlength = globals.columns - (sum(self.column_length[:-1]) + len(self.column_length) - 1)
+                        line += colorcutter(cell, restlength, '\n' + self.column_separator * (sum(self.column_length[:-1]) + len(self.column_length) - 1) )                               
+                    else:
+                        if (i + 1) != len(row):
+                            line += self.get_justified_cell_text(i, cell) + self.column_separator
+                        else:
+                            line += self.get_justified_cell_text(i, cell)
+                    
+                line = line.rstrip()
+                        
+                if globals.columns - (sum(self.column_length[:-1]) + len(self.column_length) - 1) < 0:
+                    out.write( colorleft( line, globals.columns ) + '\n' )
+                else:
+                    out.write( line + '\n' )
+                
+            return out.getvalue()[ :-1 ]
 
     def get_justified_cell_text(self, i, cell):
 

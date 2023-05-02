@@ -2594,7 +2594,7 @@ class SHowNODEOccuopancy( SpadminCommand ):
                               
         return columnar( data2,
                          headers = [ 'NodeName', 'DoaminName', 'BData', 'AData', 'SPData', 'SumData' ],
-                         justify = [ 'l', 'l', 'l', 'l', 'l', 'l' ] )
+                         justify = [ 'l', 'l', 'r', 'r', 'r', 'r' ] )
 
 define_command( SHowNODEOccuopancy() )
 

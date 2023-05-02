@@ -243,6 +243,10 @@ def dictmerger(destination, source):
         
 def color( text, color: "" ):
     
+    nocolor = True if 'nocolor' in globals.extras else False
+    if nocolor:
+        return text
+
     htmlout = True if 'htmlout' in globals.extras else False
     
     if htmlout:

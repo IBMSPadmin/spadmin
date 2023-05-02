@@ -342,7 +342,7 @@ class Spadmin(object):
 
         globals.prereqcheck = 'False'
         if args.prereqcheck:
-            globals.prereqcheck = args.prereqcheck
+            globals.prereqcheck = 'True'
         elif globals.config.getconfiguration()['SPADMIN'].get( 'prereqcheck' ) is not None:
             globals.prereqcheck = globals.config.getconfiguration()['SPADMIN']['prereqcheck']
 
@@ -357,6 +357,14 @@ class Spadmin(object):
             globals.basecommandname = args.basecommandname
         elif globals.config.getconfiguration()['SPADMIN'].get( 'basecommandname' ) is not None:
             globals.basecommandname = globals.config.getconfiguration()['SPADMIN']['basecommandname']
+            
+        print(args)
+            
+        globals.nohumanreadable = 'False'
+        if args.nohumanreadable:
+            globals.nohumanreadable = 'True'
+        elif globals.config.getconfiguration()['SPADMIN'].get( 'nohumanreadable' ) is not None:
+            globals.nohumanreadable = globals.config.getconfiguration()['SPADMIN']['nohumanreadable']
         
         if args.consoleonly:
             print("\nConsole mode...")
@@ -474,7 +482,7 @@ class Spadmin(object):
                             help='spadmin uses the server stanza to determine the server to connects to')
 
         parser.add_argument('-t', '--textcolor', type=str, help='specify the text color [default: "white"]')
-        parser.add_argument('-u', '--nohumanreadable', action='version', version='%(prog)s v1.0',
+        parser.add_argument('-u', '--nohumanreadable', action='store_const', const=True, 
                             help='no human readable conversions')
         parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.0',
                             help='show version information')

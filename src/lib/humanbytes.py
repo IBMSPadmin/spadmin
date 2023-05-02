@@ -2,6 +2,8 @@
 
 from typing import List, Union
 
+import lib.globals as globals
+
 class HumanBytes:
 	METRIC_LABELS: List[ str ]       = [ "B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" ]
 	BINARY_LABELS: List[ str ]       = [ "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB" ]
@@ -16,6 +18,9 @@ class HumanBytes:
 		Human-readable formatting of bytes, using binary (powers of 1024)
 		or metric (powers of 1000) representation.
 		"""
+		
+		if globals.nohumanreadable == 'True':
+			return str( num )
 
 		assert isinstance( num, ( int, float ) ), "num must be an int or float"
 		assert isinstance( precision, int ) and precision >= 0 and precision <= 3, "precision must be an int (range 0-3)"
