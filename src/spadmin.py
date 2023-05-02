@@ -460,7 +460,7 @@ class Spadmin(object):
                                'Use order by, eg.: show nodeoccuopancy  |orderby 5',
                                'Use grep and regexp together, eg.: show actlog |grep ANR....E',
                                'Use inverse grep, eg.: show sess |invgrep Run']
-            print("    Tip of the day: ", tips_and_tricks[random.randint(0, len(tips_and_tricks))])
+            print("    Tip of the day: ", tips_and_tricks[random.randint(0, len(tips_and_tricks)-1)])
             print()
 
     def getargs(self):
