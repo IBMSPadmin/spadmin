@@ -11,7 +11,7 @@
       - pip3 install termcolor 
       - pip3 install readchar
       - pip3 install gnureadline
-- dsmamdc v8.1.15 
+- dsmamdc v8.1.17
 - dsmserv v8.1.14
 
 ## dsmadmc kezelés pexpect modullal 
