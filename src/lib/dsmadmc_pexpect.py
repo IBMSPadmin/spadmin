@@ -102,6 +102,8 @@ class dsmadmc_pexpect:
         while ("" in list):  ## every output contains empty lines, we remove it
             list.remove("")
         for i in list:
+            if i.startswith('ANR1699I') or i.startswith('ANR1687I') or i.startswith('ANR1688I') or i.startswith('ANR1694I') or i.startswith('ANR1697I'):
+                continue
             ar.append(split(r'\t', i))
         return ar
 
