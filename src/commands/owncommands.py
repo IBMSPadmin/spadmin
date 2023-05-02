@@ -110,10 +110,10 @@ def help(command_name):
 
 
 def define_own_command(command_string, function_address, command_type, index, short_help, help):
-    spadmin_commands[command_string] = function_address
+    spadmin_commands[command_string]       = function_address
     dynruleinjector(command_string)
     command_type_and_index[command_string] = [command_type, index]
-    command_help[command_string] = [short_help, help]
+    command_help[command_string]           = [short_help, help]
 
 
 def define_command(clazz: SpadminCommand):
