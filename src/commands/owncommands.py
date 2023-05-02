@@ -2598,5 +2598,6 @@ class SHowNODEOccuopancy( SpadminCommand ):
 
 define_command( SHowNODEOccuopancy() )
 
+
 # merge these commands to the global rules
 utilities.dictmerger( globals.myIBMSPrlCompleter.rules, globals.myIBMSPrlCompleter.dynrules )
