@@ -114,6 +114,10 @@ $ -> HISTory
 
 $ -> grep
 $ -> invgrep
+$ -> cgrep
+$ -> nocolor
+$ -> htmlout
+$ -> maxwidth
 $ -> count
 $ -> orderby
 $ -> mailto
