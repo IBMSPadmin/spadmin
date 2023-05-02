@@ -2577,14 +2577,24 @@ class SHowNODEOccuopancy( SpadminCommand ):
     def _execute(self, parameters: str) -> str:
         data = []
         
-        data = timemachine_query( self.command_type, "select node_name, type, sum(logical_mb), sum(num_files) from occupancy where node_name like upper('" + parameters  + "%') group by node_name,type order by 1,2 desc" )
+        data = timemachine_query( self.command_type, "select a.NODE_NAME, n.domain_name, BACKUP_MB, ARCHIVE_MB, SPACEMG_MB, TOTAL_MB from auditocc a, nodes n where n.node_name = a.node_name order by 6" )
             
         if globals.last_error[ 'rc' ] != '0':
             return
-               
-        return columnar( data,
-                         headers = [ 'NodeName', 'BData', 'BFile', 'AData', 'AFile#', 'SumData', 'SumFile#' ],
-                         justify = [ 'l', 'l', 'l', 'l', 'l', 'l', 'l' ] )
+        
+        data2 = []
+        for row in data:
+
+            row[2] = humanbytes.HumanBytes.format( float( row[2] ) * 1024 * 1024, unit="BINARY_LABELS", precision=0 )
+            row[3] = humanbytes.HumanBytes.format( float( row[3] ) * 1024 * 1024, unit="BINARY_LABELS", precision=0 )
+            row[4] = humanbytes.HumanBytes.format( float( row[4] ) * 1024 * 1024, unit="BINARY_LABELS", precision=0 )
+            row[5] = humanbytes.HumanBytes.format( float( row[5] ) * 1024 * 1024, unit="BINARY_LABELS", precision=0 )
+          
+            data2.append( row )
+                              
+        return columnar( data2,
+                         headers = [ 'NodeName', 'DoaminName', 'BData', 'AData', 'SPData', 'SumData' ],
+                         justify = [ 'l', 'l', 'l', 'l', 'l', 'l' ] )
 
 define_command( SHowNODEOccuopancy() )
 
