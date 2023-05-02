@@ -247,7 +247,8 @@ class Columnar:
         if orderby != '' and orderby is not None and orderby[-1].isnumeric() and int(orderby[-1]) < len(data[0]):
             data = sorted(data, key=itemgetter(int(orderby[-1])), reverse=False)
 #            headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ])
-
+            ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+            headers[int(orderby[-1])] = ansi_escape.sub('', headers[int(orderby[-1])])
             # headers[int(orderby)] = colored(headers[int(orderby)], "green", attrs=[ 'bold' ]) + Fore.WHITE + Style.BRIGHT
             headers[ int(orderby[-1])] = colorize( headers[int(orderby[-1])], headers[int(orderby[-1])], globals.color_green, [ globals.color_attrs_bold ] )
 
