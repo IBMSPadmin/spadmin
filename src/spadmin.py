@@ -56,6 +56,7 @@ from time import time
 from termcolor import colored
 from pprint import pformat
 from re import search, IGNORECASE, split
+import random
 
 columnar = lib.columnar.Columnar()
 prgstart = time()
@@ -454,6 +455,12 @@ class Spadmin(object):
             print('''
     Use: "QUIt", "BYe", "LOGOut" or "Exit" commands to leave the program or
     Use: "SPadmin SHow LOG" or "SPadmin SHow LOCALLOG" to load the log file!''')
+            print()
+            tips_and_tricks = ['Use grep, eg.: show session |grep Idle',
+                               'Use order by, eg.: show nodeoccuopancy  |orderby 5',
+                               'Use grep and regexp together, eg.: show actlog |grep ANR....E',
+                               'Use inverse grep, eg.: show sess |invgrep Run']
+            print("    Tip of the day: ", tips_and_tricks[random.randint(0, len(tips_and_tricks))])
             print()
 
     def getargs(self):
