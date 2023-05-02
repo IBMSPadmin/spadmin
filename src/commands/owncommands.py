@@ -2159,9 +2159,9 @@ class ShowSTatus( SpadminCommand ):
 
         data.append( [ ' Last Full Volume', '[' + utilities.color( DBLastFull, 'green' ) + ']' ] )
         
-        status = '  Ok. ✅'
+        status = '  Ok.'
         if int( DBerrorcollector ) > 0:
-            status = utilities.color( '  Failed! ❌', 'red' )                        
+            status = utilities.color( '  Failed!', 'red' )                        
         data.append( [ 'DB overall STATUS', '->', status ] )
                         
         data.append( [] )
@@ -2189,9 +2189,9 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ ' Active failover log dir', logArchFailLog ] )    
         data.append( [ ' Active mirror log dir', logMirrorDir ] )    
         
-        status = '  Ok. ✅'
+        status = '  Ok.'
         if int( LOGerrorcollector ) > 0:
-            status = utilities.color( '  Failed! ❌', 'red' )                        
+            status = utilities.color( '  Failed!', 'red' )                        
         data.append( [ 'LOG overall STATUS', '->', status ] )
         
         data.append( [] )
@@ -2209,9 +2209,9 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ ' Unavailable Vol(s)', unavaVols + ' / ' + sumVols ] ) 
         data.append( [ ' Suspicious Vol(s)',  rweVols   + ' / ' + sumVols ] )
 
-        status = '  Ok. ✅'
+        status = '  Ok.'
         if int( roVols ) + int( unavaVols ) + int( rweVols ) > 0:
-            status = utilities.color( '  Failed! ❌', 'red' )
+            status = utilities.color( '  Failed!', 'red' )
             VOLerrorcollector += 1                        
         data.append( [ 'VOLs overall STATUS', '->', status ] )
 
@@ -2229,9 +2229,9 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ ' Offline drive(s)', offDrives + ' / ' + sumDrives ] )
         data.append( [ ' Offline path(s)',  offPaths  + ' / ' + sumPaths ] )
 
-        status = '  Ok. ✅'
+        status = '  Ok.'
         if int( offDrives ) + int( offPaths ) > 0:
-            status = utilities.color( '  Failed! ❌', 'red' )
+            status = utilities.color( '  Failed!', 'red' )
             HWerrorcollector += 1                        
         data.append( [ 'HW overall STATUS', '->', status ] )
 
@@ -2252,9 +2252,9 @@ class ShowSTatus( SpadminCommand ):
         failed = globals.tsm.send_command_array_array_tabdel( "select count(1) from events where status='Failed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is not null and NODE_NAME is not null" )[0][0]
         data.append( [ ' Failed', failed ] )
 
-        status = '  Ok. ✅'
+        status = '  Ok.'
         if int( EVENTerrorcollector ) + int( missed ) + int( failed ) > 0 :
-            status = utilities.color( '  Failed! ❌', 'red' )
+            status = utilities.color( '  Failed!', 'red' )
             EVENTerrorcollector += 1                        
         data.append( [ 'EVENTs overall STATUS', '->', status ] )
 
@@ -2267,9 +2267,9 @@ class ShowSTatus( SpadminCommand ):
         failed = globals.tsm.send_command_array_array_tabdel( "select count(1) from SUMMARY_EXTENDED where ACTIVITY_DETAILS='VMware' and SUB_ENTITY != 'Aggregate' and (start_time >= current_timestamp - 1 day) and SUCCESSFUL != 'YES' order by 1" )[0][0]
         data.append( [ ' Failed', failed ] )
         
-        status = '  Ok. ✅'
+        status = '  Ok.'
         if int( VMerrorcollector ) + int( failed ) > 0 :
-            status = utilities.color( '  Failed! ❌', 'red' )
+            status = utilities.color( '  Failed!', 'red' )
             VMerrorcollector += 1                        
         data.append( [ 'VM overall STATUS', '->', status ] )
 
@@ -2296,9 +2296,9 @@ class ShowSTatus( SpadminCommand ):
         failed = globals.tsm.send_command_array_array_tabdel( "select count(1) from events where status='Failed' and SCHEDULED_START>'2012-01-01 00:00:00' and (SCHEDULED_START>=current_timestamp-24 hour) and DOMAIN_NAME is null and NODE_NAME is null" )[0][0]
         data.append( [ ' Failed', failed ] )
         
-        status = '  Ok. ✅'
+        status = '  Ok.'
         if int( ADMINerrorcollector ) + int( missed ) + int( failed ) > 0 :
-            status = utilities.color( '  Failed! ❌', 'red' )
+            status = utilities.color( '  Failed!', 'red' )
             EVENTerrorcollector += 1                        
         data.append( [ 'ADMIN EVENTs overall STATUS', '->', status ] )
     
@@ -2308,13 +2308,13 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ '<24H activity log summary' ] )
         ACTLOGerrorcollector = 0
         
-        for severity in globals.tsm.send_command_array_array_tabdel( "select severity, count(1) from actlog where (DATE_TIME>=current_timestamp-24 hour) and severity in ('E','W') and MSGNO not in (2034, 0944) group by severity" ):
+        for severity in globals.tsm.send_command_array_array_tabdel( "select severity, count(1) from actlog where (DATE_TIME>=current_timestamp-24 hour) and severity in ('E','W') and MSGNO not in (2000, 2034, 0944) group by severity" ):
             data.append( [ ' Completed (' + severity[0] + ')', severity[1] ] )
             ACTLOGerrorcollector =+ 1
 
-        status = '  Ok. ✅'
+        status = '  Ok.'
         if int( ACTLOGerrorcollector ) + int( failed ) > 0 :
-            status = utilities.color( '  Failed! ❌', 'red' )                        
+            status = utilities.color( '  Failed!', 'red' )                        
         data.append( [ 'ACTLOG overall STATUS', '->', status ] )
                 
         data.append( [] )
@@ -2322,9 +2322,9 @@ class ShowSTatus( SpadminCommand ):
         # GLOBAL SUM part
         data.append( [ 'Global SP status summary' ] )
         
-        status = '  Ok. ✅'
+        status = '  Ok.'
         if int( DBerrorcollector ) + int( LOGerrorcollector ) + + int( VOLerrorcollector ) + + int( HWerrorcollector ) + int( EVENTerrorcollector ) + int( VMerrorcollector ) + int( ACTLOGerrorcollector )  > 0 :
-            status = utilities.color( '  Failed! ❌', 'red' )                        
+            status = utilities.color( '  Failed!', 'red' )                        
         data.append( [ 'Global SP STATUS', '->', status ] )
 
         return columnar( data,
