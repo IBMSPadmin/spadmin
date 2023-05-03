@@ -1714,12 +1714,12 @@ class ShowFilling( SpadminCommand ):
         c = 1
         for i, row in enumerate( stgpools ):
             
-            data.append( [ '', row[0] + '[' + row[1] + ']'  ] )
+            data.append( [ '', row[0] + ' [' + row[1] + ']'  ] )
 
             for i, vol in enumerate( globals.tsm.send_command_array_array_tabdel( "select VOLUME_NAME, PCT_UTILIZED from volumes where STGPOOL_NAME='" + row[0] + "' and STATUS='FILLING' and ACCESS='READWRITE' order by PCT_UTILIZED" ) ):
             
-                data.append([ c, vol[0] + '[' + vol[1] + '%]' ] )
-                data2.append( [ vol[0] ] )
+                data.append([ c, ' ' + vol[0] + ' [' + vol[1] + '%]' ] )
+                data2.append( [ c, vol[0] ] )
                 c += 1
             
         globals.lastdsmcommandresults = data2
