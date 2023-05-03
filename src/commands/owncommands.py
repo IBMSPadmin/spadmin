@@ -1686,12 +1686,12 @@ class ShowLIBVolumes(SpadminCommand):
 define_command(ShowLIBVolumes())
 
 
-class ShowFilling(SpadminCommand):
+class ShowFilling( SpadminCommand ):
     def __init__(self):
         self.command_string = globals.basecommandname + "FILLings"
-        self.command_type = "VOLUMES"
-        self.command_index = 0
-        self.command = "PAY"
+        self.command_type   = "VOLUMES"
+        self.command_index  = 0
+        self.command        = "PAY"
 
     def short_help(self) -> str:
         return 'SHow Filling: display information about fillings volumes'
@@ -1701,26 +1701,32 @@ class ShowFilling(SpadminCommand):
 """
 
     def _execute(self, parameters: str) -> str:
-        library = globals.tsm.send_command_array_array_tabdel(
-            "select VOLUME_NAME, STGPOOL_NAME, PCT_UTILIZED from volumes where STATUS='FILLING' and ACCESS='READWRITE' order by PCT_UTILIZED")
-            
-        # select stgpool_name, count(*) from volumes where stgpool_name like upper\('%$stg%'\) and status='FILLING' and ACCESS='READWRITE' and devclass_name in (select devclass_name from devclasses where WORM='NO' and DEVCLASS_NAME !='DISK') group by STGPOOL_NAME order by 2 desc
+        stgpools = globals.tsm.send_command_array_array_tabdel( "select stgpool_name, count(*) from volumes where stgpool_name like upper('%" + parameters + "%') and status='FILLING' and ACCESS='READWRITE' and devclass_name in (select devclass_name from devclasses where WORM='NO' and DEVCLASS_NAME !='DISK') group by STGPOOL_NAME having count(*)>1 order by 2 desc" )
+        
         # select VOLUME_NAME, PCT_UTILIZED from volumes where STGPOOL_NAME='$line[0]' and STATUS='FILLING' and ACCESS='READWRITE' order by PCT_UTILIZED
         
         if globals.last_error[ 'rc' ] != '0':
             return
         
-        data = []
+        data  = []
         data2 = []
 
-        for i, row in enumerate(library):
-            data.append([i + 1, row[0], row[1], row[2]])
-            data2.append([i + 1, utilities.color(row[0], 'green'), row[1], row[2]])
-        globals.lastdsmcommandresults = data
+        c = 1
+        for i, row in enumerate( stgpools ):
+            
+            data.append( [ '', row[0] + '[' + row[1] + ']'  ] )
 
-        table = columnar(data2,
-                         headers=['#', 'VolName', 'PoolName', 'PctUtil'],
-                         justify=['r', 'l', 'l', 'r'])
+            for i, vol in enumerate( globals.tsm.send_command_array_array_tabdel( "select VOLUME_NAME, PCT_UTILIZED from volumes where STGPOOL_NAME='" + row[0] + "' and STATUS='FILLING' and ACCESS='READWRITE' order by PCT_UTILIZED" ) ):
+            
+                data.append([ c, vol[0] + '[' + vol[1] + '%]' ] )
+                data2.append( [ vol[0] ] )
+                c += 1
+            
+        globals.lastdsmcommandresults = data2
+
+        table = columnar( data,
+                          headers=[ '#', 'FillingVolume' ],
+                          justify=[ 'r', 'l' ] )
 
         return table
 
@@ -2594,7 +2600,7 @@ class SHowNODEOccuopancy( SpadminCommand ):
                               
         return columnar( data2,
                          headers = [ 'NodeName', 'DoaminName', 'BData', 'AData', 'SPData', 'SumData' ],
-                         justify = [ 'l', 'l', 'r', 'r', 'r', 'r' ] )
+                         justify = [ 'l', 'c', 'r', 'r', 'r', 'r' ] )
 
 define_command( SHowNODEOccuopancy() )
 

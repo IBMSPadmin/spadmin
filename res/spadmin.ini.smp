@@ -31,17 +31,18 @@ deb = SPadmin SET DEBUG
 shdsk = SHow STGP | grep DISK
 DISKs = SHow STGP | grep DISK
 dsk = SHow STGP | grep DISK
+stgp = SHow STGP
 SESs = SHow SESsions
 scr = SHow SCRatches
 ls -l = SHow SESsions
 ps -ef = SHow PRocesses
-actew = sh act begint=-3 | grep AN\w\d{4}[EWS] | invgrep (ANR2034E||ANR0944E||ANR2000E) | more
+actew = sh act begint=-3 | grep AN\w\d{4}[EWS] | invgrep (ANR2034E||ANR0944E||ANR2000E||ANR3692W||ANR3693W) | more
 Q PRoc = SHow PRocesses
-spissues = !open https://github.com/IBMSPadmin/spadmin/issues
-newissue = !open https://github.com/IBMSPadmin/spadmin/issues/new
-github = !open https://github.com/IBMSPadmin/spadmin
-ini = !vi ~flex/spadmin/spadmin.ini
-actions = !ssh github@169.50.11.156 actions-runner/run.sh
+sp_issues = !open https://github.com/IBMSPadmin/spadmin/issues
+sp_newissue = !open https://github.com/IBMSPadmin/spadmin/issues/new
+sp_github = !open https://github.com/IBMSPadmin/spadmin
+ini = !vi ~/spadmin/spadmin.ini
+sp_actions = !ssh github@169.50.11.156 actions-runner/run.sh
 cls = !clear
 wini = !/mnt/c/WINDOWS/system32/notepad.exe ~/spadmin/spadmin.ini
 
