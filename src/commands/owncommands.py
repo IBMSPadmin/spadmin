@@ -1753,9 +1753,8 @@ class Move(SpadminCommand):
                     line = globals.lastdsmcommandresults[ int(parameters) - 1 ]
                     cmd = "MOVE DATA" + " " + line[0]
                     
-                    for line in globals.tsm.send_command_array_tabdel( cmd ):
-                        print(line)
-                                            
+                    for l in globals.tsm.send_command_normal(cmd):
+                        print(l)
                 else:
                     print(utilities.color("The given number is not found!", 'red'))
             else:
