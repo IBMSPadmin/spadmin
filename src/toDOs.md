@@ -7,3 +7,4 @@
 - Your License key has expired!
 - columnar átnézés
 - python lamda
+
