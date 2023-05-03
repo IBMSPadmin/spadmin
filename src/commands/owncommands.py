@@ -1340,7 +1340,7 @@ class ShowMount(SpadminCommand):
 
         table = columnar(data3,
                          headers=['#', 'Volume', 'Access', 'Drive', 'Path', 'Status'],
-                         justify=['r', 'l', 'l', 'l', 'l', 'l', ])
+                         justify=['r', 'l', 'c', 'l', 'l', 'l', ])
 
         return table
 
@@ -2494,7 +2494,7 @@ class SHowINActives( SpadminCommand ):
                
         return columnar( data,
                          headers = [ 'DomainName', 'NodeName', 'Locked?', 'LastAccessTime', 'Days', 'Type', '#Data', 'Files' ],
-                         justify = [ 'l', 'l', 'c', 'l', 'l', 'l', 'l', 'l' ] )
+                         justify = [ 'l', 'l', 'c', 'c', 'r', 'l', 'r', 'r' ] )
 
 define_command( SHowINActives() )
 
