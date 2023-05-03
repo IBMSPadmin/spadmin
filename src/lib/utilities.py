@@ -225,7 +225,7 @@ def validate_license():
 
         if (getmac() and getmac() == mac) and (valid_to and valid_to >= today):
             globals.logger.debug('License valid!!')
-            print(colored( " Your license is valid for " + str(valid_to) + "!", globals.color_green, attrs = [ globals.color_attrs_bold ]))
+            print(colored( " Your license is valid until " + str(valid_to) + "!", globals.color_green, attrs = [ globals.color_attrs_bold ]))
             print()
             globals.licensed = True
         else:
