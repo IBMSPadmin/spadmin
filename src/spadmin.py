@@ -456,11 +456,11 @@ class Spadmin(object):
     Use: "QUIt", "BYe", "LOGOut" or "Exit" commands to leave the program or
     Use: "SPadmin SHow LOG" or "SPadmin SHow LOCALLOG" to load the log file!''')
             print()
-            tips_and_tricks = ['Use grep, eg.: show session |grep Idle',
-                               'Use order by, eg.: show nodeoccuopancy  |orderby 5',
-                               'Use grep and regexp together, eg.: show actlog |grep ANR....E',
-                               'Use inverse grep, eg.: show sess |invgrep Run']
-            print("    Tip of the day: ", tips_and_tricks[random.randint(0, len(tips_and_tricks)-1)])
+            tips_and_tricks = ['Use grep, eg.: show session | grep Idle',
+                               'Use order by, eg.: show nodeoccuopancy | orderby 5',
+                               'Use grep and regexp together, eg.: show actlog | grep ANR....E',
+                               'Use inverse grep, eg.: show sess | invgrep Run']
+            print("    Tip of the day:", tips_and_tricks[random.randint(0, len(tips_and_tricks)-1)])
             print()
 
     def getargs(self):
