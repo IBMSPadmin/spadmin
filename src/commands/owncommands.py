@@ -1755,6 +1755,7 @@ class Move(SpadminCommand):
                     
                     for l in globals.tsm.send_command_normal(cmd):
                         print(l)
+                        
                 else:
                     print(utilities.color("The given number is not found!", 'red'))
             else:
