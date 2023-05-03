@@ -6,6 +6,7 @@ import readchar
 import uuid
 import subprocess
 import base64
+from datetime import timedelta, date, datetime
 
 import lib.columnar as columnar
 
@@ -16,16 +17,23 @@ from typing import (
 
 ansi_color_pattern = re.compile(r"\x1b\[.+?m")
 
-PASS = "PASS"
-def encode(password):
-    encoded_byte_list = [(ord(a) ^ ord(b)) for a, b in zip(password, getmac())]
-    b64_encoded_string = base64.b64encode(bytes(encoded_byte_list)).decode('ascii')
-    return PASS + b64_encoded_string
+def getmac():
+    #ret = ':'.join(re.findall('../..', '%012x' % uuid.getnode()))
+    mac_address = uuid.getnode()
+    # print(mac_address)
+    ret = ':'.join(['{:02x}'.format((mac_address >> elements) & 0xff) for elements in range(0,8*6,8)][::-1])
+    return ret
 
-def decode (b64_encoded):
-    if b64_encoded.startswith(PASS):
-        b64_decoded = list(base64.b64decode(b64_encoded[len(PASS):]))
-        decoded = [(ord(a) ^ ord(b)) for a, b in zip(''.join([chr(x) for x in b64_decoded]), getmac())]
+PASS = "PASS"
+def encode(password, cypher = getmac(), salt = PASS):
+    encoded_byte_list = [(ord(a) ^ ord(b)) for a, b in zip(password, cypher)]
+    b64_encoded_string = base64.b64encode(bytes(encoded_byte_list)).decode('ascii')
+    return salt + b64_encoded_string
+
+def decode (b64_encoded,cypher = getmac(), salt = PASS):
+    if b64_encoded.startswith(salt):
+        b64_decoded = list(base64.b64decode(b64_encoded[len(salt):]))
+        decoded = [(ord(a) ^ ord(b)) for a, b in zip(''.join([chr(x) for x in b64_decoded]), cypher)]
         decoded_string = ''.join([chr(x) for x in decoded])
         return decoded_string
     else:
@@ -175,22 +183,75 @@ def colorize_line( line ):
     else:
         return line
 
-def getmac():
-    #ret = ':'.join(re.findall('../..', '%012x' % uuid.getnode()))
-    mac_address = uuid.getnode()
-    # print(mac_address)
-    ret = ':'.join(['{:02x}'.format((mac_address >> elements) & 0xff) for elements in range(0,8*6,8)][::-1])
-    return ret
-
 def validate_license():
-    if getmac() and getmac() == '7e:17:4c:06:06:e7':
-        print(colored( " Your license is valid for 2023.02.03.!", globals.color_green, attrs = [ globals.color_attrs_bold ]))
-        globals.licensed = True
-    else:
-        print(colored( " Your License key has expired!", globals.color_red, attrs = [ globals.color_attrs_bold ]))
-        print()
-        globals.licensed = True
+    globals.logger.debug('Checking licenses...')
+    cypher = "we_have_worked_in_this_project:a_lot:please_honor_our_work"
+    license_file = os.path.join(globals.spadmin_path, 'spadmin.lic')
+    globals.logger.debug('license file: [' + license_file + ']')
+    mac = getmac()
+    globals.logger.debug('first mac address: [' + mac + ']')
+    today = date.today()
+    valid_to = today - timedelta(days=1)
+    globals.logger.debug('yesterday: [' + str(valid_to) + ']')
+    DATEFORMAT = '%d/%m/%Y' #'%Y-%m-%d'
+    if os.path.isfile(license_file):
+        globals.logger.debug('License file exists!')
+        try:
+            with open(license_file, "r") as f:
+                hidedstring = f.read()
+                mac_and_validity = decode(hidedstring, cypher, "SPADMIN").split("|", 2)
+                mac = mac_and_validity[0]
+                valid_to = datetime.strptime(mac_and_validity[1], DATEFORMAT).date()
+                globals.logger.debug('Licensed mac: [' + mac + ']')
+                globals.logger.debug('License valid until: [' + str(valid_to) + ']')
+        except:
+            globals.logger.debug('License error!!')
+            print(colored("An error occured during the license validation!", globals.color_red, attrs=[globals.color_attrs_bold]))
+            print(colored("Please check your license file: " + license_file, globals.color_red, attrs=[globals.color_attrs_bold]))
+            quit(1)
+            # plus_30_days = (today + timedelta(days=30)).strftime(DATEFORMAT)
+            # print(colored(" Ohh, nooo! You have no license file!", globals.color_red, attrs=[globals.color_attrs_bold]))
+            # print(colored(" We are creating a trial license for you, which will valid until " + str(plus_30_days), globals.color_red, attrs=[globals.color_attrs_bold]))
+            # print(colored(" If you are find this utility helpful, just visit us at: www.spadmin.com", globals.color_red, attrs=[globals.color_attrs_bold]))
+            # hidedstring = encode(mac + "|" + str(plus_30_days), cypher, "SPADMIN")
+            # print("hided string: ", hidedstring)
+            # with open(license_file, "w") as f:
+            #     f.writelines(hidedstring)
+            #     f.writelines('\n')
+            # mac_and_validity = decode(hidedstring, cypher, "SPADMIN").split("|", 2)
+            # print(mac_and_validity)
+            # mac = mac_and_validity[0]
+            # valid_to = mac_and_validity[1]
 
+        if (getmac() and getmac() == mac) and (valid_to and valid_to >= today):
+            globals.logger.debug('License valid!!')
+            print(colored( " Your license is valid for " + str(valid_to) + "!", globals.color_green, attrs = [ globals.color_attrs_bold ]))
+            globals.licensed = True
+        else:
+            globals.logger.debug('License expired!!')
+            print(colored( "Your License key has expired!", globals.color_red, attrs = [ globals.color_attrs_bold ]))
+            print(colored("""If you are find this utility helpful, and would like to ask a 30 days trial, 
+just send an email us to the send_me_a_trial_license@spadmin.com with the following content: 
+
+SPAdmin Team,
+send me a trial license for spadmin, please.
+My mac address where I want to use it: """ + mac + """
+
+Thanks.""", globals.color_red, attrs=[globals.color_attrs_bold]))
+            print()
+            globals.licensed = False
+    else:
+        globals.logger.debug('License file not found!!')
+        print(colored("Ohh, nooo! You have no license file!", globals.color_red, attrs=[globals.color_attrs_bold]))
+        print(colored("""If you are find this utility helpful, and would like to ask a 30 days trial, 
+just send an email us to the send_me_a_trial_license@spadmin.com with the following content: 
+
+SPAdmin Team,
+send me a trial license for spadmin, please.
+My mac address where I want to use it: """ + mac + """
+
+Thanks.""", globals.color_red, attrs=[globals.color_attrs_bold]))
+        quit(1)
 
 def consoleline(char='-'):
     print(char * globals.columns)
