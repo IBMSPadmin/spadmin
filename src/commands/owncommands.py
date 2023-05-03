@@ -28,6 +28,7 @@ disabled_words = ['DEFAULT', 'ALIAS', 'SPADMIN', 'BACK']  # disabled words: used
 globals.lastdsmcommandtype = '?'  # last command type: used by "kill", "on", "off", etc. commands
 globals.lastdsmcommandresults = ['']  # last command result: used by "kill", "on", "off", etc. commands
 command_type_and_index = {}
+command_free_and_index = {}
 command_help = {}
 
 class SpadminCommand:
@@ -109,18 +110,18 @@ def help(command_name):
     print(command_help[command_name])
 
 
-def define_own_command(command_string, function_address, command_type, index, short_help, help):
+def define_own_command(command_string, function_address, command_type, index, short_help, help, command_free):
     spadmin_commands[command_string]       = function_address
     dynruleinjector(command_string)
     command_type_and_index[command_string] = [command_type, index]
     command_help[command_string]           = [short_help, help]
-
+    command_free_and_index[command_string] = [command_free, index]
 
 def define_command(clazz: SpadminCommand):
     if clazz.command == "PAY" and globals.licensed == False:
         return
     define_own_command(clazz.get_command_string(), clazz.execute, clazz.get_command_type(), clazz.get_command_index(),
-                       clazz.short_help(), clazz.help())
+                       clazz.short_help(), clazz.help(), clazz.command)
 
 def timemachine_query( command_type, query ):
         
@@ -670,11 +671,12 @@ class SPadminSHowCOMmands(SpadminCommand):
             if key in command_help:
                 desc = command_help[key][0]
                 type = command_type_and_index[key][0]
-            data.append([key, type, desc])
+                free = command_free_and_index[key][0]
+            data.append([key, type, desc, free])
 
         return columnar(sorted(data, key=itemgetter(0)), headers=[
-            utilities.color('Command name', "white"), 'Type', utilities.color('Short Description', "white")],
-                        justify=['l', 'c', 'l'])
+            utilities.color('Command name', "white"), 'Type', utilities.color('Short Description', "white"), 'Free'],
+                        justify=['l', 'c', 'l', 'c'])
 
 define_command(SPadminSHowCOMmands())
 

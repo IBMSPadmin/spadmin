@@ -251,7 +251,8 @@ send me a trial license for spadmin, please.
 My mac address where I want to use it: """ + mac + """
 
 Thanks.""", globals.color_red, attrs=[globals.color_attrs_bold]))
-        quit(1)
+        globals.licensed = False
+
 
 def consoleline(char='-'):
     print(char * globals.columns)
