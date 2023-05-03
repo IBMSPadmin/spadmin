@@ -1087,7 +1087,7 @@ class kill(SpadminCommand):
             if parameters.strip().isnumeric():
                 if len(globals.lastdsmcommandresults) >= int(parameters) > 0:
                     for line in (globals.tsm.send_command_array_tabdel(
-                            "CANCEL SESSION " + globals.lastdsmcommandresults[int(parameters) - 1][1])):
+                            "CANCEL SESSION " + globals.lastdsmcommandresults[ int(parameters) - 1 ][1])):
                         print(line)
                 else:
                     print(utilities.color("The given number is not found!", 'red'))
@@ -1719,7 +1719,7 @@ class ShowFilling( SpadminCommand ):
             for i, vol in enumerate( globals.tsm.send_command_array_array_tabdel( "select VOLUME_NAME, PCT_UTILIZED from volumes where STGPOOL_NAME='" + row[0] + "' and STATUS='FILLING' and ACCESS='READWRITE' order by PCT_UTILIZED" ) ):
             
                 data.append([ c, ' ' + vol[0] + ' [' + vol[1] + '%]' ] )
-                data2.append( [ c, vol[0] ] )
+                data2.append( [ vol[0] ] )
                 c += 1
             
         globals.lastdsmcommandresults = data2
@@ -1750,8 +1750,9 @@ class Move(SpadminCommand):
         if globals.lastdsmcommandtype == "VOLUMES":
             if parameters.strip().isnumeric():
                 if len(globals.lastdsmcommandresults) >= int(parameters) > 0:
-                    line = globals.lastdsmcommandresults[int(parameters) - 1]
-                    cmd = "MOVE DATA" + " " + line[1]
+                    line = globals.lastdsmcommandresults[ int(parameters) - 1 ]
+                    cmd = "MOVE DATA" + " " + line[0]
+                    print(cmd)
                     for l in globals.tsm.send_command_normal(cmd):
                         print(l)
                 else:
