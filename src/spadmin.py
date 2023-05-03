@@ -359,8 +359,6 @@ class Spadmin(object):
         elif globals.config.getconfiguration()['SPADMIN'].get( 'basecommandname' ) is not None:
             globals.basecommandname = globals.config.getconfiguration()['SPADMIN']['basecommandname']
             
-        print(args)
-            
         globals.nohumanreadable = 'False'
         if args.nohumanreadable:
             globals.nohumanreadable = 'True'
