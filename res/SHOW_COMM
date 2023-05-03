@@ -23,7 +23,7 @@ KÉSZ 18      set server
 21     show activity
 KÉSZ: F 22     show actlog
 
-F 23     show adminevents
+KÉSZ: F 23     show adminevents
 
 24     show association
 KÉSZ F 25     show backupperformance
@@ -57,7 +57,7 @@ F 47     show moveable
 
 KÉSZ 48     show movedataperformance
 
-F 49     show nodeoccuopancy
+KÉSZ: F 49     show nodeoccuopancy
 
 50     show nodes
 KÉSZ 51     show paths
