@@ -1,5 +1,6 @@
 # spadmin.py
 
+
 ### prerequisites
 
 - macOS, Linux, Linux konténer, Micrsoft Windows WSL
