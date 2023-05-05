@@ -225,7 +225,8 @@ def validate_license():
 
         if (getmac() and getmac() == mac) and (valid_to and valid_to >= today):
             globals.logger.debug('License valid!!')
-            print(colored( " Your license is valid for " + str(valid_to) + "!", globals.color_green, attrs = [ globals.color_attrs_bold ]))
+            print(colored( " Your license is valid until " + str(valid_to) + "!", globals.color_green, attrs = [ globals.color_attrs_bold ]))
+            print()
             globals.licensed = True
         else:
             globals.logger.debug('License expired!!')
@@ -233,11 +234,13 @@ def validate_license():
             print(colored("""If you are find this utility helpful, and would like to ask a 30 days trial, 
 just send an email us to the send_me_a_trial_license@spadmin.com with the following content: 
 
+--- CUT ---
 SPAdmin Team,
 send me a trial license for spadmin, please.
 My mac address where I want to use it: """ + mac + """
 
-Thanks.""", globals.color_red, attrs=[globals.color_attrs_bold]))
+Thanks.
+--- CUT ---""", globals.color_red, attrs=[globals.color_attrs_bold]))
             print()
             globals.licensed = False
     else:
@@ -246,12 +249,14 @@ Thanks.""", globals.color_red, attrs=[globals.color_attrs_bold]))
         print(colored("""If you are find this utility helpful, and would like to ask a 30 days trial, 
 just send an email us to the send_me_a_trial_license@spadmin.com with the following content: 
 
+--- CUT ---
 SPAdmin Team,
 send me a trial license for spadmin, please.
 My mac address where I want to use it: """ + mac + """
 
-Thanks.""", globals.color_red, attrs=[globals.color_attrs_bold]))
-        globals.licensed = False
+Thanks.
+--- CUT ---""", globals.color_red, attrs=[globals.color_attrs_bold]))
+        quit(1)
 
 
 def consoleline(char='-'):
