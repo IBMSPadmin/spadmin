@@ -2,7 +2,9 @@ from re import search, MULTILINE, split
 import pexpect
 #import lib.utilities as utilities
 from termcolor import colored
-
+import sys
+import readchar
+from . import utilities
 from . import globals
 
 
@@ -25,37 +27,51 @@ class dsmadmc_pexpect:
     def __init__(self, server, id, pa):
         globals.logger.debug('starting dsmadmc: [' + server + ' ' +id + ' ' + pa + ']')
         if not server:
-            self.STARTCOMMAND_TABDEL = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
+            self.STARTCOMMAND_TABDEL = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -NOConfirm' + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
             self.STARTCOMMAND = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -NOConfirm' + ' -id=' + id + ' -pa=' + pa
         else:
-            self.STARTCOMMAND_TABDEL = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -se=' + server + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
+            self.STARTCOMMAND_TABDEL = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -NOConfirm' + ' -se=' + server + ' -id=' + id + ' -pa=' + pa + ' -dataonly=yes' + ' -tabdel'
             self.STARTCOMMAND = globals.config.getconfiguration()['SPADMIN']['dsmadmc_path'] + ' -NOConfirm' + ' -se=' + server + ' -id=' + id + ' -pa=' + pa
 
     def get_tsm_tabdel(self):
-
         if self.tsm_tabdel is None or not self.tsm_tabdel.isalive:
             # debug purposes only:
             # print ("Spawn: ", self.STARTCOMMAND)
-            self.tsm_tabdel = pexpect.spawn( '%s' % self.STARTCOMMAND_TABDEL, encoding='utf-8', echo=False, codec_errors='ignore', timeout=99999999 )
+            self.tsm_tabdel = pexpect.spawn( '%s' % self.STARTCOMMAND_TABDEL, encoding='utf-8', echo=False, codec_errors='ignore', timeout=99999999)
             self.tsm_tabdel.setwinsize(65534, 65534)
             rc = self.tsm_tabdel.expect(self.EXPECTATIONS)
             self.check_rc(self.tsm_tabdel, rc)
         return self.tsm_tabdel
 
+    def get_tsm_normal(self):
+        if self.tsm_normal is None or not self.tsm_normal.isalive:
+            self.tsm_normal = pexpect.spawn('%s' % self.STARTCOMMAND, encoding='utf-8', echo=False, codec_errors='ignore', timeout=99999999)
+            self.tsm_normal.setwinsize(65534, globals.columns)
+            rc = self.tsm_normal.expect(self.EXPECTATIONS)
+            self.check_rc(self.tsm_normal, rc)
+        return self.tsm_normal
+
     def send_command_tabdel(self, command):
+        """
+        Returns with a string
+        """
 
         try:
             tsm = self.get_tsm_tabdel()
-
             # globals.logger.debug( 'DSMADMC tabdel pid: [' + str( tsm.pid ) + ']' )
-
             globals.logger.info("Command will be sent to dsmadmc: " + command)
             tsm.sendline(command)
             rc = self.tsm_tabdel.expect(self.EXPECTATIONS)
             self.check_rc(tsm, rc)
         except KeyboardInterrupt as e:
-            print("Itt volt egy ctrl+c")
-            quit(1)
+            sys.stdout.write("CTRL+C pressed  (Press any key to reset SP connection, or press 'C' to continue)")
+            sys.stdout.flush()
+            key = readchar.readkey()
+            print()
+            if str(key).lower() != "c":
+                self.quit()
+                self.tsm_tabdel = None
+                self.tsm_normal = None
         except Exception as e:
             print('An error occurred during a dsmadmc execution:')
             print(tsm.before)
@@ -94,7 +110,7 @@ class dsmadmc_pexpect:
         list = self.send_command_tabdel( onserver + command ).splitlines()
         ar = []
         if globals.last_error['rc'] != "0":
-            print( colored( globals.last_error['message'], globals.color_red, attrs = [ globals.color_attrs_bold ] ) )
+            print( utilities.color( globals.last_error['message'], "red") )
             # print("ANS8001I Return code: ", globals.last_error['rc'])
             return ar
         if len(list) > 0:
@@ -107,17 +123,6 @@ class dsmadmc_pexpect:
             ar.append(split(r'\t', i))
         return ar
 
-
-    def get_tsm_normal(self):
-
-        if self.tsm_normal is None or not self.tsm_normal.isalive:
-            self.tsm_normal = pexpect.spawn('%s' % self.STARTCOMMAND, encoding='utf-8', echo=False)
-            self.tsm_normal.setwinsize(65534, globals.columns)
-            rc = self.tsm_normal.expect(self.EXPECTATIONS)
-            self.check_rc(self.tsm_normal, rc)
-
-        return self.tsm_normal
-
     def send_command_normal(self, command):
 
         try:
@@ -129,8 +134,14 @@ class dsmadmc_pexpect:
             rc = self.tsm_normal.expect(self.EXPECTATIONS)
             self.check_rc(tsm2, rc)
         except KeyboardInterrupt as e:
-            print("Itt volt egy ctrl+c")
-            quit(1)
+            sys.stdout.write("CTRL+C pressed  (Press any key to reset SP connection, or press 'C' to continue)")
+            sys.stdout.flush()
+            key = readchar.readkey()
+            print()
+            if str(key).lower() != "c":
+                self.quit()
+                self.tsm_tabdel = None
+                self.tsm_normal = None
 
         except Exception as e:
             print('An error occurred during a dsmadmc execution:')
@@ -142,24 +153,23 @@ class dsmadmc_pexpect:
         return tsm2.before
 
     def check_rc(self, tsm, rc):
-        if rc == 6:
+        if rc == 6: # Timeout
             print('Timeout occured.')
             print('Please check the connection parameters and restart spadmin')
             print( tsm.before[ :50 ] )
             quit(1)
-        elif rc == 7:
+        elif rc == 7: #  ANS8023E Unable to establish session with server.
             print('TCP/IP connection failure.')
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
             quit(1)
-        elif rc == 8 or rc == 9:
+        elif rc == 8 or rc == 9: # ANS1051I Invalid user id or password
             print('Invalid user id or password.')
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
             quit(1)
-        elif rc == 10:
+        elif rc == 10: # Cont>
             print("Continue the command in the next line, please: ")
-
 
         groups = search("ANS8001I Return code (\d+).", tsm.before, MULTILINE )
         if groups:
