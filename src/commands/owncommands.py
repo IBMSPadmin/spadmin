@@ -1088,9 +1088,14 @@ class kill(SpadminCommand):
         if globals.lastdsmcommandtype == "PROCESSES" or globals.lastdsmcommandtype == "SESSIONS":
             if parameters.strip().isnumeric():
                 if len(globals.lastdsmcommandresults) >= int(parameters) > 0:
-                    for line in (globals.tsm.send_command_array_tabdel(
-                            "CANCEL SESSION " + globals.lastdsmcommandresults[ int(parameters) - 1 ][1])):
-                        print(line)
+                    if globals.lastdsmcommandtype == "SESSIONS":
+                        for line in (globals.tsm.send_command_array_tabdel(
+                                "CANCEL SESSION " + globals.lastdsmcommandresults[ int(parameters) - 1 ][1])):
+                            print(line)
+                    else:
+                        for line in (globals.tsm.send_command_array_tabdel(
+                                "CANCEL PROCESS " + globals.lastdsmcommandresults[ int(parameters) - 1 ][1])):
+                            print(line)
                 else:
                     print(utilities.color("The given number is not found!", 'red'))
             else:
