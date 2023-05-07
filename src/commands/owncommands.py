@@ -2182,8 +2182,7 @@ class ShowSTatus( SpadminCommand ):
         data.append( [ 'DB' ] )
         DBerrorcollector = 0
         
-        dbFreeSpace, dbCacheHitPct, dbPkgHitPct, dbLastReorgHour, dbLastBackupHour = globals.tsm.send_command_array_array_tabdel( "select FREE_SPACE_MB, BUFF_HIT_RATIO, PKG_HIT_RATIO, TIMESTAMPDIFF( 8, char(timestamp( current_timestamp ) - TIMESTAMP( LAST_REORG ) ) ), TIMESTAMPDIFF( 8, char(timestamp( current_timestamp ) - TIMESTAMP( LAST_BACKUP_DATE ) ) ) from db" )[0]
-                
+        dbFreeSpace, dbCacheHitPct, dbPkgHitPct, dbLastReorgHour, dbLastBackupHour = globals.tsm.send_command_array_array_tabdel( "select FREE_SPACE_MB, BUFF_HIT_RATIO, PKG_HIT_RATIO, TIMESTAMPDIFF( 8, char(timestamp( current_timestamp ) - TIMESTAMP( LAST_REORG ) ) ), TIMESTAMPDIFF( 8, char(timestamp( current_timestamp ) - TIMESTAMP( LAST_BACKUP_DATE ) ) ) from db" )[0]          
         
         status = '  Ok.'
         if float( dbFreeSpace ) < 10000:
