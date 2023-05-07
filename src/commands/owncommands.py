@@ -2216,20 +2216,15 @@ class ShowSTatus( SpadminCommand ):
             DBerrorcollector =+ 1
         data.append( [ ' Last DB reorganization', humanbytes.HumanBytes.format( float( dbLastReorgHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
         
-        tmpdata = globals.tsm.send_command_array_array_tabdel( "select VOLUME_NAME, BACKUP_SERIES, hour(current_timestamp-DATE_TIME) from volhistory where type='BACKUPFULL' order by BACKUP_SERIES desc" )
+        tmpdata = globals.tsm.send_command_array_array_tabdel( "select VOLUME_NAME, BACKUP_SERIES, DATE_TIME from volhistory where type='BACKUPFULL' order by BACKUP_SERIES desc" )
         
         if globals.last_error[ 'rc' ] != '0':
             DBLastFull, dbLastSeq, dbLastFullBackupHour = '', '', '0'
         else:
             DBLastFull, dbLastSeq, dbLastFullBackupHour = tmpdata[0]
         
-        status = '  Ok.'
-        if float( dbLastFullBackupHour ) > 19:
-            status = utilities.color( '  Failed!', 'red' )
-            DBerrorcollector =+ 1
-        data.append( [ ' Last Full', humanbytes.HumanBytes.format( float( dbLastFullBackupHour ) * 3600, unit="TIME_LABELS", precision=0 ), status ] )
-
         data.append( [ ' Last Full Volume', '[' + utilities.color( DBLastFull, 'green' ) + ']' ] )
+        data.append( [ ' Last Full', dbLastFullBackupHour[:19] ] )
         
         status = '  Ok.'
         if int( DBerrorcollector ) > 0:
