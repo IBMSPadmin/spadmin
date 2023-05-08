@@ -60,6 +60,7 @@ Attaching to spadmin
 Stopping spadmin ... done
 root@BLACKHOLE:/volume1/spdocker/spadmin_runtime#
 ```
+![docker_start](res/docker_start.png)
 
 ```
 $ ssh -p 2222 root@localhost
