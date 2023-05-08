@@ -64,7 +64,7 @@ class dsmadmc_pexpect:
             rc = self.tsm_tabdel.expect(self.EXPECTATIONS)
             self.check_rc(tsm, rc)
         except KeyboardInterrupt as e:
-            sys.stdout.write("CTRL+C pressed  (Press any key to reset SP connection, or press 'C' to continue)")
+            sys.stdout.write("CTRL+C pressed  (Press 'C' to continue or press any other key to reset SP connection.)")
             sys.stdout.flush()
             key = readchar.readkey()
             print()
@@ -134,7 +134,7 @@ class dsmadmc_pexpect:
             rc = self.tsm_normal.expect(self.EXPECTATIONS)
             self.check_rc(tsm2, rc)
         except KeyboardInterrupt as e:
-            sys.stdout.write("CTRL+C pressed  (Press any key to reset SP connection, or press 'C' to continue)")
+            sys.stdout.write("CTRL+C pressed  (Press 'C' to continue or press any other key to reset SP connection.)")
             sys.stdout.flush()
             key = readchar.readkey()
             print()
