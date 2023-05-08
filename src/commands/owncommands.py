@@ -2419,7 +2419,7 @@ class SHowDBBackups( SpadminCommand ):
     def _execute(self, parameters: str) -> str:
         data = []
         
-        data = timemachine_query( self.command_type, "select date(DATE_TIME),time(DATE_TIME),TYPE,BACKUP_SERIES,BACKUP_OPERATION,VOLUME_SEQ,DEVCLASS,VOLUME_NAME from volhistory where type='BACKUPFULL' or type='BACKUPINCR' order by BACKUP_SERIES" )
+        data = timemachine_query( self.command_type, "select date(DATE_TIME),time(DATE_TIME),TYPE,BACKUP_SERIES,BACKUP_OPERATION,VOLUME_SEQ,DEVCLASS,VOLUME_NAME from volhistory where type='BACKUPFULL' or type='BACKUPINCR' order by date_time desc, BACKUP_SERIES" )
             
         if globals.last_error[ 'rc' ] != '0':
             return
@@ -2454,7 +2454,7 @@ class SHowDBSBackups( SpadminCommand ):
     def _execute(self, parameters: str) -> str:
         data = []
         
-        data = timemachine_query( self.command_type, "select date(DATE_TIME),time(DATE_TIME),TYPE,BACKUP_SERIES,BACKUP_OPERATION,VOLUME_SEQ,DEVCLASS,VOLUME_NAME from volhistory where type='DBSNAPSHOT' order by BACKUP_SERIES" )
+        data = timemachine_query( self.command_type, "select date(DATE_TIME),time(DATE_TIME),TYPE,BACKUP_SERIES,BACKUP_OPERATION,VOLUME_SEQ,DEVCLASS,VOLUME_NAME from volhistory where type='DBSNAPSHOT' order by date_time desc, BACKUP_SERIES" )
             
         if globals.last_error[ 'rc' ] != '0':
             return
