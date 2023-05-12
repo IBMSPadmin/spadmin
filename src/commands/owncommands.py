@@ -884,8 +884,13 @@ class PRint(SpadminCommand):
         """
 
     def _execute(self, parameters: str) -> str:
-        print(parameters)
-        return ""
+        
+        data = []
+        data.append( [ parameters ] )
+        
+        return columnar( data, 
+                         headers = [ 'Text' ],
+                         justify = [ 'l' ] )
 
 define_command(PRint())
 

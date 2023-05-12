@@ -116,6 +116,7 @@ $ -> grep
 $ -> invgrep
 $ -> cgrep
 $ -> nocolor
+$ -> noheader
 $ -> htmlout
 $ -> maxwidth
 $ -> count

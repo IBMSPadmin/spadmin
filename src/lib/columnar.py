@@ -277,6 +277,8 @@ class Columnar:
             maxwidth = globals.extras[ 'maxwidth' ] if 'maxwidth' in globals.extras else ''
             if maxwidth:
                 globals.columns = int( maxwidth[-1] )
+                
+            noheader = True if 'noheader' in globals.extras else False
     
             orderby = globals.extras['orderby'] if 'orderby' in globals.extras else ''
             if orderby != '' and orderby is not None and orderby[-1].isnumeric() and int(orderby[-1]) < len(data[0]):
@@ -291,27 +293,29 @@ class Columnar:
             data = invgrep( grep( data ) )
     
             self.column_length = get_column_length(headers, data)
-            header_decorator = ""
-            for i, cell in enumerate(headers):
-                header_decorator += self.header_decorator * self.column_length[i] + self.column_separator
     
-            # Header 1st decorator line --------
-            # out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
-            out.write( utilities.color( header_decorator[:globals.columns].rstrip(), globals.color_white) + "\n")
-    
-            # Header
-            header_line = ''
-            for i, cell in enumerate(headers):
-                
-                # header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white, attrs=[ globals.color_attrs_bold ] )
-                header_line += utilities.color( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white )
-    
-            # out.write( header_line[ :globals.columns + len( header_line ) - clen( header_line ) ] + "\n")
-            out.write( colorleft( header_line, globals.columns ) + "\n" )
-    
-            # Header 2nd decorator line --------
-            # out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
-            out.write( utilities.color( header_decorator[:globals.columns].rstrip(), globals.color_white ) + "\n")
+            if not noheader:
+                header_decorator = ""
+                for i, cell in enumerate(headers):
+                    header_decorator += self.header_decorator * self.column_length[i] + self.column_separator
+        
+                # Header 1st decorator line --------
+                # out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
+                out.write( utilities.color( header_decorator[:globals.columns].rstrip(), globals.color_white) + "\n")
+        
+                # Header
+                header_line = ''
+                for i, cell in enumerate(headers):
+                    
+                    # header_line += colored( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white, attrs=[ globals.color_attrs_bold ] )
+                    header_line += utilities.color( self.get_justified_cell_text( i, cell ) + self.column_separator, globals.color_white )
+        
+                # out.write( header_line[ :globals.columns + len( header_line ) - clen( header_line ) ] + "\n")
+                out.write( colorleft( header_line, globals.columns ) + "\n" )
+        
+                # Header 2nd decorator line --------
+                # out.write( colored( header_decorator[:globals.columns], globals.color_white, attrs=[ globals.color_attrs_bold ] ) + "\n")
+                out.write( utilities.color( header_decorator[:globals.columns].rstrip(), globals.color_white ) + "\n")
     
             # Rows
             for row in data:  # sorok kiíratása
