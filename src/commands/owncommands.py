@@ -1747,7 +1747,7 @@ define_command(ShowFilling())
 
 class Move(SpadminCommand):
     def __init__(self):
-        self.command_string = "MOve"
+        self.command_string = "MOve [0-9]*"
         self.command_type = "MOVE"
         self.command_index = 0
         self.command = "PAY"
