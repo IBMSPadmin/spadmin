@@ -362,6 +362,21 @@ DEFine ASSOCiation                                 -> select domain_name from do
 DEFine ASSOCiation [\w\*\-\.\+\&]+                 -> select schedule_name from client_schedules where domain_name like upper( '-2' )
 DEFine ASSOCiation [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ -> select node_name from nodes where domain_name like upper( '-3' )
 # =========================================================================================================================
+# https://www.ibm.com/docs/en/spectrum-protect/8.1.9?topic=group-define-copygroup-define-backup-copy
+# DEFine COpygroup domain_name policy_set_name class_name.....
+DEFine                                                  -> COpygroup
+DEFine COpygroup                                        -> select domain_name from domains
+DEFine COpygroup [\w\*\-\.\+\&] +                       -> select set_name from policysets where set_name<>'ACTIVE' and domain_name like upper( '-2' )
+DEFine COpygroup [\w\*\-\.\+\&]+[\w\*\-\.\+\&] +        -> select class_name from mgmtclasses where set_name like upper( '-2' ) and domain_name like upper( '-3' )
+DEFine COpygroup [\w\*\-\.\+\&] +                       -> <give_a_valid_class_name>
+
+ACTivate                           -> POlicyset
+ACTivate POlicyset                 -> select domain_name from domains
+ACTivate POlicyset [\w\*\-\.\+\&]+ -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
+
+
+#https://www.ibm.com/docs/en/spectrum-protect/8.1.9?topic=group-define-copygroup-define-archive-copy
+# DEFine COpygroup domain_name policy_set_name class_name STANDARD Type=Archive
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-define-devclass-define-device-class
 # DEFine DEVclass device_class_name LIBRary=library_name DEVType=3590
@@ -1758,4 +1773,4 @@ VARy -> ONline
 VARy ONline                         -> select volume_name from volumes where stgpool_name in (select stgpool_name from stgpools where DEVCLASS='DISK')
 VARy ONline [\w\*\-\.\/\\\$]+       -> Wait=
 VARy ONline [\w\*\-\.\/\\\$]+ Wait= -> Wait=Yes
-VARy ONline [\w\*\-\.\/\\\$]+ Wait= -> Wait=N
+VARy ONline [\w\*\-\.\/\\\$]+ Wait= -> Wait
