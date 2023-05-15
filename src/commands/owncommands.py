@@ -1747,7 +1747,7 @@ define_command(ShowFilling())
 
 class Move(SpadminCommand):
     def __init__(self):
-        self.command_string = "MOve [0-9]*"
+        self.command_string = "MOve"
         self.command_type = "MOVE"
         self.command_index = 0
         self.command = "PAY"
@@ -1760,18 +1760,22 @@ class Move(SpadminCommand):
 
     def _execute(self, parameters: str) -> str:
         if globals.lastdsmcommandtype == "VOLUMES":
+            
             if parameters.strip().isnumeric():
-                if len(globals.lastdsmcommandresults) >= int(parameters) > 0:
+                if len(globals.lastdsmcommandresults) >= int(parameters):
                     line = globals.lastdsmcommandresults[ int(parameters) - 1 ]
                     cmd = "MOVE DATA" + " " + line[0]
                     
-                    for l in globals.tsm.send_command_normal(cmd):
+                    for l in globals.tsm.send_command_normal(command).splitlines()[1:]:
                         print(l)
                         
                 else:
                     print(utilities.color("The given number is not found!", 'red'))
             else:
                 print(utilities.color("The given parameter should be a number!", 'red'))
+                # 
+                for l in globals.tsm.send_command_normal( 'MOve ' + parameters ).splitlines()[1:]:
+                    print(l)
         else:
             print(utilities.color("Last command should be SHow Filling!", 'red'))
             globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
