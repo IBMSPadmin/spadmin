@@ -110,7 +110,8 @@ class dsmadmc_pexpect:
         list = self.send_command_tabdel( onserver + command ).splitlines()
         ar = []
         if globals.last_error['rc'] != "0":
-            print( utilities.color( globals.last_error['message'], "red") )
+            print( colored( globals.last_error[ 'message' ], globals.color_red, attrs = [ globals.color_attrs_bold ]) )
+            #print( utilities.color( globals.last_error['message'], "red") )
             # print("ANS8001I Return code: ", globals.last_error['rc'])
             return ar
         if len(list) > 0:
