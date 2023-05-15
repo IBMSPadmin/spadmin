@@ -1,0 +1,331 @@
+# Simple SP report
+## Current sessions
+<table border="1">
+<tr>
+<th>#</th><th>Id</th><th>State</th><th>Wait</th><th>Sent</th><th>Received</th><th>Type</th><th>Platform</th><th>Name</th><th>MediaAcc</th><th>Verb</th>
+</tr>
+<tr>
+<td>1</td><td>35</td><td>IdleW</td><td>0 s</td><td>14 MiB</td><td>19 GiB</td><td>Admin</td><td>Linux/x86_64</td><td>DR</td><td></td><td>SentTimeQry</td>
+</tr>
+<tr>
+<td>2</td><td>467887</td><td><span style="color:green">Run</span></td><td>0 s</td><td>983 MiB</td><td>9 MiB</td><td>Admin</td><td>DSMAPI</td><td>IBM-OC-PROD</td><td></td><td>RecvPing</td>
+</tr>
+<tr>
+<td>3</td><td>985105</td><td><span style="color:green">Run</span></td><td>0 s</td><td>45 MiB</td><td>228 B</td><td>Admin</td><td>WinNT</td><td>TSMMANAGER</td><td></td><td>SentAdmCmdResp</td>
+</tr>
+<tr>
+<td>4</td><td>1078572</td><td>IdleW</td><td>8 s</td><td>56 MiB</td><td>22 MiB</td><td>Admin</td><td>DSMAPI</td><td>IBM-OC-PROD</td><td></td><td>SentAdmCmdResp</td>
+</tr>
+<tr>
+<td>5</td><td>1083417</td><td>IdleW</td><td>13 s</td><td>39 MiB</td><td>16 MiB</td><td>Admin</td><td>DSMAPI</td><td>IBM-OC-PROD</td><td></td><td>SentAdmCmdResp</td>
+</tr>
+<tr>
+<td>6</td><td>1088562</td><td>IdleW</td><td>13 s</td><td>23 MiB</td><td>9 MiB</td><td>Admin</td><td>DSMAPI</td><td>IBM-OC-PROD</td><td></td><td>SentAdmCmdResp</td>
+</tr>
+<tr>
+<td>7</td><td>1097845</td><td><span style="color:green">Run</span></td><td>0 s</td><td>135 B</td><td>316 B</td><td>Admin</td><td>WinNT</td><td>SUPPORT</td><td></td><td>RecvAdmCmd</td>
+</tr>
+<tr>
+<td>8</td><td>1097846</td><td>SendW</td><td>0 s</td><td>3 GiB</td><td>20 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">MKP059M8</span> (44 s)</td><td>SentBackInsNormEnhanced</td>
+</tr>
+<tr>
+<td>9</td><td>1097847</td><td>IdleW</td><td><span style="color:red">7 m</span></td><td>155 MiB</td><td>48 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">LTO8_DC</span> (7 m)</td><td>SentReplObjInfo</td>
+</tr>
+<tr>
+<td>10</td><td>1097848</td><td>IdleW</td><td><span style="color:red">7 m</span></td><td>49 MiB</td><td>16 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">LTO8_DC</span> (7 m)</td><td>SentReplObjInfo</td>
+</tr>
+<tr>
+<td>11</td><td>1097849</td><td>IdleW</td><td><span style="color:red">7 m</span></td><td>161 MiB</td><td>50 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">LTO8_DC</span> (7 m)</td><td>SentReplObjInfo</td>
+</tr>
+<tr>
+<td>12</td><td>1097850</td><td>IdleW</td><td><span style="color:red">7 m</span></td><td>107 MiB</td><td>34 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">LTO8_DC</span> (7 m)</td><td>SentReplObjInfo</td>
+</tr>
+<tr>
+<td>13</td><td>1097851</td><td>IdleW</td><td><span style="color:red">7 m</span></td><td>52 MiB</td><td>17 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">LTO8_DC</span> (7 m)</td><td>SentReplObjInfo</td>
+</tr>
+<tr>
+<td>14</td><td>1097852</td><td>IdleW</td><td>43 s</td><td>4 GiB</td><td>16 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">MKP059M8</span> (6 m)</td><td>SentReplEndFilespace</td>
+</tr>
+<tr>
+<td>15</td><td>1097853</td><td>IdleW</td><td><span style="color:red">7 m</span></td><td>41 KiB</td><td>2 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplEndBatch</td>
+</tr>
+<tr>
+<td>16</td><td>1097854</td><td>IdleW</td><td><span style="color:red">6 m</span></td><td>688 MiB</td><td>210 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">LTO8_DC</span> (6 m)</td><td>SentReplObjInfo</td>
+</tr>
+<tr>
+<td>17</td><td>1097855</td><td>IdleW</td><td><span style="color:red">7 m</span></td><td>501 MiB</td><td>152 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">LTO8_DC</span> (7 m)</td><td>SentReplObjInfo</td>
+</tr>
+<tr>
+<td>18</td><td>1097856</td><td>IdleW</td><td><span style="color:red">7 m</span></td><td>280 B</td><td>197 B</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>SentReplEndFilespace</td>
+</tr>
+<tr>
+<td>19</td><td>1097859</td><td>IdleW</td><td>8 s</td><td>62 KiB</td><td>56 KiB</td><td>Admin</td><td>DSMAPI</td><td>IBM-OC-PROD</td><td></td><td>SentAdmCmdResp</td>
+</tr>
+<tr>
+<td>20</td><td>1097860</td><td>IdleW</td><td>13 s</td><td>53 KiB</td><td>45 KiB</td><td>Admin</td><td>DSMAPI</td><td>IBM-OC-PROD</td><td></td><td>SentAdmCmdResp</td>
+</tr>
+<tr>
+<td>21</td><td>1097880</td><td>IdleW</td><td>16 s</td><td>2 GiB</td><td>8 MiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>SentReplEndFilespace</td>
+</tr>
+<tr>
+<td>22</td><td>1097881</td><td>SendW</td><td>0 s</td><td>13 GiB</td><td>116 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>SentBackInsNormEnhanced</td>
+</tr>
+<tr>
+<td>23</td><td>1097882</td><td>IdleW</td><td><span style="color:red">4 m</span></td><td>45 KiB</td><td>2 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">LTO8_DC</span> (4 m)</td><td>SentReplObjInfo</td>
+</tr>
+<tr>
+<td>24</td><td>1097883</td><td>IdleW</td><td>43 s</td><td>2 GiB</td><td>129 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplDeleteObjects</td>
+</tr>
+<tr>
+<td>25</td><td>1097884</td><td>IdleW</td><td><span style="color:red">1 m</span></td><td>3 GiB</td><td>3 MiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplEndBatch</td>
+</tr>
+<tr>
+<td>26</td><td>1097885</td><td>IdleW</td><td><span style="color:red">2 m</span></td><td>2 GiB</td><td>502 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td> ,<span style="color:green">LTO8_DC</span> (2 m)</td><td>SentReplObjInfo</td>
+</tr>
+<tr>
+<td>27</td><td>1097886</td><td>IdleW</td><td>18 s</td><td>3 GiB</td><td>54 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>SentReplEndFilespace</td>
+</tr>
+<tr>
+<td>28</td><td>1097887</td><td>IdleW</td><td>18 s</td><td>18 GiB</td><td>6 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplEndBatch</td>
+</tr>
+<tr>
+<td>29</td><td>1097888</td><td>IdleW</td><td><span style="color:red">2 m</span></td><td>9 GiB</td><td>77 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>SentReplEndFilespace</td>
+</tr>
+<tr>
+<td>30</td><td>1097889</td><td>IdleW</td><td>39 s</td><td>6 GiB</td><td>212 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplEndBatch</td>
+</tr>
+<tr>
+<td>31</td><td>1097892</td><td>IdleW</td><td><span style="color:red">4 m</span></td><td>63 MiB</td><td>398 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplEndBatch</td>
+</tr>
+<tr>
+<td>32</td><td>1097893</td><td>IdleW</td><td><span style="color:red">3 m</span></td><td>5 GiB</td><td>20 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplEndBatch</td>
+</tr>
+<tr>
+<td>33</td><td>1097894</td><td>IdleW</td><td><span style="color:red">4 m</span></td><td>9 KiB</td><td>2 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplSetFsInfo</td>
+</tr>
+<tr>
+<td>34</td><td>1097895</td><td>IdleW</td><td><span style="color:red">2 m</span></td><td>3 MiB</td><td>18 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplEndBatch</td>
+</tr>
+<tr>
+<td>35</td><td>1097896</td><td>IdleW</td><td><span style="color:red">4 m</span></td><td>3 KiB</td><td>709 B</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplSetFsInfo</td>
+</tr>
+<tr>
+<td>36</td><td>1097897</td><td>IdleW</td><td><span style="color:red">2 m</span></td><td>3 MiB</td><td>18 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplEndBatch</td>
+</tr>
+<tr>
+<td>37</td><td>1097898</td><td>IdleW</td><td><span style="color:red">4 m</span></td><td>337 B</td><td>254 B</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplSetFsInfo</td>
+</tr>
+<tr>
+<td>38</td><td>1097899</td><td>IdleW</td><td><span style="color:red">2 m</span></td><td>3 MiB</td><td>19 KiB</td><td>Server</td><td>Linux/x86_64</td><td>DR</td><td></td><td>RecvReplEndBatch</td>
+</tr>
+<tr>
+<td>39</td><td>1097929</td><td>IdleW</td><td><span style="color:red">3 m</span></td><td>150 B</td><td>164 B</td><td>Admin</td><td>DSMAPI</td><td>IBM-OC-PROD</td><td></td><td>SentTimeQryResp</td>
+</tr>
+<tr>
+<td>40</td><td>1097948</td><td><span style="color:green">Run</span></td><td>0 s</td><td>2 KiB</td><td>772 B</td><td>Admin</td><td>Linux x86-64</td><td>SUPPORT</td><td></td><td>RecvAdmCmd</td>
+</tr>
+</table>
+## Current actew
+Here are the errors and warnings from the last 3 hours:
+<pre>
+------------------- -----------------------------------------------------------------------------------------------------------------------------
+Date/Time           Message                                                                                                                     >
+------------------- -----------------------------------------------------------------------------------------------------------------------------
+05/15/2023 08:38:11 ANR2111W RECLAIM STGPOOL: There is no data to process for ALL_AC_T. (SESSION: 1097192, PROCESS: 3501)
+05/15/2023 08:38:11 ANR2753I (DAILY_ADMIN):ANR2111W RECLAIM STGPOOL: There is no data to process for ALL_AC_T.  (SESSION: 1097192)
+05/15/2023 08:38:11 ANR2111W RECLAIM STGPOOL: There is no data to process for ALL_A_T. (SESSION: 1097192, PROCESS: 3501)
+05/15/2023 08:38:11 ANR2753I (DAILY_ADMIN):ANR2111W RECLAIM STGPOOL: There is no data to process for ALL_A_T.  (SESSION: 1097192)
+05/15/2023 08:38:11 ANR2111W RECLAIM STGPOOL: There is no data to process for ALL_BC_T. (SESSION: 1097192, PROCESS: 3501)
+05/15/2023 08:38:11 ANR2753I (DAILY_ADMIN):ANR2111W RECLAIM STGPOOL: There is no data to process for ALL_BC_T.  (SESSION: 1097192)
+05/15/2023 08:38:11 ANR2111W RECLAIM STGPOOL: There is no data to process for DIR_B_T. (SESSION: 1097192, PROCESS: 3501)
+05/15/2023 08:38:11 ANR2753I (DAILY_ADMIN):ANR2111W RECLAIM STGPOOL: There is no data to process for DIR_B_T.  (SESSION: 1097192)
+05/15/2023 08:38:11 ANR2111W RECLAIM STGPOOL: There is no data to process for LNX_B_T. (SESSION: 1097192, PROCESS: 3501)
+05/15/2023 08:38:11 ANR2753I (DAILY_ADMIN):ANR2111W RECLAIM STGPOOL: There is no data to process for LNX_B_T.  (SESSION: 1097192)
+05/15/2023 08:38:11 ANR2111W RECLAIM STGPOOL: There is no data to process for VMW_B_T. (SESSION: 1097192, PROCESS: 3501)
+05/15/2023 08:38:11 ANR2753I (DAILY_ADMIN):ANR2111W RECLAIM STGPOOL: There is no data to process for VMW_B_T.  (SESSION: 1097192)
+05/15/2023 08:38:11 ANR2111W RECLAIM STGPOOL: There is no data to process for VMW_CTL_T. (SESSION: 1097192, PROCESS: 3501)
+05/15/2023 08:38:11 ANR2753I (DAILY_ADMIN):ANR2111W RECLAIM STGPOOL: There is no data to process for VMW_CTL_T.  (SESSION: 1097192)
+05/15/2023 08:38:11 ANR2111W RECLAIM STGPOOL: There is no data to process for WIN_B_T. (SESSION: 1097192, PROCESS: 3501)
+05/15/2023 08:38:11 ANR2753I (DAILY_ADMIN):ANR2111W RECLAIM STGPOOL: There is no data to process for WIN_B_T.  (SESSION: 1097192)
+05/15/2023 08:38:11 ANR2111W RECLAIM STGPOOL: There is no data to process for XCH_B_T. (SESSION: 1097192, PROCESS: 3501)
+05/15/2023 08:38:11 ANR2753I (DAILY_ADMIN):ANR2111W RECLAIM STGPOOL: There is no data to process for XCH_B_T.  (SESSION: 1097192)
+05/15/2023 08:38:11 ANR2111W RECLAIM STGPOOL: There is no data to process for ORA_B_T. (SESSION: 1097192, PROCESS: 3501)
+05/15/2023 08:38:11 ANR2753I (DAILY_ADMIN):ANR2111W RECLAIM STGPOOL: There is no data to process for ORA_B_T.  (SESSION: 1097192)
+05/15/2023 10:00:00 ANR1695W Server DR processed command 'SELECT' but completed with warnings. (SESSION: 1088562)
+05/15/2023 10:00:00 ANR1695W Server DR processed command 'SELECT' but completed with warnings. (SESSION: 1088562)
+05/15/2023 10:00:00 ANR1695W Server DR processed command 'SELECT' but completed with warnings. (SESSION: 1078572)
+05/15/2023 10:00:17 ANR1650W The server is trying to replicate failed data again for node SRV-NYP-FS, file space \\srv-nyp-fs\c$. This might impa
+                    ct replication performance. (SESSION: 1097879, PROCESS: 3513)
+05/15/2023 10:00:18 ANR1650W The server is trying to replicate failed data again for node SRV-CENTRAL-FS, file space \\srv-central-fs\f$. This mi
+                    ght impact replication performance. (SESSION: 1097879, PROCESS: 3513)
+05/15/2023 10:00:19 ANR1650W The server is trying to replicate failed data again for node SRV-MKBP-DC01, file space \\srv-mkbp-dc01\c$. This migh
+                    t impact replication performance. (SESSION: 1097879, PROCESS: 3513)
+05/15/2023 10:01:16 ANR0568W Session 1097932 for admin SUPPORT (Linux x86-64) terminated - connection with client severed. (SESSION: 1097932)
+05/15/2023 10:02:19 ANR0568W Session 1097938 for admin SUPPORT (Linux x86-64) terminated - connection with client severed. (SESSION: 1097938)
+05/15/2023 10:02:33 ANR0568W Session 1097940 for admin SUPPORT (Linux x86-64) terminated - connection with client severed. (SESSION: 1097940)
+</pre>
+## Current stgps
+Here are the stgps:
+<pre>
+------------ ----------- ---- ------- ------- ------- ------- ------ ---- ----------
+PoolName     DeviceClass Coll  EstCap PctUtil PctMigr HighMig LowMig Recl Next
+------------ ----------- ---- ------- ------- ------- ------- ------ ---- ----------
+ALL_AC_T     LTO8_DC     NO       0 B     0.0                         100
+ALL_A_D      DISK             100 GiB     0.0     0.0      80     60      ALL_A_T
+ALL_A_T      LTO8_DC     NO    72 TiB     3.9     0.1     100     25  100
+ALL_BC_T     LTO8_DC     NO       0 B     0.0                         100
+ARC_QC_D     DISK              50 GiB     8.7     8.7      80     50      ARC_QC_T
+ARC_QC_T     LTO8_DC     NO       0 B     0.0     0.0      80     50  100
+ARC_QI_T     LTO8_DC     NO    84 TiB     7.8     0.2      80     50  100
+DIR_B_D      DISK             100 GiB     0.5     0.0      90     70      DIR_B_T
+DIR_B_T      LTO8_DC     NO    72 TiB     0.0     0.1     100     25  100
+LNX_B_D      DISK             100 GiB     3.1     3.1      80     60      LNX_B_T
+LNX_B_T      LTO8_DC     NO    79 TiB    15.2     0.1     100     25  100
+ORA_B_D      DISK               2 TiB     2.5     0.2      90     80      ORA_B_T
+ORA_B_T      LTO8_DC     NO   316 TiB    31.1     0.9     100     25  100
+SQL_B_D      DISK               2 TiB     1.7     0.0      90     80      SQL_B_T
+SQL_B_T      LTO8_DC     NO   143 TiB    22.3     0.4     100     25  100
+VMWD_B_D                      141 GiB     0.1
+VMWD_B_T     LTO8_DC              0 B     0.0                         100
+VMWD_CTL_D   DISK              50 GiB     0.0     0.0      80     60      VMWD_CTL_T
+VMWD_CTL_T   LTO8_DC     NO       0 B     0.0     0.0      80     50  100
+VMW_AQ_EP_T  LTO8_DC     NO    72 TiB     5.3     0.1      90     70   60
+VMW_AQ_NYP_T LTO8_DC     NO       0 B     0.0     0.0      90     70   60
+VMW_B_D      DISK               1 TiB     0.0     0.0      90     80      VMW_B_T
+VMW_B_T      LTO8_DC     NO   359 TiB    53.1     1.1     100     25  100
+VMW_CTL_D    DISK             200 GiB    70.9     0.0      80     60      VMW_CTL_T
+VMW_CTL_T    LTO8_DC     NO    72 TiB     0.2     0.1      80     25  100
+WIN_B_D      DISK               1 TiB    95.3     0.0      90     80      WIN_B_T
+WIN_B_T      LTO8_DC     NO    84 TiB    17.0     0.2     100     25  100
+XCH_B_D      DISK             300 GiB     0.0     0.0      80     60      XCH_B_T
+XCH_B_T      LTO8_DC     NO    76 TiB    10.0     0.2     100     25  100
+</pre>
+## Current copygs
+Here are the copygs:
+<pre>
+----------- --------- ----------- - ---------------------------------- ------------ ------------- --------- -------- -----------
+Domain      PolicySet MgmtClass   d        BACopy(ve,vd,re,ro)         BADest       Next          ARCopy(d) ARDest   Next
+----------- --------- ----------- - ---------------------------------- ------------ ------------- --------- -------- -----------
+LNX         ACTIVE    LNX_DEF     y      NOLIMIT, NOLIMIT, 36, 36      LNX_B_D      -> LNX_B_T       366    ALL_A_D  -> ALL_A_T
+LNX         ACTIVE    LNX_DIR            NOLIMIT, NOLIMIT, 36, 36      DIR_B_D      -> DIR_B_T       366    ALL_A_D  -> ALL_A_T
+LNX         ACTIVE    LNX_ORAARCH           NOLIMIT, 0, 370, 0         LNX_B_D      -> LNX_B_T       366    ALL_A_D  -> ALL_A_T
+LNX         DEVEL     LNX_DEF     y      NOLIMIT, NOLIMIT, 36, 36      LNX_B_D      -> LNX_B_T       366    ALL_A_D  -> ALL_A_T
+LNX         DEVEL     LNX_DIR            NOLIMIT, NOLIMIT, 36, 36      DIR_B_D      -> DIR_B_T       366    ALL_A_D  -> ALL_A_T
+LNX         DEVEL     LNX_ORAARCH        NOLIMIT, NOLIMIT, 370, 0      LNX_B_D      -> LNX_B_T       366    ALL_A_D  -> ALL_A_T
+OBS         ACTIVE    OBS_DEF     y NOLIMIT, NOLIMIT, NOLIMIT, NOLIMIT ALL_A_D      -> ALL_A_T       366    ALL_A_D  -> ALL_A_T
+OBS         DEVEL     OBS_DEF     y NOLIMIT, NOLIMIT, NOLIMIT, NOLIMIT ALL_A_D      -> ALL_A_T       366    ALL_A_D  -> ALL_A_T
+ORA         ACTIVE    ORA_1W              NOLIMIT, NOLIMIT, 8, 8       ORA_B_D      -> ORA_B_T       366    ALL_A_D  -> ALL_A_T
+ORA         ACTIVE    ORA_1Y             NOLIMIT, NOLIMIT, 370, 0      ORA_B_D      -> ORA_B_T       366    ALL_A_D  -> ALL_A_T
+ORA         ACTIVE    ORA_DEF     y      NOLIMIT, NOLIMIT, 36, 36      ORA_B_D      -> ORA_B_T       366    ALL_A_D  -> ALL_A_T
+ORA         ACTIVE    ORA_FE        NOLIMIT, NOLIMIT, NOLIMIT, NOLIMIT ORA_B_D      -> ORA_B_T       366    ALL_A_D  -> ALL_A_T
+ORA         DEVEL     ORA_1W              NOLIMIT, NOLIMIT, 8, 8       ORA_B_D      -> ORA_B_T       366    ALL_A_D  -> ALL_A_T
+ORA         DEVEL     ORA_1Y             NOLIMIT, NOLIMIT, 370, 0      ORA_B_D      -> ORA_B_T       366    ALL_A_D  -> ALL_A_T
+ORA         DEVEL     ORA_DEF     y      NOLIMIT, NOLIMIT, 36, 36      ORA_B_D      -> ORA_B_T       366    ALL_A_D  -> ALL_A_T
+ORA         DEVEL     ORA_FE        NOLIMIT, NOLIMIT, NOLIMIT, NOLIMIT ORA_B_D      -> ORA_B_T       366    ALL_A_D  -> ALL_A_T
+SQL         ACTIVE    SQL_1W              NOLIMIT, NOLIMIT, 8, 8       SQL_B_D      -> SQL_B_T       366    ALL_A_D  -> ALL_A_T
+SQL         ACTIVE    SQL_1Y             NOLIMIT, NOLIMIT, 370, 0      SQL_B_D      -> SQL_B_T       366    ALL_A_D  -> ALL_A_T
+SQL         ACTIVE    SQL_DEF     y      NOLIMIT, NOLIMIT, 36, 36      SQL_B_D      -> SQL_B_T       366    ALL_A_D  -> ALL_A_T
+SQL         ACTIVE    SQL_FE        NOLIMIT, NOLIMIT, NOLIMIT, NOLIMIT SQL_B_D      -> SQL_B_T       366    ALL_A_D  -> ALL_A_T
+SQL         DEVEL     SQL_1W              NOLIMIT, NOLIMIT, 8, 8       SQL_B_D      -> SQL_B_T       366    ALL_A_D  -> ALL_A_T
+SQL         DEVEL     SQL_1Y             NOLIMIT, NOLIMIT, 370, 0      SQL_B_D      -> SQL_B_T       366    ALL_A_D  -> ALL_A_T
+SQL         DEVEL     SQL_DEF     y      NOLIMIT, NOLIMIT, 36, 36      SQL_B_D      -> SQL_B_T       366    ALL_A_D  -> ALL_A_T
+SQL         DEVEL     SQL_FE        NOLIMIT, NOLIMIT, NOLIMIT, NOLIMIT SQL_B_D      -> SQL_B_T       366    ALL_A_D  -> ALL_A_T
+VMW         ACTIVE    VMW_CTL            NOLIMIT, NOLIMIT, 36, 36      VMW_CTL_D    -> VMW_CTL_T     366    ALL_A_D  -> ALL_A_T
+VMW         ACTIVE    VMW_DEF     y      NOLIMIT, NOLIMIT, 36, 36      VMW_B_D      -> VMW_B_T       366    ALL_A_D  -> ALL_A_T
+VMW         DEVEL     VMW_CTL            NOLIMIT, NOLIMIT, 36, 36      VMW_CTL_D    -> VMW_CTL_T     366    ALL_A_D  -> ALL_A_T
+VMW         DEVEL     VMW_DEF     y      NOLIMIT, NOLIMIT, 36, 36      VMW_B_D      -> VMW_B_T       366    ALL_A_D  -> ALL_A_T
+VMWD        ACTIVE    VMWD_CTL                 2, 1, 30, 60            VMWD_CTL_D   -> VMWD_CTL_T    365    ALL_A_D  -> ALL_A_T
+VMWD        ACTIVE    VMWD_DEF    y            2, 1, 30, 60            VMWD_B_D                      365    VMWD_B_D
+VMWD        DEVEL     VMWD_CTL                 2, 1, 30, 60            VMWD_CTL_D   -> VMWD_CTL_T    365    ALL_A_D  -> ALL_A_T
+VMWD        DEVEL     VMWD_DEF    y            2, 1, 30, 60            VMWD_B_D                      365    VMWD_B_D
+VMW_A_Q     ACTIVE    VMW_A_Q_CTL              2, 1, 30, 60            ARC_QC_D     -> ARC_QC_T      365    ARC_QC_D -> ARC_QC_T
+VMW_A_Q     ACTIVE    VMW_A_Q_DEF y            2, 1, 30, 60            ARC_QI_T                      365    ARC_QI_T
+VMW_A_Q     DEVEL     VMW_A_Q_CTL              2, 1, 30, 60            ARC_QC_D     -> ARC_QC_T      365    ARC_QC_D -> ARC_QC_T
+VMW_A_Q     DEVEL     VMW_A_Q_DEF y            2, 1, 30, 60            ARC_QI_T                      365    ARC_QI_T
+VMW_A_Q_EP  ACTIVE    VMW_A_Q_CTL              2, 1, 30, 60            ARC_QC_D     -> ARC_QC_T      365    ARC_QC_D -> ARC_QC_T
+VMW_A_Q_EP  ACTIVE    VMW_A_Q_DEF y            2, 1, 30, 60            VMW_AQ_EP_T                   365    ARC_QI_T
+VMW_A_Q_EP  DEVEL     VMW_A_Q_CTL              2, 1, 30, 60            ARC_QC_D     -> ARC_QC_T      365    ARC_QC_D -> ARC_QC_T
+VMW_A_Q_EP  DEVEL     VMW_A_Q_DEF y            2, 1, 30, 60            VMW_AQ_EP_T                   365    ARC_QI_T
+VMW_A_Q_NYP ACTIVE    VMW_A_Q_CTL              2, 1, 30, 60            ARC_QC_D     -> ARC_QC_T      365    ARC_QC_D -> ARC_QC_T
+VMW_A_Q_NYP ACTIVE    VMW_A_Q_DEF y            2, 1, 30, 60            VMW_AQ_NYP_T                  365    ARC_QI_T
+VMW_A_Q_NYP DEVEL     VMW_A_Q_CTL              2, 1, 30, 60            ARC_QC_D     -> ARC_QC_T      365    ARC_QC_D -> ARC_QC_T
+VMW_A_Q_NYP DEVEL     VMW_A_Q_DEF y            2, 1, 30, 60            VMW_AQ_NYP_T                  365    ARC_QI_T
+WIN         ACTIVE    WIN_DEF     y      NOLIMIT, NOLIMIT, 36, 36      WIN_B_D      -> WIN_B_T       366    ALL_A_D  -> ALL_A_T
+WIN         ACTIVE    WIN_DIR            NOLIMIT, NOLIMIT, 36, 36      DIR_B_D      -> DIR_B_T       366    ALL_A_D  -> ALL_A_T
+WIN         DEVEL     WIN_DEF     y      NOLIMIT, NOLIMIT, 36, 36      WIN_B_D      -> WIN_B_T       366    ALL_A_D  -> ALL_A_T
+WIN         DEVEL     WIN_DIR            NOLIMIT, NOLIMIT, 36, 36      DIR_B_D      -> DIR_B_T       366    ALL_A_D  -> ALL_A_T
+XCH         ACTIVE    XCH_DEF     y      NOLIMIT, NOLIMIT, 36, 36      XCH_B_D      -> XCH_B_T       366    ALL_A_D  -> ALL_A_T
+XCH         DEVEL     XCH_DEF     y      NOLIMIT, NOLIMIT, 36, 36      XCH_B_D      -> XCH_B_T       366    ALL_A_D  -> ALL_A_T
+</pre>
+## Current events
+<table border="1">
+<tr>
+<th>StartTime ></th><th>ActualStart</th><th>< Completed</th><th>Domain</th><th>ScheduleName</th><th>NodeName</th><th>Result</th><th>RC</th>
+</tr>
+<tr>
+<td>05/15/2023 01:00:00</td><td>           01:01:10</td><td>           04:35:32</td><td>WIN</td><td>SRV-LOGCOLLECT-AGENT_DAILY_BCK</td><td>SRV-LOGCOLLECT</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 06:00:00</td><td>           06:00:11</td><td>           06:01:01</td><td>SQL</td><td>SRV-IKTATO_SQL_DIFF_0600</td><td>SRV-IKTATO_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 07:00:00</td><td>           07:00:11</td><td>           07:01:15</td><td>SQL</td><td>SRV-ALL_SQL_LOG_0700</td><td>SRV-SZEP-DB_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 07:00:00</td><td>           07:00:05</td><td>           07:00:48</td><td>SQL</td><td>SRV-ALL_SQL_LOG_0700</td><td>SRV-IKTATO_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 07:00:00</td><td>           07:00:07</td><td>           07:00:46</td><td>SQL</td><td>SRV-ALL_SQL_LOG_0700</td><td>SRV-NYP-DB_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 08:00:00</td><td>           08:00:07</td><td>           08:01:08</td><td>SQL</td><td>SRV-ALL_SQL_LOG_0800</td><td>SRV-SZEP-DB_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 08:00:00</td><td>           08:00:56</td><td>           08:01:38</td><td>SQL</td><td>SRV-ALL_SQL_LOG_0800</td><td>SRV-IKTATO_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 08:00:00</td><td>           08:00:10</td><td>           08:00:43</td><td>SQL</td><td>SRV-ALL_SQL_LOG_0800</td><td>SRV-NYP-DB_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 09:00:00</td><td>           09:00:10</td><td>           09:01:06</td><td>SQL</td><td>SRV-ALL_SQL_LOG_0900</td><td>SRV-SZEP-DB_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 09:00:00</td><td>           09:00:45</td><td>           09:01:28</td><td>SQL</td><td>SRV-ALL_SQL_LOG_0900</td><td>SRV-IKTATO_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 09:00:00</td><td>           09:00:11</td><td>           09:00:44</td><td>SQL</td><td>SRV-ALL_SQL_LOG_0900</td><td>SRV-NYP-DB_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 10:00:00</td><td>           10:00:10</td><td>           10:01:13</td><td>SQL</td><td>SRV-ALL_SQL_LOG_1000</td><td>SRV-SZEP-DB_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 10:00:00</td><td>           10:00:35</td><td>           10:01:18</td><td>SQL</td><td>SRV-ALL_SQL_LOG_1000</td><td>SRV-IKTATO_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 10:00:00</td><td>           10:00:11</td><td>           10:00:47</td><td>SQL</td><td>SRV-ALL_SQL_LOG_1000</td><td>SRV-NYP-DB_SQL</td><td><span style="color:green">Completed</span></td><td><span style="color:green">0</span></td>
+</tr>
+<tr>
+<td>05/15/2023 11:00:00</td><td></td><td></td><td>SQL</td><td>SRV-ALL_SQL_LOG_1100</td><td>SRV-SZEP-DB_SQL</td><td>Future</td><td><span style="color:red"></span></td>
+</tr>
+<tr>
+<td>05/15/2023 11:00:00</td><td></td><td></td><td>SQL</td><td>SRV-ALL_SQL_LOG_1100</td><td>SRV-EP-DB_SQL</td><td>Future</td><td><span style="color:red"></span></td>
+</tr>
+<tr>
+<td>05/15/2023 11:00:00</td><td></td><td></td><td>SQL</td><td>SRV-ALL_SQL_LOG_1100</td><td>SRV-IKTATO_SQL</td><td>Future</td><td><span style="color:red"></span></td>
+</tr>
+<tr>
+<td>05/15/2023 11:00:00</td><td></td><td></td><td>SQL</td><td>SRV-ALL_SQL_LOG_1100</td><td>SRV-NYP-DB_SQL</td><td>Future</td><td><span style="color:red"></span></td>
+</tr>
+</table>
+## Current adminevents
+<table border="1">
+<tr>
+<th>StartTime ></th><th>ActualStart</th><th>< Completed</th><th>ScheduleName</th><th>Result</th><th>RC</th>
+</tr>
+<tr>
+<td>05/15/2023 07:00:00</td><td>           07:00:08</td><td></td><td>DAILY_ADMIN</td><td><span style="color:yellow">Started</span></td><td><span style="color:red"></span></td>
+</tr>
+<tr>
+<td>05/15/2023 10:00:00</td><td>           10:00:17</td><td></td><td>DAILY_NODE_REPL</td><td><span style="color:yellow">Started</span></td><td><span style="color:red"></span></td>
+</tr>
+</table>
