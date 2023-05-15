@@ -1766,7 +1766,7 @@ class Move(SpadminCommand):
                     line = globals.lastdsmcommandresults[ int(parameters) - 1 ]
                     cmd = "MOVE DATA" + " " + line[0]
                     
-                    for l in globals.tsm.send_command_normal(command).splitlines()[1:]:
+                    for l in globals.tsm.send_command_normal(cmd).splitlines()[1:]:
                         print(l)
                         
                 else:
