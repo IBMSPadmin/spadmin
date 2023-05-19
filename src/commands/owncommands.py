@@ -2548,17 +2548,23 @@ class SHowREPLICATIONDifferences( SpadminCommand ):
             
             # > 8.1.13 
             if int( globals.spversion ) > 8 or ( int( globals.spversion ) == 8 and int( globals.sprelease ) >= 1 and int( globals.splevel ) >= 13 ) :
+                if row[6] == '':
+                    continue
+                if row[4] == '':
+                    row[4] = '0'              
                 if row[5] == '':
                     row[5] = '0'
-                if row[4] == '':
-                    row[4] = '0'
                 delta =  int( row[5].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )
                 hh = [ 'NodeName', 'Type', 'FilespaceName', 'FSID', 'FilesonS', 'FilesonR', 'ReplServer', 'delta' ]
+                if row[6] == '0':
+                    continue
             else:
-                if row[6] == '':
-                    row[6] = '0'
+                if row[5] == '':
+                    continue
                 if row[4] == '':
                     row[4] = '0'
+                if row[6] == '':
+                    row[6] = '0'
                 delta =  int( row[6].replace( ',', '' ) ) - int( row[4].replace( ',', '' ) )
                 hh = [ 'NodeName', 'Type', 'FilespaceName', 'FSID', 'FilesonS', 'ReplServer', 'FilesonR', 'delta' ]
             
