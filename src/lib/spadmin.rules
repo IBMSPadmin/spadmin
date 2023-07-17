@@ -364,11 +364,14 @@ DEFine ASSOCiation [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ -> select node_name from node
 # =========================================================================================================================
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.9?topic=group-define-copygroup-define-backup-copy
 # DEFine COpygroup domain_name policy_set_name class_name.....
-DEFine                                                  -> COpygroup
-DEFine COpygroup                                        -> select domain_name from domains
-DEFine COpygroup [\w\*\-\.\+\&]+                        -> select set_name from policysets where set_name<>'ACTIVE' and domain_name like upper( '-2' )
-DEFine COpygroup [\w\*\-\.\+\&]+                        -> <give_a_valid_class_name>
-DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+        -> select class_name from mgmtclasses where set_name like upper( '-2' ) and domain_name like upper( '-3' )
+DEFine                                                                 -> COpygroup
+DEFine COpygroup                                                       -> select domain_name from domains
+DEFine COpygroup [\w\*\-\.\+\&]+                                       -> select set_name from policysets where set_name<>'ACTIVE' and domain_name like upper( '-2' )
+#DEFine COpygroup [\w\*\-\.\+\&]+                        -> <give_a_valid_class_name>
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+                       -> select class_name from mgmtclasses where set_name like upper( '-2' ) and domain_name like upper( '-3' )
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+       -> STANDARD
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+       -> Type=
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ STANDARD -> Type=
 
 ACTivate                           -> POlicyset
 ACTivate POlicyset                 -> select domain_name from domains
