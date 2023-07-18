@@ -1247,7 +1247,7 @@ DEFine -> CONNection
 DEFine -> COpygroup
 DEFine COpygroup -> select domain_name from domains
 DEFine COpygroup [\w\*\-\.\+\&]+ -> select set_name from policysets where set_name != 'ACTIVE' and domain_name like upper( '-2' )
-DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ -> select CLASS_NAME from MGMTCLASSES where set_name like upper( '-2' ) and domain_name like upper( '-3' )
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ -> select class_name from MGMTCLASSES where set_name like upper( '-2' ) and domain_name like upper( '-3' )
 
 DEFine -> DATAMover
 DEFine -> DOmain
