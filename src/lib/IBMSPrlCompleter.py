@@ -219,13 +219,13 @@ class IBMSPrlCompleter:
         globals.logger.debug(' >>> PROCESS TOKENS with token engine, received tokens: ' + pformat(tokens))
 
         # Reset the results dictionary
-        ret         = []
-        tokenlength = len( tokens )
+        ret           = []
+        tokenlength   = len( tokens )
         
         self.retfixed = []
 
         if tokenlength == 0:
-            # Never happen this
+            # Never happens this
             globals.logger.debug(' Stepped into LEVEL 0.')
 
         elif tokenlength == 1:
@@ -233,25 +233,25 @@ class IBMSPrlCompleter:
             globals.logger.debug(' Stepped into LEVEL 1.')
 
             # Simple check the beginning of the command on start list
-            for x in self.start:
-                if search('^' + tokens[ -1 ], x, IGNORECASE):
-                    globals.logger.debug(str(tokenlength) + ' found this part [' + tokens[ -1] + '] of the command in the 1st LEVEL list items: [' + x + '].')
+            for key in self.start:
+                if search('^' + tokens[ -1 ], key, IGNORECASE):
+                    globals.logger.debug(str(tokenlength) + ' found this part [' + tokens[ -1] + '] of the command in the 1st LEVEL list items: [' + key + '].')
             
                     # similar commands CASE BUG fix v1.0 part I. test 2 ######################################
             
-                    self.retfixed.append( x + ' ' )
+                    self.retfixed.append( key + ' ' )
             
-                    index = len( tokens[ -1] )
+                    index = len( tokens[ -1 ] )
                     # override the problematic letter
                     # x[index] = tokens[ -1][index]
                     if index > 1:
                         #x = x[:index] + tokens[ -1][index] + x[index+1:]
-                        x = tokens[ -1][:index] + x[index:]
+                        key = tokens[ -1][:index] + key[index:]
                     ##########################################################################################
                     
                     # here it could be improved a bit, if they all start with token[-1], they can be capitalized???
             
-                    ret.append( x.lower() + ' ' )
+                    ret.append( key.lower() + ' ' )
 
         elif tokenlength == 2:
             # LEVEL 2
@@ -512,6 +512,8 @@ class IBMSPrlCompleter:
                     tmprules[key] = self.rules[key]
                     if len( key.split() ) > tmprulesmax:
                         tmprulesmax = len( key.split() )
+                        
+            globals.logger.debug( '--- rulesmax: ' + str(tmprulesmax) + " and reduced rules: " + pformat( tmprules, width=180 ) + ']' )
         
             for key in tmprules:
                 # SKIP the previous or further level entries when
@@ -526,10 +528,10 @@ class IBMSPrlCompleter:
                 # define path   src dest    srct destt  para
                 
                 if tokenlength >= tmprulesmax:
-                    # if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength >= 5 and key[ -1 ] == '=' ):
-                    #     continue
-                    # elif key.startswith( 'select' ):  # ???????????????????????????????
-                    #     continue
+                    if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength != 4 ) and not ( keylength >= 5 and key[ -1 ] == '=' ):
+                        continue
+                    elif key.startswith( 'select' ):  # ???????????????????????????????
+                        continue
                 else: 
                     if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength >= 5 and key[ -1 ] == '=' ):
                         continue
