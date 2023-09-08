@@ -357,7 +357,7 @@ class IBMSPrlCompleter:
         elif tokenlength == 4:
             # LEVEL 4
             logging.info( ' Stepped into LEVEL 4.' )
-
+            
             for key in self.rules:
                 # SKIP the previous or further level entries when
                 #  +key: query actlog asasaas=
@@ -445,7 +445,7 @@ class IBMSPrlCompleter:
         elif tokenlength == 5:
             # LEVEL 5
             logging.info( ' Stepped into LEVEL 5.' )
-            
+                        
             for key in self.rules:   
             
                 # SKIP the previous or further level entries when
@@ -504,7 +504,16 @@ class IBMSPrlCompleter:
             # LEVEL 6
             logging.info( ' Stepped into LEVEL >=6.' )
             
+            # reduce rules toDo: copy all of the command levels
+            tmprules  = {}
+            tmprulesmax = 0
             for key in self.rules:
+                if search( '^' + ' '.join( tokens[0:2] ), key, IGNORECASE ):
+                    tmprules[key] = self.rules[key]
+                    if len( key.split() ) > tmprulesmax:
+                        tmprulesmax = len( key.split() )
+        
+            for key in tmprules:
                 # SKIP the previous or further level entries when
                 #  +key: query actlog asasaas=
                 #   key not 4 items: query actlog asasaas=asasas sdsdsds
@@ -513,10 +522,19 @@ class IBMSPrlCompleter:
                 
                 keylength = len( key.split() )
                 
-                if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength >= 5 and key[ -1 ] == '=' ):
-                    continue
-                elif key.startswith( 'select' ):  # ???????????????????????????????
-                    continue
+                # define copyg  st  st      st   st     para
+                # define path   src dest    srct destt  para
+                
+                if tokenlength >= tmprulesmax:
+                    # if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength >= 5 and key[ -1 ] == '=' ):
+                    #     continue
+                    # elif key.startswith( 'select' ):  # ???????????????????????????????
+                    #     continue
+                else: 
+                    if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength >= 5 and key[ -1 ] == '=' ):
+                        continue
+                    elif key.startswith( 'select' ):  # ???????????????????????????????
+                        continue
                 
                 # if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
                 #     continue
