@@ -1260,16 +1260,18 @@ class ShowStgp(SpadminCommand):
     def _execute(self, parameters: str) -> str:
         data = []
         data = timemachine_query( self.command_type, 
-            "select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
+            "select STGPOOL_NAME,DEVCLASS,COLLOCATE,EST_CAPACITY_MB,PCT_UTILIZED,PCT_MIGR,CACHE,HIGHMIG,LOWMIG,RECLAIM,NEXTSTGPOOL from STGPOOLS")
         
         for index, row in enumerate(data):
-            (a, b, c, d, e, f, g, h, i, j) = row
+            (a, b, c, d, e, f, g, h, i, j, k) = row
             
             if d == '':
                 data[index][3] = 0
             else:
                 # data[index][3] = round((float(d)/1024),1)
                 data[index][3] = humanbytes.HumanBytes.format(float( d ) * 1024 * 1024, unit="BINARY_LABELS", precision=0)
+
+            row[6] = row[6][0:1]
 
             if row[1] == 'DISK':
                 if float(row[5]) > 85:
@@ -1278,8 +1280,8 @@ class ShowStgp(SpadminCommand):
                     row[5] = utilities.color(row[5], 'yellow')
                     
         return columnar( data,
-                         headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'HighMig', 'LowMig', 'Recl', 'Next'],
-                         justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
+                         headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'C', 'HighMig', 'LowMig', 'Recl', 'Next'],
+                         justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
         
 define_command(ShowStgp())
 
