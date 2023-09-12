@@ -2305,9 +2305,9 @@ class ShowSTatus( SpadminCommand ):
         unavaVols = globals.tsm.send_command_array_array_tabdel( "select count(*) from volumes where access like '%UNAVA%'" )[0][0]
         rweVols   = globals.tsm.send_command_array_array_tabdel( "select count(*) from volumes where WRITE_ERRORS>0 or READ_ERRORS>0" )[0][0]
 
-        data.append( [ ' ReadOnly Vol(s)',    roVols    + ' / ' + sumVols ] )
-        data.append( [ ' Unavailable Vol(s)', unavaVols + ' / ' + sumVols ] ) 
-        data.append( [ ' Suspicious Vol(s)',  rweVols   + ' / ' + sumVols ] )
+        data.append( [ ' ReadOnly Vol(s)',    sumVols + ' / ' + roVols ] )
+        data.append( [ ' Unavailable Vol(s)', sumVols + ' / ' + unavaVols ] ) 
+        data.append( [ ' Suspicious Vol(s)',  sumVols + ' / ' + rweVols ] )
 
         status = '  Ok.'
         if int( roVols ) + int( unavaVols ) + int( rweVols ) > 0:
@@ -2326,8 +2326,8 @@ class ShowSTatus( SpadminCommand ):
         sumPaths  = globals.tsm.send_command_array_array_tabdel( "select count(*) from paths" )[0][0]
         offPaths  = globals.tsm.send_command_array_array_tabdel( "select count(*) from paths where online='NO'" )[0][0]
 
-        data.append( [ ' Offline drive(s)', offDrives + ' / ' + sumDrives ] )
-        data.append( [ ' Offline path(s)',  offPaths  + ' / ' + sumPaths ] )
+        data.append( [ ' Offline drive(s)', sumDrives + ' / ' + offDrives ] )
+        data.append( [ ' Offline path(s)',  sumPaths  + ' / ' + offPaths ] )
 
         status = '  Ok.'
         if int( offDrives ) + int( offPaths ) > 0:

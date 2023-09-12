@@ -1542,6 +1542,9 @@ Query Volume -> Format=
 Query Volume Format=                 -> Format=Standard
 Query Volume Format=                 -> Format=Detailed
 
+Query Volume [\w\*\-\.\/\\\$]+ Format=                 -> Format=Standard
+Query Volume [\w\*\-\.\/\\\$]+ Format=                 -> Format=Detailed
+
 Query Volume STGpool=                -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
 
 RECLaim -> STGpool
