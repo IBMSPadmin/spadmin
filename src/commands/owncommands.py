@@ -709,7 +709,7 @@ class SHowACTlog(SpadminCommand):
         data2 = []
         for index, row in enumerate(data):
 
-            if search('^ANR\d{4}E', row[1]):
+            if search('^AN[ER]\d{4}E', row[1]):
                 message = utilities.color(row[1], 'red')
             elif search('^ANR\d{4}W', row[1]):
                 message = utilities.color(row[1], 'yellow')
