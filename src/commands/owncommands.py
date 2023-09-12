@@ -724,6 +724,13 @@ class SHowACTlog(SpadminCommand):
 
 define_command(SHowACTlog())
 
+# Temporary test 
+# SHow ACTlog           -> "process:
+# SHow ACTlog "process: -> select process_num from processes
+dynruleinjector( 'SHow ACTlog ' + '"search=process:' )
+globals.myIBMSPrlCompleter.dynrules['SHow ACTlog "search=process:'] = []
+globals.myIBMSPrlCompleter.dynrules['SHow ACTlog "search=process:'].append('select process_num from processes')
+
 
 class REload(SpadminCommand):
 
