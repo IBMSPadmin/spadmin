@@ -899,6 +899,17 @@ Query OPTion    ->  '*'
 REMove          -> Node
 #REMove Node     -> SYNCldapdelete
 
+###############
+# RUn command #
+###############
+RUn                            -> select name from scripts
+RUn [\w\*\-\.\+\&\@]+          -> Preview=
+RUn [\w\*\-\.\+\&\@]+          -> Verbose=
+RUn [\w\*\-\.\+\&\@]+ Preview= -> Preview=Yes
+RUn [\w\*\-\.\+\&\@]+ Preview= -> Preview=No
+RUn [\w\*\-\.\+\&\@]+ Verbose= -> Verbose=Yes
+RUn [\w\*\-\.\+\&\@]+ Verbose= -> Verbose=No
+
 ################
 # SHow command #
 ################
