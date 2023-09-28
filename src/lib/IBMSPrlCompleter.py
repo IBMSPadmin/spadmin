@@ -291,8 +291,8 @@ class IBMSPrlCompleter:
                     if tokenlength > 2 and keylength < 2:
                         continue
 
-                    if keylength < tokenlength - 1:
-                        continue                     
+                    # if keylength < tokenlength - 1:
+                    #     continue                     
 
                     tmprules[key] = self.rules[key]
 
@@ -305,13 +305,13 @@ class IBMSPrlCompleter:
             # collect the results
             for key in tmprules:
                 
-                # globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + key + ']' )
-                # globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + key + ']' )
+                globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 
                 extradelimiter = '' if search( '=', key ) else ' ' 
                 if search( '^' + utilities.regexpgenerator( key ) + extradelimiter, ' '.join( tokens ) + extradelimiter, IGNORECASE ):
                     # globals.logger.debug( str( tokenlength ) + ' Found this part [' + tokens   + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
-                    globals.logger.debug( str( tokenlength ) + " Let's continue searching with this pattern [" + pformat( self.rules[ key], width=180 ) + ']' )
+                    globals.logger.debug( str( tokenlength ) + " Let's continue searching with this pattern [" + pformat( tmprules[key], width=180 ) + ']' )
                    
                     ret += self.SPunversaltokenresolver( key, tokens )
 
