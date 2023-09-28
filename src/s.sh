@@ -1,10 +1,10 @@
-> ~/spadmin/log/spadmin.log 
-
 while :; do
+
+ > ~/spadmin/log/spadmin.log 
 
  git pull
 
- ./spadmin.py
+ ./spadmin.py --nowelcome -a 'deb; sp show log; cls'
 
  if [ $? -ne 0 ] 
    then

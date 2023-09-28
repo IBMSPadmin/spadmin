@@ -1476,7 +1476,7 @@ Query -> COpygroup
 Query -> DAMaged
 Query -> DATAMover
 Query -> DB
-QUERY -> DBSpace
+Query -> DBSpace
 Query -> DEDUPSTats
 Query -> DEVclass
 Query -> DIRSPace
@@ -1530,8 +1530,8 @@ Query -> SCHedule
 Query -> SCRATCHPadentry
 Query -> SCRipt
 Query -> SERver
-QUERY -> SERVERGroup
-QUERY -> SHREDstatus
+Query -> SERVERGroup
+Query -> SHREDstatus
 Query -> SPACETrigger
 Query -> STatus
 Query -> STAtusthreshold

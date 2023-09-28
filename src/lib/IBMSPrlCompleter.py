@@ -253,346 +253,73 @@ class IBMSPrlCompleter:
             
                     ret.append( key.lower() + ' ' )
 
-        elif tokenlength == 2:
-            # LEVEL 2
-            globals.logger.debug(' Stepped into LEVEL 2.')
-
-            for key in self.rules:
-                
-                # skip the previous level entries
-                if len( key.split() ) + 1 != 2:
-                    continue
-                
-                globals.logger.debug(str(tokenlength) + ' and searching for regexp pattern [' + key + ']')
-                globals.logger.debug(str(tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator(key) + ']')
-                if search( '^' + utilities.regexpgenerator( key ) + ' ', tokens[ -2 ] + ' ', IGNORECASE ):
-                    globals.logger.debug(str(tokenlength) + ' Found this part [' + tokens[ -2] + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].')
-                    globals.logger.debug(str(tokenlength) + " Let's continue searching with this pattern [" + pformat(self.rules[ key], width=180) + ']')
-                    for x in self.rules[ key ]:
-                        if search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                            globals.logger.debug(str(tokenlength) + ' as (regexp) starts with [' + tokens[ -1] + ' > ' + x + ']')
-                            #ret.append( x + ' ' )
-                            
-                            # similar commands CASE BUG fix v1.0 part I. test 2 ######################################
-                            
-                            self.retfixed.append( x + ' ' )
-                            
-                            index = len( tokens[ -1] )
-                            # override the problematic letter
-                            # x[index] = tokens[ -1][index]
-                            if index > 1:
-                                #x = x[:index] + tokens[ -1][index] + x[index+1:]
-                                x = tokens[ -1][:index] + x[index:]
-                            ##########################################################################################
-                            
-                            # here it could be improved a bit, if they all start with token[-1], they can be capitalized???
-                            
-                            ret.append( x.lower() + ' ' )
-                                                    
-                            continue
-
-        elif tokenlength == 3:
-            # LEVEL 3
-            globals.logger.debug(' Stepped into LEVEL 3.')
-
-            for key in self.rules:
-                
-                # skip the previous level entries
-                if len( key.split() ) + 1 != 3 and not ( len( key.split() ) == 3 and key[ -1 ] == '=' ):    
-                    continue
-                elif key.startswith( 'select' ):  # ???????????????????????????????
-                    continue
-                
-                #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + key + ']' + str( len( key.split() ) ) )
-                #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
-                #globals.logger.debug( str( tokenlength) + ' and searching in text [' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ']' )
-                #if search( '^' + utilities.regexpgenerator( key ), tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE):
-                
-                # for safer handling commands that start same (q node, q nodeg, q noded), but only if not an option (doamin=)
-                extradelimiter = '' if search( '=', key ) else ' ' 
-                if search( '^' + utilities.regexpgenerator( key ) + extradelimiter, ' '.join( tokens ) + extradelimiter, IGNORECASE):
-                    globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 3rd LEVEL dictionary item: [' + key + '].')
-                    globals.logger.debug(str(tokenlength) + " let's continue searching with this item(s) [" + pformat(self.rules[ key], width=180) + ']')
-                
-                    ret += self.SPunversaltokenresolver( key, tokens )
-                                        
-                    # for x in self.rules[ key ]:
-                    #     
-                    #     # {Mustexist: .+} feature test
-                    #     if search( '{Mustexist: .+}', x, IGNORECASE ):  
-                    #         mustexist = search( '{Mustexist: (.+)}', x )
-                    #         if not search( ' ' + mustexist[ 1 ], tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
-                    #             continue
-                    #         else:                        
-                    #             # it's Ok, we found it, then remove it not to disturb furthermore
-                    #             x = x.replace( mustexist[ 0 ], '' )
-                    #                                                     
-                    #     if x.startswith( 'select' ):
-                    #         # First try as an SQL pattern!
-                    #         globals.logger.debug( str( tokenlength) + " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
-                    #         ret += self.spsqlengine( x.strip(), tokens )
-                    #         continue
-                    #     else:
-                    #         #if explicit option is given, then preparation may needed
-                    #         if tokens[ -1 ] != '' and tokens[ -1 ][ -1 ] == '=':
-                    #             match = search( '(\w+=)\w+', x )
-                    #             if match:
-                    #                 x = x.replace( match[ 1 ], tokens[ -1 ] )
-                    #         
-                    #         if search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                    #             globals.logger.debug( str( tokenlength) + ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
-                    #             separator = '' if x[ -1 ] == '=' else ' '
-                    #             ret.append( x + separator )
-                    #             continue
-                    #         
-                    #         if search( '\w+=\w+', x ):
-                    #             left, right = x.split( '=' ) 
-                    #             leftregexp  = utilities.regexpgenerator( left )
-                    #             rightregexp = utilities.regexpgenerator( right )
-                    #             match = search( '^' + leftregexp + '=' + rightregexp, tokens[ -1 ], IGNORECASE )
-                    #             if match:
-                    #                  ret.append( match[ 1 ] + '=' + right )
-                    #                  continue
-                            
-        elif tokenlength == 4:
-            # LEVEL 4
-            logging.info( ' Stepped into LEVEL 4.' )
+        elif tokenlength >= 2:
+            # LEVEL x.
+            globals.logger.debug(' Stepped into LEVEL ' + str( tokenlength ) + '.')
             
-            for key in self.rules:
-                # SKIP the previous or further level entries when
-                #  +key: query actlog asasaas=
-                #   key not 4 items: query actlog asasaas=asasas sdsdsds
-                # BUTNOT
-                #   key 4 items with '=' endings: query actlog asasaas=asasas sdsdsds=
-                
-                keylength = len( key.split() )
-                
-                if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
-                    continue
-                elif key.startswith( 'select' ):  # ???????????????????????????????
-                    continue
-                    
-                #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + key + ']' )
-                #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
-                #if search( '^' + utilities.regexpgenerator( key ), tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
-                if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -4] + ' ' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str(keylength) + '].')
-                    globals.logger.debug(str(tokenlength) + " let's continue searching with this item(s) [" + pformat(self.rules[key], width=180) + ']')
-                                      
-                    ret += self.SPunversaltokenresolver( key, tokens )
-                        
-                    # for x in self.rules[ key ]:
-                   
-                        # # # {Mustexist: .+} feature test
-                        # # if search( '{Mustexist: .+}', x, IGNORECASE ):  
-                        # #     mustexist = search( '{Mustexist: (.+)}', x )
-                        # #     if not search( mustexist[ 1 ], tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
-                        # #         continue                       
-                        # #     else:
-                        # #         x = x.replace( mustexist[ 0 ], '' )
-                        # #         
-                        # #     
-                        # # if x.startswith( 'select' ):
-                        # #     # First try as an SQL pattern!
-                        # #     globals.logger.debug( " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
-                        # #     ret += self.spsqlengine( x.strip(), tokens )
-                        # #     continue
-                        # # elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                        # #     globals.logger.debug( ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
-                        # #     
-                        # #         
-                        # #     separator = '' if x[ -1 ] == '=' else ' '
-                        # #     ret.append( x + separator )
-                        # #     continue
-                        # 
-                        # 
-                        # # {Mustexist: .+} feature test
-                        # if search( '{Mustexist: .+}', x, IGNORECASE ):  
-                        #     mustexist = search( '{Mustexist: (.+)}', x )
-                        #     if not search( ' ' + mustexist[ 1 ], tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
-                        #         continue
-                        #     else:                        
-                        #         # it's Ok, we found it, then remove it not to disturb furthermore
-                        #         x = x.replace( mustexist[ 0 ], '' )
-                        # 
-                        # if x.startswith( 'select' ):
-                        #     # First try as an SQL pattern!
-                        #     globals.logger.debug( str( tokenlength) + " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
-                        #     ret += self.spsqlengine( x.strip(), tokens )
-                        #     continue
-                        # else:
-                        #     #if explicit option is given, then preparation may needed
-                        #     if tokens[ -1 ] != '' and tokens[ -1 ][ -1 ] == '=':
-                        #         match = search( '(\w+=)\w+', x )
-                        #         if match:
-                        #             x = x.replace( match[ 1 ], tokens[ -1 ] )
-                        #     
-                        #     if search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                        #         globals.logger.debug( str( tokenlength) + ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
-                        #         separator = '' if x[ -1 ] == '=' else ' '
-                        #         ret.append( x + separator )
-                        #         continue
-                        #     
-                        #     if search( '\w+=\w+', x ):
-                        #         left, right = x.split( '=' ) 
-                        #         leftregexp  = utilities.regexpgenerator( left )
-                        #         rightregexp = utilities.regexpgenerator( right )
-                        #         match = search( '^' + leftregexp + '=' + rightregexp, tokens[ -1 ], IGNORECASE )
-                        #         if match:
-                        #              ret.append( match[ 1 ] + '=' + right )
-                        #              continue
-                            
-        elif tokenlength == 5:
-            # LEVEL 5
-            logging.info( ' Stepped into LEVEL 5.' )
-                        
-            for key in self.rules:   
-            
-                # SKIP the previous or further level entries when
-                #  +key: query actlog asasaas=
-                #   key not 4 items: query actlog asasaas=asasas sdsdsds
-                # BUTNOT
-                #   key 4 items with '=' endings: query actlog asasaas=asasas sdsdsds=
-                # if ( ( len( key.split() ) == 4 and key[ -1 ] == '=' ) or len( key.split() ) + 1 != 5 ) and not ( len( key.split() ) == 5 and key[ -1 ] == '=' ):
-                #     continue
-                # elif key.startswith( 'select' ):  # ???????????????????????????????
-                #     continue
-                #
-                   
-                keylength = len( key.split() )
-                    
-                if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength == 5 and key[ -1 ] == '=' ):
-                    continue
-                elif key.startswith( 'select' ):  # ???????????????????????????????
-                    continue
-                     
-                #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + key + ']' )
-                #globals.logger.debug( str( tokenlength) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
-                #if search( '^' + utilities.regexpgenerator( key ), tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
-                if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -5] + ' ' + tokens[ -4] + ' ' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 5th LEVEL dictionary item: [' + key + '] [' + str(keylength) + '].')
-                    globals.logger.debug(str(tokenlength) + " let\'s continue searching with this item(s) [" + pformat( self.rules[key], width=180 ) + ']')
-                      
-                    ret += self.SPunversaltokenresolver( key, tokens )
-                                                          
-                    # for x in self.rules[ key ]:
-                     
-                        # # {Mustexist: \w+} feature test
-                        # if search( '{Mustexist: .+}', x, IGNORECASE ):  
-                        #     mustexist = search( '{Mustexist: (.+)}', x )[ 1 ] 
-                        #     if not search( mustexist, tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
-                        #         continue                       
-                        #     
-                        # if x.startswith( 'select' ):
-                        #     # First try as an SQL pattern!
-                        #     globals.logger.debug( str( tokenlength) + ' it\'s an SQL select [' + tokens[ -1 ] + ' > ' + x + ']' )
-                        #     ret += self.spsqlengine( x.strip(), tokens )
-                        #     continue
-                        # elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                        #     globals.logger.debug( str( tokenlength) + ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
-                        #     
-                        #     # remove the option part if it exists
-                        #     match = search( '{Mustexist: .+}', x )
-                        #     if match:
-                        #         x = x.replace( match[ 0 ], '' )
-                        #         
-                        #     separator = '' if x[ -1 ] == '=' else ' '
-                        #     ret.append( x + separator )
-                        #     continue
-        
-        elif tokenlength >= 6:
-            # LEVEL 6
-            logging.info( ' Stepped into LEVEL >=6.' )
-            
-            # reduce rules toDo: copy all of the command levels
-            tmprules  = {}
+            if '=' in tokens[-1]:
+                tokenlength += 1
+                globals.logger.debug(' Stepped into LEVEL overridden to: ' + str( tokenlength ) + '.')
+
+            # reduce rules to tmprules
+            tmprules    = {}
             tmprulesmax = 0
             for key in self.rules:
-                if search( '^' + ' '.join( tokens[0:2] ), key, IGNORECASE ):
-                    tmprules[key] = self.rules[key]
-                    if len( key.split() ) > tmprulesmax:
-                        tmprulesmax = len( key.split() )
-                        
-            globals.logger.debug( '--- rulesmax: ' + str(tmprulesmax) + " and reduced rules: " + pformat( tmprules, width=180 ) + ']' )
-        
-            for key in tmprules:
-                # SKIP the previous or further level entries when
-                #  +key: query actlog asasaas=
-                #   key not 4 items: query actlog asasaas=asasas sdsdsds
-                # BUTNOT
-                #   key 4 items with '=' endings: query actlog asasaas=asasas sdsdsds=
                 
-                keylength = len( key.split() )
+                if key.startswith( 'select' ):  # ???????????????????????????????
+                    continue
                 
-                # define copyg  st  st      st   st     para
-                # define path   src dest    srct destt  para
-                
-                if tokenlength >= tmprulesmax:
-                    if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength != 4 ) and not ( keylength >= 5 and key[ -1 ] == '=' ):
-                        continue
-                    elif key.startswith( 'select' ):  # ???????????????????????????????
-                        continue
-                else: 
-                    if ( ( keylength == 4 and key[ -1 ] == '=' ) or keylength + 1 != 5 ) and not ( keylength >= 5 and key[ -1 ] == '=' ):
-                        continue
-                    elif key.startswith( 'select' ):  # ???????????????????????????????
-                        continue
-                
-                # if ( ( keylength == 3 and key[ -1 ] == '=' ) or keylength + 1 != 4 ) and not ( keylength == 4 and key[ -1 ] == '=' ):
-                #     continue
-                # elif key.startswith( 'select' ):  # ???????????????????????????????
-                #     continue
+                # if search( '^' + ' '.join( tokens[0:( tokenlength - 1 )] ).rstrip(), key, IGNORECASE ):
+                # Filter onnly the first two levels!
+                # ???????????????? ez lehet már nem is kell
+                lenmax2 = ( tokenlength - 1 )
+                if lenmax2 > 2:
+                    lenmax2 = 2
+
+                # cleanup the rules to reduce its size RUN is an exception we MUST handle!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                if search( '^' + '.* '.join( tokens[0:lenmax2] ).rstrip(), key, IGNORECASE ) or search( '^' + tokens[0], 'run', IGNORECASE ):
+                    # print('['+ key + ']')
                     
-                #globals.logger.debug( ' and searching for regexp pattern [' + key + ']' )
-                #globals.logger.debug( ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
-                #if search( '^' + utilities.regexpgenerator( key ), tokens[ -6 ] + ' ' + tokens[ -5 ] + ' ' + tokens[ -4 ] + ' ' + tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
-                if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):
-                    globals.logger.debug(str(tokenlength) + ' and found [' + tokens[ -6] + ' ' + tokens[ -5] + ' ' + tokens[ -4] + ' ' + tokens[ -3] + ' ' + tokens[ -2] + '] command in the 4th LEVEL dictionary item: [' + key + '] [' + str(keylength) + '].')
-                    globals.logger.debug(str(tokenlength) + " let\'s continue searching with this item(s) [" + pformat(self.rules[key], width=180) + ']')
+                    keylength = len( key.split() )                 
+                             
+                    # if key[ -1 ] == '=':
+                    #     a = 1
+                    # else:
+                    #     if keylength >= tokenlength:
+                    #         continue                     
+
+                    if tokenlength > 2 and keylength < 2:
+                        continue
+
+                    if keylength < tokenlength - 1:
+                        continue                     
+
+                    tmprules[key] = self.rules[key]
+
+                    if keylength > tmprulesmax:
+                        tmprulesmax = keylength
+ 
+            globals.logger.debug( '--- tokenlen: ' + str( tokenlength ) + ' and tokens:        ' + pformat( tokens, width=180 ) )
+            globals.logger.debug( '--- rulesmax: ' + str( tmprulesmax ) + ' and reduced rules: ' + pformat( tmprules, width=180 ) )
+
+            # collect the results
+            for key in tmprules:
+                
+                # globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + key + ']' )
+                # globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
+                
+                extradelimiter = '' if search( '=', key ) else ' ' 
+                if search( '^' + utilities.regexpgenerator( key ) + extradelimiter, ' '.join( tokens ) + extradelimiter, IGNORECASE ):
+                    # globals.logger.debug( str( tokenlength ) + ' Found this part [' + tokens   + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
+                    globals.logger.debug( str( tokenlength ) + " Let's continue searching with this pattern [" + pformat( self.rules[ key], width=180 ) + ']' )
                    
                     ret += self.SPunversaltokenresolver( key, tokens )
-                                          
-                    # for x in self.rules[ key ]:
-                          
-                        # # {Mustexist: \w+} feature test
-                        # if search( '{Mustexist: .+}', x, IGNORECASE ):  
-                        #     mustexist = search( '{Mustexist: (.+)}', x )[ 1 ] 
-                        #     if not search( mustexist, tokens[ -3 ] + ' ' + tokens[ -2 ] + ' ' + tokens[ -1 ], IGNORECASE ):
-                        #         continue                       
-                        #     
-                        # if x.startswith( 'select' ):
-                        #     # First try as an SQL pattern!
-                        #     globals.logger.debug( str( tokenlength) + " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
-                        #     ret += self.spsqlengine( x.strip(), tokens )
-                        #     continue
-                        # elif search( '^' + tokens[ -1 ], x, IGNORECASE ):
-                        #     globals.logger.debug( str( tokenlength) + ' as a regexp starts with [' + tokens[ -1 ] + ' > ' + x + ']' )
-                        #     
-                        #     # remove the option part if it exists
-                        #     match = search( '{Mustexist: .+}', x )
-                        #     if match:
-                        #         x = x.replace( match[ 0 ], '' )
-                        #         
-                        #     separator = '' if x[ -1 ] == '=' else ' '
-                        #     ret.append( x + separator )
-                        #     continue
 
-        # elif tokenlength == 7:
-        #     # LEVEL 7
-        #     logging.info( ' Stepped into LEVEL 7.' )
-        #     
-        #     for key in self.rules:
-        #         
-        #         keylength = len( key.split() )
-        #         
-        #         if ( ( keylength == 5 and key[ -1 ] == '=' ) or keylength + 1 != 6 ) and not ( keylength == 6 and key[ -1 ] == '=' ):
-        #             continue
-        #         elif key.startswith( 'select' ):  # ???????????????????????????????
-        #             continue
-        #             
-        #         if search( '^' + utilities.regexpgenerator( key ), ' '.join( tokens ), IGNORECASE):   
-        #             ret += self.SPunversaltokenresolver( key, tokens )
-
+            # in level 2 fix to show colors
+            if tokenlength == 2:
+                self.retfixed = ret
+                ret = [x.lower() for x in ret]
+            
         else:
             globals.logger.debug(' Stepped into LEVEL Bzzz...')
 
