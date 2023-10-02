@@ -282,14 +282,13 @@ class IBMSPrlCompleter:
                     
                     keylength = len( key.split() )                 
                              
-                    # if key[ -1 ] == '=':
-                    #     a = 1
-                    # else:
-                    #     if keylength >= tokenlength:
-                    #         continue                     
+                    # if tokenlength > 3 and keylength <= 2:
+                    #     continue
 
-                    if tokenlength > 2 and keylength < 2:
+                    if keylength != ( tokenlength - 1 ) and not search( '\{1\,\}', key ):
                         continue
+
+
 
                     # if keylength < tokenlength - 1:
                     #     continue                     
@@ -302,6 +301,16 @@ class IBMSPrlCompleter:
             globals.logger.debug( '--- tokenlen: ' + str( tokenlength ) + ' and tokens:        ' + pformat( tokens, width=180 ) )
             globals.logger.debug( '--- rulesmax: ' + str( tmprulesmax ) + ' and reduced rules: ' + pformat( tmprules, width=180 ) )
 
+#             # keep only repeatable options if 
+#             tmprules2 = []
+# 
+#             if tokenlength > tmprulesmax:
+#                 for key in tmprules:
+#                     if search( '\{1\,\}', key ):
+#                         tmprules2[key] = tmprules[key]
+#                         
+#                 tmprules = tmprules2                        
+                
             # collect the results
             for key in tmprules:
                 
@@ -411,7 +420,7 @@ class IBMSPrlCompleter:
                     ret.append( x + separator )
                     continue
                                   
-                if search( '\w+=\w+', x ):
+                if search( r'\w+=\w+', x ):
                     left, right = x.split( '=' ) 
                     leftregexp  = utilities.regexpgenerator( left )
                     rightregexp = utilities.regexpgenerator( right )

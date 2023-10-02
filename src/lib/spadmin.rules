@@ -267,10 +267,10 @@ BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,} Wait=           -> Wai
 # =========================================================================================================================
 # CHECKIn LIBVolume
 # https://www.ibm.com/docs/en/tsm/7.1.8?topic=commands-checkin-libvolume-check-storage-volume-into-library
-CHECKIn                                                   -> LIBVolume
-CHECKIn LIBVolume                                         -> select library_name from libraries
-CHECKIn LIBVolume [\w\-\.\+\&]+                           -> <give_a_volumename_here>
-CHECKIn LIBVolume [\w\-\.\+\&]+                           -> SEARCH=
+CHECKIn LIBVolume                                                        -> select library_name from libraries
+CHECKIn                                                                  -> LIBVolume
+CHECKIn LIBVolume [\w\-\.\+\&]+                                          -> <give_a_volumename_here>
+CHECKIn LIBVolume [\w\-\.\+\&]+                                          -> SEARCH=
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> SEARCH=
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> STATus=
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> OWNer=
@@ -284,8 +284,8 @@ CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> VOLL
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                        -> VOLList={Mustexist: SEARCH=Bulk}
 
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ SEARCH=                  -> SEARCH=No
-CHECKIn LIBVolume [\w\-\.\+\&]+  SEARCH=                    -> SEARCH=Yes
-CHECKIn LIBVolume [\w\-\.\+\&]+  SEARCH=                    -> SEARCH=Bulk
+CHECKIn LIBVolume [\w\-\.\+\&]+ SEARCH=                                    -> SEARCH=Yes
+CHECKIn LIBVolume [\w\-\.\+\&]+ SEARCH=                                    -> SEARCH=Bulk
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ STATus=                  -> STATus=PRIvate
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ STATus=                  -> STATus=SCRatch
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ STATus=                  -> STATus=CLEaner
@@ -312,8 +312,8 @@ CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> VO
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> VOLList={Mustexist: SEARCH=Bulk}
 
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SEARCH=     -> SEARCH=No
-CHECKIn LIBVolume [\w\-\.\+\&]+    (\w+=.*){1,} SEARCH=     -> SEARCH=Yes
-CHECKIn LIBVolume [\w\-\.\+\&]+    (\w+=.*){1,} SEARCH=     -> SEARCH=Bulk
+CHECKIn LIBVolume [\w\-\.\+\&]+ (\w+=.*){1,} SEARCH=                       -> SEARCH=Yes
+CHECKIn LIBVolume [\w\-\.\+\&]+ (\w+=.*){1,} SEARCH=                       -> SEARCH=Bulk
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STATus=     -> STATus=PRIvate
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STATus=     -> STATus=SCRatch
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STATus=     -> STATus=CLEaner
@@ -330,9 +330,9 @@ CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CLEanings=  -> CL
 # CHECKOut LIBVolume
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.17?topic=commands-checkout-libvolume-check-storage-volume-out-library
 ###################
-CHECKOut                                                     -> LIBVolume
-CHECKOut LIBVolume                                           -> select library_name from libraries
-CHECKOut LIBVolume [\w\-\.\+\&]+                             -> select volume_name from libvolumes where library_name like upper( '-2' )
+CHECKOut                                                                    -> LIBVolume
+CHECKOut LIBVolume                                                          -> select library_name from libraries
+CHECKOut LIBVolume [\w\-\.\+\&]+                                            -> select volume_name from libvolumes where library_name like upper( '-2' )
 
 CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+                          -> REMOVE=
 CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ REMOVE=                  -> REMOVE=BULK
@@ -370,9 +370,13 @@ DEFine COpygroup                                                       -> select
 DEFine COpygroup [\w\*\-\.\+\&]+                                       -> select set_name from policysets where set_name<>'ACTIVE' and domain_name like upper( '-2' )
 #DEFine COpygroup [\w\*\-\.\+\&]+                                      -> <give_a_valid_class_name>
 DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+                       -> select class_name from mgmtclasses where set_name like upper( '-2' ) and domain_name like upper( '-3' )
-DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+       -> STANDARDX
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+       -> STANDARD
 DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+       -> Type=
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ Type= -> Type=Backup
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ Type= -> Type=Archive
 DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ STANDARD -> Type=
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ STANDARD Type= -> Type=Backup
+DEFine COpygroup [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ STANDARD Type= -> Type=Archive
 
 ACTivate                           -> POlicyset
 ACTivate POlicyset                 -> select domain_name from domains
