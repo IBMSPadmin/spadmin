@@ -82,7 +82,7 @@ class Spadmin(object):
             globals.logger.info(utilities.consolefilledline( 'Push autoexec commands into global config: [' + globals.autoexec + ']' ) )
             line = globals.autoexec
 
-        globals.extras = {}
+        globals.extras  = {}
         globals.aliases = {}
         
         # load aliases
@@ -179,10 +179,10 @@ class Spadmin(object):
                 # system command 
                 systemcommand = search( '^!(.+)', command )
                 if systemcommand:
-                    os.system( systemcommand[1] )
+                    os.system( systemcommand[ 1 ] )
                     # next command               
                     line = ''
-                    break
+                    continue
                       
                 # it's not own command. Does the user want to possibly exit???
                 if search('^' + utilities.regexpgenerator('QUIt') + '(?!.*\w+)', command, IGNORECASE) or \
@@ -275,15 +275,15 @@ class Spadmin(object):
         # SPadmin global settings
 
         ## COLORS:
-        globals.color_cyan = 'cyan'
-        globals.color_white = 'white'
-        globals.color_green = 'green'
-        globals.color_red = 'red'
-        globals.color_yellow = 'yellow'
-        globals.color_on_blue = 'on_blue'
-        globals.color_on_white = 'on_white'
-        globals.color_grey = 'grey'
-        globals.color_attrs_bold= 'bold'
+        globals.color_cyan            = 'cyan'
+        globals.color_white           = 'white'
+        globals.color_green           = 'green'
+        globals.color_red             = 'red'
+        globals.color_yellow          = 'yellow'
+        globals.color_on_blue         = 'on_blue'
+        globals.color_on_white        = 'on_white'
+        globals.color_grey            = 'grey'
+        globals.color_attrs_bold      = 'bold'
         globals.color_attrs_underline = 'underline'
 
         # prereq check
