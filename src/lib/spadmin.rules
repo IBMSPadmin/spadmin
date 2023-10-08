@@ -1457,9 +1457,13 @@ MOVe -> GRPMEMber
 MOVe -> MEDia
 MOVe -> NODEdata
 MOVe -> RETMedia
+
 NOTIfy -> SUBSCRIBers
 PERForm -> LIBACTion
-PING -> SERVER
+
+PING        -> SERVER
+PING SERVER -> select server_name from servers
+
 PROTect -> STGPool
 Query -> ADmin
 Query -> ALERTSTatus

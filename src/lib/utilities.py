@@ -226,7 +226,8 @@ def validate_license():
         if (getmac() and getmac() == mac) and (valid_to and valid_to >= today):
             globals.logger.debug('License valid!!')
             print(colored( " Your license is valid until " + str(valid_to) + "!", globals.color_green, attrs = [ globals.color_attrs_bold ]))
-            print()
+            if not globals.nowelcome:
+                print()
             globals.licensed = True
         else:
             globals.logger.debug('License expired!!')
@@ -241,7 +242,8 @@ My mac address where I want to use it: """ + mac + """
 
 Thanks.
 --- CUT ---""", globals.color_red, attrs=[globals.color_attrs_bold]))
-            print()
+            if not globals.nowelcome:
+                print()
             globals.licensed = False
     else:
         globals.logger.debug('License file not found!!')

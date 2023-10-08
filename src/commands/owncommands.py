@@ -435,7 +435,7 @@ class SPadminSHowVERsion(SpadminCommand):
 
     def _execute(self, parameters: str) -> str:
         data = []
-        data.append( [ 'v1.0' ] )
+        data.append( [ 'v1.2.0' ] )
         
         return columnar( data, 
                          headers=[ utilities.color( 'spadmin.py version', "white" ) ],

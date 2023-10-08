@@ -7,8 +7,8 @@ import lib.globals as globals
 class HumanBytes:
 	METRIC_LABELS: List[ str ]       = [ "B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" ]
 	BINARY_LABELS: List[ str ]       = [ "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB" ]
-	TIME_LABELS: List[ str ]       = [ "s", "m", "H", "d", "w", "Mo", "Y" ]
-	TIME_UNIT: List[ str ]       = [ 1, 60, 60, 24, 7, 30, 12, 1 ]
+	TIME_LABELS: List[ str ]         = [ "s", "m", "H", "d", "w", "Mo", "Y" ]
+	TIME_UNIT: List[ str ]           = [ 1, 60, 60, 24, 7, 30, 12, 1 ]
 	PRECISION_OFFSETS: List[ float ] = [ 0.5, 0.05, 0.005, 0.0005 ] # PREDEFINED FOR SPEED.
 	PRECISION_FORMATS: List[ str ]   = [ "{}{:.0f} {}", "{}{:.1f} {}", "{}{:.2f} {}", "{}{:.3f} {}" ] # PREDEFINED FOR SPEED.
 

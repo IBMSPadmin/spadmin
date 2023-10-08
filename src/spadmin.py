@@ -4,7 +4,7 @@
 # Original idea and the base source skeleton came from: https://sites.google.com/site/xiangyangsite/home/technical-tips/software-development/python/python-readline-completions
 #
 
-# v1.0.0
+# v1.2.0
 
 #
 #       Changed: LVL4, 5, 6 test
@@ -57,6 +57,8 @@ from termcolor import colored
 from pprint import pformat
 from re import search, IGNORECASE, split
 import random
+
+import lib.humanbytes as humanbytes
 
 columnar = lib.columnar.Columnar()
 prgstart = time()
@@ -202,8 +204,8 @@ class Spadmin(object):
                     # End of the prg
                     prgend = time()
                     utilities.consoleline('-')
-                    exetime = datetime.timedelta(seconds=prgend - prgstart)
-                    print('Program execution time:', colored(exetime, globals.color_green))
+                    exetime = datetime.timedelta( seconds = prgend - prgstart).total_seconds()
+                    print('Program execution time:', colored( humanbytes.HumanBytes.format( exetime, unit="TIME_LABELS", precision=0 ), globals.color_green))
                     globals.logger.info('Program execution time: ' + str(exetime) + 's')
                     utilities.consoleline('-')
 
@@ -241,7 +243,7 @@ class Spadmin(object):
 
                 ret = []
                 # Remove empty lines and other "technical/administartive' texts
-                for i in globals.tsm.send_command_normal(command).splitlines()[1:]:
+                for i in globals.tsm.send_command_normal( command ).splitlines()[1:]:
                     if search('^Session established with server \w+:', i):
                         continue
                     elif search('^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i):
@@ -369,6 +371,9 @@ class Spadmin(object):
             print("\nConsole mode...")
             utilities.start_console(globals.server, globals.userid,  globals.password)
             quit(0)
+            
+        if args.nowelcome:
+            globals.nowelcome = 'True'
 
         globals.logger.info(utilities.consolefilledline('START'))
         globals.logger.info(utilities.consolefilledline('START'))
@@ -410,7 +415,8 @@ class Spadmin(object):
 
         if args.fetch or globals.config.getconfiguration()['SPADMIN']['cache_prefetch'] == 'True':
             globals.logger.info('SQL prefetch for faster readline queries.')
-            print('SQL prefetch for faster readline queries...')
+            if not args.nowelcome:
+                print('SQL prefetch for faster readline queries...')
             globals.myIBMSPrlCompleter.spsqlengine('select node_name from nodes', ['prefetch'])
             globals.myIBMSPrlCompleter.spsqlengine('select domain_name from domains', ['prefetch'])
             globals.myIBMSPrlCompleter.spsqlengine('select stgpool_name from stgpools', ['prefetch'])
@@ -489,7 +495,7 @@ class Spadmin(object):
         parser.add_argument('-t', '--textcolor', type=str, help='specify the text color [default: "white"]')
         parser.add_argument('-u', '--nohumanreadable', action='store_const', const=True, 
                             help='no human readable conversions')
-        parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.0',
+        parser.add_argument('-v', '--version', action='version', version='%(prog)s v1.2.0',
                             help='show version information')
         parser.add_argument('-w', '--nowelcome', action='store_const', const=True, help='no welcome messages')
         return parser.parse_args()
@@ -507,7 +513,7 @@ __author__     = [ "Fleischmann György", "Szabó Marcell" ]
 __copyright__  = "Copyright 2022, as The SPadmin Python Project"
 __credits__    = [ "Fleischmann György", "Szabó Marcell"]
 __license__    = "MIT"
-__version__    = "1.0.0"
+__version__    = "1.2.0"
 __maintainer__ = "Fleischmann György"
 __email__      = "gyorgy@fleischmann.hu"
 __status__     = "Production"
