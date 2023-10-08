@@ -1,3 +1,5 @@
+# Simople spadmin.py starter
+
 while :; do
 
  clear
@@ -8,8 +10,7 @@ while :; do
 
  ./spadmin.py --nowelcome -a 'deb; sp show log'
 
- if [ $? -ne 0 ] 
-   then
+ if [ $? -ne 0 ] then
      exit 1 
  fi
 
