@@ -2177,18 +2177,18 @@ def basicPerformanceFromSummary(self, activity, fromdate='0', todate='1'):
             failed = row[9]
 
         if int(row[11]) > 10*60:
-            failed = utilities.color(row[11], 'red')
+            row[11] = utilities.color(row[11], 'red')
         elif int(row[11]) > 2*60:
-            failed = utilities.color(row[11], 'yellow')
+            row[11] = utilities.color(row[11], 'yellow')
         else:
-            failed = row[11]
+            row[11] = row[11]
 
         if int(row[12]) > 10*60:
-            failed = utilities.color(row[12], 'red')
+            row[12] = utilities.color(row[12], 'red')
         elif int(row[12]) > 2*60:
-            failed = utilities.color(row[12], 'yellow')
+            row[12] = utilities.color(row[12], 'yellow')
         else:
-            failed = row[12]
+            row[12] = row[12]
 
         if row[14] == 'NO':
             success = utilities.color( row[14], 'red' )
