@@ -4,7 +4,7 @@
 # Original idea and the base source skeleton came from: https://sites.google.com/site/xiangyangsite/home/technical-tips/software-development/python/python-readline-completions
 #
 
-version = 'v1.3.0'
+version = 'v1.3.1'
 
 #
 #       Changed: LVL4, 5, 6 test
