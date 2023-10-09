@@ -456,6 +456,7 @@ class Spadmin(object):
             print(colored('= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=[globals.color_attrs_bold]))
             print(colored('= Terminal properties: [', 'grey', attrs=[globals.color_attrs_bold]) + colored(str(globals.columns), globals.color_white, attrs=[globals.color_attrs_bold]) + colored('x', 'grey', attrs=[ globals.color_attrs_bold]) + colored(
                 str(globals.rows), globals.color_white, attrs=[globals.color_attrs_bold]) + colored(']', 'grey', attrs=[globals.color_attrs_bold]))
+            print(colored( '= Current version: ', 'grey', attrs=[globals.color_attrs_bold] ) + colored( globals.version, 'white', attrs=[globals.color_attrs_bold] ) )
             # Short text help
             print()
             print(' ' + colored('Short HELP:', globals.color_cyan, attrs=[globals.color_attrs_bold, globals.color_attrs_underline]))

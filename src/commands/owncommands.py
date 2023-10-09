@@ -1282,9 +1282,12 @@ class ShowStgp(SpadminCommand):
 
             if row[1] == 'DISK':
                 if float(row[5]) > 85:
-                    row[5] = utilities.color(row[5], 'red')
+                    row[5] = utilities.color( row[5], 'red' )
                 elif float(row[5]) > 70:
-                    row[5] = utilities.color(row[5], 'yellow')
+                    row[5] = utilities.color( row[5], 'yellow' )
+
+            if row[6] == 'Y':
+                row[6] = utilities.color( row[6], 'green' )
                     
         return columnar( data,
                          headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'C', 'HighMig', 'LowMig', 'Recl', 'Next'],
@@ -1587,7 +1590,7 @@ class ShowDrives(SpadminCommand):
             data2.append([i + 1, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
 
         table = columnar(data2,
-                         headers=['#', 'Library', 'Drive', 'Online', 'Element', 'State', 'Serial', 'Volume',
+                         headers=['#', 'Library', 'Drive', 'Online', 'Ele', 'State', 'Serial', 'Volume',
                                   'Allocated'],
                          justify=['r', 'l', 'l', 'l', 'c', 'l', 'l', 'l', 'l'])
         return table
@@ -2173,10 +2176,24 @@ def basicPerformanceFromSummary(self, activity, fromdate='0', todate='1'):
         else:
             failed = row[9]
 
-        if row[14] == 'NO':
-            success = utilities.color(row[14], 'red')
+        if int(row[11]) > 10*60:
+            failed = utilities.color(row[11], 'red')
+        elif int(row[11]) > 2*60:
+            failed = utilities.color(row[11], 'yellow')
         else:
-            success = row[14]
+            failed = row[11]
+
+        if int(row[12]) > 10*60:
+            failed = utilities.color(row[12], 'red')
+        elif int(row[12]) > 2*60:
+            failed = utilities.color(row[12], 'yellow')
+        else:
+            failed = row[12]
+
+        if row[14] == 'NO':
+            success = utilities.color( row[14], 'red' )
+        else:
+            success = utilities.color( row[14], 'green' )
 
         columntmp = 'Pool'
         if activity == "BACKUP" or activity == "RESTORE" or activity == "ARCHIVE" or activity == "RETRIEVE":
