@@ -4,7 +4,7 @@
 # Original idea and the base source skeleton came from: https://sites.google.com/site/xiangyangsite/home/technical-tips/software-development/python/python-readline-completions
 #
 
-# v1.2.0
+version = 'v1.3.0'
 
 #
 #       Changed: LVL4, 5, 6 test
@@ -60,8 +60,10 @@ import random
 
 import lib.humanbytes as humanbytes
 
-columnar = lib.columnar.Columnar()
 prgstart = time()
+columnar = lib.columnar.Columnar()
+
+globals.version = version
 
 try:
     import gnureadline as readline
@@ -343,9 +345,9 @@ class Spadmin(object):
             globals.userid   = globals.config.getconfiguration()[globals.server]['dsmadmc_id']
             globals.password = utilities.decode(globals.config.getconfiguration()[globals.server]['dsmadmc_password'])
 
-        globals.prereqcheck = 'False'
+        globals.prereqcheck = False
         if args.prereqcheck:
-            globals.prereqcheck = 'True'
+            globals.prereqcheck = True
         elif globals.config.getconfiguration()['SPADMIN'].get( 'prereqcheck' ) is not None:
             globals.prereqcheck = globals.config.getconfiguration()['SPADMIN']['prereqcheck']
 
@@ -361,9 +363,9 @@ class Spadmin(object):
         elif globals.config.getconfiguration()['SPADMIN'].get( 'basecommandname' ) is not None:
             globals.basecommandname = globals.config.getconfiguration()['SPADMIN']['basecommandname']
             
-        globals.nohumanreadable = 'False'
+        globals.nohumanreadable = False
         if args.nohumanreadable:
-            globals.nohumanreadable = 'True'
+            globals.nohumanreadable = True
         elif globals.config.getconfiguration()['SPADMIN'].get( 'nohumanreadable' ) is not None:
             globals.nohumanreadable = globals.config.getconfiguration()['SPADMIN']['nohumanreadable']
         
@@ -372,8 +374,9 @@ class Spadmin(object):
             utilities.start_console(globals.server, globals.userid,  globals.password)
             quit(0)
             
+        globals.nowelcome = False
         if args.nowelcome:
-            globals.nowelcome = 'True'
+            globals.nowelcome = True
 
         globals.logger.info(utilities.consolefilledline('START'))
         globals.logger.info(utilities.consolefilledline('START'))
@@ -384,7 +387,7 @@ class Spadmin(object):
         # get the screen size and store it as a global variable
         utilities.refreshrowscolumns()
 
-        if not args.nowelcome:
+        if not globals.nowelcome:
             self.welcome()
             
         utilities.validate_license()
@@ -513,7 +516,7 @@ __author__     = [ "Fleischmann György", "Szabó Marcell" ]
 __copyright__  = "Copyright 2022, as The SPadmin Python Project"
 __credits__    = [ "Fleischmann György", "Szabó Marcell"]
 __license__    = "MIT"
-__version__    = "1.2.0"
+__version__    = globals.version
 __maintainer__ = "Fleischmann György"
 __email__      = "gyorgy@fleischmann.hu"
 __status__     = "Production"

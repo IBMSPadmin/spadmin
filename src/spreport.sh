@@ -1,7 +1,7 @@
 REPORTMDFILE="spreport.md"
 
 ./spadmin.py -a " \
-	print # Simple SP report | noheader | file $REPORTMDFILE; \
+  print # Simple SP report | noheader | file $REPORTMDFILE; \
   print ## Current sessions | noheader | fileappend $REPORTMDFILE; \
   sh sess | htmlout | fileappend $REPORTMDFILE; \
   
