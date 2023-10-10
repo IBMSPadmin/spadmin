@@ -906,7 +906,7 @@ REMove          -> Node
 ###############
 # RUn command #
 ###############
-RUn                            -> select name from scripts
+RUn                            -> select distinct name from scripts
 RUn [\w\*\-\.\+\&\@]+          -> Preview=
 RUn [\w\*\-\.\+\&\@]+          -> Verbose=
 RUn [\w\*\-\.\+\&\@]+ Preview= -> Preview=Yes
@@ -1536,7 +1536,21 @@ Query -> RPFile
 Query -> SAN
 Query -> SCHedule
 Query -> SCRATCHPadentry
-Query -> SCRipt
+
+Query                                               -> SCRipt
+Query SCRipt                                        -> select distinct name from scripts
+Query SCRipt [\w\*\-\.\+\&\@]+                      -> Format=
+Query SCRipt [\w\*\-\.\+\&\@]+ Format=              -> Format=Standard
+Query SCRipt [\w\*\-\.\+\&\@]+ Format=              -> Format=Detailed
+Query SCRipt [\w\*\-\.\+\&\@]+ Format=              -> Format=Lines
+Query SCRipt [\w\*\-\.\+\&\@]+ Format=              -> Format=Raw
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> Format=
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> Outputfile={Mustexist: Format=Raw}
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format= -> Format=Standard
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format= -> Format=Detailed
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format= -> Format=Lines
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format= -> Format=Raw
+
 Query -> SERver
 Query -> SERVERGroup
 Query -> SHREDstatus
@@ -1597,60 +1611,60 @@ RESUme -> JOb
 REVoke -> AUTHority
 REVoke -> PROXynode
 
-Set -> ALERTEMAILSMTPHost
-Set ALERTEMAILSMTPHost    -> <give_a_host_name_here>
+Set                    -> ALERTEMAILSMTPHost
+Set ALERTEMAILSMTPHost -> <give_a_host_name_here>
 
-Set -> ALERTEMAILSMTPPort
-Set ALERTEMAILSMTPPort    -> <give_a_tcp_port_here>
+Set                    -> ALERTEMAILSMTPPort
+Set ALERTEMAILSMTPPort -> <give_a_tcp_port_here>
 
-Set -> ALERTINactiveduration
+Set                       -> ALERTINactiveduration
 Set ALERTINactiveduration -> <give_a_number_in_mins_here>
 
-Set -> ALERTMONITOR
+Set              -> ALERTMONITOR
 Set ALERTMONITOR -> OFf
 Set ALERTMONITOR -> ON
 
-Set -> ALERTSUMMARYToadmins
+Set                      -> ALERTSUMMARYToadmins
 Set ALERTSUMMARYToadmins -> <give_one_or_more_admin_name_here_separated_by_commas>
 
-Set -> ALERTUPDateinterval
+Set                     -> ALERTUPDateinterval
 Set ALERTUPDateinterval -> <give_a_number_in_mins_here>
 
-Set -> ARCHIVERETENTIONPROTECTion
+Set                            -> ARCHIVERETENTIONPROTECTion
 Set ARCHIVERETENTIONPROTECTion -> OFf
 Set ARCHIVERETENTIONPROTECTion -> ON
 
-Set -> ARREPLRuledefault
+Set                   -> ARREPLRuledefault
 Set ARREPLRuledefault -> ALL_DATA
 Set ARREPLRuledefault -> ALL_DATA_HIGH_PRIORITY
 Set ARREPLRuledefault -> NONE
 
-Set -> BKREPLRuledefault
+Set                   -> BKREPLRuledefault
 Set BKREPLRuledefault -> ALL_DATA
 Set BKREPLRuledefault -> ACTIVE_DATA
 Set BKREPLRuledefault -> ALL_DATA_HIGH_PRIORITY
 Set BKREPLRuledefault -> ACTIVE_DATA_HIGH_PRIORITY
 Set BKREPLRuledefault -> NONE
 
-SET -> CLIENTACTDuration
+SET                   -> CLIENTACTDuration
 Set CLIENTACTDuration -> <give_a_number_in_days_here>
 
-Set -> CONFIGManager
+Set               -> CONFIGManager
 Set CONFIGManager -> OFf
 Set CONFIGManager -> ON
 
-Set -> CONFIGRefresh
+Set               -> CONFIGRefresh
 Set CONFIGRefresh -> <give_a_number_in_mins_here>
 
 Set -> CONTEXTmessaging
 Set -> CPUINFOREFRESH
 Set -> CROSSDefine
-SET -> DBRECOVery
+Set -> DBRECOVery
 Set -> DEDUPVERificationlevel
-SET -> DEFAULTAUTHentication
-SET -> DEPLOYMAXPkgs
-SET -> DEPLOYPKGMgr
-SET -> DEPLOYREPository
+Set -> DEFAULTAUTHentication
+Set -> DEPLOYMAXPkgs
+Set -> DEPLOYPKGMgr
+Set -> DEPLOYREPository
 Set -> DISSIMILARPolicies
 Set -> DRMACTIVEDatastgpool
 Set -> DRMCHECKLabel
@@ -1667,9 +1681,9 @@ Set -> DRMPLANVpostfix
 Set -> DRMPRIMstgpool
 Set -> DRMRETentionstgpool
 Set -> DRMRPFEXpiredays
-SET -> DRMVAultname
+Set -> DRMVAultname
 Set -> EVentretention
-SET -> FAILOVERHladdress
+Set -> FAILOVERHladdress
 Set -> INVALIDPwlimit
 Set -> LDAPPassword
 Set -> LDAPUser
@@ -1686,7 +1700,7 @@ Set -> MONITOREDSERVERGroup
 Set -> MONITORINGADMIN
 Set -> NODEATRISKINTERVAL
 Set -> PASSExp
-SET -> PRODUCTOFFERING
+Set -> PRODUCTOFFERING
 Set -> PWREUselimit
 Set -> QUERYSCHedperiod
 Set -> RANDomize
@@ -1694,7 +1708,7 @@ Set -> REPLRETention
 Set -> REPLSERVer
 Set -> RETRYPeriod
 Set -> SCHEDMODes
-SET -> SCRATCHPADRETENTION
+Set -> SCRATCHPADRETENTION
 Set -> SECURITYNotif
 Set -> SERVERHladdress
 Set -> SERVERLladdress
@@ -1706,17 +1720,18 @@ Set -> STATUSREFreshinterval
 Set -> STATUSSKIPASFAILURE
 
 #######################################
-Set -> SUBFILE
-Set SUBFILE                 -> Client
-Set SUBFILE                 -> No
+Set         -> SUBFILE
+Set SUBFILE -> Client
+Set SUBFILE -> No
 
 #######################################
-Set -> SUMmaryretention
-Set SUMmaryretention        -> <give_a_number_in_days_here>
+Set                  -> SUMmaryretention
+Set SUMmaryretention -> <give_a_number_in_days_here>
 
 Set -> TAPEAlertmsg
 Set -> TOCLOADRetention
 Set -> VMATRISKINTERVAL
+
 SHRED -> DATA
 STAGE -> VOLume
 STArt -> STGRule
@@ -1760,8 +1775,8 @@ UPDate -> RETSet
 UPDate -> SCHedule
 UPDate -> SCRATCHPadentry
 
-UPDate -> SCRipt
-UPDate SCRipt -> select name from scripts
+UPDate        -> SCRipt
+UPDate SCRipt -> select distinct name from scripts
 
 UPDate -> SERver
 UPDate -> SERVERGroup

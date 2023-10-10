@@ -1977,7 +1977,11 @@ class ShowCLIENTBACKUPPERFormance(SpadminCommand):
         return """ 
         """
     def _execute(self, parameters: str) -> str:
-        return basicPerformanceFromSummary(self, "BACKUP")
+
+        if parameters.strip().isnumeric():
+            return basicPerformanceFromSummary( self, "BACKUP", parameters )
+        else:
+            return basicPerformanceFromSummary( self, "BACKUP" )
 
 define_command(ShowCLIENTBACKUPPERFormance())
 
