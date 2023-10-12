@@ -1339,9 +1339,11 @@ DELete -> SCHedule
 DELete -> SCRATCHPadentry
 DELete -> SCRipt
 
-DELete SCRipt                           -> select distinct name from scripts
-DELete SCRipt [\w\*\-\.\+\&\@]+         -> LINE=
-DELete SCRipt [\w\*\-\.\+\&\@]+ LINE=   -> select concat( '%PREFIX%',LINE) from scripts where name like upper( '-2' ) {Prefix: -1}
+DELete SCRipt                                      -> select distinct name from scripts
+DELete SCRipt [\w\*\-\.\+\&\@]+                    -> LINE=
+DELete SCRipt [\w\*\-\.\+\&\@]+ LINE=              -> select concat( '%PREFIX%',LINE) from scripts where name like upper( '-2' ) {Prefix: -1}
+DELete SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,}       -> LINE=
+DELete SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,} LINE= -> select concat( '%PREFIX%',LINE) from scripts where name like upper( '-2' ) {Prefix: -1}
 
 DELete -> SERver
 DELete -> SERVERGroup
