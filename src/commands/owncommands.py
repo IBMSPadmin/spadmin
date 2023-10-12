@@ -522,6 +522,10 @@ class SPadminSHowRULes(SpadminCommand):
             if match:
                 min = int(match[1])
 
+        # swap variables
+        if min > max:
+            min, max = max, min
+
         data = []
         for key in globals.myIBMSPrlCompleter.rules:
             if globals.myIBMSPrlCompleter.rules[key]:
@@ -1290,8 +1294,8 @@ class ShowStgp(SpadminCommand):
                 row[6] = utilities.color( row[6], 'green' )
                     
         return columnar( data,
-                         headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'C', 'HighMig', 'LowMig', 'Recl', 'Next'],
-                         justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'l'])
+                         headers=['PoolName', 'DeviceClass', 'Coll', 'EstCap', 'PctUtil', 'PctMigr', 'C', 'High', 'LowM', 'Recl', 'Next'],
+                         justify=['l', 'l', 'l', 'r', 'r', 'r', 'r', 'c', 'c', 'c', 'l'])
         
 define_command(ShowStgp())
 
@@ -1978,11 +1982,8 @@ class ShowCLIENTBACKUPPERFormance(SpadminCommand):
         """
     def _execute(self, parameters: str) -> str:
 
-        if parameters.strip().isnumeric():
-            return basicPerformanceFromSummary( self, "BACKUP", parameters )
-        else:
-            return basicPerformanceFromSummary( self, "BACKUP" )
-
+        return basicPerformanceFromSummary( self, "BACKUP", parameters )
+        
 define_command(ShowCLIENTBACKUPPERFormance())
 
 
@@ -2002,7 +2003,7 @@ class ShowCLIENTRESTOREPERFormance(SpadminCommand):
         """
 
     def _execute(self, parameters: str) -> str:
-        return basicPerformanceFromSummary(self, "RESTORE")
+        return basicPerformanceFromSummary( self, "RESTORE", parameters )
 
 define_command(ShowCLIENTRESTOREPERFormance())
 
@@ -2022,7 +2023,7 @@ class ShowCLIENTARCHIVEPERFormance(SpadminCommand):
         return """ 
         """
     def _execute(self, parameters: str) -> str:
-        return basicPerformanceFromSummary(self, "ARCHIVE")
+        return basicPerformanceFromSummary( self, "ARCHIVE", parameters )
 
 define_command(ShowCLIENTARCHIVEPERFormance())
 
@@ -2042,7 +2043,7 @@ class ShowCLIENTRETRIEVEPERFormance(SpadminCommand):
         return """ 
         """
     def _execute(self, parameters: str) -> str:
-        return basicPerformanceFromSummary(self, "RETRIEVE")
+        return basicPerformanceFromSummary( self, "RETRIEVE", parameters )
 
 define_command(ShowCLIENTRETRIEVEPERFormance())
 
@@ -2062,7 +2063,7 @@ class ShowDBBACKUPPERFormance(SpadminCommand):
         return """ 
         """
     def _execute(self, parameters: str) -> str:
-        return basicPerformanceFromSummary(self, "FULL_DBBACKUP")
+        return basicPerformanceFromSummary( self, "FULL_DBBACKUP", parameters )
 
 define_command(ShowDBBACKUPPERFormance())
 
@@ -2082,7 +2083,7 @@ class ShowMIGRATIONPERFormance(SpadminCommand):
         return """ 
         """
     def _execute(self, parameters: str) -> str:
-        return basicPerformanceFromSummary(self, "MIGRATION")
+        return basicPerformanceFromSummary( self, "MIGRATION", parameters )
 
 define_command(ShowMIGRATIONPERFormance())
 
@@ -2102,7 +2103,7 @@ class ShowMOVEDATAPERFormance(SpadminCommand):
         return """ 
         """
     def _execute(self, parameters: str) -> str:
-        return basicPerformanceFromSummary(self, "MOVE DATA")
+        return basicPerformanceFromSummary( self, "MOVE DATA", parameters )
 
 define_command(ShowMOVEDATAPERFormance())
 
@@ -2122,7 +2123,7 @@ class ShowRECLAMATIONPERFormance(SpadminCommand):
         return """ 
         """
     def _execute(self, parameters: str) -> str:
-        return basicPerformanceFromSummary(self, "RECLAMATION")
+        return basicPerformanceFromSummary( self, "RECLAMATION", parameters )
 
 define_command(ShowRECLAMATIONPERFormance())
 
@@ -2142,12 +2143,12 @@ class ShowSTGPOOLBACKUPPERFormance(SpadminCommand):
         return """ 
         """
     def _execute(self, parameters: str) -> str:
-        return basicPerformanceFromSummary(self, "STGPOOL BACKUP")
+        return basicPerformanceFromSummary( self, "STGPOOL BACKUP", parameters )
 
 define_command(ShowSTGPOOLBACKUPPERFormance())
 
 
-def basicPerformanceFromSummary(self, activity, fromdate='0', todate='1'):
+def basicPerformanceFromSummary( self, activity, parameters ):
     # ARCHIVE           Ok
     # BACKUP            Ok
     # EXPIRATION
@@ -2161,8 +2162,25 @@ def basicPerformanceFromSummary(self, activity, fromdate='0', todate='1'):
     # STGPOOL BACKUP    Ok
     # TAPE MOUNT
 
+    fromdate = 0
+    todate   = 1
+
+
+    match = search('(\d+)\s+(\d+)', parameters)
+    if match:
+        fromdate = int(match[1])
+        todate = int(match[2])
+    else:
+        match = search('(\d+)', parameters)
+        if match:
+            todate = int(match[1])
+
+    # swap variables
+    if fromdate > todate:
+        fromdate, todate = todate, fromdate
+
     data = globals.tsm.send_command_array_array_tabdel(
-        "select date(START_TIME),time(START_TIME),date(END_TIME),time(END_TIME),NUMBER,ENTITY,SCHEDULE_NAME,EXAMINED,AFFECTED,FAILED,BYTES,IDLE,MEDIAW,PROCESSES,SUCCESSFUL,timestampdiff(2,char((END_TIME-START_TIME))) from summary where ACTIVITY='" + activity + "' and (start_time >= current_timestamp - " + todate + " day) and (end_time <= current_timestamp - " + fromdate + " day) order by 1")
+        "select date(START_TIME),time(START_TIME),date(END_TIME),time(END_TIME),NUMBER,ENTITY,SCHEDULE_NAME,EXAMINED,AFFECTED,FAILED,BYTES,IDLE,MEDIAW,PROCESSES,SUCCESSFUL,timestampdiff(2,char((END_TIME-START_TIME))) from summary where ACTIVITY='" + activity + "' and (start_time >= current_timestamp - " + str( todate ) + " day) and (end_time <= current_timestamp - " + str( fromdate ) + " day) order by 1")
 
     if globals.last_error['rc'] != '0':
         return
