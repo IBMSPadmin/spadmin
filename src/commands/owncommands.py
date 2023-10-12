@@ -1902,7 +1902,7 @@ class SHowCOPYGroups(SpadminCommand):
         globals.lastdsmcommandresults = []
         
         unique = {}
-        bu = {}
+        bu     = {}
 
         for index, row in enumerate(data):
 
