@@ -867,8 +867,32 @@ Query SEssion [\d\*]+ (\w+=.*){1,} -> Format=
 Query SEssion [\d\*]+ (\w+=.*){1,} Format= -> Format=Standard
 Query SEssion [\d\*]+ (\w+=.*){1,} Format= -> Format=Detailed
     
-Query         -> STGpool
-Query STGpool -> select stgpool_name from stgpools
+# https://www.ibm.com/docs/en/storage-protect/8.1.20?topic=commands-query-stgpool-query-storage-pools
+
+Query                                                  -> STGpool
+Query STGpool                                          -> select stgpool_name from stgpools
+#
+Query STGpool [\w\*\-\.\+\&\*]+                        -> Format=
+Query STGpool [\w\*\-\.\+\&\*]+                        -> POoltype=
+Query STGpool [\w\*\-\.\+\&\*]+ Format=                -> Format=Standard
+Query STGpool [\w\*\-\.\+\&\*]+ Format=                -> Format=Detailed
+Query STGpool [\w\*\-\.\+\&\*]+ POoltype=              -> POoltype=ANY
+Query STGpool [\w\*\-\.\+\&\*]+ POoltype=              -> POoltype=PRimary
+Query STGpool [\w\*\-\.\+\&\*]+ POoltype=              -> POoltype=COpy
+Query STGpool [\w\*\-\.\+\&\*]+ POoltype=              -> POoltype=COPYCONtainer
+Query STGpool [\w\*\-\.\+\&\*]+ POoltype=              -> POoltype=ACTIVEdata
+Query STGpool [\w\*\-\.\+\&\*]+ POoltype=              -> POoltype=RETention
+#
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,}           -> Format=
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,}           -> POoltype=
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} Format=   -> Format=Standard
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} Format=   -> Format=Detailed
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=ANY
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=PRimary
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=COpy
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=COPYCONtainer
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=ACTIVEdata
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=RETention
 
 Query -> STGPOOLDIRectory
 
