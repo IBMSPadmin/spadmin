@@ -1614,7 +1614,22 @@ Query Volume STGpool=                -> select concat( '%PREFIX%', stgpool_name)
 RECLaim -> STGpool
 REConcile -> Volumes
 REGister -> Admin
-REGister -> LICense
+
+# https://www.ibm.com/docs/en/storage-protect/8.1.20?topic=commands-register-license-register-new-license
+
+REGister                            -> LICense
+REGister LICense                    -> FILE=
+REGister LICense FILE=              -> FILE=tsmbasic.lic
+REGister LICense FILE=              -> FILE=tsmee.lic
+REGister LICense FILE=              -> FILE=dataret.lic
+REGister LICense FILE=              -> FILE=*.lic
+#
+REGister LICense (\w+=.*){1,}       -> FILE=
+REGister LICense (\w+=.*){1,} FILE= -> FILE=tsmbasic.lic
+REGister LICense (\w+=.*){1,} FILE= -> FILE=tsmee.lic
+REGister LICense (\w+=.*){1,} FILE= -> FILE=dataret.lic
+REGister LICense (\w+=.*){1,} FILE= -> FILE=*.lic
+
 REGister -> Node
 REJect -> PEndingcmd
 RELease -> RETSet
