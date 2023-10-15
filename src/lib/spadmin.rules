@@ -1599,17 +1599,45 @@ Query -> TOC
 Query -> VIRTUALFSmapping
 Query -> VOLHistory
 
-Query        -> Volume
-Query Volume -> select volume_name from volumes
-Query Volume -> Format=
+Query                                                -> Volume
+Query Volume                                         -> select volume_name from volumes
 
-Query Volume Format=                 -> Format=Standard
-Query Volume Format=                 -> Format=Detailed
+Query Volume                                         -> Format=
+Query Volume                                         -> STGpool=
+Query Volume                                         -> LISTRetsets=
+Query Volume                                         -> DEVclass=
+Query Volume                                         -> STatus=
+Query Volume                                         -> ACCess=
 
-Query Volume [\w\*\-\.\/\\\$]+ Format=                 -> Format=Standard
-Query Volume [\w\*\-\.\/\\\$]+ Format=                 -> Format=Detailed
+Query Volume Format=                                 -> Format=Standard
+Query Volume Format=                                 -> Format=Detailed
+Query Volume LISTRetsets=                            -> LISTRetsets=Yes
+Query Volume LISTRetsets=                            -> LISTRetsets=No
+Query Volume DEVclass=                               -> select concat( '%PREFIX%', devclass_name) from devclasses {Prefix: -1}
+Query Volume STatus=                                 -> STatus=ONline
+Query Volume STatus=                                 -> STatus=OFfline
+Query Volume STatus=                                 -> STatus=EMPty
+Query Volume STatus=                                 -> STatus=PENding
+Query Volume STatus=                                 -> STatus=FILling
+Query Volume STatus=                                 -> STatus=FULl
+Query Volume ACCess=                                 -> ACCess=READWrite
+Query Volume ACCess=                                 -> ACCess=READOnly
+Query Volume ACCess=                                 -> ACCess=UNAVailable
+Query Volume ACCess=                                 -> ACCess=OFfsite
+Query Volume ACCess=                                 -> ACCess=DEStroyed
+Query Volume STGpool=                                -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
 
-Query Volume STGpool=                -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
+Query Volume [\w\*\-\.\/\\\$]+                       -> Format=
+Query Volume [\w\*\-\.\/\\\$]+                       -> STGpool=
+Query Volume [\w\*\-\.\/\\\$]+ Format=               -> Format=Standard
+Query Volume [\w\*\-\.\/\\\$]+ Format=               -> Format=Detailed
+Query Volume [\w\*\-\.\/\\\$]+ STGpool=              -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
+
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> Format=
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> STGpool=   
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=  -> Format=Standard
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=  -> Format=Detailed
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STGpool= -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
 
 RECLaim -> STGpool
 REConcile -> Volumes
