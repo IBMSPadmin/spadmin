@@ -508,7 +508,7 @@ if __name__ == '__main__':
     try:
         Spadmin().run()
     except Exception as e:
-        print ("Strange things are always happens...")
+        print ("Strange things always happen...")
         print (traceback.format_exc())
 
 # ---------------------------------------------------------------------------------
