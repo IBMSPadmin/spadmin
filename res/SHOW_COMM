@@ -1,6 +1,6 @@
  # Commands
 -- -------- -------------------------
- 1    alias
+KÉSZ 1    alias
  2  console
 KÉSZ 3    debug
 KÉSZ 4    debug
@@ -31,10 +31,10 @@ KÉSZ F 26     show clientarchiveperformance
 KÉSZ F 27     show clientbackupperformance
 KÉSZ F 28     show clientrestoreperformance
 KÉSZ F 29     show clientretrieveperformance
-KÉSZ: F 30     show columns
+KÉSZ F 30     show columns
 KÉSZ 31     show commands
 
-32     show copydifference
+KÉSZ 32     show copydifference
 
 KÉSZ F 33     show dbbackup
 34     show deduppending
@@ -45,9 +45,9 @@ KÉSZ 38     show environment
 39     show estgpools
 KÉSZ F 40     show events
 41     show expiration
-KÉSZ50%: F 42     show fillings
+KÉSZ F 42     show fillings
 KÉSZ 43     show lasterror
-KÉSZ: F 44     show libvolume
+KÉSZ F 44     show libvolume
 
 F 45     show maxscratch
 
@@ -57,18 +57,18 @@ F 47     show moveable
 
 KÉSZ 48     show movedataperformance
 
-KÉSZ: F 49     show nodeoccuopancy
+KÉSZ F 49     show nodeoccuopancy
 
 50     show nodes
 KÉSZ 51     show paths
-KÉSZ: F 52     show processes
+KÉSZ F 52     show processes
 53     show reclaim
 KÉSZ 54     show reclamationperformance
 KÉSZ 55     show ruler
 
 56     show schedules
 
-KÉSZ: F 57     show scratches
+KÉSZ F 57     show scratches
 58     show scripts
 59     show servers
 KÉSZ F 60     show sessions
