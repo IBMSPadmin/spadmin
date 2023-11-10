@@ -1320,6 +1320,75 @@ DEFine -> SCHedule
 DEFine -> SCRATCHPadentry
 DEFine -> SCRipt
 DEFine -> SERver
+
+DEFine SERver                                                -> <server_name>
+
+DEFine SERver [\w\*\-\.\+\&]+                                -> HLAddress=
+DEFine SERver [\w\*\-\.\+\&]+                                -> LLAddress=
+DEFine SERver [\w\*\-\.\+\&]+                                -> COMMmethod=
+DEFine SERver [\w\*\-\.\+\&]+                                -> URL=
+DEFine SERver [\w\*\-\.\+\&]+                                -> DESCription=
+DEFine SERver [\w\*\-\.\+\&]+                                -> SSL=
+DEFine SERver [\w\*\-\.\+\&]+                                -> SESSIONSECurity=
+DEFine SERver [\w\*\-\.\+\&]+                                -> SERVERPAssword=
+DEFine SERver [\w\*\-\.\+\&]+                                -> CROSSDEFine=
+DEFine SERver [\w\*\-\.\+\&]+                                -> VALIdateprotocol=
+DEFine SERver [\w\*\-\.\+\&]+                                -> TRANSFERMethod=
+DEFine SERver [\w\*\-\.\+\&]+                                -> OBJECTAgent=
+
+DEFine SERver [\w\*\-\.\+\&]+ HLAddress=                     -> HLAddress=<ip_address>
+DEFine SERver [\w\*\-\.\+\&]+ LLAddress=                     -> LLAddress=<tcp_port>
+DEFine SERver [\w\*\-\.\+\&]+ COMMmethod=                    -> COMMmethod=TCPIP
+DEFine SERver [\w\*\-\.\+\&]+ URL=                           -> URL=<url>
+DEFine SERver [\w\*\-\.\+\&]+ DESCription=                   -> DESCription=<description>
+DEFine SERver [\w\*\-\.\+\&]+ SSL=                           -> SSL=Yes
+DEFine SERver [\w\*\-\.\+\&]+ SSL=                           -> SSL=No
+DEFine SERver [\w\*\-\.\+\&]+ SESSIONSECurity=               -> SESSIONSECurity=STRict
+DEFine SERver [\w\*\-\.\+\&]+ SESSIONSECurity=               -> SESSIONSECurity=TRANSitional
+DEFine SERver [\w\*\-\.\+\&]+ SERVERPAssword=                -> SERVERPAssword=<password>
+DEFine SERver [\w\*\-\.\+\&]+ CROSSDEFine=                   -> CROSSDEFine=No
+DEFine SERver [\w\*\-\.\+\&]+ CROSSDEFine=                   -> CROSSDEFine=Yes
+DEFine SERver [\w\*\-\.\+\&]+ VALIdateprotocol=              -> VALIdateprotocol=No
+DEFine SERver [\w\*\-\.\+\&]+ VALIdateprotocol=              -> VALIdateprotocol=Yes
+DEFine SERver [\w\*\-\.\+\&]+ TRANSFERMethod=                -> TRANSFERMethod=Tcpip
+DEFine SERver [\w\*\-\.\+\&]+ TRANSFERMethod=                -> TRANSFERMethod=Fasp
+DEFine SERver [\w\*\-\.\+\&]+ PAssword=                      -> PAssword=<password>
+DEFine SERver [\w\*\-\.\+\&]+ OBJECTAgent=                   -> OBJECTAgent=Yes
+DEFine SERver [\w\*\-\.\+\&]+ OBJECTAgent=                   -> OBJECTAgent=No
+
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> HLAddress=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> LLAddress=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> COMMmethod=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> URL=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> DESCription=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> SSL=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> SESSIONSECurity=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> SERVERPAssword=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> CROSSDEFine=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> VALIdateprotocol=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> TRANSFERMethod=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> OBJECTAgent=
+
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} HLAddress=        -> HLAddress=<ip_address>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} LLAddress=        -> LLAddress=<tcp_port>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} COMMmethod=       -> COMMmethod=TCPIP
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} URL=              -> URL=<url>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} DESCription=      -> DESCription=<description>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} SSL=              -> SSL=Yes
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} SSL=              -> SSL=No
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} SESSIONSECurity=  -> SESSIONSECurity=STRict
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} SESSIONSECurity=  -> SESSIONSECurity=TRANSitional
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} SERVERPAssword=   -> SERVERPAssword=<password>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} CROSSDEFine=      -> CROSSDEFine=No
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} CROSSDEFine=      -> CROSSDEFine=Yes
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} VALIdateprotocol= -> VALIdateprotocol=No
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} VALIdateprotocol= -> VALIdateprotocol=Yes
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} TRANSFERMethod=   -> TRANSFERMethod=Tcpip
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} TRANSFERMethod=   -> TRANSFERMethod=Fasp
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} PAssword=         -> PAssword=<password>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} OBJECTAgent=      -> OBJECTAgent=Yes
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} OBJECTAgent=      -> OBJECTAgent=No
+
 DEFine -> SERVERGroup
 DEFine -> SPACETrigger
 DEFine -> STAtusthreshold
