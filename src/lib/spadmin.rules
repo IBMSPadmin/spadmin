@@ -1605,7 +1605,7 @@ Query -> HOLDlog
 Query -> JOB
 Query -> LIBRary
 Query -> LIBVolume
-Query -> LICense
+#Query -> LICense
 Query -> MACHine
 Query -> MEDia
 Query -> MGmtclass
