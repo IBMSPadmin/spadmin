@@ -1316,7 +1316,77 @@ DEFine -> PROFIle
 DEFine -> RECMEDMACHAssociation
 DEFine -> RECOVERYMedia
 DEFine -> RETRule
-DEFine -> SCHedule
+
+DEFine                                                       -> SCHedule
+DEFine SCHedule                                              -> select domain_name from domains
+DEFine SCHedule [\w\*\-\.\+\&]+                              -> <schedule_name>
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> Type=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> DESCription=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> ACTion=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> SUBACTion=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> OPTions=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> OBJects=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> PRIority=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> STARTDate=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> STARTTime=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> DURation=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> DURUnits=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> MAXRUNtime=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> SCHEDStyle=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> PERiod=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> PERUnits=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> DAYofweek=
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+              -> EXPiration=
+
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ Type=         -> Type=Client
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DESCription=  -> DESCription=<description>
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ ACTion=       -> ACTion=Incremental
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ ACTion=       -> ACTion=Selective
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ ACTion=       -> ACTion=Archive
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ ACTion=       -> ACTion=REStore
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ ACTion=       -> ACTion=RETrieve
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ ACTion=       -> ACTion=IMAGEBACkup
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ ACTion=       -> ACTion=IMAGEREStore
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ ACTion=       -> ACTion=Command
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ ACTion=       -> ACTion=Macro
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ ACTion=       -> ACTion=Deploy
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ SUBACTion=    -> SUBACTion=FASTBack
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ SUBACTion=    -> SUBACTion=Backup
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ SUBACTion=    -> SUBACTion=SYSTEMSTate
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ SUBACTion=    -> SUBACTion=VApp
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ SUBACTion=    -> SUBACTion=VM
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ OPTions=      -> OPTions=<option_string>
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ OBJects=      -> OBJects=<object_string>
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ PRIority=     -> PRIority=<number>
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ STARTDate=    -> STARTDate=<date>
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ STARTTime=    -> STARTTime=<time>
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DURation=     -> DURation=<number>
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DURUnits=     -> DURUnits=Minutes
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DURUnits=     -> DURUnits=Hours
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DURUnits=     -> DURUnits=Days
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DURUnits=     -> DURUnits=INDefinite
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ MAXRUNtime=   -> MAXRUNtime=<number>
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ SCHEDStyle=   -> SCHEDStyle=Classic
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ PERiod=       -> PERiod=<number>
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ PERUnits=     -> PERUnits=Hours
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ PERUnits=     -> PERUnits=Days
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ PERUnits=     -> PERUnits=Weeks
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ PERUnits=     -> PERUnits=Months
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ PERUnits=     -> PERUnits=Years
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ PERUnits=     -> PERUnits=Onetime
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DAYofweek=    -> DAYofweek=ANY
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DAYofweek=    -> DAYofweek=WEEKDay
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DAYofweek=    -> DAYofweek=WEEKEnd
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DAYofweek=    -> DAYofweek=SUnday
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DAYofweek=    -> DAYofweek=Monday
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DAYofweek=    -> DAYofweek=TUesday
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DAYofweek=    -> DAYofweek=Wednesday
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DAYofweek=    -> DAYofweek=THursday
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DAYofweek=    -> DAYofweek=Friday
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DAYofweek=    -> DAYofweek=SAturday
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ EXPiration=   -> EXPiration=Never
+DEFine SCHedule [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ EXPiration=   -> EXPiration=<date>
+
 DEFine -> SCRATCHPadentry
 DEFine -> SCRipt
 DEFine -> SERver
