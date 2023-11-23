@@ -342,8 +342,13 @@ class Spadmin(object):
 
         if args.SErveraddress:
             globals.server   = str(args.SErveraddress).upper()
-            globals.userid   = globals.config.getconfiguration()[globals.server]['dsmadmc_id']
-            globals.password = utilities.decode(globals.config.getconfiguration()[globals.server]['dsmadmc_password'])
+            try:
+                globals.userid   = globals.config.getconfiguration()[globals.server]['dsmadmc_id']
+                globals.password = utilities.decode(globals.config.getconfiguration()[globals.server]['dsmadmc_password'])
+            except KeyError:
+                print('\a')
+                print("Server section not found in the spadmin.ini file.")
+                quit(1)
 
         globals.prereqcheck = False
         if args.prereqcheck:
