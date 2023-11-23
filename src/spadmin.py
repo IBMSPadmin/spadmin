@@ -347,7 +347,7 @@ class Spadmin(object):
                 globals.password = utilities.decode(globals.config.getconfiguration()[globals.server]['dsmadmc_password'])
             except KeyError:
                 print('\a')
-                print("Server section not found in the spadmin.ini file.")
+                print("Server section \'%s\' not found in the spadmin.ini file." % globals.server)
                 quit(1)
 
         globals.prereqcheck = False
