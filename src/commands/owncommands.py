@@ -392,7 +392,6 @@ class SPadminSHowCONFig(SpadminCommand):
 
 define_command(SPadminSHowCONFig())
 
-
 class SPadminSHowALIases(SpadminCommand):
 
     def __init__(self):
@@ -1818,16 +1817,16 @@ class Console(SpadminCommand):
         self.command = "FREE"
 
     def short_help(self) -> str:
-        return 'Open an spadmin console  '
+        return 'Opens a new Terminal window and starts spadmin in console mode'
 
     def help(self) -> dict:
-        return """Open an spadmin console like the dsmadmc -cons command does.  """
+        return """Open an spadmin console view like the dsmadmc -cons command does.  """
 
     def _execute(self, parameters: str) -> str:
         if sys.platform == "linux" or sys.platform == "linux2":
             os.system( '/mnt/c/Windows/notepad.exe ' + globals.logfilename )
         elif sys.platform == "darwin":
-            os.system( 'echo "dsmadmc -console" > /tmp/tmp.sh ; chmod +x /tmp/tmp.sh ; open -a Terminal /tmp/tmp.sh ; rm /tmp/tmp.sh')
+           os.system('open -a Terminal ./spadmin.py --args --consoleonly')
         return ""
 
 
