@@ -390,10 +390,10 @@ class Spadmin(object):
         if not globals.nowelcome:
             self.welcome()
             
-        utilities.validate_license()
-        
+
         globals.logger.debug('Fork dsmadmc processes.')
         globals.tsm = dsmadmc_pexpect.dsmadmc_pexpect(globals.server, globals.userid, globals.password )
+        utilities.validate_license(globals.tsm)
 
         globals.logger.debug('readline class instance')
         globals.myIBMSPrlCompleter = IBMSPrlCompleter()
@@ -453,7 +453,7 @@ class Spadmin(object):
             print(colored('= ', 'grey', attrs=[globals.color_attrs_bold]) + colored("Once you start to use it, you can't live without it!!!", 'grey', attrs=[globals.color_attrs_bold, 'underline']) + ' 😀')
             print(colored('= Python3 [' + sys.version + ']', 'grey', attrs=[globals.color_attrs_bold]))
             print(colored('= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[globals.color_attrs_bold]))
-            print(colored('= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=[globals.color_attrs_bold]))
+#            print(colored('= Your first mac address is: ' + utilities.getMachineGID(globals.tsm), 'grey', attrs=[globals.color_attrs_bold]))
             print(colored('= Terminal properties: [', 'grey', attrs=[globals.color_attrs_bold]) + colored(str(globals.columns), globals.color_white, attrs=[globals.color_attrs_bold]) + colored('x', 'grey', attrs=[ globals.color_attrs_bold]) + colored(
                 str(globals.rows), globals.color_white, attrs=[globals.color_attrs_bold]) + colored(']', 'grey', attrs=[globals.color_attrs_bold]))
             print(colored( '= Current version: ', 'grey', attrs=[globals.color_attrs_bold] ) + colored( globals.version, 'white', attrs=[globals.color_attrs_bold] ) )

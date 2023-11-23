@@ -17,20 +17,21 @@ from typing import (
 
 ansi_color_pattern = re.compile(r"\x1b\[.+?m")
 
-def getmac():
-    #ret = ':'.join(re.findall('../..', '%012x' % uuid.getnode()))
-    mac_address = uuid.getnode()
-    # print(mac_address)
-    ret = ':'.join(['{:02x}'.format((mac_address >> elements) & 0xff) for elements in range(0,8*6,8)][::-1])
-    return ret
 
-PASS = "PASS"
-def encode(password, cypher = getmac(), salt = PASS):
+PASS = "PASSCODE"
+
+def getMachineGID(tsm):
+
+    if tsm is None:
+        return PASS+PASS+PASS+PASS+PASS+PASS+PASS+PASS
+    return tsm.send_command_array_tabdel( "select MACHINE_GUID from status" )[0]
+
+def encode(password, cypher = getMachineGID(None), salt = PASS):
     encoded_byte_list = [(ord(a) ^ ord(b)) for a, b in zip(password, cypher)]
     b64_encoded_string = base64.b64encode(bytes(encoded_byte_list)).decode('ascii')
     return salt + b64_encoded_string
 
-def decode (b64_encoded,cypher = getmac(), salt = PASS):
+def decode (b64_encoded,cypher = getMachineGID(None), salt = PASS):
     if b64_encoded.startswith(salt):
         b64_decoded = list(base64.b64decode(b64_encoded[len(salt):]))
         decoded = [(ord(a) ^ ord(b)) for a, b in zip(''.join([chr(x) for x in b64_decoded]), cypher)]
@@ -134,7 +135,7 @@ def check_connection(server: str, id: str, password: str) -> bool:
         print("We have successfully connected to: ", result.strip())
         return True
     except Exception as exc:
-        print(exc.output, "\n")
+        print(exc, "\n")
         return False
 
 
@@ -183,12 +184,12 @@ def colorize_line( line ):
     else:
         return line
 
-def validate_license():
+def validate_license(tsm):
     globals.logger.debug('Checking licenses...')
     cypher = "we_have_worked_in_this_project:a_lot:please_honor_our_work"
     license_file = os.path.join(globals.spadmin_path, 'spadmin.lic')
     globals.logger.debug('license file: [' + license_file + ']')
-    mac = getmac()
+    mac = getMachineGID(tsm)
     globals.logger.debug('first mac address: [' + mac + ']')
     today = date.today()
     valid_to = today - timedelta(days=1)
@@ -223,7 +224,7 @@ def validate_license():
             # mac = mac_and_validity[0]
             # valid_to = mac_and_validity[1]
 
-        if (getmac() and getmac() == mac) and (valid_to and valid_to >= today):
+        if (getMachineGID(tsm) and getMachineGID(tsm) == mac) and (valid_to and valid_to >= today):
             globals.logger.debug('License valid!!')
             print(colored( " Your license is valid until " + str(valid_to) + "!", globals.color_green, attrs = [ globals.color_attrs_bold ]))
             if not globals.nowelcome:
@@ -238,7 +239,7 @@ just send an email us to the send_me_a_trial_license@spadmin.com with the follow
 --- CUT ---
 SPAdmin Team,
 send me a trial license for spadmin, please.
-My mac address where I want to use it: """ + mac + """
+My Machine's Globally Unique ID where I want to use it: """ + mac + """
 
 Thanks.
 --- CUT ---""", globals.color_red, attrs=[globals.color_attrs_bold]))
@@ -254,7 +255,7 @@ just send an email us to the send_me_a_trial_license@spadmin.com with the follow
 --- CUT ---
 SPAdmin Team,
 send me a trial license for spadmin, please.
-My mac address where I want to use it: """ + mac + """
+My Machine's Globally Unique ID where I want to use it: """ + mac + """
 
 Thanks.
 --- CUT ---""", globals.color_red, attrs=[globals.color_attrs_bold]))
