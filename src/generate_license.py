@@ -18,7 +18,7 @@ def decode (b64_encoded,cypher, salt = PASS):
 
 cypher = "we_have_worked_in_this_project:a_lot:please_honor_our_work"
 valid_to = "01/01/2099" # "%d/%m/%Y"
-mac = "2c.7b.08.a0.77.25.11.ee.ab.7b.84.16.0c.a6.5c.e8"
+mac = "c4.6d.11.62.55.ca.ed.11.94.c4.06.ec.49.44.c5.7b"
 
 hidedstring = encode(mac+"|"+valid_to, cypher, "SPADMIN")
 print("license: ", hidedstring)

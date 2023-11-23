@@ -1775,9 +1775,9 @@ class Move(SpadminCommand):
         return """Move data """
 
     def _execute(self, parameters: str) -> str:
-        if globals.lastdsmcommandtype == "VOLUMES":
+        if parameters.strip().isnumeric():
+            if globals.lastdsmcommandtype == "VOLUMES":
             
-            if parameters.strip().isnumeric():
                 if len(globals.lastdsmcommandresults) >= int(parameters):
                     line = globals.lastdsmcommandresults[ int(parameters) - 1 ]
                     cmd = "MOVE DATA" + " " + line[0]
@@ -1788,13 +1788,13 @@ class Move(SpadminCommand):
                 else:
                     print(utilities.color("The given number is not found!", 'red'))
             else:
-                print(utilities.color("The given parameter should be a number!", 'red'))
-                # 
-                for l in globals.tsm.send_command_normal( 'MOve ' + parameters ).splitlines()[1:]:
-                    print(l)
+                print(utilities.color("Last command should be SHow Filling!", 'red'))
+                globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
         else:
-            print(utilities.color("Last command should be SHow Filling!", 'red'))
-            globals.logger.debug("Last command type: " + globals.lastdsmcommandtype)
+            # print(utilities.color("The given parameter should be a number!", 'red'))
+            #
+            for l in globals.tsm.send_command_normal('MOve ' + parameters).splitlines()[1:]:
+                print(l)
         return ""
 
     def execute(self, dummy, parameters):
