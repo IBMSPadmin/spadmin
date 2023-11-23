@@ -125,12 +125,12 @@ def check_connection(server: str, id: str, password: str) -> bool:
         if server != '':
             result = subprocess.check_output(
                 ['dsmadmc', '-se=%s' % server, '-id=%s' % id, '-pa=%s' % password, '-dataonly=yes',
-                 'select SERVER_NAME from STATUS'], stderr=subprocess.STDOUT, timeout=10,
+                 'select SERVER_NAME from STATUS'], stderr=subprocess.STDOUT, timeout=20,
                 universal_newlines=True)
         else:
             result = subprocess.check_output(
                 ['dsmadmc', '-id=%s' % id, '-pa=%s' % password, '-dataonly=yes',
-                 'select SERVER_NAME from STATUS'], stderr=subprocess.STDOUT, timeout=10,
+                 'select SERVER_NAME from STATUS'], stderr=subprocess.STDOUT, timeout=20,
                 universal_newlines=True)
         print("We have successfully connected to: ", result.strip())
         return True
