@@ -171,7 +171,7 @@ if __name__ == '__main__':
         print( colored(  '= ', 'grey', attrs=[ 'bold' ] ) + colored( "Once you start to use it, you can't live without it!!!", 'grey', attrs=[ 'bold', 'underline' ] ) + ' 😀' )
         print( colored( '= Python3 [' + sys.version + ']', 'grey', attrs=[ 'bold' ] ) )
         print( colored( '= Your current Operating System platform is: ' + platform.platform(), 'grey', attrs=[ 'bold' ] ) )
-        print(colored( '= Your first mac address is: ' + utilities.getmac(), 'grey', attrs=['bold']))
+        print(colored( '= Your Spectrum Protect GUID is: ' + utilities.getmac(), 'grey', attrs=['bold']))
         print(colored( '= Terminal properties: [', 'grey', attrs=[ 'bold' ] ) + colored(str(globals.columns), 'white', attrs=['bold']) + colored('x', 'grey', attrs=['bold']) + colored(str(globals.rows), 'white', attrs=['bold']) + colored(']', 'grey', attrs=['bold']))
         print()
         # Short text help

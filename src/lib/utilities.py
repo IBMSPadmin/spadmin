@@ -190,7 +190,7 @@ def validate_license(tsm):
     license_file = os.path.join(globals.spadmin_path, 'spadmin.lic')
     globals.logger.debug('license file: [' + license_file + ']')
     mac = getMachineGID(tsm)
-    globals.logger.debug('first mac address: [' + mac + ']')
+    globals.logger.debug('first guid address: [' + mac + ']')
     today = date.today()
     valid_to = today - timedelta(days=1)
     globals.logger.debug('yesterday: [' + str(valid_to) + ']')
@@ -203,7 +203,7 @@ def validate_license(tsm):
                 mac_and_validity = decode(hidedstring, cypher, "SPADMIN").split("|", 2)
                 mac = mac_and_validity[0]
                 valid_to = datetime.strptime(mac_and_validity[1], DATEFORMAT).date()
-                globals.logger.debug('Licensed mac: [' + mac + ']')
+                globals.logger.debug('Licensed guid: [' + mac + ']')
                 globals.logger.debug('License valid until: [' + str(valid_to) + ']')
         except:
             globals.logger.debug('License error!!')
