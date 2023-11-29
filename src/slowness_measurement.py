@@ -142,3 +142,21 @@ print( genkey )
 print( ' '.join( tokens ) ) 
 search( genkey, ' '.join( tokens ) )
 print( time.time() - t )
+
+print()
+
+print( "4translate" )
+
+a = ( '^' + regexpgenerator( key ) ).lower()
+b = ( ' '.join( tokens ) ).lower()
+
+a = a.encode('ascii', 'replace')
+b = b.encode('ascii', 'replace')
+
+t = time.time()
+print( type(a) )
+print( a )
+print( b )
+search( a, b )
+print( time.time() - t )
+
