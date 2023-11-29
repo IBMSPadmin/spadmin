@@ -1,5 +1,5 @@
 import time
-from re import search, IGNORECASE, escape, findall
+from re import search, IGNORECASE, escape, findall, MULTILINE, compile
 
 #from lib import utilities
 
@@ -59,6 +59,8 @@ tokens = ['query',
  'STatus=']
 
 extradelimiter = '='
+
+import timeit
 
 print( "1" )
 t = time.time()
@@ -145,13 +147,13 @@ print( time.time() - t )
 
 print()
 
-print( "4translate" )
+print( "5strdecode" )
 
-a = ( '^' + regexpgenerator( key ) ).lower()
+a = compile( ( '^' + regexpgenerator( key ) ) )
 b = ( ' '.join( tokens ) ).lower()
 
-a = a.encode('ascii', 'replace')
-b = b.encode('ascii', 'replace')
+# a = a.encode('ascii', 'replace')
+# b = b.encode('ascii', 'replace')
 
 t = time.time()
 print( type(a) )
