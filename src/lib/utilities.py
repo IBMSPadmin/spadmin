@@ -239,7 +239,7 @@ just send an email us to the send_me_a_trial_license@spadmin.com with the follow
 --- CUT ---
 SPAdmin Team,
 send me a trial license for spadmin, please.
-My Machine's Globally Unique ID where I want to use it: """ + mac + """
+My Machine's Globally Unique ID where I want to use it: """ + getMachineGID(tsm) + """
 
 Thanks.
 --- CUT ---""", globals.color_red, attrs=[globals.color_attrs_bold]))
