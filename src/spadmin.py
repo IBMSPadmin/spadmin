@@ -128,11 +128,16 @@ class Spadmin(object):
             # line = line.replace( '||', '##' )
 
             # as -domain.vmfull= command can contain semicolon so handling it here is necessary
-            # match = search( '-domain.vmfull=([\w\-;"\']+)', command, IGNORECASE )
-            # print( match( 1 ) )
+            match = search( '-domain.vmfull=([\w\-;"\']+)', line, IGNORECASE )
+            if match:
+                line = line.replace( match[1], match[1].replace( ';', '##' ) )
 
             # simple command runner engine
             for command in line.split(';'):
+
+                # replace back the -domain.vmfull= protected ";"
+                command = command.replace( '##', ';' )
+
                 command = command.strip()
 
                 # handling aliases
