@@ -126,6 +126,11 @@ class Spadmin(object):
 
             # protect the || as ##
             # line = line.replace( '||', '##' )
+
+            # as -domain.vmfull= command can contain semicolon so handling it here is necessary
+            #group = re.search( '-domain.vmfull=([\w\-;"\']+)', command, re.IGNORECASE )
+            #print( group(1) )
+
             # simple command runner engine
             for command in line.split(';'):
                 command = command.strip()
