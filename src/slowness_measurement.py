@@ -69,7 +69,7 @@ print( ' '.join( tokens ) )
 
 print( type( genkey ) )
 
-search( genkey, ' '.join( tokens ) )
+search( genkey, ' '.join( tokens ).lower() )
 print( time.time() - t )
 
 print()
@@ -79,77 +79,77 @@ t = time.time()
 print( genkey )
 print( ' '.join( tokens ) ) 
 
-print( type( genkey ) )
+print( regexpgenerator( key ) )
 
 search( regexpgenerator( key ), ' '.join( tokens ) )
 print( time.time() - t )
 
-print()
+# print()
 
-print( "1i" )
-t = time.time() 
-search( genkey, ' '.join( tokens ), IGNORECASE )
-print( time.time() - t )
+# print( "1i" )
+# t = time.time() 
+# search( genkey, ' '.join( tokens ), IGNORECASE )
+# print( time.time() - t )
 
-print()
+# print()
 
-print( "2i" )
-t = time.time() 
-print( regexpgenerator( key ) )
-print(' '.join( tokens ))
-alma = '^' + regexpgenerator( key ) + extradelimiter
-search( genkey, ' '.join( tokens ) + extradelimiter, IGNORECASE )
-print( time.time() - t )
+# print( "2i" )
+# t = time.time() 
+# print( regexpgenerator( key ) )
+# print(' '.join( tokens ))
+# alma = '^' + regexpgenerator( key ) + extradelimiter
+# search( genkey, ' '.join( tokens ) + extradelimiter, IGNORECASE )
+# print( time.time() - t )
 
-print()
+# print()
 
-print( "3lower" )
-t = time.time() 
-search( ( '^' + regexpgenerator( key ) + extradelimiter ).lower(), (' '.join( tokens ) + extradelimiter ).lower() )
-print( time.time() - t )
+# print( "3lower" )
+# t = time.time() 
+# search( ( '^' + regexpgenerator( key ) + extradelimiter ).lower(), (' '.join( tokens ) + extradelimiter ).lower() )
+# print( time.time() - t )
 
-from string import ascii_letters, ascii_lowercase
+# from string import ascii_letters, ascii_lowercase
 
-alpha, lower = [ s.encode( 'ascii' ) for s in [ ascii_letters, ascii_lowercase] ]
-table = bytes.maketrans( alpha, lower * 2 )           # convert to lowercase
-# deletebytes = bytes(set(range(256)) - set(alpha)) # delete nonalpha
+# alpha, lower = [ s.encode( 'ascii' ) for s in [ ascii_letters, ascii_lowercase] ]
+# table = bytes.maketrans( alpha, lower * 2 )           # convert to lowercase
+# # deletebytes = bytes(set(range(256)) - set(alpha)) # delete nonalpha
 
-print()
+# print()
 
-print( "4translate" )
-t = time.time() 
-print("AAAAAAAA".translate(table))
-search( ( '^' + regexpgenerator( key ) + extradelimiter ).translate( table ), ( ' '.join( tokens ) + extradelimiter ).translate( table ) )
-print( time.time() - t )
+# print( "4translate" )
+# t = time.time() 
+# print("AAAAAAAA".translate(table))
+# search( ( '^' + regexpgenerator( key ) + extradelimiter ).translate( table ), ( ' '.join( tokens ) + extradelimiter ).translate( table ) )
+# print( time.time() - t )
 
-print()
+# print()
 
-print( "4translate" )
+# print( "4translate" )
 
-a = str( '^' + regexpgenerator( key ) ).translate( table )
-b = str( ' '.join( tokens ) ).translate( table )
+# a = str( '^' + regexpgenerator( key ) ).translate( table )
+# b = str( ' '.join( tokens ) ).translate( table )
 
-t = time.time()
-print( type(a) )
-print( a )
-print( b )
-search( a, b )
-print( time.time() - t )
+# t = time.time()
+# print( type(a) )
+# print( a )
+# print( b )
+# search( a, b )
+# print( time.time() - t )
 
-print()
+# print()
 
-print( "1" )
-t = time.time()
-print( genkey )
-print( ' '.join( tokens ) ) 
-search( genkey, ' '.join( tokens ) )
-print( time.time() - t )
+# print( "1" )
+# t = time.time()
+# print( genkey )
+# print( ' '.join( tokens ) ) 
+# search( genkey, ' '.join( tokens ) )
+# print( time.time() - t )
 
 print()
 
 print( "5strdecode" )
 
-a = compile( ( '^' + regexpgenerator( key ) ) )
+a = compile( ( '^' + regexpgenerator( key ).lower() ) )
 b = ( ' '.join( tokens ) ).lower()
 
 # a = a.encode('ascii', 'replace')
