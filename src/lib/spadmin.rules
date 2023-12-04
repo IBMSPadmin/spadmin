@@ -8,7 +8,7 @@
 # devclass_name  [\w\*\-\.\+\&]+
 # filespace_name [\w\*\-\.\/\\\$]+
 # volume_name    [\w\*\-\.\/\\\$]+
-# for parameters (\w+=.*){1,}
+# for parameters (\w+=\w*){1,}
 # 
 
 ########################
@@ -197,34 +197,34 @@ BAckup DB COMPress=    -> COMPress=No
 BAckup DB PROTECTKeys= -> PROTECTKeys=Yes
 BAckup DB PROTECTKeys= -> PROTECTKeys=No
 # 4
-BAckup DB (\w+=.*){1,} -> DEVclass=
-BAckup DB (\w+=.*){1,} -> Type=
-BAckup DB (\w+=.*){1,} -> VOLumenames=
-BAckup DB (\w+=.*){1,} -> NUMStreams=
-BAckup DB (\w+=.*){1,} -> Scratch=
-BAckup DB (\w+=.*){1,} -> Wait=
-BAckup DB (\w+=.*){1,} -> DEDUPDEVice=
-BAckup DB (\w+=.*){1,} -> ENCRypt=
-BAckup DB (\w+=.*){1,} -> COMPress=
-BAckup DB (\w+=.*){1,} -> PROTECTKeys=
-BAckup DB (\w+=.*){1,} -> PASSword=
+BAckup DB (\w+=\w*){1,} -> DEVclass=
+BAckup DB (\w+=\w*){1,} -> Type=
+BAckup DB (\w+=\w*){1,} -> VOLumenames=
+BAckup DB (\w+=\w*){1,} -> NUMStreams=
+BAckup DB (\w+=\w*){1,} -> Scratch=
+BAckup DB (\w+=\w*){1,} -> Wait=
+BAckup DB (\w+=\w*){1,} -> DEDUPDEVice=
+BAckup DB (\w+=\w*){1,} -> ENCRypt=
+BAckup DB (\w+=\w*){1,} -> COMPress=
+BAckup DB (\w+=\w*){1,} -> PROTECTKeys=
+BAckup DB (\w+=\w*){1,} -> PASSword=
 # +4 (5)
-BAckup DB (\w+=.*){1,} DEVclass=    -> select concat( '%PREFIX%', devclass_name ) from devclasses {Prefix: -1}
-BAckup DB (\w+=.*){1,} Type=        -> Type=Incremental
-BAckup DB (\w+=.*){1,} Type=        -> Type=Full
-BAckup DB (\w+=.*){1,} Type=        -> Type=DBSnapshot
-BAckup DB (\w+=.*){1,} Scratch=     -> Scratch=Yes
-BAckup DB (\w+=.*){1,} Scratch=     -> Scratch=No
-BAckup DB (\w+=.*){1,} Wait=        -> Wait=Yes
-BAckup DB (\w+=.*){1,} Wait=        -> Wait=No
-BAckup DB (\w+=.*){1,} DEDUPDEVice= -> DEDUPDEVice=Yes
-BAckup DB (\w+=.*){1,} DEDUPDEVice= -> DEDUPDEVice=No
-BAckup DB (\w+=.*){1,} ENCRypt=     -> ENCRypt=Yes
-BAckup DB (\w+=.*){1,} ENCRypt=     -> ENCRypt=No
-BAckup DB (\w+=.*){1,} COMPress=    -> COMPress=Yes
-BAckup DB (\w+=.*){1,} COMPress=    -> COMPress=No
-BAckup DB (\w+=.*){1,} PROTECTKeys= -> PROTECTKeys=Yes
-BAckup DB (\w+=.*){1,} PROTECTKeys= -> PROTECTKeys=No
+BAckup DB (\w+=\w*){1,} DEVclass=    -> select concat( '%PREFIX%', devclass_name ) from devclasses {Prefix: -1}
+BAckup DB (\w+=\w*){1,} Type=        -> Type=Incremental
+BAckup DB (\w+=\w*){1,} Type=        -> Type=Full
+BAckup DB (\w+=\w*){1,} Type=        -> Type=DBSnapshot
+BAckup DB (\w+=\w*){1,} Scratch=     -> Scratch=Yes
+BAckup DB (\w+=\w*){1,} Scratch=     -> Scratch=No
+BAckup DB (\w+=\w*){1,} Wait=        -> Wait=Yes
+BAckup DB (\w+=\w*){1,} Wait=        -> Wait=No
+BAckup DB (\w+=\w*){1,} DEDUPDEVice= -> DEDUPDEVice=Yes
+BAckup DB (\w+=\w*){1,} DEDUPDEVice= -> DEDUPDEVice=No
+BAckup DB (\w+=\w*){1,} ENCRypt=     -> ENCRypt=Yes
+BAckup DB (\w+=\w*){1,} ENCRypt=     -> ENCRypt=No
+BAckup DB (\w+=\w*){1,} COMPress=    -> COMPress=Yes
+BAckup DB (\w+=\w*){1,} COMPress=    -> COMPress=No
+BAckup DB (\w+=\w*){1,} PROTECTKeys= -> PROTECTKeys=Yes
+BAckup DB (\w+=\w*){1,} PROTECTKeys= -> PROTECTKeys=No
 # =========================================================================================================================
 
 BAckup           -> DEVCONFig
@@ -258,19 +258,19 @@ BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ SHREDTONOshred=              -> SHR
 BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ Wait=                        -> Wait=Yes
 BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ Wait=                        -> Wait=No
 
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,}                 -> MAXPRocess=
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,}                 -> Preview=
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,}                 -> SHREDTONOshred=
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,}                 -> Wait=
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,}                 -> MAXPRocess=
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,}                 -> Preview=
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,}                 -> SHREDTONOshred=
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,}                 -> Wait=
 
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,} MAXPRocess=     -> MAXPRocess=<give_a_number_here>
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,} Preview=        -> Preview=No
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,} Preview=        -> Preview=Yes
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,} Preview=        -> Preview=VOLumesonly
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,} SHREDTONOshred= -> SHREDTONOshred=Yes
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,} SHREDTONOshred= -> SHREDTONOshred=No
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,} Wait=           -> Wait=Yes
-BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,} Wait=           -> Wait=No
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,} MAXPRocess=     -> MAXPRocess=<give_a_number_here>
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,} Preview=        -> Preview=No
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,} Preview=        -> Preview=Yes
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,} Preview=        -> Preview=VOLumesonly
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,} SHREDTONOshred= -> SHREDTONOshred=Yes
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,} SHREDTONOshred= -> SHREDTONOshred=No
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,} Wait=           -> Wait=Yes
+BAckup STGpool [\w\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,} Wait=           -> Wait=No
 
 # =========================================================================================================================
 # CHECKIn LIBVolume
@@ -306,33 +306,33 @@ CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ SWAP=                    -> SW
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ WAITTime=                -> WAITTime=<give_minutes>
 CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CLEanings=               -> CLEanings=<give_number>
 
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> SEARCH=
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> STATus=
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> OWNer=
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> CHECKLabel=
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> SWAP=
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> WAITTime=
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> CLEanings=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> SEARCH=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> STATus=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> OWNer=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> CHECKLabel=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> SWAP=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> WAITTime=
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> CLEanings=
 
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> VOLRange={Mustexist: SEARCH=Yes}
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> VOLRange={Mustexist: SEARCH=Bulk}
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> VOLList={Mustexist: SEARCH=Yes}
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> VOLList={Mustexist: SEARCH=Bulk}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> VOLRange={Mustexist: SEARCH=Yes}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> VOLRange={Mustexist: SEARCH=Bulk}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> VOLList={Mustexist: SEARCH=Yes}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> VOLList={Mustexist: SEARCH=Bulk}
 
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SEARCH=     -> SEARCH=No
-CHECKIn LIBVolume [\w\-\.\+\&]+ (\w+=.*){1,} SEARCH=                       -> SEARCH=Yes
-CHECKIn LIBVolume [\w\-\.\+\&]+ (\w+=.*){1,} SEARCH=                       -> SEARCH=Bulk
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STATus=     -> STATus=PRIvate
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STATus=     -> STATus=SCRatch
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STATus=     -> STATus=CLEaner
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} OWNer=      -> select concat( '%PREFIX%', server_name ) from servers {Prefix: -1}
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Yes
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=No
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Barcode
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SWAP=       -> SWAP=Yes
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SWAP=       -> SWAP=No
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} WAITTime=   -> WAITTime=<give_minutes>
-CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CLEanings=  -> CLEanings=<give_number>
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} SEARCH=     -> SEARCH=No
+CHECKIn LIBVolume [\w\-\.\+\&]+ (\w+=\w*){1,} SEARCH=                       -> SEARCH=Yes
+CHECKIn LIBVolume [\w\-\.\+\&]+ (\w+=\w*){1,} SEARCH=                       -> SEARCH=Bulk
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STATus=     -> STATus=PRIvate
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STATus=     -> STATus=SCRatch
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STATus=     -> STATus=CLEaner
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} OWNer=      -> select concat( '%PREFIX%', server_name ) from servers {Prefix: -1}
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} CHECKLabel= -> CHECKLabel=Yes
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} CHECKLabel= -> CHECKLabel=No
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} CHECKLabel= -> CHECKLabel=Barcode
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} SWAP=       -> SWAP=Yes
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} SWAP=       -> SWAP=No
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} WAITTime=   -> WAITTime=<give_minutes>
+CHECKIn LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} CLEanings=  -> CLEanings=<give_number>
 
 ###################
 # CHECKOut LIBVolume
@@ -352,15 +352,15 @@ CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CHECKLabel=              -> C
 CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CHECKLabel=              -> CHECKLabel=No
 CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ CHECKLabel=              -> CHECKLabel=Barcode
 
-CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> REMOVE=
-CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} REMOVE=     -> REMOVE=BULK
-CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} REMOVE=     -> REMOVE=NO
-CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} REMOVE=     -> REMOVE=YES
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> REMOVE=
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} REMOVE=     -> REMOVE=BULK
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} REMOVE=     -> REMOVE=NO
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} REMOVE=     -> REMOVE=YES
 
-CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}             -> CHECKLabel=
-CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Yes 
-CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=No
-CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CHECKLabel= -> CHECKLabel=Barcode
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}             -> CHECKLabel=
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} CHECKLabel= -> CHECKLabel=Yes 
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} CHECKLabel= -> CHECKLabel=No
+CHECKOut LIBVolume [\w\-\.\+\&]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} CHECKLabel= -> CHECKLabel=Barcode
 
 ###################
 # DEFine commands #
@@ -404,15 +404,15 @@ DEFine DEVclass [\w\*\-\.\+\&]+ DEVType=                -> DEVType=LTO
 DEFine DEVclass [\w\*\-\.\+\&]+                         -> LIBRary=
 DEFine DEVclass [\w\*\-\.\+\&]+ LIBRary=                -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
 
-DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,}            -> DEVType=
-DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} DEVType=   -> DEVType=3590
-DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} DEVType=   -> DEVType=LTO
-DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,}            -> LIBRary=
-DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LIBRary=   -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
-DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,}            -> LBProtect={Mustexist: DEVType=LTO}
-DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LBProtect= -> LBProtect=READWrite{Mustexist: DEVType=LTO}
-DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LBProtect= -> LBProtect=WRITEOnly{Mustexist: DEVType=LTO}
-DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=.*){1,} LBProtect= -> LBProtect=No{Mustexist: DEVType=LTO}
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=\w*){1,}            -> DEVType=
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=\w*){1,} DEVType=   -> DEVType=3590
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=\w*){1,} DEVType=   -> DEVType=LTO
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=\w*){1,}            -> LIBRary=
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=\w*){1,} LIBRary=   -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=\w*){1,}            -> LBProtect={Mustexist: DEVType=LTO}
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=\w*){1,} LBProtect= -> LBProtect=READWrite{Mustexist: DEVType=LTO}
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=\w*){1,} LBProtect= -> LBProtect=WRITEOnly{Mustexist: DEVType=LTO}
+DEFine DEVclass [\w\*\-\.\+\&]+ (\w+=\w*){1,} LBProtect= -> LBProtect=No{Mustexist: DEVType=LTO}
 # =========================================================================================================================
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.18?topic=library-scsi
@@ -451,27 +451,27 @@ DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SERial=         -> SERial=AUTODetect
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI SERial=         -> SERial=<GIVE_a_valid_serialnumber>
 
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}          -> SHAREd=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SHAREd=  -> SHAREd=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,}          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} SHAREd=  -> SHAREd=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}               -> RESETDrives=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,}               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} RESETDrives=  -> RESETDrives=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}             -> AUTOLabel=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
 
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}                  -> RELABELSCRatch=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RELABELSCRatch=  -> RELABELSCRatch=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} RELABELSCRatch=  -> RELABELSCRatch=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,}                  -> RELABELSCRatch=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} RELABELSCRatch=  -> RELABELSCRatch=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} RELABELSCRatch=  -> RELABELSCRatch=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,}         -> SERial=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SERial= -> SERial=AUTODetect
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=.*){1,} SERial= -> SERial=<GIVE_a_valid_serialnumber>
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,}         -> SERial=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} SERial= -> SERial=AUTODetect
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=SCSI (\w+=\w*){1,} SERial= -> SERial=<GIVE_a_valid_serialnumber>
 
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL          -> SHAREd=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL SHAREd=  -> SHAREd=Yes
@@ -495,27 +495,27 @@ DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL SERial=  -> SERial=AUTODetect
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL SERial=  -> SERial=<GIVE_a_valid_serialnumber>
 
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,}          -> SHAREd=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} SHAREd=  -> SHAREd=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,}          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} SHAREd=  -> SHAREd=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,}               -> RESETDrives=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,}               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} RESETDrives=  -> RESETDrives=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,}             -> AUTOLabel=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
 
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,}                  -> RELABELSCRatch=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} RELABELSCRatch=  -> RELABELSCRatch=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} RELABELSCRatch=  -> RELABELSCRatch=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,}                  -> RELABELSCRatch=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} RELABELSCRatch=  -> RELABELSCRatch=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} RELABELSCRatch=  -> RELABELSCRatch=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,}         -> SERial=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} SERial= -> SERial=AUTODetect
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=.*){1,} SERial= -> SERial=<GIVE_a_valid_serialnumber>
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,}         -> SERial=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} SERial= -> SERial=AUTODetect
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=VTL (\w+=\w*){1,} SERial= -> SERial=<GIVE_a_valid_serialnumber>
 
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X          -> SHAREd=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X SHAREd=  -> SHAREd=Yes
@@ -541,27 +541,27 @@ DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X PRIVATECATegory=  -> PRIVATECATegory=<
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X                      -> WORMSCRatchcategory=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X WORMSCRatchcategory= -> WORMSCRatchcategory=<GIVE_a_valid_number>
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,}          -> SHAREd=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} SHAREd=  -> SHAREd=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,}          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} SHAREd=  -> SHAREd=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,}               -> RESETDrives=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,}               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} RESETDrives=  -> RESETDrives=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,}             -> AUTOLabel=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
 
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,}                   -> SCRATCHCATegory=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} SCRATCHCATegory=  -> SCRATCHCATegory=301
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} SCRATCHCATegory=  -> SCRATCHCATegory=<GIVE_a_valid_number>
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,}                   -> SCRATCHCATegory=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} SCRATCHCATegory=  -> SCRATCHCATegory=301
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} SCRATCHCATegory=  -> SCRATCHCATegory=<GIVE_a_valid_number>
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,}                  -> PRIVATECATegory=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} PRIVATECATegory= -> PRIVATECATegory=300
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=.*){1,} PRIVATECATegory= -> PRIVATECATegory=<GIVE_a_valid_number>
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,}                  -> PRIVATECATegory=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} PRIVATECATegory= -> PRIVATECATegory=300
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=349X (\w+=\w*){1,} PRIVATECATegory= -> PRIVATECATegory=<GIVE_a_valid_number>
 
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS          -> SHAREd=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS SHAREd=  -> SHAREd=Yes
@@ -579,39 +579,39 @@ DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS  AUTOLabel=  -> AUTOLabel=OVERWRITE
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS               -> ACSID=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS ACSID=        -> ACSID=<GIVE_a_valid_number>
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,}          -> SHAREd=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} SHAREd=  -> SHAREd=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,}          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,} SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,} SHAREd=  -> SHAREd=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,}               -> RESETDrives=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,}               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,} RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,} RESETDrives=  -> RESETDrives=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,}             -> AUTOLabel=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,}         -> ACSID=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=.*){1,} ACSID=  -> ACSID=<GIVE_a_valid_number>
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,}         -> ACSID=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=ACSLS (\w+=\w*){1,} ACSID=  -> ACSID=<GIVE_a_valid_number>
 
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal              -> AUTOLabel=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal  AUTOLabel=  -> AUTOLabel=Yes
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal  AUTOLabel=  -> AUTOLabel=No
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal  AUTOLabel=  -> AUTOLabel=OVERWRITE
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=.*){1,}             -> AUTOLabel=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=\w*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=EXTernal (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
 
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE           -> SHAREd=
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE  SHAREd=  -> SHAREd=Yes
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE  SHAREd=  -> SHAREd=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE (\w+=.*){1,}          -> SHAREd=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE (\w+=.*){1,} SHAREd=  -> SHAREd=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE (\w+=.*){1,} SHAREd=  -> SHAREd=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE (\w+=\w*){1,}          -> SHAREd=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE (\w+=\w*){1,} SHAREd=  -> SHAREd=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=FILE (\w+=\w*){1,} SHAREd=  -> SHAREd=No
 
 
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL                -> RESETDrives=
@@ -623,14 +623,14 @@ DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL AUTOLabel=  -> AUTOLabel=Yes
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL AUTOLabel=  -> AUTOLabel=No
 DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL AUTOLabel=  -> AUTOLabel=OVERWRITE
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,}               -> RESETDrives=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,} RESETDrives=  -> RESETDrives=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,} RESETDrives=  -> RESETDrives=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=\w*){1,}               -> RESETDrives=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=\w*){1,} RESETDrives=  -> RESETDrives=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=\w*){1,} RESETDrives=  -> RESETDrives=No
 
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,}             -> AUTOLabel=
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=Yes
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=No
-DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=.*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=\w*){1,}             -> AUTOLabel=
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=Yes
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=No
+DEFine LIBRary [\w\-\.\+\&]+ LIBType=MANUAL (\w+=\w*){1,} AUTOLabel=  -> AUTOLabel=OVERWRITE
 
 ###################
 # DELete commands #
@@ -661,18 +661,18 @@ Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CO
 Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=NONUNIcode
 Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ CODEType=              -> CODEType=BOTH
 
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> Format=
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> NAMEType=
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,}           -> CODEType=
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}           -> Format=
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}           -> NAMEType=
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}           -> CODEType=
 #
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=   -> Format=Standard
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=   -> Format=Detailed
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=SERVER 
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=UNIcode
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} NAMEType= -> NAMEType=FSID
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=UNIcode
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=NONUNIcode
-Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=.*){1,} CODEType= -> CODEType=BOTH
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} Format=   -> Format=Standard
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} Format=   -> Format=Detailed
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} NAMEType= -> NAMEType=SERVER 
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} NAMEType= -> NAMEType=UNIcode
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} NAMEType= -> NAMEType=FSID
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} CODEType= -> CODEType=UNIcode
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} CODEType= -> CODEType=NONUNIcode
+Query FIlespace [\w\*\-\.\+\&\@]+ [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} CODEType= -> CODEType=BOTH
 
 # https://www.ibm.com/docs/en/tsm/7.1.1?topic=commands-query-path-display-path-definition
 #2
@@ -696,7 +696,7 @@ Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ DESTType=              -> DESTType=LI
 Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ Format=                -> Format=Standard
 Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ Format=                -> Format=Detailed
 #7
-Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=.*){1,} LIBRary=  -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
+Query PATH [\w\*\-\.\+\&]+ [\w\*\-\.\+\&]+ (\w+=\w*){1,} LIBRary=  -> select concat( '%PREFIX%', library_name ) from libraries {Prefix: -1}
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-actlog-query-activity-log
 Query                         -> ACtlog
@@ -723,46 +723,46 @@ Query ACtlog ORiginator=      -> ORiginator=ALL
 Query ACtlog ORiginator=      -> ORiginator=SErver
 Query ACtlog ORiginator=      -> ORiginator=CLient
 
-Query ACtlog (\w+=.*){1,} -> BEGINDate=
-Query ACtlog (\w+=.*){1,} -> BEGINTime=
-Query ACtlog (\w+=.*){1,} -> ENDDate=
-Query ACtlog (\w+=.*){1,} -> ENDTime=
-Query ACtlog (\w+=.*){1,} -> Search=
-Query ACtlog (\w+=.*){1,} -> MSGno=
-Query ACtlog (\w+=.*){1,} -> NODEname=
-Query ACtlog (\w+=.*){1,} -> JOB=
-Query ACtlog (\w+=.*){1,} -> ORiginator=
-Query ACtlog (\w+=.*){1,} ORiginator= -> ORiginator=ALL
-Query ACtlog (\w+=.*){1,} ORiginator= -> ORiginator=SErver
-Query ACtlog (\w+=.*){1,} ORiginator= -> ORiginator=Client
+Query ACtlog (\w+=\w*){1,} -> BEGINDate=
+Query ACtlog (\w+=\w*){1,} -> BEGINTime=
+Query ACtlog (\w+=\w*){1,} -> ENDDate=
+Query ACtlog (\w+=\w*){1,} -> ENDTime=
+Query ACtlog (\w+=\w*){1,} -> Search=
+Query ACtlog (\w+=\w*){1,} -> MSGno=
+Query ACtlog (\w+=\w*){1,} -> NODEname=
+Query ACtlog (\w+=\w*){1,} -> JOB=
+Query ACtlog (\w+=\w*){1,} -> ORiginator=
+Query ACtlog (\w+=\w*){1,} ORiginator= -> ORiginator=ALL
+Query ACtlog (\w+=\w*){1,} ORiginator= -> ORiginator=SErver
+Query ACtlog (\w+=\w*){1,} ORiginator= -> ORiginator=Client
 #
-Query ACtlog (\w+=.*){1,} -> OWNERname={Mustexist: ORiginator=CLient}
-Query ACtlog (\w+=.*){1,} -> SCHedname={Mustexist: ORiginator=CLient}
-Query ACtlog (\w+=.*){1,} -> DOmainname={Mustexist: ORiginator=CLient}
-Query ACtlog (\w+=.*){1,} -> SESsnum={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=\w*){1,} -> OWNERname={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=\w*){1,} -> SCHedname={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=\w*){1,} -> DOmainname={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=\w*){1,} -> SESsnum={Mustexist: ORiginator=CLient}
 
-Query ACtlog (\w+=.*){1,} DOmainname= -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}{Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=\w*){1,} DOmainname= -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}{Mustexist: ORiginator=CLient}
 # =========================================================================================================================
 
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> BEGINDate=
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> BEGINTime=
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> ENDDate=
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> ENDTime=
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> Search=
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> MSGno=
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> NODEname=
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> JOB=
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> ORiginator=
-Query ACtlog (\w+=.*) (\w+=.*){1,} ORiginator= -> ORiginator=ALL
-Query ACtlog (\w+=.*) (\w+=.*){1,} ORiginator= -> ORiginator=SErver
-Query ACtlog (\w+=.*) (\w+=.*){1,} ORiginator= -> ORiginator=Client
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> BEGINDate=
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> BEGINTime=
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> ENDDate=
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> ENDTime=
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> Search=
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> MSGno=
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> NODEname=
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> JOB=
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> ORiginator=
+Query ACtlog (\w+=.*) (\w+=\w*){1,} ORiginator= -> ORiginator=ALL
+Query ACtlog (\w+=.*) (\w+=\w*){1,} ORiginator= -> ORiginator=SErver
+Query ACtlog (\w+=.*) (\w+=\w*){1,} ORiginator= -> ORiginator=Client
 #
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> OWNERname={Mustexist: ORiginator=CLient}
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> SCHedname={Mustexist: ORiginator=CLient}
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> DOmainname={Mustexist: ORiginator=CLient}
-Query ACtlog (\w+=.*) (\w+=.*){1,} -> SESsnum={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> OWNERname={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> SCHedname={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> DOmainname={Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=.*) (\w+=\w*){1,} -> SESsnum={Mustexist: ORiginator=CLient}
 # 
-Query ACtlog (\w+=.*) (\w+=.*){1,} DOmainname= -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}{Mustexist: ORiginator=CLient}
+Query ACtlog (\w+=.*) (\w+=\w*){1,} DOmainname= -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}{Mustexist: ORiginator=CLient}
 
 # https://www.ibm.com/docs/en/spectrum-protect/8.1.15?topic=commands-query-license-display-license-information
 Query -> LICense
@@ -831,21 +831,21 @@ Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LOcal
 Query Node [\w\*\-\.]*\s*(\w+=\w*\s*)* AUTHentication= -> AUTHentication=LDap
 
 # de ez már az 5. szint
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> Type=
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> DOmain=
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> Format=
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> AUTHentication=
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=Client
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=NAS
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=Server
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=Any
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=OBJECTClient
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Type=        -> Type=OSSMClient
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format=        -> Format=Standard
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format=        -> Format=Detailed
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LOcal
-Query Node [\w\*\-\.\+\&\@]+ (\w+=.*){1,} AUTHentication=        -> AUTHentication=LDap
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}         -> Type=
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}         -> DOmain=
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}         -> Format=
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}         -> AUTHentication=
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Type=        -> Type=Client
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Type=        -> Type=NAS
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Type=        -> Type=Server
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Type=        -> Type=Any
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Type=        -> Type=OBJECTClient
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Type=        -> Type=OSSMClient
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} DOmain= -> select concat( '%PREFIX%', domain_name) from domains {Prefix: -1}
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Format=        -> Format=Standard
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Format=        -> Format=Detailed
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} AUTHentication=        -> AUTHentication=LOcal
+Query Node [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} AUTHentication=        -> AUTHentication=LDap
 
 Query             -> SEssion
 Query SEssion     -> select session_id from sessions
@@ -871,9 +871,9 @@ Query SEssion [\d\*]+ Format= -> Format=Detailed
 Query SEssion [\d\*]+ -> Type= 
 Query SEssion [\d\*]+ -> CLIENTName=
 
-Query SEssion [\d\*]+ (\w+=.*){1,} -> Format=
-Query SEssion [\d\*]+ (\w+=.*){1,} Format= -> Format=Standard
-Query SEssion [\d\*]+ (\w+=.*){1,} Format= -> Format=Detailed
+Query SEssion [\d\*]+ (\w+=\w*){1,} -> Format=
+Query SEssion [\d\*]+ (\w+=\w*){1,} Format= -> Format=Standard
+Query SEssion [\d\*]+ (\w+=\w*){1,} Format= -> Format=Detailed
     
 # https://www.ibm.com/docs/en/storage-protect/8.1.20?topic=commands-query-stgpool-query-storage-pools
 
@@ -891,16 +891,16 @@ Query STGpool [\w\*\-\.\+\&\*]+ POoltype=              -> POoltype=COPYCONtainer
 Query STGpool [\w\*\-\.\+\&\*]+ POoltype=              -> POoltype=ACTIVEdata
 Query STGpool [\w\*\-\.\+\&\*]+ POoltype=              -> POoltype=RETention
 #
-Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,}           -> Format=
-Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,}           -> POoltype=
-Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} Format=   -> Format=Standard
-Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} Format=   -> Format=Detailed
-Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=ANY
-Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=PRimary
-Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=COpy
-Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=COPYCONtainer
-Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=ACTIVEdata
-Query STGpool [\w\*\-\.\+\&\*]+ (\w+=.*){1,} POoltype= -> POoltype=RETention
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=\w*){1,}           -> Format=
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=\w*){1,}           -> POoltype=
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=\w*){1,} Format=   -> Format=Standard
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=\w*){1,} Format=   -> Format=Detailed
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=\w*){1,} POoltype= -> POoltype=ANY
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=\w*){1,} POoltype= -> POoltype=PRimary
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=\w*){1,} POoltype= -> POoltype=COpy
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=\w*){1,} POoltype= -> POoltype=COPYCONtainer
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=\w*){1,} POoltype= -> POoltype=ACTIVEdata
+Query STGpool [\w\*\-\.\+\&\*]+ (\w+=\w*){1,} POoltype= -> POoltype=RETention
 
 Query -> STGPOOLDIRectory
 
@@ -918,13 +918,13 @@ Query             -> PRocess
 Query PRocess     -> select process_num from processes
 Query PRocess     -> DESCription=
 Query PRocess     -> STATus=
-Query PRocess (\w+=.*){1,} -> DESCription=
-Query PRocess (\w+=.*){1,} -> STATus=
+Query PRocess (\w+=\w*){1,} -> DESCription=
+Query PRocess (\w+=\w*){1,} -> STATus=
 # LVL 4(5)
 Query PRocess \d+ -> DESCription=
 Query PRocess \d+ -> STATus=
-Query PRocess \d+ (\w+=.*){1,} -> DESCription=
-Query PRocess \d+ (\w+=.*){1,} -> STATus=
+Query PRocess \d+ (\w+=\w*){1,} -> DESCription=
+Query PRocess \d+ (\w+=\w*){1,} -> STATus=
 
 Query           ->  OPTion
 Query OPTion    ->  '*'
@@ -1251,37 +1251,37 @@ DEFine CLIENTAction [\w\*\-\.\+\&\@]+ OBJects=    -> OBJects=<give_an_object_str
 DEFine CLIENTAction [\w\*\-\.\+\&\@]+ Wait=       -> Wait=Yes
 DEFine CLIENTAction [\w\*\-\.\+\&\@]+ Wait=       -> Wait=No
 
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> SUBACTion={Mustexist: ACTion=Archive}
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=FASTBack{Mustexist: ACTion=Archive}
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=SYSTEMSTate{Mustexist: ACTion=Archive}
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=VM{Mustexist: ACTion=Archive}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}            -> SUBACTion={Mustexist: ACTion=Archive}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} SUBACTion= -> SUBACTion=FASTBack{Mustexist: ACTion=Archive}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} SUBACTion= -> SUBACTion=SYSTEMSTate{Mustexist: ACTion=Archive}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} SUBACTion= -> SUBACTion=VM{Mustexist: ACTion=Archive}
 
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> SUBACTion={Mustexist: ACTion=Backup}
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=FASTBack{Mustexist: ACTion=Backup}
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=SYSTEMSTate{Mustexist: ACTion=Backup}
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} SUBACTion= -> SUBACTion=VM{Mustexist: ACTion=Backup}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}            -> SUBACTion={Mustexist: ACTion=Backup}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} SUBACTion= -> SUBACTion=FASTBack{Mustexist: ACTion=Backup}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} SUBACTion= -> SUBACTion=SYSTEMSTate{Mustexist: ACTion=Backup}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} SUBACTion= -> SUBACTion=VM{Mustexist: ACTion=Backup}
 
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> DOmain=
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} DOmain=    -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> ACTion=
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> OPTions=
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> OBJects=
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,}            -> Wait=
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Incremental
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Selective
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Archive
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}            -> DOmain=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} DOmain=    -> select concat( '%PREFIX%', domain_name ) from domains {Prefix: -1}
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}            -> ACTion=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}            -> OPTions=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}            -> OBJects=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}            -> Wait=
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} ACTion=    -> ACTion=Incremental
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} ACTion=    -> ACTion=Selective
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} ACTion=    -> ACTion=Archive
 
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Backup
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=REStore
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=RETrieve
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=IMAGEBACkup
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=IMAGEREStore
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Command
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} ACTion=    -> ACTion=Macro
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} OPTions=   -> OPTions=<give_an_option_string_here>
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} OBJects=   -> OBJects=<give_an_object_string_here>
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Wait=      -> Wait=Yes
-DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Wait=      -> Wait=No
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} ACTion=    -> ACTion=Backup
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} ACTion=    -> ACTion=REStore
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} ACTion=    -> ACTion=RETrieve
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} ACTion=    -> ACTion=IMAGEBACkup
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} ACTion=    -> ACTion=IMAGEREStore
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} ACTion=    -> ACTion=Command
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} ACTion=    -> ACTion=Macro
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} OPTions=   -> OPTions=<give_an_option_string_here>
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} OBJects=   -> OBJects=<give_an_object_string_here>
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Wait=      -> Wait=Yes
+DEFine CLIENTAction [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Wait=      -> Wait=No
 
 DEFine -> CLIENTOpt
 DEFine -> CLOptset
@@ -1431,38 +1431,38 @@ DEFine SERver [\w\*\-\.\+\&]+ PAssword=                      -> PAssword=<passwo
 DEFine SERver [\w\*\-\.\+\&]+ OBJECTAgent=                   -> OBJECTAgent=Yes
 DEFine SERver [\w\*\-\.\+\&]+ OBJECTAgent=                   -> OBJECTAgent=No
 
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> HLAddress=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> LLAddress=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> COMMmethod=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> URL=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> DESCription=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> SSL=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> SESSIONSECurity=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> SERVERPAssword=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> CROSSDEFine=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> VALIdateprotocol=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> TRANSFERMethod=
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,}                   -> OBJECTAgent=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> HLAddress=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> LLAddress=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> COMMmethod=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> URL=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> DESCription=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> SSL=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> SESSIONSECurity=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> SERVERPAssword=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> CROSSDEFine=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> VALIdateprotocol=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> TRANSFERMethod=
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,}                   -> OBJECTAgent=
 
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} HLAddress=        -> HLAddress=<ip_address>
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} LLAddress=        -> LLAddress=<tcp_port>
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} COMMmethod=       -> COMMmethod=TCPIP
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} URL=              -> URL=<url>
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} DESCription=      -> DESCription=<description>
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} SSL=              -> SSL=Yes
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} SSL=              -> SSL=No
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} SESSIONSECurity=  -> SESSIONSECurity=STRict
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} SESSIONSECurity=  -> SESSIONSECurity=TRANSitional
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} SERVERPAssword=   -> SERVERPAssword=<password>
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} CROSSDEFine=      -> CROSSDEFine=No
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} CROSSDEFine=      -> CROSSDEFine=Yes
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} VALIdateprotocol= -> VALIdateprotocol=No
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} VALIdateprotocol= -> VALIdateprotocol=Yes
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} TRANSFERMethod=   -> TRANSFERMethod=Tcpip
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} TRANSFERMethod=   -> TRANSFERMethod=Fasp
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} PAssword=         -> PAssword=<password>
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} OBJECTAgent=      -> OBJECTAgent=Yes
-DEFine SERver [\w\*\-\.\+\&]+ (\w+=.*){1,} OBJECTAgent=      -> OBJECTAgent=No
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} HLAddress=        -> HLAddress=<ip_address>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} LLAddress=        -> LLAddress=<tcp_port>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} COMMmethod=       -> COMMmethod=TCPIP
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} URL=              -> URL=<url>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} DESCription=      -> DESCription=<description>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} SSL=              -> SSL=Yes
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} SSL=              -> SSL=No
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} SESSIONSECurity=  -> SESSIONSECurity=STRict
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} SESSIONSECurity=  -> SESSIONSECurity=TRANSitional
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} SERVERPAssword=   -> SERVERPAssword=<password>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} CROSSDEFine=      -> CROSSDEFine=No
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} CROSSDEFine=      -> CROSSDEFine=Yes
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} VALIdateprotocol= -> VALIdateprotocol=No
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} VALIdateprotocol= -> VALIdateprotocol=Yes
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} TRANSFERMethod=   -> TRANSFERMethod=Tcpip
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} TRANSFERMethod=   -> TRANSFERMethod=Fasp
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} PAssword=         -> PAssword=<password>
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} OBJECTAgent=      -> OBJECTAgent=Yes
+DEFine SERver [\w\*\-\.\+\&]+ (\w+=\w*){1,} OBJECTAgent=      -> OBJECTAgent=No
 
 DEFine -> SERVERGroup
 DEFine -> SPACETrigger
@@ -1513,8 +1513,8 @@ DELete -> SCRipt
 DELete SCRipt                                      -> select distinct name from scripts
 DELete SCRipt [\w\*\-\.\+\&\@]+                    -> LINE=
 DELete SCRipt [\w\*\-\.\+\&\@]+ LINE=              -> select concat( '%PREFIX%',LINE) from scripts where name like upper( '-2' ) {Prefix: -1}
-DELete SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,}       -> LINE=
-DELete SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,} LINE= -> select concat( '%PREFIX%',LINE) from scripts where name like upper( '-2' ) {Prefix: -1}
+DELete SCRipt [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}       -> LINE=
+DELete SCRipt [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} LINE= -> select concat( '%PREFIX%',LINE) from scripts where name like upper( '-2' ) {Prefix: -1}
 
 DELete -> SERver
 DELete -> SERVERGroup
@@ -1615,20 +1615,20 @@ MOVe Data [\w\*\-\.\/\\\$]+ Wait=    -> Wait=Yes
 MOVe Data [\w\*\-\.\/\\\$]+ Wait=    -> Wait=No
 MOVe Data [\w\*\-\.\/\\\$]+ ENCrypt=    -> ENCrypt=Yes
 MOVe Data [\w\*\-\.\/\\\$]+ ENCrypt=    -> ENCrypt=No
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> STGpool=
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> SHREDTONOshred=
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> RECONStruct=
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> Wait=
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,}          -> ENCrypt=
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STGpool=  -> select concat( '%PREFIX%', stgpool_name ) from stgpools {Prefix: -1}
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SHREDTONOshred=    -> SHREDTONOshred=Yes
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} SHREDTONOshred=    -> SHREDTONOshred=No
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} RECONStruct=    -> RECONStruct=Yes
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} RECONStruct=    -> RECONStruct=No
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Wait=    -> Wait=Yes
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Wait=    -> Wait=No
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} ENCrypt=    -> ENCrypt=Yes
-MOVe Data [\w\*\-\.\/\\\$]+ (\w+=.*){1,} ENCrypt=    -> ENCrypt=No
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}          -> STGpool=
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}          -> SHREDTONOshred=
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}          -> RECONStruct=
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}          -> Wait=
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}          -> ENCrypt=
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STGpool=  -> select concat( '%PREFIX%', stgpool_name ) from stgpools {Prefix: -1}
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} SHREDTONOshred=    -> SHREDTONOshred=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} SHREDTONOshred=    -> SHREDTONOshred=No
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} RECONStruct=    -> RECONStruct=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} RECONStruct=    -> RECONStruct=No
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} Wait=    -> Wait=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} Wait=    -> Wait=No
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} ENCrypt=    -> ENCrypt=Yes
+MOVe Data [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} ENCrypt=    -> ENCrypt=No
 
 MOVe -> DRMedia
 MOVe -> GRPMEMber
@@ -1722,12 +1722,12 @@ Query SCRipt [\w\*\-\.\+\&\@]+ Format=              -> Format=Standard
 Query SCRipt [\w\*\-\.\+\&\@]+ Format=              -> Format=Detailed
 Query SCRipt [\w\*\-\.\+\&\@]+ Format=              -> Format=Lines
 Query SCRipt [\w\*\-\.\+\&\@]+ Format=              -> Format=Raw
-Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> Format=
-Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,}         -> Outputfile={Mustexist: Format=Raw}
-Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format= -> Format=Standard
-Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format= -> Format=Detailed
-Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format= -> Format=Lines
-Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=.*){1,} Format= -> Format=Raw
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}         -> Format=
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=\w*){1,}         -> Outputfile={Mustexist: Format=Raw}
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Format= -> Format=Standard
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Format= -> Format=Detailed
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Format= -> Format=Lines
+Query SCRipt [\w\*\-\.\+\&\@]+ (\w+=\w*){1,} Format= -> Format=Raw
 
 Query -> SERver
 Query -> SERVERGroup
@@ -1773,29 +1773,29 @@ Query Volume ACCess=                                     -> ACCess=OFfsite
 Query Volume ACCess=                                     -> ACCess=DEStroyed
 Query Volume STGpool=                                    -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
 
-Query Volume (\w+=.*){1,}                                             -> Format=
-Query Volume (\w+=.*){1,}                                             -> STGpool=
-Query Volume (\w+=.*){1,}                                             -> LISTRetsets=
-Query Volume (\w+=.*){1,}                                             -> DEVclass=
-Query Volume (\w+=.*){1,}                                             -> STatus=
-Query Volume (\w+=.*){1,}                                             -> ACCess=
-Query Volume (\w+=.*){1,} Format=                                     -> Format=Standard
-Query Volume (\w+=.*){1,} Format=                                     -> Format=Detailed
-Query Volume (\w+=.*){1,} LISTRetsets=                                -> LISTRetsets=Yes
-Query Volume (\w+=.*){1,} LISTRetsets=                                -> LISTRetsets=No
-Query Volume (\w+=.*){1,} DEVclass=                                   -> select concat( '%PREFIX%', devclass_name) from devclasses {Prefix: -1}
-Query Volume (\w+=.*){1,} STatus=                                     -> STatus=ONline
-Query Volume (\w+=.*){1,} STatus=                                     -> STatus=OFfline
-Query Volume (\w+=.*){1,} STatus=                                     -> STatus=EMPty
-Query Volume (\w+=.*){1,} STatus=                                     -> STatus=PENding
-Query Volume (\w+=.*){1,} STatus=                                     -> STatus=FILling
-Query Volume (\w+=.*){1,} STatus=                                     -> STatus=FULl
-Query Volume (\w+=.*){1,} ACCess=                                     -> ACCess=READWrite
-Query Volume (\w+=.*){1,} ACCess=                                     -> ACCess=READOnly
-Query Volume (\w+=.*){1,} ACCess=                                     -> ACCess=UNAVailable
-Query Volume (\w+=.*){1,} ACCess=                                     -> ACCess=OFfsite
-Query Volume (\w+=.*){1,} ACCess=                                     -> ACCess=DEStroyed
-Query Volume (\w+=.*){1,} STGpool=                                    -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
+Query Volume (\w+=\w*){1,}                                             -> Format=
+Query Volume (\w+=\w*){1,}                                             -> STGpool=
+Query Volume (\w+=\w*){1,}                                             -> LISTRetsets=
+Query Volume (\w+=\w*){1,}                                             -> DEVclass=
+Query Volume (\w+=\w*){1,}                                             -> STatus=
+Query Volume (\w+=\w*){1,}                                             -> ACCess=
+Query Volume (\w+=\w*){1,} Format=                                     -> Format=Standard
+Query Volume (\w+=\w*){1,} Format=                                     -> Format=Detailed
+Query Volume (\w+=\w*){1,} LISTRetsets=                                -> LISTRetsets=Yes
+Query Volume (\w+=\w*){1,} LISTRetsets=                                -> LISTRetsets=No
+Query Volume (\w+=\w*){1,} DEVclass=                                   -> select concat( '%PREFIX%', devclass_name) from devclasses {Prefix: -1}
+Query Volume (\w+=\w*){1,} STatus=                                     -> STatus=ONline
+Query Volume (\w+=\w*){1,} STatus=                                     -> STatus=OFfline
+Query Volume (\w+=\w*){1,} STatus=                                     -> STatus=EMPty
+Query Volume (\w+=\w*){1,} STatus=                                     -> STatus=PENding
+Query Volume (\w+=\w*){1,} STatus=                                     -> STatus=FILling
+Query Volume (\w+=\w*){1,} STatus=                                     -> STatus=FULl
+Query Volume (\w+=\w*){1,} ACCess=                                     -> ACCess=READWrite
+Query Volume (\w+=\w*){1,} ACCess=                                     -> ACCess=READOnly
+Query Volume (\w+=\w*){1,} ACCess=                                     -> ACCess=UNAVailable
+Query Volume (\w+=\w*){1,} ACCess=                                     -> ACCess=OFfsite
+Query Volume (\w+=\w*){1,} ACCess=                                     -> ACCess=DEStroyed
+Query Volume (\w+=\w*){1,} STGpool=                                    -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
 
 Query Volume [\w\*\-\.\/\\\$]+                           -> Format=
 Query Volume [\w\*\-\.\/\\\$]+                           -> STGpool=
@@ -1821,29 +1821,29 @@ Query Volume [\w\*\-\.\/\\\$]+ ACCess=                   -> ACCess=OFfsite
 Query Volume [\w\*\-\.\/\\\$]+ ACCess=                   -> ACCess=DEStroyed
 Query Volume [\w\*\-\.\/\\\$]+ STGpool=                  -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
 
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,}              -> Format=
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,}              -> STGpool=
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,}              -> LISTRetsets=
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,}              -> DEVclass=
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,}              -> STatus=
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,}              -> ACCess=
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=      -> Format=Standard
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} Format=      -> Format=Detailed
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} LISTRetsets= -> LISTRetsets=Yes
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} LISTRetsets= -> LISTRetsets=No
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} DEVclass=    -> select concat( '%PREFIX%', devclass_name) from devclasses {Prefix: -1}
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STatus=      -> STatus=ONline
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STatus=      -> STatus=OFfline
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STatus=      -> STatus=EMPty
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STatus=      -> STatus=PENding
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STatus=      -> STatus=FILling
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STatus=      -> STatus=FULl
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} ACCess=      -> ACCess=READWrite
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} ACCess=      -> ACCess=READOnly
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} ACCess=      -> ACCess=UNAVailable
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} ACCess=      -> ACCess=OFfsite
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} ACCess=      -> ACCess=DEStroyed
-Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} STGpool=     -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}              -> Format=
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}              -> STGpool=
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}              -> LISTRetsets=
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}              -> DEVclass=
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}              -> STatus=
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,}              -> ACCess=
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} Format=      -> Format=Standard
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} Format=      -> Format=Detailed
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} LISTRetsets= -> LISTRetsets=Yes
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} LISTRetsets= -> LISTRetsets=No
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} DEVclass=    -> select concat( '%PREFIX%', devclass_name) from devclasses {Prefix: -1}
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STatus=      -> STatus=ONline
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STatus=      -> STatus=OFfline
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STatus=      -> STatus=EMPty
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STatus=      -> STatus=PENding
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STatus=      -> STatus=FILling
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STatus=      -> STatus=FULl
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} ACCess=      -> ACCess=READWrite
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} ACCess=      -> ACCess=READOnly
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} ACCess=      -> ACCess=UNAVailable
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} ACCess=      -> ACCess=OFfsite
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} ACCess=      -> ACCess=DEStroyed
+Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*){1,} STGpool=     -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
 
 RECLaim -> STGpool
 REConcile -> Volumes
@@ -1858,11 +1858,11 @@ REGister LICense FILE=              -> FILE=tsmee.lic
 REGister LICense FILE=              -> FILE=dataret.lic
 REGister LICense FILE=              -> FILE=*.lic
 #
-REGister LICense (\w+=.*){1,}       -> FILE=
-REGister LICense (\w+=.*){1,} FILE= -> FILE=tsmbasic.lic
-REGister LICense (\w+=.*){1,} FILE= -> FILE=tsmee.lic
-REGister LICense (\w+=.*){1,} FILE= -> FILE=dataret.lic
-REGister LICense (\w+=.*){1,} FILE= -> FILE=*.lic
+REGister LICense (\w+=\w*){1,}       -> FILE=
+REGister LICense (\w+=\w*){1,} FILE= -> FILE=tsmbasic.lic
+REGister LICense (\w+=\w*){1,} FILE= -> FILE=tsmee.lic
+REGister LICense (\w+=\w*){1,} FILE= -> FILE=dataret.lic
+REGister LICense (\w+=\w*){1,} FILE= -> FILE=*.lic
 
 REGister -> Node
 REJect -> PEndingcmd
