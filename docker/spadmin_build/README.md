@@ -7,4 +7,4 @@ To build Ubuntu 22.04 based image use the next steps:
 4. `docker build  --tag doffy2023/dsmadmc:20231204 --rm --compress .`
 5. If you have docker hub account push the image into it: `docker push doffy2023/dsmadmc:20231204`
 
-The tag value `20230404` must be changed not to conflict the existing one.
+The tag value `20231204` must be changed not to conflict the existing one.
