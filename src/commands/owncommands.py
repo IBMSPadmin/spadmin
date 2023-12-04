@@ -2664,6 +2664,8 @@ class SHowNODEOccuopancy( SpadminCommand ):
 
     def help(self) -> dict:
         return """ 
+        Please, be aware to run audit license before show nodeoccupancy
+        https://www.ibm.com/docs/en/storage-protect/8.1.20?topic=commands-query-auditoccupancy-query-client-node-storage-utilization
         """
 
     def _execute(self, parameters: str) -> str:
