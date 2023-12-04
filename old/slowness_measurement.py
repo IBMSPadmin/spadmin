@@ -42,7 +42,7 @@ def regexpgenerator(regexp):
 # 20231129 135234 INFO   DEBUG IF START ---------------- 
 # 20231129 135236 INFO   DEBUG IF END ---------------- 
 
-key    = "Query Volume [\w\*\-\.\/\\\$]+ (\w+=.*){1,} ACCess="
+key    = "Query Volume [\w\*\-\.\/\\\$]+ (\w+=\w*\s+){1,} ACCess="
 #           Query                   Volume                         [\w\*\-\.\/\\\$]+     (\w+=.*){1,}     ACCess=
 genkey = "^(Query|Quer|Que|Qu|Q)\s+(Volume|Volum|Volu|Vol|Vo|V)\s+([\w\*\-\.\/\\\$]+)\s+((\w+=.*){1,})\s+(ACCess|ACCes|ACCe|ACC)=(?!.*\w+\s)"
 tokens = ['query',

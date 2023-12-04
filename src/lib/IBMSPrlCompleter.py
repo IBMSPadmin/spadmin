@@ -285,7 +285,10 @@ class IBMSPrlCompleter:
                     # if tokenlength > 3 and keylength <= 2:
                     #     continue
 
-                    if keylength != ( tokenlength - 1 ) and not search( '\{1\,\}', key ):
+                    # if keylength != ( tokenlength - 1 ) and not search( '\{1\,\}', key ):
+                    # v2 ???
+                    if keylength != ( tokenlength - 1 ) and not search( '\\w= \]\*\)', key ):
+
                         continue
 
 
