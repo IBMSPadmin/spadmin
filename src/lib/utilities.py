@@ -81,7 +81,7 @@ def printer(string):
                 f.writelines('\n')
         except:
             print(
-                colored("An error occured during the file write!", globals.color_red, attrs=[globals.color_attrs_bold])) 
+                colored("An error occured during the file write!", globals.color_red, attrs=[globals.color_attrs_bold]))
         return
 
     filename = globals.extras[ 'fileappend' ][-1] if 'fileappend' in globals.extras and len(globals.extras[ 'fileappend' ]) > 0 else ''
@@ -267,6 +267,7 @@ My Machine's Globally Unique ID where I want to use it: """ + mac + """
 
 Thanks.
 --- CUT ---""", globals.color_red, attrs=[globals.color_attrs_bold]))
+
         quit(1)
 
 
