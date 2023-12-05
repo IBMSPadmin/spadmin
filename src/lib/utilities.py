@@ -72,20 +72,28 @@ def printer(string):
     if not string:
         return
 
-    filename = globals.extras[ 'file' ][-1] if 'file' in globals.extras else ''
+    filename = globals.extras[ 'file' ][-1] if 'file' in globals.extras and len(globals.extras[ 'file' ]) > 0 else ''
     
     if filename != '':
-        with open( filename, 'w' ) as f:
-            f.writelines( string )
-            f.writelines( '\n' )
+        try:
+            with open(filename, 'w') as f:
+                f.writelines(string)
+                f.writelines('\n')
+        except:
+            print(
+                colored("An error occured during the file write!", globals.color_red, attrs=[globals.color_attrs_bold]))
         return
 
-    filename = globals.extras[ 'fileappend' ][-1] if 'fileappend' in globals.extras else ''
-    
+    filename = globals.extras[ 'fileappend' ][-1] if 'fileappend' in globals.extras and len(globals.extras[ 'fileappend' ]) > 0 else ''
+
     if filename != '':
-        with open( filename, 'a' ) as f:
-            f.writelines( string )
-            f.writelines( '\n' )
+        try:
+            with open(filename, 'a') as f:
+                f.writelines(string)
+                f.writelines('\n')
+        except:
+            print(
+                colored("An error occured during the file write!", globals.color_red, attrs=[globals.color_attrs_bold]))
         return
 
     s = str(string).split("\n")
