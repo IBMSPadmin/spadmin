@@ -3,6 +3,7 @@ import re
 from operator import itemgetter
 from . import utilities
 from . import globals
+from termcolor import colored
 
 from typing import (
     Union,
@@ -18,9 +19,15 @@ def grep(data):
     grep = globals.extras['grep'] if 'grep' in globals.extras else ''
     
     if grep != '' and grep is not None:
-        
+
         for g in grep:
-    
+
+            try: # Checking regexp validity
+                re.compile(g)
+            except re.error:
+                print(colored("Non valid regex pattern: " + g, globals.color_red, attrs=[globals.color_attrs_bold]))
+                return []
+
             grep_data = []
             
             for i, row in enumerate(data):
@@ -81,7 +88,13 @@ def invgrep(data):
     if invgrep != '' and invgrep is not None:
     
         for invg in invgrep:
-    
+
+            try: # Checking regexp validity
+                re.compile(invg)
+            except re.error:
+                print(colored("Non valid regex pattern: " + invg, globals.color_red, attrs=[globals.color_attrs_bold]))
+                return []
+
             invgrep_data = []
     
             for i, row in enumerate(data):
