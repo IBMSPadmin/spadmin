@@ -3,18 +3,18 @@
 #-----------------------------------------------------------------------------------
 # TSM - SP
 
-apt-get update && apt-get install -y --no-install-recommends wget openssh-server
+apt-get update && apt-get install -y --no-install-recommends curl openssh-server
 
 SP_dir=/tmp/SP_kits
 mkdir $SP_dir
 cd $SP_dir
 SP_path=https://www3.software.ibm.com/storage/tivoli-storage-management/maintenance/client/v8r1/Linux/LinuxX86_DEB/BA/v8120/
 SP_file=8.1.20.0-TIV-TSMBAC-LinuxX86_DEB.tar
-wget -k --no-check-certificate --no-verbose $SP_path$SP_file
-apt-get remove -y wget
+curl -LOk $SP_path$SP_file
+apt-get remove -y curl
 tar xf $SP_file
-apt-get install $SP_dir/gskcrypt64_8.0-55.29.linux.x86_64.deb \
-  $SP_dir/gskssl64_8.0-55.29.linux.x86_64.deb \
+apt-get install $SP_dir/gskcrypt64_8.0-55.*.linux.x86_64.deb \
+  $SP_dir/gskssl64_8.0-55.*.linux.x86_64.deb \
   $SP_dir/tivsm-api64.amd64.deb \
   $SP_dir/tivsm-ba.amd64.deb \
   && apt-get clean && apt-get -y autoremove
