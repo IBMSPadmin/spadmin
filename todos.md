@@ -1,4 +1,4 @@
-ToDo
+ToDos
 
 Telepítési doksik:
 
