@@ -8,7 +8,7 @@ apt-get update && apt-get install -y --no-install-recommends wget openssh-server
 SP_dir=/tmp/SP_kits
 mkdir $SP_dir
 cd $SP_dir
-SP_path=https://ftp.software.ibm.com/storage/tivoli-storage-management/maintenance/client/v8r1/Linux/LinuxX86_DEB/BA/v8120/
+SP_path=https://www3.software.ibm.com/storage/tivoli-storage-management/maintenance/client/v8r1/Linux/LinuxX86_DEB/BA/v8120/
 SP_file=8.1.20.0-TIV-TSMBAC-LinuxX86_DEB.tar
 wget -k --no-check-certificate --no-verbose $SP_path$SP_file
 apt-get remove -y wget
