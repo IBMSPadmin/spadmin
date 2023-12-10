@@ -148,14 +148,14 @@ class Spadmin(object):
                 # handling aliases v2
                 aliasrest = ''
                 for alias in globals.aliases:
-                    aliasmatch = search('^' + utilities.regexpgenerator(alias) + '\s+', command + ' ', IGNORECASE)
+                    aliasmatch = search( '^(' + utilities.regexpgenerator(alias) + ')\s+', command + ' ', IGNORECASE )
                     if aliasmatch:
                         # keep the right side of the command 
                         aliasrest = command.replace( aliasmatch[1], '' )
                         # remove the rest part
                         command = command.replace( aliasrest, '' )
                         # replace alias                        
-                        command = command.replace(aliasmatch[1], globals.aliases[alias])
+                        command = command.replace( aliasmatch[1], globals.aliases[alias] )
                         break
 
                 # add right part of the alias if exists
@@ -409,7 +409,6 @@ class Spadmin(object):
         if not globals.nowelcome:
             self.welcome()
             
-
         globals.logger.debug('Fork dsmadmc processes.')
         globals.tsm = dsmadmc_pexpect.dsmadmc_pexpect(globals.server, globals.userid, globals.password )
         utilities.validate_license(globals.tsm)
