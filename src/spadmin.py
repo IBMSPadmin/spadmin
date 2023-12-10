@@ -190,6 +190,10 @@ class Spadmin(object):
 
                 globals.logger.info('Base command: [' + command + '] and extras: ' + pformat(globals.extras))
 
+                # help shorcut feature
+                if command[ -1 ] == '?':
+                    command = 'help ' + command[ :-1 ]
+
                 # system command 
                 systemcommand = search( '^!(.+)', command )
                 if systemcommand:
