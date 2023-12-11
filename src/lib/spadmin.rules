@@ -2138,6 +2138,67 @@ UPDate -> SUBRULE
 UPDate -> VIRTUALFSMapping
 UPDate -> VOLHistory
 UPDate -> Volume
+UPDate Volume                                   -> select volume_name from volumes
+UPDate Volume [\w\*\-\.\/\\\$]+                 -> ACCess=
+UPDate Volume [\w\*\-\.\/\\\$]+ ACCess=         -> ACCess=READWrite
+UPDate Volume [\w\*\-\.\/\\\$]+ ACCess=         -> ACCess=READOnly
+UPDate Volume [\w\*\-\.\/\\\$]+ ACCess=         -> ACCess=UNAVailable
+UPDate Volume [\w\*\-\.\/\\\$]+ ACCess=         -> ACCess=DEStroyed
+UPDate Volume [\w\*\-\.\/\\\$]+ ACCess=         -> ACCess=OFfsite
+UPDate Volume [\w\*\-\.\/\\\$]+                 -> LOcation=
+UPDate Volume [\w\*\-\.\/\\\$]+ LOcation=       -> LOcation=<give_a_location_here>
+UPDate Volume [\w\*\-\.\/\\\$]+                 -> WHERESTGpool=
+UPDate Volume [\w\*\-\.\/\\\$]+ WHERESTGpool=   -> WHERESTGpool=*
+UPDate Volume [\w\*\-\.\/\\\$]+ WHERESTGpool=   -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
+UPDate Volume [\w\*\-\.\/\\\$]+ WHEREDEVclass=  -> WHEREDEVclass=*
+UPDate Volume [\w\*\-\.\/\\\$]+ WHEREDEVclass=  -> select concat( '%PREFIX%', devclass_name) from devclasses {Prefix: -1}
+UPDate Volume [\w\*\-\.\/\\\$]+                 -> WHEREACCess=
+UPDate Volume [\w\*\-\.\/\\\$]+ WHEREACCess=    -> WHEREACCess=READWrite
+UPDate Volume [\w\*\-\.\/\\\$]+ WHEREACCess=    -> WHEREACCess=READOnly
+UPDate Volume [\w\*\-\.\/\\\$]+ WHEREACCess=    -> WHEREACCess=UNAVailable
+UPDate Volume [\w\*\-\.\/\\\$]+ WHEREACCess=    -> WHEREACCess=OFfsite
+UPDate Volume [\w\*\-\.\/\\\$]+ WHEREACCess=    -> WHEREACCess=DEStroyed
+UPDate Volume [\w\*\-\.\/\\\$]+                 -> WHERESTatus=
+UPDate Volume [\w\*\-\.\/\\\$]+ WHERESTatus=    -> WHERESTatus=ONline
+UPDate Volume [\w\*\-\.\/\\\$]+ WHERESTatus=    -> WHERESTatus=OFfline
+UPDate Volume [\w\*\-\.\/\\\$]+ WHERESTatus=    -> WHERESTatus=EMPty
+UPDate Volume [\w\*\-\.\/\\\$]+ WHERESTatus=    -> WHERESTatus=FILling
+UPDate Volume [\w\*\-\.\/\\\$]+ WHERESTatus=    -> WHERESTatus=FULl
+UPDate Volume [\w\*\-\.\/\\\$]+                 -> Preview=
+UPDate Volume [\w\*\-\.\/\\\$]+ Preview=        -> Preview=No
+UPDate Volume [\w\*\-\.\/\\\$]+ Preview=        -> Preview=Yes
+
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*)                 -> ACCess=
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) ACCess=         -> ACCess=READWrite
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) ACCess=         -> ACCess=READOnly
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) ACCess=         -> ACCess=UNAVailable
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) ACCess=         -> ACCess=DEStroyed
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) ACCess=         -> ACCess=OFfsite
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*)                 -> LOcation=
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) LOcation=       -> LOcation=<give_a_location_here>
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*)                 -> WHERESTGpool=
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHERESTGpool=   -> WHERESTGpool=*
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHERESTGpool=   -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHEREDEVclass=  -> WHEREDEVclass=*
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHEREDEVclass=  -> select concat( '%PREFIX%', devclass_name) from devclasses {Prefix: -1}
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*)                 -> WHEREACCess=
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHEREACCess=    -> WHEREACCess=READWrite
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHEREACCess=    -> WHEREACCess=READOnly
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHEREACCess=    -> WHEREACCess=UNAVailable
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHEREACCess=    -> WHEREACCess=OFfsite
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHEREACCess=    -> WHEREACCess=DEStroyed
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*)                 -> WHERESTatus=
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHERESTatus=    -> WHERESTatus=ONline
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHERESTatus=    -> WHERESTatus=OFfline
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHERESTatus=    -> WHERESTatus=EMPty
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHERESTatus=    -> WHERESTatus=FILling
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHERESTatus=    -> WHERESTatus=FULl
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*)                 -> Preview=
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) Preview=        -> Preview=No
+UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) Preview=        -> Preview=Yes
+
+
+
 VALidate -> ASPera
 VALidate -> CLOud
 VALidate                            -> LAnfree
