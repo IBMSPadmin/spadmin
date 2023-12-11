@@ -69,7 +69,7 @@ class dsmadmc_pexpect:
             key = readchar.readkey()
             print()
             if str(key).lower() != "c":
-                self.quit()
+                self.closeconnections()
                 self.tsm_tabdel = None
                 self.tsm_normal = None
         except Exception as e:
@@ -140,7 +140,7 @@ class dsmadmc_pexpect:
             key = readchar.readkey()
             print()
             if str(key).lower() != "c":
-                self.quit()
+                self.closeconnections()
                 self.tsm_tabdel = None
                 self.tsm_normal = None
 
@@ -179,7 +179,7 @@ class dsmadmc_pexpect:
             globals.last_error = {'rc': "0", 'message': ''}
 
 
-    def quit(self):
+    def closeconnections(self):
         globals.logger.debug('DSMADMC normal quit.')
         self.send_command_normal('quit')
         globals.logger.debug('DSMADMC tabdel quit.')

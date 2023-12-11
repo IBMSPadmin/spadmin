@@ -227,7 +227,7 @@ class Spadmin(object):
 
                     print('Background dsmadmc processes cleaning...')
                     globals.logger.info('Background dsmadmc processes cleaning...')
-                    globals.tsm.quit()
+                    globals.tsm.closeconnections()
 
                     globals.logger.info(utilities.consolefilledline('END'))
                     globals.logger.info(utilities.consolefilledline('END'))

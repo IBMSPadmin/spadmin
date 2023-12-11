@@ -332,7 +332,7 @@ class SPadminSWitchSErver(SpadminCommand):
         if not parameters or str(parameters).upper() == 'BACK':
             print('Switch back to the default server...')
             globals.server = ''
-            globals.tsm.quit()
+            globals.tsm.closeconnections()
             from lib.dsmadmc_pexpect import dsmadmc_pexpect
             globals.userid = globals.config.getconfiguration()['SPADMIN']['dsmadmc_id']
             globals.password = utilities.decode(globals.config.getconfiguration()['SPADMIN']['dsmadmc_password'])
@@ -345,7 +345,7 @@ class SPadminSWitchSErver(SpadminCommand):
             print("Switching Server...")
             server = str(parameters).upper()
             if globals.config.getconfiguration().has_section(server) and str(parameters).upper() not in disabled_words:
-                globals.tsm.quit()
+                globals.tsm.closeconnections()
                 from lib.dsmadmc_pexpect import dsmadmc_pexpect
                 globals.server = server
                 globals.userid = globals.config.getconfiguration()[server]['dsmadmc_id']
