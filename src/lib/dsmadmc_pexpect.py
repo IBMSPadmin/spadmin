@@ -77,7 +77,7 @@ class dsmadmc_pexpect:
             print(tsm.before)
             print(str(e))
             print('Please check the connection parameters and restart spadmin')
-            quit(1)
+            sys.exit(1)
 
         return tsm.before
 
@@ -149,7 +149,7 @@ class dsmadmc_pexpect:
             print(tsm2.before)
             print(str(e))
             print('Please check the connection parameters and restart spadmin')
-            quit(1)
+            sys.exit(1)
 
         return tsm2.before
 
@@ -158,17 +158,17 @@ class dsmadmc_pexpect:
             print('Timeout occured.')
             print('Please check the connection parameters and restart spadmin')
             print( tsm.before[ :50 ] )
-            quit(1)
+            sys.exit(1)
         elif rc == 7: #  ANS8023E Unable to establish session with server.
             print('TCP/IP connection failure.')
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
-            quit(1)
+            sys.exit(1)
         elif rc == 8 or rc == 9: # ANS1051I Invalid user id or password
             print('Invalid user id or password.')
             print('Please check the connection parameters and restart spadmin')
             print(tsm.before)
-            quit(1)
+            sys.exit(1)
         elif rc == 10: # Cont>
             print("Continue the command in the next line, please: ")
 

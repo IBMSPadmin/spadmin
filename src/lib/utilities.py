@@ -216,7 +216,7 @@ def validate_license(tsm):
             globals.logger.debug('License error!!')
             print(colored("An error occured during the license validation!", globals.color_red, attrs=[globals.color_attrs_bold]))
             print(colored("Please check your license file: " + license_file, globals.color_red, attrs=[globals.color_attrs_bold]))
-            quit(1)
+            sys.exit(1)
             # plus_30_days = (today + timedelta(days=30)).strftime(DATEFORMAT)
             # print(colored(" Ohh, nooo! You have no license file!", globals.color_red, attrs=[globals.color_attrs_bold]))
             # print(colored(" We are creating a trial license for you, which will valid until " + str(plus_30_days), globals.color_red, attrs=[globals.color_attrs_bold]))
@@ -266,8 +266,7 @@ My Machine's Globally Unique ID where I want to use it: """ + machineGUID + """
 
 Thanks.
 --- CUT ---""", globals.color_red, attrs=[globals.color_attrs_bold]))
-
-        quit(1)
+        sys.exit(1)
 
 
 def consoleline(char='-'):
