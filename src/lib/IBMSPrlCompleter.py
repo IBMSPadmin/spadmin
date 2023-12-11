@@ -315,21 +315,21 @@ class IBMSPrlCompleter:
 #                 tmprules = tmprules2                        
                 
             # collect the results
-            globals.logger.info("DEBUG START ---------------- ")
+            # globals.logger.info("DEBUG START ---------------- ")
             for key in tmprules:
                 
                 globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + key + ']' )
                 globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 
-                extradelimiter = '' if search( '=', key ) else ' '
-                globals.logger.info("  DEBUG IF START ---------------- ")
+                extradelimiter = '##' if search( '=', key ) else ' '
+                # globals.logger.info("  DEBUG IF START ---------------- ")
                 if search( '^' + utilities.regexpgenerator( key ) + extradelimiter, ' '.join( tokens ) + extradelimiter, IGNORECASE ):
                     # globals.logger.debug( str( tokenlength ) + ' Found this part [' + tokens   + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
                     globals.logger.debug( str( tokenlength ) + " Let's continue searching with this pattern [" + pformat( tmprules[key], width=180 ) + ']' )
-                    globals.logger.info("  DEBUG TOKEN RESOLVER ---------------- ")
+                    # globals.logger.info("  DEBUG TOKEN RESOLVER ---------------- ")
                     ret += self.SPunversaltokenresolver( key, tokens )
-                globals.logger.info("  DEBUG IF END ---------------- ")
-            globals.logger.info("DEBUG END ---------------- ")
+                # globals.logger.info("  DEBUG IF END ---------------- ")
+            # globals.logger.info("DEBUG END ---------------- ")
 
             # in level 2 fix to show colors
             if tokenlength == 2:
