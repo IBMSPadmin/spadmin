@@ -17,7 +17,6 @@ from typing import (
 
 ansi_color_pattern = re.compile(r"\x1b\[.+?m")
 
-
 PASS = "PASSCODE"
 
 def getMachineGID(tsm):
@@ -197,8 +196,8 @@ def validate_license(tsm):
     cypher = "we_have_worked_in_this_project:a_lot:please_honor_our_work"
     license_file = os.path.join(globals.spadmin_path, 'spadmin.lic')
     globals.logger.debug('license file: [' + license_file + ']')
-    mac = getMachineGID(tsm)
-    globals.logger.debug('first guid address: [' + mac + ']')
+    machineGUID = getMachineGID(tsm)
+    globals.logger.debug('first guid address: [' + machineGUID + ']')
     today = date.today()
     valid_to = today - timedelta(days=1)
     globals.logger.debug('yesterday: [' + str(valid_to) + ']')
@@ -209,9 +208,9 @@ def validate_license(tsm):
             with open(license_file, "r") as f:
                 hidedstring = f.read()
                 mac_and_validity = decode(hidedstring, cypher, "SPADMIN").split("|", 2)
-                mac = mac_and_validity[0]
+                licensedGUID = mac_and_validity[0]
                 valid_to = datetime.strptime(mac_and_validity[1], DATEFORMAT).date()
-                globals.logger.debug('Licensed guid: [' + mac + ']')
+                globals.logger.debug('Licensed guid: [' + licensedGUID + ']')
                 globals.logger.debug('License valid until: [' + str(valid_to) + ']')
         except:
             globals.logger.debug('License error!!')
@@ -232,7 +231,7 @@ def validate_license(tsm):
             # mac = mac_and_validity[0]
             # valid_to = mac_and_validity[1]
 
-        if (getMachineGID(tsm) and getMachineGID(tsm) == mac) and (valid_to and valid_to >= today):
+        if (machineGUID and machineGUID == licensedGUID) and (valid_to and valid_to >= today):
             globals.logger.debug('License valid!!')
             print(colored( " Your license is valid until " + str(valid_to) + "!", globals.color_green, attrs = [ globals.color_attrs_bold ]))
             if not globals.nowelcome:
@@ -247,7 +246,7 @@ just send an email us to the send_me_a_trial_license@spadmin.com with the follow
 --- CUT ---
 SPAdmin Team,
 send me a trial license for spadmin, please.
-My Machine's Globally Unique ID where I want to use it: """ + getMachineGID(tsm) + """
+My Machine's Globally Unique ID where I want to use it: """ + machineGUID + """
 
 Thanks.
 --- CUT ---""", globals.color_red, attrs=[globals.color_attrs_bold]))
@@ -263,7 +262,7 @@ just send an email us to the send_me_a_trial_license@spadmin.com with the follow
 --- CUT ---
 SPAdmin Team,
 send me a trial license for spadmin, please.
-My Machine's Globally Unique ID where I want to use it: """ + mac + """
+My Machine's Globally Unique ID where I want to use it: """ + machineGUID + """
 
 Thanks.
 --- CUT ---""", globals.color_red, attrs=[globals.color_attrs_bold]))
