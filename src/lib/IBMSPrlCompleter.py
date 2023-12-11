@@ -321,7 +321,7 @@ class IBMSPrlCompleter:
                 globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + key + ']' )
                 globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 
-                extradelimiter = '##' if search( '=', key ) else ' '
+                extradelimiter = '' if search( '=', key ) else ' '
                 # globals.logger.info("  DEBUG IF START ---------------- ")
                 if search( '^' + utilities.regexpgenerator( key ) + extradelimiter, ' '.join( tokens ) + extradelimiter, IGNORECASE ):
                     # globals.logger.debug( str( tokenlength ) + ' Found this part [' + tokens   + '] of the command in the 2nd LEVEL dictionary items: [' + key + '].' )
