@@ -80,6 +80,7 @@ class dsmadmc_pexpect:
             sys.exit(1)
 
         return tsm.before
+    
 
     def send_command_array_tabdel(self, command):
         """
