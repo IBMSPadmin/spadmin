@@ -5,15 +5,15 @@
 
 - macOS, Linux, Linux konténer, Micrsoft Windows WSL
 - python3
-- pyton modulok
+- python modulok (prereq.sh)
 	- pip install termcolor readline pexpect readchar
     - Marcell - új mac-jén teszt: 
       - pip3 install pexpect 
       - pip3 install termcolor 
       - pip3 install readchar
       - pip3 install gnureadline
-- dsmamdc v8.1.17
-- dsmserv v8.1.14
+- dsmamdc v8.1.20
+- dsmserv v8.1.20
 
 ## dsmadmc kezelés pexpect modullal 
 
@@ -26,28 +26,31 @@ Még nem tiszta 100%-ban, hogy mi a különbség a readline és a gnureadline k�
 ./spadmin paraméterek
 
 ```
-$ ./spadmin.py -h
-usage: spadmin.py [-h] [--consoleonly] [-c COMMANDS] [-d] [-i INIFILENAME] [-l LOGFILENAME] [-m] [-n] [-p] [-r RULEFILENAME] [-s]
+$ ./spadmin.py --help
+usage: spadmin.py [-h] [-a AUTOEXEC] [-b BASECOMMANDNAME] [-c] [-d] [-f] [-i INIFILENAME] [-l LOGFILENAME] [-m] [-n] [-p] [-s] [-se SERVERADDRESS]
                                [-t TEXTCOLOR] [-u] [-v] [-w]
 
 Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager.
 
 options:
   -h, --help            show this help message and exit
-  --consoleonly         run console only mode!
-  -c COMMANDS, --commands COMMANDS
+  -a AUTOEXEC, --autoexec AUTOEXEC
                         autoexec command(s). Enclose the commands in quotation marks " " when multiple commands are separated by: ;
+  -b BASECOMMANDNAME, --basecommandname BASECOMMANDNAME
+                        custom base command name, default: SHow
+  -c, --consoleonly     run console only mode!
   -d, --debug           debug messages into log file
+  -f, --fetch           enable SQL prefetch queries
   -i INIFILENAME, --inifilename INIFILENAME
                         ini filename
   -l LOGFILENAME, --logfilename LOGFILENAME
                         log filename
-  -m, --norlsqlcache    no cache for sql queries in reradline
-  -n, --norlsqlhelpepr  no sql queries in reradline
+  -m, --norlsqlcache    no cache for SQL queries in reradline
+  -n, --norlsqlhelper   no SQL queries in reradline
   -p, --prereqcheck     prerequisite check
-  -r RULEFILENAME, --rulefilename RULEFILENAME
-                        custom rule filename
   -s, --disablerl       disable readline functionality
+  -se SERVERADDRESS, --SErveraddress SERVERADDRESS
+                        spadmin uses the server stanza to determine the server to connects to
   -t TEXTCOLOR, --textcolor TEXTCOLOR
                         specify the text color [default: "white"]
   -u, --nohumanreadable
@@ -59,7 +62,7 @@ Thank you very much for downloading and starting to use it!
 ```
 
 ```
-$ ./spadmin.py -c 'SHow Stgp; quit'
+./spadmin.py -a "SHow Stgp; quit"
 
  ███████╗ ██████╗   █████╗  ██████╗  ███╗   ███╗ ██╗ ███╗   ██╗     ██████╗  ██╗   ██╗
  ██╔════╝ ██╔══██╗ ██╔══██╗ ██╔══██╗ ████╗ ████║ ██║ ████╗  ██║     ██╔══██╗ ╚██╗ ██╔╝
@@ -68,45 +71,61 @@ $ ./spadmin.py -c 'SHow Stgp; quit'
  ███████║ ██║      ██║  ██║ ██████╔╝ ██║ ╚═╝ ██║ ██║ ██║ ╚████║ ██╗ ██║         ██║
  ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝
 
+           *             ,
+                       _/^\_
+                      <     >
+     *                 /.-.\         *
+              *        `/&\`                   *
+                      ,@.*;@,
+                     /_o.I %_\    *
+        *           (`'--:o(_@;
+ *                  /`;--.,__ `')             *
+                  ;@`o % O,*`'`&\   *
+            *    (`'--)_@ ;o %'()\      *
+                 /`;--._`''--._O'@;
+                /&*,()~o`;-.,_ `""`)
+     *          /`,@ ;+& () o*`;-';\ *
+               (`""--.,_0 +% @' &()\          *
+               /-.,_    ``''--....-'`)  *
+          *    /@%;o`:;'--,.__   __.'\            *
+              ;*,&(); @ % &^;~`"`o;@();         *
+              /(); o^~; & ().o@*&`;&%O\    *
+        jgs   `"="==""==,,,.,="=="==="`
+           __.----.(\-''#####---...___...-----._
+         '`         \)_`"""""`
+
  Powerful CLI administration tool for IBM Spectrum Protect aka Tivoli Storage Manager
 
 = Welcome! Enter any IBM Spectrum Protect commands and if you're lost type Help!
 = We're trying to breathe new life into this old school character based management interface.
 = Once you start to use it, you can't live without it!!! 😀
-= Python3 [3.10.6 (main, Aug 30 2022, 05:12:36) [Clang 13.1.6 (clang-1316.0.21.2.5)]]
-= Your current Operating System platform is: macOS-12.5.1-x86_64-i386-64bit
-= Terminal properties: [155x45]
-
-Loading rules: [100.0%====================================================================================================================================]
+= Python3 [3.11.6 (main, Nov  2 2023, 04:51:19) [Clang 14.0.0 (clang-1400.0.29.202)]]
+= Your current Operating System platform is: macOS-12.7.1-x86_64-i386-64bit
+= Terminal properties: [168x47]
+= Current version: v1.4.1
 
  Short HELP:
 
-	  Use: "QUIt", "BYe", "LOGout" or "Exit" commands to leave the program or
-	  use: "REload" to reload the rule file! and
-	  use: "SHow LOG" to reach the local log file!
+    Use: "QUIt", "BYe", "LOGOut" or "Exit" commands to leave the program or
+    Use: "SPadmin SHow LOG" or "SPadmin SHow LOCALLOG" to load the log file!
 
--------------- ----------------- ----- -------------- ------------- ---------- --------- -------- ------ --------------
-Pool Name      Device class      Coll. Est. Cap. (GB) Pct. Utilized Pct. Migr. High Mig. Low Mig. Recl.  Next
--------------- ----------------- ----- -------------- ------------- ---------- --------- -------- ------ --------------
-CEVA_CT        DC_TS3200_LTO4_02 NO           12668.0          26.8                                  100
-CEVA_NAS_BD    DISK                             200.0           8.1        8.1        80       60        CEVA_NAS_BT
-CEVA_NAS_BT    DC_TS3200_LTO4_05 GROUP        32005.9          42.2       17.2       100       99     60
-CEVA_WINDIR_BD DISK                              10.0           6.9        0.0        90       70        CEVA_WIN_BT
-CEVA_WIN_BD    DISK                             400.0           0.0        0.0        90       10        CEVA_WIN_BT
-CEVA_WIN_BT    DC_TS3200_LTO4_01 NO           11829.3          28.7       33.3       100       99     60
-CLOUDPOOL                                           0
-EG_LINUX_BD    DISK                             100.0           0.0        0.0        90       70        EG_LINUX_BT
-EG_LINUX_BT    DC_TS3200_LTO4_04 NO            8940.7           0.3        1.0       100       99     60
-EG_MAC_BD      DISK                             200.0           0.0        0.0        90       70        EG_LINUX_BT
-EG_MAC_BT      DC_TS3200_LTO4_03 NO               0.0           0.0        0.0         0        0     60 EG_LINUX_BT
-SPACEMGPOOL    DISK                               0.0           0.0        0.0        90       70
------------------------------------------------------------------------------------------------------------------------------------------------------------
-Program execution time: 0:00:03.986163
------------------------------------------------------------------------------------------------------------------------------------------------------------
+    Tip of the day: Use grep and regexp together, eg.: show actlog | grep ANR....E
+
+ Your license is valid until 2099-01-01!
+
+Loading rules: [100.0%=================================================================================================================================================]
+SQL prefetch for faster readline queries...
+----------- ----------- ----- ------ ------- ------- - ---- ---- ---- ----
+PoolName    DeviceClass Coll  EstCap PctUtil PctMigr C High LowM Recl Next
+----------- ----------- ----- ------ ------- ------- - ---- ---- ---- ----
+ARCHIVEPOOL DISK                 0 B     0.0     0.0 N  90   70
+BACKUPPOOL  DISK                 0 B     0.0     0.0 N  90   70       FILE
+FILE        DC_FILE     GROUP  8 GiB     2.2     2.2    90   70   60
+SPACEMGPOOL DISK                 0 B     0.0     0.0 N  90   70
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Program execution time: 6 s
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Background dsmadmc processes cleaning...
-
-19:02:49 Fri Sep 09 [flex@MBP16:[~/gith/spadmin/completer-poc] [0]
-$
 ```
 
 ## rules fájl használata
@@ -183,8 +202,6 @@ Ha tartozik hozzá SQL lekérdezés és az SQL lekérdezésben fel akarunk haszn
 ```
 DEFine ASSOCiation \w+ \w+ -> select node_name from nodes where domain_name like upper( '-3' )
 ```
-
-
 
 ## A következő parancsok mennek:
 
