@@ -2149,9 +2149,7 @@ UPDate Volume [\w\*\-\.\/\\\$]+ ACCess=         -> ACCess=OFfsite
 UPDate Volume [\w\*\-\.\/\\\$]+                 -> LOcation=
 UPDate Volume [\w\*\-\.\/\\\$]+ LOcation=       -> LOcation=<give_a_location_here>
 UPDate Volume [\w\*\-\.\/\\\$]+                 -> WHERESTGpool=
-UPDate Volume [\w\*\-\.\/\\\$]+ WHERESTGpool=   -> WHERESTGpool=*
 UPDate Volume [\w\*\-\.\/\\\$]+ WHERESTGpool=   -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
-UPDate Volume [\w\*\-\.\/\\\$]+ WHEREDEVclass=  -> WHEREDEVclass=*
 UPDate Volume [\w\*\-\.\/\\\$]+ WHEREDEVclass=  -> select concat( '%PREFIX%', devclass_name) from devclasses {Prefix: -1}
 UPDate Volume [\w\*\-\.\/\\\$]+                 -> WHEREACCess=
 UPDate Volume [\w\*\-\.\/\\\$]+ WHEREACCess=    -> WHEREACCess=READWrite
@@ -2178,9 +2176,7 @@ UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) ACCess=         -> ACCess=OFfsite
 UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*)                 -> LOcation=
 UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) LOcation=       -> LOcation=<give_a_location_here>
 UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*)                 -> WHERESTGpool=
-UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHERESTGpool=   -> WHERESTGpool=*
 UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHERESTGpool=   -> select concat( '%PREFIX%', stgpool_name) from stgpools {Prefix: -1}
-UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHEREDEVclass=  -> WHEREDEVclass=*
 UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHEREDEVclass=  -> select concat( '%PREFIX%', devclass_name) from devclasses {Prefix: -1}
 UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*)                 -> WHEREACCess=
 UPDate Volume [\w\*\-\.\/\\\$]+ ([\w= ]*) WHEREACCess=    -> WHEREACCess=READWrite
