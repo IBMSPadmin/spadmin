@@ -288,10 +288,10 @@ class IBMSPrlCompleter:
                     # if keylength != ( tokenlength - 1 ) and not search( '\{1\,\}', key ):
                     # v2 ???
                     if keylength != ( tokenlength - 1 ) and not search( '\\w= \]\*\)', key ):
-
                         continue
 
-
+                    if len(tokens[-1]) > 0 and tokens[-1][-1] == '=' and not search( '^' + tokens[-1][:-1], key.split()[-1][:-1], IGNORECASE ):
+                         continue
 
                     # if keylength < tokenlength - 1:
                     #     continue                     
@@ -315,13 +315,14 @@ class IBMSPrlCompleter:
 #                 tmprules = tmprules2                        
                 
             # collect the results
-            # globals.logger.info("DEBUG START ---------------- ")
+            globals.logger.info("DEBUG START ---------------- ")
+            globals.logger.info(tokens)
             for key in tmprules:
                 
                 globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + key + ']' )
                 globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 
-                extradelimiter = '' if search( '=', key ) else ' '
+                extradelimiter = '' if key[-1] == '=' else ' '
                 
                 #extradelimiter2 = '$' if key[ -1 ] == '=' and tokens[ -1 ][ -1 ]  == '=' else ''
                 # globals.logger.info("  DEBUG IF START ---------------- ")
@@ -413,6 +414,7 @@ class IBMSPrlCompleter:
             if x.startswith( 'select' ):
                 # First try as an SQL pattern!
                 #globals.logger.debug( str( tokenlength) + " it's an SQL select [" + tokens[ -1 ] + ' > ' + x + ']' )
+
                 ret += self.spsqlengine( x.strip(), tokens )
                 continue
             else:
