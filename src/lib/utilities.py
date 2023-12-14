@@ -281,7 +281,7 @@ def consolefilledline(left='', pattern='-', right='', width=120):
 def regexpgenerator(regexp):
     savelastchar = ''
     if regexp[-1] == '=':
-        savelastchar = regexp[-1] + '(?!.*\w+\s)'
+        savelastchar = regexp[-1] + '$' #'(?!.*\w+\s)'
         regexp = regexp[: -1]
     # # save v2 with regexp pattern
     # match = search( '(=.*)$', regexp )
