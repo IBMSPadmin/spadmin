@@ -322,7 +322,7 @@ class IBMSPrlCompleter:
                 globals.logger.debug( str( tokenlength ) + ' and searching for regexp pattern [' + '^' + utilities.regexpgenerator( key ) + ']' )
                 
                 extradelimiter = '' if search( '=', key ) else ' '
-                extradelimiter = ''
+                
                 #extradelimiter2 = '$' if key[ -1 ] == '=' and tokens[ -1 ][ -1 ]  == '=' else ''
                 # globals.logger.info("  DEBUG IF START ---------------- ")
                 if search( '^' + utilities.regexpgenerator( key ) + extradelimiter, ' '.join( tokens ) + extradelimiter, IGNORECASE ):
