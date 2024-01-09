@@ -11,9 +11,9 @@ from . import globals
 class dsmadmc_pexpect:
     STARTCOMMAND_TABDEL = None
     STARTCOMMAND = None
-    MORE1 = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt
-    MORE2 = 'The character \'#\' stands for any decimal integer.'  # meg itt
-    MORE3 = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt
+    MORE1 = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt RC:2
+    MORE2 = 'The character \'#\' stands for any decimal integer.'  # meg itt RC:3
+    MORE3 = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt RC:4
     CONT = 'cont>'
     PROMPT1 = 'Protect: .*'
     PROMPT2 = 'tsm: .*'
@@ -126,14 +126,19 @@ class dsmadmc_pexpect:
         return ar
 
     def send_command_normal(self, command):
-
+        output = ""
         try:
             tsm2 = self.get_tsm_normal()
 
             # globals.logger.debug('DSMADMC normal pid: [' + str(tsm2.pid) + ']')
 
             tsm2.sendline(command)
-            rc = self.tsm_normal.expect(self.EXPECTATIONS)
+            rc = tsm2.expect(self.EXPECTATIONS)
+            output += tsm2.before
+            while rc == 2:
+                tsm2.sendline("")
+                rc = tsm2.expect(self.EXPECTATIONS)
+                output += tsm2.before
             self.check_rc(tsm2, rc)
         except KeyboardInterrupt as e:
             sys.stdout.write("\nCTRL+C pressed (Press 'C' to continue or press any other key to reset SP connection.)")
@@ -152,7 +157,7 @@ class dsmadmc_pexpect:
             print('Please check the connection parameters and restart spadmin')
             sys.exit(1)
 
-        return tsm2.before
+        return output
 
     def check_rc(self, tsm, rc):
         if rc == 6: # Timeout

@@ -727,12 +727,41 @@ class SHowACTlog(SpadminCommand):
 
 define_command(SHowACTlog())
 
+
+
+
 # Temporary test 
 # SHow ACTlog           -> "process:
 # SHow ACTlog "process: -> select process_num from processes
 dynruleinjector( 'SHow ACTlog ' + '"search=process:' )
 globals.myIBMSPrlCompleter.dynrules['SHow ACTlog "search=process:'] = []
 globals.myIBMSPrlCompleter.dynrules['SHow ACTlog "search=process:'].append('select process_num from processes')
+
+
+class SHowTEST(SpadminCommand):
+
+    def __init__(self):
+        self.command_string = globals.basecommandname + "TEST"
+        self.command_type = "ACTLOG"
+        self.command_index = 0
+        self.command = "PAY"
+
+    def short_help(self) -> str:
+        return 'Shows the activity log'
+
+    def help(self) -> dict:
+        return """ 
+        """
+
+    def _execute(self, parameters: str) -> str:
+        data = globals.tsm.send_command_array_array_tabdel("select * from backups")
+
+        if globals.last_error[ 'rc' ] != '0':
+            return
+
+        return data
+
+define_command(SHowTEST())
 
 
 class REload(SpadminCommand):
