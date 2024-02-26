@@ -128,7 +128,7 @@ class Spadmin(object):
             # line = line.replace( '||', '##' )
 
             # as -domain.vmfull= command can contain semicolon so handling it here is necessary
-            match = search( '-domain.vmfull=([\w\-;"\']+)', line, IGNORECASE )
+            match = search( r'-domain.vmfull=([\w\-;"\']+)', line, IGNORECASE )
             if match:
                 line = line.replace( match[1], match[1].replace( ';', '##' ) )
 
@@ -148,7 +148,7 @@ class Spadmin(object):
                 # handling aliases v2
                 aliasrest = ''
                 for alias in globals.aliases:
-                    aliasmatch = search( '^(' + utilities.regexpgenerator(alias) + ')\s+', command + ' ', IGNORECASE )
+                    aliasmatch = search( '^(' + utilities.regexpgenerator(alias) + r')\s+', command + ' ', IGNORECASE )
                     if aliasmatch:
                         # keep the right side of the command 
                         aliasrest = command.replace( aliasmatch[1], '' )
@@ -203,17 +203,17 @@ class Spadmin(object):
                     continue
                       
                 # it's not own command. Does the user want to possibly exit???
-                if search('^' + utilities.regexpgenerator('QUIt') + '(?!.*\w+)', command, IGNORECASE) or \
-                        search('^' + utilities.regexpgenerator('LOGOut') + '(?!.*\w+)', command, IGNORECASE) or \
-                        search('^' + utilities.regexpgenerator('Exit') + '(?!.*\w+)', command, IGNORECASE) or \
-                        search('^' + utilities.regexpgenerator('Exit') + '\s+\d+', command, IGNORECASE) or \
-                        search('^' + utilities.regexpgenerator('BYe') + '(?!.*\w+)', command, IGNORECASE):
+                if search('^' + utilities.regexpgenerator('QUIt') + r'(?!.*\w+)', command, IGNORECASE) or \
+                        search('^' + utilities.regexpgenerator('LOGOut') + r'(?!.*\w+)', command, IGNORECASE) or \
+                        search('^' + utilities.regexpgenerator('Exit') + r'(?!.*\w+)', command, IGNORECASE) or \
+                        search('^' + utilities.regexpgenerator('Exit') + r'\s+\d+', command, IGNORECASE) or \
+                        search('^' + utilities.regexpgenerator('BYe') + r'(?!.*\w+)', command, IGNORECASE):
 
                     globals.logger.debug(utilities.consolefilledline('<<< INPUT LOOP END '))
 
                     # exit code override if exists
                     exitcode = 0
-                    match = search('^\w+\s+(\d+)', command, IGNORECASE)
+                    match = search(r'^\w+\s+(\d+)', command, IGNORECASE)
                     if match:
                         exitcode = int(match[1])
 
@@ -239,7 +239,7 @@ class Spadmin(object):
                 match = False
                 # let's try to find maybe it's an own command
                 for key in owncommands.spadmin_commands:
-                    maincommandpart = search('^' + utilities.regexpgenerator(key) + '\s+', command + ' ', IGNORECASE)
+                    maincommandpart = search('^' + utilities.regexpgenerator(key) + r'\s+', command + ' ', IGNORECASE)
                     if maincommandpart:
                         # just transfer the parameters
                         globals.logger.info('Own command found: [' + command + '] and try to execute.')
@@ -260,11 +260,11 @@ class Spadmin(object):
                 ret = []
                 # Remove empty lines and other "technical/administartive' texts
                 for i in globals.tsm.send_command_normal( command ).splitlines()[1:]:
-                    if search('^Session established with server \w+:', i):
+                    if search(r'^Session established with server \w+:', i):
                         continue
-                    elif search('^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i):
+                    elif search(r'^\s\sServer Version \d+, Release \d+, Level \d+.\d\d\d', i):
                         continue
-                    elif search('^\s\sServer date\/time\:', i):
+                    elif search(r'^\s\sServer date\/time\:', i):
                         continue
                     elif i is None or i == '':
                         continue
@@ -460,7 +460,7 @@ class Spadmin(object):
  ╚══════╝ ╚═╝      ╚═╝  ╚═╝ ╚═════╝  ╚═╝     ╚═╝ ╚═╝ ╚═╝  ╚═══╝ ╚═╝ ╚═╝         ╚═╝'''))
 
             if datetime.datetime.now().month == 12:
-                print ( '''
+                print ( r'''
            *             ,
                        _/^\_
                       <     >

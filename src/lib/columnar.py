@@ -211,14 +211,14 @@ def colorcutter( text, width, textfiller ):
 def colorize( text: str, regexp: str, color: str, attrs=[] ):
             
         text    = str( text )                 # FIX: "TypeError: expected string or bytes-like object"
-        regexp  = regexp.replace( '[', '\[' ) # FIX: regexp vs. ANSI sequence
+        regexp  = regexp.replace( r'[', r'\[' ) # FIX: regexp vs. ANSI sequence
         match   = re.search( regexp, text )
         
         if match:
             before = text[0:match.start()]
             # print(repr(before))
             # last_colors = re.findall("(\x1b\[.+?m)", before)
-            last_colors = re.findall( "(\x1b\[.+?m|\x1b\[1m\x1b\[.+?m)", before )
+            last_colors = re.findall( r"(\x1b\[.+?m|\x1b\[1m\x1b\[.+?m)", before )
             found_last_color = ''
             if last_colors:
                 if len( last_colors ) > 1  and last_colors[ -2 ] == '\x1b[1m':

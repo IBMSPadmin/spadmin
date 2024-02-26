@@ -87,10 +87,10 @@ class IBMSPrlCompleter:
         ret = []
 
         # select preparation
-        if search( '\'(-\d)\'', select ):
+        if search( r'\'(-\d)\'', select ):
             # extra index
             globals.logger.debug('  Extra select has found: [' + select + '].')
-            for element in findall('\'(-\d)\'', select):
+            for element in findall(r'\'(-\d)\'', select):
                 select = select.replace(str(element), tokens[int(element)])
                 globals.logger.debug('  SP SQL Engine select index preparation result: [' + select + '].')
 
@@ -102,7 +102,7 @@ class IBMSPrlCompleter:
             # extra prefix
             prefix = search( '{Prefix: (.+)}', select )[ 1 ]
             select = select.replace( '{Prefix: ' + prefix + '}', '' )  # remove the logic description
-            match = search( '(\w+=)\w*', tokens[ int( prefix ) ] )
+            match = search( r'(\w+=)\w*', tokens[ int( prefix ) ] )
             if match:
                 select = select.replace( '%PREFIX%', match[ 1 ] )
 
@@ -287,7 +287,7 @@ class IBMSPrlCompleter:
 
                     # if keylength != ( tokenlength - 1 ) and not search( '\{1\,\}', key ):
                     # v2 ???
-                    if keylength != ( tokenlength - 1 ) and not search( '\\w= \]\*\)', key ):
+                    if keylength != ( tokenlength - 1 ) and not search( r'\\w= \]\*\)', key ):
                         continue
 
                     if len(tokens[-1]) > 0 and tokens[-1][-1] == '=' and not search( '^' + tokens[-1][:-1], key.split()[-1][:-1], IGNORECASE ):
@@ -420,7 +420,7 @@ class IBMSPrlCompleter:
             else:
                 #if explicit option is given, then preparation may needed
                 if tokens[ -1 ] != '' and tokens[ -1 ][ -1 ] == '=':
-                    match = search( '(\w+=)\w+', x )
+                    match = search( r'(\w+=)\w+', x )
                     if match:
                         x = x.replace( match[ 1 ], tokens[ -1 ] )
                                 
@@ -465,8 +465,8 @@ class IBMSPrlCompleter:
         for match in sorted( matches, key = lambda s: s.casefold() ):
 
             # cleanup for PARAMETER= values
-            if search( '^\w+=(\w+)', match ):
-                ppp = search( '^\w+=(\w+)', match )[ 1 ]
+            if search( r'^\w+=(\w+)', match ):
+                ppp = search( r'^\w+=(\w+)', match )[ 1 ]
             else:
                 ppp = match
             

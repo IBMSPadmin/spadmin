@@ -512,12 +512,12 @@ class SPadminSHowRULes(SpadminCommand):
         min = 0
         max = 99
 
-        match = search('(\d+)\s+(\d+)', parameters)
+        match = search(r'(\d+)\s+(\d+)', parameters)
         if match:
             min = int(match[1])
             max = int(match[2])
         else:
-            match = search('(\d+)', parameters)
+            match = search(r'(\d+)', parameters)
             if match:
                 min = int(match[1])
 
@@ -712,9 +712,9 @@ class SHowACTlog(SpadminCommand):
         data2 = []
         for index, row in enumerate(data):
 
-            if search('^AN[ER]\d{4}E', row[1]):
+            if search(r'^AN[ER]\d{4}E', row[1]):
                 message = utilities.color(row[1], 'red')
-            elif search('^ANR\d{4}W', row[1]):
+            elif search(r'^ANR\d{4}W', row[1]):
                 message = utilities.color(row[1], 'yellow')
             else:
                 message = row[1]
@@ -976,14 +976,14 @@ class SHowSESsions(SpadminCommand):
             bytes_received = humanbytes.HumanBytes.format(int(row[4]), unit="BINARY_LABELS", precision=0)
 
             # mediaaccess = ''.join( row[ 8:14 ] )
-            match = search('(\w+),(.+),(\d+)', row[11])
+            match = search(r'(\w+),(.+),(\d+)', row[11])
             if match:
                 # row[11] = 'Read: ' + utilities.color(match[2], 'green', attrs=[globals.color_attrs_bold]) + ', ' + match[
                 #    1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
                 row[11] = 'Read: ' + utilities.color(match[2], 'green') + ', ' + match[
                     1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
 
-            match = search('(\w+),(.+),(\d+)', row[14])
+            match = search(r'(\w+),(.+),(\d+)', row[14])
             if match:
                 # row[14] = 'Write: ' + utilities.color(match[2], 'green', attrs=[globals.color_attrs_bold]) + ', ' + match[
                 #    1] + ', ' + humanbytes.HumanBytes.format(int(match[3]), unit="TIME_LABELS", precision=0)
@@ -993,7 +993,7 @@ class SHowSESsions(SpadminCommand):
             mediaaccess = row[8] + row[9] + row[10] + row[11] + row[12] + row[13] + row[14]
             mediaaccess = mediaaccess.lstrip( ',' )
             # mediaaccess = sub( '(\w+)\,(\d+)', lambda m: utilities.color(m.group(1), 'green', attrs=[globals.color_attrs_bold]) + ' (' + humanbytes.HumanBytes.format( int( m.group(2) ), unit="TIME_LABELS", precision=0 ) + ')', mediaaccess)
-            mediaaccess = sub( '(\w+)\,(\d+)', lambda m: utilities.color(m.group(1), 'green') + ' (' + humanbytes.HumanBytes.format( int( m.group(2) ), unit="TIME_LABELS", precision=0 ) + ')', mediaaccess)
+            mediaaccess = sub( r'(\w+)\,(\d+)', lambda m: utilities.color(m.group(1), 'green') + ' (' + humanbytes.HumanBytes.format( int( m.group(2) ), unit="TIME_LABELS", precision=0 ) + ')', mediaaccess)
 
             data2.append(
                 [index + 1, row[0], state, wait, bytes_sent, bytes_received, row[5], row[6], row[7], mediaaccess,
@@ -1038,26 +1038,26 @@ class SHowPRocesses(SpadminCommand):
 
             # Current input volume: MKP056M8. Current output volume(s): MKP074M8.
             status = row[4]
-            status = sub('(Current input volume: )([\w\/\.]+)(\.)',
+            status = sub(r'(Current input volume: )([\w\/\.]+)(\.)',
                          lambda m: m.group(1) + utilities.color(m.group(2), 'green') + m.group(3), status)
-            status = sub('(Current input volumes: )([\w\/,\.]+)(\()',
+            status = sub(r'(Current input volumes: )([\w\/,\.]+)(\()',
                          lambda m: m.group(1) + utilities.color(m.group(2), 'green') + m.group(3), status)
-            status = sub('(Current input volumes: )([\w\/,\.]+)(\([\w ]+\))([\w\/,\.]+)(\()',
+            status = sub(r'(Current input volumes: )([\w\/,\.]+)(\([\w ]+\))([\w\/,\.]+)(\()',
                          # Current input volumes: MKP002M8,(33772 Seconds)MKP049M8,(15618 Seconds)
                          lambda m: m.group(1) + utilities.color(m.group(2), 'green') + m.group(3) + utilities.color(
                              m.group(4), 'green') + m.group(5), status)
-            status = sub('(Current output volume\(' + 's\): )([\w\/\.]+)(\.)',
+            status = sub(r'(Current output volume\(' + r's\): )([\w\/\.]+)(\.)',
                          lambda m: m.group(1) + utilities.color(m.group(2), 'green') + m.group(3), status)
-            status = sub('(Current output volumes: )([\w\/,\.]+)(\()',
+            status = sub(r'(Current output volumes: )([\w\/,\.]+)(\()',
                          lambda m: m.group(1) + utilities.color(m.group(2), 'green') + m.group(3), status)
-            status = sub('(Waiting for mount of input volume )([\w\/]+)( \()',
+            status = sub(r'(Waiting for mount of input volume )([\w\/]+)( \()',
                          lambda m: m.group(1) + utilities.color(m.group(2), 'green') + m.group(3), status)
-            status = sub('(Waiting for mount of output volume )([\w\/,]+)( \()',
+            status = sub(r'(Waiting for mount of output volume )([\w\/,]+)( \()',
                          # Waiting for mount of input volume 000006L4 (3 seconds)
                          lambda m: m.group(1) + utilities.color(m.group(2), 'green') + m.group(3), status)
-            status = sub('(Volume )([\w\/]+)( \()',
+            status = sub(r'(Volume )([\w\/]+)( \()',
                          lambda m: m.group(1) + utilities.color(m.group(2), 'green') + m.group(3), status)
-            status = sub('(Waiting for mount point in device class [\w\/,]+)( \()',
+            status = sub(r'(Waiting for mount point in device class [\w\/,]+)( \()',
                         # Waiting for mount point in device class DC_TS3200_LTO4_05 (596 seconds).
                         lambda m: utilities.color(m.group(1), 'yellow') + m.group(2), status)
                         
@@ -1094,13 +1094,13 @@ class SPadminSHowLOCALLOG(SpadminCommand):
         logfile.close()
 
         min = -30
-        match = search('(\d+)', parameters)
+        match = search(r'(\d+)', parameters)
         if match:
             min = int(match[1]) * -1
 
         for line in lines[min:]:
 
-            match = search('^(\d{8})\s(\d{6})\s(\w+)\s(.*)$', line.rstrip())
+            match = search(r'^(\d{8})\s(\d{6})\s(\w+)\s(.*)$', line.rstrip())
             if match:
                 data.append([match[1], match[2], match[3], match[4]])
             else:
@@ -2194,12 +2194,12 @@ def basicPerformanceFromSummary( self, activity, parameters ):
     todate   = 1
 
 
-    match = search('(\d+)\s+(\d+)', parameters)
+    match = search(r'(\d+)\s+(\d+)', parameters)
     if match:
         fromdate = int(match[1])
         todate = int(match[2])
     else:
-        match = search('(\d+)', parameters)
+        match = search(r'(\d+)', parameters)
         if match:
             todate = int(match[1])
 

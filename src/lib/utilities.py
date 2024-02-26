@@ -180,13 +180,13 @@ def start_console(server: str, id: str, password: str) -> bool:
         
 
 def colorize_line( line ):
-    if re.search( '^ANR\d{4}E', line ):
+    if re.search( r'^ANR\d{4}E', line ):
         return colored( line, globals.color_red, attrs = [ globals.color_attrs_bold ])
-    elif re.search( '^ANR\d{4}W', line ):
+    elif re.search( r'^ANR\d{4}W', line ):
         return colored( line, globals.color_yellow, attrs = [ globals.color_attrs_bold ])
-    elif re.search( '^ANR\d{4}D', line ):
+    elif re.search( r'^ANR\d{4}D', line ):
         return colored( line, globals.color_cyan, attrs = [ globals.color_attrs_bold ])
-    elif re.search( '^AN\d{5}S', line ):
+    elif re.search( r'^AN\d{5}S', line ):
         return colored( line, globals.color_red, attrs = [ globals.color_attrs_bold ])
     else:
         return line
@@ -281,7 +281,7 @@ def consolefilledline(left='', pattern='-', right='', width=120):
 def regexpgenerator(regexp):
     savelastchar = ''
     if regexp[-1] == '=':
-        savelastchar = regexp[-1] + '(?!.*\w+\s)'
+        savelastchar = regexp[-1] + r'(?!.*\w+\s)'
         regexp = regexp[: -1]
     # # save v2 with regexp pattern
     # match = search( '(=.*)$', regexp )
@@ -307,7 +307,7 @@ def regexpgenerator(regexp):
         else:
             result += '(' + part + ')'
 
-        result += '\s+'
+        result += r'\s+'
 
     return result[:-3] + savelastchar
 

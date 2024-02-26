@@ -11,9 +11,9 @@ from . import globals
 class dsmadmc_pexpect:
     STARTCOMMAND_TABDEL = None
     STARTCOMMAND = None
-    MORE1 = 'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt RC:2
+    MORE1 = r'more...   \(\<ENTER\> to continue, \'C\' to cancel\)'  # meg itt RC:2
     MORE2 = 'The character \'#\' stands for any decimal integer.'  # meg itt RC:3
-    MORE3 = 'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt RC:4
+    MORE3 = r'Do you wish to proceed\? \(Yes \(Y\)/No \(N\)\)'  # meg itt RC:4
     CONT = 'cont>'
     PROMPT1 = 'Protect: .*'
     PROMPT2 = 'tsm: .*'
@@ -178,7 +178,7 @@ class dsmadmc_pexpect:
         elif rc == 10: # Cont>
             print("Continue the command in the next line, please: ")
 
-        groups = search("ANS8001I Return code (\d+).", tsm.before, MULTILINE )
+        groups = search(r"ANS8001I Return code (\d+).", tsm.before, MULTILINE )
         if groups:
             globals.last_error = {'rc': groups[1], 'message': tsm.before.splitlines()[2]}
         else:
