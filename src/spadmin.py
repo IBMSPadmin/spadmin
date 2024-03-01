@@ -429,8 +429,16 @@ class Spadmin(object):
         globals.logger.debug('Inject new readline handlers for compelter and display.')
 
         if not args.disablerl:
-            readline.parse_and_bind('tab: complete')
-            readline.set_completer_delims(' ')
+
+            # Temporary Readline fix, compatibility in v.3.12
+            if 'libedit' in readline.__doc__:
+                print( 'Found libedit readline' )
+                readline.parse_and_bind( 'bind ^I rl_complete' )
+            else:
+                print( 'Found readline or GNUreadline' )
+                readline.parse_and_bind( 'tab: complete' )
+                readline.set_completer_delims( ' ' )
+
             readline.set_completer(globals.myIBMSPrlCompleter.IBMSPcompleter)
             readline.set_completion_display_matches_hook(globals.myIBMSPrlCompleter.match_display_hook)
 
