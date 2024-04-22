@@ -4,7 +4,7 @@
 # Original idea and the base source skeleton came from: https://sites.google.com/site/xiangyangsite/home/technical-tips/software-development/python/python-readline-completions
 #
 
-version = 'v1.5.0'
+version = 'v1.5.5'
 
 #
 #       Changed: LVL4, 5, 6 test
@@ -197,7 +197,10 @@ class Spadmin(object):
                 # system command 
                 systemcommand = search( '^!(.+)', command )
                 if systemcommand:
-                    os.system( systemcommand[ 1 ] )
+                    if platform.node() == 'tsm.marcell-szabo-s-account.cloud':
+                        print( 'System commands not allowed on this DEMO environment!!!' )
+                    else:
+                        os.system( systemcommand[ 1 ] )
                     # next command               
                     line = ''
                     continue
