@@ -12,7 +12,7 @@ jobs:
     if: "contains(github.event.head_commit.message, '[ubuntu]')"
     runs-on: ubuntu-20.04 #ubuntu-22.04, ubuntu-20.04,
     env:
-      OS: ubuntu-20.04
+      OS: ubuntu-latest
     strategy:
       matrix:
 #        python-version: ["3.7", "3.8", "3.9", "3.10"]
@@ -63,7 +63,7 @@ jobs:
       #     add: 'build/spadmin_${{env.OS}}_${{ steps.date.outputs.date }}'
         
   build-mac:
-    if: "contains(github.event.head_commit.message, '[mac]')"
+    if: "contains(github.event.head_commit.message, '[macos]')"
     runs-on: macos-12 #macos-12, macos-11,
     env:
       OS: macos-12
