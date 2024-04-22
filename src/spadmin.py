@@ -6,7 +6,7 @@
 
 version = 'v1.5.5'
 
-# RLS
+#
 #       Changed: LVL4, 5, 6 test
 #       Changed: alias v2 handler hopefully can handle regexps in aliases
 #       Changed: after TAB-TAB alignment POC
