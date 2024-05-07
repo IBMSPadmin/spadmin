@@ -241,7 +241,7 @@ def validate_license(tsm):
             globals.logger.debug('License expired!!')
             print(colored( "Your License key has expired!", globals.color_red, attrs = [ globals.color_attrs_bold ]))
             print(colored("""If you are find this utility helpful, and would like to ask a 30 days trial, 
-just send an email us to the send_me_a_trial_license@spadmin.com with the following content: 
+just send an email us to the get.spadm.lic@gmail.com with the following content: 
 
 --- CUT ---
 SPAdmin Team,
